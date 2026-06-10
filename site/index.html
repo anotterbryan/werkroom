@@ -186,6 +186,48 @@ function sortTable(table,rows,render,col,numeric){let asc=true;
   return ()=>{asc=!asc;rows.sort((a,b)=>{let x=a[col],y=b[col];if(numeric){x=+x||0;y=+y||0;}
     return (x<y?-1:x>y?1:0)*(asc?1:-1);});render();};}
 
+/* ---- shared lookups + drill-down helpers (built once from DATA) ---- */
+const _SONG={};D.songs.forEach(s=>{_SONG[s.song_id]=s;});
+const _EP={};D.episodes.forEach(e=>{_EP[e.episode_id]=e;});
+function songText(id){if(!id||id==='-')return null;const s=_SONG[id];if(!s)return null;
+  return s.title+(s.artist&&s.artist!=='-'?` — ${s.artist}`:'');}
+function epLabel(eid){const e=_EP[eid];return e?`${seasonName(e.season_id)} · E${e.episode_number}`+(e.title&&e.title!=='-'?` ${e.title}`:''):eid;}
+const RESULT_LBL={NORMAL:'lip sync',SURVIVAL:'survival',SHANTAY:'double shantay',SASHAY:'double sashay',TOPS:'for the win',CROWN:'for the crown'};
+/* every lip sync a queen took part in (winner/loser/participant), keyed by queen_id */
+const _LSQ={};
+D.lip_syncs.forEach(l=>{[...new Set([l.queen_a_id,l.queen_b_id,l.winner_id,l.loser_id].filter(x=>x&&x!=='-'))]
+  .forEach(q=>{(_LSQ[q]=_LSQ[q]||[]).push(l);});});
+function qLink(qid){return el('span',{style:'color:var(--rose);cursor:pointer;text-decoration:underline',
+  onclick:ev=>{ev.stopPropagation();go('queen:'+qid);}},qname[qid]||qid);}
+function epChip(eid){return el('span',{style:'cursor:pointer;color:var(--gold);text-decoration:underline',
+  onclick:ev=>{const e=_EP[eid];if(e){ev.stopPropagation();go('season:'+e.season_id);}}},epLabel(eid));}
+/* colored section header for detail views */
+function sectionHead(text,color){return el('div',{style:`font-family:var(--mono);font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:${color||'var(--magenta)'};font-weight:700;margin:0 0 9px`},text);}
+/* render one lip sync from a given queen's POV -> a span with linked names */
+function lipSyncLine(l,fromQid){
+  const box=el('span',{});
+  const s=songText(l.song_id)||'—';
+  box.append(epChip(l.episode_id));
+  box.append(document.createTextNode('  ·  ♪ '+s+'  ·  '));
+  const rt=RESULT_LBL[l.result_type]||l.result_type;
+  if(l.result_type==='SHANTAY'||l.result_type==='SASHAY'){
+    box.append(document.createTextNode(rt+' with '));
+    const other=[l.queen_a_id,l.queen_b_id].filter(x=>x&&x!=='-'&&x!==fromQid)[0];
+    if(other)box.append(qLink(other));
+  } else if(fromQid&&l.winner_id===fromQid){
+    box.append(el('span',{style:'color:var(--mint)'},'WON'));
+    if(l.loser_id&&l.loser_id!=='-'){box.append(document.createTextNode(' vs '));box.append(qLink(l.loser_id));}
+    box.append(document.createTextNode(' ('+rt+')'));
+  } else if(fromQid&&l.loser_id===fromQid){
+    box.append(el('span',{style:'color:var(--rose)'},'lost'));
+    if(l.winner_id&&l.winner_id!=='-'){box.append(document.createTextNode(' to '));box.append(qLink(l.winner_id));}
+  } else {
+    if(l.winner_id&&l.winner_id!=='-'){box.append(document.createTextNode('won: '));box.append(qLink(l.winner_id));}
+    if(l.loser_id&&l.loser_id!=='-'){box.append(document.createTextNode('  ·  out: '));box.append(qLink(l.loser_id));}
+  }
+  return box;
+}
+
 /* ---------- 0. OVERVIEW / HOME ---------- */
 V({id:'home',title:'The <em>Werkroom</em>',kicker:'A Drag Race Data Observatory',icon:'crown',group:'Start',
  desc:'An original, copyright-safe exploration of eighteen seasons of the U.S. main series — every queen, episode, lip sync, guest judge and panel shift, woven through one connected database. Thirty ways to read the herstory.',
@@ -368,8 +410,9 @@ function renderQueen(m,qid){
     <h1 class="vtitle">${q.drag_name}</h1>
     <div class="vdesc">${[q.legal_name,q.hometown].filter(x=>x&&x!=='-').join(' · ')||'A competitor in the herstory.'}</div>
     <div style="margin-top:10px"><button class="tab" onclick="go('queens')">← All queens</button></div></div>`;
-  const wrap=el('div',{class:'grid fade',style:'gap:16px'});
-  // runs
+  const wrap=el('div',{class:'fade',style:'display:flex;flex-direction:column;gap:14px'});
+  // ---- Competition record ----
+  wrap.append(sectionHead('Competition record','var(--magenta)'));
   runs.forEach(c=>{
     const prog=D.progression.filter(p=>p.contestant_id===c.contestant_id)
       .sort((a,b)=>epNum(a.episode_id)-epNum(b.episode_id));
@@ -382,14 +425,38 @@ function renderQueen(m,qid){
     const track=el('div',{class:'chip-row',style:'margin-top:12px'});
     prog.forEach(p=>track.append(el('span',{class:'st st-'+(p.status||'SAFE'),
       title:p.episode_id+': '+p.status},p.status)));
-    row.append(track);wrap.append(row);
+    row.append(track);
+    // challenge wins detail
+    const wins=prog.filter(p=>p.status==='WIN');
+    if(wins.length){
+      const wd=el('div',{style:'margin-top:11px;font-size:11px;line-height:1.6'});
+      wd.append(el('span',{style:'color:var(--gold);font-size:9px;letter-spacing:1px;text-transform:uppercase;margin-right:6px'},'Challenge wins'));
+      wins.forEach((p,i)=>{const e=_EP[p.episode_id];if(i)wd.append(document.createTextNode(' · '));
+        wd.append(el('span',{style:'cursor:pointer;text-decoration:underline;color:rgba(247,240,230,.8)',onclick:()=>go('season:'+c.season_id),
+          title:(e&&e.main_challenge&&e.main_challenge!=='-')?e.main_challenge:''},`E${e?e.episode_number:epNum(p.episode_id)}`));});
+      row.append(wd);
+    }
+    wrap.append(row);
   });
-  // guest appearances (spokes)
+  // ---- Lip-sync record ----
+  const ls=(_LSQ[qid]||[]).slice().sort((a,b)=>a.episode_id<b.episode_id?-1:1);
+  if(ls.length){
+    wrap.append(sectionHead('Lip-sync record','var(--gold)'));
+    const lc=el('div',{class:'card'});
+    const won=ls.filter(l=>l.winner_id===qid).length, lost=ls.filter(l=>l.loser_id===qid).length;
+    lc.append(el('div',{style:'font-size:10px;color:rgba(247,240,230,.55);margin-bottom:8px'},`${ls.length} performed · ${won} won · ${lost} lost`));
+    ls.forEach(l=>lc.append(el('div',{style:'font-size:11px;padding:4px 0;border-top:1px solid rgba(255,255,255,.05);line-height:1.5'},lipSyncLine(l,qid))));
+    wrap.append(lc);
+  }
+  // ---- As a Drag Race alum ----
   if(guestApps.length){
+    wrap.append(sectionHead('Later appearances as an alum','var(--mint)'));
     const g=el('div',{class:'card'});
-    g.innerHTML='<div class="vkicker">Later appearances as an alum</div>';
-    guestApps.forEach(a=>g.append(el('div',{style:'font-size:12px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.05)'},
-      `${seasonName(a.season_id)}${a.episode_id?(' · '+a.episode_id):''} — ${a.appearance_type.replace('_',' ').toLowerCase()} ${a.role_detail&&a.role_detail!=='-'?('('+a.role_detail+')'):''}`)));
+    guestApps.forEach(a=>{const row=el('div',{style:'font-size:11.5px;padding:5px 0;border-top:1px solid rgba(255,255,255,.05);line-height:1.5'});
+      row.append(el('span',{style:'color:var(--gold)'},seasonName(a.season_id)));
+      if(a.episode_id&&a.episode_id!=='-'){row.append(document.createTextNode(' · '));row.append(epChip(a.episode_id));}
+      row.append(document.createTextNode(` — ${a.appearance_type.replace(/_/g,' ').toLowerCase()}${a.role_detail&&a.role_detail!=='-'?' ('+a.role_detail+')':''}`));
+      g.append(row);});
     wrap.append(g);
   }
   m.append(wrap);
@@ -446,31 +513,53 @@ V({id:'songreuse',title:'Lip-Sync <em>Song Reuse</em>',kicker:'The Competition',
   m.innerHTML+=`<div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(140px,1fr));margin-bottom:18px">
     <div class="card"><div class="stat">${X.song_reuse.length}</div><div class="statlbl">distinct songs</div></div>
     <div class="card"><div class="stat">${multi.length}</div><div class="statlbl">used more than once</div></div></div>`;
-  const host=el('div',{class:'card fade'});host.innerHTML='<div class="vkicker">Most-reused tracks</div>';
+  const host=el('div',{class:'card fade'});host.innerHTML='<div class="vkicker">Most-reused tracks · click to see each use</div>';
   const max=Math.max(...X.song_reuse.map(s=>s.times_used),1);
-  X.song_reuse.slice(0,40).forEach(s=>{
-    host.append(el('div',{style:'display:flex;align-items:center;gap:10px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.05)'},
-      el('div',{style:'flex:1;font-size:12px'},`${s.title} — ${s.artist}`),
+  const lsBySong={};D.lip_syncs.forEach(l=>{(lsBySong[l.song_id]=lsBySong[l.song_id]||[]).push(l);});
+  X.song_reuse.slice(0,60).forEach(s=>{
+    const wrap=el('div',{style:'border-bottom:1px solid rgba(255,255,255,.05)'});
+    const caret=el('span',{style:'color:var(--magenta);font-size:9px;width:10px;flex:none'},'▸');
+    const hdr=el('div',{style:'display:flex;align-items:center;gap:10px;padding:6px 0;cursor:pointer'},caret,
+      el('div',{style:'flex:1;font-size:12px'},`${s.title}${s.artist&&s.artist!=='-'?' — '+s.artist:''}`),
       el('div',{class:'bar',style:`width:${120*s.times_used/max}px`}),
-      el('div',{style:'width:24px;text-align:right;color:var(--gold);font-weight:700'},s.times_used)));
+      el('div',{style:'width:24px;text-align:right;color:var(--gold);font-weight:700'},s.times_used));
+    const det=el('div',{style:'display:none;padding:0 0 10px 20px'});
+    const rows=(lsBySong[s.song_id]||[]).slice().sort((a,b)=>a.episode_id<b.episode_id?-1:1);
+    if(rows.length) rows.forEach(l=>det.append(el('div',{style:'font-size:11px;padding:3px 0;line-height:1.5'},lipSyncLine(l))));
+    else (s.episodes||[]).forEach(eid=>det.append(el('div',{style:'font-size:11px;padding:3px 0'},epChip(eid))));
+    hdr.addEventListener('click',()=>{const o=det.style.display==='none';det.style.display=o?'block':'none';caret.textContent=o?'▾':'▸';});
+    wrap.append(hdr,det);host.append(wrap);
   });
   m.append(host);
  }});
 
 /* ---------- 8. LIP-SYNC ASSASSIN LEADERBOARD ---------- */
 V({id:'assassin',title:'Lip-Sync <em>Assassins</em>',kicker:'The Competition',icon:'mic',group:'The Competition',
- desc:'Queens ranked by lip syncs won — the slayers who survived the smackdown most often.',
+ desc:'Queens ranked by lip syncs won — the slayers who survived the smackdown most often. Click a queen for every lip sync she performed.',
  render(m){
   m.innerHTML=head(this);
   const host=el('div',{class:'card fade'});
   const board=X.assassin_board.filter(a=>a.ls_wins>=1);
   const max=Math.max(...board.map(a=>a.ls_wins),1);
-  host.innerHTML='<div class="vkicker">Lip syncs won</div>';
-  board.slice(0,40).forEach((a,i)=>host.append(el('div',{style:'display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.05);cursor:pointer',onclick:()=>go('queen:'+a.queen_id)},
-    el('div',{style:'width:22px;color:var(--gold);font-family:var(--disp);font-weight:800'},i+1),
-    el('div',{style:'flex:1;font-size:13px'},a.drag_name),
-    el('div',{class:'bar',style:`width:${110*a.ls_wins/max}px`}),
-    el('div',{style:'width:24px;text-align:right;color:var(--rose);font-weight:700'},a.ls_wins))));
+  host.innerHTML='<div class="vkicker">Lip syncs won · click to expand</div>';
+  board.slice(0,60).forEach((a,i)=>{
+    const wrap=el('div',{style:'border-bottom:1px solid rgba(255,255,255,.05)'});
+    const caret=el('span',{style:'color:var(--magenta);font-size:9px;width:10px;flex:none'},'▸');
+    const hdr=el('div',{style:'display:flex;align-items:center;gap:10px;padding:7px 0;cursor:pointer'},caret,
+      el('div',{style:'width:20px;color:var(--gold);font-family:var(--disp);font-weight:800'},i+1),
+      el('div',{style:'flex:1;font-size:13px'},a.drag_name),
+      el('div',{class:'bar',style:`width:${110*a.ls_wins/max}px`}),
+      el('div',{style:'width:24px;text-align:right;color:var(--rose);font-weight:700'},a.ls_wins));
+    const det=el('div',{style:'display:none;padding:0 0 10px 20px'});
+    const ls=(_LSQ[a.queen_id]||[]).slice().sort((x,y)=>x.episode_id<y.episode_id?-1:1);
+    det.append(el('div',{style:'font-size:10px;color:rgba(247,240,230,.55);margin:2px 0 7px'},
+      `${a.assassinations} sent home · ${a.shantays} shantay · ${a.sashays} sashay  ·  `,
+      el('span',{style:'cursor:pointer;color:var(--gold);text-decoration:underline',onclick:ev=>{ev.stopPropagation();go('queen:'+a.queen_id);}},'full profile →')));
+    ls.forEach(l=>det.append(el('div',{style:'font-size:11px;padding:3px 0;line-height:1.5'},lipSyncLine(l,a.queen_id))));
+    if(!ls.length)det.append(el('div',{style:'font-size:11px;color:rgba(247,240,230,.4)'},'No lip syncs recorded.'));
+    hdr.addEventListener('click',()=>{const o=det.style.display==='none';det.style.display=o?'block':'none';caret.textContent=o?'▾':'▸';});
+    wrap.append(hdr,det);host.append(wrap);
+  });
   m.append(host);
  }});
 
@@ -589,11 +678,24 @@ V({id:'challenges',title:'Challenge <em>Types</em>',kicker:'The Competition',ico
   m.innerHTML=head(this);
   const ent=Object.entries(X.challenge_types).sort((a,b)=>b[1]-a[1]);
   const max=Math.max(...ent.map(e=>e[1]),1);
-  const host=el('div',{class:'card fade'});
-  ent.forEach(([k,v])=>host.append(el('div',{style:'display:flex;align-items:center;gap:10px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.05)'},
-    el('div',{style:'flex:1;font-size:12px'},k),
-    el('div',{class:'bar',style:`width:${160*v/max}px`}),
-    el('div',{style:'width:22px;text-align:right;color:var(--gold);font-weight:700'},v))));
+  const host=el('div',{class:'card fade'});host.innerHTML='<div class="vkicker">Maxi-challenge types · click to list episodes</div>';
+  ent.forEach(([k,v])=>{
+    const wrap=el('div',{style:'border-bottom:1px solid rgba(255,255,255,.05)'});
+    const caret=el('span',{style:'color:var(--magenta);font-size:9px;width:10px;flex:none'},'▸');
+    const hdr=el('div',{style:'display:flex;align-items:center;gap:10px;padding:6px 0;cursor:pointer'},caret,
+      el('div',{style:'flex:1;font-size:12px'},k),
+      el('div',{class:'bar',style:`width:${160*v/max}px`}),
+      el('div',{style:'width:22px;text-align:right;color:var(--gold);font-weight:700'},v));
+    const det=el('div',{style:'display:none;padding:0 0 10px 20px'});
+    D.episodes.filter(e=>e.main_challenge_type===k).sort((a,b)=>a.episode_id<b.episode_id?-1:1).forEach(e=>{
+      const row=el('div',{style:'font-size:11px;padding:3px 0;line-height:1.4'});
+      row.append(epChip(e.episode_id));
+      if(e.main_challenge&&e.main_challenge!=='-')row.append(el('span',{style:'color:rgba(247,240,230,.6)'},'  —  '+e.main_challenge));
+      det.append(row);
+    });
+    hdr.addEventListener('click',()=>{const o=det.style.display==='none';det.style.display=o?'block':'none';caret.textContent=o?'▾':'▸';});
+    wrap.append(hdr,det);host.append(wrap);
+  });
   m.append(host);
  }});
 
@@ -624,11 +726,30 @@ V({id:'episodes',title:'Episode <em>Browser</em>',kicker:'The Competition',icon:
   const draw=()=>{const q=search.value.toLowerCase(),sf=sel.value;list.innerHTML='';
     D.episodes.filter(e=>(!sf||e.season_id===sf)&&((e.title||'')+(e.main_challenge||'')).toLowerCase().includes(q)).forEach(e=>{
       const gj=D.appearances.filter(a=>a.episode_id===e.episode_id&&a.appearance_type==='GUEST_JUDGE').map(a=>a.person_name);
-      list.append(el('div',{class:'card',style:'padding:14px;cursor:pointer',onclick:()=>go('season:'+e.season_id)},
-        el('div',{style:'font-size:10px;color:var(--gold)'},seasonName(e.season_id)+' · E'+e.episode_number),
+      const lss=D.lip_syncs.filter(l=>l.episode_id===e.episode_id);
+      const song=songText(e.lip_sync_song_id)||(lss.length===1?songText(lss[0].song_id):null)||(lss.length>1?`Lip Sync for the Crown — ${lss.length} songs`:null);
+      const det=el('div',{style:'display:none;margin-top:8px;border-top:1px solid rgba(255,255,255,.08);padding-top:8px'});
+      const field=(label,val)=>{if(val==null||val===''||val==='-')return;det.append(el('div',{style:'margin:3px 0;font-size:11px;line-height:1.5'},
+        el('span',{style:'color:var(--gold);font-size:9px;letter-spacing:1px;text-transform:uppercase;margin-right:6px'},label),(val&&val.nodeType)?val:document.createTextNode(val)));};
+      field('Main challenge',(e.main_challenge&&e.main_challenge!=='-')?e.main_challenge+(e.main_challenge_type&&e.main_challenge_type!=='-'?` (${e.main_challenge_type})`:''):null);
+      field('Mini',e.mini_challenge);
+      field('Runway',e.runway_theme);
+      if(lss.length) lss.forEach((l,i)=>field(lss.length>1?(i===0?'Lip syncs':''):'Lip sync', lipSyncLine(l)));
+      else if(songText(e.lip_sync_song_id)) field('Lip sync', songText(e.lip_sync_song_id));
+      if(e.eliminated_id&&e.eliminated_id!=='-'&&qname[e.eliminated_id]) field('Eliminated', qLink(e.eliminated_id));
+      if(gj.length) field('Guest judges', gj.join(', '));
+      const hadFields=det.children.length>0;
+      if(!hadFields)det.append(el('div',{style:'font-size:11px;color:rgba(247,240,230,.4)'},'No further detail recorded yet.'));
+      det.append(el('div',{style:'margin-top:6px'},el('span',{style:'font-size:10px;color:var(--gold);text-decoration:underline;cursor:pointer',
+        onclick:ev=>{ev.stopPropagation();go('season:'+e.season_id);}},'open season →')));
+      const card=el('div',{class:'card',style:'padding:14px;cursor:pointer'},
+        el('div',{style:'font-size:10px;color:var(--gold)'},seasonName(e.season_id)+' · E'+e.episode_number+(e.air_date&&e.air_date!=='-'?' · '+e.air_date:'')),
         el('div',{style:'font-family:var(--disp);font-weight:700;font-size:15px;margin:3px 0'},e.title&&e.title!=='-'?e.title:'(untitled)'),
-        e.lip_sync_track&&e.lip_sync_track!=='-'?el('div',{style:'font-size:10px;color:var(--rose);margin-top:4px'},'♪ '+e.lip_sync_track):'',
-        gj.length?el('div',{style:'font-size:10px;color:rgba(247,240,230,.55);margin-top:4px'},'GJ: '+gj.join(', ')):''));
+        song?el('div',{style:'font-size:10px;color:var(--rose);margin-top:4px'},'♪ '+song):'',
+        gj.length?el('div',{style:'font-size:10px;color:rgba(247,240,230,.55);margin-top:4px'},'GJ: '+gj.join(', ')):'',
+        det);
+      card.addEventListener('click',()=>{const o=det.style.display==='none';det.style.display=o?'block':'none';});
+      list.append(card);
     });
     if(!list.children.length)list.innerHTML='<div class="empty">No episodes match.</div>';};
   search.addEventListener('input',draw);sel.addEventListener('change',draw);draw();
