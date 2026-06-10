@@ -943,8 +943,9 @@ V({id:'winscatter',title:'Wins vs <em>Placement</em>',kicker:'The Competition',i
   ax(pad,H-pad,W-10,H-pad);ax(pad,10,pad,H-pad);
   const tx=(t,x,y,anc)=>{const e=document.createElementNS(NS,'text');e.setAttribute('x',x);e.setAttribute('y',y);e.setAttribute('fill','rgba(247,240,230,.82)');e.setAttribute('font-size','10');e.setAttribute('font-family','var(--mono)');if(anc)e.setAttribute('text-anchor',anc);e.textContent=t;svg.append(e);};
   tx('challenge wins →',W/2,H-12,'middle');tx('← better placement',pad-12,H/2,'middle');
-  pts.forEach(p=>{const x=pad+(W-pad-20)*(+p.wins)/maxW;const y=10+(H-pad-10)*((+p.placement-1)/maxP);
-    const c=document.createElementNS(NS,'circle');c.setAttribute('cx',x);c.setAttribute('cy',y);c.setAttribute('r',+p.placement===1?6:4);
+  pts.forEach((p,i)=>{const jx=((i*37)%13)-6, jy=((i*53)%13)-6; // jitter so overlapping queens are all visible
+    const x=pad+(W-pad-20)*(+p.wins)/maxW+jx;const y=10+(H-pad-10)*((+p.placement-1)/maxP)+jy;
+    const c=document.createElementNS(NS,'circle');c.setAttribute('cx',x);c.setAttribute('cy',y);c.setAttribute('r',+p.placement===1?6:3.4);
     c.setAttribute('fill',+p.placement===1?'var(--gold)':'rgba(255,92,171,.6)');c.setAttribute('class','node');
     c.addEventListener('mousemove',e=>showTip(e,`${p.drag_name}<br>${seasonName(p.season)}<br>${p.wins} wins · #${p.placement}`));
     c.addEventListener('mouseleave',hideTip);c.addEventListener('click',()=>go('queen:'+p.queen_id));svg.append(c);});
@@ -955,15 +956,29 @@ V({id:'winscatter',title:'Wins vs <em>Placement</em>',kicker:'The Competition',i
 
 /* ---------- 23. ENTRANCE ORDER vs OUTCOME ---------- */
 V({id:'entrance',title:'Entrance Order <em>&amp; Fate</em>',kicker:'The Competition',icon:'grid',group:'The Competition',
- desc:'Is there luck in walking in first? Entrance order against final placement, where the data exists.',
+ desc:'Is there luck in walking in first? Entrance order against final placement. Click a season to expand; entrance order is filled where sourced.',
  render(m){
   m.innerHTML=head(this);
-  const rows=D.contestants.filter(c=>c.entrance_order&&+c.entrance_order>0&&+c.placement>0);
-  if(!rows.length){m.innerHTML+='<div class="card empty">Entrance-order data isn\u2019t populated for these seasons yet.</div>';return;}
-  const host=el('div',{class:'card fade',style:'overflow-x:auto'});
-  let h='<table><tr><th>Queen</th><th>Season</th><th>Entered</th><th>Placed</th></tr>';
-  rows.sort((a,b)=>+a.entrance_order-+b.entrance_order).forEach(c=>h+=`<tr style="cursor:pointer" onclick="go('queen:${c.queen_id}')"><td>${qname[c.queen_id]}</td><td>${seasonName(c.season_id)}</td><td>${c.entrance_order}</td><td>#${c.placement}</td></tr>`);
-  host.innerHTML=h+'</table>';m.append(host);
+  const host=el('div',{class:'card fade'});host.innerHTML='<div class="vkicker">By season \u00b7 click to expand</div>';
+  SEASON_ORDER.forEach(sid=>{
+    const cs=contestantsBySeason(sid).slice().sort((a,b)=>{
+      const ea=+a.entrance_order||99,eb=+b.entrance_order||99;return ea!==eb?ea-eb:(+a.placement||99)-(+b.placement||99);});
+    const hasEnt=cs.some(c=>c.entrance_order&&c.entrance_order!=='-');
+    const wrap=el('div',{style:'border-bottom:1px solid rgba(255,255,255,.05)'});
+    const caret=el('span',{style:'color:var(--magenta);font-size:9px;width:10px;flex:none'},'\u25b8');
+    const hdr=el('div',{style:'display:flex;align-items:center;gap:10px;padding:6px 0;cursor:pointer'},caret,
+      el('div',{style:'flex:1;font-size:13.5px;color:var(--gold)'},seasonName(sid)),
+      el('div',{style:'font-size:11px;color:rgba(247,240,230,.6)'},hasEnt?'entrance order \u2192':'entrance order not yet sourced'));
+    const det=el('div',{style:'display:none;padding:2px 0 10px 20px;overflow-x:auto'});
+    const tbl=el('table',{style:'font-size:12px'});
+    tbl.append(el('tr',{},el('th',{},'Entered'),el('th',{},'Queen'),el('th',{},'Placed')));
+    cs.forEach(c=>{const tr=el('tr',{style:'cursor:pointer'});tr.addEventListener('click',()=>go('queen:'+c.queen_id));
+      tr.append(el('td',{},c.entrance_order&&c.entrance_order!=='-'?c.entrance_order:'\u2014'),el('td',{},qname[c.queen_id]||c.queen_id),el('td',{},c.placement?('#'+c.placement):'\u2014'));tbl.append(tr);});
+    det.append(tbl);
+    hdr.addEventListener('click',()=>{const o=det.style.display==='none';det.style.display=o?'block':'none';caret.textContent=o?'\u25be':'\u25b8';});
+    wrap.append(hdr,det);host.append(wrap);
+  });
+  m.append(host);
  }});
 
 /* ---------- 24. SEASON SIZE TIMELINE ---------- */
