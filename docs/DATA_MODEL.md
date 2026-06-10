@@ -4,8 +4,13 @@ The source of truth is the ten CSV tables in [`data/`](../data). Everything else
 `site/site_data.js`, `dist/DragRaceDB_master.xlsx`, and the data the site loads — is
 **generated** from them. Never hand-edit a generated file; edit the CSVs and rebuild.
 
-Scope: **RuPaul's Drag Race US main series, Seasons 1–18.** (All Stars and the
-international franchises are a future phase; see [HANDOFF.md](HANDOFF.md).)
+Scope: **RuPaul's Drag Race US main series (Seasons 1–18) + All Stars (in progress).**
+Franchise is a first-class dimension via `seasons.franchise`, with extensible season-ID
+prefixes — `US` (US main), `AS` (All Stars), reserved `UK` (Drag Race UK) and `CA`
+(Canada's Drag Race) for the next imports. A performer keeps **one `queen_id` across every
+franchise**, so cross-franchise links (e.g. a UK winner appearing on All Stars) resolve
+automatically. The site reads the franchise list dynamically, so new franchises need no
+view changes.
 
 ## Conventions in force
 
@@ -49,7 +54,11 @@ international franchises are a future phase; see [HANDOFF.md](HANDOFF.md).)
 ### contestants — one row per queen per season
 `contestant_id` (PK), `queen_id`→queens, `season_id`→seasons, `placement`,
 `entrance_order`, `home_city`, `wins`, `highs`, `lows`, `bottoms`,
-`eliminated_episode`, `miss_congeniality`
+`eliminated_episode`, `miss_congeniality`, `drag_name_used`
+- `drag_name_used` = the name the performer competed under that season when it differs
+  from her canonical `queens.drag_name` (e.g. Trinity Taylor → "Trinity The Tuck" in All
+  Stars); `-` when the same. The `queen_id` is unchanged, so one identity spans every
+  franchise. The site shows `drag_name_used` in season context, canonical name elsewhere.
 - `home_city` = where the queen was based at the time of that season (may differ from
   `queens.hometown`, the canonical origin).
 - `wins/highs/lows/bottoms` are **computed** from `progression` (see validate rule below).
