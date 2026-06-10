@@ -1,0 +1,396 @@
+appearance_id,person_name,season_id,episode_id,appearance_type,role_detail,is_drag_race_alum,alum_queen_id,notes
+AP0001,Ariana Grande,US15,US15E02,GUEST_JUDGE,singer and actress,No,,
+AP0002,Maren Morris,US15,US15E03,GUEST_JUDGE,singer-songwriter,No,,
+AP0003,Amandla Stenberg,US15,US15E04,GUEST_JUDGE,actress,No,,
+AP0004,Janelle Monáe,US15,US15E05,GUEST_JUDGE,"singer, rapper, actress",No,,
+AP0005,Megan Stalter,US15,US15E06,GUEST_JUDGE,comedian,No,,
+AP0006,Harvey Guillén,US15,US15E07,GUEST_JUDGE,actor,No,,
+AP0007,Julia Garner,US15,US15E09,GUEST_JUDGE,actress,No,,
+AP0008,Ali Wong,US15,US15E11,GUEST_JUDGE,comedian and actress,No,,
+AP0009,Orville Peck,US15,US15E12,GUEST_JUDGE,country musician,No,,
+AP0010,Hayley Kiyoko,US15,US15E13,GUEST_JUDGE,singer,No,,
+AP0011,Ariana Grande,US15,US15E01,MAINSTAGE_GUEST,special guest,No,,
+AP0012,Vivacious,US15,US15E01,MAINSTAGE_GUEST,drag performer,No,,
+AP0013,Freddy Scott,US15,US15E06,WERKROOM_GUEST,composer and actor,No,,
+AP0014,Leland,US15,US15E06,WERKROOM_GUEST,producer,No,,
+AP0015,Old Gays,US15,US15E06,MAINSTAGE_GUEST,social media personalities,No,,
+AP0016,Danny Trejo,US15,US15E07,MAINSTAGE_GUEST,actor,No,,
+AP0017,Charo,US15,US15E10,WERKROOM_GUEST,entertainer,No,,
+AP0018,Frankie Grande,US15,US15E10,WERKROOM_GUEST,internet personality,No,,
+AP0019,Love Connie,US15,US15E10,WERKROOM_GUEST,drag performer,No,,
+AP0020,Miguel Zarate,US15,US15E12,WERKROOM_GUEST,choreographer,No,,
+AP0021,Norvina,US15,US15E13,WERKROOM_GUEST,ABH president,No,,
+AP0022,Miguel Zarate,US15,US15E14,WERKROOM_GUEST,choreographer,No,,
+AP0023,Kevin Bacon,US15,US15E15,MAINSTAGE_GUEST,actor,No,,
+AP0024,Susan Bysiewicz,US15,US15E15,MAINSTAGE_GUEST,Lt. Governor of Connecticut,No,,
+AP0025,Aquaria,US15,US15E15,MAINSTAGE_GUEST,Drag Race alum,Yes,Q0115,
+AP0026,Asia O'Hara,US15,US15E15,MAINSTAGE_GUEST,Drag Race alum,Yes,Q0117,
+AP0027,Coco Montrese,US15,US15E15,MAINSTAGE_GUEST,Drag Race alum,Yes,Q0051,
+AP0028,DeJa Skye,US15,US15E15,MAINSTAGE_GUEST,Drag Race alum,Yes,Q0173,
+AP0029,Derrick Barry,US15,US15E15,MAINSTAGE_GUEST,Drag Race alum,Yes,Q0093,
+AP0030,Maddy Morphosis,US15,US15E15,MAINSTAGE_GUEST,Drag Race alum,Yes,Q0177,
+AP0031,Bob Mackie,US15,US15E16,MAINSTAGE_GUEST,fashion designer,No,,
+AP0032,Leland,US15,US15E16,MAINSTAGE_GUEST,producer,No,,
+AP0033,Orville Peck,US15,US15E16,MAINSTAGE_GUEST,musician,No,,
+AP0034,Vanessa Williams,US15,US15E16,MAINSTAGE_GUEST,singer and actress,No,,
+AP0035,Jinkx Monsoon,US15,US15E16,MAINSTAGE_GUEST,Drag Race alum,Yes,Q0047,
+AP0036,Kornbread Jeté,US15,US15E16,MAINSTAGE_GUEST,Drag Race alum,No,,
+AP0037,Willow Pill,US15,US15E16,MAINSTAGE_GUEST,Drag Race alum,Yes,Q0168,
+AP0038,Charlize Theron,US16,US16E01,GUEST_JUDGE,actress and producer,No,,
+AP0039,Becky G,US16,US16E02,GUEST_JUDGE,singer and actress,No,,
+AP0040,Isaac Mizrahi,US16,US16E03,GUEST_JUDGE,fashion designer,No,,
+AP0041,Sarah Michelle Gellar,US16,US16E04,GUEST_JUDGE,actress,No,,
+AP0042,Icona Pop,US16,US16E05,GUEST_JUDGE,electropop duo,No,,
+AP0043,Law Roach,US16,US16E06,GUEST_JUDGE,stylist,No,,
+AP0044,Adam Shankman,US16,US16E07,GUEST_JUDGE,director/choreographer,No,,
+AP0045,Kyra Sedgwick,US16,US16E08,GUEST_JUDGE,actress,No,,
+AP0046,Kaia Gerber,US16,US16E09,GUEST_JUDGE,model,No,,
+AP0047,Jamal Sims,US16,US16E10,GUEST_JUDGE,choreographer,No,,
+AP0048,Joel Kim Booster,US16,US16E11,GUEST_JUDGE,actor and comedian,No,,
+AP0049,Mayan Lopez,US16,US16E12,GUEST_JUDGE,actress,No,,
+AP0050,Kelsea Ballerini,US16,US16E13,GUEST_JUDGE,singer,No,,
+AP0051,Ronan Farrow,US16,US16E14,GUEST_JUDGE,journalist,No,,
+AP0052,Derrick Barry,US16,US16E01,WERKROOM_GUEST,Drag Race alum,Yes,Q0093,
+AP0053,Love Connie,US16,US16E01,WERKROOM_GUEST,drag performer,No,,
+AP0054,Charo,US16,US16E06,WERKROOM_GUEST,entertainer,No,,
+AP0055,Melissa McCarthy,US16,US16E07,MAINSTAGE_GUEST,actress and comedian,No,,
+AP0056,Chad Michaels,US16,US16E08,WERKROOM_GUEST,Drag Race alum (AS1 winner),Yes,Q0035,
+AP0057,Leland,US16,US16E10,WERKROOM_GUEST,music producer,No,,
+AP0058,Freddy Scott,US16,US16E10,WERKROOM_GUEST,composer,No,,
+AP0059,Norvina,US16,US16E12,WERKROOM_GUEST,ABH president,No,,
+AP0060,Albert Sanchez,US16,US16E14,WERKROOM_GUEST,photographer,No,,
+AP0061,Matt Rogers,US16,US16E14,MAINSTAGE_GUEST,comedian/host,No,,
+AP0062,Sasha Colby,US16,US16E16,MAINSTAGE_GUEST,Drag Race alum (S15 winner),Yes,Q0182,
+AP0063,Malaysia Babydoll Foxx,US16,US16E16,MAINSTAGE_GUEST,Drag Race alum (S15 MissC),Yes,Q0186,
+AP0064,Cassandra Peterson,US16,US16E16,MAINSTAGE_GUEST,actress (Elvira),No,,
+AP0065,Katy Perry,US17,US17E01,GUEST_JUDGE,singer,No,,
+AP0066,Doechii,US17,US17E02,GUEST_JUDGE,rapper and singer,No,,
+AP0067,Sandra Bernhard,US17,US17E03,GUEST_JUDGE,actress and comedian,No,,
+AP0068,Julia Schlaepfer,US17,US17E04,GUEST_JUDGE,actress,No,,
+AP0069,Lawrence Chaney,US17,US17E02,MAINSTAGE_GUEST,Drag Race UK alum,No,,
+AP0070,Tracee Ellis Ross,US17,US17E14,GUEST_JUDGE,actress,No,,
+AP0071,Cardi B,US18,US18E01,GUEST_JUDGE,rapper,No,,
+AP0072,Dove Cameron,US18,US18E02,GUEST_JUDGE,actress/singer,No,,
+AP0073,Iman,US18,US18E10,GUEST_JUDGE,supermodel,No,,
+AP0074,Atsuko Okatsuka,US18,US18E11,GUEST_JUDGE,comedian,No,,
+AP0075,Julianne Nicholson,US18,US18E12,GUEST_JUDGE,actress,No,,
+AP0076,Danielle Pinnock,US18,US18E13,GUEST_JUDGE,actress,No,,
+AP0077,Benny Blanco,US18,US18E09,GUEST_JUDGE,music producer,No,,
+AP0078,Leland,US18,US18E09,GUEST_JUDGE,music producer,No,,
+AP0079,Brooke Shields,US18,US18E07,GUEST_JUDGE,actress/model,No,,
+AP0080,Bob the Drag Queen,US18,US18E01,WERKROOM_GUEST,Drag Race alum,Yes,Q0089,
+AP0081,Kim Chi,US18,US18E01,WERKROOM_GUEST,Drag Race alum,Yes,Q0090,
+AP0082,Raja,US18,US18E01,WERKROOM_GUEST,Drag Race alum,Yes,Q0022,
+AP0083,Jamal Sims,US18,US18E01,WERKROOM_GUEST,choreographer,No,,
+AP0084,Teyana Taylor,US18,US18E13,GUEST_JUDGE,actress/singer,No,,confirmed S18 guest judge
+AP0085,Zara Larsson,US18,US18E05,GUEST_JUDGE,singer,No,,confirmed S18 guest judge
+AP0086,Amy Taylor,US18,US18E06,GUEST_JUDGE,musician (Amyl and the Sniffers),No,,confirmed S18 guest judge
+AP0087,Annaleigh Ashford,US18,US18E04,GUEST_JUDGE,actress,No,,confirmed S18 guest judge
+AP0088,Sarah Sherman,US18,US18E03,GUEST_JUDGE,comedian (SNL),No,,confirmed S18 guest judge
+AP0089,Law Roach,US18,US18E04,GUEST_JUDGE,stylist,No,,confirmed S18 guest judge
+AP0090,Jamal Sims,US18,US18E07,GUEST_JUDGE,choreographer,No,,confirmed S18 guest judge
+AP0091,Sapphira Cristál,US17,US17E16,MAINSTAGE_GUEST,S16 winner alum guest (finale),Yes,Q0199,S17 finale guest
+AP0092,Xunami Muse,US17,US17E16,MAINSTAGE_GUEST,S16 alum guest (finale),Yes,Q0206,S17 finale guest
+AP0093,Nymphia Wind,US17,US17E16,MAINSTAGE_GUEST,S16 winner alum guest (finale),Yes,Q0198,S17 finale guest
+AP0094,Liza Minnelli,US17,US17E16,MAINSTAGE_GUEST,Lifetime Achievement honoree (finale),No,,
+AP0095,Bob Mackie,US01,US01E01,GUEST_JUDGE,fashion designer,No,,
+AP0096,Mike Ruiz,US01,US01E01,WERKROOM_GUEST,photographer (mini-challenge),No,,
+AP0097,Michelle Williams,US01,US01E02,GUEST_JUDGE,singer (Destiny's Child),No,,
+AP0098,Debra Wilson,US01,US01E03,GUEST_JUDGE,actress/comedian (MADtv),No,,
+AP0099,Lucy Lawless,US01,US01E05,GUEST_JUDGE,actress,No,,S1 guest judge
+AP0100,Maria Conchita Alonso,US01,,GUEST_JUDGE,actress/singer,No,,S1 guest judge; exact episode not yet verified
+AP0101,Robin Antin,US01,,GUEST_JUDGE,creator of The Pussycat Dolls,No,,S1 guest judge; exact episode not yet verified
+AP0102,Jenny Shimizu,US01,US01E04,GUEST_JUDGE,model/actress,No,,S1 guest judge
+AP0103,Tori Spelling,US01,,GUEST_JUDGE,actress,No,,S1 guest judge; exact episode not yet verified
+AP0104,Dean McDermott,US01,,GUEST_JUDGE,actor,No,,S1 guest judge; exact episode not yet verified
+AP0105,Howard Bragman,US01,,GUEST_JUDGE,author/publicist,No,,S1 guest judge; exact episode not yet verified
+AP0106,Frank Gatson,US01,US01E07,GUEST_JUDGE,choreographer,No,,S1 guest judge
+AP0107,Tanya Tucker,US02,US02E03,GUEST_JUDGE,country music legend,No,,
+AP0108,Kathy Najimy,US02,US02E03,GUEST_JUDGE,actress (directed commercial),No,,
+AP0109,Niecy Nash,US02,US02E04,GUEST_JUDGE,comedian/actress,No,,
+AP0110,Lisa Rinna,US02,US02E04,GUEST_JUDGE,actress,No,,
+AP0111,Alec Mapa,US02,US02E04,MAINSTAGE_GUEST,actor,No,,
+AP0112,Phoebe Price,US02,US02E04,MAINSTAGE_GUEST,celebrity personality,No,,
+AP0113,Marc Malkin,US02,,GUEST_JUDGE,E! journalist,No,,S2 book-cover episode; exact ep not yet verified
+AP0114,Jackie Collins,US02,,GUEST_JUDGE,author,No,,S2 book-cover episode; exact ep not yet verified
+AP0115,Gigi Levangie Grazer,US02,,GUEST_JUDGE,author,No,,S2 book-cover episode; exact ep not yet verified
+AP0116,Tatum O'Neal,US02,,GUEST_JUDGE,Academy Award winner,No,,S2 divalicious award-shows episode; exact ep not yet verified
+AP0117,Marissa Jaret Winokur,US02,,GUEST_JUDGE,Tony Award winner,No,,S2 divalicious award-shows episode; exact ep not yet verified
+AP0118,Susan Powter,US03,US03E02,GUEST_JUDGE,fitness guru,No,,
+AP0119,La Toya Jackson,US03,US03E02,GUEST_JUDGE,singer,No,,
+AP0120,Lily Tomlin,US03,US03E03,GUEST_JUDGE,actress and comedian,No,,
+AP0121,Alessandra Torresani,US03,US03E03,GUEST_JUDGE,actress,No,,
+AP0122,Chloë Sevigny,US03,US03E05,GUEST_JUDGE,actress and model,No,,S3 morning-news episode
+AP0123,Debbie Matenopoulos,US03,US03E05,GUEST_JUDGE,television host,No,,S3 morning-news episode
+AP0124,Kristin Cavallari,US03,US03E05,MAINSTAGE_GUEST,TV personality (interviewed),No,,S3 morning-news episode
+AP0125,Bruce Vilanch,US03,US03E02,GUEST_JUDGE,comedy writer,No,,S3 guest judge
+AP0126,Vanessa Williams,US03,US03E02,GUEST_JUDGE,actress/singer,No,,S3 guest judge
+AP0127,Aisha Tyler,US03,US03E06,GUEST_JUDGE,comedian/actress,No,,S3 guest judge
+AP0128,Amber Rose,US03,US03E06,GUEST_JUDGE,model,No,,S3 guest judge
+AP0129,Eliza Dushku,US03,US03E07,GUEST_JUDGE,actress,No,,S3 guest judge
+AP0130,Sara Rue,US03,US03E07,GUEST_JUDGE,actress,No,,S3 guest judge
+AP0131,Rita Rudner,US03,US03E08,GUEST_JUDGE,comedian,No,,S3 guest judge
+AP0132,Arden Myrin,US03,US03E08,GUEST_JUDGE,comedian,No,,S3 guest judge
+AP0133,Cheryl Tiegs,US03,US03E09,GUEST_JUDGE,model,No,,S3 guest judge
+AP0134,Johnny Weir,US03,US03E09,GUEST_JUDGE,figure skater,No,,S3 guest judge
+AP0135,Jody Watley,US03,US03E10,GUEST_JUDGE,singer,No,,S3 guest judge
+AP0136,Carmen Electra,US03,US03E10,GUEST_JUDGE,actress,No,,S3 guest judge
+AP0137,Wayne Brady,US03,US03E11,GUEST_JUDGE,actor/comedian,No,,S3 guest judge
+AP0138,Fantasia Barrino,US03,US03E11,GUEST_JUDGE,singer,No,,S3 guest judge
+AP0139,Margaret Cho,US03,US03E12,GUEST_JUDGE,actress/comedian,No,,S3 guest judge
+AP0140,Sharon Osbourne,US03,US03E12,GUEST_JUDGE,TV personality,No,,S3 guest judge
+AP0141,Mike Ruiz,US03,US03E02,WERKROOM_GUEST,photographer,No,,S3 photographer
+AP0142,Rick Fox,US04,US04E02,GUEST_JUDGE,actor/former NBA player,No,,
+AP0143,John Salley,US04,US04E02,GUEST_JUDGE,former NBA player/TV host,No,,
+AP0144,Max Mutchnick,US04,US04E04,GUEST_JUDGE,TV producer (Will & Grace),No,,
+AP0145,Nicole Sullivan,US04,US04E04,GUEST_JUDGE,actress/comedian,No,,
+AP0146,Dan Savage,US04,US04E09,GUEST_JUDGE,author/activist,No,,
+AP0147,Jeffrey Moran,US04,US04E09,GUEST_JUDGE,Absolut Vodka exec,No,,
+AP0148,Candis Cayne,US04,US04E14,MAINSTAGE_GUEST,finale Glamazon video special guest,No,,
+AP0149,Mathu Andersen,US04,US04E14,MAINSTAGE_GUEST,finale Glamazon video special guest,No,,
+AP0150,Raja,US04,US04E14,MAINSTAGE_GUEST,S3 winner - finale guest,Yes,Q0022,
+AP0151,Tyra Sanchez,US04,US04E14,MAINSTAGE_GUEST,S2 winner - finale guest,Yes,Q0010,
+AP0152,Piyah Martell,US04,,WERKROOM_GUEST,mini-challenge guest,No,,S4 butterfly-hat mini; exact ep TBD
+AP0153,Camille Grammer,US05,US05E01,GUEST_JUDGE,TV personality,No,,
+AP0154,Mike Ruiz,US05,US05E01,WERKROOM_GUEST,photographer (mini-challenge),No,,
+AP0155,Kristen Johnston,US05,US05E02,GUEST_JUDGE,actress,No,,
+AP0156,Juliette Lewis,US05,US05E02,GUEST_JUDGE,actress,No,,
+AP0157,Coco Austin,US05,US05E03,GUEST_JUDGE,TV personality/model,No,,
+AP0158,Paulina Porizkova,US05,US05E03,GUEST_JUDGE,model,No,,
+AP0159,Chaz Bono,US05,US05E04,GUEST_JUDGE,writer/advocate,No,,
+AP0160,Travis Wall,US05,US05E04,GUEST_JUDGE,choreographer,No,,
+AP0161,Nick Lazzarini,US05,US05E04,WERKROOM_GUEST,guest choreographer,No,,
+AP0162,La Toya Jackson,US05,US05E06,GUEST_JUDGE,singer,No,,
+AP0163,Anita Pointer,US05,US05E06,GUEST_JUDGE,singer (The Pointer Sisters),No,,
+AP0164,Ruth Pointer,US05,US05E06,GUEST_JUDGE,singer (The Pointer Sisters),No,,
+AP0165,Aubrey O'Day,US05,US05E08,GUEST_JUDGE,singer,No,,
+AP0166,Joan Van Ark,US05,US05E08,GUEST_JUDGE,actress,No,,
+AP0167,Julie Brown,US05,US05E09,GUEST_JUDGE,comedian,No,,S5 Snatch Game ep
+AP0168,Downtown Julie Brown,US05,US05E09,GUEST_JUDGE,TV personality,No,,S5 Snatch Game ep
+AP0169,Gloria Allred,US05,US05E14,MAINSTAGE_GUEST,attorney - finale courtroom,No,,S5 finale
+AP0170,Candis Cayne,US05,US05E14,MAINSTAGE_GUEST,actress - finale guest,No,,S5 finale
+AP0171,Mathu Andersen,US05,US05E14,MAINSTAGE_GUEST,finale guest,No,,S5 finale
+AP0172,Adam Lambert,US06,US06E01,GUEST_JUDGE,singer,No,,
+AP0173,Mike Ruiz,US06,US06E01,WERKROOM_GUEST,photographer,No,,
+AP0174,Khloé Kardashian,US06,US06E02,GUEST_JUDGE,TV personality,No,,
+AP0175,Mike Ruiz,US06,US06E02,WERKROOM_GUEST,photographer (mini-challenge),No,,
+AP0176,Linda Blair,US06,US06E03,GUEST_JUDGE,actress,No,,
+AP0177,Lena Headey,US06,US06E03,GUEST_JUDGE,actress,No,,
+AP0178,Sheryl Lee Ralph,US06,US06E04,GUEST_JUDGE,actress/singer,No,,
+AP0179,Lucian Piane,US06,US06E04,GUEST_JUDGE,composer,No,,
+AP0180,Our Lady J,US06,US06E04,WERKROOM_GUEST,guest pianist,No,,
+AP0181,Jaime Pressly,US06,US06E08,GUEST_JUDGE,actress,No,,
+AP0182,Bruce Vilanch,US06,US06E08,GUEST_JUDGE,comedian/writer,No,,
+AP0183,Neil Patrick Harris,US06,US06E10,GUEST_JUDGE,actor,No,,
+AP0184,David Burtka,US06,US06E10,GUEST_JUDGE,actor/chef,No,,
+AP0185,Khloé Kardashian,US06,US06E11,GUEST_JUDGE,TV personality,No,,
+AP0186,Bob Mackie,US06,US06E11,GUEST_JUDGE,fashion designer,No,,
+AP0187,Mathu Andersen,US06,US06E12,GUEST_JUDGE,artist (also directed sketches),No,,
+AP0188,Jamal Sims,US06,US06E12,WERKROOM_GUEST,choreographer,No,,
+AP0189,Chaz Bono,US06,US06E09,GUEST_JUDGE,writer/advocate,No,,S6 talk-show/animal-runway ep
+AP0190,Georgia Holt,US06,US06E09,GUEST_JUDGE,singer/actress (Cher's mother),No,,S6 talk-show ep
+AP0191,Paula Abdul,US06,US06E09,GUEST_JUDGE,singer/choreographer,No,,S6 talk-show ep
+AP0192,Alaska,US07,US07E01,MAINSTAGE_GUEST,S5 runner-up guest,Yes,Q0048,
+AP0193,Mathu Andersen,US07,US07E01,WERKROOM_GUEST,photographer/makeup artist,No,,
+AP0194,Magnus Hastings,US07,US07E01,WERKROOM_GUEST,photographer,No,,
+AP0195,Olivia Newton-John,US07,US07E02,GUEST_JUDGE,singer/actress,No,,
+AP0196,Jordin Sparks,US07,US07E02,GUEST_JUDGE,singer,No,,
+AP0197,Moby,US07,US07E02,WERKROOM_GUEST,musician,No,,
+AP0198,Jamal Sims,US07,US07E02,WERKROOM_GUEST,choreographer,No,,
+AP0199,Ariana Grande,US07,US07E03,GUEST_JUDGE,singer/actress,No,,
+AP0200,Merle Ginsberg,US07,US07E03,GUEST_JUDGE,journalist (former panelist),No,,
+AP0201,Jessica Alba,US07,US07E04,GUEST_JUDGE,actress,No,,
+AP0202,Lucian Piane,US07,US07E04,GUEST_JUDGE,composer,No,,
+AP0203,Kathy Griffin,US07,US07E05,GUEST_JUDGE,comedian,No,,
+AP0204,Isaac Mizrahi,US07,US07E05,GUEST_JUDGE,fashion designer,No,,
+AP0205,Tamar Braxton,US07,US07E06,GUEST_JUDGE,singer/TV personality,No,,
+AP0206,Michael Urie,US07,US07E06,GUEST_JUDGE,actor,No,,
+AP0207,LeAnn Rimes,US07,US07E07,GUEST_JUDGE,singer,No,,
+AP0208,Nelsan Ellis,US07,US07E07,GUEST_JUDGE,actor,No,,
+AP0209,Bianca Del Rio,US07,US07E07,MAINSTAGE_GUEST,S6 winner guest,Yes,Q0061,
+AP0210,Latrice Royale,US07,US07E08,MAINSTAGE_GUEST,S4 Miss C / AS1 - guest,Yes,Q0037,
+AP0211,Demi Lovato,US07,US07E09,GUEST_JUDGE,singer/actress,No,,
+AP0212,John Waters,US07,US07E09,GUEST_JUDGE,director,No,,
+AP0213,Our Lady J,US07,US07E09,WERKROOM_GUEST,musician,No,,
+AP0214,Lucian Piane,US07,US07E09,WERKROOM_GUEST,composer,No,,
+AP0215,Alyssa Milano,US07,US07E11,GUEST_JUDGE,actress,No,,S7 guest judge
+AP0216,Rachael Harris,US07,,GUEST_JUDGE,actress/comedian,No,,S7 guest judge; exact ep TBD
+AP0217,Santino Rice,US07,,GUEST_JUDGE,fashion designer (former panelist),No,,S7 guest judge; exact ep TBD
+AP0218,Rebecca Romijn,US07,US07E12,GUEST_JUDGE,actress,No,,S7 guest judge
+AP0219,Nicole Richie,US08,US08E01,GUEST_JUDGE,TV personality,No,,
+AP0220,Mathu Andersen,US08,US08E01,WERKROOM_GUEST,photographer,No,,
+AP0221,BeBe Zahara Benet,US08,US08E01,MAINSTAGE_GUEST,former winner/contestant - 100th ep guest,Yes,Q0001,
+AP0222,Tyra Sanchez,US08,US08E01,MAINSTAGE_GUEST,former winner/contestant - 100th ep guest,Yes,Q0010,
+AP0223,Raja,US08,US08E01,MAINSTAGE_GUEST,former winner/contestant - 100th ep guest,Yes,Q0022,
+AP0224,Sharon Needles,US08,US08E01,MAINSTAGE_GUEST,former winner/contestant - 100th ep guest,Yes,Q0034,
+AP0225,Chad Michaels,US08,US08E01,MAINSTAGE_GUEST,former winner/contestant - 100th ep guest,Yes,Q0035,
+AP0226,Jinkx Monsoon,US08,US08E01,MAINSTAGE_GUEST,former winner/contestant - 100th ep guest,Yes,Q0047,
+AP0227,Violet Chachki,US08,US08E01,MAINSTAGE_GUEST,former winner/contestant - 100th ep guest,Yes,Q0075,
+AP0228,Morgan McMichaels,US08,US08E01,MAINSTAGE_GUEST,former winner/contestant - 100th ep guest,Yes,Q0017,
+AP0229,Latrice Royale,US08,US08E01,MAINSTAGE_GUEST,former winner/contestant - 100th ep guest,Yes,Q0037,
+AP0230,Raven,US08,US08E01,MAINSTAGE_GUEST,former winner/contestant - 100th ep guest,Yes,Q0011,
+AP0231,Shannel,US08,US08E01,MAINSTAGE_GUEST,former winner/contestant - 100th ep guest,Yes,Q0004,
+AP0232,Ester Dean,US08,US08E02,GUEST_JUDGE,singer-songwriter,No,,
+AP0233,Lucian Piane,US08,US08E02,GUEST_JUDGE,composer,No,,
+AP0234,AB Soto,US08,US08E02,WERKROOM_GUEST,performer,No,,
+AP0235,Jamal Sims,US08,US08E02,WERKROOM_GUEST,choreographer,No,,
+AP0236,Faith Evans,US08,US08E03,GUEST_JUDGE,singer,No,,
+AP0237,Tasha Smith,US08,US08E03,GUEST_JUDGE,actress,No,,
+AP0238,Todrick Hall,US08,US08E06,GUEST_JUDGE,singer/choreographer,No,,
+AP0239,Marc Jacobs,US08,US08E06,GUEST_JUDGE,fashion designer,No,,
+AP0240,Christy McGinity Gibel,US08,US08E06,WERKROOM_GUEST,Little Women: LA cast,No,,
+AP0241,Terra Jolé,US08,US08E06,WERKROOM_GUEST,Little Women: LA cast,No,,
+AP0242,Thomas Roberts,US08,US08E07,GUEST_JUDGE,news anchor,No,,
+AP0243,Vivica A. Fox,US08,US08E07,GUEST_JUDGE,actress,No,,
+AP0244,Andrew Christian,US08,US08E07,WERKROOM_GUEST,designer (mini-challenge),No,,
+AP0245,Amy Sedaris,US08,US08E08,GUEST_JUDGE,actress/comedian,No,,
+AP0246,David Sedaris,US08,US08E08,GUEST_JUDGE,author,No,,
+AP0247,Lady Gaga,US09,US09E01,GUEST_JUDGE,singer (entered disguised as 'Ronnie'),No,,
+AP0248,Lisa Kudrow,US09,US09E02,GUEST_JUDGE,actress/comedian,No,,
+AP0249,Kate Pierson,US09,US09E02,MAINSTAGE_GUEST,singer (The B-52s),No,,
+AP0250,Fred Schneider,US09,US09E02,MAINSTAGE_GUEST,singer (The B-52s),No,,
+AP0251,Cindy Wilson,US09,US09E02,MAINSTAGE_GUEST,singer (The B-52s),No,,
+AP0252,Todrick Hall,US09,US09E05,GUEST_JUDGE,singer/choreographer,No,,
+AP0253,Meghan Trainor,US09,US09E05,GUEST_JUDGE,singer,No,,
+AP0254,Chester Lockhart,US09,US09E05,WERKROOM_GUEST,assistant choreographer,No,,
+AP0255,Tamar Braxton,US09,US09E08,GUEST_JUDGE,singer,No,,
+AP0256,Fortune Feimster,US09,US09E08,GUEST_JUDGE,comedian,No,,
+AP0257,Lisa Robertson,US09,,GUEST_JUDGE,TV personality/former QVC host,No,,S9 guest judge; exact ep TBD
+AP0258,Noah Galvin,US09,,GUEST_JUDGE,actor,No,,S9 guest judge; exact ep TBD
+AP0259,Kesha,US09,,GUEST_JUDGE,singer-songwriter,No,,S9 guest judge; exact ep TBD
+AP0260,Zaldy,US09,,GUEST_JUDGE,fashion designer,No,,S9 guest judge; exact ep TBD
+AP0261,Andie MacDowell,US09,,GUEST_JUDGE,actress,No,,S9 guest judge; exact ep TBD
+AP0262,Joan Smalls,US09,,GUEST_JUDGE,fashion model,No,,S9 guest judge; exact ep TBD
+AP0263,Todrick Hall,US09,US09E12,WERKROOM_GUEST,choreographer,No,,ep12 non-mainstage guest
+AP0264,Christina Aguilera,US10,US10E01,GUEST_JUDGE,singer,No,,
+AP0265,Courtney Love,US10,US10E03,GUEST_JUDGE,musician/actress,No,,
+AP0266,Nico Tortorella,US10,US10E03,GUEST_JUDGE,actor,No,,
+AP0267,Logan Browning,US10,US10E04,GUEST_JUDGE,actress,No,,
+AP0268,Tisha Campbell,US10,US10E04,GUEST_JUDGE,actress,No,,
+AP0269,Billy Eichner,US10,US10E08,GUEST_JUDGE,comedian,No,,
+AP0270,Andrew Rannells,US10,US10E08,GUEST_JUDGE,actor,No,,
+AP0271,Todrick Hall,US10,US10E08,WERKROOM_GUEST,choreographer,No,,
+AP0272,Abbi Jacobson,US10,US10E09,GUEST_JUDGE,comedian (Broad City),No,,
+AP0273,Ilana Glazer,US10,US10E09,GUEST_JUDGE,comedian (Broad City),No,,
+AP0274,Stephen Colbert,US10,US10E09,MAINSTAGE_GUEST,TV host,No,,
+AP0275,Randy Rainbow,US10,US10E09,MAINSTAGE_GUEST,comedian,No,,
+AP0276,Miles Heizer,US10,US10E10,GUEST_JUDGE,actor,No,,
+AP0277,Lizzo,US10,US10E10,GUEST_JUDGE,singer,No,,
+AP0278,Anthony Padilla,US10,US10E10,WERKROOM_GUEST,social media personality (makeover),No,,
+AP0279,Chester See,US10,US10E10,WERKROOM_GUEST,social media personality (makeover),No,,
+AP0280,Frankie Grande,US10,US10E10,WERKROOM_GUEST,social media personality (makeover),No,,
+AP0281,Kingsley,US10,US10E10,WERKROOM_GUEST,social media personality (makeover),No,,
+AP0282,Raymond Braun,US10,US10E10,WERKROOM_GUEST,social media personality (makeover),No,,
+AP0283,Tyler Oakley,US10,US10E10,WERKROOM_GUEST,social media personality (makeover),No,,
+AP0284,Shania Twain,US10,US10E05,GUEST_JUDGE,singer,No,,S10 guest judge
+AP0285,Halsey,US10,US10E02,GUEST_JUDGE,singer,No,,S10 guest judge
+AP0286,Kate Upton,US10,US10E07,GUEST_JUDGE,model,No,,S10 guest judge
+AP0287,Kumail Nanjiani,US10,US10E06,GUEST_JUDGE,actor/comedian,No,,S10 guest judge
+AP0288,Emily V. Gordon,US10,US10E06,GUEST_JUDGE,writer,No,,S10 guest judge
+AP0289,Padma Lakshmi,US10,US10E02,GUEST_JUDGE,TV host,No,,S10 guest judge
+AP0290,Audra McDonald,US10,US10E07,GUEST_JUDGE,actress/singer,No,,S10 guest judge
+AP0291,Ashanti,US10,US10E11,GUEST_JUDGE,singer,No,,S10 guest judge
+AP0292,Carrie Preston,US10,US10E05,GUEST_JUDGE,actress,No,,S10 guest judge
+AP0293,Lena Dunham,US10,US10E11,GUEST_JUDGE,writer/actress,No,,S10 guest judge
+AP0294,Andy Cohen,US10,US10E02,MAINSTAGE_GUEST,TV host - special appearance,No,,S10
+AP0295,Cheyenne Jackson,US10,US10E11,MAINSTAGE_GUEST,actor - special appearance,No,,S10
+AP0296,Miley Cyrus,US11,US11E01,GUEST_JUDGE,singer,No,,
+AP0297,Adore Delano,US11,US11E01,MAINSTAGE_GUEST,former contestant - premiere guest,Yes,Q0062,
+AP0298,Delta Work,US11,US11E01,MAINSTAGE_GUEST,former contestant - premiere guest,Yes,Q0027,
+AP0299,Derrick Barry,US11,US11E01,MAINSTAGE_GUEST,former contestant - premiere guest,Yes,Q0093,
+AP0300,Eureka,US11,US11E01,MAINSTAGE_GUEST,former contestant - premiere guest,No,,
+AP0301,Farrah Moan,US11,US11E01,MAINSTAGE_GUEST,former contestant - premiere guest,Yes,Q0108,
+AP0302,Ginger Minj,US11,US11E01,MAINSTAGE_GUEST,former contestant - premiere guest,Yes,Q0076,
+AP0303,Jasmine Masters,US11,US11E01,MAINSTAGE_GUEST,former contestant - premiere guest,Yes,Q0086,
+AP0304,Kimora Blac,US11,US11E01,MAINSTAGE_GUEST,former contestant - premiere guest,Yes,Q0113,
+AP0305,Manila Luzon,US11,US11E01,MAINSTAGE_GUEST,former contestant - premiere guest,Yes,Q0023,
+AP0306,Mariah Balenciaga,US11,US11E01,MAINSTAGE_GUEST,former contestant - premiere guest,No,,
+AP0307,Ongina,US11,US11E01,MAINSTAGE_GUEST,former contestant - premiere guest,Yes,Q0005,
+AP0308,Raja,US11,US11E01,MAINSTAGE_GUEST,former contestant - premiere guest,Yes,Q0022,
+AP0309,Raven,US11,US11E01,MAINSTAGE_GUEST,former contestant - premiere guest,Yes,Q0011,
+AP0310,Sonique,US11,US11E01,MAINSTAGE_GUEST,former contestant - premiere guest,Yes,Q0018,
+AP0311,"Victoria ""Porkchop"" Parker",US11,US11E01,MAINSTAGE_GUEST,former contestant - premiere guest,No,,
+AP0312,Bobby Moynihan,US11,US11E02,GUEST_JUDGE,comedian,No,,
+AP0313,Sydelle Noel,US11,US11E02,GUEST_JUDGE,actress,No,,
+AP0314,Derrick Barry,US11,US11E02,WERKROOM_GUEST,alum guest,Yes,Q0093,
+AP0315,Guillermo Díaz,US11,US11E03,GUEST_JUDGE,actor,No,,
+AP0316,Troye Sivan,US11,US11E03,GUEST_JUDGE,singer,No,,
+AP0317,Cara Delevingne,US11,US11E05,GUEST_JUDGE,model/actress,No,,
+AP0318,Elvira,US11,US11E05,GUEST_JUDGE,actress (Cassandra Peterson),No,,
+AP0319,Trixie Mattel,US11,US11E05,MAINSTAGE_GUEST,AS3 winner - guest,Yes,Q0080,
+AP0320,Mirai Nagasu,US11,US11E06,GUEST_JUDGE,figure skater,No,,
+AP0321,Adam Rippon,US11,US11E06,GUEST_JUDGE,figure skater,No,,
+AP0322,Travis Wall,US11,US11E06,GUEST_JUDGE,choreographer,No,,
+AP0323,Love Connie,US11,US11E06,WERKROOM_GUEST,performer,No,,
+AP0324,Lena Waithe,US11,US11E11,GUEST_JUDGE,writer/actress,No,,S11 guest judge
+AP0325,Gina Rodriguez,US11,US11E10,GUEST_JUDGE,actress,No,,S11 guest judge
+AP0326,Wanda Sykes,US11,US11E11,GUEST_JUDGE,comedian,No,,S11 guest judge
+AP0327,Tony Hale,US11,US11E08,GUEST_JUDGE,actor,No,,S11 guest judge
+AP0328,Kandi Burruss,US11,US11E07,GUEST_JUDGE,singer/TV personality,No,,S11 guest judge
+AP0329,Tiffany Pollard,US11,US11E04,GUEST_JUDGE,TV personality,No,,S11 guest judge
+AP0330,Joel McHale,US11,US11E04,GUEST_JUDGE,comedian,No,,S11 guest judge
+AP0331,Clea DuVall,US11,US11E08,GUEST_JUDGE,actress,No,,S11 guest judge
+AP0332,Fortune Feimster,US11,US11E09,GUEST_JUDGE,comedian,No,,S11 guest judge
+AP0333,Cheyenne Jackson,US11,US11E09,GUEST_JUDGE,actor,No,,S11 guest judge
+AP0334,Katherine Langford,US11,US11E10,GUEST_JUDGE,actress,No,,S11 guest judge
+AP0335,Natasha Lyonne,US11,US11E09,GUEST_JUDGE,actress,No,,S11 guest judge
+AP0336,Amber Valletta,US11,US11E07,GUEST_JUDGE,model,No,,S11 guest judge
+AP0337,Rachel Maddow,US11,US11E04,MAINSTAGE_GUEST,news anchor - special appearance,No,,S11
+AP0338,Nicki Minaj,US12,US12E01,GUEST_JUDGE,rapper (premiere),No,,
+AP0339,Thandiwe Newton,US12,US12E02,GUEST_JUDGE,actress,No,,
+AP0340,Robyn,US12,US12E02,GUEST_JUDGE,singer,No,,
+AP0341,Raven,US12,US12E02,WERKROOM_GUEST,alum guest/makeup,Yes,Q0011,
+AP0342,Zaldy,US12,US12E02,WERKROOM_GUEST,fashion designer,No,,
+AP0343,Olivia Munn,US12,US12E03,GUEST_JUDGE,actress,No,,
+AP0344,Charo,US12,US12E03,WERKROOM_GUEST,entertainer,No,,
+AP0345,Normani,US12,US12E05,GUEST_JUDGE,singer,No,,
+AP0346,Winnie Harlow,US12,US12E07,GUEST_JUDGE,model,No,,
+AP0347,Alexandria Ocasio-Cortez,US12,US12E07,GUEST_JUDGE,U.S. Representative,No,,
+AP0348,Jamal Sims,US12,US12E07,WERKROOM_GUEST,choreographer,No,,
+AP0349,Rachel Bloom,US12,US12E09,GUEST_JUDGE,actress/singer,No,,
+AP0350,Jeff Goldblum,US12,US12E09,GUEST_JUDGE,actor,No,,
+AP0351,Raven,US12,US12E09,WERKROOM_GUEST,alum guest,Yes,Q0011,
+AP0352,Daisy Ridley,US12,US12E10,GUEST_JUDGE,actress,No,,
+AP0353,Jamal Sims,US12,US12E12,GUEST_JUDGE,choreographer,No,,
+AP0354,Leland,US12,US12E12,WERKROOM_GUEST,music producer,No,,
+AP0355,Whoopi Goldberg,US12,US12E11,GUEST_JUDGE,actress/TV host,No,,S12 guest judge
+AP0356,Chaka Khan,US12,US12E08,GUEST_JUDGE,singer,No,,S12 guest judge
+AP0357,Leslie Jones,US12,,GUEST_JUDGE,comedian,No,,S12 guest judge; exact ep TBD
+AP0358,Daniel Franzese,US12,,GUEST_JUDGE,actor,No,,S12 guest judge; exact ep TBD
+AP0359,Jonathan Bennett,US12,,GUEST_JUDGE,actor,No,,S12 guest judge; exact ep TBD
+AP0360,Jamal Sims,US13,US13E02,GUEST_JUDGE,choreographer,No,,
+AP0361,Nicole Byer,US13,US13E03,GUEST_JUDGE,comedian/host,No,,
+AP0362,Loni Love,US13,US13E04,GUEST_JUDGE,comedian/host,No,,
+AP0363,Jeffrey Bowyer-Chapman,US13,US13E04,WERKROOM_GUEST,actor/model,No,,
+AP0364,Anne Hathaway,US13,US13E08,GUEST_JUDGE,actress (Rusical),No,,
+AP0365,Jamal Sims,US13,US13E08,WERKROOM_GUEST,choreographer,No,,
+AP0366,Jamal Sims,US13,US13E14,GUEST_JUDGE,choreographer,No,,
+AP0367,Ts Madison,US13,,GUEST_JUDGE,TV personality (recurring guest judge),No,,S13 recurring GJ; exact ep TBD
+AP0368,Cynthia Erivo,US13,,GUEST_JUDGE,actress/singer,No,,S13 guest judge; exact ep TBD
+AP0369,Nicole Byer,US13,,GUEST_JUDGE,comedian (also later ep),No,,S13 Nicole Byer appeared in multiple eps; additional ep TBD
+AP0370,Loni Love,US13,,GUEST_JUDGE,comedian (disco doc ep),No,,S13 Loni Love second appearance (disco); exact ep TBD
+AP0371,Scarlett Johansson,US13,,MAINSTAGE_GUEST,superfan video masterclass,No,,S13; exact ep TBD
+AP0372,Anne Hathaway,US13,,MAINSTAGE_GUEST,superfan video masterclass,No,,S13 masterclass (separate from ep8 judging)
+AP0373,Nina West,US13,,MAINSTAGE_GUEST,former Miss Congeniality - guest,Yes,Q0132,S13 Miss C guest; exact ep TBD
+AP0374,Valentina,US13,,MAINSTAGE_GUEST,former Miss Congeniality - guest,Yes,Q0107,S13 Miss C guest; exact ep TBD
+AP0375,Heidi N Closet,US13,,MAINSTAGE_GUEST,former Miss Congeniality - guest,Yes,Q0147,S13 Miss C guest; exact ep TBD
+AP0376,Lizzo,US14,US14E01,GUEST_JUDGE,singer,No,,
+AP0377,Alicia Keys,US14,US14E02,GUEST_JUDGE,singer-songwriter,No,,
+AP0378,Andra Day,US14,US14E12,GUEST_JUDGE,singer,No,,
+AP0379,Leslie Jordan,US14,US14E12,MAINSTAGE_GUEST,actor (guest star),No,,
+AP0380,Leland,US14,US14E12,WERKROOM_GUEST,music producer,No,,
+AP0381,Dulcé Sloan,US14,US14E13,GUEST_JUDGE,comedian (The Daily Show),No,,
+AP0382,Norvina,US14,US14E13,WERKROOM_GUEST,ABH president (mini-challenge),No,,
+AP0383,Dove Cameron,US14,,GUEST_JUDGE,actress/singer,No,,S14 Snatch Game ep; exact ep TBD
+AP0384,Raven,US14,,MAINSTAGE_GUEST,alum - plays Snatch Game,Yes,Q0011,S14 Snatch Game; exact ep TBD
+AP0385,Nicole Byer,US14,,GUEST_JUDGE,comedian (menz panel ep),No,,S14 menz panel ep; exact ep TBD
+AP0386,Taraji P. Henson,US14,,GUEST_JUDGE,actress,No,,S14 guest judge; exact ep TBD
+AP0387,Ava Max,US14,,GUEST_JUDGE,singer,No,,S14 guest judge; exact ep TBD
+AP0388,Christine Chiu,US14,,GUEST_JUDGE,TV personality,No,,S14 guest judge; exact ep TBD
+AP0389,Loni Love,US14,,GUEST_JUDGE,comedian,No,,S14 guest judge; exact ep TBD
+AP0390,Ts Madison,US14,,GUEST_JUDGE,TV personality,No,,S14 guest judge; exact ep TBD
+AP0391,Alec Mapa,US14,,GUEST_JUDGE,actor/comedian,No,,S14 guest judge; exact ep TBD
+AP0392,Jennifer Lopez,US14,,MAINSTAGE_GUEST,virtual appearance,No,,S14 virtual; exact ep TBD
+AP0393,Sarah McLachlan,US14,,MAINSTAGE_GUEST,virtual appearance,No,,S14 virtual; exact ep TBD
+AP0394,Trinity K. Bonet,US14,,WERKROOM_GUEST,alum guest,Yes,Q0067,S14 non-mainstage alum guest; exact ep TBD
+AP0395,Naomi Smalls,US14,,WERKROOM_GUEST,alum guest,Yes,Q0091,S14 non-mainstage alum guest; exact ep TBD

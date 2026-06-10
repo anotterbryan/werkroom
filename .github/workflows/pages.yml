@@ -1,0 +1,55 @@
+name: pages
+
+# Builds the site from data/ and deploys it to GitHub Pages on every push to main.
+# (Alternatively, you can skip this workflow entirely and set Settings -> Pages to
+# serve the committed /site folder directly, since site/index.html is checked in.)
+#
+# To use this workflow: repo Settings -> Pages -> Build and deployment -> Source:
+# "GitHub Actions".
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Validate before building
+        run: python scripts/validate.py
+
+      - name: Build site
+        run: |
+          python scripts/build_site_data.py
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

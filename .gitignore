@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
+
+# Local verification material (PDFs/screenshots) — kept out of version control
+# for copyright reasons. Put trusted source captures here while working.
+reference/
+
+# Scratch / exports
+scratch/
+exports/
+*.tmp

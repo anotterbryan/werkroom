@@ -1,0 +1,4 @@
+# Runtime dependencies for the build scripts.
+# build_site_data.py, build_site.py, and validate.py are pure standard library.
+# Only the spreadsheet builder needs a third-party package:
+openpyxl>=3.1

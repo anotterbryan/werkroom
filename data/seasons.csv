@@ -1,0 +1,19 @@
+season_id,franchise,season_label,platform,host,premiere_date,episode_count,winner_id,miss_congeniality_id,power_up_system
+US01,US main,Season 1,Logo TV,RuPaul,2009-02-02,9,Q0001,Q0002,-
+US02,US main,Season 2,Logo TV,RuPaul,2010-02-01,12,Q0010,Q0014,-
+US03,US main,Season 3,Logo TV,RuPaul,2011-01-24,16,Q0022,Q0025,-
+US04,US main,Season 4,Logo TV,RuPaul,2012-01-30,14,Q0034,Q0037,-
+US05,US main,Season 5,Logo TV,RuPaul,2013-01-28,14,Q0047,Q0053,-
+US06,US main,Season 6,Logo TV,RuPaul,2014-02-24,14,Q0061,Q0065,-
+US07,US main,Season 7,Logo TV,RuPaul,2015-03-02,14,Q0075,Q0079,-
+US08,US main,Season 8,Logo TV,RuPaul,2016-03-07,10,Q0089,Q0098,-
+US09,US main,Season 9,Logo TV,RuPaul,2017-03-24,14,Q0101,Q0107,-
+US10,US main,Season 10,Logo TV,RuPaul,2018-03-22,14,Q0115,Q0119,-
+US11,US main,Season 11,Logo TV,RuPaul,2019-02-28,14,Q0128,Q0132,-
+US12,US main,Season 12,Logo TV,RuPaul,2020-02-28,14,Q0144,Q0147,-
+US13,US main,Season 13,Logo TV,RuPaul,2021-01-01,16,Q0155,Q0164,-
+US14,US main,Season 14,Logo TV,RuPaul,2022-01-07,16,Q0168,,-
+US15,US main,Season 15,MTV,RuPaul,2023-01-06,16,Q0182,Q0186,-
+US16,US main,Season 16,MTV,RuPaul,2024-01-05,16,Q0198,Q0199,-
+US17,US main,Season 17,MTV,RuPaul,2025-01-03,16,Q0212,Q0220,-
+US18,US main,Season 18,MTV,RuPaul,2026-01-02,16,Q0226,Q0230,-
