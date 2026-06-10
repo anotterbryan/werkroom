@@ -40,7 +40,11 @@ international franchises are a future phase; see [HANDOFF.md](HANDOFF.md).)
 
 ### seasons — one row per season
 `season_id` (PK), `franchise`, `season_label`, `platform`, `host`, `premiere_date`,
-`episode_count`, `winner_id`→queens, `miss_congeniality_id`→queens, `power_up_system`
+`episode_count`, `winner_id`→queens, `miss_congeniality_id`→queens, `power_up_system`,
+`cash_prize`
+- `cash_prize` = the winner's headline grand prize in USD (integer, no separators;
+  `-` if unverified). Sourced from the season's Fandom/Wikipedia finale. Cast to int by
+  `build_site_data.py` (`INT_FIELDS["seasons"]`).
 
 ### contestants — one row per queen per season
 `contestant_id` (PK), `queen_id`→queens, `season_id`→seasons, `placement`,

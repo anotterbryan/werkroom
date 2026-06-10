@@ -273,7 +273,7 @@ function renderSeasonDetail(m,sid){
   const eps=D.episodes.filter(e=>e.season_id===sid).sort((a,b)=>+a.episode_number-+b.episode_number);
   m.innerHTML=`<div class="vhead fade"><div class="vkicker">${s.platform} · ${s.premiere_date||''}</div>
     <h1 class="vtitle">${seasonName(sid)}</h1>
-    <div class="vdesc">Winner <b style="color:var(--gold)">${qname[s.winner_id]||'—'}</b> · Miss Congeniality ${qname[s.miss_congeniality_id]||'—'} · ${eps.length} episodes</div>
+    <div class="vdesc">Winner <b style="color:var(--gold)">${qname[s.winner_id]||'—'}</b> · Miss Congeniality ${qname[s.miss_congeniality_id]||'—'} · ${eps.length} episodes${s.cash_prize?` · prize <b style="color:var(--gold)">$${Number(s.cash_prize).toLocaleString()}</b>`:''}</div>
     <div style="margin-top:10px"><button class="tab" onclick="go('atlas')">← All seasons</button></div></div>`;
   const grid=el('div',{class:'grid fade',style:'grid-template-columns:1.1fr 1fr;gap:18px'});
   // contestants
