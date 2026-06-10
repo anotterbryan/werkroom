@@ -114,7 +114,10 @@ select,input[type=text]{background:rgba(0,0,0,.35);border:1px solid rgba(244,181
 .st-BTM,.st-BTM2{background:rgba(230,0,126,.55);color:#fff}
 .st-ELIM,.st-DISQ{background:#7a0030;color:#ffd9ec}
 .st-RUNNER-UP,.st-RUN{background:rgba(244,181,63,.4);color:#fff}
-.st-GUEST,.st-IMM,.st-RTRN,.st-SAVE,.st-WDR{background:rgba(255,255,255,.06);color:rgba(247,240,230,.5)}
+.st-STAY{background:rgba(116,224,200,.45);color:#04231c}
+.st-TOP2{background:rgba(244,181,63,.55);color:#3a2400}
+.st-LOSS{background:rgba(255,140,80,.5);color:#3a1800}
+.st-GUEST,.st-IMM,.st-RTRN,.st-SAVE,.st-WDR,.st-SDADHH{background:rgba(255,255,255,.06);color:rgba(247,240,230,.5)}
 svg .node:hover{cursor:pointer}
 .chip-row{display:flex;flex-wrap:wrap;gap:6px}
 .foot{margin-top:40px;padding-top:18px;border-top:1px solid rgba(244,181,63,.2);
@@ -233,7 +236,7 @@ function renderSeasonDetail(m,sid){
   // contestants
   const ct=el('div',{class:'card'});
   ct.innerHTML='<div class="vkicker">Cast & placement</div>';
-  const tbl=el('table');tbl.innerHTML='<tr><th>#</th><th>Queen</th><th>W</th><th>H</th><th>L</th><th>B</th></tr>';
+  const tbl=el('table');tbl.innerHTML='<tr><th>#</th><th>Queen</th><th title="Entrance order">Ent</th><th>W</th><th>H</th><th>L</th><th>B</th></tr>';
   cs.forEach(c=>{const tr=el('tr',{style:'cursor:pointer',onclick:()=>go('queen:'+c.queen_id)});
     const isWin=(+c.placement===1)||(s.winner_id&&s.winner_id!=='-'&&s.winner_id===c.queen_id);
     const isRU=(+c.placement===2);
@@ -241,6 +244,7 @@ function renderSeasonDetail(m,sid){
       +(isRU?' <span class="pill">Runner-up</span>':'')
       +(c.miss_congeniality==='Yes'?' <span class="pill mint">Miss C</span>':'');
     tr.innerHTML=`<td>${c.placement||'—'}</td><td>${qname[c.queen_id]}${pills}</td>
+      <td style="color:rgba(247,240,230,.6)">${c.entrance_order||'—'}</td>
       <td>${c.wins}</td><td>${c.highs}</td><td>${c.lows}</td><td>${c.bottoms}</td>`;tbl.append(tr);});
   ct.append(tbl);grid.append(ct);
   // episodes
@@ -254,6 +258,17 @@ function renderSeasonDetail(m,sid){
         (gjs.length?`  ·  GJ: ${gjs.join(', ')}`:''))));
   });
   grid.append(et);m.append(grid);
+  // full progression matrix (queens × episodes), color-coded by status — the signature progress chart
+  const prog={};D.progression.filter(p=>p.season_id===sid).forEach(p=>{prog[p.queen_id+'|'+p.episode_id]=p.status;});
+  const esc=t=>String(t).replace(/"/g,'&quot;');
+  const mx=el('div',{class:'card fade',style:'overflow-x:auto;margin-top:18px'});
+  let mh='<div class="vkicker">Progression — episode by episode</div>';
+  mh+='<table style="font-size:10px"><tr><th style="white-space:nowrap">Queen</th>'+
+    eps.map(e=>`<th title="${(e.title&&e.title!=='-')?esc(e.title):('Episode '+e.episode_number)}">${e.episode_number}</th>`).join('')+'</tr>';
+  cs.forEach(c=>{mh+=`<tr><td style="white-space:nowrap;cursor:pointer" onclick="go('queen:${c.queen_id}')">${qname[c.queen_id]}</td>`+
+    eps.map(e=>{const st=prog[c.queen_id+'|'+e.episode_id]||'';
+      return `<td style="text-align:center;padding:3px">${st?`<span class="st st-${st}" style="min-width:0;width:100%" title="Ep ${e.episode_number}: ${st}">${st}</span>`:''}</td>`;}).join('')+'</tr>';});
+  mh+='</table>';mx.innerHTML=mh;m.append(mx);
 }
 V({id:'season',title:'Season <em>Detail</em>',kicker:'The Competition',icon:'grid',group:null,hidden:true,
   render(m){renderSeasonDetail(m,'US01');}});
