@@ -235,7 +235,12 @@ function renderSeasonDetail(m,sid){
   ct.innerHTML='<div class="vkicker">Cast & placement</div>';
   const tbl=el('table');tbl.innerHTML='<tr><th>#</th><th>Queen</th><th>W</th><th>H</th><th>L</th><th>B</th></tr>';
   cs.forEach(c=>{const tr=el('tr',{style:'cursor:pointer',onclick:()=>go('queen:'+c.queen_id)});
-    tr.innerHTML=`<td>${c.placement||'—'}</td><td>${qname[c.queen_id]}${c.miss_congeniality==='Yes'?' <span class="pill mint">Miss C</span>':''}</td>
+    const isWin=(+c.placement===1)||(s.winner_id&&s.winner_id!=='-'&&s.winner_id===c.queen_id);
+    const isRU=(+c.placement===2);
+    const pills=(isWin?` <span class="pill gold">${icon('crown')} Crowned</span>`:'')
+      +(isRU?' <span class="pill">Runner-up</span>':'')
+      +(c.miss_congeniality==='Yes'?' <span class="pill mint">Miss C</span>':'');
+    tr.innerHTML=`<td>${c.placement||'—'}</td><td>${qname[c.queen_id]}${pills}</td>
       <td>${c.wins}</td><td>${c.highs}</td><td>${c.lows}</td><td>${c.bottoms}</td>`;tbl.append(tr);});
   ct.append(tbl);grid.append(ct);
   // episodes
