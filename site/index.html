@@ -383,18 +383,28 @@ V({id:'queens',title:'The <em>Queens</em>',kicker:'The Queens',icon:'star',group
   const ctrl=el('div',{class:'controls'});
   const search=el('input',{type:'text',placeholder:'Search queens…',style:'flex:1;min-width:200px'});
   ctrl.append(search);m.append(ctrl);
-  const list=el('div',{class:'grid fade',style:'grid-template-columns:repeat(auto-fill,minmax(190px,1fr))'});
+  const list=el('div',{class:'grid fade',style:'grid-template-columns:repeat(auto-fill,minmax(190px,1fr));align-items:start'});
   m.append(list);
-  const seen={};
   const draw=(q='')=>{list.innerHTML='';
     D.contestants.forEach(c=>{
       const nm=qname[c.queen_id]; if(q&&!nm.toLowerCase().includes(q.toLowerCase()))return;
-      list.append(el('div',{class:'card',style:'cursor:pointer;padding:14px',onclick:()=>go('queen:'+c.queen_id)},
+      const card=el('div',{class:'card',style:'cursor:pointer;padding:14px'},
         el('div',{style:'font-family:var(--disp);font-weight:700;font-size:16px'},nm),
         el('div',{style:'font-size:11.5px;color:var(--gold);margin-top:3px'},seasonName(c.season_id)+' · '+(c.placement?('#'+c.placement):'')),
         el('div',{class:'chip-row',style:'margin-top:8px'},
           c.wins>0?el('span',{class:'pill gold'},c.wins+'W'):'',
-          c.miss_congeniality==='Yes'?el('span',{class:'pill mint'},'Miss C'):'')));
+          c.miss_congeniality==='Yes'?el('span',{class:'pill mint'},'Miss C'):''));
+      const det=el('div',{style:'display:none;margin-top:10px;border-top:1px solid rgba(255,255,255,.08);padding-top:8px'});
+      det.append(el('div',{style:'font-size:10.5px;color:rgba(247,240,230,.65);margin-bottom:6px'},`${c.wins}W · ${c.highs}H · ${c.lows}L · ${c.bottoms}B`));
+      const prog=D.progression.filter(p=>p.contestant_id===c.contestant_id).sort((a,b)=>epNum(a.episode_id)-epNum(b.episode_id));
+      const track=el('div',{class:'chip-row'});prog.forEach(p=>track.append(el('span',{class:'st st-'+(p.status||'SAFE'),title:p.episode_id+': '+p.status},p.status)));det.append(track);
+      const ls=(_LSQ[c.queen_id]||[]).filter(l=>{const e=_EP[l.episode_id];return e&&e.season_id===c.season_id;});
+      det.append(el('div',{style:'margin-top:8px;font-size:10.5px'},
+        (ls.length?el('span',{style:'color:rgba(247,240,230,.7)'},`${ls.length} lip sync${ls.length>1?'s':''} this season · `):''),
+        el('span',{style:'color:var(--gold);text-decoration:underline;cursor:pointer',onclick:ev=>{ev.stopPropagation();go('queen:'+c.queen_id);}},'full profile →')));
+      card.append(det);
+      card.addEventListener('click',()=>{const o=det.style.display==='none';det.style.display=o?'block':'none';});
+      list.append(card);
     });
     if(!list.children.length)list.innerHTML='<div class="empty">No queens match.</div>';};
   search.addEventListener('input',e=>draw(e.target.value));draw();
@@ -652,16 +662,16 @@ function buildAlumniSVG(byq){
       const sc=document.createElementNS(NS,'circle');sc.setAttribute('cx',sx);sc.setAttribute('cy',sy);sc.setAttribute('r',4);
       sc.setAttribute('fill','var(--rose)');sc.setAttribute('class','node');
       sc.addEventListener('mousemove',e=>showTip(e,`${a.person}<br><b style="color:var(--gold)">${slabel[a.season]}</b> ${a.episode||''}<br>${a.type.replace('_',' ').toLowerCase()}`));
-      sc.addEventListener('mouseleave',hideTip);svg.append(sc);
+      sc.addEventListener('mouseleave',hideTip);sc.addEventListener('click',()=>go('season:'+a.season));svg.append(sc);
     });
-    const hub=document.createElementNS(NS,'circle');hub.setAttribute('cx',hubX);hub.setAttribute('cy',cy);hub.setAttribute('r',8);
+    const hub=document.createElementNS(NS,'circle');hub.setAttribute('cx',hubX);hub.setAttribute('cy',cy);hub.setAttribute('r',Math.min(7+apps.length,15));
     hub.setAttribute('fill','var(--gold)');hub.setAttribute('class','node');
     hub.addEventListener('click',()=>go('queen:'+qid));
-    hub.addEventListener('mousemove',e=>showTip(e,`${qname[qid]}<br>${apps.length} guest link(s)`));hub.addEventListener('mouseleave',hideTip);
+    hub.addEventListener('mousemove',e=>showTip(e,`${qname[qid]}<br>${apps.length} guest link(s) · click for profile`));hub.addEventListener('mouseleave',hideTip);
     svg.append(hub);
-    const t=document.createElementNS(NS,'text');t.setAttribute('x',hubX-14);t.setAttribute('y',cy+4);t.setAttribute('text-anchor','end');
-    t.setAttribute('fill','var(--cream)');t.setAttribute('font-size','12');t.setAttribute('font-family','var(--mono)');t.textContent=qname[qid];
-    svg.append(t);
+    const t=document.createElementNS(NS,'text');t.setAttribute('x',hubX-16);t.setAttribute('y',cy+4);t.setAttribute('text-anchor','end');
+    t.setAttribute('fill','var(--cream)');t.setAttribute('font-size','12');t.setAttribute('font-family','var(--mono)');t.setAttribute('class','node');t.textContent=qname[qid];
+    t.addEventListener('click',()=>go('queen:'+qid));svg.append(t);
   });
   return svg;
 }
@@ -685,13 +695,30 @@ V({id:'hometowns',title:'Hometown <em>Geography</em>',kicker:'The Queens',icon:'
  desc:'Where the queens come from — the cities and regions that have sent the most competitors.',
  render(m){
   m.innerHTML=head(this);
-  const host=el('div',{class:'card fade'});host.innerHTML='<div class="vkicker">Most-represented hometowns</div>';
+  const host=el('div',{class:'card fade'});host.innerHTML='<div class="vkicker">Most-represented hometowns · click a city for its queens</div>';
   const max=Math.max(...X.hometowns.map(h=>h.count),1);
-  X.hometowns.filter(h=>h.count>=1).slice(0,40).forEach(h=>host.append(
-    el('div',{style:'display:flex;align-items:center;gap:10px;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.05)'},
+  const qByHome={};D.queens.forEach(q=>{if(q.hometown&&q.hometown!=='-')(qByHome[q.hometown]=qByHome[q.hometown]||[]).push(q.queen_id);});
+  const contByQ={};D.contestants.forEach(c=>{(contByQ[c.queen_id]=contByQ[c.queen_id]||[]).push(c);});
+  X.hometowns.filter(h=>h.count>=1).slice(0,60).forEach(h=>{
+    const wrap=el('div',{style:'border-bottom:1px solid rgba(255,255,255,.05)'});
+    const caret=el('span',{style:'color:var(--magenta);font-size:9px;width:10px;flex:none'},'▸');
+    const hdr=el('div',{style:'display:flex;align-items:center;gap:10px;padding:5px 0;cursor:pointer'},caret,
       el('div',{style:'flex:1;font-size:13.5px'},h.hometown),
       el('div',{class:'bar',style:`width:${130*h.count/max}px`}),
-      el('div',{style:'width:22px;text-align:right;color:var(--gold);font-weight:700'},h.count))));
+      el('div',{style:'width:22px;text-align:right;color:var(--gold);font-weight:700'},h.count));
+    const det=el('div',{style:'display:none;padding:0 0 10px 20px'});
+    (qByHome[h.hometown]||[]).forEach(qid=>{
+      const runs=(contByQ[qid]||[]).slice().sort((a,b)=>a.season_id<b.season_id?-1:1);
+      const tw=runs.reduce((n,c)=>n+(+c.wins||0),0);
+      const best=Math.min(...runs.map(c=>+c.placement||99));
+      const row=el('div',{style:'font-size:11.5px;padding:3px 0;line-height:1.5'});
+      row.append(qLink(qid));
+      row.append(el('span',{style:'color:rgba(247,240,230,.7)'},'  — '+runs.map(c=>seasonName(c.season_id)+(c.placement?(' #'+c.placement):'')).join(', ')+`  ·  ${tw}W`+(best===1?'  · 👑':'')));
+      det.append(row);
+    });
+    hdr.addEventListener('click',()=>{const o=det.style.display==='none';det.style.display=o?'block':'none';caret.textContent=o?'▾':'▸';});
+    wrap.append(hdr,det);host.append(wrap);
+  });
   m.append(host);
  }});
 
@@ -876,10 +903,11 @@ V({id:'guestdir',title:'Guest Judge <em>Directory</em>',kicker:'The Panel',icon:
 
 /* ---------- 21. APPEARANCE-TYPE SPLIT ---------- */
 V({id:'apptypes',title:'Appearance <em>Types</em>',kicker:'The Panel',icon:'chart',group:'The Panel',
- desc:'Guest judges versus mainstage and werkroom guests — the shape of who shows up, season by season.',
+ desc:'How involved each guest gets — sitting on the judges’ panel, appearing on the mainstage, or coming into the werkroom. (Finer splits — in the challenge, prepping the queens, Untucked — arrive as that data is added.) Click a season for the names.',
  render(m){
   m.innerHTML=head(this);
   const types=['GUEST_JUDGE','MAINSTAGE_GUEST','WERKROOM_GUEST'];
+  const TLABEL={GUEST_JUDGE:'judges’ panel',MAINSTAGE_GUEST:'mainstage',WERKROOM_GUEST:'werkroom'};
   const col={GUEST_JUDGE:'var(--magenta)',MAINSTAGE_GUEST:'var(--gold)',WERKROOM_GUEST:'var(--mint)'};
   const host=el('div',{class:'card fade',style:'overflow-x:auto'});
   const counts={};SEASON_ORDER.forEach(s=>{counts[s]={};types.forEach(t=>counts[s][t]=0);});
@@ -895,7 +923,7 @@ V({id:'apptypes',title:'Appearance <em>Types</em>',kicker:'The Panel',icon:'char
       if(!list.length)return;any=true;
       const grp=el('div',{style:'margin:6px 0'});
       grp.append(el('div',{style:`font-size:10px;letter-spacing:1px;text-transform:uppercase;color:${col[t]};margin-bottom:5px`},
-        t.replace(/_/g,' ').toLowerCase()+` (${list.length})`));
+        TLABEL[t]+` (${list.length})`));
       const inner=el('div',{class:'chip-row',style:'gap:6px'});
       list.forEach(a=>{
         const isAlum=a.is_drag_race_alum==='Yes';
@@ -925,7 +953,7 @@ V({id:'apptypes',title:'Appearance <em>Types</em>',kicker:'The Panel',icon:'char
     row.addEventListener('click',()=>{const open=det.style.display==='none';det.style.display=open?'block':'none';caret.textContent=open?'▾':'▸';});
     host.append(row,det);
   });
-  m.append(el('div',{class:'legend'},...types.map(t=>el('span',{},el('span',{class:'sw',style:'background:'+col[t]}),t.replace('_',' ').toLowerCase()))),host);
+  m.append(el('div',{class:'legend'},...types.map(t=>el('span',{},el('span',{class:'sw',style:'background:'+col[t]}),TLABEL[t]))),host);
  }});
 
 /* ---------- 22. WIN-RATE SCATTER ---------- */
@@ -1074,30 +1102,42 @@ V({id:'tenure',title:'Judge <em>Tenure</em>',kicker:'The Panel',icon:'mask',grou
 
 /* ---------- 29. THE CONNECTION FINDER (two-queen path) ---------- */
 V({id:'connect',title:'The <em>Connection</em> Finder',kicker:'The Connections',icon:'web',group:'The Connections',
- desc:'Pick two queens; see what links them — shared seasons, shared lip-sync songs, or shared guest-judge episodes.',
+ desc:'Pick one queen and her whole web appears — castmates, lip-sync opponents, and the alumni appearances that tie her to other seasons.',
  render(m){
   m.innerHTML=head(this);
   const qopts=[...new Set(D.contestants.map(c=>c.queen_id))].map(q=>({id:q,n:qname[q]})).sort((a,b)=>a.n.localeCompare(b.n));
   const ctrl=el('div',{class:'controls'});
-  const a=el('select'),b=el('select');
-  qopts.forEach(o=>{a.append(el('option',{value:o.id},o.n));b.append(el('option',{value:o.id},o.n));});
-  b.selectedIndex=Math.min(1,qopts.length-1);
-  ctrl.append(el('span',{style:'font-size:12.5px;color:var(--gold)'},'Queen A:'),a,el('span',{style:'font-size:12.5px;color:var(--gold)'},'Queen B:'),b);m.append(ctrl);
-  const host=el('div',{class:'card fade'});m.append(host);
-  const draw=()=>{const qa=a.value,qb=b.value;host.innerHTML='<div class="vkicker">Connections</div>';
-    const sa=new Set(D.contestants.filter(c=>c.queen_id===qa).map(c=>c.season_id));
-    const sb=new Set(D.contestants.filter(c=>c.queen_id===qb).map(c=>c.season_id));
-    const shared=[...sa].filter(s=>sb.has(s));
-    const out=[];
-    if(shared.length)out.push(`Competed in the same season: <b style="color:var(--gold)">${shared.map(seasonName).join(', ')}</b>`);
-    // shared guest episodes via alum links
-    const ea=new Set(D.appearances.filter(x=>x.alum_queen_id===qa&&x.episode_id).map(x=>x.episode_id));
-    const eb=new Set(D.appearances.filter(x=>x.alum_queen_id===qb&&x.episode_id).map(x=>x.episode_id));
-    const se=[...ea].filter(e=>eb.has(e));
-    if(se.length)out.push(`Guest-appeared in the same episode: ${se.join(', ')}`);
-    host.innerHTML+=out.length?out.map(o=>`<div style="font-size:14px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.05)">${o}</div>`).join(''):
-      '<div class="empty">No direct link found in current data — the web grows as All Stars and outside-world bridges are added.</div>';};
-  a.addEventListener('change',draw);b.addEventListener('change',draw);draw();
+  const a=el('select');qopts.forEach(o=>a.append(el('option',{value:o.id},o.n)));
+  ctrl.append(el('span',{style:'font-size:12.5px;color:var(--gold)'},'Queen:'),a);m.append(ctrl);
+  const host=el('div',{class:'fade'});m.append(host);
+  const chips=(ids)=>{const w=el('div',{class:'chip-row',style:'gap:6px;margin-top:6px'});[...ids].forEach(id=>{const sp=qLink(id);sp.className='pill';sp.style.cssText='cursor:pointer;color:var(--rose)';w.append(sp);});return w;};
+  const draw=()=>{const qa=a.value;host.innerHTML='';
+    const myRuns=D.contestants.filter(c=>c.queen_id===qa);
+    // 1) castmates per season
+    const cm=new Set();
+    myRuns.forEach(c=>D.contestants.filter(x=>x.season_id===c.season_id&&x.queen_id!==qa).forEach(x=>cm.add(x.queen_id)));
+    const c1=el('div',{class:'card',style:'margin-bottom:14px'});
+    c1.append(sectionHead(`Competed alongside · ${cm.size}`,'var(--magenta)'),
+      el('div',{style:'font-size:11px;color:rgba(247,240,230,.6)'},myRuns.map(c=>seasonName(c.season_id)).join(', ')),chips(cm));
+    host.append(c1);
+    // 2) lip-sync opponents
+    const opp=new Set();(_LSQ[qa]||[]).forEach(l=>[l.queen_a_id,l.queen_b_id,l.winner_id,l.loser_id].forEach(x=>{if(x&&x!=='-'&&x!==qa)opp.add(x);}));
+    const c2=el('div',{class:'card',style:'margin-bottom:14px'});
+    c2.append(sectionHead(`Faced in a lip sync · ${opp.size}`,'var(--gold)'));
+    c2.append(opp.size?chips(opp):el('div',{style:'font-size:11.5px;color:rgba(247,240,230,.5)'},'No recorded lip syncs.'));
+    host.append(c2);
+    // 3) alum appearances
+    const apps=D.appearances.filter(x=>x.alum_queen_id===qa);
+    const c3=el('div',{class:'card'});
+    c3.append(sectionHead(`Returned as an alum · ${apps.length}`,'var(--mint)'));
+    if(apps.length)apps.forEach(ap=>{const r=el('div',{style:'font-size:11.5px;padding:4px 0;line-height:1.5'});
+      r.append(el('span',{style:'color:var(--gold)'},seasonName(ap.season_id)));
+      if(ap.episode_id&&ap.episode_id!=='-'){r.append(document.createTextNode(' · '));r.append(epChip(ap.episode_id));}
+      r.append(document.createTextNode(` — ${ap.appearance_type.replace(/_/g,' ').toLowerCase()}${ap.role_detail&&ap.role_detail!=='-'?' ('+ap.role_detail+')':''}`));c3.append(r);});
+    else c3.append(el('div',{style:'font-size:11.5px;color:rgba(247,240,230,.5)'},'No alum appearances recorded.'));
+    host.append(c3);
+  };
+  a.addEventListener('change',draw);draw();
  }});
 
 /* ---------- 30. DATA HEALTH / METHODOLOGY ---------- */
