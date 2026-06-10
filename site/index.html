@@ -199,6 +199,12 @@ D.lip_syncs.forEach(l=>{[...new Set([l.queen_a_id,l.queen_b_id,l.winner_id,l.los
   .forEach(q=>{(_LSQ[q]=_LSQ[q]||[]).push(l);});});
 function qLink(qid){return el('span',{style:'color:var(--rose);cursor:pointer;text-decoration:underline',
   onclick:ev=>{ev.stopPropagation();go('queen:'+qid);}},qname[qid]||qid);}
+/* per-season display name: the as-competed name when set, else canonical */
+function cname(c){return (c&&c.drag_name_used&&c.drag_name_used!=='-')?c.drag_name_used:(qname[c.queen_id]||c.queen_id);}
+/* franchise filter (global) */
+let FRANCHISE='All';
+const FRANCHISES=[...new Set(D.seasons.map(s=>s.franchise))];
+function seasonAllowed(sid){if(FRANCHISE==='All')return true;const s=D.seasons.find(x=>x.season_id===sid);return s&&s.franchise===FRANCHISE;}
 function epChip(eid){return el('span',{style:'cursor:pointer;color:var(--gold);text-decoration:underline',
   onclick:ev=>{const e=_EP[eid];if(e){ev.stopPropagation();go('season:'+e.season_id);}}},epLabel(eid));}
 /* colored section header for detail views */
@@ -230,7 +236,7 @@ function lipSyncLine(l,fromQid){
 
 /* ---------- 0. OVERVIEW / HOME ---------- */
 V({id:'home',title:'The <em>Werkroom</em>',kicker:'A Drag Race Data Observatory',icon:'crown',group:'Start',
- desc:'An original, copyright-safe exploration of eighteen seasons of the U.S. main series — every queen, episode, lip sync, guest judge and panel shift, woven through one connected database. Thirty ways to read the herstory.',
+ desc:'An original, copyright-safe exploration of RuPaul’s Drag Race — every queen, episode, lip sync, guest judge and panel shift across the U.S. main series and All Stars, woven through one connected database.',
  render(m){
   const meta=D.meta;
   const cards=[['Seasons',meta.seasons,'atlas'],['Queens',meta.queens,'queens'],['Contestant runs',meta.contestants,'tallies'],
@@ -251,14 +257,21 @@ V({id:'atlas',title:'Season <em>Atlas</em>',kicker:'The Competition',icon:'grid'
  desc:'Every season at a glance — winner, runners-up, Miss Congeniality, episode count and platform.',
  render(m){
   m.innerHTML=head(this);
+  const ctrl=el('div',{class:'controls'});
+  ctrl.append(el('span',{style:'font-size:11px;color:var(--gold)'},'Franchise:'));
+  ['All',...FRANCHISES].forEach(f=>{const b=el('button',{class:'tab'+(FRANCHISE===f?' on':'')},f);
+    b.addEventListener('click',()=>{FRANCHISE=f;go('atlas');});ctrl.append(b);});
+  m.append(ctrl);
   const wrap=el('div',{class:'grid fade',style:'grid-template-columns:repeat(auto-fit,minmax(250px,1fr))'});
-  D.seasons.forEach(s=>{
+  D.seasons.filter(s=>seasonAllowed(s.season_id)).forEach(s=>{
     const win=qname[s.winner_id]||'—', mc=qname[s.miss_congeniality_id]||'—';
     const cs=contestantsBySeason(s.season_id).sort((a,b)=>(+a.placement||99)-(+b.placement||99));
-    const runners=cs.filter(c=>+c.placement>1&&+c.placement<=3).map(c=>qname[c.queen_id]);
+    const runners=cs.filter(c=>+c.placement>1&&+c.placement<=3).map(c=>cname(c));
     wrap.append(el('div',{class:'card',style:'cursor:pointer',onclick:()=>go('season:'+s.season_id)},
-      el('div',{class:'vkicker'},s.platform+' · '+ (s.premiere_date||'')),
-      el('div',{style:'font-family:var(--disp);font-weight:800;font-size:24px;color:var(--cream)'},seasonName(s.season_id)),
+      el('div',{style:'display:flex;justify-content:space-between;align-items:center'},
+        el('div',{class:'vkicker',style:'margin:0'},s.platform+' · '+ (s.premiere_date||'')),
+        el('span',{class:'pill'+(s.franchise==='All Stars'?' mint':' gold'),style:'font-size:9px'},s.franchise)),
+      el('div',{style:'font-family:var(--disp);font-weight:800;font-size:24px;color:var(--cream);margin-top:6px'},seasonName(s.season_id)),
       el('div',{style:'margin:10px 0 4px',html:`<span class="pill gold">${icon('crown')} ${win}</span>`}),
       el('div',{style:'font-size:12.5px;color:rgba(247,240,230,.85);line-height:1.7;margin-top:6px'},
         `Runners-up: ${runners.join(', ')||'—'}`,el('br'),`Miss C: ${mc}`,el('br'),`${s.episode_count} episodes`)));
@@ -286,7 +299,7 @@ function renderSeasonDetail(m,sid){
     const pills=(isWin?` <span class="pill gold">${icon('crown')} Crowned</span>`:'')
       +(isRU?' <span class="pill">Runner-up</span>':'')
       +(c.miss_congeniality==='Yes'?' <span class="pill mint">Miss C</span>':'');
-    tr.innerHTML=`<td>${c.placement||'—'}</td><td>${qname[c.queen_id]}${pills}</td>
+    tr.innerHTML=`<td>${c.placement||'—'}</td><td>${cname(c)}${pills}</td>
       <td style="color:rgba(247,240,230,.82)">${c.entrance_order||'—'}</td>
       <td>${c.wins}</td><td>${c.highs}</td><td>${c.lows}</td><td>${c.bottoms}</td>`;tbl.append(tr);});
   ct.append(tbl);grid.append(ct);
@@ -367,7 +380,7 @@ function renderSeasonDetail(m,sid){
   let mh='<div class="vkicker">Progression — episode by episode</div>';
   mh+='<table style="font-size:11.5px"><tr><th style="white-space:nowrap">Queen</th>'+
     eps.map(e=>`<th title="${(e.title&&e.title!=='-')?esc(e.title):('Episode '+e.episode_number)}">${e.episode_number}</th>`).join('')+'</tr>';
-  cs.forEach(c=>{mh+=`<tr><td style="white-space:nowrap;cursor:pointer" onclick="go('queen:${c.queen_id}')">${qname[c.queen_id]}</td>`+
+  cs.forEach(c=>{mh+=`<tr><td style="white-space:nowrap;cursor:pointer" onclick="go('queen:${c.queen_id}')">${cname(c)}</td>`+
     eps.map(e=>{const st=prog[c.queen_id+'|'+e.episode_id]||'';
       return `<td style="text-align:center;padding:3px">${st?`<span class="st st-${st}" style="min-width:0;width:100%" title="Ep ${e.episode_number}: ${st}">${st}</span>`:''}</td>`;}).join('')+'</tr>';});
   mh+='</table>';mx.innerHTML=mh;m.append(mx);
@@ -387,7 +400,7 @@ V({id:'queens',title:'The <em>Queens</em>',kicker:'The Queens',icon:'star',group
   m.append(list);
   const draw=(q='')=>{list.innerHTML='';
     D.contestants.forEach(c=>{
-      const nm=qname[c.queen_id]; if(q&&!nm.toLowerCase().includes(q.toLowerCase()))return;
+      const nm=cname(c); if(q&&!((nm+' '+(qname[c.queen_id]||'')).toLowerCase().includes(q.toLowerCase())))return;
       const card=el('div',{class:'card',style:'cursor:pointer;padding:14px'},
         el('div',{style:'font-family:var(--disp);font-weight:700;font-size:16px'},nm),
         el('div',{style:'font-size:11.5px;color:var(--gold);margin-top:3px'},seasonName(c.season_id)+' · '+(c.placement?('#'+c.placement):'')),
@@ -488,7 +501,7 @@ V({id:'placementgrid',title:'Placement <em>Grid</em>',kicker:'The Competition',i
     const eps=D.episodes.filter(e=>e.season_id===sid).sort((a,b)=>+a.episode_number-+b.episode_number);
     const prog={};D.progression.filter(p=>p.season_id===sid).forEach(p=>{prog[p.queen_id+'|'+p.episode_id]=p.status;});
     let html='<table style="font-size:11.5px"><tr><th>Queen</th>'+eps.map(e=>`<th title="${e.title}">${e.episode_number}</th>`).join('')+'</tr>';
-    cs.forEach(c=>{html+=`<tr><td style="white-space:nowrap;cursor:pointer" onclick="go('queen:${c.queen_id}')">${qname[c.queen_id]}</td>`+
+    cs.forEach(c=>{html+=`<tr><td style="white-space:nowrap;cursor:pointer" onclick="go('queen:${c.queen_id}')">${cname(c)}</td>`+
       eps.map(e=>{const st=prog[c.queen_id+'|'+e.episode_id]||'';return `<td style="text-align:center;padding:3px">${st?`<span class="st st-${st}" style="min-width:0;width:100%">${st}</span>`:''}</td>`;}).join('')+'</tr>';});
     html+='</table>';host.innerHTML=html;};
   sel.addEventListener('change',e=>draw(e.target.value));draw(SEASON_ORDER[0]);
@@ -1001,7 +1014,7 @@ V({id:'entrance',title:'Entrance Order <em>&amp; Fate</em>',kicker:'The Competit
     const tbl=el('table',{style:'font-size:12px'});
     tbl.append(el('tr',{},el('th',{},'Entered'),el('th',{},'Queen'),el('th',{},'Placed')));
     cs.forEach(c=>{const tr=el('tr',{style:'cursor:pointer'});tr.addEventListener('click',()=>go('queen:'+c.queen_id));
-      tr.append(el('td',{},c.entrance_order&&c.entrance_order!=='-'?c.entrance_order:'\u2014'),el('td',{},qname[c.queen_id]||c.queen_id),el('td',{},c.placement?('#'+c.placement):'\u2014'));tbl.append(tr);});
+      tr.append(el('td',{},c.entrance_order&&c.entrance_order!=='-'?c.entrance_order:'\u2014'),el('td',{},cname(c)),el('td',{},c.placement?('#'+c.placement):'\u2014'));tbl.append(tr);});
     det.append(tbl);
     hdr.addEventListener('click',()=>{const o=det.style.display==='none';det.style.display=o?'block':'none';caret.textContent=o?'\u25be':'\u25b8';});
     wrap.append(hdr,det);host.append(wrap);
