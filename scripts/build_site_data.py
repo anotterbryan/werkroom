@@ -218,6 +218,17 @@ def build_derived(raw):
         or "Snatch Game" in e["title"]
     ]
 
+    # guest_bios: optional one-line "known for" descriptors keyed by person_name
+    guest_bios = {}
+    gpath = DATA / "guests.csv"
+    if gpath.exists():
+        with open(gpath, newline="", encoding="utf-8") as fh:
+            for r in csv.DictReader(fh):
+                kf = (r.get("known_for") or "").strip()
+                if kf and kf not in BLANKS:
+                    guest_bios[r["person_name"]] = kf
+    d["guest_bios"] = guest_bios
+
     # lookups
     d["qname"] = qname
     d["slabel"] = slabel

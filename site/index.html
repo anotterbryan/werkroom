@@ -809,19 +809,22 @@ V({id:'elimorder',title:'Elimination <em>Order</em>',kicker:'The Competition',ic
 
 /* ---------- 20. GUEST JUDGE DIRECTORY ---------- */
 V({id:'guestdir',title:'Guest Judge <em>Directory</em>',kicker:'The Panel',icon:'mask',group:'The Panel',
- desc:'Searchable index of every guest judge and the episodes they sat for.',
+ desc:'Searchable index of every guest judge and the episodes they sat for. Recurring judges include a short "known for" note.',
  render(m){
   m.innerHTML=head(this);
+  const bios=X.guest_bios||{};
   const ctrl=el('div',{class:'controls'});const search=el('input',{type:'text',placeholder:'Search guest judges…',style:'flex:1;min-width:200px'});
   ctrl.append(search);m.append(ctrl);
   const list=el('div',{class:'fade'});m.append(list);
   const draw=q=>{list.innerHTML='';
     X.guest_freq.filter(g=>g.name.toLowerCase().includes((q||'').toLowerCase())).forEach(g=>{
-      list.append(el('div',{class:'card',style:'margin-bottom:8px'},
+      const card=el('div',{class:'card',style:'margin-bottom:8px'},
         el('div',{style:'display:flex;justify-content:space-between'},
           el('div',{style:'font-family:var(--disp);font-weight:700;font-size:15px'},g.name),
-          el('span',{class:'pill gold'},g.appearances+'×')),
-        el('div',{style:'font-size:10px;color:rgba(247,240,230,.55);margin-top:5px'},g.episodes.join(' · ')||'episode TBD')));
+          el('span',{class:'pill gold'},g.appearances+'×')));
+      if(bios[g.name])card.append(el('div',{style:'font-size:11px;color:var(--mint);margin-top:4px;font-style:italic'},bios[g.name]));
+      card.append(el('div',{style:'font-size:10px;color:rgba(247,240,230,.55);margin-top:5px'},g.episodes.join(' · ')||'episode TBD'));
+      list.append(card);
     });
     if(!list.children.length)list.innerHTML='<div class="empty">No guest judges match.</div>';};
   search.addEventListener('input',e=>draw(e.target.value));draw('');
