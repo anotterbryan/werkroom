@@ -233,10 +233,10 @@ V({id:'home',title:'The <em>Werkroom</em>',kicker:'A Drag Race Data Observatory'
  desc:'An original, copyright-safe exploration of eighteen seasons of the U.S. main series — every queen, episode, lip sync, guest judge and panel shift, woven through one connected database. Thirty ways to read the herstory.',
  render(m){
   const meta=D.meta;
-  const cards=[['Seasons',meta.seasons],['Queens',meta.queens],['Contestant runs',meta.contestants],
-    ['Episodes',meta.episodes],['Guest appearances',meta.appearances],['Lip-sync songs',meta.songs]];
+  const cards=[['Seasons',meta.seasons,'atlas'],['Queens',meta.queens,'queens'],['Contestant runs',meta.contestants,'tallies'],
+    ['Episodes',meta.episodes,'episodes'],['Guest appearances',meta.appearances,'guestdir'],['Lip-sync songs',meta.songs,'songreuse']];
   m.innerHTML=head(this)+`<div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(150px,1fr))">${
-    cards.map(c=>`<div class="card"><div class="stat">${c[1]}</div><div class="statlbl">${c[0]}</div></div>`).join('')}</div>
+    cards.map(c=>`<div class="card" style="cursor:pointer" onclick="go('${c[2]}')"><div class="stat">${c[1]}</div><div class="statlbl">${c[0]}</div></div>`).join('')}</div>
     <div class="card" style="margin-top:18px"><div class="vkicker">How to read this</div>
     <p style="font-size:14px;line-height:1.7;color:rgba(247,240,230,.92)">Every queen is a <b style="color:var(--gold)">hub</b>; her runs and guest spots are <b style="color:var(--rose)">spokes</b>. Returning queens share one identity across seasons, and alumni who reappear as guests link back to their original run. Use the left rail — grouped into <em>The Queens</em>, <em>The Competition</em>, <em>The Panel</em>, and <em>The Connections</em> — to move between the thirty views. Most are filterable and sortable; hover anything for detail.</p></div>
     <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin-top:18px">${
@@ -516,7 +516,7 @@ V({id:'songreuse',title:'Lip-Sync <em>Song Reuse</em>',kicker:'The Competition',
   const host=el('div',{class:'card fade'});host.innerHTML='<div class="vkicker">Most-reused tracks · click to see each use</div>';
   const max=Math.max(...X.song_reuse.map(s=>s.times_used),1);
   const lsBySong={};D.lip_syncs.forEach(l=>{(lsBySong[l.song_id]=lsBySong[l.song_id]||[]).push(l);});
-  X.song_reuse.slice(0,60).forEach(s=>{
+  X.song_reuse.filter(s=>s.title&&s.title!=='-').sort((a,b)=>b.times_used-a.times_used||a.title.localeCompare(b.title)).slice(0,60).forEach(s=>{
     const wrap=el('div',{style:'border-bottom:1px solid rgba(255,255,255,.05)'});
     const caret=el('span',{style:'color:var(--magenta);font-size:10px;width:10px;flex:none'},'▸');
     const hdr=el('div',{style:'display:flex;align-items:center;gap:10px;padding:6px 0;cursor:pointer'},caret,
@@ -568,12 +568,24 @@ V({id:'guestfreq',title:'Guest Judge <em>Frequency</em>',kicker:'The Panel',icon
  desc:'The most recurring guest judges across the franchise — the famous faces Ru keeps inviting back.',
  render(m){
   m.innerHTML=head(this);
-  const host=el('div',{class:'card fade'});host.innerHTML='<div class="vkicker">By number of guest-judge appearances</div>';
+  const host=el('div',{class:'card fade'});host.innerHTML='<div class="vkicker">By guest-judge appearances · click for episodes</div>';
+  const bios=X.guest_bios||{};
   const max=Math.max(...X.guest_freq.map(g=>g.appearances),1);
-  X.guest_freq.slice(0,50).forEach(g=>host.append(el('div',{style:'display:flex;align-items:center;gap:10px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.05)'},
-    el('div',{style:'flex:1;font-size:13.5px'},g.name),
-    el('div',{class:'bar',style:`width:${110*g.appearances/max}px`}),
-    el('div',{style:'width:24px;text-align:right;color:var(--gold);font-weight:700'},g.appearances))));
+  X.guest_freq.slice(0,80).forEach(g=>{
+    const wrap=el('div',{style:'border-bottom:1px solid rgba(255,255,255,.05)'});
+    const caret=el('span',{style:'color:var(--magenta);font-size:9px;width:10px;flex:none'},'▸');
+    const hdr=el('div',{style:'display:flex;align-items:center;gap:10px;padding:6px 0;cursor:pointer'},caret,
+      el('div',{style:'flex:1;font-size:13.5px'},g.name),
+      el('div',{class:'bar',style:`width:${110*g.appearances/max}px`}),
+      el('div',{style:'width:24px;text-align:right;color:var(--gold);font-weight:700'},g.appearances));
+    const det=el('div',{style:'display:none;padding:0 0 9px 20px'});
+    if(bios[g.name])det.append(el('div',{style:'font-size:11px;color:var(--mint);font-style:italic;margin:2px 0 6px'},bios[g.name]));
+    const eprow=el('div',{style:'font-size:11.5px;line-height:1.7'});
+    (g.episodes||[]).forEach((eid,i)=>{if(i)eprow.append(document.createTextNode(' · '));eprow.append(epChip(eid));});
+    det.append((g.episodes&&g.episodes.length)?eprow:el('div',{style:'font-size:11px;color:rgba(247,240,230,.4)'},'Season-level credit (episode not specified)'));
+    hdr.addEventListener('click',()=>{const o=det.style.display==='none';det.style.display=o?'block':'none';caret.textContent=o?'▾':'▸';});
+    wrap.append(hdr,det);host.append(wrap);
+  });
   m.append(host);
  }});
 
@@ -587,11 +599,23 @@ V({id:'panel',title:'Panel <em>Evolution</em>',kicker:'The Panel',icon:'mask',gr
   const order=Object.keys(people).sort((a,b)=>{
     const fa=SEASON_ORDER.findIndex(s=>people[a].seasons[s]),fb=SEASON_ORDER.findIndex(s=>people[b].seasons[s]);return fa-fb;});
   const host=el('div',{class:'card fade',style:'overflow-x:auto'});
-  let h='<table style="font-size:11.5px"><tr><th>Judge</th>'+SEASON_ORDER.map(s=>`<th>${s.replace('US','')}</th>`).join('')+'</tr>';
   const col={HOST:'var(--gold)',MAIN_JUDGE:'var(--magenta)',ROTATING_JUDGE:'rgba(116,224,200,.7)'};
-  order.forEach(nm=>{h+=`<tr><td style="white-space:nowrap">${nm}</td>`+
-    SEASON_ORDER.map(s=>{const r=people[nm].seasons[s];return `<td style="text-align:center;padding:3px">${r?`<span title="${r}" style="display:inline-block;width:12px;height:12px;border-radius:3px;background:${col[r]}"></span>`:''}</td>`;}).join('')+'</tr>';});
-  h+='</table>';host.innerHTML=h;
+  const tbl=el('table',{style:'font-size:11.5px'});
+  tbl.append(el('tr',{},el('th',{},'Judge · click for detail'),...SEASON_ORDER.map(s=>el('th',{},s.replace('US','')))));
+  order.forEach(nm=>{
+    const tr=el('tr',{style:'cursor:pointer'},el('td',{style:'white-space:nowrap'},nm),
+      ...SEASON_ORDER.map(s=>{const r=people[nm].seasons[s];const td=el('td',{style:'text-align:center;padding:3px'});
+        if(r)td.append(el('span',{title:r,style:`display:inline-block;width:12px;height:12px;border-radius:3px;background:${col[r]}`}));return td;}));
+    const det=el('tr',{style:'display:none'});
+    const dtd=el('td',{colspan:String(SEASON_ORDER.length+1),style:'padding:4px 10px 10px 10px;font-size:11px'});
+    SEASON_ORDER.filter(s=>people[nm].seasons[s]).forEach((s,i)=>{if(i)dtd.append(document.createTextNode('   '));
+      dtd.append(el('span',{style:'cursor:pointer;color:var(--gold);text-decoration:underline',onclick:ev=>{ev.stopPropagation();go('season:'+s);}},
+        seasonName(s)+' ('+people[nm].seasons[s].replace(/_/g,' ').toLowerCase()+')'));});
+    det.append(dtd);
+    tr.addEventListener('click',()=>{const o=det.style.display==='none';det.style.display=o?'table-row':'none';});
+    tbl.append(tr,det);
+  });
+  host.append(tbl);
   m.append(el('div',{class:'legend'},
     el('span',{},el('span',{class:'sw',style:'background:var(--gold)'}),'Host'),
     el('span',{},el('span',{class:'sw',style:'background:var(--magenta)'}),'Main judge'),
@@ -704,11 +728,28 @@ V({id:'snatch',title:'The <em>Snatch Game</em> Index',kicker:'The Competition',i
  desc:'Every Snatch Game across the seasons — the franchise\u2019s signature celebrity-impersonation challenge.',
  render(m){
   m.innerHTML=head(this);
-  const host=el('div',{class:'grid fade',style:'grid-template-columns:repeat(auto-fit,minmax(180px,1fr))'});
-  X.snatch_index.forEach(s=>host.append(el('div',{class:'card',style:'cursor:pointer',onclick:()=>go('season:'+s.season)},
-    el('div',{style:'font-family:var(--disp);font-weight:700;font-size:16px'},seasonName(s.season)),
-    el('div',{style:'font-size:12.5px;color:var(--gold);margin-top:4px'},s.title||'Snatch Game'),
-    el('div',{style:'font-size:11.5px;color:rgba(247,240,230,.72);margin-top:2px'},s.episode_id))));
+  const host=el('div',{class:'grid fade',style:'grid-template-columns:repeat(auto-fit,minmax(200px,1fr))'});
+  const winBy={};D.progression.forEach(p=>{if(p.status==='WIN'){(winBy[p.episode_id]=winBy[p.episode_id]||[]).push(p.queen_id);}});
+  X.snatch_index.forEach(s=>{
+    const e=_EP[s.episode_id]||{};
+    const card=el('div',{class:'card',style:'cursor:pointer'});
+    const det=el('div',{style:'display:none;margin-top:8px;border-top:1px solid rgba(255,255,255,.08);padding-top:8px;font-size:11.5px;line-height:1.6'});
+    const field=(lbl,val)=>{if(val==null||val===''||val==='-')return;det.append(el('div',{style:'margin:3px 0'},
+      el('span',{style:'color:var(--gold);font-size:9px;letter-spacing:1px;text-transform:uppercase;margin-right:6px'},lbl),(val&&val.nodeType)?val:document.createTextNode(val)));};
+    const wins=(winBy[s.episode_id]||[]).filter(q=>qname[q]);
+    if(wins.length){const w=el('span',{});wins.forEach((q,i)=>{if(i)w.append(document.createTextNode(', '));w.append(qLink(q));});field('Won by',w);}
+    field('Played as / challenge', e.main_challenge);
+    if(e.eliminated_id&&e.eliminated_id!=='-'&&qname[e.eliminated_id])field('Eliminated',qLink(e.eliminated_id));
+    if(e.lip_sync_song_id&&songText(e.lip_sync_song_id))field('Lip sync',songText(e.lip_sync_song_id));
+    det.append(el('div',{style:'margin-top:6px'},el('span',{style:'font-size:10px;color:var(--gold);text-decoration:underline;cursor:pointer',onclick:ev=>{ev.stopPropagation();go('season:'+s.season);}},'open season →')));
+    card.append(
+      el('div',{style:'font-family:var(--disp);font-weight:700;font-size:16px'},seasonName(s.season)),
+      el('div',{style:'font-size:12.5px;color:var(--gold);margin-top:4px'},s.title||'Snatch Game'),
+      el('div',{style:'font-size:11.5px;color:rgba(247,240,230,.72);margin-top:2px'},'E'+(e.episode_number||s.episode_id.slice(-2))+(e.air_date&&e.air_date!=='-'?' · '+e.air_date:'')),
+      det);
+    card.addEventListener('click',()=>{const o=det.style.display==='none';det.style.display=o?'block':'none';});
+    host.append(card);
+  });
   if(!X.snatch_index.length)host.innerHTML='<div class="empty">No Snatch Game episodes flagged.</div>';
   m.append(host);
  }});
@@ -761,11 +802,14 @@ V({id:'winners',title:'Winners\u2019 <em>Circle</em>',kicker:'The Queens',icon:'
  render(m){
   m.innerHTML=head(this);
   const wrap=el('div',{class:'grid fade',style:'grid-template-columns:repeat(auto-fit,minmax(200px,1fr))'});
+  const CANCELLED={Q0010:true}; // Tyra Sanchez (S2)
   D.seasons.forEach(s=>{const c=D.contestants.find(x=>x.queen_id===s.winner_id&&x.season_id===s.season_id);
-    wrap.append(el('div',{class:'card',style:'cursor:pointer;text-align:center',onclick:()=>go('queen:'+s.winner_id)},
+    const cx=CANCELLED[s.winner_id];
+    wrap.append(el('div',{class:'card',style:'cursor:pointer;text-align:center'+(cx?';opacity:.9':''),onclick:()=>go('queen:'+s.winner_id)},
       el('div',{style:'color:var(--gold);font-size:22px',html:icon('crown')}),
-      el('div',{style:'font-family:var(--disp);font-weight:800;font-size:19px;margin-top:6px'},qname[s.winner_id]||'—'),
+      el('div',{style:'font-family:var(--disp);font-weight:800;font-size:19px;margin-top:6px'+(cx?';text-decoration:line-through;text-decoration-color:var(--magenta);text-decoration-thickness:2px':'')},qname[s.winner_id]||'—'),
       el('div',{style:'font-size:11.5px;color:var(--gold)'},seasonName(s.season_id)),
+      cx?el('div',{style:'margin-top:7px'},el('span',{class:'pill',style:'background:rgba(230,0,126,.28);border-color:var(--magenta);color:#fff'},'✗ Cancelled')):'',
       c?el('div',{class:'chip-row',style:'justify-content:center;margin-top:8px'},el('span',{class:'pill gold'},c.wins+' wins')):''));
   });
   m.append(wrap);
@@ -962,10 +1006,23 @@ V({id:'artists',title:'Lip-Sync <em>Artists</em>',kicker:'The Competition',icon:
   const byArtist={};X.song_reuse.forEach(s=>{byArtist[s.artist]=(byArtist[s.artist]||0)+s.times_used;});
   const ent=Object.entries(byArtist).filter(e=>e[0]&&e[0]!=='-').sort((a,b)=>b[1]-a[1]);
   const max=Math.max(...ent.map(e=>e[1]),1);
-  const host=el('div',{class:'card fade'});
-  ent.slice(0,40).forEach(([a,n])=>host.append(el('div',{style:'display:flex;align-items:center;gap:10px;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.05)'},
-    el('div',{style:'flex:1;font-size:13.5px'},a),el('div',{class:'bar',style:`width:${130*n/max}px`}),
-    el('div',{style:'width:22px;text-align:right;color:var(--gold);font-weight:700'},n))));
+  const host=el('div',{class:'card fade'});host.innerHTML='<div class="vkicker">By lip-sync tracks · click an artist for songs + episodes</div>';
+  ent.slice(0,60).forEach(([a,n])=>{
+    const wrap=el('div',{style:'border-bottom:1px solid rgba(255,255,255,.05)'});
+    const caret=el('span',{style:'color:var(--magenta);font-size:9px;width:10px;flex:none'},'▸');
+    const hdr=el('div',{style:'display:flex;align-items:center;gap:10px;padding:5px 0;cursor:pointer'},caret,
+      el('div',{style:'flex:1;font-size:13.5px'},a),el('div',{class:'bar',style:`width:${130*n/max}px`}),
+      el('div',{style:'width:22px;text-align:right;color:var(--gold);font-weight:700'},n));
+    const det=el('div',{style:'display:none;padding:0 0 9px 20px'});
+    X.song_reuse.filter(s=>s.artist===a&&s.title&&s.title!=='-').sort((x,y)=>y.times_used-x.times_used).forEach(s=>{
+      const row=el('div',{style:'font-size:11.5px;padding:3px 0;line-height:1.5'});
+      row.append(el('span',{style:'color:var(--cream)'},'♪ '+s.title+'  '));
+      (s.episodes||[]).forEach((eid,i)=>{if(i)row.append(document.createTextNode(', '));row.append(epChip(eid));});
+      det.append(row);
+    });
+    hdr.addEventListener('click',()=>{const o=det.style.display==='none';det.style.display=o?'block':'none';caret.textContent=o?'▾':'▸';});
+    wrap.append(hdr,det);host.append(wrap);
+  });
   m.append(host);
  }});
 
@@ -1029,7 +1086,7 @@ V({id:'connect',title:'The <em>Connection</em> Finder',kicker:'The Connections',
  }});
 
 /* ---------- 30. DATA HEALTH / METHODOLOGY ---------- */
-V({id:'health',title:'Data <em>Health</em>',kicker:'The Connections',icon:'chart',group:'About',
+V({id:'health',title:'Data <em>Health</em>',kicker:'The Connections',icon:'chart',group:'About',hidden:true,
  desc:'Transparency on coverage — what\u2019s verified, what\u2019s still flagged, and how the database was built.',
  render(m){
   m.innerHTML=head(this);
