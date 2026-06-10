@@ -683,14 +683,45 @@ V({id:'apptypes',title:'Appearance <em>Types</em>',kicker:'The Panel',icon:'char
   const counts={};SEASON_ORDER.forEach(s=>{counts[s]={};types.forEach(t=>counts[s][t]=0);});
   D.appearances.forEach(a=>{if(counts[a.season_id]&&counts[a.season_id][a.appearance_type]!=null)counts[a.season_id][a.appearance_type]++;});
   const max=Math.max(...SEASON_ORDER.map(s=>types.reduce((n,t)=>n+counts[s][t],0)),1);
+  // drill-down: the named people for one season, grouped by appearance type
+  const buildDetail=s=>{
+    const det=el('div',{style:'display:none;padding:4px 0 12px 84px'});
+    const apps=D.appearances.filter(a=>a.season_id===s);
+    let any=false;
+    types.forEach(t=>{
+      const list=apps.filter(a=>a.appearance_type===t);
+      if(!list.length)return;any=true;
+      const grp=el('div',{style:'margin:6px 0'});
+      grp.append(el('div',{style:`font-size:9px;letter-spacing:1px;text-transform:uppercase;color:${col[t]};margin-bottom:5px`},
+        t.replace(/_/g,' ').toLowerCase()+` (${list.length})`));
+      const inner=el('div',{class:'chip-row',style:'gap:6px'});
+      list.forEach(a=>{
+        const isAlum=a.is_drag_race_alum==='Yes';
+        const role=a.role_detail&&a.role_detail!=='-'?` · ${a.role_detail}`:'';
+        const chip=el('span',{class:'pill'+(isAlum?' mint':'')},(isAlum?'★ ':'')+a.person_name+role);
+        if(isAlum&&a.alum_queen_id&&a.alum_queen_id!=='-'&&qname[a.alum_queen_id]){
+          chip.style.cursor='pointer';chip.title='Drag Race alum — view profile';
+          chip.addEventListener('click',ev=>{ev.stopPropagation();go('queen:'+a.alum_queen_id);});
+        }else if(isAlum){chip.title='Drag Race alum';}
+        inner.append(chip);
+      });
+      grp.append(inner);det.append(grp);
+    });
+    if(!any)det.append(el('div',{style:'font-size:10px;color:rgba(247,240,230,.4)'},'No named guests recorded for this season yet.'));
+    return det;
+  };
   SEASON_ORDER.forEach(s=>{
     const tot=types.reduce((n,t)=>n+counts[s][t],0);
-    const row=el('div',{style:'display:flex;align-items:center;gap:10px;padding:5px 0'});
-    row.append(el('div',{style:'width:74px;font-size:11px;color:var(--gold)'},seasonName(s)));
+    const caret=el('span',{style:'color:var(--magenta);font-size:9px;width:10px;flex:none'},'▸');
+    const row=el('div',{style:'display:flex;align-items:center;gap:10px;padding:5px 0;cursor:pointer'});
+    row.append(caret,el('div',{style:'width:64px;font-size:11px;color:var(--gold)'},seasonName(s)));
     const barwrap=el('div',{style:'flex:1;display:flex;height:16px;border-radius:8px;overflow:hidden;background:rgba(0,0,0,.3)'});
     types.forEach(t=>{if(counts[s][t])barwrap.append(el('div',{style:`width:${100*counts[s][t]/max}%;background:${col[t]}`,
       title:`${t}: ${counts[s][t]}`}));});
-    row.append(barwrap,el('div',{style:'width:24px;text-align:right;font-size:11px'},tot));host.append(row);
+    row.append(barwrap,el('div',{style:'width:24px;text-align:right;font-size:11px'},tot));
+    const det=buildDetail(s);
+    row.addEventListener('click',()=>{const open=det.style.display==='none';det.style.display=open?'block':'none';caret.textContent=open?'▾':'▸';});
+    host.append(row,det);
   });
   m.append(el('div',{class:'legend'},...types.map(t=>el('span',{},el('span',{class:'sw',style:'background:'+col[t]}),t.replace('_',' ').toLowerCase()))),host);
  }});
