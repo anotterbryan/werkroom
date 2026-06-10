@@ -24,10 +24,10 @@ body{
     linear-gradient(160deg,#1c0726 0%,var(--ink) 60%,#0c0114 100%);
   background-attachment:fixed;
   color:var(--cream); font-family:var(--mono); min-height:100vh;
-  -webkit-font-smoothing:antialiased;
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility;line-height:1.5;
 }
 /* film-grain overlay */
-body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.05;
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.018;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
 a{color:inherit;text-decoration:none}
 ::selection{background:var(--magenta);color:#fff}
@@ -46,19 +46,19 @@ aside{position:sticky;top:0;height:100vh;overflow-y:auto;padding:24px 16px;
 .brand{font-family:var(--disp);font-weight:800;font-size:25px;line-height:1;letter-spacing:.5px;
   color:var(--cream);margin-bottom:2px}
 .brand .crown{color:var(--gold)}
-.brand-sub{font-size:9.5px;letter-spacing:3px;color:var(--magenta);text-transform:uppercase;margin-bottom:20px;font-weight:700}
+.brand-sub{font-size:10.5px;letter-spacing:3px;color:var(--magenta);text-transform:uppercase;margin-bottom:20px;font-weight:700}
 .navsearch{width:100%;background:rgba(0,0,0,.35);border:1px solid rgba(244,181,63,.3);color:var(--cream);
-  font-family:var(--mono);font-size:11px;padding:9px 11px;border-radius:8px;margin-bottom:14px}
-.navsearch::placeholder{color:rgba(247,240,230,.4)}
-.navgroup{font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);
+  font-family:var(--mono);font-size:12.5px;padding:9px 11px;border-radius:8px;margin-bottom:14px}
+.navsearch::placeholder{color:rgba(247,240,230,.62)}
+.navgroup{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);
   margin:16px 0 7px;opacity:.8;font-weight:700}
-.navlink{display:flex;align-items:center;gap:9px;padding:7px 10px;border-radius:8px;font-size:12px;
-  cursor:pointer;color:rgba(247,240,230,.82);transition:.15s;border:1px solid transparent}
+.navlink{display:flex;align-items:center;gap:9px;padding:7px 10px;border-radius:8px;font-size:13.5px;
+  cursor:pointer;color:rgba(247,240,230,.92);transition:.15s;border:1px solid transparent}
 .navlink:hover{background:rgba(230,0,126,.16);color:#fff;transform:translateX(3px)}
 .navlink.active{background:linear-gradient(90deg,rgba(230,0,126,.34),transparent);
   border-color:rgba(230,0,126,.5);color:#fff}
 .navlink .ic{width:16px;height:16px;flex:none;opacity:.9}
-.navnum{margin-left:auto;font-size:9px;opacity:.5}
+.navnum{margin-left:auto;font-size:10px;opacity:.5}
 
 main{padding:34px 40px 90px;max-width:1180px;width:100%}
 @media(max-width:860px){main{padding:74px 18px 80px}}
@@ -69,48 +69,48 @@ main{padding:34px 40px 90px;max-width:1180px;width:100%}
 
 /* ---------- View header ---------- */
 .vhead{margin-bottom:26px;position:relative}
-.vkicker{font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--magenta);font-weight:700;margin-bottom:8px}
+.vkicker{font-size:11.5px;letter-spacing:4px;text-transform:uppercase;color:var(--magenta);font-weight:700;margin-bottom:8px}
 .vtitle{font-family:var(--disp);font-weight:800;font-size:clamp(28px,4vw,46px);line-height:1.02;color:var(--cream)}
 .vtitle em{font-style:italic;color:var(--gold)}
-.vdesc{margin-top:10px;font-size:12.5px;line-height:1.6;color:rgba(247,240,230,.7);max-width:680px}
+.vdesc{margin-top:10px;font-size:14px;line-height:1.6;color:rgba(247,240,230,.88);max-width:680px}
 
 /* ---------- Cards / common ---------- */
 .card{background:linear-gradient(150deg,rgba(61,22,84,.5),rgba(22,3,32,.62));
   border:1px solid rgba(244,181,63,.18);border-radius:16px;padding:20px;box-shadow:var(--shadow)}
 .grid{display:grid;gap:16px}
 .stat{font-family:var(--disp);font-weight:800;font-size:40px;color:var(--gold);line-height:1}
-.statlbl{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(247,240,230,.6);margin-top:4px}
-.pill{display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:20px;font-size:10px;
+.statlbl{font-size:11.5px;letter-spacing:2px;text-transform:uppercase;color:rgba(247,240,230,.82);margin-top:4px}
+.pill{display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:20px;font-size:11.5px;
   background:rgba(230,0,126,.18);border:1px solid rgba(230,0,126,.4);color:var(--rose)}
 .pill.gold{background:rgba(244,181,63,.16);border-color:rgba(244,181,63,.45);color:var(--gold)}
 .pill.mint{background:rgba(116,224,200,.14);border-color:rgba(116,224,200,.4);color:var(--mint)}
-table{width:100%;border-collapse:collapse;font-size:12px}
-th{text-align:left;font-size:9.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th{text-align:left;font-size:10.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);
   padding:9px 10px;border-bottom:1px solid rgba(244,181,63,.25);position:sticky;top:0;background:#1a0526;cursor:pointer;user-select:none}
 th:hover{color:var(--rose)}
 td{padding:8px 10px;border-bottom:1px solid rgba(255,255,255,.05)}
 tr:hover td{background:rgba(230,0,126,.07)}
 .bar{height:10px;border-radius:6px;background:linear-gradient(90deg,var(--magenta),var(--gold))}
 button.tab{background:rgba(0,0,0,.3);border:1px solid rgba(244,181,63,.3);color:var(--cream);
-  font-family:var(--mono);font-size:11px;padding:7px 13px;border-radius:20px;cursor:pointer;transition:.15s}
+  font-family:var(--mono);font-size:12.5px;padding:7px 13px;border-radius:20px;cursor:pointer;transition:.15s}
 button.tab:hover{border-color:var(--magenta)}
 button.tab.on{background:var(--magenta);border-color:var(--magenta);color:#fff}
 .controls{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px;align-items:center}
 select,input[type=text]{background:rgba(0,0,0,.35);border:1px solid rgba(244,181,63,.3);color:var(--cream);
-  font-family:var(--mono);font-size:11px;padding:7px 10px;border-radius:8px}
-.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:10px;color:rgba(247,240,230,.7);margin:10px 0}
+  font-family:var(--mono);font-size:12.5px;padding:7px 10px;border-radius:8px}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:11.5px;color:rgba(247,240,230,.88);margin:10px 0}
 .legend span{display:inline-flex;align-items:center;gap:5px}
 .sw{width:11px;height:11px;border-radius:3px;display:inline-block}
-.empty{padding:40px;text-align:center;color:rgba(247,240,230,.45);font-size:12px}
+.empty{padding:40px;text-align:center;color:rgba(247,240,230,.66);font-size:13.5px}
 .fade{animation:fade .5s ease}
 @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 .tooltip{position:fixed;pointer-events:none;background:#0c0114;border:1px solid var(--gold);
-  border-radius:8px;padding:8px 11px;font-size:11px;z-index:9998;max-width:240px;box-shadow:var(--shadow);opacity:0;transition:opacity .12s}
+  border-radius:8px;padding:8px 11px;font-size:12.5px;z-index:9998;max-width:240px;box-shadow:var(--shadow);opacity:0;transition:opacity .12s}
 /* status cells */
-.st{display:inline-block;min-width:30px;text-align:center;padding:3px 4px;border-radius:5px;font-size:9.5px;font-weight:700}
+.st{display:inline-block;min-width:30px;text-align:center;padding:3px 4px;border-radius:5px;font-size:10.5px;font-weight:700}
 .st-WIN,.st-WINNER{background:var(--gold);color:#3a2400}
 .st-HIGH{background:rgba(116,224,200,.7);color:#04231c}
-.st-SAFE{background:rgba(255,255,255,.1);color:rgba(247,240,230,.7)}
+.st-SAFE{background:rgba(255,255,255,.1);color:rgba(247,240,230,.88)}
 .st-LOW{background:rgba(255,140,80,.5);color:#3a1800}
 .st-BTM,.st-BTM2{background:rgba(230,0,126,.55);color:#fff}
 .st-ELIM,.st-DISQ{background:#7a0030;color:#ffd9ec}
@@ -118,11 +118,11 @@ select,input[type=text]{background:rgba(0,0,0,.35);border:1px solid rgba(244,181
 .st-STAY{background:rgba(116,224,200,.45);color:#04231c}
 .st-TOP2{background:rgba(244,181,63,.55);color:#3a2400}
 .st-LOSS{background:rgba(255,140,80,.5);color:#3a1800}
-.st-GUEST,.st-IMM,.st-RTRN,.st-SAVE,.st-WDR,.st-SDADHH{background:rgba(255,255,255,.06);color:rgba(247,240,230,.5)}
+.st-GUEST,.st-IMM,.st-RTRN,.st-SAVE,.st-WDR,.st-SDADHH{background:rgba(255,255,255,.06);color:rgba(247,240,230,.72)}
 svg .node:hover{cursor:pointer}
 .chip-row{display:flex;flex-wrap:wrap;gap:6px}
 .foot{margin-top:40px;padding-top:18px;border-top:1px solid rgba(244,181,63,.2);
-  font-size:10px;color:rgba(247,240,230,.4);line-height:1.7}
+  font-size:11.5px;color:rgba(247,240,230,.62);line-height:1.7}
 </style>
 </head>
 <body>
@@ -202,7 +202,7 @@ function qLink(qid){return el('span',{style:'color:var(--rose);cursor:pointer;te
 function epChip(eid){return el('span',{style:'cursor:pointer;color:var(--gold);text-decoration:underline',
   onclick:ev=>{const e=_EP[eid];if(e){ev.stopPropagation();go('season:'+e.season_id);}}},epLabel(eid));}
 /* colored section header for detail views */
-function sectionHead(text,color){return el('div',{style:`font-family:var(--mono);font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:${color||'var(--magenta)'};font-weight:700;margin:0 0 9px`},text);}
+function sectionHead(text,color){return el('div',{style:`font-family:var(--mono);font-size:11.5px;letter-spacing:2.5px;text-transform:uppercase;color:${color||'var(--magenta)'};font-weight:700;margin:0 0 9px`},text);}
 /* render one lip sync from a given queen's POV -> a span with linked names */
 function lipSyncLine(l,fromQid){
   const box=el('span',{});
@@ -238,12 +238,12 @@ V({id:'home',title:'The <em>Werkroom</em>',kicker:'A Drag Race Data Observatory'
   m.innerHTML=head(this)+`<div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(150px,1fr))">${
     cards.map(c=>`<div class="card"><div class="stat">${c[1]}</div><div class="statlbl">${c[0]}</div></div>`).join('')}</div>
     <div class="card" style="margin-top:18px"><div class="vkicker">How to read this</div>
-    <p style="font-size:12.5px;line-height:1.7;color:rgba(247,240,230,.8)">Every queen is a <b style="color:var(--gold)">hub</b>; her runs and guest spots are <b style="color:var(--rose)">spokes</b>. Returning queens share one identity across seasons, and alumni who reappear as guests link back to their original run. Use the left rail — grouped into <em>The Queens</em>, <em>The Competition</em>, <em>The Panel</em>, and <em>The Connections</em> — to move between the thirty views. Most are filterable and sortable; hover anything for detail.</p></div>
+    <p style="font-size:14px;line-height:1.7;color:rgba(247,240,230,.92)">Every queen is a <b style="color:var(--gold)">hub</b>; her runs and guest spots are <b style="color:var(--rose)">spokes</b>. Returning queens share one identity across seasons, and alumni who reappear as guests link back to their original run. Use the left rail — grouped into <em>The Queens</em>, <em>The Competition</em>, <em>The Panel</em>, and <em>The Connections</em> — to move between the thirty views. Most are filterable and sortable; hover anything for detail.</p></div>
     <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin-top:18px">${
       VIEWS.filter(v=>v.id!=='home').slice(0,8).map(v=>`<div class="card" style="cursor:pointer" onclick="go('${v.id}')">
         <div style="color:var(--gold)">${icon(v.icon)}</div>
         <div style="font-family:var(--disp);font-weight:700;font-size:17px;margin:6px 0 4px">${v.title.replace(/<[^>]+>/g,'')}</div>
-        <div style="font-size:11px;color:rgba(247,240,230,.6);line-height:1.5">${v.desc||''}</div></div>`).join('')}</div>`;
+        <div style="font-size:12.5px;color:rgba(247,240,230,.82);line-height:1.5">${v.desc||''}</div></div>`).join('')}</div>`;
  }});
 
 /* ---------- 1. SEASON ATLAS ---------- */
@@ -260,7 +260,7 @@ V({id:'atlas',title:'Season <em>Atlas</em>',kicker:'The Competition',icon:'grid'
       el('div',{class:'vkicker'},s.platform+' · '+ (s.premiere_date||'')),
       el('div',{style:'font-family:var(--disp);font-weight:800;font-size:24px;color:var(--cream)'},seasonName(s.season_id)),
       el('div',{style:'margin:10px 0 4px',html:`<span class="pill gold">${icon('crown')} ${win}</span>`}),
-      el('div',{style:'font-size:11px;color:rgba(247,240,230,.65);line-height:1.7;margin-top:6px'},
+      el('div',{style:'font-size:12.5px;color:rgba(247,240,230,.85);line-height:1.7;margin-top:6px'},
         `Runners-up: ${runners.join(', ')||'—'}`,el('br'),`Miss C: ${mc}`,el('br'),`${s.episode_count} episodes`)));
   });
   m.append(wrap);
@@ -287,7 +287,7 @@ function renderSeasonDetail(m,sid){
       +(isRU?' <span class="pill">Runner-up</span>':'')
       +(c.miss_congeniality==='Yes'?' <span class="pill mint">Miss C</span>':'');
     tr.innerHTML=`<td>${c.placement||'—'}</td><td>${qname[c.queen_id]}${pills}</td>
-      <td style="color:rgba(247,240,230,.6)">${c.entrance_order||'—'}</td>
+      <td style="color:rgba(247,240,230,.82)">${c.entrance_order||'—'}</td>
       <td>${c.wins}</td><td>${c.highs}</td><td>${c.lows}</td><td>${c.bottoms}</td>`;tbl.append(tr);});
   ct.append(tbl);grid.append(ct);
   // episodes — collapsed row shows the lip-sync; click to expand (incl. finale crown brackets + outcome)
@@ -300,7 +300,7 @@ function renderSeasonDetail(m,sid){
   const qlink=qid=>el('span',{style:'color:var(--rose);cursor:pointer;text-decoration:underline',
     onclick:ev=>{ev.stopPropagation();go('queen:'+qid);}},qname[qid]);
   const namesSpan=(arr,style)=>{const sp=el('span',style?{style}:{});arr.forEach((c,i)=>{if(i)sp.append(document.createTextNode(', '));sp.append(qlink(c.queen_id));});return sp;};
-  const et=el('div',{class:'card'});et.innerHTML='<div class="vkicker">Episodes <span style="font-size:9px;color:rgba(247,240,230,.4);text-transform:none;letter-spacing:0">· click a row for detail</span></div>';
+  const et=el('div',{class:'card'});et.innerHTML='<div class="vkicker">Episodes <span style="font-size:10px;color:rgba(247,240,230,.62);text-transform:none;letter-spacing:0">· click a row for detail</span></div>';
   eps.forEach(e=>{
     const gjs=D.appearances.filter(a=>a.episode_id===e.episode_id&&a.appearance_type==='GUEST_JUDGE').map(a=>a.person_name);
     const song=songLabel(e.lip_sync_song_id);
@@ -314,16 +314,16 @@ function renderSeasonDetail(m,sid){
     else if(e.main_challenge_type==='Reunion') sub='Reunion';
     else sub='♪ —';
     const wrap=el('div',{style:'border-bottom:1px solid rgba(255,255,255,.06)'});
-    const caret=el('span',{style:'color:var(--magenta);font-size:9px;width:10px;flex:none;transition:transform .15s'},'▸');
+    const caret=el('span',{style:'color:var(--magenta);font-size:10px;width:10px;flex:none;transition:transform .15s'},'▸');
     const hdr=el('div',{style:'padding:8px 0;cursor:pointer;display:flex;gap:8px;align-items:baseline'},caret,
       el('div',{style:'flex:1'},
-        el('div',{style:'font-size:12px;color:var(--cream)'},`${e.episode_number}. ${e.title&&e.title!=='-'?e.title:'(untitled)'}`),
-        el('div',{style:'font-size:10px;color:rgba(247,240,230,.55);margin-top:3px'},
+        el('div',{style:'font-size:13.5px;color:var(--cream)'},`${e.episode_number}. ${e.title&&e.title!=='-'?e.title:'(untitled)'}`),
+        el('div',{style:'font-size:11.5px;color:rgba(247,240,230,.76);margin-top:3px'},
           sub+(gjs.length?`  ·  GJ: ${gjs.join(', ')}`:''))));
-    const det=el('div',{style:'display:none;padding:2px 0 12px 18px;font-size:11px;line-height:1.6'});
+    const det=el('div',{style:'display:none;padding:2px 0 12px 18px;font-size:12.5px;line-height:1.6'});
     const field=(label,val)=>{if(val==null||val===''||val==='-')return;
       det.append(el('div',{style:'margin:3px 0'},
-        el('span',{style:'color:var(--gold);font-size:9px;letter-spacing:1px;text-transform:uppercase;margin-right:7px'},label),
+        el('span',{style:'color:var(--gold);font-size:10px;letter-spacing:1px;text-transform:uppercase;margin-right:7px'},label),
         (val&&val.nodeType)?val:document.createTextNode(val)));};
     field('Main challenge', (e.main_challenge&&e.main_challenge!=='-')
       ? e.main_challenge+(e.main_challenge_type&&e.main_challenge_type!=='-'?` (${e.main_challenge_type})`:'') : null);
@@ -334,7 +334,7 @@ function renderSeasonDetail(m,sid){
       lss.forEach((l,i)=>{
         const box=el('span',{});
         box.append(document.createTextNode((songLabel(l.song_id)||'—')+'  '));
-        box.append(el('span',{style:'color:rgba(247,240,230,.5)'},'· '+(RESULT_LABEL[l.result_type]||l.result_type)));
+        box.append(el('span',{style:'color:rgba(247,240,230,.72)'},'· '+(RESULT_LABEL[l.result_type]||l.result_type)));
         if(l.winner_id&&l.winner_id!=='-'&&qname[l.winner_id]){box.append(document.createTextNode('  · won: '));box.append(qlink(l.winner_id));}
         if(l.loser_id&&l.loser_id!=='-'&&qname[l.loser_id]){box.append(document.createTextNode('  · out: '));box.append(qlink(l.loser_id));}
         field(lss.length>1?(i===0?'Lip syncs'+trk:''):'Lip sync'+trk, box);
@@ -352,7 +352,7 @@ function renderSeasonDetail(m,sid){
       if(mc.length) field('Miss Congeniality', namesSpan(mc));
     }
     if(!det.children.length){const t=e.main_challenge_type;
-      det.append(el('div',{style:'color:rgba(247,240,230,.4)'},
+      det.append(el('div',{style:'color:rgba(247,240,230,.62)'},
         t==='Clip Show'?'Season recap — clip show (no challenge or lip sync).':
         t==='Reunion'?'Reunion special — no competition.':'No further details recorded yet.'));}
     hdr.addEventListener('click',()=>{const open=det.style.display==='none';det.style.display=open?'block':'none';
@@ -365,7 +365,7 @@ function renderSeasonDetail(m,sid){
   const esc=t=>String(t).replace(/"/g,'&quot;');
   const mx=el('div',{class:'card fade',style:'overflow-x:auto;margin-top:18px'});
   let mh='<div class="vkicker">Progression — episode by episode</div>';
-  mh+='<table style="font-size:10px"><tr><th style="white-space:nowrap">Queen</th>'+
+  mh+='<table style="font-size:11.5px"><tr><th style="white-space:nowrap">Queen</th>'+
     eps.map(e=>`<th title="${(e.title&&e.title!=='-')?esc(e.title):('Episode '+e.episode_number)}">${e.episode_number}</th>`).join('')+'</tr>';
   cs.forEach(c=>{mh+=`<tr><td style="white-space:nowrap;cursor:pointer" onclick="go('queen:${c.queen_id}')">${qname[c.queen_id]}</td>`+
     eps.map(e=>{const st=prog[c.queen_id+'|'+e.episode_id]||'';
@@ -391,7 +391,7 @@ V({id:'queens',title:'The <em>Queens</em>',kicker:'The Queens',icon:'star',group
       const nm=qname[c.queen_id]; if(q&&!nm.toLowerCase().includes(q.toLowerCase()))return;
       list.append(el('div',{class:'card',style:'cursor:pointer;padding:14px',onclick:()=>go('queen:'+c.queen_id)},
         el('div',{style:'font-family:var(--disp);font-weight:700;font-size:16px'},nm),
-        el('div',{style:'font-size:10px;color:var(--gold);margin-top:3px'},seasonName(c.season_id)+' · '+(c.placement?('#'+c.placement):'')),
+        el('div',{style:'font-size:11.5px;color:var(--gold);margin-top:3px'},seasonName(c.season_id)+' · '+(c.placement?('#'+c.placement):'')),
         el('div',{class:'chip-row',style:'margin-top:8px'},
           c.wins>0?el('span',{class:'pill gold'},c.wins+'W'):'',
           c.miss_congeniality==='Yes'?el('span',{class:'pill mint'},'Miss C'):'')));
@@ -429,10 +429,10 @@ function renderQueen(m,qid){
     // challenge wins detail
     const wins=prog.filter(p=>p.status==='WIN');
     if(wins.length){
-      const wd=el('div',{style:'margin-top:11px;font-size:11px;line-height:1.6'});
-      wd.append(el('span',{style:'color:var(--gold);font-size:9px;letter-spacing:1px;text-transform:uppercase;margin-right:6px'},'Challenge wins'));
+      const wd=el('div',{style:'margin-top:11px;font-size:12.5px;line-height:1.6'});
+      wd.append(el('span',{style:'color:var(--gold);font-size:10px;letter-spacing:1px;text-transform:uppercase;margin-right:6px'},'Challenge wins'));
       wins.forEach((p,i)=>{const e=_EP[p.episode_id];if(i)wd.append(document.createTextNode(' · '));
-        wd.append(el('span',{style:'cursor:pointer;text-decoration:underline;color:rgba(247,240,230,.8)',onclick:()=>go('season:'+c.season_id),
+        wd.append(el('span',{style:'cursor:pointer;text-decoration:underline;color:rgba(247,240,230,.92)',onclick:()=>go('season:'+c.season_id),
           title:(e&&e.main_challenge&&e.main_challenge!=='-')?e.main_challenge:''},`E${e?e.episode_number:epNum(p.episode_id)}`));});
       row.append(wd);
     }
@@ -444,15 +444,15 @@ function renderQueen(m,qid){
     wrap.append(sectionHead('Lip-sync record','var(--gold)'));
     const lc=el('div',{class:'card'});
     const won=ls.filter(l=>l.winner_id===qid).length, lost=ls.filter(l=>l.loser_id===qid).length;
-    lc.append(el('div',{style:'font-size:10px;color:rgba(247,240,230,.55);margin-bottom:8px'},`${ls.length} performed · ${won} won · ${lost} lost`));
-    ls.forEach(l=>lc.append(el('div',{style:'font-size:11px;padding:4px 0;border-top:1px solid rgba(255,255,255,.05);line-height:1.5'},lipSyncLine(l,qid))));
+    lc.append(el('div',{style:'font-size:11.5px;color:rgba(247,240,230,.76);margin-bottom:8px'},`${ls.length} performed · ${won} won · ${lost} lost`));
+    ls.forEach(l=>lc.append(el('div',{style:'font-size:12.5px;padding:4px 0;border-top:1px solid rgba(255,255,255,.05);line-height:1.5'},lipSyncLine(l,qid))));
     wrap.append(lc);
   }
   // ---- As a Drag Race alum ----
   if(guestApps.length){
     wrap.append(sectionHead('Later appearances as an alum','var(--mint)'));
     const g=el('div',{class:'card'});
-    guestApps.forEach(a=>{const row=el('div',{style:'font-size:11.5px;padding:5px 0;border-top:1px solid rgba(255,255,255,.05);line-height:1.5'});
+    guestApps.forEach(a=>{const row=el('div',{style:'font-size:12.5px;padding:5px 0;border-top:1px solid rgba(255,255,255,.05);line-height:1.5'});
       row.append(el('span',{style:'color:var(--gold)'},seasonName(a.season_id)));
       if(a.episode_id&&a.episode_id!=='-'){row.append(document.createTextNode(' · '));row.append(epChip(a.episode_id));}
       row.append(document.createTextNode(` — ${a.appearance_type.replace(/_/g,' ').toLowerCase()}${a.role_detail&&a.role_detail!=='-'?' ('+a.role_detail+')':''}`));
@@ -471,13 +471,13 @@ V({id:'placementgrid',title:'Placement <em>Grid</em>',kicker:'The Competition',i
   m.innerHTML=head(this);
   const ctrl=el('div',{class:'controls'});
   const sel=el('select');SEASON_ORDER.forEach(s=>sel.append(el('option',{value:s},seasonName(s))));
-  ctrl.append(el('span',{style:'font-size:11px;color:var(--gold)'},'Season:'),sel);m.append(ctrl);
+  ctrl.append(el('span',{style:'font-size:12.5px;color:var(--gold)'},'Season:'),sel);m.append(ctrl);
   const host=el('div',{class:'card fade',style:'overflow-x:auto'});m.append(host);
   const draw=sid=>{
     const cs=contestantsBySeason(sid).sort((a,b)=>(+a.placement||99)-(+b.placement||99));
     const eps=D.episodes.filter(e=>e.season_id===sid).sort((a,b)=>+a.episode_number-+b.episode_number);
     const prog={};D.progression.filter(p=>p.season_id===sid).forEach(p=>{prog[p.queen_id+'|'+p.episode_id]=p.status;});
-    let html='<table style="font-size:10px"><tr><th>Queen</th>'+eps.map(e=>`<th title="${e.title}">${e.episode_number}</th>`).join('')+'</tr>';
+    let html='<table style="font-size:11.5px"><tr><th>Queen</th>'+eps.map(e=>`<th title="${e.title}">${e.episode_number}</th>`).join('')+'</tr>';
     cs.forEach(c=>{html+=`<tr><td style="white-space:nowrap;cursor:pointer" onclick="go('queen:${c.queen_id}')">${qname[c.queen_id]}</td>`+
       eps.map(e=>{const st=prog[c.queen_id+'|'+e.episode_id]||'';return `<td style="text-align:center;padding:3px">${st?`<span class="st st-${st}" style="min-width:0;width:100%">${st}</span>`:''}</td>`;}).join('')+'</tr>';});
     html+='</table>';host.innerHTML=html;};
@@ -518,15 +518,15 @@ V({id:'songreuse',title:'Lip-Sync <em>Song Reuse</em>',kicker:'The Competition',
   const lsBySong={};D.lip_syncs.forEach(l=>{(lsBySong[l.song_id]=lsBySong[l.song_id]||[]).push(l);});
   X.song_reuse.slice(0,60).forEach(s=>{
     const wrap=el('div',{style:'border-bottom:1px solid rgba(255,255,255,.05)'});
-    const caret=el('span',{style:'color:var(--magenta);font-size:9px;width:10px;flex:none'},'▸');
+    const caret=el('span',{style:'color:var(--magenta);font-size:10px;width:10px;flex:none'},'▸');
     const hdr=el('div',{style:'display:flex;align-items:center;gap:10px;padding:6px 0;cursor:pointer'},caret,
-      el('div',{style:'flex:1;font-size:12px'},`${s.title}${s.artist&&s.artist!=='-'?' — '+s.artist:''}`),
+      el('div',{style:'flex:1;font-size:13.5px'},`${s.title}${s.artist&&s.artist!=='-'?' — '+s.artist:''}`),
       el('div',{class:'bar',style:`width:${120*s.times_used/max}px`}),
       el('div',{style:'width:24px;text-align:right;color:var(--gold);font-weight:700'},s.times_used));
     const det=el('div',{style:'display:none;padding:0 0 10px 20px'});
     const rows=(lsBySong[s.song_id]||[]).slice().sort((a,b)=>a.episode_id<b.episode_id?-1:1);
-    if(rows.length) rows.forEach(l=>det.append(el('div',{style:'font-size:11px;padding:3px 0;line-height:1.5'},lipSyncLine(l))));
-    else (s.episodes||[]).forEach(eid=>det.append(el('div',{style:'font-size:11px;padding:3px 0'},epChip(eid))));
+    if(rows.length) rows.forEach(l=>det.append(el('div',{style:'font-size:12.5px;padding:3px 0;line-height:1.5'},lipSyncLine(l))));
+    else (s.episodes||[]).forEach(eid=>det.append(el('div',{style:'font-size:12.5px;padding:3px 0'},epChip(eid))));
     hdr.addEventListener('click',()=>{const o=det.style.display==='none';det.style.display=o?'block':'none';caret.textContent=o?'▾':'▸';});
     wrap.append(hdr,det);host.append(wrap);
   });
@@ -544,19 +544,19 @@ V({id:'assassin',title:'Lip-Sync <em>Assassins</em>',kicker:'The Competition',ic
   host.innerHTML='<div class="vkicker">Lip syncs won · click to expand</div>';
   board.slice(0,60).forEach((a,i)=>{
     const wrap=el('div',{style:'border-bottom:1px solid rgba(255,255,255,.05)'});
-    const caret=el('span',{style:'color:var(--magenta);font-size:9px;width:10px;flex:none'},'▸');
+    const caret=el('span',{style:'color:var(--magenta);font-size:10px;width:10px;flex:none'},'▸');
     const hdr=el('div',{style:'display:flex;align-items:center;gap:10px;padding:7px 0;cursor:pointer'},caret,
       el('div',{style:'width:20px;color:var(--gold);font-family:var(--disp);font-weight:800'},i+1),
-      el('div',{style:'flex:1;font-size:13px'},a.drag_name),
+      el('div',{style:'flex:1;font-size:14px'},a.drag_name),
       el('div',{class:'bar',style:`width:${110*a.ls_wins/max}px`}),
       el('div',{style:'width:24px;text-align:right;color:var(--rose);font-weight:700'},a.ls_wins));
     const det=el('div',{style:'display:none;padding:0 0 10px 20px'});
     const ls=(_LSQ[a.queen_id]||[]).slice().sort((x,y)=>x.episode_id<y.episode_id?-1:1);
-    det.append(el('div',{style:'font-size:10px;color:rgba(247,240,230,.55);margin:2px 0 7px'},
+    det.append(el('div',{style:'font-size:11.5px;color:rgba(247,240,230,.76);margin:2px 0 7px'},
       `${a.assassinations} sent home · ${a.shantays} shantay · ${a.sashays} sashay  ·  `,
       el('span',{style:'cursor:pointer;color:var(--gold);text-decoration:underline',onclick:ev=>{ev.stopPropagation();go('queen:'+a.queen_id);}},'full profile →')));
-    ls.forEach(l=>det.append(el('div',{style:'font-size:11px;padding:3px 0;line-height:1.5'},lipSyncLine(l,a.queen_id))));
-    if(!ls.length)det.append(el('div',{style:'font-size:11px;color:rgba(247,240,230,.4)'},'No lip syncs recorded.'));
+    ls.forEach(l=>det.append(el('div',{style:'font-size:12.5px;padding:3px 0;line-height:1.5'},lipSyncLine(l,a.queen_id))));
+    if(!ls.length)det.append(el('div',{style:'font-size:12.5px;color:rgba(247,240,230,.62)'},'No lip syncs recorded.'));
     hdr.addEventListener('click',()=>{const o=det.style.display==='none';det.style.display=o?'block':'none';caret.textContent=o?'▾':'▸';});
     wrap.append(hdr,det);host.append(wrap);
   });
@@ -571,7 +571,7 @@ V({id:'guestfreq',title:'Guest Judge <em>Frequency</em>',kicker:'The Panel',icon
   const host=el('div',{class:'card fade'});host.innerHTML='<div class="vkicker">By number of guest-judge appearances</div>';
   const max=Math.max(...X.guest_freq.map(g=>g.appearances),1);
   X.guest_freq.slice(0,50).forEach(g=>host.append(el('div',{style:'display:flex;align-items:center;gap:10px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.05)'},
-    el('div',{style:'flex:1;font-size:12px'},g.name),
+    el('div',{style:'flex:1;font-size:13.5px'},g.name),
     el('div',{class:'bar',style:`width:${110*g.appearances/max}px`}),
     el('div',{style:'width:24px;text-align:right;color:var(--gold);font-weight:700'},g.appearances))));
   m.append(host);
@@ -587,7 +587,7 @@ V({id:'panel',title:'Panel <em>Evolution</em>',kicker:'The Panel',icon:'mask',gr
   const order=Object.keys(people).sort((a,b)=>{
     const fa=SEASON_ORDER.findIndex(s=>people[a].seasons[s]),fb=SEASON_ORDER.findIndex(s=>people[b].seasons[s]);return fa-fb;});
   const host=el('div',{class:'card fade',style:'overflow-x:auto'});
-  let h='<table style="font-size:10px"><tr><th>Judge</th>'+SEASON_ORDER.map(s=>`<th>${s.replace('US','')}</th>`).join('')+'</tr>';
+  let h='<table style="font-size:11.5px"><tr><th>Judge</th>'+SEASON_ORDER.map(s=>`<th>${s.replace('US','')}</th>`).join('')+'</tr>';
   const col={HOST:'var(--gold)',MAIN_JUDGE:'var(--magenta)',ROTATING_JUDGE:'rgba(116,224,200,.7)'};
   order.forEach(nm=>{h+=`<tr><td style="white-space:nowrap">${nm}</td>`+
     SEASON_ORDER.map(s=>{const r=people[nm].seasons[s];return `<td style="text-align:center;padding:3px">${r?`<span title="${r}" style="display:inline-block;width:12px;height:12px;border-radius:3px;background:${col[r]}"></span>`:''}</td>`;}).join('')+'</tr>';});
@@ -665,7 +665,7 @@ V({id:'hometowns',title:'Hometown <em>Geography</em>',kicker:'The Queens',icon:'
   const max=Math.max(...X.hometowns.map(h=>h.count),1);
   X.hometowns.filter(h=>h.count>=1).slice(0,40).forEach(h=>host.append(
     el('div',{style:'display:flex;align-items:center;gap:10px;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.05)'},
-      el('div',{style:'flex:1;font-size:12px'},h.hometown),
+      el('div',{style:'flex:1;font-size:13.5px'},h.hometown),
       el('div',{class:'bar',style:`width:${130*h.count/max}px`}),
       el('div',{style:'width:22px;text-align:right;color:var(--gold);font-weight:700'},h.count))));
   m.append(host);
@@ -681,16 +681,16 @@ V({id:'challenges',title:'Challenge <em>Types</em>',kicker:'The Competition',ico
   const host=el('div',{class:'card fade'});host.innerHTML='<div class="vkicker">Maxi-challenge types · click to list episodes</div>';
   ent.forEach(([k,v])=>{
     const wrap=el('div',{style:'border-bottom:1px solid rgba(255,255,255,.05)'});
-    const caret=el('span',{style:'color:var(--magenta);font-size:9px;width:10px;flex:none'},'▸');
+    const caret=el('span',{style:'color:var(--magenta);font-size:10px;width:10px;flex:none'},'▸');
     const hdr=el('div',{style:'display:flex;align-items:center;gap:10px;padding:6px 0;cursor:pointer'},caret,
-      el('div',{style:'flex:1;font-size:12px'},k),
+      el('div',{style:'flex:1;font-size:13.5px'},k),
       el('div',{class:'bar',style:`width:${160*v/max}px`}),
       el('div',{style:'width:22px;text-align:right;color:var(--gold);font-weight:700'},v));
     const det=el('div',{style:'display:none;padding:0 0 10px 20px'});
     D.episodes.filter(e=>e.main_challenge_type===k).sort((a,b)=>a.episode_id<b.episode_id?-1:1).forEach(e=>{
-      const row=el('div',{style:'font-size:11px;padding:3px 0;line-height:1.4'});
+      const row=el('div',{style:'font-size:12.5px;padding:3px 0;line-height:1.4'});
       row.append(epChip(e.episode_id));
-      if(e.main_challenge&&e.main_challenge!=='-')row.append(el('span',{style:'color:rgba(247,240,230,.6)'},'  —  '+e.main_challenge));
+      if(e.main_challenge&&e.main_challenge!=='-')row.append(el('span',{style:'color:rgba(247,240,230,.82)'},'  —  '+e.main_challenge));
       det.append(row);
     });
     hdr.addEventListener('click',()=>{const o=det.style.display==='none';det.style.display=o?'block':'none';caret.textContent=o?'▾':'▸';});
@@ -707,8 +707,8 @@ V({id:'snatch',title:'The <em>Snatch Game</em> Index',kicker:'The Competition',i
   const host=el('div',{class:'grid fade',style:'grid-template-columns:repeat(auto-fit,minmax(180px,1fr))'});
   X.snatch_index.forEach(s=>host.append(el('div',{class:'card',style:'cursor:pointer',onclick:()=>go('season:'+s.season)},
     el('div',{style:'font-family:var(--disp);font-weight:700;font-size:16px'},seasonName(s.season)),
-    el('div',{style:'font-size:11px;color:var(--gold);margin-top:4px'},s.title||'Snatch Game'),
-    el('div',{style:'font-size:10px;color:rgba(247,240,230,.5);margin-top:2px'},s.episode_id))));
+    el('div',{style:'font-size:12.5px;color:var(--gold);margin-top:4px'},s.title||'Snatch Game'),
+    el('div',{style:'font-size:11.5px;color:rgba(247,240,230,.72);margin-top:2px'},s.episode_id))));
   if(!X.snatch_index.length)host.innerHTML='<div class="empty">No Snatch Game episodes flagged.</div>';
   m.append(host);
  }});
@@ -729,8 +729,8 @@ V({id:'episodes',title:'Episode <em>Browser</em>',kicker:'The Competition',icon:
       const lss=D.lip_syncs.filter(l=>l.episode_id===e.episode_id);
       const song=songText(e.lip_sync_song_id)||(lss.length===1?songText(lss[0].song_id):null)||(lss.length>1?`Lip Sync for the Crown — ${lss.length} songs`:null);
       const det=el('div',{style:'display:none;margin-top:8px;border-top:1px solid rgba(255,255,255,.08);padding-top:8px'});
-      const field=(label,val)=>{if(val==null||val===''||val==='-')return;det.append(el('div',{style:'margin:3px 0;font-size:11px;line-height:1.5'},
-        el('span',{style:'color:var(--gold);font-size:9px;letter-spacing:1px;text-transform:uppercase;margin-right:6px'},label),(val&&val.nodeType)?val:document.createTextNode(val)));};
+      const field=(label,val)=>{if(val==null||val===''||val==='-')return;det.append(el('div',{style:'margin:3px 0;font-size:12.5px;line-height:1.5'},
+        el('span',{style:'color:var(--gold);font-size:10px;letter-spacing:1px;text-transform:uppercase;margin-right:6px'},label),(val&&val.nodeType)?val:document.createTextNode(val)));};
       field('Main challenge',(e.main_challenge&&e.main_challenge!=='-')?e.main_challenge+(e.main_challenge_type&&e.main_challenge_type!=='-'?` (${e.main_challenge_type})`:''):null);
       field('Mini',e.mini_challenge);
       field('Runway',e.runway_theme);
@@ -739,14 +739,14 @@ V({id:'episodes',title:'Episode <em>Browser</em>',kicker:'The Competition',icon:
       if(e.eliminated_id&&e.eliminated_id!=='-'&&qname[e.eliminated_id]) field('Eliminated', qLink(e.eliminated_id));
       if(gj.length) field('Guest judges', gj.join(', '));
       const hadFields=det.children.length>0;
-      if(!hadFields)det.append(el('div',{style:'font-size:11px;color:rgba(247,240,230,.4)'},'No further detail recorded yet.'));
-      det.append(el('div',{style:'margin-top:6px'},el('span',{style:'font-size:10px;color:var(--gold);text-decoration:underline;cursor:pointer',
+      if(!hadFields)det.append(el('div',{style:'font-size:12.5px;color:rgba(247,240,230,.62)'},'No further detail recorded yet.'));
+      det.append(el('div',{style:'margin-top:6px'},el('span',{style:'font-size:11.5px;color:var(--gold);text-decoration:underline;cursor:pointer',
         onclick:ev=>{ev.stopPropagation();go('season:'+e.season_id);}},'open season →')));
       const card=el('div',{class:'card',style:'padding:14px;cursor:pointer'},
-        el('div',{style:'font-size:10px;color:var(--gold)'},seasonName(e.season_id)+' · E'+e.episode_number+(e.air_date&&e.air_date!=='-'?' · '+e.air_date:'')),
+        el('div',{style:'font-size:11.5px;color:var(--gold)'},seasonName(e.season_id)+' · E'+e.episode_number+(e.air_date&&e.air_date!=='-'?' · '+e.air_date:'')),
         el('div',{style:'font-family:var(--disp);font-weight:700;font-size:15px;margin:3px 0'},e.title&&e.title!=='-'?e.title:'(untitled)'),
-        song?el('div',{style:'font-size:10px;color:var(--rose);margin-top:4px'},'♪ '+song):'',
-        gj.length?el('div',{style:'font-size:10px;color:rgba(247,240,230,.55);margin-top:4px'},'GJ: '+gj.join(', ')):'',
+        song?el('div',{style:'font-size:11.5px;color:var(--rose);margin-top:4px'},'♪ '+song):'',
+        gj.length?el('div',{style:'font-size:11.5px;color:rgba(247,240,230,.76);margin-top:4px'},'GJ: '+gj.join(', ')):'',
         det);
       card.addEventListener('click',()=>{const o=det.style.display==='none';det.style.display=o?'block':'none';});
       list.append(card);
@@ -765,7 +765,7 @@ V({id:'winners',title:'Winners\u2019 <em>Circle</em>',kicker:'The Queens',icon:'
     wrap.append(el('div',{class:'card',style:'cursor:pointer;text-align:center',onclick:()=>go('queen:'+s.winner_id)},
       el('div',{style:'color:var(--gold);font-size:22px',html:icon('crown')}),
       el('div',{style:'font-family:var(--disp);font-weight:800;font-size:19px;margin-top:6px'},qname[s.winner_id]||'—'),
-      el('div',{style:'font-size:10px;color:var(--gold)'},seasonName(s.season_id)),
+      el('div',{style:'font-size:11.5px;color:var(--gold)'},seasonName(s.season_id)),
       c?el('div',{class:'chip-row',style:'justify-content:center;margin-top:8px'},el('span',{class:'pill gold'},c.wins+' wins')):''));
   });
   m.append(wrap);
@@ -781,7 +781,7 @@ V({id:'missc',title:'Miss <em>Congeniality</em>',kicker:'The Queens',icon:'heart
     wrap.append(el('div',{class:'card',style:'cursor:pointer;text-align:center',onclick:()=>go('queen:'+s.miss_congeniality_id)},
       el('div',{style:'color:var(--mint)',html:icon('heart')}),
       el('div',{style:'font-family:var(--disp);font-weight:800;font-size:18px;margin-top:6px'},qname[s.miss_congeniality_id]||'—'),
-      el('div',{style:'font-size:10px;color:var(--gold)'},seasonName(s.season_id))));
+      el('div',{style:'font-size:11.5px;color:var(--gold)'},seasonName(s.season_id))));
   });
   m.append(wrap);
  }});
@@ -793,7 +793,7 @@ V({id:'elimorder',title:'Elimination <em>Order</em>',kicker:'The Competition',ic
   m.innerHTML=head(this);
   const ctrl=el('div',{class:'controls'});const sel=el('select');
   SEASON_ORDER.forEach(s=>sel.append(el('option',{value:s},seasonName(s))));
-  ctrl.append(el('span',{style:'font-size:11px;color:var(--gold)'},'Season:'),sel);m.append(ctrl);
+  ctrl.append(el('span',{style:'font-size:12.5px;color:var(--gold)'},'Season:'),sel);m.append(ctrl);
   const host=el('div',{class:'card fade'});m.append(host);
   const draw=sid=>{host.innerHTML='<div class="vkicker">Exit sequence</div>';
     const evs=D.elimination_events.filter(e=>e.season_id===sid&&e.event_type==='eliminated')
@@ -801,7 +801,7 @@ V({id:'elimorder',title:'Elimination <em>Order</em>',kicker:'The Competition',ic
     if(!evs.length){host.innerHTML+='<div class="empty">No elimination events recorded.</div>';return;}
     evs.forEach(e=>host.append(el('div',{style:'display:flex;gap:12px;align-items:center;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.05);cursor:pointer',onclick:()=>go('queen:'+e.queen_id)},
       el('div',{style:'width:46px;color:var(--gold);font-family:var(--disp);font-weight:800'},e.episode_id.slice(-3)),
-      el('div',{style:'flex:1;font-size:13px'},qname[e.queen_id]||e.queen_id),
+      el('div',{style:'flex:1;font-size:14px'},qname[e.queen_id]||e.queen_id),
       e.decided_by_queen_id&&e.decided_by_queen_id!=='-'?el('span',{class:'pill'},'by '+(qname[e.decided_by_queen_id]||'?')):'')));
   };
   sel.addEventListener('change',e=>draw(e.target.value));draw(SEASON_ORDER[0]);
@@ -822,8 +822,8 @@ V({id:'guestdir',title:'Guest Judge <em>Directory</em>',kicker:'The Panel',icon:
         el('div',{style:'display:flex;justify-content:space-between'},
           el('div',{style:'font-family:var(--disp);font-weight:700;font-size:15px'},g.name),
           el('span',{class:'pill gold'},g.appearances+'×')));
-      if(bios[g.name])card.append(el('div',{style:'font-size:11px;color:var(--mint);margin-top:4px;font-style:italic'},bios[g.name]));
-      card.append(el('div',{style:'font-size:10px;color:rgba(247,240,230,.55);margin-top:5px'},g.episodes.join(' · ')||'episode TBD'));
+      if(bios[g.name])card.append(el('div',{style:'font-size:12.5px;color:var(--mint);margin-top:4px;font-style:italic'},bios[g.name]));
+      card.append(el('div',{style:'font-size:11.5px;color:rgba(247,240,230,.76);margin-top:5px'},g.episodes.join(' · ')||'episode TBD'));
       list.append(card);
     });
     if(!list.children.length)list.innerHTML='<div class="empty">No guest judges match.</div>';};
@@ -850,7 +850,7 @@ V({id:'apptypes',title:'Appearance <em>Types</em>',kicker:'The Panel',icon:'char
       const list=apps.filter(a=>a.appearance_type===t);
       if(!list.length)return;any=true;
       const grp=el('div',{style:'margin:6px 0'});
-      grp.append(el('div',{style:`font-size:9px;letter-spacing:1px;text-transform:uppercase;color:${col[t]};margin-bottom:5px`},
+      grp.append(el('div',{style:`font-size:10px;letter-spacing:1px;text-transform:uppercase;color:${col[t]};margin-bottom:5px`},
         t.replace(/_/g,' ').toLowerCase()+` (${list.length})`));
       const inner=el('div',{class:'chip-row',style:'gap:6px'});
       list.forEach(a=>{
@@ -865,18 +865,18 @@ V({id:'apptypes',title:'Appearance <em>Types</em>',kicker:'The Panel',icon:'char
       });
       grp.append(inner);det.append(grp);
     });
-    if(!any)det.append(el('div',{style:'font-size:10px;color:rgba(247,240,230,.4)'},'No named guests recorded for this season yet.'));
+    if(!any)det.append(el('div',{style:'font-size:11.5px;color:rgba(247,240,230,.62)'},'No named guests recorded for this season yet.'));
     return det;
   };
   SEASON_ORDER.forEach(s=>{
     const tot=types.reduce((n,t)=>n+counts[s][t],0);
-    const caret=el('span',{style:'color:var(--magenta);font-size:9px;width:10px;flex:none'},'▸');
+    const caret=el('span',{style:'color:var(--magenta);font-size:10px;width:10px;flex:none'},'▸');
     const row=el('div',{style:'display:flex;align-items:center;gap:10px;padding:5px 0;cursor:pointer'});
-    row.append(caret,el('div',{style:'width:64px;font-size:11px;color:var(--gold)'},seasonName(s)));
+    row.append(caret,el('div',{style:'width:64px;font-size:12.5px;color:var(--gold)'},seasonName(s)));
     const barwrap=el('div',{style:'flex:1;display:flex;height:16px;border-radius:8px;overflow:hidden;background:rgba(0,0,0,.3)'});
     types.forEach(t=>{if(counts[s][t])barwrap.append(el('div',{style:`width:${100*counts[s][t]/max}%;background:${col[t]}`,
       title:`${t}: ${counts[s][t]}`}));});
-    row.append(barwrap,el('div',{style:'width:24px;text-align:right;font-size:11px'},tot));
+    row.append(barwrap,el('div',{style:'width:24px;text-align:right;font-size:12.5px'},tot));
     const det=buildDetail(s);
     row.addEventListener('click',()=>{const open=det.style.display==='none';det.style.display=open?'block':'none';caret.textContent=open?'▾':'▸';});
     host.append(row,det);
@@ -897,7 +897,7 @@ V({id:'winscatter',title:'Wins vs <em>Placement</em>',kicker:'The Competition',i
   // axes
   const ax=(x1,y1,x2,y2)=>{const l=document.createElementNS(NS,'line');l.setAttribute('x1',x1);l.setAttribute('y1',y1);l.setAttribute('x2',x2);l.setAttribute('y2',y2);l.setAttribute('stroke','rgba(244,181,63,.4)');svg.append(l);};
   ax(pad,H-pad,W-10,H-pad);ax(pad,10,pad,H-pad);
-  const tx=(t,x,y,anc)=>{const e=document.createElementNS(NS,'text');e.setAttribute('x',x);e.setAttribute('y',y);e.setAttribute('fill','rgba(247,240,230,.6)');e.setAttribute('font-size','10');e.setAttribute('font-family','var(--mono)');if(anc)e.setAttribute('text-anchor',anc);e.textContent=t;svg.append(e);};
+  const tx=(t,x,y,anc)=>{const e=document.createElementNS(NS,'text');e.setAttribute('x',x);e.setAttribute('y',y);e.setAttribute('fill','rgba(247,240,230,.82)');e.setAttribute('font-size','10');e.setAttribute('font-family','var(--mono)');if(anc)e.setAttribute('text-anchor',anc);e.textContent=t;svg.append(e);};
   tx('challenge wins →',W/2,H-12,'middle');tx('← better placement',pad-12,H/2,'middle');
   pts.forEach(p=>{const x=pad+(W-pad-20)*(+p.wins)/maxW;const y=10+(H-pad-10)*((+p.placement-1)/maxP);
     const c=document.createElementNS(NS,'circle');c.setAttribute('cx',x);c.setAttribute('cy',y);c.setAttribute('r',+p.placement===1?6:4);
@@ -931,10 +931,10 @@ V({id:'seasonsize',title:'Cast Size <em>Over Time</em>',kicker:'The Competition'
   const max=Math.max(...D.seasons.map(s=>+s.episode_count||0),...SEASON_ORDER.map(s=>contestantsBySeason(s).length),1);
   D.seasons.forEach(s=>{const nc=contestantsBySeason(s.season_id).length;
     host.append(el('div',{style:'display:flex;align-items:center;gap:10px;padding:5px 0'},
-      el('div',{style:'width:74px;font-size:11px;color:var(--gold)'},seasonName(s.season_id)),
+      el('div',{style:'width:74px;font-size:12.5px;color:var(--gold)'},seasonName(s.season_id)),
       el('div',{style:'flex:1'},
-        el('div',{style:'display:flex;align-items:center;gap:6px'},el('div',{class:'bar',style:`width:${180*nc/max}px;background:var(--magenta)`}),el('span',{style:'font-size:10px'},nc+' queens')),
-        el('div',{style:'display:flex;align-items:center;gap:6px;margin-top:3px'},el('div',{class:'bar',style:`width:${180*(+s.episode_count)/max}px;background:var(--gold)`}),el('span',{style:'font-size:10px'},s.episode_count+' eps')))));
+        el('div',{style:'display:flex;align-items:center;gap:6px'},el('div',{class:'bar',style:`width:${180*nc/max}px;background:var(--magenta)`}),el('span',{style:'font-size:11.5px'},nc+' queens')),
+        el('div',{style:'display:flex;align-items:center;gap:6px;margin-top:3px'},el('div',{class:'bar',style:`width:${180*(+s.episode_count)/max}px;background:var(--gold)`}),el('span',{style:'font-size:11.5px'},s.episode_count+' eps')))));
   });
   m.append(host);
  }});
@@ -948,7 +948,7 @@ V({id:'perfectrun',title:'The <em>Perfect Run</em> Finder',kicker:'The Competiti
   const wrap=el('div',{class:'grid fade',style:'grid-template-columns:repeat(auto-fit,minmax(200px,1fr))'});
   clean.forEach(t=>wrap.append(el('div',{class:'card',style:'cursor:pointer',onclick:()=>go('queen:'+t.queen_id)},
     el('div',{style:'font-family:var(--disp);font-weight:700;font-size:16px'},t.drag_name),
-    el('div',{style:'font-size:10px;color:var(--gold)'},seasonName(t.season)+' · #'+t.placement),
+    el('div',{style:'font-size:11.5px;color:var(--gold)'},seasonName(t.season)+' · #'+t.placement),
     el('div',{class:'chip-row',style:'margin-top:8px'},el('span',{class:'pill gold'},t.wins+'W'),el('span',{class:'pill mint'},'0 btm')))));
   if(!clean.length)wrap.innerHTML='<div class="empty">No clean runs found in current data.</div>';
   m.append(wrap);
@@ -964,7 +964,7 @@ V({id:'artists',title:'Lip-Sync <em>Artists</em>',kicker:'The Competition',icon:
   const max=Math.max(...ent.map(e=>e[1]),1);
   const host=el('div',{class:'card fade'});
   ent.slice(0,40).forEach(([a,n])=>host.append(el('div',{style:'display:flex;align-items:center;gap:10px;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.05)'},
-    el('div',{style:'flex:1;font-size:12px'},a),el('div',{class:'bar',style:`width:${130*n/max}px`}),
+    el('div',{style:'flex:1;font-size:13.5px'},a),el('div',{class:'bar',style:`width:${130*n/max}px`}),
     el('div',{style:'width:22px;text-align:right;color:var(--gold);font-weight:700'},n))));
   m.append(host);
  }});
@@ -978,7 +978,7 @@ V({id:'platforms',title:'Platform <em>Eras</em>',kicker:'The Competition',icon:'
   const wrap=el('div',{class:'grid fade',style:'grid-template-columns:repeat(auto-fit,minmax(220px,1fr))'});
   Object.entries(byP).forEach(([p,ss])=>wrap.append(el('div',{class:'card'},
     el('div',{style:'font-family:var(--disp);font-weight:800;font-size:20px;color:var(--gold)'},p),
-    el('div',{style:'font-size:11px;color:rgba(247,240,230,.6);margin-top:4px'},ss.length+' seasons'),
+    el('div',{style:'font-size:12.5px;color:rgba(247,240,230,.82);margin-top:4px'},ss.length+' seasons'),
     el('div',{class:'chip-row',style:'margin-top:10px'},ss.map(s=>el('span',{class:'pill',style:'cursor:pointer',onclick:()=>go('season:'+s)},s.replace('US','')))))));
   m.append(wrap);
  }});
@@ -993,7 +993,7 @@ V({id:'tenure',title:'Judge <em>Tenure</em>',kicker:'The Panel',icon:'mask',grou
   const arr=Object.values(cnt).sort((a,b)=>b.n-a.n);const max=Math.max(...arr.map(a=>a.n),1);
   const host=el('div',{class:'card fade'});
   arr.forEach(a=>host.append(el('div',{style:'display:flex;align-items:center;gap:10px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.05)'},
-    el('div',{style:'flex:1;font-size:12px'},a.name),
+    el('div',{style:'flex:1;font-size:13.5px'},a.name),
     el('div',{class:'chip-row'},[...a.roles].map(r=>el('span',{class:'pill'+(r==='HOST'?' gold':r==='ROTATING_JUDGE'?' mint':'')},r.replace('_',' ').toLowerCase()))),
     el('div',{class:'bar',style:`width:${90*a.n/max}px`}),
     el('div',{style:'width:50px;text-align:right;color:var(--gold);font-weight:700'},a.n+' szn'))));
@@ -1010,7 +1010,7 @@ V({id:'connect',title:'The <em>Connection</em> Finder',kicker:'The Connections',
   const a=el('select'),b=el('select');
   qopts.forEach(o=>{a.append(el('option',{value:o.id},o.n));b.append(el('option',{value:o.id},o.n));});
   b.selectedIndex=Math.min(1,qopts.length-1);
-  ctrl.append(el('span',{style:'font-size:11px;color:var(--gold)'},'Queen A:'),a,el('span',{style:'font-size:11px;color:var(--gold)'},'Queen B:'),b);m.append(ctrl);
+  ctrl.append(el('span',{style:'font-size:12.5px;color:var(--gold)'},'Queen A:'),a,el('span',{style:'font-size:12.5px;color:var(--gold)'},'Queen B:'),b);m.append(ctrl);
   const host=el('div',{class:'card fade'});m.append(host);
   const draw=()=>{const qa=a.value,qb=b.value;host.innerHTML='<div class="vkicker">Connections</div>';
     const sa=new Set(D.contestants.filter(c=>c.queen_id===qa).map(c=>c.season_id));
@@ -1023,7 +1023,7 @@ V({id:'connect',title:'The <em>Connection</em> Finder',kicker:'The Connections',
     const eb=new Set(D.appearances.filter(x=>x.alum_queen_id===qb&&x.episode_id).map(x=>x.episode_id));
     const se=[...ea].filter(e=>eb.has(e));
     if(se.length)out.push(`Guest-appeared in the same episode: ${se.join(', ')}`);
-    host.innerHTML+=out.length?out.map(o=>`<div style="font-size:13px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.05)">${o}</div>`).join(''):
+    host.innerHTML+=out.length?out.map(o=>`<div style="font-size:14px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.05)">${o}</div>`).join(''):
       '<div class="empty">No direct link found in current data — the web grows as All Stars and outside-world bridges are added.</div>';};
   a.addEventListener('change',draw);b.addEventListener('change',draw);draw();
  }});
@@ -1039,7 +1039,7 @@ V({id:'health',title:'Data <em>Health</em>',kicker:'The Connections',icon:'chart
   m.innerHTML+=`<div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(150px,1fr))">${
     cards.map(c=>`<div class="card"><div class="stat">${c[1]}</div><div class="statlbl">${c[0]}</div></div>`).join('')}</div>
     <div class="card" style="margin-top:18px"><div class="vkicker">Method</div>
-    <p style="font-size:12.5px;line-height:1.7;color:rgba(247,240,230,.8)">Seasons 1\u201314 were verified episode-by-episode; 15\u201318 carry a complete guest-judge layer. Where an exact episode couldn\u2019t be confirmed from a reliable source, the entry is <b style="color:var(--rose)">left blank rather than guessed</b> \u2014 ${tbd} appearances remain honestly flagged. Every queen is one identity across the database, so returning competitors and alumni guests resolve to a single hub. No official logos, trade dress, or photographs are used; the visual identity is original.</p></div>`;
+    <p style="font-size:14px;line-height:1.7;color:rgba(247,240,230,.92)">Seasons 1\u201314 were verified episode-by-episode; 15\u201318 carry a complete guest-judge layer. Where an exact episode couldn\u2019t be confirmed from a reliable source, the entry is <b style="color:var(--rose)">left blank rather than guessed</b> \u2014 ${tbd} appearances remain honestly flagged. Every queen is one identity across the database, so returning competitors and alumni guests resolve to a single hub. No official logos, trade dress, or photographs are used; the visual identity is original.</p></div>`;
  }});
 
 /* ============================ NAV + ROUTER ============================ */
