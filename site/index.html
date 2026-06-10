@@ -248,21 +248,36 @@ function renderSeasonDetail(m,sid){
       <td style="color:rgba(247,240,230,.6)">${c.entrance_order||'—'}</td>
       <td>${c.wins}</td><td>${c.highs}</td><td>${c.lows}</td><td>${c.bottoms}</td>`;tbl.append(tr);});
   ct.append(tbl);grid.append(ct);
-  // episodes — collapsed row shows the resolved lip-sync song; click to expand for full detail
+  // episodes — collapsed row shows the lip-sync; click to expand (incl. finale crown brackets + outcome)
   const songById={};D.songs.forEach(so=>{songById[so.song_id]=so;});
   const songLabel=id=>{if(!id||id==='-')return null;const so=songById[id];if(!so)return null;
     return so.title+(so.artist&&so.artist!=='-'?` — ${so.artist}`:'');};
+  const lsByEp={};D.lip_syncs.forEach(l=>{(lsByEp[l.episode_id]=lsByEp[l.episode_id]||[]).push(l);});
+  const RESULT_LABEL={NORMAL:'lip sync',SURVIVAL:'survival, no elimination',SHANTAY:'double shantay (both stayed)',
+    SASHAY:'double sashay (both out)',TOPS:'lip sync for the win',CROWN:'lip sync for the crown'};
+  const qlink=qid=>el('span',{style:'color:var(--rose);cursor:pointer;text-decoration:underline',
+    onclick:ev=>{ev.stopPropagation();go('queen:'+qid);}},qname[qid]);
+  const namesSpan=(arr,style)=>{const sp=el('span',style?{style}:{});arr.forEach((c,i)=>{if(i)sp.append(document.createTextNode(', '));sp.append(qlink(c.queen_id));});return sp;};
   const et=el('div',{class:'card'});et.innerHTML='<div class="vkicker">Episodes <span style="font-size:9px;color:rgba(247,240,230,.4);text-transform:none;letter-spacing:0">· click a row for detail</span></div>';
   eps.forEach(e=>{
     const gjs=D.appearances.filter(a=>a.episode_id===e.episode_id&&a.appearance_type==='GUEST_JUDGE').map(a=>a.person_name);
     const song=songLabel(e.lip_sync_song_id);
+    const lss=lsByEp[e.episode_id]||[];
+    const isFinaleEp=lss.some(l=>l.result_type==='CROWN')||['Finale','Reunion'].includes(e.main_challenge_type);
+    let sub;
+    if(lss.length>1) sub=`♪ Lip Sync for the Crown — ${lss.length} songs`;
+    else if(song) sub=`♪ ${song}`;
+    else if(lss.length===1) sub=`♪ ${songLabel(lss[0].song_id)||'—'}`;
+    else if(e.main_challenge_type==='Clip Show') sub='Season recap';
+    else if(e.main_challenge_type==='Reunion') sub='Reunion';
+    else sub='♪ —';
     const wrap=el('div',{style:'border-bottom:1px solid rgba(255,255,255,.06)'});
     const caret=el('span',{style:'color:var(--magenta);font-size:9px;width:10px;flex:none;transition:transform .15s'},'▸');
     const hdr=el('div',{style:'padding:8px 0;cursor:pointer;display:flex;gap:8px;align-items:baseline'},caret,
       el('div',{style:'flex:1'},
         el('div',{style:'font-size:12px;color:var(--cream)'},`${e.episode_number}. ${e.title&&e.title!=='-'?e.title:'(untitled)'}`),
         el('div',{style:'font-size:10px;color:rgba(247,240,230,.55);margin-top:3px'},
-          `♪ ${song||'—'}`+(gjs.length?`  ·  GJ: ${gjs.join(', ')}`:''))));
+          sub+(gjs.length?`  ·  GJ: ${gjs.join(', ')}`:''))));
     const det=el('div',{style:'display:none;padding:2px 0 12px 18px;font-size:11px;line-height:1.6'});
     const field=(label,val)=>{if(val==null||val===''||val==='-')return;
       det.append(el('div',{style:'margin:3px 0'},
@@ -272,14 +287,32 @@ function renderSeasonDetail(m,sid){
       ? e.main_challenge+(e.main_challenge_type&&e.main_challenge_type!=='-'?` (${e.main_challenge_type})`:'') : null);
     field('Mini challenge', e.mini_challenge);
     field('Runway', e.runway_theme);
-    if(song){const trk=['main','untucked'].includes(e.lip_sync_track)?(e.lip_sync_track==='untucked'?' · aired on Untucked':' · aired on main show'):'';
-      field('Lip sync', song+trk);}
-    if(e.eliminated_id&&e.eliminated_id!=='-'&&qname[e.eliminated_id]){
-      const a=el('span',{style:'color:var(--rose);cursor:pointer;text-decoration:underline',
-        onclick:ev=>{ev.stopPropagation();go('queen:'+e.eliminated_id);}},qname[e.eliminated_id]);
-      field('Eliminated', a);}
+    if(lss.length){
+      const trk=e.lip_sync_track==='untucked'?' (Untucked)':'';
+      lss.forEach((l,i)=>{
+        const box=el('span',{});
+        box.append(document.createTextNode((songLabel(l.song_id)||'—')+'  '));
+        box.append(el('span',{style:'color:rgba(247,240,230,.5)'},'· '+(RESULT_LABEL[l.result_type]||l.result_type)));
+        if(l.winner_id&&l.winner_id!=='-'&&qname[l.winner_id]){box.append(document.createTextNode('  · won: '));box.append(qlink(l.winner_id));}
+        if(l.loser_id&&l.loser_id!=='-'&&qname[l.loser_id]){box.append(document.createTextNode('  · out: '));box.append(qlink(l.loser_id));}
+        field(lss.length>1?(i===0?'Lip syncs'+trk:''):'Lip sync'+trk, box);
+      });
+    } else if(song){
+      const trk=['main','untucked'].includes(e.lip_sync_track)?(e.lip_sync_track==='untucked'?' · aired on Untucked':' · aired on main show'):'';
+      field('Lip sync', song+trk);
+    }
+    if(e.eliminated_id&&e.eliminated_id!=='-'&&qname[e.eliminated_id]) field('Eliminated', qlink(e.eliminated_id));
     if(gjs.length)field('Guest judges', gjs.join(', '));
-    if(!det.children.length)det.append(el('div',{style:'color:rgba(247,240,230,.35)'},'No further details recorded yet.'));
+    if(isFinaleEp){
+      const winners=cs.filter(c=>+c.placement===1),rus=cs.filter(c=>+c.placement===2),mc=cs.filter(c=>c.miss_congeniality==='Yes');
+      if(winners.length) field('Crowned', namesSpan(winners,'color:var(--gold);font-weight:700'));
+      if(rus.length) field('Runner-up', namesSpan(rus));
+      if(mc.length) field('Miss Congeniality', namesSpan(mc));
+    }
+    if(!det.children.length){const t=e.main_challenge_type;
+      det.append(el('div',{style:'color:rgba(247,240,230,.4)'},
+        t==='Clip Show'?'Season recap — clip show (no challenge or lip sync).':
+        t==='Reunion'?'Reunion special — no competition.':'No further details recorded yet.'));}
     hdr.addEventListener('click',()=>{const open=det.style.display==='none';det.style.display=open?'block':'none';
       caret.textContent=open?'▾':'▸';});
     wrap.append(hdr,det);et.append(wrap);
