@@ -1,4 +1,11 @@
-# Werkroom Librarian — deploy guide (≈5 minutes)
+# Werkroom Librarian — OPTIONAL Cloudflare Worker (currently unused)
+
+> **Status (2026-06-11): not deployed, not needed.** The site's "Ask the
+> Library" runs **fully in-browser** — a deterministic intent engine over the
+> database plus keyword search of `site/kb/facts.json`. No accounts, no API
+> keys. This folder is kept only in case a generative upgrade is ever wanted.
+
+# Original deploy guide (≈5 minutes)
 
 The chatbot is a Cloudflare Worker that holds your Anthropic API key, retrieves
 facts from the site's knowledge pack (`site/kb/facts.json`, rebuilt by

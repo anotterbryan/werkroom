@@ -256,8 +256,6 @@ function lipSyncLine(l,fromQid){
 }
 
 /* ============ EXPLORER PACK: shared infrastructure ============ */
-/* Ask-the-Library endpoint — set to your Cloudflare Worker URL after deploy (see chatbot/README.md) */
-const CHAT_ENDPOINT = '';
 const PAL=['#e6007e','#f4b53f','#7ad1b5','#b78aed','#ef798a','#5aa7e0','#f0915e','#9ecf63'];
 const CGRID='rgba(247,240,230,.08)', CTXT='rgba(247,240,230,.72)';
 function mkChart(host,cfg,h){ /* Chart.js with graceful fallback (tables always accompany) */
@@ -2210,37 +2208,115 @@ V({id:'hostpack',title:'Host <em>Pack</em>',kicker:'Games',icon:'book',group:'Ga
   if(pre)gen();
  }});
 
-/* ASK THE LIBRARY (chatbot; needs CHAT_ENDPOINT — chatbot/README.md) */
+/* ASK THE LIBRARY — fully in-browser librarian: intent engine over the DB + fact-pack search. No server, no keys. */
+const LIB={ready:false};
+function libInit(){
+  if(LIB.ready)return;LIB.ready=true;
+  const norm=s=>s.toLowerCase().normalize('NFKD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9 ]+/g,' ').replace(/\s+/g,' ').trim();
+  LIB.norm=norm;
+  LIB.queens=D.queens.map(q=>({n:norm(q.drag_name),q})).sort((a,b)=>b.n.length-a.n.length);
+  D.contestants.forEach(c=>{if(c.drag_name_used&&c.drag_name_used!=='-')LIB.queens.push({n:norm(c.drag_name_used),q:D.queens.find(x=>x.queen_id===c.queen_id)});});
+  LIB.seasons=D.seasons.map(s=>({n:norm(s.season_label),s})).concat(D.seasons.map(s=>({n:norm(s.season_id),s})));
+  LIB.songs=D.songs.filter(s=>s.title&&s.title!=='-').map(s=>({n:norm(s.title),s})).sort((a,b)=>b.n.length-a.n.length);
+  LIB.celebs=D.episode_roles.filter(r=>r.role_type==='SNATCH_CHARACTER').map(r=>({n:norm(r.role_detail.split('(')[0]),r}));
+  LIB.cont={};D.contestants.forEach(c=>{(LIB.cont[c.queen_id]=LIB.cont[c.queen_id]||[]).push(c);});
+}
+function libFind(list,nq){for(const e of list){if(e.n&&e.n.length>3&&nq.includes(e.n))return e;}return null;}
+function libSeason(nq){
+  const m=nq.match(/season (\d{1,2})/);
+  if(m){const lbl='season '+m[1];const hit=LIB.seasons.find(e=>e.n===lbl||e.n.endsWith(' '+lbl));if(hit)return hit.s;}
+  const e=libFind(LIB.seasons,nq);return e&&e.s;
+}
+function libAnswer(raw){
+  libInit();const nq=LIB.norm(raw);const L=[];
+  const Q=libFind(LIB.queens,nq)?.q, S=libSeason(nq), SO=libFind(LIB.songs,nq)?.s, C=libFind(LIB.celebs,nq)?.r;
+  const name=q=>q.drag_name, runsOf=q=>LIB.cont[q.queen_id]||[];
+  const seasonOfQ=()=>{const r=runsOf(Q);return S?r.find(c=>c.season_id===S.season_id):r[0];};
+  // who won <season>
+  if(S&&/\bwho (won|is the winner|took the crown)\b/.test(nq)&&!/lip ?sync/.test(nq)&&S.winner_id&&S.winner_id!=='-'){
+    L.push('season:'+S.season_id,'queen:'+S.winner_id);
+    return {t:`${qname[S.winner_id]} won ${S.season_label}.`,links:L};}
+  // who won the lip sync to <song>
+  if(SO&&/lip ?sync/.test(nq)){
+    const rows=D.lip_syncs.filter(l=>l.song_id===SO.song_id);
+    if(rows.length){const lines=rows.map(l=>{const pair=[l.queen_a_id,l.queen_b_id].filter(x=>x&&x!=='-').map(x=>qname[x]).join(' vs ');
+      return `${epLabel(l.episode_id)}: ${pair}${l.winner_id&&l.winner_id!=='-'?' — '+qname[l.winner_id]+' won':''} (${RESULT_LBL[l.result_type]||l.result_type})`;});
+      rows.slice(0,2).forEach(l=>{const e=_EP[l.episode_id];if(e)L.push('season:'+e.season_id);});
+      return {t:`"${SO.title}" by ${SO.artist}: ${lines.join('  ·  ')}`,links:[...new Set(L)]};}}
+  // snatch game: who did <queen> play / who played <celeb>
+  if(/snatch/.test(nq)&&Q){const rows=D.episode_roles.filter(r=>r.role_type==='SNATCH_CHARACTER'&&r.contestant_id.endsWith(Q.queen_id));
+    if(rows.length)return {t:`${name(Q)} played ${rows.map(r=>r.role_detail+' ('+epLabel(r.episode_id)+')').join('; ')}.`,links:['queen:'+Q.queen_id,'snatchhall']};
+    return {t:`No Snatch Game character recorded for ${name(Q)} yet — the Fandom ingest is still widening.`,links:['snatchhall']};}
+  if(/snatch|play(ed)?/.test(nq)&&C){const c=D.contestants.find(x=>x.contestant_id===C.contestant_id);
+    return {t:`${C.role_detail} was played by ${c?qname[c.queen_id]:'?'} in Snatch Game (${epLabel(C.episode_id)}).`,links:c?['queen:'+c.queen_id,'snatchhall']:['snatchhall']};}
+  // where is <queen> from
+  if(Q&&/\b(where|from|hometown|city|represent)\b/.test(nq)){const c=seasonOfQ();const bits=[];
+    if(Q.hometown&&Q.hometown!=='-')bits.push(`${name(Q)} is from ${Q.hometown}`);
+    if(c&&c.home_city&&c.home_city!=='-'&&c.home_city!==Q.hometown)bits.push(`she represented ${c.home_city} on ${seasonName(c.season_id)}`);
+    if(bits.length)return {t:bits.join('; ')+'.',links:['queen:'+Q.queen_id,'georoll']};}
+  // how old
+  if(Q&&/\b(how old|age)\b/.test(nq)){const r=runsOf(Q).filter(c=>c.age_at_filming&&c.age_at_filming!=='-');
+    if(r.length)return {t:`${name(Q)} was ${r.map(c=>c.age_at_filming+' on '+seasonName(c.season_id)).join(', ')}.${Q.birthdate&&Q.birthdate!=='-'?' Born '+Q.birthdate+'.':''}`,links:['queen:'+Q.queen_id,'ages']};}
+  // earnings
+  if(Q&&/\b(earn|money|prize|cash|won how much|how much)\b/.test(nq)){const r=runsOf(Q).filter(c=>c.earnings&&c.earnings!=='-');
+    if(r.length)return {t:`${name(Q)} documented ${r.map(c=>'$'+(+c.earnings).toLocaleString()+' ('+seasonName(c.season_id)+')').join(' + ')}.`,links:['queen:'+Q.queen_id,'earnings']};}
+  // placement / track record
+  if(Q&&/\b(place|placed|placement|finish|rank|track record|do on|how did)\b/.test(nq)){
+    const r=runsOf(Q);if(r.length)return {t:r.map(c=>`${seasonName(c.season_id)}: #${c.placement||'?'} (${c.wins||0}W/${c.highs||0}H/${c.lows||0}L/${c.bottoms||0}B)`).join('  ·  '),links:['queen:'+Q.queen_id]};}
+  // miss congeniality
+  if(/congenialit|miss c\b/.test(nq)&&S&&S.miss_congeniality_id&&S.miss_congeniality_id!=='-')
+    return {t:`${qname[S.miss_congeniality_id]} was Miss Congeniality of ${S.season_label}.`,links:['season:'+S.season_id,'missc']};
+  // air dates / premiere
+  if(S&&/\b(air|premiere|start|when)\b/.test(nq))
+    return {t:`${S.season_label} premiered ${S.premiere_date} on ${S.platform} (${S.episode_count} episodes).`,links:['season:'+S.season_id,'timeline']};
+  // farewell
+  if(Q&&/\b(farewell|mirror|message)\b/.test(nq)){const ev=D.elimination_events.find(e=>e.queen_id===Q.queen_id&&e.farewell&&e.farewell!=='-');
+    if(ev)return {t:`${name(Q)}'s mirror message (${epLabel(ev.episode_id)}): "${ev.farewell}"`,links:['queen:'+Q.queen_id,'farewells']};}
+  // lip-sync record
+  if(Q&&/lip ?sync/.test(nq)){const a=X.assassin_board.find(b=>b.queen_id===Q.queen_id);
+    if(a)return {t:`${name(Q)}: ${a.ls_wins} lip syncs won, ${a.assassinations} sent home, ${a.shantays} double shantays.`,links:['queen:'+Q.queen_id,'assassin']};}
+  // queen generic
+  if(Q){const r=runsOf(Q);return {t:`${name(Q)}: ${r.map(c=>seasonName(c.season_id)+(c.placement?' #'+c.placement:'')).join('; ')}.${Q.hometown&&Q.hometown!=='-'?' From '+Q.hometown+'.':''}`,links:['queen:'+Q.queen_id]};}
+  if(S){const w=S.winner_id&&S.winner_id!=='-'?` Winner: ${qname[S.winner_id]}.`:'';
+    return {t:`${S.season_label}: premiered ${S.premiere_date}, ${S.episode_count} episodes on ${S.platform}.`+w,links:['season:'+S.season_id]};}
+  return null;
+}
+let _FACTS=null;
+async function libFacts(){if(_FACTS)return _FACTS;
+  try{const r=await fetch('kb/facts.json');_FACTS=(await r.json()).facts;}catch(e){_FACTS=[];}
+  return _FACTS;}
+async function libSearch(raw){
+  const facts=await libFacts();if(!facts.length)return null;
+  const STOP=new Set(['the','and','was','who','did','does','how','what','where','when','why','tell','about','ever','with','for','are','that','this','她','from','her','his','they','them','won','win','show','race','drag','rupaul','rupauls','season','queen','queens','episode']);
+  const qt=LIB.norm(raw).split(' ').filter(w=>w.length>2&&!STOP.has(w));
+  const scored=facts.map(f=>{const hay=(f.t+' '+f.k).toLowerCase();let s=0,hits=0;
+    for(const w of qt){if(hay.includes(w)){s+=w.length>4?2:1;hits++;}if(f.k.includes(w))s+=2;}return {f,s,hits};})
+    .filter(x=>x.s>3&&x.hits>=2).sort((a,b)=>b.s-a.s).slice(0,3);
+  if(!scored.length)return null;
+  return {t:'Here’s what the library holds: '+scored.map(x=>x.f.t).join('  ◆  '),links:[...new Set(scored.map(x=>x.f.l))].slice(0,3)};
+}
 V({id:'ask',title:'Ask the <em>Library</em>',kicker:'Games',icon:'book',group:'Games',
- desc:'The Werkroom Librarian — ask anything about the show and get an answer grounded in this database, with links to explore.',
+ desc:'The Werkroom Librarian — ask in plain English; she answers straight from the database, every time, no AI guesswork. Runs entirely in your browser.',
  render(m){m.innerHTML=head(this);
   const card=el('div',{class:'card fade'});m.append(card);
-  if(!CHAT_ENDPOINT){
-    card.append(sectionHead('Not connected yet','var(--gold)'),
-      el('div',{style:'font-size:13px;line-height:1.7;color:rgba(247,240,230,.85)'},
-        'The Librarian needs her serverless brain deployed first — a 5-minute Cloudflare Worker setup that keeps the API key off this site. The code and step-by-step guide live in the repo at chatbot/README.md. Once deployed, set CHAT_ENDPOINT in index.html and she wakes up.'));
-    return;}
   const log=el('div',{style:'display:flex;flex-direction:column;gap:10px;min-height:120px;margin-bottom:12px'});
-  const hist=[];
   const add=(role,text,links)=>{const b=el('div',{style:`max-width:85%;padding:10px 14px;border-radius:14px;font-size:13.5px;line-height:1.6;${role==='user'?'align-self:flex-end;background:rgba(230,0,126,.18);border:1px solid rgba(230,0,126,.35)':'align-self:flex-start;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12)'}`},text);
     if(links&&links.length){const lr=el('div',{style:'margin-top:6px;display:flex;gap:10px;flex-wrap:wrap'});
       links.forEach(l=>lr.append(el('span',{style:'cursor:pointer;color:var(--gold);text-decoration:underline;font-size:12px',onclick:()=>go(l)},'explore →')));b.append(lr);}
     log.append(b);return b;};
+  add('bot','Hi! I answer from the database itself — try "Who won Season 9?", "Who did Gottmik play in Snatch Game?", "Where is Jinkx Monsoon from?", "Who won the lip sync to Toxic?", or "How old was Symone?"');
   const row=el('div',{style:'display:flex;gap:8px'});
-  const inp=el('input',{type:'text',maxlength:'500',placeholder:'Who won the lip sync to…? Where is … from? Who did … play in Snatch Game?',
+  const inp=el('input',{type:'text',maxlength:'300',placeholder:'Ask the Librarian…',
     style:'flex:1;background:rgba(255,255,255,.06);color:var(--cream);border:1px solid rgba(255,255,255,.14);border-radius:10px;padding:10px 12px;font:inherit;font-size:13px'});
   const send=el('button',{class:'tab'},'Ask');
-  const fire=async()=>{const q=inp.value.trim();if(!q)return;inp.value='';
-    add('user',q);const wait=add('bot','…thinking');
-    try{const r=await fetch(CHAT_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({question:q,history:hist})});
-      const j=await r.json();wait.remove();
-      if(j.answer){add('bot',j.answer,j.links);hist.push({role:'user',content:q},{role:'assistant',content:j.answer});}
-      else add('bot','Hmm, the Librarian tripped on her heels ('+(j.error||'unknown error')+'). Try again?');
-    }catch(e){wait.remove();add('bot','Could not reach the Librarian — is the Worker deployed and CORS happy?');}};
+  const fire=async()=>{const q=inp.value.trim();if(!q)return;inp.value='';add('user',q);
+    let a=null;try{a=libAnswer(q);}catch(e){}
+    if(!a){const wait=add('bot','…flipping through the archives');try{a=await libSearch(q);}catch(e){}wait.remove();}
+    if(a)add('bot',a.t,a.links);
+    else add('bot','That one’s not on my shelves yet, henny. Try a queen, a season, a song, or a Snatch Game character — or browse The Vault.',['vault']);};
   send.addEventListener('click',fire);inp.addEventListener('keydown',e=>{if(e.key==='Enter')fire();});
   row.append(inp,send);card.append(log,row);
-  card.append(el('div',{style:'margin-top:10px;font-size:10.5px;color:rgba(247,240,230,.45)'},'Answers are grounded in this site’s database via a retrieval pack — the Librarian cites what she reads.'));
+  card.append(el('div',{style:'margin-top:10px;font-size:10.5px;color:rgba(247,240,230,.45)'},'100% in-browser · no servers, no AI APIs · every answer is a live database lookup'));
  }});
 
 function buildNav(){
