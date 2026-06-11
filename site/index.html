@@ -1365,7 +1365,7 @@ V({id:'gallery',title:'Cast <em>Gallery</em>',kicker:'Explore Queens',icon:'star
     const g=el('div',{style:'display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:10px;margin-bottom:18px'});
     bySeason[s].sort((a,b)=>(+a.placement||99)-(+b.placement||99)).forEach(r=>{
       g.append(el('div',{style:'cursor:pointer;text-align:center',onclick:()=>go('queen:'+r.queen_id)},
-        el('img',{src:r.image,loading:'lazy',alt:r.queen,style:'width:96px;height:96px;object-fit:cover;border-radius:12px;border:1px solid rgba(255,255,255,.12)'}),
+        el('img',{src:r.image,alt:r.queen,style:'width:96px;height:96px;object-fit:cover;border-radius:12px;border:1px solid rgba(255,255,255,.12)'}),
         el('div',{style:'font-size:11px;margin-top:4px;line-height:1.25'},r.queen),
         el('div',{style:'font-size:10px;color:var(--gold)'},r.placement?'#'+r.placement:'')));});
     card.append(g);});
@@ -1784,7 +1784,7 @@ V({id:'vault',title:'The <em>Vault</em>',kicker:'The Vault',icon:'grid',group:'T
     [new Set(rows.map(r=>r.season)).size,'seasons'],[Object.keys(rows[0]||{}).length-2,'columns']]);
   const card=el('div',{class:'card fade'});m.append(card);
   dataTable(card,{page:50,csv:'werkroom-master',rows,
-    cols:[{k:'queen',label:'Queen',html:r=>r.image?`<img src="${r.image}" loading="lazy" style="width:26px;height:26px;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:6px">${r.queen}`:r.queen},
+    cols:[{k:'queen',label:'Queen',html:r=>r.image?`<img src="${r.image}" style="width:26px;height:26px;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:6px">${r.queen}`:r.queen},
       {k:'season_label',label:'Season',filter:1},{k:'franchise',label:'Franchise',filter:1},
       {k:'placement',label:'Place',num:1},{k:'age',label:'Age',num:1},{k:'home_city',label:'Represented'},
       {k:'hometown',label:'Origin'},{k:'wins',label:'W',num:1},{k:'highs',label:'H',num:1},
