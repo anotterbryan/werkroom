@@ -123,6 +123,26 @@ svg .node:hover{cursor:pointer}
 .chip-row{display:flex;flex-wrap:wrap;gap:6px}
 .foot{margin-top:40px;padding-top:18px;border-top:1px solid rgba(244,181,63,.2);
   font-size:11.5px;color:rgba(247,240,230,.62);line-height:1.7}
+/* ---------- Games: trivia ---------- */
+button.opt{display:block;width:100%;text-align:left;padding:10px 14px;margin:8px 0;border-radius:12px;
+  background:rgba(0,0,0,.3);border:1px solid rgba(244,181,63,.3);color:var(--cream);
+  font-family:var(--mono);font-size:13.5px;cursor:pointer;transition:.15s}
+button.opt:hover:not(:disabled){border-color:var(--magenta);transform:translateX(2px)}
+button.opt.correct{background:rgba(116,224,200,.22);border-color:var(--mint);color:var(--mint);font-weight:700}
+button.opt.wrong{background:rgba(255,92,171,.16);border-color:var(--rose);color:var(--rose)}
+button.opt:disabled{cursor:default}
+@media print{
+  body{background:#fff!important;color:#000!important;font-size:11pt}
+  body::after{display:none}
+  aside,.topbar,.tabs,.controls,button,.foot,.navsearch,.tooltip{display:none!important}
+  .app{display:block}
+  main{max-width:none;padding:0}
+  .vhead .vkicker,.vdesc{display:none}
+  .vtitle,.vtitle em{color:#000!important}
+  .card{background:#fff!important;border:1px solid #bbb;box-shadow:none;color:#000!important;page-break-inside:avoid}
+  .card *{color:#000!important}
+  .pagebreak{page-break-before:always}
+}
 </style>
 </head>
 <body>
@@ -1390,7 +1410,7 @@ V({id:'health',title:'Data <em>Health</em>',kicker:'The Connections',icon:'chart
 
 /* ============================ NAV + ROUTER ============================ */
 const GROUPS=['Start','The Queens','The Competition','The Panel','The Connections',
-  'Explore Queens','Explore Runs','Explore Seasons','Explore Music','Explore Panel','The Vault','About'];
+  'Explore Queens','Explore Runs','Explore Seasons','Explore Music','Explore Panel','The Vault','Games','About'];
 /* ============ EXPLORER PACK: 30 views ============ */
 /* progression sequences per contestant (ordered) */
 let _SEQ=null;function seqs(){if(_SEQ)return _SEQ;_SEQ={};
@@ -1839,6 +1859,353 @@ V({id:'vault',title:'The <em>Vault</em>',kicker:'The Vault',icon:'grid',group:'T
       {k:'ls_total',label:'LS',num:1},{k:'mini_wins',label:'Mini',num:1},{k:'earnings',label:'Earnings',num:1},
       {k:'snatch',label:'Snatch Game'},{k:'miss_c',label:'Miss C',filter:1},{k:'birthdate',label:'Birthdate'},
       {k:'entrance',label:'Entr.',num:1}]});
+ }});
+
+/* ============================ GAMES: TRIVIA NIGHT + HOST PACK ============================ */
+/* seeded RNG so a pack code reproduces a game exactly */
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+function _seedOf(code){let h=2166136261;for(const c of String(code)){h^=c.charCodeAt(0);h=Math.imul(h,16777619);}return h>>>0;}
+function _newCode(){const A='ABCDEFGHJKMNPQRSTUVWXYZ23456789';let s='';for(let i=0;i<6;i++)s+=A[Math.floor(Math.random()*A.length)];return s;}
+const _pickR=(rng,a)=>a&&a.length?a[Math.floor(rng()*a.length)]:null;
+function _shuf(rng,a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+/* correct + 3 unique distractors (never the correct answer), shuffled */
+function _opts(rng,correct,pool){const ds=[...new Set(pool.map(x=>String(x)).filter(d=>d&&d!=='-'&&d!==String(correct)))];
+  if(ds.length<3)return null;return _shuf(rng,[String(correct),..._shuf(rng,ds).slice(0,3)]);}
+const TRIVIA_CATS=['Crowns','Placements','Lip Syncs','Snatch Game','Queens IRL','Deep Cuts'];
+/* all question pools, computed fresh under the current franchise filter */
+function _tCtx(){
+  const M=masterRows().filter(r=>seasonAllowed(r.season));
+  const seasons=D.seasons.filter(s=>seasonAllowed(s.season_id));
+  const bySeason={};M.forEach(r=>{(bySeason[r.season]=bySeason[r.season]||[]).push(r);});
+  const ls=D.lip_syncs.filter(l=>{const e=_EP[l.episode_id];return e&&seasonAllowed(e.season_id);});
+  const lsBySeason={};ls.forEach(l=>{const sid=_EP[l.episode_id].season_id;(lsBySeason[sid]=lsBySeason[sid]||[]).push(l);});
+  const cont={};D.contestants.forEach(c=>cont[c.contestant_id]=c);
+  const snatch=D.episode_roles.filter(r=>r.role_type==='SNATCH_CHARACTER'&&cont[r.contestant_id]&&r.role_detail&&r.role_detail!=='-')
+    .map(r=>({c:cont[r.contestant_id],celeb:r.role_detail,ep:r.episode_id}));
+  const snatchScoped=snatch.filter(x=>seasonAllowed(x.c.season_id));
+  const elims={};D.elimination_events.filter(e=>e.event_type==='eliminated'&&seasonAllowed(e.season_id)&&qname[e.queen_id])
+    .forEach(e=>{(elims[e.season_id]=elims[e.season_id]||[]).push(e);});
+  Object.values(elims).forEach(a=>a.sort((x,y)=>epNum(x.episode_id)-epNum(y.episode_id)));
+  const farewells=D.elimination_events.filter(e=>seasonAllowed(e.season_id)&&e.farewell&&e.farewell!=='-'&&qname[e.queen_id]);
+  const gjs=D.appearances.filter(a=>a.appearance_type==='GUEST_JUDGE'&&a.episode_id&&a.episode_id!=='-'&&seasonAllowed(a.season_id));
+  const gjNames=[...new Set(D.appearances.filter(a=>a.appearance_type==='GUEST_JUDGE').map(a=>a.person_name))];
+  return {M,seasons,bySeason,ls,lsBySeason,snatch,snatchScoped,elims,farewells,gjNames,gjs};
+}
+/* question templates — every answer computed from the data; gen returns {q,correct,options,fact,link} or null */
+const TRIVIA_TEMPLATES=[
+ /* 1. who won the season */
+ {cat:'Crowns',d:'casual',gen(rng,C){
+   const s=_pickR(rng,C.seasons.filter(x=>x.winner_id&&x.winner_id!=='-'&&qname[x.winner_id]
+     &&(C.bySeason[x.season_id]||[]).filter(r=>+r.placement>=2&&+r.placement<=5).length>=3));
+   if(!s)return null;const cast=C.bySeason[s.season_id];
+   const wrow=cast.find(r=>r.queen_id===s.winner_id);const win=wrow?wrow.queen:qname[s.winner_id];
+   const o=_opts(rng,win,cast.filter(r=>+r.placement>=2&&+r.placement<=5).map(r=>r.queen));if(!o)return null;
+   return {q:`Who won ${seasonName(s.season_id)}?`,correct:win,options:o,
+     fact:`She took the crown with ${wrow?wrow.wins:0} challenge win${wrow&&+wrow.wins===1?'':'s'}${s.cash_prize?` and a $${Number(s.cash_prize).toLocaleString()} prize`:''}.`,
+     link:'queen:'+s.winner_id};}},
+ /* 2. runner-up */
+ {cat:'Crowns',d:'casual',gen(rng,C){
+   const s=_pickR(rng,C.seasons.filter(x=>{const cs=C.bySeason[x.season_id]||[];
+     return cs.filter(r=>+r.placement===2).length===1&&cs.filter(r=>+r.placement>=3&&+r.placement<=6).length>=3;}));
+   if(!s)return null;const cs=C.bySeason[s.season_id];const ru=cs.find(r=>+r.placement===2);
+   const o=_opts(rng,ru.queen,cs.filter(r=>+r.placement>=3&&+r.placement<=6).map(r=>r.queen));if(!o)return null;
+   return {q:`Who was the runner-up of ${seasonName(s.season_id)}?`,correct:ru.queen,options:o,
+     fact:`${ru.queen} finished #2 with a ${ru.wins}W · ${ru.highs}H track record.`,link:'queen:'+ru.queen_id};}},
+ /* 3. Miss Congeniality */
+ {cat:'Crowns',d:'casual',gen(rng,C){
+   const s=_pickR(rng,C.seasons.filter(x=>x.miss_congeniality_id&&x.miss_congeniality_id!=='-'&&qname[x.miss_congeniality_id]
+     &&(C.bySeason[x.season_id]||[]).filter(r=>r.miss_c!=='Yes').length>=3));
+   if(!s)return null;const cs=C.bySeason[s.season_id];
+   const row=cs.find(r=>r.queen_id===s.miss_congeniality_id);const mc=row?row.queen:qname[s.miss_congeniality_id];
+   const o=_opts(rng,mc,cs.filter(r=>r.miss_c!=='Yes'&&r.queen_id!==s.miss_congeniality_id).map(r=>r.queen));if(!o)return null;
+   return {q:`Who took home Miss Congeniality on ${seasonName(s.season_id)}?`,correct:mc,options:o,
+     fact:row&&row.placement?`The fans' favorite finished #${row.placement} that season.`:'A fan-voted title.',link:'queen:'+s.miss_congeniality_id};}},
+ /* 4. first out */
+ {cat:'Placements',d:'medium',gen(rng,C){
+   const sid=_pickR(rng,Object.keys(C.elims).filter(k=>C.elims[k].length>=4));if(!sid)return null;
+   const evs=C.elims[sid],first=evs[0];
+   const o=_opts(rng,qname[first.queen_id],evs.slice(1,6).map(e=>qname[e.queen_id]));if(!o)return null;
+   return {q:`Who sashayed away first on ${seasonName(sid)}?`,correct:qname[first.queen_id],options:o,
+     fact:`She was sent home in ${epLabel(first.episode_id)}.`,link:'queen:'+first.queen_id};}},
+ /* 5. placement */
+ {cat:'Placements',d:'medium',gen(rng,C){
+   const r=_pickR(rng,C.M.filter(x=>+x.placement>=2&&(C.bySeason[x.season]||[]).length>=6));if(!r)return null;
+   const p=+r.placement,max=Math.max(...C.bySeason[r.season].map(x=>+x.placement||0));
+   let cand=[];for(let k=1;k<=4;k++){if(p-k>=1)cand.push(p-k);if(p+k<=max)cand.push(p+k);}
+   const o=_opts(rng,'#'+p,[...new Set(cand)].map(x=>'#'+x));if(!o)return null;
+   return {q:`Where did ${r.queen} finish on ${seasonName(r.season)}?`,correct:'#'+p,options:o,
+     fact:`Her track record: ${r.wins}W · ${r.highs}H · ${r.lows}L · ${r.bottoms}B.`,link:'queen:'+r.queen_id};}},
+ /* 6. lip-sync song */
+ {cat:'Lip Syncs',d:'medium',gen(rng,C){
+   const l=_pickR(rng,C.ls.filter(x=>x.queen_a_id&&x.queen_b_id&&x.queen_a_id!=='-'&&x.queen_b_id!=='-'
+     &&qname[x.queen_a_id]&&qname[x.queen_b_id]&&songText(x.song_id)));if(!l)return null;
+   const sid=_EP[l.episode_id].season_id;const correct=songText(l.song_id);
+   const o=_opts(rng,correct,(C.lsBySeason[sid]||[]).filter(x=>x.song_id!==l.song_id).map(x=>songText(x.song_id)).filter(Boolean));
+   if(!o)return null;
+   const wn=l.winner_id&&l.winner_id!=='-'?qname[l.winner_id]:null;
+   return {q:`${qname[l.queen_a_id]} vs ${qname[l.queen_b_id]} in ${epLabel(l.episode_id)} — what was the song?`,correct,options:o,
+     fact:wn?`${wn} shantayed in that ${RESULT_LBL[l.result_type]||'lip sync'}.`:`Result: ${RESULT_LBL[l.result_type]||l.result_type}.`,link:'season:'+sid};}},
+ /* 7. lip-sync winner */
+ {cat:'Lip Syncs',d:'casual',gen(rng,C){
+   const l=_pickR(rng,C.ls.filter(x=>x.winner_id&&x.winner_id!=='-'&&x.loser_id&&x.loser_id!=='-'
+     &&qname[x.winner_id]&&qname[x.loser_id]&&songText(x.song_id)));if(!l)return null;
+   const sid=_EP[l.episode_id].season_id;const win=qname[l.winner_id],lose=qname[l.loser_id];
+   const cast=[...new Set((C.bySeason[sid]||[]).map(r=>r.queen).filter(n=>n!==win&&n!==lose))];
+   if(cast.length<2)return null;
+   const options=_shuf(rng,[win,lose,..._shuf(rng,cast).slice(0,2)]);
+   if(new Set(options).size!==4)return null;
+   return {q:`Who won the lip sync to “${(_SONG[l.song_id]||{}).title}” in ${epLabel(l.episode_id)}?`,correct:win,options,
+     fact:`She beat ${lose}${l.result_type==='NORMAL'?', who sashayed away':' ('+(RESULT_LBL[l.result_type]||l.result_type)+')'}.`,link:'queen:'+l.winner_id};}},
+ /* 8. snatch game character */
+ {cat:'Snatch Game',d:'medium',gen(rng,C){
+   const x=_pickR(rng,C.snatchScoped);if(!x)return null;
+   const o=_opts(rng,x.celeb,C.snatch.filter(y=>y!==x).map(y=>y.celeb));if(!o)return null;
+   return {q:`Who did ${cname(x.c)} play in the Snatch Game on ${seasonName(x.c.season_id)}?`,correct:x.celeb,options:o,
+     fact:`That Snatch Game was ${epLabel(x.ep)}.`,link:'queen:'+x.c.queen_id};}},
+ /* 9. snatch game reverse */
+ {cat:'Snatch Game',d:'superfan',gen(rng,C){
+   const x=_pickR(rng,C.snatchScoped);if(!x)return null;
+   const sameCeleb=new Set(C.snatch.filter(y=>y.celeb===x.celeb).map(y=>cname(y.c)));
+   const o=_opts(rng,cname(x.c),C.snatch.map(y=>cname(y.c)).filter(n=>!sameCeleb.has(n)));if(!o)return null;
+   return {q:`Which queen played ${x.celeb} in the Snatch Game?`,correct:cname(x.c),options:o,
+     fact:`She did it on ${epLabel(x.ep)}.`,link:'queen:'+x.c.queen_id};}},
+ /* 10. hometown */
+ {cat:'Queens IRL',d:'medium',gen(rng,C){
+   const r=_pickR(rng,C.M.filter(x=>x.home_city));if(!r)return null;
+   const o=_opts(rng,r.home_city,[...new Set((C.bySeason[r.season]||[]).map(x=>x.home_city).filter(c=>c&&c!==r.home_city))]);
+   if(!o)return null;
+   return {q:`Which city did ${r.queen} represent on ${seasonName(r.season)}?`,correct:r.home_city,options:o,
+     fact:`She finished #${r.placement||'?'} that season.`,link:'queen:'+r.queen_id};}},
+ /* 11. age at filming */
+ {cat:'Queens IRL',d:'superfan',gen(rng,C){
+   const r=_pickR(rng,C.M.filter(x=>+x.age));if(!r)return null;const a=+r.age;
+   const offs=_shuf(rng,[-4,-3,-2,-1,1,2,3,4]).slice(0,3);
+   const options=_shuf(rng,[String(a),...offs.map(x=>String(a+x))]);
+   return {q:`How old was ${r.queen} when she filmed ${seasonName(r.season)}?`,correct:String(a),options,
+     fact:`She placed #${r.placement||'?'}${r.hometown?' · originally from '+r.hometown:''}.`,link:'queen:'+r.queen_id};}},
+ /* 12. farewell mirror message */
+ {cat:'Deep Cuts',d:'superfan',gen(rng,C){
+   const e=_pickR(rng,C.farewells);if(!e)return null;
+   const o=_opts(rng,qname[e.queen_id],(C.bySeason[e.season_id]||[]).filter(r=>r.queen_id!==e.queen_id).map(r=>r.queen));
+   if(!o)return null;
+   let msg=String(e.farewell);if(msg.length>140)msg=msg.slice(0,137)+'…';
+   return {q:`A mirror on ${seasonName(e.season_id)} read: “${msg}” — who wrote it?`,correct:qname[e.queen_id],options:o,
+     fact:`She left in ${epLabel(e.episode_id)}.`,link:'queen:'+e.queen_id};}},
+ /* 13. guest judge */
+ {cat:'Deep Cuts',d:'superfan',gen(rng,C){
+   const a=_pickR(rng,C.gjs);if(!a)return null;
+   const sameEp=new Set(C.gjs.filter(x=>x.episode_id===a.episode_id).map(x=>x.person_name));
+   const o=_opts(rng,a.person_name,C.gjNames.filter(n=>!sameEp.has(n)));if(!o)return null;
+   return {q:`Who sat as a guest judge for ${epLabel(a.episode_id)}?`,correct:a.person_name,options:o,
+     fact:a.role_detail&&a.role_detail!=='-'?`Known for: ${a.role_detail}.`:`One of ${sameEp.size} guest${sameEp.size===1?'':'s'} that night.`,
+     link:'season:'+((_EP[a.episode_id]||{}).season_id||a.season_id)};}},
+ /* 14. earnings */
+ {cat:'Deep Cuts',d:'superfan',gen(rng,C){
+   const r=_pickR(rng,C.M.filter(x=>+x.earnings>0));if(!r)return null;
+   const v=+r.earnings,fmt=x=>'$'+x.toLocaleString('en-US');
+   const ds=[];for(const d of _shuf(rng,[2000,3000,4000,5000,6000,7000,8000,10000,-2000,-3000,-4000,-5000,-7000,-10000])){
+     const x=v+d;if(x>0&&x!==v&&!ds.includes(x))ds.push(x);if(ds.length===3)break;}
+   if(ds.length<3)return null;
+   const options=_shuf(rng,[fmt(v),...ds.map(fmt)]);
+   return {q:`How much prize money did ${r.queen} document on ${seasonName(r.season)}?`,correct:fmt(v),options,
+     fact:`That run: ${r.wins} challenge win${+r.wins===1?'':'s'} and a #${r.placement||'?'} finish.`,link:'queen:'+r.queen_id};}},
+];
+/* deterministic: same code + same settings (and franchise scope) => identical questions */
+function buildQuestions(cfg){ // cfg:{code,cats,diff,n}
+  const rng=mulberry32(_seedOf(cfg.code));
+  const C=_tCtx();
+  let pool=TRIVIA_TEMPLATES.filter(t=>cfg.cats.includes(t.cat));
+  if(cfg.diff==='Casual')pool=pool.filter(t=>t.d!=='superfan');
+  else if(cfg.diff==='Superfan')pool=pool.filter(t=>t.d!=='casual');
+  if(!pool.length)pool=TRIVIA_TEMPLATES.filter(t=>cfg.cats.includes(t.cat));
+  if(!pool.length)pool=TRIVIA_TEMPLATES.slice();
+  const out=[],seen=new Set();let guard=cfg.n*80;
+  while(out.length<cfg.n&&guard-->0){
+    const t=_pickR(rng,pool);let q=null;
+    for(let i=0;i<8&&!q;i++)q=t.gen(rng,C); // 8 tries, then draw another template
+    if(!q||seen.has(q.q))continue;
+    if(!q.options||q.options.length!==4||new Set(q.options).size!==4||!q.options.includes(String(q.correct)))continue;
+    seen.add(q.q);out.push(Object.assign({cat:t.cat,d:t.d},q));
+  }
+  return out;
+}
+let _TRIVIA_CFG=null; // set by Trivia Night's "printable version" button; read once by Host Pack
+
+/* ---------- 31. TRIVIA NIGHT ---------- */
+V({id:'trivia',title:'Trivia <em>Night</em>',kicker:'Games',icon:'sparkle',group:'Games',
+ desc:'A quiz computed live from the database — every answer is real and one click away from its proof. Pick categories, share the pack code, and gather the girls.',
+ render(m){
+  m.innerHTML=head(this);fTabs(m,'trivia');
+  const host=el('div',{class:'fade'});m.append(host);
+  const state={cats:TRIVIA_CATS.slice(),diff:'Mixed',n:10,teams:1,names:['Team 1','Team 2','Team 3','Team 4'],code:''};
+  const lbl=t=>el('div',{style:'font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin:14px 0 6px'},t);
+  const setup=()=>{
+    host.innerHTML='';
+    const card=el('div',{class:'card',style:'max-width:680px'});
+    card.append(sectionHead('Set up your game','var(--magenta)'));
+    card.append(lbl('Categories'));
+    const crow=el('div',{class:'chip-row'});
+    TRIVIA_CATS.forEach(c=>{const b=el('button',{class:'tab'+(state.cats.includes(c)?' on':'')},c);
+      b.addEventListener('click',()=>{if(state.cats.includes(c)){if(state.cats.length>1)state.cats.splice(state.cats.indexOf(c),1);}
+        else state.cats.push(c);setup();});crow.append(b);});
+    card.append(crow,lbl('Difficulty'));
+    const drow=el('div',{class:'chip-row'});
+    ['Casual','Mixed','Superfan'].forEach(d=>{const b=el('button',{class:'tab'+(state.diff===d?' on':'')},d);
+      b.addEventListener('click',()=>{state.diff=d;setup();});drow.append(b);});
+    card.append(drow,lbl('Questions'));
+    const nrow=el('div',{class:'chip-row'});
+    [5,10,20].forEach(n=>{const b=el('button',{class:'tab'+(state.n===n?' on':'')},n+' Qs');
+      b.addEventListener('click',()=>{state.n=n;setup();});nrow.append(b);});
+    card.append(nrow,lbl('Teams'));
+    const trow=el('div',{class:'chip-row'});
+    [1,2,3,4].forEach(t=>{const b=el('button',{class:'tab'+(state.teams===t?' on':'')},t===1?'Solo':t+' teams');
+      b.addEventListener('click',()=>{state.teams=t;setup();});trow.append(b);});
+    card.append(trow);
+    if(state.teams>1){const tn=el('div',{style:'display:flex;flex-wrap:wrap;gap:8px;margin-top:10px'});
+      for(let i=0;i<state.teams;i++){const inp=el('input',{type:'text',value:state.names[i],style:'width:130px'});
+        inp.addEventListener('input',e=>{state.names[i]=e.target.value.trim()||('Team '+(i+1));});tn.append(inp);}
+      card.append(tn);}
+    card.append(lbl('Pack code — blank for a fresh game, or enter one to replay it'));
+    const codeI=el('input',{type:'text',placeholder:'e.g. KXM3Q7',value:state.code,style:'width:160px;text-transform:uppercase'});
+    codeI.addEventListener('input',e=>{state.code=e.target.value.trim().toUpperCase();});
+    card.append(codeI);
+    const start=el('button',{class:'tab on',style:'display:block;margin-top:18px;font-size:14px;padding:10px 22px'},'★ Start the game');
+    start.addEventListener('click',()=>{if(!state.code)state.code=_newCode();play();});
+    card.append(start);host.append(card);
+  };
+  const play=()=>{
+    const qs=buildQuestions({code:state.code,cats:state.cats.slice(),diff:state.diff,n:state.n});
+    host.innerHTML='';
+    if(!qs.length){host.append(el('div',{class:'card empty'},'Not enough data under the current franchise filter for those settings — widen the categories or switch the scope to All.'));return;}
+    const scores=new Array(state.teams).fill(0);let i=0;
+    const card=el('div',{class:'card',style:'max-width:680px'});host.append(card);
+    const end=()=>{
+      card.innerHTML='';card.append(sectionHead('Final runway','var(--gold)'));
+      if(state.teams>1){
+        const mx=Math.max(...scores);const winners=state.names.slice(0,state.teams).filter((_,t)=>scores[t]===mx);
+        card.append(el('div',{style:'font-family:var(--disp);font-weight:800;font-size:26px;color:var(--gold);margin:6px 0'},
+          winners.length>1?'Double shantay — '+winners.join(' & ')+'!':winners[0]+' takes the crown!'));
+        scores.forEach((s,t)=>card.append(el('div',{style:'font-size:14px;padding:3px 0'},`${state.names[t]} — ${s} point${s===1?'':'s'}`)));
+      }else{
+        card.append(el('div',{style:'font-family:var(--disp);font-weight:800;font-size:26px;color:var(--gold);margin:6px 0'},`${scores[0]} / ${qs.length}`));
+        card.append(el('div',{style:'font-size:13px;color:rgba(247,240,230,.85)'},
+          scores[0]===qs.length?'A perfect run — condragulations!':scores[0]>=qs.length*.7?'Shantay, you stay.':'The library is open — study the views and try again.'));
+      }
+      card.append(el('div',{style:'font-size:11.5px;color:rgba(247,240,230,.6);margin:10px 0'},'Pack code '+state.code+' — share it to replay these exact questions.'));
+      const row=el('div',{class:'chip-row',style:'margin-top:8px'});
+      const again=el('button',{class:'tab'},'play again');again.addEventListener('click',()=>{state.code='';setup();});
+      const same=el('button',{class:'tab'},'same pack again');same.addEventListener('click',play);
+      const print=el('button',{class:'tab on'},'printable version');
+      print.addEventListener('click',()=>{_TRIVIA_CFG={code:state.code,cats:state.cats.slice(),diff:state.diff,n:state.n};go('hostpack');});
+      row.append(again,same,print);card.append(row);
+    };
+    const draw=()=>{
+      if(i>=qs.length)return end();
+      const q=qs[i];card.innerHTML='';
+      card.append(el('div',{style:'display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:12px'},
+        el('span',{class:'pill gold'},`Q ${i+1}/${qs.length}`),el('span',{class:'pill'},q.cat+' · '+q.d),
+        el('span',{style:'font-size:11px;color:rgba(247,240,230,.6)'},'pack '+state.code),
+        el('span',{class:'pill mint'},state.teams>1?scores.map((s,t)=>state.names[t]+' '+s).join(' · '):'score '+scores[0])));
+      card.append(el('div',{style:'font-family:var(--disp);font-weight:700;font-size:21px;line-height:1.3;margin-bottom:14px'},q.q));
+      const after=el('div');
+      const reveal=hit=>{
+        after.innerHTML='';
+        after.append(el('div',{style:'margin:12px 0 4px;font-size:13.5px;font-weight:700;color:'+(hit?'var(--mint)':'var(--rose)')},
+          hit?'Condragulations — correct!':'Sashay… the answer is '+q.correct+'.'));
+        const f=el('div',{style:'font-size:12.5px;color:rgba(247,240,230,.85);line-height:1.6'},q.fact+'  ');
+        f.append(el('span',{style:'color:var(--gold);text-decoration:underline;cursor:pointer',onclick:()=>go(q.link)},'explore →'));
+        after.append(f);
+        if(state.teams>1){
+          const tr=el('div',{class:'chip-row',style:'margin-top:10px;align-items:center'});
+          tr.append(el('span',{style:'font-size:11px;color:rgba(247,240,230,.6)'},'Point to:'));
+          scores.forEach((_,t)=>{const b=el('button',{class:'tab'},'+1 '+state.names[t]);
+            b.addEventListener('click',()=>{scores[t]++;b.classList.add('on');b.disabled=true;});tr.append(b);});
+          after.append(tr);
+        }
+        const nx=el('button',{class:'tab on',style:'margin-top:14px'},i+1<qs.length?'next →':'finish ★');
+        nx.addEventListener('click',()=>{i++;draw();});after.append(nx);
+      };
+      const btns=q.options.map(o=>{const b=el('button',{class:'opt'},o);
+        b.addEventListener('click',()=>{
+          btns.forEach(x=>{x.disabled=true;if(x.textContent===String(q.correct))x.classList.add('correct');});
+          const hit=o===String(q.correct);
+          if(!hit)b.classList.add('wrong');else if(state.teams===1)scores[0]++;
+          reveal(hit);});
+        return b;});
+      btns.forEach(b=>card.append(b));card.append(after);
+    };
+    draw();
+  };
+  setup();
+ }});
+
+/* ---------- 32. HOST PACK (printable) ---------- */
+V({id:'hostpack',title:'Host <em>Pack</em>',kicker:'Games',icon:'book',group:'Games',
+ desc:'Printable rounds for a live trivia night — questions up front, answer key on its own page. Generate, print, host. A pack code reproduces the same game as Trivia Night.',
+ render(m){
+  m.innerHTML=head(this);fTabs(m,'hostpack');
+  const pre=_TRIVIA_CFG;_TRIVIA_CFG=null;let pendingN=pre?pre.n:null;
+  const state={cats:pre?pre.cats.slice():TRIVIA_CATS.slice(),diff:pre?pre.diff:'Mixed',
+    rounds:pre?Math.max(1,Math.ceil(pre.n/10)):2,code:pre?pre.code:''};
+  const ctrl=el('div',{class:'controls',style:'flex-direction:column;align-items:flex-start;gap:10px'});
+  const lbl=t=>el('span',{style:'font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);width:96px;flex:none'},t);
+  const out=el('div',{class:'fade'});
+  let crow,drow,rrow,codeI,printB;
+  const drawCtrl=()=>{
+    ctrl.innerHTML='';
+    crow=el('div',{class:'chip-row',style:'align-items:center'},lbl('Categories'));
+    TRIVIA_CATS.forEach(c=>{const b=el('button',{class:'tab'+(state.cats.includes(c)?' on':'')},c);
+      b.addEventListener('click',()=>{if(state.cats.includes(c)){if(state.cats.length>1)state.cats.splice(state.cats.indexOf(c),1);}
+        else state.cats.push(c);drawCtrl();});crow.append(b);});
+    drow=el('div',{class:'chip-row',style:'align-items:center'},lbl('Difficulty'));
+    ['Casual','Mixed','Superfan'].forEach(d=>{const b=el('button',{class:'tab'+(state.diff===d?' on':'')},d);
+      b.addEventListener('click',()=>{state.diff=d;drawCtrl();});drow.append(b);});
+    rrow=el('div',{class:'chip-row',style:'align-items:center'},lbl('Rounds'));
+    [1,2,3].forEach(r=>{const b=el('button',{class:'tab'+(state.rounds===r?' on':'')},r+' × 10 Qs');
+      b.addEventListener('click',()=>{state.rounds=r;pendingN=null;drawCtrl();});rrow.append(b);});
+    const grow=el('div',{class:'chip-row',style:'align-items:center'},lbl('Pack code'));
+    codeI=el('input',{type:'text',placeholder:'blank = random',value:state.code,style:'width:150px;text-transform:uppercase'});
+    codeI.addEventListener('input',e=>{state.code=e.target.value.trim().toUpperCase();});
+    const genB=el('button',{class:'tab on'},'Generate pack');genB.addEventListener('click',gen);
+    printB=el('button',{class:'tab',style:'display:'+(out.children.length?'inline-block':'none')},'⎙ Print');
+    printB.addEventListener('click',()=>{if(window.print)window.print();});
+    grow.append(codeI,genB,printB);
+    ctrl.append(crow,drow,rrow,grow);
+  };
+  function gen(){
+    if(!state.code)state.code=_newCode();if(codeI)codeI.value=state.code;
+    const n=pendingN||state.rounds*10;pendingN=null;
+    const qs=buildQuestions({code:state.code,cats:state.cats.slice(),diff:state.diff,n});
+    out.innerHTML='';
+    if(!qs.length){out.append(el('div',{class:'card empty'},'Not enough data under the current franchise filter — widen the categories or switch the scope to All.'));return;}
+    const title=el('div',{class:'card',style:'margin-bottom:14px'});
+    title.append(el('div',{style:'font-family:var(--disp);font-weight:800;font-size:30px'},'The Werkroom — Trivia Night'),
+      el('div',{style:'font-size:13px;margin-top:8px;line-height:1.7'},
+        `Pack code ${state.code} · ${new Date().toISOString().slice(0,10)} · scope: ${FRANCHISE==='All'?'all franchises':FRANCHISE} · ${qs.length} questions · ${state.diff.toLowerCase()} difficulty`));
+    out.append(title);
+    for(let r=0;r*10<qs.length;r++){
+      const card=el('div',{class:'card',style:'margin-bottom:14px'});
+      card.append(sectionHead('Round '+(r+1),'var(--magenta)'));
+      qs.slice(r*10,r*10+10).forEach((q,j)=>{
+        const d=el('div',{class:'hp-q',style:'padding:7px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:13.5px;line-height:1.55'});
+        d.append(el('b',{style:'color:var(--gold)'},(r*10+j+1)+'. '),q.q,
+          el('div',{style:'font-size:12px;color:rgba(247,240,230,.75);margin-top:3px'},
+            q.options.map((o,k)=>'ABCD'[k]+') '+o).join('    ')));
+        card.append(d);});
+      out.append(card);
+    }
+    const key=el('div',{class:'card pagebreak'});
+    key.append(sectionHead('Answer key — keep away from the girls','var(--gold)'));
+    qs.forEach((q,j)=>{
+      const L='ABCD'[q.options.indexOf(String(q.correct))];
+      key.append(el('div',{class:'hp-a',style:'font-size:12.5px;padding:4px 0;border-bottom:1px solid rgba(255,255,255,.05);line-height:1.5'},
+        el('b',{style:'color:var(--gold)'},`R${Math.floor(j/10)+1} · Q${j+1}: `),`${L} — ${q.correct}`,
+        el('span',{style:'color:rgba(247,240,230,.65)'},'  ·  '+q.fact)));});
+    out.append(key);
+    if(printB)printB.style.display='inline-block';
+  }
+  drawCtrl();m.append(ctrl,out);
+  if(pre)gen();
  }});
 
 function buildNav(){
