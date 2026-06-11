@@ -113,7 +113,7 @@ AP0111,Alec Mapa,US02,US02E04,MAINSTAGE_GUEST,actor,No,,
 AP0112,Phoebe Price,US02,US02E04,MAINSTAGE_GUEST,celebrity personality,No,,
 AP0113,Marc Malkin,US02,,GUEST_JUDGE,E! journalist,No,,S2 book-cover episode; exact ep not yet verified
 AP0114,Jackie Collins,US02,,GUEST_JUDGE,author,No,,S2 book-cover episode; exact ep not yet verified
-AP0115,Gigi Levangie Grazer,US02,,GUEST_JUDGE,author,No,,S2 book-cover episode; exact ep not yet verified
+AP0115,Gigi Levangie,US02,,GUEST_JUDGE,author,No,,S2 book-cover episode; exact ep not yet verified
 AP0116,Tatum O'Neal,US02,,GUEST_JUDGE,Academy Award winner,No,,S2 divalicious award-shows episode; exact ep not yet verified
 AP0117,Marissa Jaret Winokur,US02,,GUEST_JUDGE,Tony Award winner,No,,S2 divalicious award-shows episode; exact ep not yet verified
 AP0118,Susan Powter,US03,US03E02,GUEST_JUDGE,fitness guru,No,,
@@ -316,7 +316,7 @@ AP0314,Derrick Barry,US11,US11E02,WERKROOM_GUEST,alum guest,Yes,Q0093,
 AP0315,Guillermo Díaz,US11,US11E03,GUEST_JUDGE,actor,No,,
 AP0316,Troye Sivan,US11,US11E03,GUEST_JUDGE,singer,No,,
 AP0317,Cara Delevingne,US11,US11E05,GUEST_JUDGE,model/actress,No,,
-AP0318,Elvira,US11,US11E05,GUEST_JUDGE,actress (Cassandra Peterson),No,,
+AP0318,"Elvira, Mistress of the Dark",US11,US11E05,GUEST_JUDGE,actress (Cassandra Peterson),No,,
 AP0319,Trixie Mattel,US11,US11E05,MAINSTAGE_GUEST,AS3 winner - guest,Yes,Q0080,
 AP0320,Mirai Nagasu,US11,US11E06,GUEST_JUDGE,figure skater,No,,
 AP0321,Adam Rippon,US11,US11E06,GUEST_JUDGE,figure skater,No,,
@@ -394,3 +394,80 @@ AP0392,Jennifer Lopez,US14,,MAINSTAGE_GUEST,virtual appearance,No,,S14 virtual; 
 AP0393,Sarah McLachlan,US14,,MAINSTAGE_GUEST,virtual appearance,No,,S14 virtual; exact ep TBD
 AP0394,Trinity K. Bonet,US14,,WERKROOM_GUEST,alum guest,Yes,Q0067,S14 non-mainstage alum guest; exact ep TBD
 AP0395,Naomi Smalls,US14,,WERKROOM_GUEST,alum guest,Yes,Q0091,S14 non-mainstage alum guest; exact ep TBD
+AP0396,Mike Ruiz,US01,-,GUEST_JUDGE,photographer,No,,from Wikipedia guest-judge list
+AP0397,Gordon Espinet,US01,-,GUEST_JUDGE,make-up artist,No,,from Wikipedia guest-judge list
+AP0398,Jeffrey Moran,US01,-,GUEST_JUDGE,Absolut Vodka marketing/branding executive,No,,from Wikipedia guest-judge list
+AP0399,Mike Ruiz,US02,-,GUEST_JUDGE,photographer,No,,from Wikipedia guest-judge list
+AP0400,Kathy Griffin,US02,-,GUEST_JUDGE,comedian,No,,from Wikipedia guest-judge list
+AP0401,Kim Coles,US02,-,GUEST_JUDGE,actress and comedian,No,,from Wikipedia guest-judge list
+AP0402,Dita Von Teese,US02,-,GUEST_JUDGE,burlesque performer,No,,from Wikipedia guest-judge list
+AP0403,Mathu Andersen,US02,-,GUEST_JUDGE,make-up artist and photographer,No,,from Wikipedia guest-judge list
+AP0404,Martha Wash,US02,-,GUEST_JUDGE,singer-songwriter,No,,from Wikipedia guest-judge list
+AP0405,Henry Rollins,US02,-,GUEST_JUDGE,"musician, actor, and comedian",No,,from Wikipedia guest-judge list
+AP0406,Terri Nunn,US02,-,GUEST_JUDGE,singer and actress,No,,from Wikipedia guest-judge list
+AP0407,Debbie Reynolds,US02,-,GUEST_JUDGE,actress and singer,No,,from Wikipedia guest-judge list
+AP0408,Cloris Leachman,US02,-,GUEST_JUDGE,actress and comedian,No,,from Wikipedia guest-judge list
+AP0409,Toni Ko,US02,-,GUEST_JUDGE,CEO of NYX Cosmetics,No,,from Wikipedia guest-judge list
+AP0410,Mike Ruiz,US03,-,GUEST_JUDGE,"photographer, director, and reality television personality",No,,from Wikipedia guest-judge list
+AP0411,Jeffrey Moran,US03,-,GUEST_JUDGE,Absolut Vodka marketing/branding executive,No,,from Wikipedia guest-judge list
+AP0412,Gigi Levangie,US03,-,GUEST_JUDGE,"novelist and host of Logo's *The Arrangement ""The Arrangement (2010 TV series)"")*",No,,from Wikipedia guest-judge list
+AP0413,"Elvira, Mistress of the Dark",US04,-,GUEST_JUDGE,actress and television hostess,No,,from Wikipedia guest-judge list
+AP0414,Mike Ruiz,US04,-,GUEST_JUDGE,photographer,No,,from Wikipedia guest-judge list
+AP0415,Amber Riley,US04,-,GUEST_JUDGE,actress and singer,No,,from Wikipedia guest-judge list
+AP0416,Natalie Cole,US04,-,GUEST_JUDGE,"actress, pianist, singer and songwriter",No,,from Wikipedia guest-judge list
+AP0417,Loretta Devine,US04,-,GUEST_JUDGE,actress,No,,from Wikipedia guest-judge list
+AP0418,Ross Mathews,US04,-,GUEST_JUDGE,comedian and television personality,No,,from Wikipedia guest-judge list
+AP0419,Kelly Osbourne,US04,-,GUEST_JUDGE,"television host, actress, and singer",No,,from Wikipedia guest-judge list
+AP0420,Pauley Perrette,US04,-,GUEST_JUDGE,"actress, singer, and writer",No,,from Wikipedia guest-judge list
+AP0421,Regina King,US04,-,GUEST_JUDGE,actress,No,,from Wikipedia guest-judge list
+AP0422,Pam Tillis,US04,-,GUEST_JUDGE,singer and songwriter,No,,from Wikipedia guest-judge list
+AP0423,Lucian Piane,US04,-,GUEST_JUDGE,composer and music producer,No,,from Wikipedia guest-judge list
+AP0424,Pamela Anderson,US04,-,GUEST_JUDGE,actress and model,No,,from Wikipedia guest-judge list
+AP0425,Jennifer Tilly,US04,-,GUEST_JUDGE,actress,No,,from Wikipedia guest-judge list
+AP0426,Jesse Tyler Ferguson,US04,-,GUEST_JUDGE,actor,No,,from Wikipedia guest-judge list
+AP0427,Jennifer Love Hewitt,US04,-,GUEST_JUDGE,actress and singer,No,,from Wikipedia guest-judge list
+AP0428,Rose McGowan,US04,-,GUEST_JUDGE,actress,No,,from Wikipedia guest-judge list
+AP0429,Wynonna Judd,US04,-,GUEST_JUDGE,actress and singer,No,,from Wikipedia guest-judge list
+AP0430,Mike Ruiz,US05,-,GUEST_JUDGE,photographer,No,,from Wikipedia guest-judge list
+AP0431,The Pointer Sisters (Anita and Ruth),US05,-,GUEST_JUDGE,girl group,No,,from Wikipedia guest-judge list
+AP0432,Leslie Jordan,US05,-,GUEST_JUDGE,actor,No,,from Wikipedia guest-judge list
+AP0433,Jeffrey Moran,US05,-,GUEST_JUDGE,Absolut Vodka marketing/branding executive,No,,from Wikipedia guest-judge list
+AP0434,María Conchita Alonso,US05,-,GUEST_JUDGE,singer/songwriter and actress,No,,from Wikipedia guest-judge list
+AP0435,Jamie-Lynn Sigler,US05,-,GUEST_JUDGE,actress and singer,No,,from Wikipedia guest-judge list
+AP0436,Clinton Kelly,US05,-,GUEST_JUDGE,"""Clinton Kelly (TV personality)""), fashion stylist",No,,from Wikipedia guest-judge list
+AP0437,George Kotsiopoulos,US05,-,GUEST_JUDGE,editor and fashion consultant,No,,from Wikipedia guest-judge list
+AP0438,Marg Helgenberger,US05,-,GUEST_JUDGE,actress,No,,from Wikipedia guest-judge list
+AP0439,Bob Mackie,US05,-,GUEST_JUDGE,fashion designer,No,,from Wikipedia guest-judge list
+AP0440,Mike Ruiz,US06,-,GUEST_JUDGE,photographer,No,,from Wikipedia guest-judge list
+AP0441,Gillian Jacobs,US06,-,GUEST_JUDGE,actress,No,,from Wikipedia guest-judge list
+AP0442,Heather McDonald,US06,-,GUEST_JUDGE,actress and comedian,No,,from Wikipedia guest-judge list
+AP0443,Eve,US06,-,GUEST_JUDGE,"""Eve (entertainer)""), rapper and actress",No,,from Wikipedia guest-judge list
+AP0444,Trina,US06,-,GUEST_JUDGE,rapper,No,,from Wikipedia guest-judge list
+AP0445,Leah Remini,US06,-,GUEST_JUDGE,actress,No,,from Wikipedia guest-judge list
+AP0446,Lainie Kazan,US06,-,GUEST_JUDGE,actress and singer,No,,from Wikipedia guest-judge list
+AP0447,Mel B,US07,-,GUEST_JUDGE,singer,No,,from Wikipedia guest-judge list
+AP0448,Kat Dennings,US07,-,GUEST_JUDGE,actress,No,,from Wikipedia guest-judge list
+AP0449,Jamal Sims,US08,-,GUEST_JUDGE,choreographer,No,,from Wikipedia guest-judge list
+AP0450,Chris Stein,US08,-,GUEST_JUDGE,musician,No,,from Wikipedia guest-judge list
+AP0451,Debbie Harry,US08,-,GUEST_JUDGE,singer,No,,from Wikipedia guest-judge list
+AP0452,Chanel Iman,US08,-,GUEST_JUDGE,model,No,,from Wikipedia guest-judge list
+AP0453,Gigi Hadid,US08,-,GUEST_JUDGE,model,No,,from Wikipedia guest-judge list
+AP0454,The B-52's,US09,-,GUEST_JUDGE,new wave band,No,,from Wikipedia guest-judge list
+AP0455,Cheyenne Jackson,US09,-,GUEST_JUDGE,actor and singer,No,,from Wikipedia guest-judge list
+AP0456,Jeffrey Bowyer-Chapman,US09,-,GUEST_JUDGE,actor and model,No,,from Wikipedia guest-judge list
+AP0457,Naya Rivera,US09,-,GUEST_JUDGE,actress and singer,No,,from Wikipedia guest-judge list
+AP0458,Candis Cayne,US09,-,GUEST_JUDGE,actress,No,,from Wikipedia guest-judge list
+AP0459,Denis O'Hare,US09,-,GUEST_JUDGE,actor,No,,from Wikipedia guest-judge list
+AP0460,Jennie Garth,US09,-,GUEST_JUDGE,actress,No,,from Wikipedia guest-judge list
+AP0461,Tori Spelling,US09,-,GUEST_JUDGE,actress and television personality,No,,from Wikipedia guest-judge list
+AP0462,Todrick Hall,US10,-,GUEST_JUDGE,"singer, director, choreographer",No,,from Wikipedia guest-judge list
+AP0463,Todrick Hall,US11,-,GUEST_JUDGE,"singer, director, choreographer & former *RuPaul's Drag Race All Stars* judge",No,,from Wikipedia guest-judge list
+AP0464,Paul W. Downs,US17,-,GUEST_JUDGE,actor and writer,No,,from Wikipedia guest-judge list
+AP0465,Hunter Schafer,US17,-,GUEST_JUDGE,actress and model,No,,from Wikipedia guest-judge list
+AP0466,Quinta Brunson,US17,-,GUEST_JUDGE,actress and comedian,No,,from Wikipedia guest-judge list
+AP0467,Adam Lambert,US17,-,GUEST_JUDGE,singer and actor,No,,from Wikipedia guest-judge list
+AP0468,Betsey Johnson,US17,-,GUEST_JUDGE,fashion designer,No,,from Wikipedia guest-judge list
+AP0469,Whitney Cummings,US17,-,GUEST_JUDGE,actress and stand-up comedian,No,,from Wikipedia guest-judge list
+AP0470,Sam Smith,US17,-,GUEST_JUDGE,singer,No,,from Wikipedia guest-judge list
+AP0471,Jerrod Carmichael,US17,-,GUEST_JUDGE,"actor, comedian and writer",No,,from Wikipedia guest-judge list
+AP0472,June Diane Raphael,US17,-,GUEST_JUDGE,actress and comedian,No,,from Wikipedia guest-judge list
