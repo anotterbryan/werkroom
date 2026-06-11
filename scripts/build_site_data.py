@@ -37,7 +37,7 @@ TABLES = ["queens", "seasons", "contestants", "episodes", "progression",
 # matching the historical site_data.json typing exactly.
 INT_FIELDS = {
     "contestants": {"placement", "entrance_order", "wins", "highs", "lows", "bottoms",
-                    "earnings"},
+                    "earnings", "age_at_filming"},
     "seasons": {"cash_prize"},
 }
 LS_WIN_TYPES = ["NORMAL", "SURVIVAL", "SHANTAY", "TOPS", "CROWN", "SASHAY"]

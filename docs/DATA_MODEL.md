@@ -55,7 +55,8 @@ view changes.
 `contestant_id` (PK), `queen_id`→queens, `season_id`→seasons, `placement`,
 `entrance_order`, `home_city`, `wins`, `highs`, `lows`, `bottoms`,
 `eliminated_episode`, `miss_congeniality`, `drag_name_used`, `image`
-(per-season cast photo URL, Fandom), `earnings` (total season winnings USD int)
+(per-season cast photo URL, Fandom), `earnings` (total season winnings USD int),
+`age_at_filming` (int, Fandom ranked-contestant table)
 - `drag_name_used` = the name the performer competed under that season when it differs
   from her canonical `queens.drag_name` (e.g. Trinity Taylor → "Trinity The Tuck" in All
   Stars); `-` when the same. The `queen_id` is unchanged, so one identity spans every
