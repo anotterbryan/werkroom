@@ -354,6 +354,8 @@ V({id:'home',title:'The <em>Werkroom</em>',kicker:'A Drag Race Data Observatory'
         <div style="color:var(--gold)">${icon(v.icon)}</div>
         <div style="font-family:var(--disp);font-weight:700;font-size:17px;margin:6px 0 4px">${v.title.replace(/<[^>]+>/g,'')}</div>
         <div style="font-size:12.5px;color:rgba(247,240,230,.82);line-height:1.5">${v.desc||''}</div></div>`).join('')}</div>`;
+  m.append(el('div',{class:'card fade',style:'margin-top:18px',
+    html:'NEW: six explorer sections — galleries, charts, and The Vault master table — now live in the left rail.'}));
  }});
 
 /* ---------- 1. SEASON ATLAS ---------- */
@@ -366,6 +368,9 @@ V({id:'atlas',title:'Season <em>Atlas</em>',kicker:'The Competition',icon:'grid'
   ['All',...FRANCHISES].forEach(f=>{const b=el('button',{class:'tab'+(FRANCHISE===f?' on':'')},f);
     b.addEventListener('click',()=>{FRANCHISE=f;go('atlas');});ctrl.append(b);});
   m.append(ctrl);
+  statCards(m,[[D.seasons.filter(s=>seasonAllowed(s.season_id)).length,'seasons'],
+    [new Set(D.contestants.filter(c=>seasonAllowed(c.season_id)).map(c=>c.queen_id)).size,'queens in scope'],
+    [D.episodes.filter(e=>seasonAllowed(e.season_id)).length,'episodes in scope']]);
   const wrap=el('div',{class:'grid fade',style:'grid-template-columns:repeat(auto-fit,minmax(250px,1fr))'});
   D.seasons.filter(s=>seasonAllowed(s.season_id)).forEach(s=>{
     const win=qname[s.winner_id]||'—', mc=qname[s.miss_congeniality_id]||'—';
@@ -500,13 +505,22 @@ V({id:'queens',title:'The <em>Queens</em>',kicker:'The Queens',icon:'star',group
   const ctrl=el('div',{class:'controls'});
   const search=el('input',{type:'text',placeholder:'Search queens…',style:'flex:1;min-width:200px'});
   ctrl.append(search);m.append(ctrl);
+  statCards(m,[[new Set(D.contestants.map(c=>c.queen_id)).size,'queens'],[D.contestants.length,'contestant runs'],
+    [new Set(D.contestants.map(c=>c.season_id)).size,'seasons']]);
+  /* smallest cast photo per queen (lowest scale-to-width variant across her rows) */
+  const _QIMG={};const _imgSc=u=>+((u.match(/scale-to-width-down\/(\d+)/)||[])[1]||9999);
+  D.contestants.forEach(c=>{if(c.image&&c.image!=='-'){const cur=_QIMG[c.queen_id];
+    if(!cur||_imgSc(c.image)<_imgSc(cur))_QIMG[c.queen_id]=c.image;}});
   const list=el('div',{class:'grid fade',style:'grid-template-columns:repeat(auto-fill,minmax(190px,1fr));align-items:start'});
   m.append(list);
   const draw=(q='')=>{list.innerHTML='';
     D.contestants.forEach(c=>{
       const nm=cname(c); if(q&&!((nm+' '+(qname[c.queen_id]||'')).toLowerCase().includes(q.toLowerCase())))return;
+      const img=_QIMG[c.queen_id];
       const card=el('div',{class:'card',style:'cursor:pointer;padding:14px'},
-        el('div',{style:'font-family:var(--disp);font-weight:700;font-size:16px'},nm),
+        el('div',{style:'display:flex;align-items:center;gap:8px'},
+          img?el('img',{src:img,alt:nm,style:'width:34px;height:34px;border-radius:50%;object-fit:cover;flex:none;border:1px solid rgba(244,181,63,.35)'}):'',
+          el('div',{style:'font-family:var(--disp);font-weight:700;font-size:16px'},nm)),
         el('div',{style:'font-size:11.5px;color:var(--gold);margin-top:3px'},seasonName(c.season_id)+' · '+(c.placement?('#'+c.placement):'')),
         el('div',{class:'chip-row',style:'margin-top:8px'},
           c.wins>0?el('span',{class:'pill gold'},c.wins+'W'):'',
@@ -599,10 +613,13 @@ V({id:'placementgrid',title:'Placement <em>Grid</em>',kicker:'The Competition',i
   const ctrl=el('div',{class:'controls'});
   const sel=el('select');SEASON_ORDER.forEach(s=>sel.append(el('option',{value:s},seasonName(s))));
   ctrl.append(el('span',{style:'font-size:12.5px;color:var(--gold)'},'Season:'),sel);m.append(ctrl);
+  const statsHost=el('div');m.append(statsHost);
   const host=el('div',{class:'card fade',style:'overflow-x:auto'});m.append(host);
   const draw=sid=>{
     const cs=contestantsBySeason(sid).sort((a,b)=>(+a.placement||99)-(+b.placement||99));
     const eps=D.episodes.filter(e=>e.season_id===sid).sort((a,b)=>+a.episode_number-+b.episode_number);
+    const elims=D.elimination_events.filter(e=>e.season_id===sid&&e.event_type==='eliminated').length;
+    statsHost.innerHTML='';statCards(statsHost,[[cs.length,'cast size'],[eps.length,'episodes'],[elims,'eliminations']]);
     const prog={};D.progression.filter(p=>p.season_id===sid).forEach(p=>{prog[p.queen_id+'|'+p.episode_id]=p.status;});
     let html='<table style="font-size:11.5px"><tr><th>Queen</th>'+eps.map(e=>`<th title="${e.title}">${e.episode_number}</th>`).join('')+'</tr>';
     cs.forEach(c=>{html+=`<tr><td style="white-space:nowrap;cursor:pointer" onclick="go('queen:${c.queen_id}')">${cname(c)}</td>`+
@@ -615,19 +632,17 @@ V({id:'placementgrid',title:'Placement <em>Grid</em>',kicker:'The Competition',i
 V({id:'tallies',title:'Track <em>Record</em> Tallies',kicker:'The Competition',icon:'chart',group:'The Competition',
  desc:'Cumulative wins, highs, lows and bottoms per queen — sortable. The statistical fingerprint of a run.',
  render(m){
-  m.innerHTML=head(this);
-  const host=el('div',{class:'card fade',style:'overflow-x:auto'});m.append(host);
-  let rows=X.tally.slice();let sortKey='wins',asc=false;
-  const draw=()=>{rows.sort((a,b)=>{let x=a[sortKey],y=b[sortKey];if(typeof x==='string'){return (x<y?-1:1)*(asc?1:-1);}return ((+x||0)-(+y||0))*(asc?1:-1);});
-    const max=Math.max(...rows.map(r=>+r.wins||0),1);
-    let h='<table><tr>'+[['drag_name','Queen'],['season','Season'],['wins','Wins'],['highs','Highs'],['lows','Lows'],['bottoms','Btm'],['placement','Place']]
-      .map(c=>`<th data-k="${c[0]}">${c[1]}</th>`).join('')+'</tr>';
-    rows.forEach(r=>{h+=`<tr style="cursor:pointer" onclick="go('queen:${r.queen_id}')"><td>${r.drag_name}</td><td>${seasonName(r.season)}</td>
-      <td><div style="display:flex;align-items:center;gap:6px"><span>${r.wins}</span><span class="bar" style="width:${40*(+r.wins||0)/max}px"></span></div></td>
-      <td>${r.highs}</td><td>${r.lows}</td><td>${r.bottoms}</td><td>${r.placement||'—'}</td></tr>`;});
-    h+='</table>';host.innerHTML=h;
-    $$('th',host).forEach(t=>t.onclick=()=>{const k=t.dataset.k;if(k===sortKey)asc=!asc;else{sortKey=k;asc=false;}draw();});};
-  draw();
+  m.innerHTML=head(this);fTabs(m,'tallies');
+  const rows=X.tally.filter(t=>seasonAllowed(t.season)).map(t=>({queen:t.drag_name,queen_id:t.queen_id,
+    season:seasonName(t.season),wins:+t.wins||0,highs:+t.highs||0,lows:+t.lows||0,bottoms:+t.bottoms||0,placement:t.placement||''}));
+  statCards(m,[[rows.length,'runs tallied'],[rows.reduce((s,r)=>s+r.wins,0),'challenge wins'],[rows.filter(r=>+r.placement===1).length,'crowns']]);
+  const card=el('div',{class:'card fade'});m.append(card);
+  const top=rows.slice().sort((a,b)=>b.wins-a.wins).slice(0,15);
+  mkChart(card,{type:'bar',data:{labels:top.map(r=>r.queen),datasets:[{label:'wins',data:top.map(r=>r.wins),backgroundColor:PAL[0]}]},
+    options:{indexAxis:'y',plugins:{legend:{display:false}}}},340);
+  dataTable(card,{cols:[{k:'queen',label:'Queen'},{k:'season',label:'Season',filter:1},{k:'wins',label:'Wins',num:1},
+    {k:'highs',label:'Highs',num:1},{k:'lows',label:'Lows',num:1},{k:'bottoms',label:'Btm',num:1},{k:'placement',label:'Place',num:1}],
+    rows,csv:'tallies',onRow:r=>go('queen:'+r.queen_id)});
  }});
 
 /* ---------- 7. LIP-SYNC SONG REUSE ---------- */
@@ -640,6 +655,11 @@ V({id:'songreuse',title:'Lip-Sync <em>Song Reuse</em>',kicker:'The Competition',
   m.innerHTML+=`<div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(140px,1fr));margin-bottom:18px">
     <div class="card"><div class="stat">${X.song_reuse.length}</div><div class="statlbl">distinct songs</div></div>
     <div class="card"><div class="stat">${multi.length}</div><div class="statlbl">used more than once</div></div></div>`;
+  const chartCard=el('div',{class:'card fade',style:'margin-bottom:14px'});
+  chartCard.append(sectionHead('Top 12 most-reused tracks','var(--gold)'));
+  const topSongs=X.song_reuse.filter(s=>s.title&&s.title!=='-').sort((a,b)=>b.times_used-a.times_used).slice(0,12);
+  if(mkChart(chartCard,{type:'bar',data:{labels:topSongs.map(s=>s.title),datasets:[{label:'times used',data:topSongs.map(s=>s.times_used),backgroundColor:PAL[0]}]},
+    options:{indexAxis:'y',plugins:{legend:{display:false}}}},300))m.append(chartCard);
   const host=el('div',{class:'card fade'});host.innerHTML='<div class="vkicker">Most-reused tracks · click to see each use</div>';
   const max=Math.max(...X.song_reuse.map(s=>s.times_used),1);
   const lsBySong={};D.lip_syncs.forEach(l=>{(lsBySong[l.song_id]=lsBySong[l.song_id]||[]).push(l);});
@@ -668,6 +688,11 @@ V({id:'assassin',title:'Lip-Sync <em>Assassins</em>',kicker:'The Competition',ic
   const host=el('div',{class:'card fade'});
   const board=X.assassin_board.filter(a=>a.ls_wins>=1);
   const max=Math.max(...board.map(a=>a.ls_wins),1);
+  const chartCard=el('div',{class:'card fade',style:'margin-bottom:14px'});
+  chartCard.append(sectionHead('Top 12 assassins by lip syncs won','var(--gold)'));
+  const topA=board.slice(0,12);
+  if(mkChart(chartCard,{type:'bar',data:{labels:topA.map(a=>a.drag_name),datasets:[{label:'lip syncs won',data:topA.map(a=>a.ls_wins),backgroundColor:PAL[4]}]},
+    options:{indexAxis:'y',plugins:{legend:{display:false}}}},300))m.append(chartCard);
   host.innerHTML='<div class="vkicker">Lip syncs won · click to expand</div>';
   board.slice(0,60).forEach((a,i)=>{
     const wrap=el('div',{style:'border-bottom:1px solid rgba(255,255,255,.05)'});
@@ -695,6 +720,11 @@ V({id:'guestfreq',title:'Guest Judge <em>Frequency</em>',kicker:'The Panel',icon
  desc:'The most recurring guest judges across the franchise — the famous faces Ru keeps inviting back.',
  render(m){
   m.innerHTML=head(this);
+  const chartCard=el('div',{class:'card fade',style:'margin-bottom:14px'});
+  chartCard.append(sectionHead('Top 12 most-invited guests','var(--gold)'));
+  const topG=X.guest_freq.slice(0,12);
+  if(mkChart(chartCard,{type:'bar',data:{labels:topG.map(g=>g.name),datasets:[{label:'appearances',data:topG.map(g=>g.appearances),backgroundColor:PAL[1]}]},
+    options:{indexAxis:'y',plugins:{legend:{display:false}}}},300))m.append(chartCard);
   const host=el('div',{class:'card fade'});host.innerHTML='<div class="vkicker">By guest-judge appearances · click for episodes</div>';
   const bios=X.guest_bios||{};
   const max=Math.max(...X.guest_freq.map(g=>g.appearances),1);
@@ -725,6 +755,7 @@ V({id:'panel',title:'Panel <em>Evolution</em>',kicker:'The Panel',icon:'mask',gr
     (people[p.person_name].seasons=people[p.person_name].seasons||{})[p.season_id]=p.role;});
   const order=Object.keys(people).sort((a,b)=>{
     const fa=SEASON_ORDER.findIndex(s=>people[a].seasons[s]),fb=SEASON_ORDER.findIndex(s=>people[b].seasons[s]);return fa-fb;});
+  statCards(m,[[order.length,'panelists'],[new Set(D.panel.map(p=>p.season_id)).size,'seasons covered']]);
   const host=el('div',{class:'card fade',style:'overflow-x:auto'});
   const col={HOST:'var(--gold)',MAIN_JUDGE:'var(--magenta)',ROTATING_JUDGE:'rgba(116,224,200,.7)'};
   const tbl=el('table',{style:'font-size:11.5px'});
@@ -757,12 +788,19 @@ V({id:'alumniweb',title:'Alumni <em>Web</em>',kicker:'The Connections',icon:'web
   const links=X.alumni_links;
   // group by queen
   const byq={};links.forEach(l=>{(byq[l.queen_id]=byq[l.queen_id]||[]).push(l);});
+  statCards(m,[[links.length,'alumni links'],[Object.keys(byq).length,'distinct alumni']]);
   const svg=buildAlumniSVG(byq);
   const host=el('div',{class:'card fade',style:'overflow:auto'});host.append(svg);
   m.append(host);
   m.append(el('div',{class:'legend'},
     el('span',{},el('span',{class:'sw',style:'background:var(--gold)'}),'Queen (hub)'),
     el('span',{},el('span',{class:'sw',style:'background:var(--rose)'}),'Guest appearance (spoke)')));
+  const tcard=el('div',{class:'card fade',style:'margin-top:14px'});m.append(tcard);
+  tcard.append(sectionHead('Every alumni link','var(--gold)'));
+  dataTable(tcard,{cols:[{k:'person',label:'Person'},{k:'season',label:'Season',filter:1},{k:'episode',label:'Episode'},{k:'type',label:'Type',filter:1}],
+    rows:links.map(l=>({person:l.person,queen_id:l.queen_id,season:slabel[l.season]||l.season,
+      episode:(l.episode&&l.episode!=='-')?l.episode:'',type:(l.type||'').replace(/_/g,' ').toLowerCase()})),
+    csv:'alumni-links',onRow:r=>go('queen:'+r.queen_id)});
  }});
 function buildAlumniSVG(byq){
   const NS='http://www.w3.org/2000/svg';
@@ -811,32 +849,28 @@ V({id:'returning',title:'Returning <em>Queens</em>',kicker:'The Connections',ico
 V({id:'hometowns',title:'Hometown <em>Geography</em>',kicker:'The Queens',icon:'map',group:'The Queens',
  desc:'Where the queens come from — the cities and regions that have sent the most competitors.',
  render(m){
-  m.innerHTML=head(this);
-  const host=el('div',{class:'card fade'});host.innerHTML='<div class="vkicker">Most-represented hometowns · click a city for its queens</div>';
-  const max=Math.max(...X.hometowns.map(h=>h.count),1);
-  const qByHome={};D.queens.forEach(q=>{if(q.hometown&&q.hometown!=='-')(qByHome[q.hometown]=qByHome[q.hometown]||[]).push(q.queen_id);});
+  m.innerHTML=head(this);fTabs(m,'hometowns');
   const contByQ={};D.contestants.forEach(c=>{(contByQ[c.queen_id]=contByQ[c.queen_id]||[]).push(c);});
-  X.hometowns.filter(h=>h.count>=1).slice(0,60).forEach(h=>{
-    const wrap=el('div',{style:'border-bottom:1px solid rgba(255,255,255,.05)'});
-    const caret=el('span',{style:'color:var(--magenta);font-size:9px;width:10px;flex:none'},'▸');
-    const hdr=el('div',{style:'display:flex;align-items:center;gap:10px;padding:5px 0;cursor:pointer'},caret,
-      el('div',{style:'flex:1;font-size:13.5px'},h.hometown),
-      el('div',{class:'bar',style:`width:${130*h.count/max}px`}),
-      el('div',{style:'width:22px;text-align:right;color:var(--gold);font-weight:700'},h.count));
-    const det=el('div',{style:'display:none;padding:0 0 10px 20px'});
-    (qByHome[h.hometown]||[]).forEach(qid=>{
-      const runs=(contByQ[qid]||[]).slice().sort((a,b)=>a.season_id<b.season_id?-1:1);
-      const tw=runs.reduce((n,c)=>n+(+c.wins||0),0);
-      const best=Math.min(...runs.map(c=>+c.placement||99));
-      const row=el('div',{style:'font-size:11.5px;padding:3px 0;line-height:1.5'});
-      row.append(qLink(qid));
-      row.append(el('span',{style:'color:rgba(247,240,230,.7)'},'  — '+runs.map(c=>seasonName(c.season_id)+(c.placement?(' #'+c.placement):'')).join(', ')+`  ·  ${tw}W`+(best===1?'  · 👑':'')));
-      det.append(row);
-    });
-    hdr.addEventListener('click',()=>{const o=det.style.display==='none';det.style.display=o?'block':'none';caret.textContent=o?'▾':'▸';});
-    wrap.append(hdr,det);host.append(wrap);
-  });
-  m.append(host);
+  const qByHome={};const seen={};
+  masterScoped().forEach(r=>{if(!r.hometown)return;const k=r.hometown+'|'+r.queen_id;if(seen[k])return;seen[k]=1;
+    (qByHome[r.hometown]=qByHome[r.hometown]||[]).push(r.queen_id);});
+  const rows=Object.entries(qByHome).map(([hometown,qs])=>({hometown,queens:qs.length})).sort((a,b)=>b.queens-a.queens||a.hometown.localeCompare(b.hometown));
+  statCards(m,[[rows.length,'hometowns'],[rows[0]?rows[0].hometown:'—','most represented'],[rows[0]?rows[0].queens:'—','queens from there']]);
+  const card=el('div',{class:'card fade'});m.append(card);
+  const top=rows.slice(0,15);
+  mkChart(card,{type:'bar',data:{labels:top.map(r=>r.hometown),datasets:[{label:'queens',data:top.map(r=>r.queens),backgroundColor:PAL[2]}]},
+    options:{indexAxis:'y',plugins:{legend:{display:false}}}},340);
+  dataTable(card,{cols:[{k:'hometown',label:'Hometown'},{k:'queens',label:'Queens',num:1}],rows,csv:'hometowns',page:60,
+    onRow:r=>{const det=el('div',{class:'card fade'});det.append(sectionHead(r.hometown,'var(--gold)'));
+      (qByHome[r.hometown]||[]).forEach(qid=>{
+        const runs=(contByQ[qid]||[]).slice().sort((a,b)=>a.season_id<b.season_id?-1:1);
+        const tw=runs.reduce((n,c)=>n+(+c.wins||0),0);
+        const best=Math.min(...runs.map(c=>+c.placement||99));
+        const row=el('div',{style:'font-size:12px;padding:3px 0;line-height:1.5'});
+        row.append(qLink(qid));
+        row.append(el('span',{style:'color:rgba(247,240,230,.7)'},'  — '+runs.map(c=>seasonName(c.season_id)+(c.placement?(' #'+c.placement):'')).join(', ')+`  ·  ${tw}W`+(best===1?'  · 👑':'')));
+        det.append(row);});
+      m.append(det);if(det.scrollIntoView)det.scrollIntoView({behavior:'smooth'});}});
  }});
 
 /* ---------- 14. CHALLENGE TYPE BREAKDOWN ---------- */
@@ -846,6 +880,9 @@ V({id:'challenges',title:'Challenge <em>Types</em>',kicker:'The Competition',ico
   m.innerHTML=head(this);
   const ent=Object.entries(X.challenge_types).sort((a,b)=>b[1]-a[1]);
   const max=Math.max(...ent.map(e=>e[1]),1);
+  const chartCard=el('div',{class:'card fade',style:'margin-bottom:14px'});
+  chartCard.append(sectionHead('The challenge recipe','var(--gold)'));
+  if(mkChart(chartCard,{type:'doughnut',data:{labels:ent.map(e=>e[0]),datasets:[{data:ent.map(e=>e[1]),backgroundColor:ent.map((_,i)=>PAL[i%PAL.length])}]}},300))m.append(chartCard);
   const host=el('div',{class:'card fade'});host.innerHTML='<div class="vkicker">Maxi-challenge types · click to list episodes</div>';
   ent.forEach(([k,v])=>{
     const wrap=el('div',{style:'border-bottom:1px solid rgba(255,255,255,.05)'});
@@ -872,6 +909,8 @@ V({id:'snatch',title:'The <em>Snatch Game</em> Index',kicker:'The Competition',i
  desc:'Every Snatch Game across the seasons — the franchise\u2019s signature celebrity-impersonation challenge.',
  render(m){
   m.innerHTML=head(this);
+  const snrows=D.episode_roles.filter(r=>r.role_type==='SNATCH_CHARACTER');
+  statCards(m,[[X.snatch_index.length,'snatch episodes'],[snrows.length,'characters recorded']]);
   const host=el('div',{class:'grid fade',style:'grid-template-columns:repeat(auto-fit,minmax(200px,1fr))'});
   const winBy={};D.progression.forEach(p=>{if(p.status==='WIN'){(winBy[p.episode_id]=winBy[p.episode_id]||[]).push(p.queen_id);}});
   X.snatch_index.forEach(s=>{
@@ -896,48 +935,31 @@ V({id:'snatch',title:'The <em>Snatch Game</em> Index',kicker:'The Competition',i
   });
   if(!X.snatch_index.length)host.innerHTML='<div class="empty">No Snatch Game episodes flagged.</div>';
   m.append(host);
+  const cont={};D.contestants.forEach(c=>cont[c.contestant_id]=c);
+  const tcard=el('div',{class:'card fade',style:'margin-top:14px'});m.append(tcard);
+  tcard.append(sectionHead('Who played whom','var(--gold)'));
+  dataTable(tcard,{cols:[{k:'queen',label:'Queen'},{k:'celebrity',label:'Played'},{k:'episode',label:'Episode'}],
+    rows:snrows.map(r=>{const c=cont[r.contestant_id]||{};
+      return {queen:c.queen_id?cname(c):'?',queen_id:c.queen_id,celebrity:r.role_detail!=='-'?r.role_detail:'',episode:epLabel(r.episode_id)};}),
+    csv:'snatch-characters',page:60,onRow:r=>r.queen_id&&go('queen:'+r.queen_id)});
  }});
 
 /* ---------- 16. EPISODE BROWSER ---------- */
 V({id:'episodes',title:'Episode <em>Browser</em>',kicker:'The Competition',icon:'grid',group:'The Competition',
  desc:'Search every episode by title or challenge. Each card shows the lip-sync track and that night\u2019s guest judges.',
  render(m){
-  m.innerHTML=head(this);
-  const ctrl=el('div',{class:'controls'});
-  const search=el('input',{type:'text',placeholder:'Search title or challenge…',style:'flex:1;min-width:200px'});
-  const sel=el('select');sel.append(el('option',{value:''},'All seasons'));SEASON_ORDER.forEach(s=>sel.append(el('option',{value:s},seasonName(s))));
-  ctrl.append(search,sel);m.append(ctrl);
-  const list=el('div',{class:'grid fade',style:'grid-template-columns:repeat(auto-fill,minmax(240px,1fr))'});m.append(list);
-  const draw=()=>{const q=search.value.toLowerCase(),sf=sel.value;list.innerHTML='';
-    D.episodes.filter(e=>(!sf||e.season_id===sf)&&((e.title||'')+(e.main_challenge||'')).toLowerCase().includes(q)).forEach(e=>{
-      const gj=D.appearances.filter(a=>a.episode_id===e.episode_id&&a.appearance_type==='GUEST_JUDGE').map(a=>a.person_name);
-      const lss=D.lip_syncs.filter(l=>l.episode_id===e.episode_id);
-      const song=songText(e.lip_sync_song_id)||(lss.length===1?songText(lss[0].song_id):null)||(lss.length>1?`Lip Sync for the Crown — ${lss.length} songs`:null);
-      const det=el('div',{style:'display:none;margin-top:8px;border-top:1px solid rgba(255,255,255,.08);padding-top:8px'});
-      const field=(label,val)=>{if(val==null||val===''||val==='-')return;det.append(el('div',{style:'margin:3px 0;font-size:12.5px;line-height:1.5'},
-        el('span',{style:'color:var(--gold);font-size:10px;letter-spacing:1px;text-transform:uppercase;margin-right:6px'},label),(val&&val.nodeType)?val:document.createTextNode(val)));};
-      field('Main challenge',(e.main_challenge&&e.main_challenge!=='-')?e.main_challenge+(e.main_challenge_type&&e.main_challenge_type!=='-'?` (${e.main_challenge_type})`:''):null);
-      field('Mini',e.mini_challenge);
-      field('Runway',e.runway_theme);
-      if(lss.length) lss.forEach((l,i)=>field(lss.length>1?(i===0?'Lip syncs':''):'Lip sync', lipSyncLine(l)));
-      else if(songText(e.lip_sync_song_id)) field('Lip sync', songText(e.lip_sync_song_id));
-      if(e.eliminated_id&&e.eliminated_id!=='-'&&qname[e.eliminated_id]) field('Eliminated', qLink(e.eliminated_id));
-      if(gj.length) field('Guest judges', gj.join(', '));
-      const hadFields=det.children.length>0;
-      if(!hadFields)det.append(el('div',{style:'font-size:12.5px;color:rgba(247,240,230,.62)'},'No further detail recorded yet.'));
-      det.append(el('div',{style:'margin-top:6px'},el('span',{style:'font-size:11.5px;color:var(--gold);text-decoration:underline;cursor:pointer',
-        onclick:ev=>{ev.stopPropagation();go('season:'+e.season_id);}},'open season →')));
-      const card=el('div',{class:'card',style:'padding:14px;cursor:pointer'},
-        el('div',{style:'font-size:11.5px;color:var(--gold)'},seasonName(e.season_id)+' · E'+e.episode_number+(e.air_date&&e.air_date!=='-'?' · '+e.air_date:'')),
-        el('div',{style:'font-family:var(--disp);font-weight:700;font-size:15px;margin:3px 0'},e.title&&e.title!=='-'?e.title:'(untitled)'),
-        song?el('div',{style:'font-size:11.5px;color:var(--rose);margin-top:4px'},'♪ '+song):'',
-        gj.length?el('div',{style:'font-size:11.5px;color:rgba(247,240,230,.76);margin-top:4px'},'GJ: '+gj.join(', ')):'',
-        det);
-      card.addEventListener('click',()=>{const o=det.style.display==='none';det.style.display=o?'block':'none';});
-      list.append(card);
-    });
-    if(!list.children.length)list.innerHTML='<div class="empty">No episodes match.</div>';};
-  search.addEventListener('input',draw);sel.addEventListener('change',draw);draw();
+  m.innerHTML=head(this);fTabs(m,'episodes');
+  const eps=D.episodes.filter(e=>seasonAllowed(e.season_id));
+  statCards(m,[[eps.length,'episodes'],[new Set(eps.map(e=>e.season_id)).size,'seasons'],
+    [eps.filter(e=>e.main_challenge_type==='Snatch Game').length,'snatch games']]);
+  const card=el('div',{class:'card fade'});m.append(card);
+  const rows=eps.map(e=>({episode_id:e.episode_id,_sid:e.season_id,season:seasonName(e.season_id),number:+e.episode_number,
+    title:(e.title&&e.title!=='-')?e.title:'',air_date:(e.air_date&&e.air_date!=='-')?e.air_date:'',
+    type:(e.main_challenge_type&&e.main_challenge_type!=='-')?e.main_challenge_type:'',
+    runway:(e.runway_theme&&e.runway_theme!=='-')?e.runway_theme:''}));
+  dataTable(card,{cols:[{k:'episode_id',label:'ID'},{k:'season',label:'Season',filter:1},{k:'number',label:'Ep',num:1},
+    {k:'title',label:'Title'},{k:'air_date',label:'Air date'},{k:'type',label:'Challenge type',filter:1},{k:'runway',label:'Runway theme'}],
+    rows,csv:'episodes',page:60,onRow:r=>go('season:'+r._sid)});
  }});
 
 /* ---------- 17. WINNERS' CIRCLE ---------- */
@@ -951,6 +973,7 @@ V({id:'winners',title:'Winners\u2019 <em>Circle</em>',kicker:'The Queens',icon:'
     const cx=CANCELLED[s.winner_id];
     wrap.append(el('div',{class:'card',style:'cursor:pointer;text-align:center'+(cx?';opacity:.9':''),onclick:()=>go('queen:'+s.winner_id)},
       el('div',{style:'color:var(--gold);font-size:22px',html:icon('crown')}),
+      (c&&c.image&&c.image!=='-')?el('img',{src:c.image,alt:qname[s.winner_id]||'',style:'width:72px;height:72px;border-radius:14px;object-fit:cover;margin-top:8px;border:1px solid rgba(244,181,63,.4)'}):'',
       el('div',{style:'font-family:var(--disp);font-weight:800;font-size:19px;margin-top:6px'+(cx?';text-decoration:line-through;text-decoration-color:var(--magenta);text-decoration-thickness:2px':'')},qname[s.winner_id]||'—'),
       el('div',{style:'font-size:11.5px;color:var(--gold)'},seasonName(s.season_id)),
       cx?el('div',{style:'margin-top:7px'},el('span',{class:'pill',style:'background:rgba(230,0,126,.28);border-color:var(--magenta);color:#fff'},'✗ Cancelled')):'',
@@ -966,8 +989,10 @@ V({id:'missc',title:'Miss <em>Congeniality</em>',kicker:'The Queens',icon:'heart
   m.innerHTML=head(this);
   const wrap=el('div',{class:'grid fade',style:'grid-template-columns:repeat(auto-fit,minmax(200px,1fr))'});
   D.seasons.forEach(s=>{if(!s.miss_congeniality_id||s.miss_congeniality_id==='-')return;
+    const c=D.contestants.find(x=>x.queen_id===s.miss_congeniality_id&&x.season_id===s.season_id);
     wrap.append(el('div',{class:'card',style:'cursor:pointer;text-align:center',onclick:()=>go('queen:'+s.miss_congeniality_id)},
       el('div',{style:'color:var(--mint)',html:icon('heart')}),
+      (c&&c.image&&c.image!=='-')?el('img',{src:c.image,alt:qname[s.miss_congeniality_id]||'',style:'width:72px;height:72px;border-radius:14px;object-fit:cover;margin-top:8px;border:1px solid rgba(116,224,200,.4)'}):'',
       el('div',{style:'font-family:var(--disp);font-weight:800;font-size:18px;margin-top:6px'},qname[s.miss_congeniality_id]||'—'),
       el('div',{style:'font-size:11.5px;color:var(--gold)'},seasonName(s.season_id))));
   });
@@ -987,10 +1012,11 @@ V({id:'elimorder',title:'Elimination <em>Order</em>',kicker:'The Competition',ic
     const evs=D.elimination_events.filter(e=>e.season_id===sid&&e.event_type==='eliminated')
       .sort((a,b)=>epNum(a.episode_id)-epNum(b.episode_id));
     if(!evs.length){host.innerHTML+='<div class="empty">No elimination events recorded.</div>';return;}
-    evs.forEach(e=>host.append(el('div',{style:'display:flex;gap:12px;align-items:center;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.05);cursor:pointer',onclick:()=>go('queen:'+e.queen_id)},
-      el('div',{style:'width:46px;color:var(--gold);font-family:var(--disp);font-weight:800'},e.episode_id.slice(-3)),
-      el('div',{style:'flex:1;font-size:14px'},qname[e.queen_id]||e.queen_id),
-      e.decided_by_queen_id&&e.decided_by_queen_id!=='-'?el('span',{class:'pill'},'by '+(qname[e.decided_by_queen_id]||'?')):'')));
+    dataTable(host,{cols:[{k:'ep',label:'Episode',num:1},{k:'queen',label:'Queen'},{k:'farewell',label:'Mirror message'},{k:'by',label:'Decided by'}],
+      rows:evs.map(e=>({ep:epNum(e.episode_id),queen:qname[e.queen_id]||e.queen_id,queen_id:e.queen_id,
+        farewell:(e.farewell&&e.farewell!=='-')?e.farewell:'',
+        by:(e.decided_by_queen_id&&e.decided_by_queen_id!=='-')?(qname[e.decided_by_queen_id]||'?'):''})),
+      csv:'elim-order-'+sid,onRow:r=>go('queen:'+r.queen_id)});
   };
   sel.addEventListener('change',e=>draw(e.target.value));draw(SEASON_ORDER[0]);
  }});
@@ -999,23 +1025,22 @@ V({id:'elimorder',title:'Elimination <em>Order</em>',kicker:'The Competition',ic
 V({id:'guestdir',title:'Guest Judge <em>Directory</em>',kicker:'The Panel',icon:'mask',group:'The Panel',
  desc:'Searchable index of every guest judge and the episodes they sat for. Recurring judges include a short "known for" note.',
  render(m){
-  m.innerHTML=head(this);
+  m.innerHTML=head(this);fTabs(m,'guestdir');
   const bios=X.guest_bios||{};
-  const ctrl=el('div',{class:'controls'});const search=el('input',{type:'text',placeholder:'Search guest judges…',style:'flex:1;min-width:200px'});
-  ctrl.append(search);m.append(ctrl);
-  const list=el('div',{class:'fade'});m.append(list);
-  const draw=q=>{list.innerHTML='';
-    X.guest_freq.filter(g=>g.name.toLowerCase().includes((q||'').toLowerCase())).forEach(g=>{
-      const card=el('div',{class:'card',style:'margin-bottom:8px'},
-        el('div',{style:'display:flex;justify-content:space-between'},
-          el('div',{style:'font-family:var(--disp);font-weight:700;font-size:15px'},g.name),
-          el('span',{class:'pill gold'},g.appearances+'×')));
-      if(bios[g.name])card.append(el('div',{style:'font-size:12.5px;color:var(--mint);margin-top:4px;font-style:italic'},bios[g.name]));
-      card.append(el('div',{style:'font-size:11.5px;color:rgba(247,240,230,.76);margin-top:5px'},g.episodes.join(' · ')||'episode TBD'));
-      list.append(card);
-    });
-    if(!list.children.length)list.innerHTML='<div class="empty">No guest judges match.</div>';};
-  search.addEventListener('input',e=>draw(e.target.value));draw('');
+  const rows=X.guest_freq.map(g=>{
+    const scoped=(g.episodes||[]).filter(eid=>{const e=_EP[eid];return e&&seasonAllowed(e.season_id);});
+    return {name:g.name,appearances:FRANCHISE==='All'?g.appearances:scoped.length,
+      known_for:bios[g.name]||'',_eps:FRANCHISE==='All'?(g.episodes||[]):scoped};})
+    .filter(r=>r.appearances>0).sort((a,b)=>b.appearances-a.appearances||a.name.localeCompare(b.name));
+  statCards(m,[[rows.length,'guest judges'],[rows[0]?rows[0].name:'—','most frequent']]);
+  const card=el('div',{class:'card fade'});m.append(card);
+  dataTable(card,{cols:[{k:'name',label:'Name'},{k:'appearances',label:'Appearances',num:1},{k:'known_for',label:'Known for'}],
+    rows,csv:'guest-directory',page:60,
+    onRow:r=>{const det=el('div',{class:'card fade'});det.append(sectionHead(r.name,'var(--gold)'));
+      if(r.known_for)det.append(el('div',{style:'font-size:12.5px;color:var(--mint);font-style:italic;margin-bottom:6px'},r.known_for));
+      if(r._eps.length)r._eps.forEach(eid=>det.append(el('div',{style:'font-size:12.5px;padding:3px 0'},epChip(eid))));
+      else det.append(el('div',{style:'font-size:11.5px;color:rgba(247,240,230,.5)'},'Season-level credit (episode not specified)'));
+      m.append(det);if(det.scrollIntoView)det.scrollIntoView({behavior:'smooth'});}});
  }});
 
 /* ---------- 21. APPEARANCE-TYPE SPLIT ---------- */
@@ -1070,6 +1095,11 @@ V({id:'apptypes',title:'Appearance <em>Types</em>',kicker:'The Panel',icon:'char
     row.addEventListener('click',()=>{const open=det.style.display==='none';det.style.display=open?'block':'none';caret.textContent=open?'▾':'▸';});
     host.append(row,det);
   });
+  const totals={};types.forEach(t=>totals[t]=0);
+  D.appearances.forEach(a=>{if(totals[a.appearance_type]!=null)totals[a.appearance_type]++;});
+  const dc=el('div',{class:'card fade',style:'margin-bottom:14px'});
+  dc.append(sectionHead('All appearances by type','var(--gold)'));
+  if(mkChart(dc,{type:'doughnut',data:{labels:types.map(t=>TLABEL[t]),datasets:[{data:types.map(t=>totals[t]),backgroundColor:['#e6007e','#f4b53f','#7ad1b5']}]}},260))m.append(dc);
   m.append(el('div',{class:'legend'},...types.map(t=>el('span',{},el('span',{class:'sw',style:'background:'+col[t]}),TLABEL[t]))),host);
  }});
 
@@ -1077,26 +1107,21 @@ V({id:'apptypes',title:'Appearance <em>Types</em>',kicker:'The Panel',icon:'char
 V({id:'winscatter',title:'Wins vs <em>Placement</em>',kicker:'The Competition',icon:'chart',group:'The Competition',
  desc:'Does winning challenges predict winning the crown? Each dot a queen — challenge wins against final placement.',
  render(m){
-  m.innerHTML=head(this);
-  const host=el('div',{class:'card fade'});const NS='http://www.w3.org/2000/svg';
-  const W=820,H=460,pad=48;
-  const pts=X.tally.filter(t=>+t.placement>0);
-  const maxW=Math.max(...pts.map(p=>+p.wins||0),1),maxP=Math.max(...pts.map(p=>+p.placement||1),1);
-  const svg=document.createElementNS(NS,'svg');svg.setAttribute('viewBox',`0 0 ${W} ${H}`);svg.setAttribute('width','100%');
-  // axes
-  const ax=(x1,y1,x2,y2)=>{const l=document.createElementNS(NS,'line');l.setAttribute('x1',x1);l.setAttribute('y1',y1);l.setAttribute('x2',x2);l.setAttribute('y2',y2);l.setAttribute('stroke','rgba(244,181,63,.4)');svg.append(l);};
-  ax(pad,H-pad,W-10,H-pad);ax(pad,10,pad,H-pad);
-  const tx=(t,x,y,anc)=>{const e=document.createElementNS(NS,'text');e.setAttribute('x',x);e.setAttribute('y',y);e.setAttribute('fill','rgba(247,240,230,.82)');e.setAttribute('font-size','10');e.setAttribute('font-family','var(--mono)');if(anc)e.setAttribute('text-anchor',anc);e.textContent=t;svg.append(e);};
-  tx('challenge wins →',W/2,H-12,'middle');tx('← better placement',pad-12,H/2,'middle');
-  pts.forEach((p,i)=>{const jx=((i*37)%13)-6, jy=((i*53)%13)-6; // jitter so overlapping queens are all visible
-    const x=pad+(W-pad-20)*(+p.wins)/maxW+jx;const y=10+(H-pad-10)*((+p.placement-1)/maxP)+jy;
-    const c=document.createElementNS(NS,'circle');c.setAttribute('cx',x);c.setAttribute('cy',y);c.setAttribute('r',+p.placement===1?6:3.4);
-    c.setAttribute('fill',+p.placement===1?'var(--gold)':'rgba(255,92,171,.6)');c.setAttribute('class','node');
-    c.addEventListener('mousemove',e=>showTip(e,`${p.drag_name}<br>${seasonName(p.season)}<br>${p.wins} wins · #${p.placement}`));
-    c.addEventListener('mouseleave',hideTip);c.addEventListener('click',()=>go('queen:'+p.queen_id));svg.append(c);});
-  host.append(svg);m.append(host);
-  m.append(el('div',{class:'legend'},el('span',{},el('span',{class:'sw',style:'background:var(--gold)'}),'Season winner'),
-    el('span',{},el('span',{class:'sw',style:'background:rgba(255,92,171,.6)'}),'Other placement')));
+  m.innerHTML=head(this);fTabs(m,'winscatter');
+  const fr={};D.seasons.forEach(s=>fr[s.season_id]=s.franchise);
+  const pts=X.tally.filter(t=>+t.placement>0&&seasonAllowed(t.season));
+  statCards(m,[[pts.length,'queens plotted'],[pts.filter(p=>+p.placement===1).length,'winners'],
+    [Math.max(...pts.map(p=>+p.wins||0),0),'most wins in a run']]);
+  const card=el('div',{class:'card fade'});m.append(card);
+  const sets={};pts.forEach(p=>{const f=fr[p.season]||'?';
+    (sets[f]=sets[f]||[]).push({x:+p.wins||0,y:+p.placement,label:p.drag_name+' · '+seasonName(p.season)});});
+  mkChart(card,{type:'scatter',data:{datasets:Object.entries(sets).map(([f,d],i)=>({label:f,data:d,backgroundColor:PAL[i%PAL.length],pointRadius:4,pointHoverRadius:6}))},
+    options:{scales:{x:{title:{display:true,text:'challenge wins',color:CTXT},ticks:{color:CTXT,font:{size:10}},grid:{color:CGRID}},
+      y:{reverse:true,title:{display:true,text:'final placement (1 = crown)',color:CTXT},ticks:{color:CTXT,font:{size:10}},grid:{color:CGRID}}},
+      plugins:{tooltip:{callbacks:{label:c=>c.raw.label+' — '+c.raw.x+'W · #'+c.raw.y}}}}},380);
+  dataTable(card,{cols:[{k:'queen',label:'Queen'},{k:'season',label:'Season',filter:1},{k:'wins',label:'Wins',num:1},{k:'placement',label:'Placement',num:1}],
+    rows:pts.map(p=>({queen:p.drag_name,queen_id:p.queen_id,season:seasonName(p.season),wins:+p.wins||0,placement:+p.placement})),
+    csv:'wins-vs-placement',onRow:r=>go('queen:'+r.queen_id)});
  }});
 
 /* ---------- 23. ENTRANCE ORDER vs OUTCOME ---------- */
@@ -1104,6 +1129,15 @@ V({id:'entrance',title:'Entrance Order <em>&amp; Fate</em>',kicker:'The Competit
  desc:'Is there luck in walking in first? Entrance order against final placement. Click a season to expand; entrance order is filled where sourced.',
  render(m){
   m.innerHTML=head(this);
+  const agg={};D.contestants.forEach(c=>{const s=D.seasons.find(x=>x.season_id===c.season_id);
+    if(!s||s.franchise!=='US main'||!+c.entrance_order||!+c.placement)return;
+    (agg[+c.entrance_order]=agg[+c.entrance_order]||[]).push(+c.placement);});
+  const eks=Object.keys(agg).map(Number).sort((a,b)=>a-b);
+  const cc=el('div',{class:'card fade',style:'margin-bottom:14px'});
+  cc.append(sectionHead('Average final placement by entrance order \u2014 US main series (lower is better)','var(--gold)'));
+  if(eks.length&&mkChart(cc,{type:'bar',data:{labels:eks.map(k=>'#'+k),datasets:[{label:'avg final placement',
+    data:eks.map(k=>+(agg[k].reduce((a,b)=>a+b,0)/agg[k].length).toFixed(2)),backgroundColor:PAL[0]}]},
+    options:{plugins:{legend:{display:false}}}},240))m.append(cc);
   const host=el('div',{class:'card fade'});host.innerHTML='<div class="vkicker">By season \u00b7 click to expand</div>';
   SEASON_ORDER.forEach(sid=>{
     const cs=contestantsBySeason(sid).slice().sort((a,b)=>{
@@ -1131,16 +1165,14 @@ V({id:'seasonsize',title:'Cast Size <em>Over Time</em>',kicker:'The Competition'
  desc:'How the casts grew — number of competitors and episodes per season across the run.',
  render(m){
   m.innerHTML=head(this);
-  const host=el('div',{class:'card fade'});
-  const max=Math.max(...D.seasons.map(s=>+s.episode_count||0),...SEASON_ORDER.map(s=>contestantsBySeason(s).length),1);
-  D.seasons.forEach(s=>{const nc=contestantsBySeason(s.season_id).length;
-    host.append(el('div',{style:'display:flex;align-items:center;gap:10px;padding:5px 0'},
-      el('div',{style:'width:74px;font-size:12.5px;color:var(--gold)'},seasonName(s.season_id)),
-      el('div',{style:'flex:1'},
-        el('div',{style:'display:flex;align-items:center;gap:6px'},el('div',{class:'bar',style:`width:${180*nc/max}px;background:var(--magenta)`}),el('span',{style:'font-size:11.5px'},nc+' queens')),
-        el('div',{style:'display:flex;align-items:center;gap:6px;margin-top:3px'},el('div',{class:'bar',style:`width:${180*(+s.episode_count)/max}px;background:var(--gold)`}),el('span',{style:'font-size:11.5px'},s.episode_count+' eps')))));
-  });
-  m.append(host);
+  const rows=SEASON_ORDER.map(sid=>{const s=D.seasons.find(x=>x.season_id===sid)||{};
+    return {season:seasonName(sid),_sid:sid,queens:contestantsBySeason(sid).length,episodes:+s.episode_count||0};});
+  const card=el('div',{class:'card fade'});m.append(card);
+  mkChart(card,{type:'line',data:{labels:rows.map(r=>r._sid),
+    datasets:[{label:'cast size',data:rows.map(r=>r.queens),borderColor:PAL[0],backgroundColor:PAL[0],tension:.3,pointRadius:3},
+      {label:'episodes',data:rows.map(r=>r.episodes),borderColor:PAL[1],backgroundColor:PAL[1],tension:.3,pointRadius:3}]}},300);
+  dataTable(card,{cols:[{k:'season',label:'Season'},{k:'queens',label:'Queens',num:1},{k:'episodes',label:'Episodes',num:1}],
+    rows,csv:'season-size',onRow:r=>go('season:'+r._sid)});
  }});
 
 /* ---------- 25. THE PERFECT-RUN FINDER ---------- */
@@ -1149,6 +1181,9 @@ V({id:'perfectrun',title:'The <em>Perfect Run</em> Finder',kicker:'The Competiti
  render(m){
   m.innerHTML=head(this);
   const clean=X.tally.filter(t=>(+t.bottoms||0)===0&&(+t.wins||0)>=1).sort((a,b)=>(+b.wins)-(+a.wins));
+  const latest=clean.slice().sort((a,b)=>SEASON_ORDER.indexOf(b.season)-SEASON_ORDER.indexOf(a.season))[0];
+  statCards(m,[[clean.length,'perfect runs found'],[latest?latest.drag_name:'—','latest'],
+    [latest?seasonName(latest.season):'—','her season']]);
   const wrap=el('div',{class:'grid fade',style:'grid-template-columns:repeat(auto-fit,minmax(200px,1fr))'});
   clean.forEach(t=>wrap.append(el('div',{class:'card',style:'cursor:pointer',onclick:()=>go('queen:'+t.queen_id)},
     el('div',{style:'font-family:var(--disp);font-weight:700;font-size:16px'},t.drag_name),
@@ -1166,6 +1201,11 @@ V({id:'artists',title:'Lip-Sync <em>Artists</em>',kicker:'The Competition',icon:
   const byArtist={};X.song_reuse.forEach(s=>{byArtist[s.artist]=(byArtist[s.artist]||0)+s.times_used;});
   const ent=Object.entries(byArtist).filter(e=>e[0]&&e[0]!=='-').sort((a,b)=>b[1]-a[1]);
   const max=Math.max(...ent.map(e=>e[1]),1);
+  const chartCard=el('div',{class:'card fade',style:'margin-bottom:14px'});
+  chartCard.append(sectionHead('Top 12 lip-sync artists','var(--gold)'));
+  const topArt=ent.slice(0,12);
+  if(mkChart(chartCard,{type:'bar',data:{labels:topArt.map(e=>e[0]),datasets:[{label:'lip-sync tracks',data:topArt.map(e=>e[1]),backgroundColor:PAL[3]}]},
+    options:{indexAxis:'y',plugins:{legend:{display:false}}}},300))m.append(chartCard);
   const host=el('div',{class:'card fade'});host.innerHTML='<div class="vkicker">By lip-sync tracks · click an artist for songs + episodes</div>';
   ent.slice(0,60).forEach(([a,n])=>{
     const wrap=el('div',{style:'border-bottom:1px solid rgba(255,255,255,.05)'});
@@ -1262,6 +1302,7 @@ V({id:'platforms',title:'Platform <em>Eras</em>',kicker:'The Competition',icon:'
  render(m){
   m.innerHTML=head(this);
   const byP={};D.seasons.forEach(s=>{(byP[s.platform]=byP[s.platform]||[]).push(s.season_id);});
+  statCards(m,[[Object.keys(byP).length,'platforms'],[D.seasons.length,'seasons']]);
   const wrap=el('div',{class:'grid fade',style:'grid-template-columns:repeat(auto-fit,minmax(220px,1fr))'});
   Object.entries(byP).forEach(([p,ss])=>wrap.append(el('div',{class:'card'},
     el('div',{style:'font-family:var(--disp);font-weight:800;font-size:20px;color:var(--gold)'},p),
@@ -1278,6 +1319,11 @@ V({id:'tenure',title:'Judge <em>Tenure</em>',kicker:'The Panel',icon:'mask',grou
   const cnt={};D.panel.forEach(p=>{cnt[p.person_name]=(cnt[p.person_name]||{name:p.person_name,n:0,roles:new Set()});
     cnt[p.person_name].n++;cnt[p.person_name].roles.add(p.role);});
   const arr=Object.values(cnt).sort((a,b)=>b.n-a.n);const max=Math.max(...arr.map(a=>a.n),1);
+  const chartCard=el('div',{class:'card fade',style:'margin-bottom:14px'});
+  chartCard.append(sectionHead('Top 12 longest tenures','var(--gold)'));
+  const topT=arr.slice(0,12);
+  if(mkChart(chartCard,{type:'bar',data:{labels:topT.map(a=>a.name),datasets:[{label:'seasons at the table',data:topT.map(a=>a.n),backgroundColor:PAL[0]}]},
+    options:{indexAxis:'y',plugins:{legend:{display:false}}}},300))m.append(chartCard);
   const host=el('div',{class:'card fade'});
   arr.forEach(a=>host.append(el('div',{style:'display:flex;align-items:center;gap:10px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.05)'},
     el('div',{style:'flex:1;font-size:13.5px'},a.name),
@@ -1296,6 +1342,7 @@ V({id:'connect',title:'The <em>Connection</em> Finder',kicker:'The Connections',
   const ctrl=el('div',{class:'controls'});
   const a=el('select');qopts.forEach(o=>a.append(el('option',{value:o.id},o.n)));
   ctrl.append(el('span',{style:'font-size:12.5px;color:var(--gold)'},'Queen:'),a);m.append(ctrl);
+  statCards(m,[[qopts.length,'queens'],[D.seasons.length,'seasons'],[X.alumni_links.length,'guest links in scope']]);
   const host=el('div',{class:'fade'});m.append(host);
   const chips=(ids)=>{const w=el('div',{class:'chip-row',style:'gap:6px;margin-top:6px'});[...ids].forEach(id=>{const sp=qLink(id);sp.className='pill';sp.style.cssText='cursor:pointer;color:var(--rose)';w.append(sp);});return w;};
   const draw=()=>{const qa=a.value;host.innerHTML='';
