@@ -30,12 +30,14 @@ OUT = ROOT / "site" / "site_data.js"
 BLANKS = ("", "-")  # values treated as "no data"
 
 TABLES = ["queens", "seasons", "contestants", "episodes", "progression",
-          "songs", "lip_syncs", "elimination_events", "panel", "appearances"]
+          "songs", "lip_syncs", "elimination_events", "panel", "appearances",
+          "episode_roles"]
 
 # Per-table fields cast to int (None when blank). Everything else stays a string,
 # matching the historical site_data.json typing exactly.
 INT_FIELDS = {
-    "contestants": {"placement", "entrance_order", "wins", "highs", "lows", "bottoms"},
+    "contestants": {"placement", "entrance_order", "wins", "highs", "lows", "bottoms",
+                    "earnings"},
     "seasons": {"cash_prize"},
 }
 LS_WIN_TYPES = ["NORMAL", "SURVIVAL", "SHANTAY", "TOPS", "CROWN", "SASHAY"]

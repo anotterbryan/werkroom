@@ -32,6 +32,7 @@ PK = {
     "episodes": "episode_id", "progression": "progression_id", "songs": "song_id",
     "lip_syncs": "lip_sync_id", "elimination_events": "event_id",
     "panel": "panel_id", "appearances": "appearance_id",
+    "episode_roles": "role_id",
 }
 
 
@@ -102,6 +103,8 @@ def main():
     check("FK panel.season_id -> seasons", fk(t["panel"], "season_id", sids, False))
     check("FK appearances.season_id -> seasons", fk(t["appearances"], "season_id", sids, False))
     check("FK appearances.episode_id -> episodes", fk(t["appearances"], "episode_id", eids))
+    check("FK episode_roles.contestant_id -> contestants", fk(t["episode_roles"], "contestant_id", cids, False))
+    check("FK episode_roles.episode_id -> episodes", fk(t["episode_roles"], "episode_id", eids, False))
 
     # 3. ground truth: single NORMAL no-save loser == eliminated_id ----------
     epmap = {e["episode_id"]: e for e in t["episodes"]}

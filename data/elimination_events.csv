@@ -1,187 +1,187 @@
-event_id,queen_id,season_id,episode_id,event_type,decided_by_queen_id,notes
-E0001,Q0009,US01,US01E01,eliminated,-,-
-E0002,Q0008,US01,US01E02,eliminated,-,-
-E0003,Q0007,US01,US01E03,eliminated,-,-
-E0004,Q0006,US01,US01E04,eliminated,-,-
-E0005,Q0005,US01,US01E05,eliminated,-,-
-E0006,Q0004,US01,US01E06,eliminated,-,-
-E0007,Q0003,US01,US01E08,eliminated,-,-
-E0008,Q0021,US02,US02E01,eliminated,-,-
-E0009,Q0020,US02,US02E02,eliminated,-,-
-E0010,Q0019,US02,US02E03,eliminated,-,-
-E0011,Q0018,US02,US02E04,eliminated,-,-
-E0012,Q0017,US02,US02E05,eliminated,-,-
-E0013,Q0016,US02,US02E06,eliminated,-,-
-E0014,Q0015,US02,US02E07,eliminated,-,-
-E0015,Q0014,US02,US02E08,eliminated,-,-
-E0016,Q0013,US02,US02E09,eliminated,-,-
-E0017,Q0012,US02,US02E11,eliminated,-,-
-E0018,Q0033,US03,US03E02,eliminated,-,-
-E0019,Q0032,US03,US03E03,eliminated,-,-
-E0020,Q0031,US03,US03E04,eliminated,-,-
-E0021,Q0030,US03,US03E05,eliminated,-,-
-E0022,Q0029,US03,US03E06,eliminated,-,-
-E0023,Q0028,US03,US03E07,eliminated,-,-
-E0024,Q0027,US03,US03E08,eliminated,-,-
-E0025,Q0026,US03,US03E10,eliminated,-,-
-E0026,Q0021,US03,US03E11,eliminated,-,-
-E0027,Q0026,US03,US03E12,eliminated,-,-
-E0028,Q0025,US03,US03E13,eliminated,-,-
-E0029,Q0024,US03,US03E15,eliminated,-,-
-E0030,Q0046,US04,US04E01,eliminated,-,-
-E0031,Q0045,US04,US04E02,eliminated,-,-
-E0032,Q0044,US04,US04E03,eliminated,-,-
-E0033,Q0043,US04,US04E04,eliminated,-,-
-E0034,Q0038,US04,US04E05,eliminated,-,-
-E0035,Q0042,US04,US04E06,eliminated,-,-
-E0036,Q0041,US04,US04E07,eliminated,-,-
-E0037,Q0040,US04,US04E08,disqualified,-,Disqualified; bottom two (Phi Phi O'Hara & Sharon Needles) both stayed (double shantay)
-E0038,Q0038,US04,US04E10,eliminated,-,-
-E0039,Q0037,US04,US04E11,eliminated,-,-
-E0040,Q0060,US05,US05E01,eliminated,-,-
-E0041,Q0058,US05,US05E03,eliminated,-,-
-E0042,Q0057,US05,US05E04,eliminated,-,-
-E0043,Q0055,US05,US05E05,eliminated,-,-
-E0044,Q0054,US05,US05E06,eliminated,-,-
-E0045,Q0053,US05,US05E08,eliminated,-,-
-E0046,Q0052,US05,US05E09,eliminated,-,-
-E0047,Q0051,US05,US05E10,eliminated,-,-
-E0048,Q0050,US05,US05E11,eliminated,-,-
-E0049,Q0074,US06,US06E01,eliminated,-,-
-E0050,Q0073,US06,US06E02,eliminated,-,-
-E0051,Q0072,US06,US06E03,eliminated,-,-
-E0052,Q0071,US06,US06E04,eliminated,-,-
-E0053,Q0070,US06,US06E05,eliminated,-,-
-E0054,Q0069,US06,US06E06,eliminated,-,-
-E0055,Q0068,US06,US06E08,eliminated,-,-
-E0056,Q0067,US06,US06E09,eliminated,-,-
-E0057,Q0066,US06,US06E10,eliminated,-,-
-E0058,Q0065,US06,US06E11,eliminated,-,-
-E0059,Q0064,US06,US06E12,eliminated,-,-
-E0060,Q0088,US07,US07E01,eliminated,-,-
-E0061,Q0087,US07,US07E02,eliminated,-,-
-E0062,Q0086,US07,US07E03,eliminated,-,-
-E0063,Q0080,US07,US07E04,eliminated,-,-
-E0064,Q0085,US07,US07E05,eliminated,-,-
-E0065,Q0084,US07,US07E06,eliminated,-,-
-E0066,Q0083,US07,US07E07,eliminated,-,-
-E0067,Q0082,US07,US07E08,eliminated,-,-
-E0068,Q0081,US07,US07E09,eliminated,-,-
-E0069,Q0080,US07,US07E10,eliminated,-,-
-E0070,Q0079,US07,US07E11,eliminated,-,-
-E0071,Q0078,US07,US07E12,eliminated,-,-
-E0072,Q0097,US08,US08E01,eliminated,-,-
-E0073,Q0099,US08,US08E02,eliminated,-,-
-E0074,Q0098,US08,US08E03,eliminated,-,-
-E0075,Q0097,US08,US08E04,eliminated,-,-
-E0076,Q0096,US08,US08E05,eliminated,-,-
-E0077,Q0095,US08,US08E06,eliminated,-,-
-E0078,Q0094,US08,US08E07,eliminated,-,-
-E0079,Q0093,US08,US08E08,eliminated,-,-
-E0080,Q0092,US08,US08E09,eliminated,-,-
-E0081,Q0114,US09,US09E02,eliminated,-,-
-E0082,Q0113,US09,US09E03,eliminated,-,-
-E0083,Q0112,US09,US09E04,eliminated,-,-
-E0084,Q0111,US09,US09E05,eliminated,-,-
-E0085,Q0098,US09,US09E06,eliminated,-,-
-E0086,Q0109,US09,US09E07,eliminated,-,-
-E0087,Q0108,US09,US09E08,eliminated,-,-
-E0088,Q0107,US09,US09E09,eliminated,-,-
-E0089,Q0106,US09,US09E10,eliminated,-,-
-E0090,Q0105,US09,US09E11,eliminated,-,-
-E0091,Q0127,US10,US10E01,eliminated,-,-
-E0092,Q0126,US10,US10E02,eliminated,-,-
-E0093,Q0125,US10,US10E03,eliminated,-,-
-E0094,Q0124,US10,US10E04,eliminated,-,-
-E0095,Q0123,US10,US10E05,eliminated,-,-
-E0096,Q0122,US10,US10E06,eliminated,-,-
-E0097,Q0121,US10,US10E07,eliminated,-,-
-E0098,Q0120,US10,US10E08,eliminated,-,-
-E0099,Q0119,US10,US10E10,eliminated,-,-
-E0100,Q0141,US11,US11E01,eliminated,-,-
-E0101,Q0140,US11,US11E02,eliminated,-,-
-E0102,Q0139,US11,US11E03,eliminated,-,-
-E0103,Q0138,US11,US11E04,eliminated,-,-
-E0104,Q0137,US11,US11E05,eliminated,-,-
-E0105,Q0136,US11,US11E06,eliminated,-,-
-E0106,Q0134,US11,US11E09,eliminated,-,-
-E0107,Q0133,US11,US11E10,eliminated,-,-
-E0108,Q0132,US11,US11E11,eliminated,-,-
-E0109,Q0127,US11,US11E12,eliminated,-,-
-E0110,Q0154,US12,US12E03,eliminated,-,-
-E0111,Q0153,US12,US12E04,eliminated,-,-
-E0112,Q0152,US12,US12E05,eliminated,-,-
-E0113,Q0151,US12,US12E06,eliminated,-,-
-E0114,Q0150,US12,US12E07,eliminated,-,-
-E0115,Q0149,US12,US12E08,eliminated,-,-
-E0116,Q0147,US12,US12E11,eliminated,-,-
-E0117,Q0146,US12,US12E12,eliminated,-,-
-E0118,Q0167,US13,US13E04,eliminated,-,-
-E0119,Q0166,US13,US13E05,eliminated,-,-
-E0120,Q0165,US13,US13E06,eliminated,-,-
-E0121,Q0164,US13,US13E07,eliminated,-,-
-E0122,Q0163,US13,US13E09,eliminated,-,-
-E0123,Q0162,US13,US13E10,eliminated,-,-
-E0124,Q0161,US13,US13E11,eliminated,-,-
-E0125,Q0160,US13,US13E12,eliminated,-,-
-E0126,Q0159,US13,US13E13,eliminated,-,-
-E0127,Q0178,US14,US14E01,eliminated,-,-
-E0128,Q0172,US14,US14E02,eliminated,-,-
-E0129,Q0181,US14,US14E03,eliminated,-,-
-E0130,Q0180,US14,US14E04,eliminated,-,-
-E0131,Q0178,US14,US14E05,eliminated,-,-
-E0132,Q0177,US14,US14E06,eliminated,-,-
-E0133,Q0176,US14,US14E08,eliminated,-,-
-E0134,Q0173,US14,US14E13,eliminated,-,-
-E0135,Q0197,US15,US15E02,LSFYL elimination,Q0195,"Eliminated in One Night Only, Part 2"
-E0136,Q0196,US15,US15E03,LSFYL elimination,Q0195,Eliminated in All Queens Go to Heaven
-E0137,Q0191,US15,US15E04,LSFYL elimination,Q0190,Eliminated in Supersized Snatch Game
-E0138,Q0195,US15,US15E05,LSFYL elimination,Q0187,Eliminated in House of Fashion
-E0139,Q0194,US15,US15E06,LSFYL elimination,Q0192,Eliminated in Old Friends Gold
-E0140,Q0193,US15,US15E07,LSFYL elimination,Q0192,Eliminated in The Daytona Wind 2
-E0141,Q0192,US15,US15E08,LSFYL elimination,Q0183,Eliminated in Lip Sync LaLaPaRuZa Smackdown
-E0142,Q0190,US15,US15E09,LSFYL elimination,Q0187,Eliminated in The Crystal Ball
-E0143,Q0186,US15,US15E10,LSFYL elimination,Q0187,Eliminated in 50/50's Most Gagworthy Stars
-E0144,Q0188,US15,US15E11,LSFYL elimination,Q0183,"Eliminated in Two Queens, One Joke"
-E0145,Q0187,US15,US15E12,LSFYL elimination,Q0189,Eliminated in Wigloose: The Rusical!
-E0146,Q0189,US15,US15E13,LSFYL elimination,Q0184,Eliminated in Teacher Makeovers
-E0147,Q0211,US16,US16E03,LSFYL elimination,Q0208,Eliminated in The Mother of All Balls
-E0148,Q0210,US16,US16E04,LSFYL elimination,Q0208,Eliminated in RDR Live!
-E0149,Q0209,US16,US16E05,LSFYL elimination,Q0201,Eliminated in Girl Groups
-E0150,Q0208,US16,US16E06,LSFYL elimination,Q0204,Eliminated in Welcome to the DollHouse
-E0151,Q0207,US16,US16E07,LSFYL elimination,Q0204,Eliminated in The Sound of Rusic
-E0152,Q0206,US16,US16E08,LSFYL elimination,Q0202,Eliminated in Snatch Game
-E0153,Q0205,US16,US16E09,LSFYL elimination,Q0204,Eliminated in See You Next Wednesday
-E0154,Q0204,US16,US16E11,LSFYL elimination,Q0202,Eliminated in Corporate Queens
-E0155,Q0203,US16,US16E12,LSFYL elimination,Q0202,Eliminated in Bathroom Hunties
-E0156,Q0202,US16,US16E13,LSFYL elimination,Q0199,Eliminated in Drag Race Vegas Live! Makeovers
-E0157,Q0201,US16,US16E14,LSFYL elimination,Q0200,Eliminated in Booked and Blessed
-E0158,Q0222,US17,US17E03,LSFYL elimination,Q0223,Eliminated in Monopulence!
-E0159,Q0223,US17,US17E04,LSFYL elimination,Q0219,"Eliminated in Bitch, I'm A Drag Queen!"
-E0160,Q0224,US17,US17E06,LSFYL elimination,Q0221,Eliminated in Let's Get Sea Sickening Ball
-E0161,Q0220,US17,US17E07,LSFYL elimination,Q0217,Eliminated in Snatch Game
-E0162,Q0225,US17,US17E08,LSFYL elimination,Q0219,Eliminated in The Wicked Wiz Of Oz: The Rusical!
-E0163,Q0219,US17,US17E09,LSFYL elimination,Q0218,Eliminated in Heavens to Betsey!
-E0164,Q0221,US17,US17E10,LSFYL elimination,Q0213,Eliminated in The Villains Roast
-E0165,Q0218,US17,US17E11,LSFYL elimination,Q0217,Eliminated in Ross Mathews vs. The Ducks
-E0166,Q0217,US17,US17E12,LSFYL elimination,Q0217,"Eliminated in Charisma, Uniqueness, Nerve & Talent Monologues"
-E0167,Q0216,US17,US17E14,LSFYL elimination,Q0214,Eliminated in How's Your Headliner?
-E0168,Q0239,US18,US18E02,LSFYL elimination,,Eliminated in Premiere Part 2
-E0169,Q0238,US18,US18E03,LSFYL elimination,,Eliminated in Episode 3
-E0170,Q0237,US18,US18E04,LSFYL elimination,,Eliminated in Episode 4
-E0171,Q0236,US18,US18E06,LSFYL elimination,,Eliminated in Episode 6
-E0172,Q0235,US18,US18E07,LSFYL elimination,,Eliminated in Episode 7
-E0173,Q0234,US18,US18E08,LSFYL elimination,,Eliminated in Episode 8
-E0174,Q0233,US18,US18E09,LSFYL elimination,Q0229,Eliminated in Fannie: The Rusical
-E0175,Q0232,US18,US18E11,LSFYL elimination,Q0229,Eliminated in A Toast to Alyssa Edwards
-E0176,Q0231,US18,US18E12,LSFYL elimination,,Eliminated in Episode 12
-E0177,Q0230,US18,US18E13,LSFYL elimination,,Eliminated in Episode 13
-E0178,Q0229,US18,US18E14,LSFYL elimination,Q0227,Eliminated in Good Morning Bitches
-E0179,Q0039,US04,US04E09,eliminated,-,-
-E0180,Q0026,US03,US03E12,returned,-,Won the chance to return in 'Jocks in Frocks'; eliminated again the same episode
-E0181,Q0038,US04,US04E10,returned,-,Returned via twist in 'DILFs: Dads I'd Like to Frock'; eliminated again the same episode
-E0182,Q0059,US05,US05E02,eliminated,-,-
-E0183,Q0118,US10,US10E11,eliminated,-,-
-E0184,Q0135,US11,US11E07,eliminated,-,Eliminated; returned in the finale (E13)
-E0185,Q0148,US12,US12E09,eliminated,-,-
-E0186,Q0175,US14,US14E11,eliminated,-,LaLaPaRuZa Smackdown elimination
+event_id,queen_id,season_id,episode_id,event_type,decided_by_queen_id,notes,farewell
+E0001,Q0009,US01,US01E01,eliminated,-,-,-
+E0002,Q0008,US01,US01E02,eliminated,-,-,-
+E0003,Q0007,US01,US01E03,eliminated,-,-,-
+E0004,Q0006,US01,US01E04,eliminated,-,-,-
+E0005,Q0005,US01,US01E05,eliminated,-,-,-
+E0006,Q0004,US01,US01E06,eliminated,-,-,-
+E0007,Q0003,US01,US01E08,eliminated,-,-,-
+E0008,Q0021,US02,US02E01,eliminated,-,-,"Love you all! Turn it out... Shangela ""DJ"
+E0009,Q0020,US02,US02E02,eliminated,-,-,Be Safe Bitch N.P. Brooks
+E0010,Q0019,US02,US02E03,eliminated,-,-,Balls 2 the walls // Fishes or Bitches > You pick // Mystique
+E0011,Q0018,US02,US02E04,eliminated,-,-,"☮♥ XO Son!que ""Trust"
+E0012,Q0017,US02,US02E05,eliminated,-,-,All you have to do is DREAM! Love Morgan XOXO!
+E0013,Q0016,US02,US02E06,eliminated,-,-,"Live, Love & Believe!! XO. Sahara"
+E0014,Q0015,US02,US02E07,eliminated,-,-,♥ I love you girls! ¡Viva P.R.! xoxo JW ♥♥
+E0015,Q0014,US02,US02E08,eliminated,-,-,"Lick this Boxx, bitch // XOXO // Love you all! Pandora Boxx"
+E0016,Q0013,US02,US02E09,eliminated,-,-,Do you 2 the FULLEST! Love TATI ♥
+E0017,Q0012,US02,US02E11,eliminated,-,-,-
+E0018,Q0033,US03,US03E02,eliminated,-,-,"Don't Be Shady!! Be A Lady! Love Ya, Venus DLite"
+E0019,Q0032,US03,US03E03,eliminated,-,-,"BE You Bitches (Boots) Loves, Phoenix"
+E0020,Q0031,US03,US03E04,eliminated,-,-,mimiimfurst.com // life is too short to live someone elses.
+E0021,Q0030,US03,US03E05,eliminated,-,-,Never give up! Your all STARS!!! xoxo India
+E0022,Q0029,US03,US03E06,eliminated,-,-,Condragulations Raja. Mug4Dayz! Mariah
+E0023,Q0028,US03,US03E07,eliminated,-,-,Be a lady! You're All Amazing. Stacy Layne 'Bryant' Matthews // Jig...
+E0024,Q0027,US03,US03E08,eliminated,-,-,WORK HEATHERS xoxo Delta
+E0025,Q0026,US03,US03E10,eliminated,-,-,HEATHER better win!
+E0026,Q0021,US03,US03E11,eliminated,-,-,Always live your dream and believe in second chances. Halleloo! ♡ Shangela:)
+E0027,Q0026,US03,US03E12,eliminated,-,-,Good bye AGAIN!! Best of luck to everyone. Turn it out & don't be a sprepper! xoxo Carmen
+E0028,Q0025,US03,US03E13,eliminated,-,-,"Echa pa' lante, no mires pa' atras pa' coger impulso, and you know what f&%k you haha ha ha"
+E0029,Q0024,US03,US03E15,eliminated,-,-,-
+E0030,Q0046,US04,US04E01,eliminated,-,-,"Keep it cute, ladies! Shady sisters 4-ever! ♥ Alisa"
+E0031,Q0045,US04,US04E02,eliminated,-,-,Stay true 2 U + xoxo good luck! - Beyond!
+E0032,Q0044,US04,US04E03,eliminated,-,-,This is (only) the beginning! Much Love - The Princess / I ♥ U DIDA RITZ!
+E0033,Q0043,US04,US04E04,eliminated,-,-,"Girls: Stay humble... People go up... You'll be on the way down! Kisses MLQ / Chad, Sharon, Milan, Dita = True Friends / Kenya: Botate Mami!"
+E0034,Q0038,US04,US04E05,eliminated,-,-,"Remember, the real queen is not made in this 4 wall. I'll be waiting for you in my kindom \[sic\] / Phi Phi - I love you - sisters 4 ever"
+E0035,Q0042,US04,US04E06,eliminated,-,-,"Say love n show love / Colored girl, why yo base look like chalk? / Jiggly REPRESENT / Dwayne Milan / ♥ ♥ ♥ ♥"
+E0036,Q0041,US04,US04E07,eliminated,-,-,To my Bitchez / ♥ y'all 2 Death! / C U @ da Reunion! / Keep it REAL! / Luv the Dusty RPDR4 Girls! <3 / Shady / I can get \*\*\*\*\*\* now! / <3 Dida / Jiggly Caliente
+E0037,Q0040,US04,US04E08,disqualified,-,Disqualified; bottom two (Phi Phi O'Hara & Sharon Needles) both stayed (double shantay),-
+E0038,Q0038,US04,US04E10,eliminated,-,-,"Girl I say bye again! Thank 4 your love. When I left this competition, I felt loved. I love you, And the winner is..... I don't know. Kiss K.M."
+E0039,Q0037,US04,US04E11,eliminated,-,-,"My divas, Remember who you are, and what you stand for / I love you and miss you all. Stay fierce!! Latrice Royale"
+E0040,Q0060,US05,US05E01,eliminated,-,-,You are ALL STARS!! Smooches PT
+E0041,Q0058,US05,US05E03,eliminated,-,-,Love all of u guys / Remember 'never be a victor!' -♡- Monica Beverly Hillz
+E0042,Q0057,US05,US05E04,eliminated,-,-,"**(Honey Mahogany):** ""Keep on loving each other. We will meet again... I can't wait! All my L♡VE - Honey Mahogany"
+E0043,Q0055,US05,US05E05,eliminated,-,-,Latino shade! It was a pleasure to meet you all! Thank for your friendship. XOXO Kiss and hugs! Lineysha
+E0044,Q0054,US05,US05E06,eliminated,-,-,"Cheers to my 🐟 fish, fabulous and fierce sisters / I ♡ you all ♡ Jade J."
+E0045,Q0053,US05,US05E08,eliminated,-,-,I Love you Girls So Much!! You Always have a friend in me! xoxo IVY💋
+E0046,Q0052,US05,US05E09,eliminated,-,-,"THE SKY IS THE LIMIT WHEN YOUR ♡'S IN IT! Don't dream it, BE IT. Always & forever, Alyssa!"
+E0047,Q0051,US05,US05E10,eliminated,-,-,I LOVE YOU ALL! GIVE THEM HELL GIRLS / Love Coco M.
+E0048,Q0050,US05,US05E11,eliminated,-,-,Condragulations grillz! Go fucking KILL Them! Rolaskatox 4EVAAAHH! ♡ Detox
+E0049,Q0074,US06,US06E01,eliminated,-,-,-
+E0050,Q0073,US06,US06E02,eliminated,-,-,-
+E0051,Q0072,US06,US06E03,eliminated,-,-,-
+E0052,Q0071,US06,US06E04,eliminated,-,-,-
+E0053,Q0070,US06,US06E05,eliminated,-,-,-
+E0054,Q0069,US06,US06E06,eliminated,-,-,It's Milkin' time! ♡ you girls! Big + scary forever (drawing of cow udders)
+E0055,Q0068,US06,US06E08,eliminated,-,-,-
+E0056,Q0067,US06,US06E09,eliminated,-,-,-
+E0057,Q0066,US06,US06E10,eliminated,-,-,-
+E0058,Q0065,US06,US06E11,eliminated,-,-,-
+E0059,Q0064,US06,US06E12,eliminated,-,-,-
+E0060,Q0088,US07,US07E01,eliminated,-,-,"Love yourself / Live your truth / You're never too old to dream! xoxo, Tempest"
+E0061,Q0087,US07,US07E02,eliminated,-,-,"LOVE YOU, MEAN IT! [GING](https://rupaulsdragrace.fandom.com/wiki/Ginger_Minj ""Ginger Minj"") FOR THE WIN:)"
+E0062,Q0086,US07,US07E03,eliminated,-,-,Best of luck ladies. Luv J. Masters.
+E0063,Q0080,US07,US07E04,eliminated,-,-,"Wear clown noses! Make fun of each other! Stay Plastic <3 Trixie Mattel. P.S. Fame – I used your lipstick, sorry:)"
+E0064,Q0085,US07,US07E05,eliminated,-,-,Be good to yourself... Be kind to one another... Love to the moon & back! <3 xo MKD (P.S. Go Ginger)
+E0065,Q0084,US07,US07E06,eliminated,-,-,"Everything happens 4 a reason, pero la vida continua! Big things will come! Kandy Ho xoxo"
+E0066,Q0083,US07,US07E07,eliminated,-,-,-
+E0067,Q0082,US07,US07E08,eliminated,-,-,-
+E0068,Q0081,US07,US07E09,eliminated,-,-,-
+E0069,Q0080,US07,US07E10,eliminated,-,-,-
+E0070,Q0079,US07,US07E11,eliminated,-,-,-
+E0071,Q0078,US07,US07E12,eliminated,-,-,-
+E0072,Q0097,US08,US08E01,eliminated,-,-,"Dear Ladies & Monsters, it was a pleasure meeting you all! Play the cards you are dealt + TURN DA PARTY! The Beauty, Naysha Lopez ♥ P.S. I ♥ U Layla!<sup>[<i><a href=""https://en.wikipedia.org/wiki/en:Sic"" title=""wikipedia:en:Sic"">Sic</a></i>]</sup> xoxo"
+E0073,Q0099,US08,US08E02,eliminated,-,-,-
+E0074,Q0098,US08,US08E03,eliminated,-,-,"Don't give up!!! Fight For Youre <sup>[<i><a href=""https://en.wikipedia.org/wiki/en:Sic"" title=""wikipedia:en:Sic"">Sic</a></i>]</sup> Dreams!!! Love you mis amores #Cucu ♥"
+E0075,Q0097,US08,US08E04,eliminated,-,-,"Dear Ladies, Have a good time and push yourself. I got a 2nd chance, don't blow your first and only! xoxo Da Beauty! Naysha Lopez"
+E0076,Q0096,US08,US08E05,eliminated,-,-,"Ladies, you have been touched by fierceness! Now werq it out! - Bob, ♥ you! See jew in new york. - Thorgy you are amazeballz! - AcidBetty.com 💋"
+E0077,Q0095,US08,US08E06,eliminated,-,-,"My dearest trashbags, I'm sorry to leave you all so soon, but know this, the love I have for you is REAL + quite strong. Also whoever wins owes me a tea or a steak dinner! Love you all ♥ Robbie"
+E0078,Q0094,US08,US08E07,eliminated,-,-,"Clowns! All of you!! Come to NY - but please take down Bob!....She's terrible! - anyway - ♥ you guys! top 3?....... Naomi, Bob, Deryk <sup>[<i><a href=""https://en.wikipedia.org/wiki/en:Sic"" title=""wikipedia:en:Sic"">Sic</a></i>]</sup>... Let's see.... (that was shady!) ♥ Thorgy"
+E0079,Q0093,US08,US08E08,eliminated,-,-,"To my top 4, Ru said I won the challenge. What happened? I love you all! ♥ Derrick Bitch"
+E0080,Q0092,US08,US08E09,eliminated,-,-,-
+E0081,Q0114,US09,US09E02,eliminated,-,-,You Live to Love me more each Day. JM. PS JK I LOVE you all.
+E0082,Q0113,US09,US09E03,eliminated,-,-,"Hey ladies, I ♡ you all! Sisters 4 ever! ♡ kimmy"
+E0083,Q0112,US09,US09E04,eliminated,-,-,"LADIES, I'VE ENJOYED GETTING TO KNOW EACH + EVERYONE OF YOU! SLAY IT FOR TRANMA! XO CHARLIE"
+E0084,Q0111,US09,US09E05,eliminated,-,-,Well sluts! Biggie is out but this is NOT the last of Me!!:) I need all of you to ALWAYS #beyourselftofreeyourself ♡ Eureka!!:P
+E0085,Q0098,US09,US09E06,eliminated,-,-,"Don't stop / Bealive <sup>[<i><a href=""https://en.wikipedia.org/wiki/en:Sic"" title=""wikipedia:en:Sic"">Sic</a></i>]</sup> in you!!! Love you. CUCU xoxo"
+E0086,Q0109,US09,US09E07,eliminated,-,-,Love u guys. Please don't be too messy without me! xoxo Aja 💔 PS. ur all gay:)
+E0087,Q0108,US09,US09E08,eliminated,-,-,"Hey ladies! I LOVE YOU ALL SOOO MUCH. YOU ARE ALL superstars... and it's so special to finally have a REAL family. Good luck, & DON'T FUCK IT UP ♡ Farrah Moan"
+E0088,Q0107,US09,US09E09,eliminated,-,-,"LADIES, I LOVE YOU WITH ALL OF MY HEART. IF EVER YOU NEED ME, I'M YOURS. CON AMOR, VALENTINA 💋"
+E0089,Q0106,US09,US09E10,eliminated,-,-,Debbie Downer is gone. Sue Me! *Shae Coulee* hope you struggle cleaning this LOL. Love you all ♡
+E0090,Q0105,US09,US09E11,eliminated,-,-,"Wishes come true, not free. You're my sisters always. -miss Dickpig continental, 2016:P"
+E0091,Q0127,US10,US10E01,eliminated,-,-,Ladies I ♡ U... The Vanjie way! xoxo Vanessa ♡!
+E0092,Q0126,US10,US10E02,eliminated,-,-,"Thank you Sisters. Im <sup>[<i><a href=""https://en.wikipedia.org/wiki/en:Sic"" title=""wikipedia:en:Sic"">Sic</a></i>]</sup> So Blessed to have met you all. Keep it Kute! *KKW*"
+E0093,Q0125,US10,US10E03,eliminated,-,-,我爱 you (I love you all! Season 10 is going to be amazing! - Yuhua Hamasaki)
+E0094,Q0124,US10,US10E04,eliminated,-,-,“NEVA LAVD YA! ❤️ Dusty”
+E0095,Q0123,US10,US10E05,eliminated,-,-,-
+E0096,Q0122,US10,US10E06,eliminated,-,-,-
+E0097,Q0121,US10,US10E07,eliminated,-,-,-
+E0098,Q0120,US10,US10E08,eliminated,-,-,-
+E0099,Q0119,US10,US10E10,eliminated,-,-,-
+E0100,Q0141,US11,US11E01,eliminated,-,-,"I LOVE ALL OF YOU CYSTERS! HAVE FUN ♡ — GUNBAE, BITCHES! SOJU ♡"
+E0101,Q0140,US11,US11E02,eliminated,-,-,For the first time I've felt like I truly belonged / thank you for embracing me & making me feel loved XoXo Kahanna
+E0102,Q0139,US11,US11E03,eliminated,-,-,-
+E0103,Q0138,US11,US11E04,eliminated,-,-,-
+E0104,Q0137,US11,US11E05,eliminated,-,-,-
+E0105,Q0136,US11,US11E06,eliminated,-,-,-
+E0106,Q0134,US11,US11E09,eliminated,-,-,-
+E0107,Q0133,US11,US11E10,eliminated,-,-,-
+E0108,Q0132,US11,US11E11,eliminated,-,-,-
+E0109,Q0127,US11,US11E12,eliminated,-,-,-
+E0110,Q0154,US12,US12E03,eliminated,-,-,Keep Ur Heads UP / I♡U ALL! - Dahlia ♡
+E0111,Q0153,US12,US12E04,eliminated,-,-,"TO All of my special queens, Make sure you do what I couldn’t do. Love yourself, respect yourself, and remember to show the world that you care about what you believe in. I'm devastated I couldn't stay longer. But I look forward to lots of fun memories with you. Rock M. Sakura ♡ Love you all truly."
+E0112,Q0152,US12,US12E05,eliminated,-,-,I might have not gotten a crown / But I have a sisterhood / I ♥ U / Your French sister! (I'm still the prettier) N
+E0113,Q0151,US12,US12E06,eliminated,-,-,I Hope my screams were loud enough for you Bitches. You may not know me now but you sure will later ♡ Aiden Zhane
+E0114,Q0150,US12,US12E07,eliminated,-,-,SIS. SHARE THE JOY! YOU AIN'T SHIT. JK. LOVE YOU ALL. xo BRITA BITCH
+E0115,Q0149,US12,US12E08,eliminated,-,-,"Sisters, I'm so happy I got to share this experience with you. Stay humble, grateful, & remember, you're on RuPaul's Drag Race!! I love you, Jan 💋"
+E0116,Q0147,US12,US12E11,eliminated,-,-,Remember to stay Soft & Supple and always (Insert stolen catchphrase here). Love Heidi... Something 💋
+E0117,Q0146,US12,US12E12,eliminated,-,-,-
+E0118,Q0167,US13,US13E04,eliminated,-,-,"Keep chasing the sparkle, I love you ladies. - KAH MORA HALL"
+E0119,Q0166,US13,US13E05,eliminated,-,-,Im a gay ass Bitch... Im WHO? xoxo ♡ Joey JAY! ♡
+E0120,Q0165,US13,US13E06,eliminated,-,-,"Till We MEET Again / Love, Misha ♡"
+E0121,Q0164,US13,US13E07,eliminated,-,-,Slay! Then save me a plate! Love y'all! LaLa Ri!
+E0122,Q0163,US13,US13E09,eliminated,-,-,It took ya'll hoes 4 times to get Rid of me!!! Be kind and make it HOE! xoxo Elliott with 2 Ts
+E0123,Q0162,US13,US13E10,eliminated,-,-,"CLARA CLARA, OVER ANY GOLD MEDAL, CROWN OR CASH PRIZE, MY SISTERS WERE THE GREATEST REWARD. ASS OF '13 OFF TO GET SOME D! L8R SK8RS! ♡ DENALI💋"
+E0124,Q0161,US13,US13E11,eliminated,-,-,Live Life with no apologies / Be your true authentic self / Let your Light shine / Turn it and Burn it / xx the manhattan monster TinaB
+E0125,Q0160,US13,US13E12,eliminated,-,-,"Hay Goobers! I'm so happy to have You All in my life now! To My New sisters, I love you so much and love yourself inside & out ♡ Wiggle to the top! UTǐCA"
+E0126,Q0159,US13,US13E13,eliminated,-,-,"*""* BELIEVE IN YOURSELF, AS I BELIEVE IN YOU! ♡ *""* XOXO, YOUR POLITE DIVA, LIV"
+E0127,Q0178,US14,US14E01,eliminated,-,-,"Cross your fingers + toes b/c the whole world is about to know, we did THAT 💋 ♡ u all:)"
+E0128,Q0172,US14,US14E02,eliminated,-,-,Stay Positive Be Kind. Stay You! - Love Daya
+E0129,Q0181,US14,US14E03,eliminated,-,-,Thank you for Finally giving me my Drag Family - June ♡
+E0130,Q0180,US14,US14E04,eliminated,-,-,“Believe In Your Self “Perrasss” ♡ 💋 Your latina Queen”
+E0131,Q0178,US14,US14E05,eliminated,-,-,"Biiiitchhh Ya'll put up a damn good fight! I love you all so so so much! Keep being your absolutely Beautiful selves ♡♡♡ Peace, love, and meatballs:)"
+E0132,Q0177,US14,US14E06,eliminated,-,-,"DON'T BE AFRAID TO BE YOURSELF ♡, BE KIND, AND BE STUPID - MADDY"
+E0133,Q0176,US14,US14E08,eliminated,-,-,You Ladies are truly a blessing to me & to the world / you each are ALL STARS ♡ Kerri Colby 💋
+E0134,Q0173,US14,US14E13,eliminated,-,-,-
+E0135,Q0197,US15,US15E02,LSFYL elimination,Q0195,"Eliminated in One Night Only, Part 2",-
+E0136,Q0196,US15,US15E03,LSFYL elimination,Q0195,Eliminated in All Queens Go to Heaven,-
+E0137,Q0191,US15,US15E04,LSFYL elimination,Q0190,Eliminated in Supersized Snatch Game,-
+E0138,Q0195,US15,US15E05,LSFYL elimination,Q0187,Eliminated in House of Fashion,-
+E0139,Q0194,US15,US15E06,LSFYL elimination,Q0192,Eliminated in Old Friends Gold,-
+E0140,Q0193,US15,US15E07,LSFYL elimination,Q0192,Eliminated in The Daytona Wind 2,-
+E0141,Q0192,US15,US15E08,LSFYL elimination,Q0183,Eliminated in Lip Sync LaLaPaRuZa Smackdown,-
+E0142,Q0190,US15,US15E09,LSFYL elimination,Q0187,Eliminated in The Crystal Ball,-
+E0143,Q0186,US15,US15E10,LSFYL elimination,Q0187,Eliminated in 50/50's Most Gagworthy Stars,-
+E0144,Q0188,US15,US15E11,LSFYL elimination,Q0183,"Eliminated in Two Queens, One Joke",-
+E0145,Q0187,US15,US15E12,LSFYL elimination,Q0189,Eliminated in Wigloose: The Rusical!,-
+E0146,Q0189,US15,US15E13,LSFYL elimination,Q0184,Eliminated in Teacher Makeovers,-
+E0147,Q0211,US16,US16E03,LSFYL elimination,Q0208,Eliminated in The Mother of All Balls,-
+E0148,Q0210,US16,US16E04,LSFYL elimination,Q0208,Eliminated in RDR Live!,-
+E0149,Q0209,US16,US16E05,LSFYL elimination,Q0201,Eliminated in Girl Groups,-
+E0150,Q0208,US16,US16E06,LSFYL elimination,Q0204,Eliminated in Welcome to the DollHouse,-
+E0151,Q0207,US16,US16E07,LSFYL elimination,Q0204,Eliminated in The Sound of Rusic,-
+E0152,Q0206,US16,US16E08,LSFYL elimination,Q0202,Eliminated in Snatch Game,-
+E0153,Q0205,US16,US16E09,LSFYL elimination,Q0204,Eliminated in See You Next Wednesday,-
+E0154,Q0204,US16,US16E11,LSFYL elimination,Q0202,Eliminated in Corporate Queens,-
+E0155,Q0203,US16,US16E12,LSFYL elimination,Q0202,Eliminated in Bathroom Hunties,-
+E0156,Q0202,US16,US16E13,LSFYL elimination,Q0199,Eliminated in Drag Race Vegas Live! Makeovers,-
+E0157,Q0201,US16,US16E14,LSFYL elimination,Q0200,Eliminated in Booked and Blessed,-
+E0158,Q0222,US17,US17E03,LSFYL elimination,Q0223,Eliminated in Monopulence!,-
+E0159,Q0223,US17,US17E04,LSFYL elimination,Q0219,"Eliminated in Bitch, I'm A Drag Queen!",-
+E0160,Q0224,US17,US17E06,LSFYL elimination,Q0221,Eliminated in Let's Get Sea Sickening Ball,-
+E0161,Q0220,US17,US17E07,LSFYL elimination,Q0217,Eliminated in Snatch Game,-
+E0162,Q0225,US17,US17E08,LSFYL elimination,Q0219,Eliminated in The Wicked Wiz Of Oz: The Rusical!,-
+E0163,Q0219,US17,US17E09,LSFYL elimination,Q0218,Eliminated in Heavens to Betsey!,-
+E0164,Q0221,US17,US17E10,LSFYL elimination,Q0213,Eliminated in The Villains Roast,-
+E0165,Q0218,US17,US17E11,LSFYL elimination,Q0217,Eliminated in Ross Mathews vs. The Ducks,-
+E0166,Q0217,US17,US17E12,LSFYL elimination,Q0217,"Eliminated in Charisma, Uniqueness, Nerve & Talent Monologues",-
+E0167,Q0216,US17,US17E14,LSFYL elimination,Q0214,Eliminated in How's Your Headliner?,-
+E0168,Q0239,US18,US18E02,LSFYL elimination,,Eliminated in Premiere Part 2,-
+E0169,Q0238,US18,US18E03,LSFYL elimination,,Eliminated in Episode 3,-
+E0170,Q0237,US18,US18E04,LSFYL elimination,,Eliminated in Episode 4,-
+E0171,Q0236,US18,US18E06,LSFYL elimination,,Eliminated in Episode 6,-
+E0172,Q0235,US18,US18E07,LSFYL elimination,,Eliminated in Episode 7,-
+E0173,Q0234,US18,US18E08,LSFYL elimination,,Eliminated in Episode 8,-
+E0174,Q0233,US18,US18E09,LSFYL elimination,Q0229,Eliminated in Fannie: The Rusical,-
+E0175,Q0232,US18,US18E11,LSFYL elimination,Q0229,Eliminated in A Toast to Alyssa Edwards,-
+E0176,Q0231,US18,US18E12,LSFYL elimination,,Eliminated in Episode 12,-
+E0177,Q0230,US18,US18E13,LSFYL elimination,,Eliminated in Episode 13,-
+E0178,Q0229,US18,US18E14,LSFYL elimination,Q0227,Eliminated in Good Morning Bitches,-
+E0179,Q0039,US04,US04E09,eliminated,-,-,"Ms. Cheese loves you! Stay true 2 U girl / Chad, Needles, Latrice 💋 💋 💋 P.S. Phi Phi: Thank u love u"
+E0180,Q0026,US03,US03E12,returned,-,Won the chance to return in 'Jocks in Frocks'; eliminated again the same episode,-
+E0181,Q0038,US04,US04E10,returned,-,Returned via twist in 'DILFs: Dads I'd Like to Frock'; eliminated again the same episode,-
+E0182,Q0059,US05,US05E02,eliminated,-,-,God bless America / viva Panamá / keep bearing light QUEENS / xoxo Serena ChaCha
+E0183,Q0118,US10,US10E11,eliminated,-,-,-
+E0184,Q0135,US11,US11E07,eliminated,-,Eliminated; returned in the finale (E13),-
+E0185,Q0148,US12,US12E09,eliminated,-,-,"I hope I made you PROUD KANSAS city! Remember, yes Bitch you might be! PS Heidi unlike the other girls Im <sup>[<i><a href=""https://en.wikipedia.org/wiki/en:Sic"" title=""wikipedia:en:Sic"">Sic</a></i>]</sup> not leaving you A DAMN thing ♡ W X"
+E0186,Q0175,US14,US14E11,eliminated,-,LaLaPaRuZa Smackdown elimination,"Dear Ladies, I'm so happy I have Found sisters in all y'all! I can't wait to KiKi w/y'all after this. Hope y'all the best, and most of all.... MAXINE!!! P.S ANGIE, Daesha, Jorgeous, Go all the way! my forever sistas / Love, Jasmine Kennedie"

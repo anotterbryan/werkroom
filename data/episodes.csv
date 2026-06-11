@@ -1,533 +1,533 @@
-episode_id,season_id,episode_number,title,air_date,main_challenge,main_challenge_type,mini_challenge,runway_theme,lip_sync_song_id,lip_sync_track,eliminated_id,power_up_used
-US01E01,US01,1,Drag on a Dime,2009-02-02,Sexy photoshoot; design looks from thrift-store materials,Design,-,-,S0208,main,Q0009,-
-US01E02,US01,2,Girl Group Challenge,2009-02-09,Destiny's Child girl-group lip-sync battle (teams),Girl Group,Act out emotions,-,S0002,main,Q0008,-
-US01E03,US01,3,Queens of All Media,2009-02-16,Channel Oprah across TV personality roles,Acting,-,Dress to Impress,S0003,main,Q0007,-
-US01E04,US01,4,Mac Viva-Glam Challenge,2009-02-23,Film a MAC Viva-Glam commercial in 10 minutes,Acting,30 Minutes to do partner's makeup,-,S0004,main,Q0006,-
-US01E05,US01,5,Drag School of Charm,2009-03-02,Makeover female fighters into drag daughters,Makeover,Exercise/endurance challenge,-,S0005,main,Q0005,-
-US01E06,US01,6,Absolut Drag Ball,2009-03-09,Absolut Drag Ball: themed ball runway looks,Design,Vogue posing challenge,-,S0144,main,Q0004,-
-US01E07,US01,7,Extra Special Edition,2009-03-16,-,Clip Show,-,-,-,main,-,-
-US01E08,US01,8,Grand Finale,2009-03-23,Record a verse and film a spot for RuPaul's 'Cover Girl' video,Finale,-,-,S0007,main,Q0003,-
-US01E09,US01,9,Re-United!,2009-03-23,-,Reunion,-,-,-,main,-,-
-US02E01,US02,1,Gone with the Windows,2010-02-01,Design outfits from window treatments and home furnishings,Design,Gone with the Wind photo shoot,Curtain Couture,S0007,main,Q0021,-
-US02E02,US02,2,Starbootylicious,2010-02-08,Burlesque revue: earn cash performing and selling gift certificates,Talent Show,Turn RuPaul doll from lady to a tramp,High-Class Drag,S0008,main,Q0020,-
-US02E03,US02,3,Country Queens,2010-02-15,Country Queens girl-group performance,Girl Group,"""Chicken or what?"" eating contest",Denim and Diamond Couture,S0209,main,Q0019,-
-US02E04,US02,4,The Snatch Game,2010-02-22,Snatch Game,Snatch Game,The Queen is Right,Personal Style,S0010,main,Q0018,-
-US02E05,US02,5,Here Comes the Bride,2010-03-01,Design a wedding dress; pose as bride and groom in a photoshoot,Design,Decorate a box in your drag style,-,S0011,main,Q0017,-
-US02E06,US02,6,Rocker Chicks,2010-03-08,"Live rock performance of ""LadyBoy"" by RuPaul",Singing,Give a wig a glam rock makeover,-,S0012,main,Q0016,-
-US02E07,US02,7,Once Upon a Queen,2010-03-22,Pitch and promote a concept for an autobiography,Acting,Reading is Fundamental,-,S0013,main,Q0015,-
-US02E08,US02,8,Golden Gals,2010-03-29,Transform older men into drag mothers and lip-sync a duet,Makeover,Match contestants with their baby pictures,-,S0014,main,Q0014,-
-US02E09,US02,9,The Diva Awards,2010-04-12,"Create three looks for ""Diva Award"" ceremonies",Design,Style/accessorize one of four identical dresses,-,S0015,main,Q0013,-
-US02E10,US02,10,The Main Event Clip Show,2010-04-19,-,Clip Show,-,-,-,main,-,-
-US02E11,US02,11,Grand Finale,2010-04-26,Shoot a music video for 'Jealous of My Boogie' and a Dynasty-inspired scene,Finale,-,-,S0210,main,Q0012,-
-US02E12,US02,12,Reunion,2010-04-26,-,Reunion,-,-,-,main,-,-
-US03E01,US03,1,Casting Extravaganza,2011-01-24,-,-,-,-,-,main,-,-
-US03E02,US03,2,The Queen Who Mopped Xmas,2011-01-24,Holiday thrift-store drag,Design,Christmas Card Photo Shoot,-,S0017,main,Q0033,-
-US03E03,US03,3,Queens in Space,2011-01-31,Act in sci-fi movie spoofs,Acting,Psychic Challenge,-,S0211,main,Q0032,-
-US03E04,US03,4,Totally Leotarded,2011-02-07,Produce a fitness video with Susan Powter,Acting,Making Letoards from Duct Tapes,-,S0019,main,Q0031,-
-US03E05,US03,5,QNN News,2011-02-14,Produce a morning news show,Acting,Scandalous Red Carpet Photo,-,S0020,main,Q0030,-
-US03E06,US03,6,The Snatch Game,2011-02-21,Snatch Game,Snatch Game,Shit Rupaul Says,-,S0021,main,Q0029,-
-US03E07,US03,7,"Face, Face, Face of Cakes",2011-02-28,Create a cake-inspired couture garment and decorate a doll cake,Design,Nude photo shoot with Deborah Anderson,-,S0022,main,Q0028,-
-US03E08,US03,8,Ru Ha Ha,2011-03-07,Perform a stand-up routine before a live audience,Comedy,Reading is Fundamental,-,S0023,main,Q0027,-
-US03E09,US03,9,"Life, Liberty & the Pursuit of Style",2011-03-14,Film a patriotic message for US military overseas,Acting,Decorate bras using rhinestones,-,S0024,main,-,-
-US03E10,US03,10,RuPaul-a-Palooza,2011-03-21,Record and perform an interpretation of RuPaul's 'Superstar',Song/Verse,Ru-sical chairs,-,S0025,main,Q0026,-
-US03E11,US03,11,RuPaul's Hair Extravaganza,2011-03-28,"Design three looks for a hair show, one made entirely from wigs",Design,Beach-themed headpiece,-,S0026,main,Q0021,-
-US03E12,US03,12,Jocks in Frocks,2011-04-04,Turn a straight jock into a drag sister and perform a safe-sex cheer,Makeover,Dunk-a-Queen,-,S0027,main,Q0026,-
-US03E13,US03,13,Make Dat Money,2011-04-11,"Three runway looks plus an opening number to ""Just Wanna Dance""",Talent Show,Create/market a drag product,-,S0028,main,Q0025,-
-US03E14,US03,14,Superstar Edition,2011-04-18,-,Clip Show,-,-,-,main,-,-
-US03E15,US03,15,Grand Finale,2011-04-25,Film the music video for RuPaul's 'Champion',Finale,-,-,S0029,main,Q0024,-
-US03E16,US03,16,Reunited!,2011-05-02,-,Reunion,-,-,-,main,-,-
-US04E01,US04,1,RuPocalypse Now!,2012-01-30,Design a post-apocalyptic couture look from looted materials,Design,Photoshoot with Mike Ruiz,Apocalyptic Couture,S0030,main,Q0046,-
-US04E02,US04,2,WTF!: Wrestling's Trashiest Fighters,2012-02-06,Create a wrestling storyline and perform a match in the ring,Acting,Create “badonkadonk” with padding in 30 minutes,Girly Girl Couture,S0031,main,Q0045,-
-US04E03,US04,3,Glamazons vs Champions,2012-02-13,Produce and act in infomercials for RuPaul's Glamazon and Champion,Acting,Create hats with butterfly-shaped accessories,Platinum and Gold,S0032,main,Q0044,-
-US04E04,US04,4,Queens Behind Bars,2012-02-20,"In two teams, star in episodes of a sitcom",Acting,"Paint a partner's face, while handcuffed",Red Carpet,S0033,main,Q0043,-
-US04E05,US04,5,Snatch Game,2012-02-27,Snatch Game,Snatch Game,Beat the Clock,Best Drag,S0034,main,Q0038,-
-US04E06,US04,6,Float Your Boat,2012-03-05,Create and wear a parade float based on a pride-flag color,Design,Wet t-shirt contest,Pride Parade Extravaganza,S0035,main,Q0042,-
-US04E07,US04,7,Dragazines,2012-03-12,Create a magazine cover capturing an assigned theme,Design,Reading is Fundamental,Dragazines,S0212,main,Q0041,-
-US04E08,US04,8,Frenemies,2012-03-19,Live singing duet between paired queens,Singing,Polygraph test,-,S0213,main,Q0040,-
-US04E09,US04,9,Frock the Vote!,2012-03-26,Presidential debate as the 2012 Wig Party candidate,Acting,Design Absolut Vodka-inspired shoe,Inaugural Drag,S0038,main,Q0039,-
-US04E10,US04,10,DILFs: Dads I'd Like To Frock,2012-04-02,Turn a DILF into a pregnant drag diva,Makeover,Give a teddy bear a makeover,Pregnant Makeover,S0039,main,Q0038,-
-US04E11,US04,11,The Fabulous Bitch Ball,2012-04-09,Design three outfits for the Bitch Ball,Design,Everybody Loves Puppets,"Daytime Dog Park, Pooch in a Purse, and Canine Couture",S0040,main,Q0037,-
-US04E12,US04,12,RuPaul Rewind,2012-04-16,-,Clip Show,-,-,-,main,-,-
-US04E13,US04,13,The Final Three,2012-04-23,Shoot the music video for RuPaul's 'Glamazon',Finale,-,-,-,main,-,-
-US04E14,US04,14,Reunited,2012-04-30,-,Reunion,-,-,-,main,-,-
-US05E01,US05,1,RuPaullywood or Bust,2013-01-28,"Make a dress that brings out Hollywood realness and glamour, out of materials found out of dumpster dive.",Design,Underwater photoshoot,-,S0041,main,Q0060,-
-US05E02,US05,2,Lip Synch Eleganza Extravaganza,2013-02-04,Lip sync and re-enact a famous scene from a past season of RuPaul's Drag Race Untucked,Acting,Lip-synch with only your mouth visible,Best Drag,S0042,main,Q0059,-
-US05E03,US05,3,Draggle Rock,2013-02-11,"In teams, star in children's TV Shows",Acting,Create mannequin dolls,Think Pink,S0043,main,Q0058,-
-US05E04,US05,4,Black Swan: Why It Gotta Be Black?,2013-02-18,Perform in different acts of a ballet about RuPaul's life,Talent Show,Soul Train dance-off,Divalicious,S0205,main,Q0057,-
-US05E05,US05,5,Snatch Game,2013-02-25,Snatch Game,Snatch Game,Style a cuddler into a red-carpet look,Deadliest Snatch,S0045,main,Q0055,-
-US05E06,US05,6,Can I Get An Amen?,2013-03-04,"Record a ""We Are the World""-inspired anthem titled ""Can I Get An Amen?""",Singing,Apply drag makeup in the dark,Favorite Body Part,S0046,main,Q0054,-
-US05E07,US05,7,RuPaul Roast,2013-03-11,"Roast RuPaul, as well as the judges and fellow queens, in front of a live audience",Comedy,Reading is Fundamental,-,S0047,main,-,-
-US05E08,US05,8,Scent of a Drag Queen,2013-03-18,"Create, market, and film a commercial for a signature fragrance",Acting,Whatcha Packin',Company spokeswoman,S0048,main,Q0053,-
-US05E09,US05,9,Drama Queens,2013-04-01,Star in a faux Latin telenovela alongside Wilmer Valderrama,Acting,"Create fake sob stories, cry in front of RuPaul",Spanish Telenovela Realness,S0049,main,Q0052,-
-US05E10,US05,10,Super Troopers,2013-04-08,Military-to-drag makeover with color guard performance,Makeover,Drag booty camp with fitness trainer,-,S0206,main,Q0051,-
-US05E11,US05,11,Sugar Ball,2013-04-15,Design three outfits for the Sugar Ball,Design,Everybody Loves Puppets,"Super Duper Sweet 16, Sugar Mama: Executive Realness, and Candy Couture",S0051,main,Q0050,-
-US05E12,US05,12,"The Final Three, Hunty",2013-04-22,"Star in RuPaul's music video ""The Beginning"" and shoot a courtroom scene.",Finale,-,-,-,main,-,-
-US05E13,US05,13,Countdown to the Crown,2013-04-29,-,Clip Show,-,-,-,main,-,-
-US05E14,US05,14,Reunited!,2013-05-06,-,Reunion,-,-,-,main,-,-
-US06E01,US06,1,RuPauls Big Opening,2014-02-24,Designing an outfit inspired by a TV show,Design,Jumping off a platform photoshoot,TV Shows,S0052,main,Q0074,-
-US06E02,US06,2,RuPauls Big Opening Part2,2014-03-03,Design an outfit inspired by party supplies,Design,Boudoir pillow fight with the Pit Crew,Party Boxes,S0053,main,Q0073,-
-US06E03,US06,3,Scream Queens,2014-03-10,"Star in horror film trailers for ""Drag Race Me to Hell""",Acting,Create beach-themed lip sync in pairs,Best Drag,S0054,main,Q0072,-
-US06E04,US06,4,Shade: The Rusical,2014-03-17,Performing live in the original production of Shade: The Rusical.,Rusical,Female or She-male?,Tony Awards,S0055,main,Q0071,-
-US06E05,US06,5,Snatch Game,2014-03-24,Snatch Game,Snatch Game,-,A Night of A Thousand Rupauls,S0056,main,Q0070,-
-US06E06,US06,6,Oh No She Betta Don't,2014-03-31,"Rapping in teams to ""Oh No She Better Don't""",Song/Verse,Reading is Fundamental,Crazy Sexy Cool,S0057,main,Q0069,-
-US06E07,US06,7,Glamazon by Colorevolution,2014-04-07,Record an infomercial for Rupaul's Glamazon cosmetics,Acting,Design nails and hand modeling fruits,Black & White,S0058,main,-,-
-US06E08,US06,8,Drag Queens of Comedy,2014-04-07,Performing a stand-up comedy act in front of a live audience of elderly people.,Comedy,Lip-sync to a RuPaul song upside down,-,S0059,main,Q0068,-
-US06E09,US06,9,Drag Queens of Talk,2014-04-14,Guest hosting The RuPaul Show and interviewing celebrity guests,Acting,“Hung Men” hangman challenge,Animal Kingdom Couture,S0060,main,Q0067,-
-US06E10,US06,10,Drag My Wedding,2014-04-21,Transform grooms into brides for a wedding,Makeover,Abstract painting with bodies for marriage equality,Wedding Makeover,S0061,main,Q0066,-
-US06E11,US06,11,Glitter Ball,2014-04-28,Glitter Ball,Design,Everybody Loves Puppets,"Banjee Girl Bling, Platinum Card Executive Realness, and Dripping in Jewels Eleganza",S0062,main,Q0065,-
-US06E12,US06,12,Sissy That Walk!,2014-05-05,"Star in a music video for RuPaul's song ""Sissy That Walk"" and act in two scenes",Finale,-,-,S0063,main,Q0064,-
-US06E13,US06,13,Countdown to the Crown,2014-05-12,-,Clip Show,-,-,-,main,-,-
-US06E14,US06,14,The Finale,2014-05-19,-,Finale,-,-,-,main,-,-
-US07E01,US07,1,Born Naked,2015-03-02,Create a resort-wear tearaway to reveal a nude illusion.,Design,Model 2 looks,-,S0064,main,Q0088,-
-US07E02,US07,2,Glamazonian Airways,2015-03-09,Perform in a pre-flight safety video for the first airline run by drag queens,Acting,Keep fish face as Pit Crew blow jets of air into queens faces,Jet Set Eleganza,S0065,main,Q0087,-
-US07E03,US07,3,Shakesqueer,2015-03-16,"""Hamlet it up"" in two twisted Shakespeare classics – Romy and Juliet and MacBitch",Acting,Soul Train dance-off,Bearded and Beautiful (inspired by Milk ),S0066,main,Q0086,-
-US07E04,US07,4,Spoof! (There It Is),2015-03-23,Create a music video parody of a RuPaul song.,Song/Verse,-,Green,S0067,main,Q0080,-
-US07E05,US07,5,The DESPY Awards,2015-03-30,Come up with funny banter and take jabs at the other contestants while presenting awards for different categories at the first ever DESPY Awards .,Comedy,Make paper versions of classic red carpet outfits,-,S0215,main,Q0085,-
-US07E06,US07,6,Ru Hollywood Stories,2015-04-06,"Reenact ""Whatever Happened to Merle Ginsberg"" from the point of view of Merle, RuPaul and Michelle Visage.",Acting,Pull cards out of Pit Crews' underpants to earn points,Death Becomes Her,S0069,main,Q0084,-
-US07E07,US07,7,Snatch Game,2015-04-13,Snatch Game,Snatch Game,-,Leather & Lace,S0070,main,Q0083,-
-US07E08,US07,8,Conjoined Queens,2015-04-20,Create a conjoined twin makeover with a previously eliminated contestant,Makeover,Create prison uniform look,-,S0071,main,Q0082,-
-US07E09,US07,9,Divine Inspiration,2015-04-27,Star in Musical versions of John Waters' most iconic films,Rusical,Reading is Fundamental,Ugliest dress ever,S0072,main,Q0081,-
-US07E10,US07,10,Prancing Queens,2015-05-04,Dancing in a live drag dance spectacular,Talent Show,Create “Fake Housewives of Drag Race” look using tape,"Half man, half woman",S0073,main,Q0080,-
-US07E11,US07,11,"Hello, Kitty Girls!",2015-05-11,Create two outfits only using products provided by Hello Kitty,Design,Everybody Loves Puppets,Hello Kitty BFF Hello Kitty Eleganza,S0074,main,Q0079,-
-US07E12,US07,12,And The Rest Is Drag,2015-05-18,"Star in the music video for RuPaul's single ""Born Naked""",Finale,-,Best Drag,S0075,main,Q0078,-
-US07E13,US07,13,Countdown to the Crown,2015-05-25,-,Clip Show,-,-,-,main,-,-
-US07E14,US07,14,The Grand Finale,2015-06-01,-,Finale,-,-,-,main,-,-
-US08E01,US08,1,Keeping it 100!,2016-03-07,Create an outfit based on design challenges from seasons past,Design,Photoshoot with past winners,-,S0076,main,Q0097,-
-US08E02,US08,2,Bitch Perfect,2016-03-14,Perform in a collegiate acapella sing-off: Bitch Perfect,Singing,Latin dance-off to RuPaul's “Cha Cha Bitch”,Movie Premiere Realness,S0077,main,Q0099,-
-US08E03,US08,3,RuCo's Empire,2016-03-21,Perform in two Empire-inspired acting scenes,Acting,Drag up supreme court robes,Rollergirl Realness,S0216,main,Q0098,-
-US08E04,US08,4,New Wave Queens,2016-03-28,Sing live in '80s style New Wave girl bands,Girl Group,-,Neon Realness,S0079,main,Q0097,-
-US08E05,US08,5,Supermodel Snatch Game,2016-04-04,Snatch Game,Snatch Game,-,Iconic Madonna Looks,S0080,main,Q0096,-
-US08E06,US08,6,Wizards of Drag,2016-04-11,Give a The Wizard of Oz -themed makeovers to cast members of Little Women: LA,Makeover,Reading is Fundamental,Wizard of Oz couture,S0081,main,Q0095,-
-US08E07,US08,7,Shady Politics,2016-04-18,Work in pairs to shoot presidential campaign ads to smear their partner and stake their claim to be the first drag President of the U.S.A.,Acting,True/False guessing game with Pit Crew,Black & White Realness (inspired by Detox ),S0082,main,Q0094,-
-US08E08,US08,8,RuPaul Look Ball,2016-04-25,Ball Challenge,Design,Everybody Loves Puppets,"The Book Ball: Baby Drag Realness, That's My Mama Realness, and Autobiographical Eleganza Extravaganza",S0083,main,Q0093,-
-US08E09,US08,9,The Realness,2016-05-02,"Star in the music video for RuPaul's song ""The Realness""",Finale,-,-,S0084,main,Q0092,-
-US08E10,US08,10,The Grand Finale,2016-05-16,-,Finale,-,-,-,main,-,-
-US09E01,US09,1,Oh. My. Gaga!,2017-03-24,"Compete in the Miss Charisma, Uniqueness, Never & Talent pageant in two categories : one inspired by your hometown, the other inspired by your favorite Lady Gaga look",Talent Show,-,Frock Inspired by Your Home City Your Favorite Lady Gaga Drag,-,main,-,-
-US09E02,US09,2,She Done Already Done Brought It On,2017-03-31,Perform in a cheer battle,Talent Show,-,White Party,S0085,main,Q0114,-
-US09E03,US09,3,Draggily Ever After,2017-04-07,Create a fantasy fairy-tale princess and a sassy sidekick.,Design,-,-,S0086,main,Q0113,-
-US09E04,US09,4,Good Morning Bitches!,2017-04-14,Star in morning talk shows,Acting,-,Naughty nighties,S0087,main,Q0112,-
-US09E05,US09,5,Reality Stars: The Musical,2017-04-21,Perform in Kardashian: The Musical,Rusical,-,Faux Fur Realness,S0088,main,Q0111,-
-US09E06,US09,6,Snatch Game,2017-04-28,Snatch Game,Snatch Game,-,"Night of 1,000 Madonnas: The Shequel",S0089,main,Q0098,-
-US09E07,US09,7,9021-HO,2017-05-05,"Act in the classic 90's high-school drama, 9021-HO",Acting,-,Big Hair Everywhere,S0090,main,Q0109,-
-US09E08,US09,8,RuPaul Roast,2017-05-12,Perform a comedy roast of Michelle Visage,Comedy,Reading is Fundamental,-,S0091,main,Q0108,-
-US09E09,US09,9,Your Pilot's On Fire,2017-05-19,"Create, write, and co-star in a TV pilot",Acting,-,Club Kid Couture,S0092,main,Q0107,-
-US09E10,US09,10,Makeovers: Crew Better Work,2017-05-26,"Makeover crew members and perform a lip-sync of ""Click Clack (Make that Money)"" by RuPaul",Makeover,-,-,S0093,main,Q0106,-
-US09E11,US09,11,Gayest Ball Ever,2017-06-02,The Gayest Ball Ever,Design,Everybody Loves Puppets,"Rainbow-She-Betta-Do, Sexy Unicorn, and Village People Eleganza Extravaganza",S0094,main,Q0105,-
-US09E12,US09,12,Category Is,2017-06-09,"Write and perform a rap on RuPaul's new single ""Category Is"" and guest star on RuPaul's podcast with Michelle Visage.",Finale,-,-,S0095,main,-,-
-US09E13,US09,13,Reunited,2017-06-16,-,Reunion,-,-,-,main,-,-
-US09E14,US09,14,Grand Finale,2017-06-23,-,Finale,-,-,S0096,main,-,-
-US10E01,US10,1,10s Across The Board,2018-03-22,Drag on a Dime: construct a runway outfit from 99¢-store items,Design,Stand out on runway in a sea of queens,-,S0097,main,Q0127,-
-US10E02,US10,2,PharmaRusical,2018-03-29,"Lip-sync and dance in ""PharmaRusical""",Rusical,Hay Girl Hay dance competition,Very Best Drag,S0098,main,Q0126,-
-US10E03,US10,3,Tap That App,2018-04-05,Star in commercials for drag-themed dating apps,Acting,Screen tests for Ru's chocolate bar campaign,Feathers,S0099,main,Q0125,-
-US10E04,US10,4,The Last Ball on Earth,2018-04-12,Design three looks for The Last Ball on Earth,Design,Photobomb celebrity photographs,"Alaskan Winter Realness, Miami Summer Realness, and Martian Eleganza Extravaganza",S0100,main,Q0124,-
-US10E05,US10,5,The Bossy Rossy Show,2018-04-19,Improv on The Bossy Rossy Show (hosted by Ross Mathews),Acting,Drag up army duffel bag contents,Denim & Diamonds,S0220,main,Q0123,-
-US10E06,US10,6,Drag Con Panel Extravaganza,2018-04-26,"In teams, produce and host DragCon panels",Acting,Identify objects by sitting on them,Hats Incredible,S0102,main,Q0122,-
-US10E07,US10,7,Snatch Game,2018-05-03,Snatch Game,Snatch Game,Reading is Fundamental,Mermaid Fantasy (Salute to Bette Midler),S0103,main,Q0121,-
-US10E08,US10,8,The Unauthorized Rusical,2018-05-10,"Perform in ""Cher: The Unauthorized Rusical""",Rusical,Slap Out Of It,Glitterific,S0104,main,Q0120,-
-US10E09,US10,9,Breastworld,2018-05-17,"Act in the series ""Breastworld""",Acting,"Pants down, bottoms up",Silver Foxy,S0105,main,-,-
-US10E10,US10,10,Social Media Kings Into Queens,2018-05-24,Give drag makeovers to social-media stars,Makeover,Create a super macho character and pose for a man's body spray,Drag Family Values,S0106,main,Q0119,-
-US10E11,US10,11,Evil Twins,2018-06-07,Present your best self and your evil twin,Acting,Resting Brunch Face,Double Trouble,S0107,main,Q0118,-
-US10E12,US10,12,American,2018-06-14,"Write and perform a solo verse on RuPaul's ""American""",Song/Verse,-,Final Four Eleganza Extravaganza,S0108,main,-,-
-US10E13,US10,13,Queens Reunited,2018-06-21,-,Reunion,-,-,-,main,-,-
-US10E14,US10,14,Grand Finale,2018-06-28,-,Finale,-,-,S0109,main,-,-
-US11E01,US11,1,Whatcha Unpackin?,2019-02-28,Create signature looks from materials belonging to former “RuPaul’s Drag Race” legends.,Design,Photo Shoot with Drag Race Legends,-,S0223,main,Q0141,-
-US11E02,US11,2,"Good God Girl, Get Out",2019-03-07,"Act in a drag queen version of ""Black Panther""and""Get Out""",Acting,Celebrity Photo Bomb,What's Your Sign?,S0111,main,Q0140,-
-US11E03,US11,3,Diva Worship,2019-03-14,Perform live in a Diva Evangelical Talk Show,Acting,Seduce Your Way Into a Seduction Concert,Fringe,S0224,main,Q0139,-
-US11E04,US11,4,Trump: The Rusical,2019-03-21,Trump: The Rusical,Rusical,Why You Maddow Tho?,Orange Alert,S0113,main,Q0138,-
-US11E05,US11,5,Monster Ball,2019-03-28,Showcase three Halloween inspired looks,Design,Transform yourself into living doll,"The Monster Ball (Trampy Trick or Treater, Witch, Please!, & MILF Eleganza)",S0225,main,Q0137,-
-US11E06,US11,6,The Draglympics,2019-04-04,"Perform in a free-style floor program which includes Fanography, Voguing, and Shablam",Talent Show,Galisthenics,All That Glitters Is Gold,S0115,main,Q0136,-
-US11E07,US11,7,From Farm to Runway,2019-04-11,Create a high fashion look made from organic materials to model on the runway,Design,Potato sack race,-,S0116,main,Q0135,-
-US11E08,US11,8,Snatch Game at Sea,2019-04-18,Snatch Game at Sea,Snatch Game,Pitch your own self-help book,Sequins on the Runway,S0117,main,-,-
-US11E09,US11,9,L.A.D.P.!,2019-04-25,Perform in an improv comedy police sketch,Acting,Reading is Fundamental,Face-Kini Realness,S0118,main,Q0134,-
-US11E10,US11,10,Dragracadabra,2019-05-02,Perform in your very own magic show,Talent Show,Balls to the Wall,Caftan Realness,S0119,main,Q0133,-
-US11E11,US11,11,Bring Back My Queens!,2019-05-09,Makeover returning contestants into a member of their own drag family,Makeover,Slap Out Of It,Drag Family Values,S0120,main,Q0132,-
-US11E12,US11,12,Queens Everywhere,2019-05-16,"Write and record a verse in a performance of RuPaul's hit single ""Queens Everywhere""",Finale,-,Best Drag,S0226,main,Q0127,-
-US11E13,US11,13,Reunited,2019-05-23,-,Reunion,-,-,-,main,-,-
-US11E14,US11,14,Grand Finale,2019-05-30,-,Finale,-,-,S0122,main,-,-
-US12E01,US12,1,I’m That Bitch,2020-02-28,"Write and perform an original rap number to ""I'm That Bitch"".",Song/Verse,Model 2 looks,Sparkle,S0123,main,-,-
-US12E02,US12,2,You Don’t Know Me,2020-03-06,"Write and perform an original Fosse-inspired jazz number called ""You Don't Know Me"".",Song/Verse,Model 2 looks,Tulle,S0124,main,-,-
-US12E03,US12,3,World’s Worst,2020-03-13,"Improv in a talent competition, called ""World's Worst"".",Acting,Queer-Peer Assessment,Buttons and Bows,S0125,main,Q0154,-
-US12E04,US12,4,The Ball Ball,2020-03-20,Showcase three looks in The Ball Ball,Design,“The Beehive Jive”,"Lady Baller, Basketball Wife Realess, and Balls to the Wall Eleganza",S0126,main,Q0153,-
-US12E05,US12,5,Gay’s Anataomy,2020-03-27,"Overact in Gay's Anatomy, a parody of the popular TV show Grey's Anatomy",Acting,Pink Pill or Silver Pill,Planet of the Capes,S0127,main,Q0152,-
-US12E06,US12,6,Snatch Game,2020-04-03,Snatch Game,Snatch Game,-,Frozen Eleganza,S0128,main,Q0151,-
-US12E07,US12,7,Madonna: The Unauthorized Rusical,2020-04-10,Record vocals and perform to them in Madonna: The Unauthorized Rusical .,Rusical,-,Night of a 1000 Michelle Visages,S0129,main,Q0150,-
-US12E08,US12,8,Droop,2020-04-17,Create and market a product for a new drag queen lifestyle brand.,Acting,"In pairs, curate a box of FabFitFun products for another duo, then gift it to them with shade .",Black Wedding,S0130,main,Q0149,-
-US12E09,US12,9,Choices 2020,2020-04-24,Compete on the political stage to become America's first drag queen president,Acting,"Audition for the title of ""Kitty Girl 2020""",Stars and Stripes Forever,S0131,main,Q0148,-
-US12E10,US12,10,Superfan Makeover,2020-05-01,"Makeover Drag Race super fans and teach them to lip sync to ""U Wear It Well"" against eachother on the mainstage.",Makeover,Reading is Fundamental (unaired),Drag Family Resemblance,S0132,main,-,-
-US12E11,US12,11,One-Queen Show,2020-05-08,The queens perform in their own one woman show,Talent Show,Everybody Loves Puppets,The Color Purple,S0133,main,Q0147,-
-US12E12,US12,12,Viva Drag Vegas,2020-05-15,Record and perform a medley of songs from RuPaul's Drag Race Live in Las Vegas,Finale,"Design an over-the-top, one-of-a-kind showgirl headdress, that screams 'Viva Drag Vegas'.",Eleganza Extravaganza,S0134,main,Q0146,-
-US12E13,US12,13,Alone Together,2020-05-22,-,Clip Show,-,-,-,main,-,-
-US12E14,US12,14,Grand Finale,2020-05-29,-,Finale,-,-,S0135,main,-,-
-US13E01,US13,1,The Pork Chop,2021-01-01,The queens face off in Lip Sync For Your Life battles,LaLaPaRuZa,-,-,-,main,-,-
-US13E02,US13,2,Condragulations,2021-01-08,"Write original lyrics and perform them for RuPaul's song ""Condragulations""",Song/Verse,Show off two runway ready looks in the categories Day Time Drama Mama and Night Time is the Right Time,Lamé you Stay,S0136,main,-,-
-US13E03,US13,3,Phenomenon,2021-01-15,"Write original lyrics and perform them for RuPaul's song ""Phenomenon""",Song/Verse,Show off two runway ready looks in the categories the Lady and the Vamp,"We’re Here, We’re Sheer, Get Used To It",S0137,main,-,-
-US13E04,US13,4,RuPaulmark Channel,2021-01-22,Overact in cheesy RuPaulmark holiday movies.,Acting,-,Trains for Days,S0138,main,Q0167,-
-US13E05,US13,5,The Bag Ball,2021-01-29,Showcase three looks in The Bag Ball,Design,Baby Got Back: Who Is the Most Misbehaved Baby?,"Mixed Bag, Money Bags, Bag Ball Extravaganza",S0139,main,Q0166,-
-US13E06,US13,6,Disco-Mentary,2021-02-05,Dance in a documentary as a tribute to disco.,Talent Show,Create eye-popping dresses from wallpaper,Little Black Dress,S0235,main,Q0165,-
-US13E07,US13,7,Bossy Bossy Ruboot,2021-02-12,"Test their improv skills in the second instalment of the ""Bossy Rossy Show""",Acting,Reading is Fundamental,Bead It,S0141,main,Q0164,-
-US13E08,US13,8,Social Media: The Unverified Rusical,2021-02-19,Record vocals and perform them to Social Media: The Unverified Rusical .,Rusical,-,"Yellow, Gorgeous!",S0236,main,-,-
-US13E09,US13,9,The Snatch Game,2021-03-05,Snatch Game,Snatch Game,Quick drag,Fascinating Fascinators,S0143,main,Q0163,-
-US13E10,US13,10,Freaky Friday Queens,2021-03-12,Getting in pairs to Makeover each other.,Makeover,-,Drag Dopplegangers,S0144,main,Q0162,-
-US13E11,US13,11,Pop! Goes the Queens,2021-03-19,"Create and advertise a brand of soft drinks, plus, write a catchy jingle",Acting,Are You Smarter Than The Pit Crew?,BEAST Couture,S0145,main,Q0161,-
-US13E12,US13,12,Nice Girls Roast,2021-03-26,A Roast of former Miss Congeniality title holders,Comedy,Comedy makeup,-,S0146,main,Q0160,-
-US13E13,US13,13,"Henny, I Shrunk The Drag Queens!",2021-04-02,"Star in a drag parody of the film ""Honey, I Shrunk The Kids""",Acting,-,Haute Pockets,S0147,main,Q0159,-
-US13E14,US13,14,Gettin’ Lucky,2021-04-09,"Write and perform a solo verse to be included on RuPaul's new song ""Lucky,"" and guest star on RuPaul and Michelle Visage's podcast to talk about their journey throughout the competition.",Finale,-,Drag Excellence,-,main,-,-
-US13E15,US13,15,Reunited,2021-04-16,-,Reunion,-,-,-,main,-,-
-US13E16,US13,16,Grand Finale,2021-04-23,-,Finale,-,"Black and White, Red All Over, and Grand Finale Eleganza Extravaganza",-,main,-,-
-US14E01,US14,1,Big Opening No. 1,2022-01-07,"The Charisma, Nerve and Talent Show",Talent Show,Pose for a photo while spinned around on the Lipsync for the Crown wheel,Signature Show-Stopping Drag,S0148,main,Q0178,-
-US14E02,US14,2,Big Opening No. 2,2022-01-14,"The Charisma, Nerve and Talent Show",Talent Show,Pose for a photo in a giant bowl of Tic-Tacs,Sickening Signature Drag,S0240,main,Q0172,-
-US14E03,US14,3,A Pair of Balls,2022-01-21,Ball with themes corresponding to the split premiere groups,Design,-,"Group 1) Hide & Chic; Group 2) Red, White, and Blue Ball",S0150,main,Q0181,-
-US14E04,US14,4,She's A Super Tease,2022-01-28,"In two rivalling teams, produce attention grabbing superteases for Season 14.",Acting,-,Night of 1000 Jlo’s,S0151,main,Q0180,-
-US14E05,US14,5,Save A Queen,2022-02-04,"In teams, produce PSAs for a charity featuring the assigned porkchop queen, complete with rhyming",Acting,-,Spring Has Sprung,S0152,main,Q0178,-
-US14E06,US14,6,Glamazon Prime,2022-02-11,Design an outfit out of items shopped online,Design,-,Glamazon Primetime,S0153,main,Q0177,-
-US14E07,US14,7,The Daytona Wind,2022-02-18,Star in a Southern soap opera featuring three rivalling drag families,Acting,-,Chaps on the Runway,-,main,-,-
-US14E08,US14,8,60s Girl Groups,2022-02-25,Sing and dance as three 60s girl groups,Girl Group,Reading is Fundamental,Heart On,S0242,main,Q0176,-
-US14E09,US14,9,Menzeses,2022-03-04,Drag Con discussion panels in teams,Acting,Photobomb celebrity photographs,Shoulder Pads,S0243,main,-,-
-US14E10,US14,10,Snatch Game,2022-03-11,Snatch Game,Snatch Game,Make a look out of bubble wrap,Holy Couture,-,main,-,-
-US14E11,US14,11,An Extra Special Episode,2022-03-18,The bottom 7 queens face each other in a lip sync smackdown tournament.,LaLaPaRuZa,-,-,-,main,Q0175,-
-US14E12,US14,12,Moulin Ru: The Rusical,2022-03-25,"Star in ""Moulin Ru: The Rusical"" (a parody of Moulin Rouge! )",Rusical,-,"Mirror, Mirror",S0250,main,-,-
-US14E13,US14,13,The Ross Mathews Roast,2022-04-01,A roast of Ross Mathews,Comedy,Paint a mural of RuPaul and Dolly Parton,Tutu Much,S0157,main,Q0173,-
-US14E14,US14,14,Catwalk,2022-04-08,"Star in a music video for RuPaul's song ""Catwalk.""",Finale,-,"You’re a Winner, Baby",S0158,main,-,-
-US14E15,US14,15,Reunited!,2022-04-15,-,Reunion,-,-,-,main,-,-
-US14E16,US14,16,Grand Finale,2022-04-22,-,Finale,-,-,-,main,-,-
-US15E01,US15,1,"One Night Only, Part 1",2023-01-06,Talent Show (Group 1 entrances),Talent Show,Sexy Car Wash Photoshoot (Group 1) and Windy Hog Photoshoot (Group 2),Who Is She?,,-,,-
-US15E02,US15,2,"One Night Only, Part 2",2023-01-06,Talent Show,Talent Show,-,Who Is She?,S0159,main,Q0197,-
-US15E03,US15,3,All Queens Go to Heaven,2023-01-13,Queer afterlife infomercial (teams),Acting,-,Metallica,S0160,main,Q0196,-
-US15E04,US15,4,Supersized Snatch Game,2023-01-20,Snatch Game,Snatch Game,-,Beautiful Nightmare,S0161,main,Q0191,-
-US15E05,US15,5,House of Fashion,2023-01-27,Home decor fashion line (teams),Design,Reading Challenge,Drag Race Fashion Week,S0162,main,Q0195,-
-US15E06,US15,6,Old Friends Gold,2023-02-03,Old lady girl groups (teams),Girl Group,-,Tie-Dye to Die For,S0163,main,Q0194,-
-US15E07,US15,7,The Daytona Wind 2,2023-02-10,80s soap opera acting,Acting,-,Puffa Please,S0164,main,Q0193,-
-US15E08,US15,8,Lip Sync LaLaPaRuZa Smackdown,2023-02-17,Lip Sync LaLaPaRuZa Smackdown,LaLaPaRuZa,-,,S0090,main,Q0192,-
-US15E09,US15,9,The Crystal Ball,2023-02-24,The Crystal Ball (design),Design,Photobomb moments from past seasons,Start Your Engines / My Favorite Ball / Crystallized Eleganza,S0203,main,Q0190,-
-US15E10,US15,10,50/50's Most Gagworthy Stars,2023-03-03,Interview celebrities for 50/50,Acting,-,Night of a Thousand Beyoncés,S0166,main,Q0186,-
-US15E11,US15,11,"Two Queens, One Joke",2023-03-10,Stand-up comedy (pairs),Comedy,Harlem Vogue Ball,Rip Her to Shreds,S0167,main,Q0188,-
-US15E12,US15,12,Wigloose: The Rusical!,2023-03-17,Wigloose: The Rusical!,Rusical,-,Everybody Say Glove!,S0204,main,Q0187,-
-US15E13,US15,13,Teacher Makeovers,2023-03-24,Makeover school teachers,Makeover,Spill The T,Drag Family Resemblance,S0169,main,Q0189,-
-US15E14,US15,14,Blame It on the Edit,2023-03-31,Verses to 'Blame It on the Edit',Song/Verse,-,Drag Excellence,S0170,main,,-
-US15E15,US15,15,Reunited,2023-04-07,Reunion,Reunion,-,,,-,,-
-US15E16,US15,16,Grand Finale,2023-04-14,Finale lip syncs for the crown,Finale,-,,S0022,main,,-
-US16E01,US16,1,Rate-A-Queen,2024-01-05,MTV Spring Break Talent Show,Talent Show,Photoshoot through a Doorbell Camera on RuPaul's porch,RuVeal Yourself,S0171,main,,-
-US16E02,US16,2,Queen Choice Awards,2024-01-12,Queen Choice Awards Talent Show,Talent Show,Get a photo taken at the She-MV,Made You Look,S0172,main,,-
-US16E03,US16,3,The Mother of All Balls,2024-01-19,The Mother of All Balls (design),Design,-,Mother Goose / Significant Mother / Eleganza,S0173,main,Q0211,-
-US16E04,US16,4,RDR Live!,2024-01-26,RDR Live sketch comedy,Acting,-,Everything Every-Cher All at Once,S0174,main,Q0210,-
-US16E05,US16,5,Girl Groups,2024-02-02,Girl group verses (teams),Girl Group,"Take a cover photo for an original memoir, inspired by RuPaul's The House of Hidden Meanings","Faster Pussycat, Wig, Wig",S0175,main,Q0209,-
-US16E06,US16,6,Welcome to the DollHouse,2024-02-09,Design your own drag doll,Design,Flamenco dance with the Pit Crew,Welcome to the Dollhouse,S0176,main,Q0208,-
-US16E07,US16,7,The Sound of Rusic,2024-02-16,The Sound of Rusic (Rusical),Rusical,-,I Can Buy Myself Flowers,S0177,main,Q0207,-
-US16E08,US16,8,Snatch Game,2024-02-23,Snatch Game,Snatch Game,Reading Challenge,Dancing Queen,S0178,main,Q0206,-
-US16E09,US16,9,See You Next Wednesday,2024-03-01,Neo-goth unconventional materials,Design,Spit Take in response to comments from RuPaul,See You Next Wednesday,S0252,main,Q0205,-
-US16E10,US16,10,Werq the World,2024-03-08,Verses to 'Power',Song/Verse,-,True Colors,S0180,main,,-
-US16E11,US16,11,Corporate Queens,2024-03-15,Drag awareness seminars (teams),Acting,"Vote who best fits the characteristic named by RuPaul. Instead of points, the majority voters earn $100.",Flashback: DragCon 1980,S0181,main,Q0204,-
-US16E12,US16,12,Bathroom Hunties,2024-03-22,Design your own bathroom (pairs),Design,"Paint a custom t-shirt using just a painted face , inspired by Tammy Faye .",Chain Reaction,S0182,main,Q0203,-
-US16E13,US16,13,Drag Race Vegas Live! Makeovers,2024-03-29,Makeover Pit Crew dancers,Makeover,-,Drag Family Resemblance,S0183,main,Q0202,-
-US16E14,US16,14,Booked and Blessed,2024-04-05,Promote a memoir concept,Acting,-,Fandango,S0184,main,Q0201,-
-US16E15,US16,15,Lip Sync LaLaPaRuza Smackdown – Reunited,2024-04-12,Lip Sync LaLaPaRuZa Smackdown,LaLaPaRuZa,-,,S0185,main,,-
-US16E16,US16,16,Grand Finale,2024-04-19,Finale lip syncs for the crown,Finale,-,Grande Finale Eleganza,S0186,main,,-
-US17E01,US17,1,Squirrel Games,2025-01-03,Drag Queens Got Talent (Talent Show),Talent Show,"Prior to the Werkroom Entrances, play Ru Light, Green Light with Drag Race Alum and local queens",Masked For Masked Singer,S0187,main,,-
-US17E02,US17,2,Drag Queens Got Talent - Part 2,2025-01-10,Talent Show Part 2,Talent Show,-,Is It Cake?,S0188,main,,-
-US17E03,US17,3,Monopulence!,2025-01-17,Design Monopoly looks,Design,-,Monopulence,S0262,main,Q0222,-
-US17E04,US17,4,"Bitch, I'm A Drag Queen!",2025-01-24,Singing challenge,Singing,-,Quilted For Your Pleasure,S0190,main,Q0223,-
-US17E05,US17,5,RDR Live!,2025-01-31,RDR Live sketch comedy,Acting,-,Tickled Pink,S0191,main,,-
-US17E06,US17,6,Let's Get Sea Sickening Ball,2025-02-07,Sea-themed ball (design),Design,Transport Anastasia Beverly Hills Lipsticks to a display case,Sea Sickening Ball,S0263,main,Q0224,-
-US17E07,US17,7,Snatch Game,2025-02-14,Snatch Game,Snatch Game,-,Leather and Lace,S0264,main,Q0220,-
-US17E08,US17,8,The Wicked Wiz Of Oz: The Rusical!,2025-02-21,Wicked Wiz of Oz (Rusical),Rusical,-,Emerald City Eleganza,S0265,main,Q0225,-
-US17E09,US17,9,Heavens to Betsey!,2025-02-28,Design (Betsey Johnson),Design,Reading Challenge,Heavens to Betsey,S0266,main,Q0219,-
-US17E10,US17,10,The Villains Roast,2025-03-07,Roast,Comedy,Questions with Michelle Visage and the Badonka Dunk Tank,Villains,S0267,main,Q0221,-
-US17E11,US17,11,Ross Mathews vs. The Ducks,2025-03-14,Acting challenge,Acting,-,Feather Frenzy,S0268,main,Q0218,-
-US17E12,US17,12,"Charisma, Uniqueness, Nerve & Talent Monologues",2025-03-21,CUNT Monologues,Acting,"In pairs, fill in the blanks to write the other queen's Drag Race bios",Pearls of Wisdom,S0269,main,Q0217,-
-US17E13,US17,13,Drag Baby Mamas,2025-03-28,Makeover,Makeover,Spill The T,Drag Family Resemblance,S0270,main,,-
-US17E14,US17,14,How's Your Headliner?,2025-04-04,Headliner act,Acting,-,Showgirl Realness,S0192,main,Q0216,-
-US17E15,US17,15,Lip Sync Lalaparuza Smackdown,2025-04-11,Lip Sync LaLaPaRuZa Smackdown,LaLaPaRuZa,-,,S0193,main,,-
-US17E16,US17,16,Grand Finale,2025-04-18,Finale lip syncs for the crown,Finale,-,Grand Finale Eleganza,S0194,main,,-
-US18E01,US18,1,Premiere Part 1,2026-01-02,Talent Show,Talent Show,Act as a scream queen with masked dancers and pose for a photoshoot,"Reclaim, Renew, Rejoice",S0277,main,,-
-US18E02,US18,2,Premiere Part 2,2026-01-09,Talent Show,Talent Show,-,"Your Neck, Your Back, Your Pussy, and Your Crack",S0278,main,Q0239,-
-US18E03,US18,3,RDR Live Returns!,2026-01-16,RDR Live!,Acting,-,Animal Attraction,S0279,main,Q0238,-
-US18E04,US18,4,Red Carpet Mash-Ups,2026-01-23,"In pairs, design a look inspired by two iconic red carpet moments",Design,-,Red Carpet Mashups,S0280,main,Q0237,-
-US18E05,US18,5,"The Rate-A-Queen Talent Show, Part 1",2026-01-30,"Perform in the Rate-A-Queen Talent Show, Part 1",Talent Show,-,"Not Today, Satin",S0281,main,,-
-US18E06,US18,6,"The Rate-A-Queen Talent Show, Part 2",2026-02-06,"Perform in the Rate-A-Queen Talent Show, Part 2",Talent Show,-,"Shake, Shake, Shake",S0030,main,Q0236,-
-US18E07,US18,7,Drag Queens For Change,2026-02-13,"In pairs, create comedic political ads that parody polarizing political issues",Acting,-,I Can See Right Through Her,S0282,main,Q0235,-
-US18E08,US18,8,Snatch Game Of Love: Island Edition,2026-02-20,Snatch Game of Love Island,Snatch Game,-,80s Ladies,S0283,main,Q0234,-
-US18E09,US18,9,Fannie: The Rusical,2026-02-27,Rusical,Rusical,"Grindr, I Hardly Know Her!",Beige Against The Machine,S0284,main,Q0233,-
-US18E10,US18,10,Drag in a Bag,2026-03-06,Design,Design,Reading Challenge,Party,S0526,main,,-
-US18E11,US18,11,A Toast to Alyssa Edwards,2026-03-13,Roast,Comedy,Advertise fragrances provided by Scent Bird,Swept Away,S0195,main,Q0232,-
-US18E12,US18,12,"Mammas, Don't Let Your Babies Grow Up to Be Drag Queens",2026-03-20,Give drag makeovers to queer cowboys,Makeover,Race while riding inflatable horses,Drag Family Resemblance,S0285,main,Q0231,-
-US18E13,US18,13,Karens Gone Wild,2026-03-27,"Improvise in the show ""Karens got Wild""",Acting,Everybody Loves Puppets,From Wholesome to Folsom,S0525,main,Q0230,-
-US18E14,US18,14,Good Morning Bitches,2026-04-03,Talk show,Acting,-,Drag Excellence,S0196,main,Q0229,-
-US18E15,US18,15,Lip Sync RuPaul-A-Paruza Smackdown,2026-04-10,Lip Sync Smackdown,LaLaPaRuZa,-,-,,-,,-
-US18E16,US18,16,Grand Finale,2026-04-17,Finale,Finale,-,-,S0286,main,,-
-AS05E01,AS05,1,All Star Variety Extravaganza,2020-06-05,Werq The World Variety Extravaganza Show,Talent Show,Reading is Fundamental,-,S0352,main,Q0093,-
-AS05E02,AS05,2,I'm In Love!,2020-06-12,Write and perform,Girl Group,-,Love The Skin You're In,S0353,main,Q0005,-
-AS05E03,AS05,3,Get a Room!,2020-06-19,Design a signature suite,Design,-,Three Looks In One,S0354,main,Q0029,-
-AS05E04,AS05,4,SheMZ,2020-06-26,Improv,Acting,-,Camo Couture,S0355,main,Q0123,-
-AS05E05,AS05,5,Snatch Game of Love,2020-07-03,Snatch Game of Love,Snatch Game,-,Prom Queen Fantasy,S0356,main,Q0030,-
-AS05E06,AS05,6,The Charles Family Backyard Ball,2020-07-10,Showcase two looks,Design,-,-,S0357,main,Q0024,-
-AS05E07,AS05,7,Stand-Up Smackdown,2020-07-17,Face off in a,Comedy,-,Freak Out!,S0139,main,Q0122,-
-AS05E08,AS05,8,Clap Back!,2020-07-24,"Write, record, and perform a verse",Finale,•,All Star Eleganza,S0358,main,-,-
-AS01E01,AS01,1,It Takes Two,2012-10-22,Create an,PhotoShoot,-,Team,S0359,main,Q0014,-
-AS01E02,AS01,2,RuPaul's Gaff-In,2012-10-29,Perform and write original jokes doing celebrity impersonations for,Snatch Game,In Da Butt Ru,60s Glam,S0360,main,Q0008,-
-AS01E03,AS01,3,Queens Behaving Badly,2012-11-05,"Act ""naughty"" on the streets of Hollywood and do pranks",Acting,Queens With Guy Phones,Bad Girl Chic,S0221,main,Q0023,-
-AS01E04,AS01,4,All-Star Girl Groups,2012-11-12,Transform daughters of celebrities,MakeOver,-,-,S0361,main,Q0025,-
-AS01E05,AS01,5,Dynamic Drag Duos,2012-11-19,Create a Super Hero or Super Villain persona to your secret drag identity,Design,Basketball game of,-,S0362,main,-,-
-AS01E06,AS01,6,The Grand Finale,2012-11-26,Drag on a Time,Finale,•,-,S0363,main,Q0004,-
-AS02E01,AS02,1,All Star Talent Show Extravaganza,2016-08-25,All Star Talent Show,Talent Show,Reading is Fundamental,-,S0375,main,Q0051,-
-AS02E02,AS02,2,All Stars Snatch Game,2016-09-01,Celebrity impersonations in the,Snatch Game,-,: Latex Eleganza,S0376,main,Q0013,-
-AS02E03,AS02,3,HERstory of the World,2016-09-08,Perform in a rusical,Rusical,-,: The Future of Drag,S0200,main,Q0076,-
-AS02E04,AS02,4,Drag Movie Shequels,2016-09-15,Perform in a,Acting,-,: Two Looks in One,S0377,main,Q0052,-
-AS02E05,AS02,5,Revenge Of The Queens,2016-09-22,Performing a live,Comedy,-,-,S0378,main,Q0051,-
-AS02E06,AS02,6,Drag Fish Tank,2016-09-29,"Create, market, and film a commercial",Advert,"""Beastly Golf Challenge""",: Pants on the Runway,S0379,main,Q0013,-
-AS02E07,AS02,7,Family That Drags Together,2016-10-06,Drag Makeover,MakeOver,-,-,S0380,main,Q0052,-
-AS02E08,AS02,8,All Stars Supergroup,2016-10-13,Write original rap lyrics and perform,Finale,-,-,S0381,main,Q0049,-
-AS02E09,AS02,9,Reunited,2016-10-27,•,Reunion,•,-,-,main,-,-
-AS03E01,AS03,1,All-Star Variety Show,2018-01-25,Variety Show,Talent Show,Reading is Fundamental,-,S0320,main,Q0017,-
-AS03E02,AS03,2,Divas Lip Sync Live,2018-02-01,Go Full diva in a lip-syncing dance number,Rusical,-,RuDemption Realness,S0321,main,Q0094,-
-AS03E03,AS03,3,The B*tchelor,2018-02-08,The contestants',Acting,-,Wigs on Wigs on Wigs (inspired by Roxxxy Andrews),S0322,main,Q0069,-
-AS03E04,AS03,4,All Stars Snatch Game,2018-02-15,Snatch Game,Snatch Game,-,Flower Power,S0323,main,Q0092,-
-AS03E05,AS03,5,Pop Art Ball,2018-02-22,"Design wearable soup cans inspired by Andy Warhol, and  Studio 54 disco looks.",Design,The contestants pose for a photo that will be turned into a pop art portrait,Soup Can Realness and Studio 54 Disco Looks,S0324,main,Q0109,-
-AS03E06,AS03,6,Handmaids to Kitty Girls,2018-03-01,The contestants audition for RuPaul's new,Girl Group,-,-,S0325,main,Q0094,-
-AS03E07,AS03,7,My Best Squirrelfriend's Dragsmaids Wedding Trip,2018-03-08,The contestants’,Acting,-,Red For Filth,S0326,main,Q0017,-
-AS03E08,AS03,8,A Jury of Your Queers,2018-03-15,"Write, sing, and dance",Finale,•,Best Drag Eleganza Extravaganza,S0327,main,Q0021,-
-AS04E01,AS04,1,All Star Super Queen Variety Show,2018-12-14,Variety Show,Talent Show,Reading is Fundamental,-,S0287,main,Q0086,-
-AS04E02,AS04,2,"Super Girl Groups, Henny",2018-12-21,Audition for the new super,Girl Group,-,Eleguence After Dark,S0288,main,Q0108,-
-AS04E03,AS04,3,Snatch Game of Love,2018-12-28,Snatch Game of Love,Snatch Game,-,Boots The House Down,S0289,main,Q0070,-
-AS04E04,AS04,4,Jersey Justice,2019-01-04,Improvise,Acting,-,Swerves and Curves,S0290,main,Q0037,-
-AS04E05,AS04,5,Roast in Peace,2019-01-11,The Funeral,Comedy,-,Angelic White,S0291,main,-,-
-AS04E06,AS04,6,LaLaPaRUza,2019-01-18,Lip Sync Smackdown,LipSync,-,LaLaPaRUza Eleganza,-,main,Q0086,-
-AS04E07,AS04,7,Queens of Clubs,2019-01-25,Design and host,Design,-,Plastique Fantastique,S0292,main,Q0107,-
-AS04E08,AS04,8,RuPaul's Best Judy's Race,2019-02-01,Transform their best friends into their own drag sisters,MakeOver,-,Best Judy Realness,S0293,main,Q0023,-
-AS04E09,AS04,9,"Sex and the Kitty, Girl 3",2019-02-08,Star in,Acting,-,Kitty Girl Couture,S0294,main,Q0037,-
-AS04E10,AS04,10,Super Queen Grand Finale,2019-02-15,"Write, sing, and dance",Finale,•,All Star Eleganza,S0295,main,Q0091,-
-AS06E01,AS06,1,All Star Variety Extravaganza,2021-06-24,Variety Show,Talent Show,Reading is Fundamental,-,S0364,main,Q0059,-
-AS06E02,AS06,2,The Blue Ball,2021-06-24,The,Design,-,-,S0365,main,Q0041,-
-AS06E03,AS06,3,Side Hustles,2021-07-01,Write and star in a commercial,Advert,-,Rudemption Runway,S0366,main,Q0131,-
-AS06E04,AS06,4,Halftime Headliners,2021-07-08,"Headline in """,Rusical,-,The Frill of It All,S0367,main,Q0025,-
-AS06E05,AS06,5,Pink Table Talk,2021-07-15,Produce and host an intimate chat show,Acting,-,Clash of the Patterns,S0368,main,Q0136,-
-AS06E06,AS06,6,Rumerican Horror Story: Coven Girls,2021-07-22,Over-acting,Acting,-,"Oh, My Goth!",S0369,main,Q0130,-
-AS06E07,AS06,7,Show Up Queen,2021-07-29,Write and record a verse,Girl Group,-,Hot Tropics,S0370,main,Q0149,-
-AS06E08,AS06,8,Snatch Game of Love,2021-08-05,Snatch Game of Love,Snatch Game,-,Pop Art,S0371,main,Q0014,-
-AS06E09,AS06,9,Drag Tots,2021-08-12,Create and dress up,Design,All Star Class Superlatives,Drag Tots,S0372,main,Q0111,-
-AS06E10,AS06,10,Rudemption Lip-Sync Smackdown,2021-08-19,-,LipSync,-,-,-,main,-,-
-AS06E11,AS06,11,"The Charisma, Uniqueness, Nerve and Talent Monologues",2021-08-26,Entertain in the,Comedy,Pride photo op,"Oops! I Did It Again, A Fashionable Fashion Fail",S0373,main,Q0067,-
-AS06E12,AS06,12,This is Our Country,2021-09-02,"Write, record, and perform a verse",Finale,•,All Star Hall of Fame Eleganza Extravaganza,S0374,main,-,-
-AS07E01,AS07,1,Legends,2022-05-20,The queens must,Rumix,Reading is Fundamental,I'm Crowning,S0328,main,-,-
-AS07E02,AS07,2,Snatch Game,2022-05-20,The queens must give two celebrity impersonations in the,Snatch Game,-,The Pleather Principle,S0329,main,-,-
-AS07E03,AS07,3,The Realness of Fortune Ball,2022-05-27,The queens must showcase three looks in,Design,: Hungman: Fill in a Before-and-After word puzzle,-,S0322,main,-,-
-AS07E04,AS07,4,Fairytale Justice,2022-06-03,The queens must,Acting,-,Spikes on the Runway,S0330,main,-,-
-AS07E05,AS07,5,Draguation Speeches,2022-06-10,The queens must,Comedy,-,Veiled It,S0331,main,-,-
-AS07E06,AS07,6,Total Ru-quest Live,2022-06-17,The queens must,Girl Group,-,"Night of 1,000 Dolly Partons",S0332,main,-,-
-AS07E07,AS07,7,Legendary Legend Looks,2022-06-24,The queens must,Design,-,Legendary Legend Looks,S0333,main,-,-
-AS07E08,AS07,8,Santa's School For Girls,2022-07-01,The queens must,Acting,-,Knitty Knitty Bang Bang,S0334,main,-,-
-AS07E09,AS07,9,Dance Like a Drag Queen,2022-07-08,Create,Advert,-,What Lies Beneath,S0335,main,-,-
-AS07E10,AS07,10,The Kennedy Davenport Center Honors Hall of Shade,2022-07-15,Roast each other,Comedy,-,All Glow'd Up,S0336,main,-,-
-AS07E11,AS07,11,Drag Race Gives Back Variety Extravaganza,2022-07-22,Variety Show,Talent Show,-,-,S0337,main,-,-
-AS07E12,AS07,12,Lip Sync LaLaPaRuza Smackdown,2022-07-29,Lip Sync LaLaPaRuZa Smackdown for The Crown,Finale,•,Grand Finale Eleganza,-,main,-,-
-AS08E01,AS08,1,The Fame Games,2023-05-12,Write and perform,Girl Group,Model two looks on the runway,Famous Forever,S0308,main,Q0058,-
-AS08E02,AS08,2,It's RDR Live!,2023-05-12,Perform in a sketch comedy performance,Acting,-,Net Gala,S0309,main,Q0097,-
-AS08E03,AS08,3,The Supermarket Ball,2023-05-19,The Supermarket Ball,Design,-,-,S0310,main,Q0085,-
-AS08E04,AS08,4,Screen Queens,2023-05-26,Create trailers for a scripted series,Advert,-,Ass The World Turns,S0311,main,Q0064,-
-AS08E05,AS08,5,Snatch Game of Love,2023-06-02,Snatch Game of Love,Snatch Game,-,Ruveal Yourself,S0312,main,-,-
-AS08E06,AS08,6,JOAN: The Unauthorized Rusical!,2023-06-09,Joan: The Unauthorised Rusical,Rusical,-,Night of 1000 Grace Jones,S0313,main,Q0114,-
-AS08E07,AS08,7,Forensic Queens,2023-06-16,"Improvise in the new RuPrime series ""Forensic Queens""",Acting,-,Miss Fill In The Blank,S0314,main,Q0140,-
-AS08E08,AS08,8,You’re A Winner Baby!,2023-06-23,"Transform materials into your own signature look that screams ""I'm A Winner Baby!""",Design,-,I'm A Winner Baby!,S0315,main,Q0164,-
-AS08E09,AS08,9,"Carson Kressley, This is Your Gay Life",2023-06-30,The Carson Kressley Roast,Comedy,-,Snow Bunny,S0316,main,Q0105,-
-AS08E10,AS08,10,The Letter “L”,2023-07-07,Transform lesbians into fabulous drag queens,MakeOver,"In 45 minutes, transform their torsos inspired by a special Jean Paul Gaultier fragrance and",Drag Family Resemblance,S0317,main,Q0015,-
-AS08E11,AS08,11,The Fame Games Variety Extravaganza,2023-07-14,Showcase a solo performance in,Talent Show,Reading Challenge,-,S0318,main,-,-
-AS08E12,AS08,12,Grand Finale,2023-07-21,•,Finale,•,Finale Fabulosity,S0319,main,-,-
-AS09E01,AS09,1,Drag Queens Save the World,2024-05-17,The contestants must,Rumix,Reading is Fundamental,"Signature Look, Signature Fragrance",S0344,main,-,-
-AS09E02,AS09,2,The Paint Ball,2024-05-17,Serve three looks in The Paint Ball,Design,-,-,S0345,main,-,-
-AS09E03,AS09,3,Snatch Game of Love,2024-05-24,Snatch Game of Love,Snatch Game,-,A Tail and Two Titties,S0346,main,-,-
-AS09E04,AS09,4,Smokin' Hot Firefighter Makeovers,2024-05-31,"In duos,",MakeOver,-,Smoking Hot Pop Stars,S0347,main,-,-
-AS09E05,AS09,5,Property Queens,2024-06-07,"In duos, create dragged up real estates",Advert,Soul Train Dance Off,Day to Night Ruveal,S0348,main,-,-
-AS09E06,AS09,6,The National Drag Convention Roast,2024-06-14,The National Drag Convention,Comedy,Straw Poll,Atomic Blonde,S0349,main,-,-
-AS09E07,AS09,7,Meeting in the Ladies Room,2024-06-21,Act in the original film,Acting,Move the contents of one fruit basket to another basket using only their legs,"Widow, Weep For Me",S0215,main,-,-
-AS09E08,AS09,8,Make Your Own Kind of Rusic,2024-06-28,Create an outfit,Design,Photobomb,Make Your Own Kind of Rusic,S0350,main,-,-
-AS09E09,AS09,9,Rosemarie's Baby Shower: The Rusical,2024-07-05,Rosemarie's Baby Shower: The Rusical,Rusical,-,Bring Back My Pearls,S0351,main,-,-
-AS09E10,AS09,10,Lip-Sync Lalaparuza Smackdown,2024-07-12,Lip Sync LaLaPaRuZa Smackdown,LipSync,-,Lip Sync LaLaPaRuZa,S0069,main,-,-
-AS10E01,AS10,1,"Winner Winner, Chicken Dinner",2025-05-09,The contestants must,Rumix,-,Slits and Tits,S0296,main,-,-
-AS10E02,AS10,2,Murder on the Dance Floor,2025-05-09,Improvise,Acting,Move a softball up the Pit Crew's body without hands,Coming and Going,S0297,main,-,-
-AS10E03,AS10,3,Hoop Queens Makeovers,2025-05-16,Makeover,MakeOver,Shoot basketball free-throws,Drag Family Resemblance,S0298,main,-,-
-AS10E04,AS10,4,Eight Ball,2025-05-23,Design,Design,-,Eight Ball Eleganza,S0299,main,-,-
-AS10E05,AS10,5,Rappin’ Roast,2025-05-30,Write and perform verses,Comedy,-,Little Shop of Whores,S0300,main,-,-
-AS10E06,AS10,6,Starrbooty: The Rebooty,2025-06-06,Starrbooty: The Rebooty,Rusical,-,"Wild, Wild West",S0301,main,-,-
-AS10E07,AS10,7,Wicked Good,2025-06-13,"In pairs,",Design,-,Good Witch and Wicked Witch,S0302,main,-,-
-AS10E08,AS10,8,Stagecooch,2025-06-20,Perform in country girl groups,Girl Group,Clueless,"Night of a 1,000 Mileys",S0303,main,-,-
-AS10E09,AS10,9,The Golden Bitchelor,2025-06-27,Improvise,Acting,-,Paper Dolls,S0304,main,-,-
-AS10E10,AS10,10,Tournament of All Stars Snatch Game,2025-07-04,Snatch Game,Snatch Game,-,Tear-A-Me-Suit,S0305,main,Q0098,-
-AS10E11,AS10,11,Tournament of All Stars Talent Invitational,2025-07-11,Perform in the Tournament of All Stars,Talent Show,Reading Challenge,Foiled Again,S0306,main,Q0185,-
-AS10E12,AS10,12,Tournament of All Stars Smackdown for the Crown,2025-07-18,•,Finale,•,-,S0307,main,-,-
-AS11E01,AS11,1,Break Dancin’ 2: Electric Rugaloo,2026-05-08,Write and perform a verse,Rumix,-,La Toyas R Us,S0338,main,-,-
-AS11E02,AS11,2,Bar Queen Couture,2026-05-08,Design a couture outfit,Design,Put on a pair of oversized underwear without using hands,Bar Queen Couture,S0339,main,-,-
-AS11E03,AS11,3,Shop Til U Drop,2026-05-15,Host a live shopping show,Advert,-,"Paris, France",S0340,main,-,-
-AS11E04,AS11,4,Duets: It Takes Two,2026-05-22,"In pairs,",Girl Group,-,You Butter Ask Somebody,S0341,main,-,-
-AS11E05,AS11,5,How-To Videos,2026-05-29,Create short informational videos,Advert,-,Barn This Way,S0342,main,-,-
-AS11E06,AS11,6,Too Many Daddies,2026-06-05,Makeover a gay dad,MakeOver,Slap Out of It!,Drag Family Resemblance,S0343,main,-,-
-AS11E07,AS11,7,-,-,-,Design,-,-,-,main,-,-
-CA01E01,CA01,1,Eh-Leganza Eh-Xtravaganza,2020-07-02,Canuck Couture Fantasy:,Design,Photoshoot with a high speed fan and snow blowing in their faces,-,S0397,main,Q0252,-
-CA01E02,CA01,2,Her-Itage Moments,2020-07-09,Acting Challenge,Acting,The Nutsmacker: a crash course in ballet,Not My First Time,S0398,main,Q0251,-
-CA01E03,CA01,3,Not Sorry Aboot It,2020-07-16,"Write, record and perform in a song",Girl Groups,"Canada Gay-M: Be co-anchors for Canada's premier gay morning show and read off a teleprompter in English, French, and ""Gay-lish""",Québec-ky With The Good Hair,S0399,main,Q0250,-
-CA01E04,CA01,4,Single Use Queens,2020-07-23,Design and create,Design,Underwear Memory Matching,-,S0400,main,Q0249,-
-CA01E05,CA01,5,The Snatch Game,2020-07-30,Snatch Game,Snatch Game,Reading is Fundamental,Night of a 1000 Céline Dions,S0401,main,Q0248,-
-CA01E06,CA01,6,Star Sixty-Nine,2020-08-06,"In teams,",Advert,Psychic Hotline Operators,Canadian Tux-She-Do: Denim on Denim on Denim,S0402,main,Q0247,-
-CA01E07,CA01,7,Miss Loose Jaw,2020-08-13,Compete in Drag Race's very first pageant,Acting,-,Pageant Perfection,S0403,main,Q0246,-
-CA01E08,CA01,8,Welcome to the Family,2020-08-20,Makeover,Make Over,Everybody Loves Puppets,A Family Affair,S0404,main,Q0245,-
-CA01E09,CA01,9,The Snow Ball,2020-08-27,Showcase 3 frozen looks in,Design,Sing Canada's National Anthem as a local chanteuse,-,S0405,main,Q0241,-
-CA01E10,CA01,10,U Wear It Well,2020-09-03,Write and record a verse for a performance,Finale,-,Coronation Eleganza,-,main,-,-
-CA02E01,CA02,1,Lost and Fierce,2021-10-14,Create a haute-check couture look,Design,Pose for a,-,S0382,main,Q0264,-
-CA02E02,CA02,2,Under the Big Top,2021-10-21,Perform in the,Rusical,Queen of My Neighborhood Pageant,Circus Bezerkus,S0383,main,Q0263,-
-CA02E03,CA02,3,Screech,2021-10-28,Overact in a slasher film,Acting,-,Good Girl Gone Bad,S0384,main,Q0262,-
-CA02E04,CA02,4,Snatch Game,2021-11-04,Snatch Game,Snatch Game,Reading is Fundamental,Made in Canada,S0385,main,Q0261,-
-CA02E05,CA02,5,Bye Flop,2021-11-11,Perform as country pop,Girl Groups,"Pair up, get into quick drag, and give a lesson on safe sex",Monochromatica: Future Pop Princess,S0386,main,Q0260,-
-CA02E06,CA02,6,The Sinner's Ball,2021-11-18,Present three looks in,Design,Get into artiste quick drag and,-,S0387,main,Q0259,-
-CA02E07,CA02,7,The Roast of Brooke Lynn Hytes,2021-11-25,Partake in the,Comedy,"Sound off on the highs and lows of this season's fashion on Brad's new show,",Dungeons and Drag Queens,S0388,main,Q0258,-
-CA02E08,CA02,8,Prom,2021-12-02,Pair up with teenagers for a,Make Over,Receive live calls from family members,Cool Mom and Prom Queen,S0389,main,Q0257,-
-CA02E09,CA02,9,The Reunion,2021-12-09,-,Reunion,-,-,-,main,Q0256,-
-CA02E10,CA02,10,Queen of the North,2021-12-16,Write and record a verse for a performance,Finale,•,Coronation Eleganza,S0199,main,-,-
-CA03E01,CA03,1,Sidewalk to Catwalk,2022-07-14,Create an entirely new look,Design,Sissy That Sidewalk rooftop fashion show,Sidewalk to Catwalk,S0414,main,Q0276,-
-CA03E02,CA03,2,The Who-Knows,2022-07-21,Host the Who-Knows Awards Show,Stand Up,Take hockey jerseys and get into quick drag.,Goddesses of the Ancient World,S0415,main,Q0275,-
-CA03E03,CA03,3,Ruets,2022-07-28,"In pairs,",Lip Sync,Make Brooke laugh during a date.,Sleeves,S0416,main,Q0274,-
-CA03E04,CA03,4,Bitch Stole My Look,2022-08-04,Create a look,Design,Improv your way through a Tuck Talk sponsored by Trojan.,Bitch Stole My Look,S0417,main,Q0273,-
-CA03E05,CA03,5,Snatch Game,2022-08-11,Snatch Game,Snatch Game,Reading is Fundamental,Periodic Table of Elements,S0418,main,Q0272,-
-CA03E06,CA03,6,Cosmetic Queens,2022-08-18,Film a commercial,Advert,Drag Family,Paint,S0419,main,Q0271,-
-CA03E07,CA03,7,Squirrels Trip: The Rusical,2022-08-25,Perform in,Rusical,Audition,Dystopian Drag,S0420,main,Q0270,-
-CA03E08,CA03,8,Masquerade Ball,2022-09-01,Present three looks in,Design,-,-,S0421,main,Q0269,-
-CA03E09,CA03,9,True North Strong (and Fierce),2022-09-08,Write and record a verse,Finale,•,Coronation Eleganza,S0422,main,Q0268,-
-CA04E01,CA04,1,Premiere Ball,2023-11-16,Present three looks,Runway,-,-,S0423,main,-,-
-CA04E02,CA04,2,QV-She,2023-11-23,Advertise a drag look product,Advert,-,Gemstones,S0424,main,Q0287,-
-CA04E03,CA04,3,OH-SHE-GAGGIN,2023-11-30,Perform as rival girl groups,Girl Groups,Get into quick drag and,Sunglasses at Night,S0425,main,Q0286,-
-CA04E04,CA04,4,Out of the Closet,2023-12-07,Design a look,Design,Metallic Photoshoot,Out of the Closet,-,main,-,-
-CA04E05,CA04,5,Snatch Game,2023-12-14,Snatch Game,Snatch Game,Reading Challenge,Steampunk,S0426,main,Q0285,-
-CA04E06,CA04,6,Lip Sync Slay Offs,2023-12-21,Face off in the,Lip Sync,-,-,S0427,main,Q0284,-
-CA04E07,CA04,7,From Drags to Riches: The Rusical,2023-12-28,Star in,Rusical,Get in quick drag and,Always a Bridesmaid,S0428,main,Q0282,-
-CA04E08,CA04,8,A Star Is Born,2024-01-04,Makeover,Make Over,Get a makeover,A Star is Born,S0429,main,Q0281,-
-CA04E09,CA04,9,Grand Finale,2024-01-11,Write and record a verse,Finale,•,Coronation Eleganza,S0430,main,Q0280,-
-CA05E01,CA05,1,Go Off Queen,2024-11-21,Write a verse,Rumix,-,You Oughta Know... Me,S0406,main,-,-
-CA05E02,CA05,2,Greetings Queenlings,2024-11-28,"In teams,",Advert,-,Time and Place,S0407,main,Q0298,-
-CA05E03,CA05,3,The Slayoffs: Teams Edition,2024-12-05,Face off the,Lip Sync,-,-,S0408,main,Q0297,-
-CA05E04,CA05,4,Fast Fashion,2024-12-12,Design,Design,Boudoir photoshoot,-,S0409,main,Q0296,-
-CA05E05,CA05,5,The One Where They Went '90s,2024-12-19,"In teams,",Girl Groups,Get in quick drag and audition to be a '90s showcase supermodel,Grunge and Glamour,S0410,main,Q0295,-
-CA05E06,CA05,6,Snatch Game,2024-12-26,Snatch Game,Snatch Game,Reading Challenge,Alien Superstar,S0403,main,Q0294,-
-CA05E07,CA05,7,The Devil Wore Custom,2025-01-02,Design,Design,Get in quick drag and get interviewed to be Brooke Lynn's assistant,-,S0411,main,Q0293,-
-CA05E08,CA05,8,What Just Happened?!,2025-01-09,Be guests on the late night talk show,Acting,Get in quick drag and become a field reporter for Brad News,Statuesque,S0412,main,Q0292,-
-CA05E09,CA05,9,Grand Finale,2025-01-16,Write and record,Finale,•,Coronation Eleganza,S0413,main,Q0291,-
-CA06E01,CA06,1,Not Sorry Aboot It,2025-11-20,Write a verse,Rumix,-,More is More,S0049,main,-,-
-CA06E02,CA06,2,Yachty Girls,2025-11-27,"In teams,",Advert,-,In the Shadows,S0390,main,Q0310,-
-CA06E03,CA06,3,Pick Your Poison,2025-12-04,Choose between,Snatch Game,-,Scene Stealers (Design),S0391,main,Q0309,-
-CA06E04,CA06,4,Reading Battles are Back Back Back Again,2025-12-11,Reading Battles,Comedy,Get in quick drag and get a fashion consultation by Carson Kressley,My Chemical Reaction,S0392,main,Q0308,-
-CA06E05,CA06,5,The Shade,2025-12-18,"In teams,",Acting,Get in quick drag and sing karaoke to iconic verses from,A Perp Walk to Remember,S0393,main,Q0307,-
-CA06E06,CA06,6,Slayoffs,2025-12-25,Face off in the,Lip Sync,-,-,S0394,main,Q0306,-
-CA06E07,CA06,7,Paris (Ontario) Fashion Week,2026-01-01,Design,Design,Get in quick drag and star in a perfume commercial,-,S0395,main,Q0304,-
-CA06E08,CA06,8,"Charisma, Uniqueness, Nerve, and Talent",2026-01-08,-,Rusical,-,Uniqueness,S0396,main,Q0303,-
-CA06E09,CA06,9,Pop Queens of the North,2026-01-15,Write and record,Finale,•,Coronation Eleganza,S0196,main,Q0302,-
-UK01E01,UK01,1,The Royal Queens,2019-10-03,Rule the,Runway,Take part in a photoshoot challenge depicting the beheading of Anne Boleyn.,-,S0487,main,Q0319,-
-UK01E02,UK01,2,Downton Draggy,2019-10-10,Act in,Acting,-,Bond Girl Glamourama,S0488,main,Q0318,-
-UK01E03,UK01,3,Posh On A Penny,2019-10-17,Create a show-stopping outfit,Design,Dance around a maypole,-,S0004,main,Q0317,-
-UK01E04,UK01,4,The Snatch Game,2019-10-24,Snatch Game,Snatch Game,-,Weird Science,S0489,main,Q0316,-
-UK01E05,UK01,5,Girl Groups,2019-10-31,Record vocals and perform in a girl group,Girl Groups,Reading is Fundamental,A Day at the Races.,S0490,main,Q0315,-
-UK01E06,UK01,6,Thirsty Werk,2019-11-07,Create and,Advert,"Boxers, Briefs or Commando",Rainy Day Eleganza,S0491,main,Q0314,-
-UK01E07,UK01,7,The Family That Slays Together,2019-11-14,Drag Makeovers,Make Over,Everybody Loves Puppets,-,S0492,main,Q0313,-
-UK01E08,UK01,8,Grand Finale,2019-11-21,Write and record a verse for a performance,Finale,-,Final Three Eleganza Extravaganza,S0493,main,Q0312,-
-UK01E09,UK01,9,It's A Wrap!,2019-11-29,•,Reunion,•,-,-,main,-,-
-UK02E01,UK02,1,Royalty Returns,2021-01-14,Serve up two runway looks,Runway,Wimbled'hun Photoshoot,-,S0468,main,Q0327,-
-UK02E02,UK02,2,Rats: The Rusical,2021-01-21,Perform in,Rusical,Drag Race Cabinet: the queens must vote themselves in four categories.,"Surprise, Surprise",S0469,main,Q0331,-
-UK02E03,UK02,3,Who Wore It Best?,2021-01-28,Create and model a look on the runway,Design,Limbo for your Life,-,S0470,main,Q0330,-
-UK02E04,UK02,4,Morning Glory,2021-02-04,"Host ""Morning Glory""",Acting,Present a pastry in a sexual manner,Monster Mashup,S0471,main,-,-
-UK02E05,UK02,5,The RuRuvision Song Contest,2021-02-11,Record vocals and perform in a girl group,Girl Groups,-,A Day at the Seaside,S0019,main,Q0331,-
-UK02E06,UK02,6,Snatch Game,2021-02-18,Snatch Game,Snatch Game,-,PreHERstoric,S0472,main,Q0326,-
-UK02E07,UK02,7,Lockdown Supersheroes,2021-02-25,Create and model a look,Design,Reading is Fundamental,Lockdown Supersheroes,S0473,main,Q0325,-
-UK02E08,UK02,8,Stoned on the Runway,2021-03-04,Put on a,Stand Up,The Masc 4 Masc Singer,Stoned On The Runway,S0474,main,Q0324,-
-UK02E09,UK02,9,BeastEnders,2021-03-11,Pay tribute to iconic British,Acting,Everybody Loves Puppets,Panto Dames,S0475,main,-,-
-UK02E10,UK02,10,Grand Finale,2021-03-18,Write and record a verse for a performance,Finale,•,Final Four Eleganza Extravaganza,S0476,main,Q0323,-
-UK03E01,UK03,1,The Return of Royalty,2021-09-23,Serve up two runway looks,Runway,Ru's Dirty Charades,-,S0195,main,Q0342,-
-UK03E02,UK03,2,Dragoton,2021-09-30,Perform as dance instructors,Choreo,Rupermarket Sweeps,Red Carpet Show-Stoppers,S0431,main,Q0341,-
-UK03E03,UK03,3,Great Outdoors,2021-10-07,Create a camping-inspired look,Design,"Create a straight male character and market it in a Tinder spoof ""Findhr""",-,S0432,main,Q0328,-
-UK03E04,UK03,4,Big Drag Energy,2021-10-14,Record vocals and perform in a girl group,Girl Groups,-,A Night of a Thousand Spice Girls,S0433,main,-,-
-UK03E05,UK03,5,Draglexa,2021-10-21,Create and advertise,Advert,Pair up and compete on RuPaul's Dog Race,"Expenny, Henny: Expensive-looking Drag",S0434,main,Q0339,-
-UK03E06,UK03,6,Snatch Game,2021-10-28,Snatch Game,Snatch Game,Reading is Fundamental,Feeling Fruity,S0435,main,Q0338,-
-UK03E07,UK03,7,Miss Fugly Beauty Pageant,2021-11-04,Serve three looks on the runway,Design,-,"Fugly Swimwear, Charity Shop Chic and Fugly But Fashionable",S0436,main,Q0336,-
-UK03E08,UK03,8,Bra Wars,2021-11-11,Over acting,Acting,-,Scene Stealers,S0437,main,-,-
-UK03E09,UK03,9,The Pearly Gates Roast,2021-11-18,A,Comedy,-,"Oh My Goddess: Ethereal, Mythical Glamour",S0312,main,Q0335,-
-UK03E10,UK03,10,Grand Finale,2021-11-25,Write and record a verse for a performance,Finale,•,Final Three: Eleganza Extravaganza,S0438,main,-,-
-UK04E01,UK04,1,ST4RT Your Engines,2022-09-22,Serve up two runway looks,Runway,Photoshoot,Keeping it 100! and Ru Are You?,S0448,main,Q0354,-
-UK04E02,UK04,2,Yass-tonbury Festival,2022-09-29,Write and perform original lyrics,Girl Groups,-,Neon Nights,S0449,main,Q0353,-
-UK04E03,UK04,3,Naff-ta Awards,2022-10-06,Pairs bingo-inspired,Design,NAFF-TA Awards,Bingo She Better Don't!,S0450,main,Q0352,-
-UK04E04,UK04,4,Catty Man,2022-10-13,Improv,Acting,Line of Booty Duty,"The Mane Event- ""Love your hair, hope you win""",S0451,main,Q0351,-
-UK04E05,UK04,5,Lairy Poppins - The Rusical,2022-10-20,Lairy Poppins – The Rusical,Rusical,Reading is Fundamental,West End Wonders,S0452,main,-,-
-UK04E06,UK04,6,Snatch Game,2022-10-27,Snatch Game,Snatch Game,-,Tickled Pink,S0453,main,Q0349,-
-UK04E07,UK04,7,Makeover Challenge,2022-11-03,Makeover,Make Over,-,Family Makeover Realness,S0454,main,Q0348,-
-UK04E08,UK04,8,The Squirrel Games,2022-11-10,Act,Acting,-,Ruff and Ready,S0455,main,-,-
-UK04E09,UK04,9,Comedy Queens,2022-11-17,Roast,Comedy,-,Pretty in Punk,S0456,main,Q0347,-
-UK04E10,UK04,10,Grand Finale,2022-11-24,Write and record a verse for a performance,Finale,•,Grand Finale Eleganza,S0457,main,Q0346,-
-UK05E01,UK05,1,Tickety-Boo,2023-09-28,Serve up three looks:,Runway,-,Fierce Impressions Eleganza Extravaganza,S0477,main,-,-
-UK05E02,UK05,2,Purr-fect Looks,2023-10-05,Create and showcase a look,Design,Let the Cat out of the Bag,Pet-Shop Catwalk Couture,S0478,main,Q0364,-
-UK05E03,UK05,3,Club Bangers,2023-10-12,Write and perform original lyrics,Girl Groups,-,Night Of A Thousand Pop Icons,S0479,main,-,-
-UK05E04,UK05,4,DisasterClass,2023-10-19,Perform an inspirational seminar,Acting,Pose and deliver a sticky tag line in DTF bro drag,Slaycation,S0480,main,Q0363,-
-UK05E05,UK05,5,Panto Dames,2023-10-26,Perform in the Rusical,Rusical,Reading Challenge,"Mirror, Mirror",S0481,main,Q0362,-
-UK05E06,UK05,6,Snatch Game,2023-11-02,Snatch Game,Snatch Game,-,Heart Ons,S0482,main,Q0361,-
-UK05E07,UK05,7,Melodrama-Rama,2023-11-09,Screen Test,Acting,Everybody Loves Puppets,Pajamarama,S0483,main,Q0360,-
-UK05E08,UK05,8,Hotline Makeover,2023-11-16,Makeover,Make Over,-,Drag Family Resemblance,S0484,main,Q0359,-
-UK05E09,UK05,9,Dragiators' Roast,2023-11-23,Perform in a gladiator themed,Comedy,-,Poofs on Parade,S0485,main,Q0358,-
-UK05E10,UK05,10,Grand Finale,2023-11-30,Write their own verses and star in the music video,Finale,•,Grand Finale Eleganza - Dripping In Jewels,S0486,main,Q0357,-
-UK06E01,UK06,1,Cabaret Talent Show,2024-09-26,Perform in the Tickety Boo Cabaret Club,Talent Show,-,Queen Of Your Hometown,S0458,main,-,-
-UK06E02,UK06,2,Stitch & Strut,2024-10-03,"In teams,",Design,-,"Cocktail Party, Lady Boss, and Red Carpet",S0459,main,-,-
-UK06E03,UK06,3,Brit-flicks,2024-10-10,Act,Acting,Air Out Your Dirty Laundry: pick an item of clothing with a descriptor and give it to the person it fits best,New Romantics,S0460,main,Q0375,-
-UK06E04,UK06,4,Ghoul Power,2024-10-17,In,Girl Groups,-,Call Me Mother Nature,S0461,main,Q0374,-
-UK06E05,UK06,5,Sofa Showdown,2024-10-24,Improvise,Acting,Try to make RuPaul and Raven laugh while sitting in a pink furry chair,How's Your Headpiece?,S0462,main,Q0373,-
-UK06E06,UK06,6,Snatch Game,2024-10-31,Snatch Game,Snatch Game,Reading Challenge,Doctor Who Is She?,S0463,main,Q0372,-
-UK06E07,UK06,7,Pop of the Tops - Live: The Rusical,2024-11-07,Sing live in,Rusical,-,Night of a Thousand Princess Dianas,S0464,main,Q0371,-
-UK06E08,UK06,8,All in the Drag Family,2024-11-14,Makeover,Make Over,-,Drag Family Resemblance,S0465,main,Q0370,-
-UK06E09,UK06,9,Send in the Clowns,2024-11-21,Perform in the,Comedy,-,Semifinal Vinyl,S0466,main,Q0369,-
-UK06E10,UK06,10,Grand Finale,2024-11-28,"Write, record, and choreograph",Finale,•,Grand Finale Eleganza,S0467,main,Q0368,-
-UK07E01,UK07,1,Queens of the Brit Gala,2025-09-25,Present a signature look at the Brit Gala,Runway,-,Queen of your Hometown,S0439,main,-,-
-UK07E02,UK07,2,Rumble in the Jumble,2025-10-01,Create and model a look,Design,"Vote for the queen who best fits a category in ""The Tainters""",Rumble in the Jumble,S0440,main,Q0388,-
-UK07E03,UK07,3,Battle of the Brats,2025-10-09,In,Girl Groups,-,Cuddly Wuddly,S0441,main,Q0387,-
-UK07E04,UK07,4,Sweety Darlings!,2025-10-16,Act,Acting,-,Ab Fab: A Night of a Thousand Sweetie Darlings,S0442,main,Q0386,-
-UK07E05,UK07,5,Talent Ahoy!,2025-10-23,Perform in the,Talent Show,-,Having It Large,S0443,main,Q0385,-
-UK07E06,UK07,6,Peter Pansy: The Rusical,2025-10-30,Peter Pansy: The Rusical,Rusical,-,Battle Axe - Warrior Queen,S0444,main,Q0384,-
-UK07E07,UK07,7,Snatch Me Out!,2025-11-06,Snatch Me Out!,Snatch Game,Reading Challenge,Holiday Ho Ho Hos,S0445,main,Q0383,-
-UK07E08,UK07,8,The Hun Makeover,2025-11-13,Makeover,Make Over,-,Drag Family Resemblance,S0446,main,Q0382,-
-UK07E09,UK07,9,Comedy is a Bitch,2025-11-20,Perform in the,Comedy,-,English Country Garden Realness,S0447,main,Q0381,-
-UK07E10,UK07,10,Sing For The Crown,2025-11-27,"Write, record, and choreograph",Finale,•,Epic Eleganza,S0083,main,Q0380,-
-CW01E01,CW01,1,-,2022-11-18,Write and perform original lyrics,Girl Groups,-,Queen Of The World,S0499,main,Q0254,-
-CW01E02,CW01,2,Snatch Summit,2022-11-26,Compete in the,Snatch Game,Reading is Fundamental,Celestial Bodies,S0500,main,Q0262,-
-CW01E03,CW01,3,The Weather Ball,2022-12-02,Showcase three looks in,Design,-,-,S0325,main,Q0389,-
-CW01E04,CW01,4,Comedy Queens,2022-12-09,Perform a,Comedy,Record Cameo-style personalized messages,Plaid Girls Club,S0501,main,-,-
-CW01E05,CW01,5,Spy Queens,2022-12-16,Star in a movie trailer,Acting,-,Y2GAY: 2000s Club Kids,S0502,main,Q0335,-
-CW01E06,CW01,6,Grand Finale,2022-12-23,•,Finale,•,Coronation Eleganza Extravaganza,-,main,-,-
-CW02E01,CW02,1,Drag Pop,2024-07-19,Write and perform original lyrics,Girl Groups,-,Wonders of the World: My Very Best Drag,S0494,main,Q0390,-
-CW02E02,CW02,2,The Hole,2024-07-26,Improvise,Acting,-,Mother Nature,S0495,main,Q0349,-
-CW02E03,CW02,3,Glamorous Drag Queen Ball Challenge,2024-08-02,The Glamorous Drag Queen Ball Challenge,Design,"Audition for the new movie ""Drag-e""",-,S0496,main,Q0249,-
-CW02E04,CW02,4,Reading Battles,2024-08-09,Reading Battles,Comedy,"Lip sync to ""Just What They Want"" by",Razzle Dazzle,S0497,main,Q0111,-
-CW02E05,CW02,5,Snatch Game: The Rusical,2024-08-17,Snatch Game:,Snatch Game,-,Summer of '69,S0498,main,Q0268,-
-CW02E06,CW02,6,Grand Finale,2024-08-23,•,Finale,•,Crown Me,-,main,-,-
-GA01E01,GA01,1,Global Talent Extravaganza,2024-08-16,Global Glamazon Talent Extravaganza,Talent Show,-,Garden of Eden,S0042,main,-,-
-GA01E02,GA01,2,Global Talent Extravaganza: Part 2,2024-08-16,Global Glamazon Talent Extravaganza: Part 2,Talent Show,Get in 20-minutes quick drag and partake in a photoshoot,Money Makes The World Go Round,S0503,main,-,-
-GA01E03,GA01,3,International Queen Of Mystery Ball,2024-08-23,International Queen of Mystery Ball,Design,-,-,S0504,main,Q0399,-
-GA01E04,GA01,4,Everybody Say Love Girl Groups,2024-08-30,Write a verse and create a choreography for,Girl Groups,Guess the total population of their countries,Color My World,S0489,main,Q0398,-
-GA01E05,GA01,5,Boobie: The Shequels,2024-09-06,"Star in sequels of ""Boobie""",Acting,Reading Challenge,Browntown,S0505,main,Q0397,-
-GA01E06,GA01,6,It's 5 O'Clock Somewhere,2024-09-13,Create a cocktail dress,Design,Do makeup mid-air,It's 5 O'Clock Somewhere,S0109,main,Q0396,-
-GA01E07,GA01,7,Snatch Game Of Love,2024-09-20,Snatch Game of Love,Snatch Game,Get in 20-minutes quick drag and,Eat Me,S0506,main,Q0395,-
-GA01E08,GA01,8,Mmm... A Rich International Roast,2024-09-27,Star in an international Roast,Comedy,-,Blow Me Away,S0401,main,Q0255,-
-GA01E09,GA01,9,Re-United Nations Make-Overs,2024-10-04,Re-United Nations Make-Overs: Makeover one of the eliminated contestants,Make Over,Who is She?,Drag Family Resemblance,S0025,main,Q0394,-
-GA01E10,GA01,10,There's No Place Like Home,2024-10-11,Create a tourism spot showcasing your country,Advert,-,Star Trek: Queens in Outer Space,S0019,main,Q0393,-
-GA01E11,GA01,11,Global Lip-Sync Lalaparuza,2024-10-18,The eliminated contestants face off in a,Lip Sync,-,Lalaparuza Eleganza,-,main,-,-
-GA01E12,GA01,12,Dance Like The World Is Watching,2024-10-25,Write a verse and participate in the music video,Finale,•,Best Drag On Earth,S0211,main,-,-
-UW01E01,UW01,1,Global Glamazons,2022-02-01,Talent Show,Talent Show,-,"I'm A Winner, Baby!",S0521,main,Q0245,-
-UW01E02,UW01,2,RuPaul Ball,2022-02-08,Serve three looks on the,Design,-,-,S0522,main,Q0313,-
-UW01E03,UW01,3,West End Wendys,2022-02-15,West End Wendys - The Rusical,Rusical,Reading is Fundamental,Dot Dot Dot,S0523,main,Q0241,-
-UW01E04,UW01,4,Snatch Game,2022-02-22,Snatch Game,Snatch Game,-,Luck Be A Lady,S0128,main,Q0401,-
-UW01E05,UW01,5,Semifinals,2022-03-01,Perform their own version,Rumix,-,Werk of Art,S0524,main,Q0400,-
-UW01E06,UW01,6,Grand Finale,2022-03-08,•,Finale,•,Grand Finale Eleganza Extravaganza,-,main,-,-
-UW02E01,UW02,1,The Queens' Variety Show,2024-02-09,Talent Show,Talent Show,-,: For Queen And Country,S0514,main,Q0123,-
-UW02E02,UW02,2,The Happy Ending Ball,2024-02-16,The Happy Ending,Design,-,-,S0515,main,Q0406,-
-UW02E03,UW02,3,Drag Race World,2024-02-23,Advertise,Advert,-,: Ruveal Yourself!,S0516,main,Q0346,-
-UW02E04,UW02,4,Snatch Game,2024-03-01,Snatch Game,Snatch Game,-,: Gone Cruisin',S0517,main,Q0405,-
-UW02E05,UW02,5,Seven!: The Rusical,2024-03-08,Perform in,Rusical,Reading Challenge,: When I Glow Up,S0518,main,Q0319,-
-UW02E06,UW02,6,Strictly Come Prancing,2024-03-15,Perform in,Choreo,-,": Business in the Front, Party in the Back",S0519,main,Q0337,-
-UW02E07,UW02,7,Haters Wedding Roast,2024-03-22,Roast,Comedy,Dance,: Take Me Up The Aisle,S0520,main,Q0136,-
-UW02E08,UW02,8,Grand Finale,2024-03-29,•,Finale,•,Finale Eleganza Extravaganza,-,main,-,-
-UW03E01,UW03,1,RuRuvision Song Contest,2026-01-27,Perform an original song,Talent Show,-,: For Queen and Country,S0507,main,-,-
-UW03E02,UW03,2,Runway Ru-Mix,2026-02-03,Rework a previous look into a new look for the future,Design,-,": RuDemption, The RuMix",S0508,main,Q0281,-
-UW03E03,UW03,3,The Miss Snatch Game Pageant,2026-02-10,Miss Snatch Game Pageant,Snatch Game,-,: Let Them Eat Cake,S0509,main,Q0410,-
-UW03E04,UW03,4,Girl Groups From Outer Space,2026-02-17,In,Girl Groups,-,": You're A Star, Baby",S0510,main,Q0351,-
-UW03E05,UW03,5,Silent Movie Acting Challenge,2026-02-24,Act in silent movies,Acting,Reading Challenge,: Shevil Movie Villains,S0511,main,Q0008,-
-UW03E06,UW03,6,RuPaul's Fringe Festival,2026-03-03,"In duos,",Comedy,-,: RuVeal,S0512,main,Q0374,-
-UW03E07,UW03,7,Olympian Makeovers,2026-03-10,Give drag makeovers,Make Over,Assign the queens medals,: Drag Family Resemblance,S0513,main,Q0409,-
-UW03E08,UW03,8,Reunion & Lip Sync Smack Down For The Crown,2026-03-17,•,Finale,•,Finale Eleganza Extravaganza,-,main,-,-
+episode_id,season_id,episode_number,title,air_date,main_challenge,main_challenge_type,mini_challenge,runway_theme,lip_sync_song_id,lip_sync_track,eliminated_id,power_up_used,mini_challenge_winner_prize,maxi_challenge_prize
+US01E01,US01,1,Drag on a Dime,2009-02-02,Sexy photoshoot; design looks from thrift-store materials,Design,-,-,S0208,main,Q0009,-,-,Stay in Paris Hotel in Las Vegas and immunity from next week's elimination
+US01E02,US01,2,Girl Group Challenge,2009-02-09,Destiny's Child girl-group lip-sync battle (teams),Girl Group,Act out emotions,-,S0002,main,Q0008,-,Got to select their group as team captains,Immunity from next week's elimination and a basket of chocolate from Karma and Vojeur Chocolate
+US01E03,US01,3,Queens of All Media,2009-02-16,Channel Oprah across TV personality roles,Acting,-,Dress to Impress,S0003,main,Q0007,-,-,-
+US01E04,US01,4,Mac Viva-Glam Challenge,2009-02-23,Film a MAC Viva-Glam commercial in 10 minutes,Acting,30 Minutes to do partner's makeup,-,S0004,main,Q0006,-,-,-
+US01E05,US01,5,Drag School of Charm,2009-03-02,Makeover female fighters into drag daughters,Makeover,Exercise/endurance challenge,-,S0005,main,Q0005,-,-,-
+US01E06,US01,6,Absolut Drag Ball,2009-03-09,Absolut Drag Ball: themed ball runway looks,Design,Vogue posing challenge,-,S0144,main,Q0004,-,-,-
+US01E07,US01,7,Extra Special Edition,2009-03-16,-,Clip Show,-,-,-,main,-,-,-,-
+US01E08,US01,8,Grand Finale,2009-03-23,Record a verse and film a spot for RuPaul's 'Cover Girl' video,Finale,-,-,S0007,main,Q0003,-,-,-
+US01E09,US01,9,Re-United!,2009-03-23,-,Reunion,-,-,-,main,-,-,-,-
+US02E01,US02,1,Gone with the Windows,2010-02-01,Design outfits from window treatments and home furnishings,Design,Gone with the Wind photo shoot,Curtain Couture,S0007,main,Q0021,-,First choice in curtain selection,A photo spread for Interior Illusions featured in Lux Magazine and immunity from next week's elimination
+US02E02,US02,2,Starbootylicious,2010-02-08,Burlesque revue: earn cash performing and selling gift certificates,Talent Show,Turn RuPaul doll from lady to a tramp,High-Class Drag,S0008,main,Q0020,-,-,"A $1,500 gift certificate to Sequin Queen and immunity from next week's elimination"
+US02E03,US02,3,Country Queens,2010-02-15,Country Queens girl-group performance,Girl Group,"""Chicken or what?"" eating contest",Denim and Diamond Couture,S0209,main,Q0019,-,-,A collection of designer bags from M. Clifford Designs and immunity from next week's elimination
+US02E04,US02,4,The Snatch Game,2010-02-22,Snatch Game,Snatch Game,The Queen is Right,Personal Style,S0010,main,Q0018,-,A phone call home,"A $1,000 shopping spree from Billion Dollar Babes and immunity from next week's elimination"
+US02E05,US02,5,Here Comes the Bride,2010-03-01,Design a wedding dress; pose as bride and groom in a photoshoot,Design,Decorate a box in your drag style,-,S0011,main,Q0017,-,-,"A five night vacation at the Hyatt in Palm Springs, CA and immunity from next week's elimination"
+US02E06,US02,6,Rocker Chicks,2010-03-08,"Live rock performance of ""LadyBoy"" by RuPaul",Singing,Give a wig a glam rock makeover,-,S0012,main,Q0016,-,-,"A $1,000 shopping spree"
+US02E07,US02,7,Once Upon a Queen,2010-03-22,Pitch and promote a concept for an autobiography,Acting,Reading is Fundamental,-,S0013,main,Q0015,-,-,a shopping spree at L.A. Eyeworks
+US02E08,US02,8,Golden Gals,2010-03-29,Transform older men into drag mothers and lip-sync a duet,Makeover,Match contestants with their baby pictures,-,S0014,main,Q0014,-,-,"a 4-day 3-night stay and massage at East Canyon Hotel in Palm Springs, CA"
+US02E09,US02,9,The Diva Awards,2010-04-12,"Create three looks for ""Diva Award"" ceremonies",Design,Style/accessorize one of four identical dresses,-,S0015,main,Q0013,-,-,a feature photo spread on Paper Magazine
+US02E10,US02,10,The Main Event Clip Show,2010-04-19,-,Clip Show,-,-,-,main,-,-,-,-
+US02E11,US02,11,Grand Finale,2010-04-26,Shoot a music video for 'Jealous of My Boogie' and a Dynasty-inspired scene,Finale,-,-,S0210,main,Q0012,-,-,-
+US02E12,US02,12,Reunion,2010-04-26,-,Reunion,-,-,-,main,-,-,-,-
+US03E01,US03,1,Casting Extravaganza,2011-01-24,-,-,-,-,-,main,-,-,-,-
+US03E02,US03,2,The Queen Who Mopped Xmas,2011-01-24,Holiday thrift-store drag,Design,Christmas Card Photo Shoot,-,S0017,main,Q0033,-,An extra $25 to spend at the thrift store.,"A $2,000 gift card to Sequin Queen and immunity from next week's elimination"
+US03E03,US03,3,Queens in Space,2011-01-31,Act in sci-fi movie spoofs,Acting,Psychic Challenge,-,S0211,main,Q0032,-,-,A set of hand-sculpted silicone breastplates by Boobs For Queens
+US03E04,US03,4,Totally Leotarded,2011-02-07,Produce a fitness video with Susan Powter,Acting,Making Letoards from Duct Tapes,-,S0019,main,Q0031,-,-,"A $2,500 gift card to Gilt Groupe and immunity from next week's elimination"
+US03E05,US03,5,QNN News,2011-02-14,Produce a morning news show,Acting,Scandalous Red Carpet Photo,-,S0020,main,Q0030,-,-,"A $2,000 gift card to Wig USA and immunity from next week's elimination"
+US03E06,US03,6,The Snatch Game,2011-02-21,Snatch Game,Snatch Game,Shit Rupaul Says,-,S0021,main,Q0029,-,A phone call home,A cruise for 2 to the Bahamas courtesy of Al and Chuck Travel
+US03E07,US03,7,"Face, Face, Face of Cakes",2011-02-28,Create a cake-inspired couture garment and decorate a doll cake,Design,Nude photo shoot with Deborah Anderson,-,S0022,main,Q0028,-,-,A shopping spree at l.a. Eyeworks
+US03E08,US03,8,Ru Ha Ha,2011-03-07,Perform a stand-up routine before a live audience,Comedy,Reading is Fundamental,-,S0023,main,Q0027,-,An extra 10 minutes with Rita Rudner and choose the line up for the maxi challenge.,"An original, custom designed gown from Miami Elite Designs"
+US03E09,US03,9,"Life, Liberty & the Pursuit of Style",2011-03-14,Film a patriotic message for US military overseas,Acting,Decorate bras using rhinestones,-,S0024,main,-,-,An extra 5 minutes to film,A three-piece luxury luggage set from Antler Luggage
+US03E10,US03,10,RuPaul-a-Palooza,2011-03-21,Record and perform an interpretation of RuPaul's 'Superstar',Song/Verse,Ru-sical chairs,-,S0025,main,Q0026,-,First choice at genre and order of queens for their choice,"An original, custom gown by Marco Marco"
+US03E11,US03,11,RuPaul's Hair Extravaganza,2011-03-28,"Design three looks for a hair show, one made entirely from wigs",Design,Beach-themed headpiece,-,S0026,main,Q0021,-,-,An Alaskan cruise for 2 from Al and Chuck Travel
+US03E12,US03,12,Jocks in Frocks,2011-04-04,Turn a straight jock into a drag sister and perform a safe-sex cheer,Makeover,Dunk-a-Queen,-,S0027,main,Q0026,-,-,Manila and Fuchsia each received a cruise for 2 to the Bahamas from Al & Chuck Travel
+US03E13,US03,13,Make Dat Money,2011-04-11,"Three runway looks plus an opening number to ""Just Wanna Dance""",Talent Show,Create/market a drag product,-,S0028,main,Q0025,-,-,A collection of fine jewelry from Kathy Ireland Jewelry
+US03E14,US03,14,Superstar Edition,2011-04-18,-,Clip Show,-,-,-,main,-,-,-,-
+US03E15,US03,15,Grand Finale,2011-04-25,Film the music video for RuPaul's 'Champion',Finale,-,-,S0029,main,Q0024,-,-,-
+US03E16,US03,16,Reunited!,2011-05-02,-,Reunion,-,-,-,main,-,-,-,-
+US04E01,US04,1,RuPocalypse Now!,2012-01-30,Design a post-apocalyptic couture look from looted materials,Design,Photoshoot with Mike Ruiz,Apocalyptic Couture,S0030,main,Q0046,-,-,-
+US04E02,US04,2,WTF!: Wrestling's Trashiest Fighters,2012-02-06,Create a wrestling storyline and perform a match in the ring,Acting,Create “badonkadonk” with padding in 30 minutes,Girly Girl Couture,S0031,main,Q0045,-,-,-
+US04E03,US04,3,Glamazons vs Champions,2012-02-13,Produce and act in infomercials for RuPaul's Glamazon and Champion,Acting,Create hats with butterfly-shaped accessories,Platinum and Gold,S0032,main,Q0044,-,-,-
+US04E04,US04,4,Queens Behind Bars,2012-02-20,"In two teams, star in episodes of a sitcom",Acting,"Paint a partner's face, while handcuffed",Red Carpet,S0033,main,Q0043,-,-,-
+US04E05,US04,5,Snatch Game,2012-02-27,Snatch Game,Snatch Game,Beat the Clock,Best Drag,S0034,main,Q0038,-,-,-
+US04E06,US04,6,Float Your Boat,2012-03-05,Create and wear a parade float based on a pride-flag color,Design,Wet t-shirt contest,Pride Parade Extravaganza,S0035,main,Q0042,-,-,-
+US04E07,US04,7,Dragazines,2012-03-12,Create a magazine cover capturing an assigned theme,Design,Reading is Fundamental,Dragazines,S0212,main,Q0041,-,-,-
+US04E08,US04,8,Frenemies,2012-03-19,Live singing duet between paired queens,Singing,Polygraph test,-,S0213,main,Q0040,-,-,-
+US04E09,US04,9,Frock the Vote!,2012-03-26,Presidential debate as the 2012 Wig Party candidate,Acting,Design Absolut Vodka-inspired shoe,Inaugural Drag,S0038,main,Q0039,-,-,-
+US04E10,US04,10,DILFs: Dads I'd Like To Frock,2012-04-02,Turn a DILF into a pregnant drag diva,Makeover,Give a teddy bear a makeover,Pregnant Makeover,S0039,main,Q0038,-,-,-
+US04E11,US04,11,The Fabulous Bitch Ball,2012-04-09,Design three outfits for the Bitch Ball,Design,Everybody Loves Puppets,"Daytime Dog Park, Pooch in a Purse, and Canine Couture",S0040,main,Q0037,-,-,-
+US04E12,US04,12,RuPaul Rewind,2012-04-16,-,Clip Show,-,-,-,main,-,-,-,-
+US04E13,US04,13,The Final Three,2012-04-23,Shoot the music video for RuPaul's 'Glamazon',Finale,-,-,-,main,-,-,-,-
+US04E14,US04,14,Reunited,2012-04-30,-,Reunion,-,-,-,main,-,-,-,-
+US05E01,US05,1,RuPaullywood or Bust,2013-01-28,"Make a dress that brings out Hollywood realness and glamour, out of materials found out of dumpster dive.",Design,Underwater photoshoot,-,S0041,main,Q0060,-,-,-
+US05E02,US05,2,Lip Synch Eleganza Extravaganza,2013-02-04,Lip sync and re-enact a famous scene from a past season of RuPaul's Drag Race Untucked,Acting,Lip-synch with only your mouth visible,Best Drag,S0042,main,Q0059,-,-,-
+US05E03,US05,3,Draggle Rock,2013-02-11,"In teams, star in children's TV Shows",Acting,Create mannequin dolls,Think Pink,S0043,main,Q0058,-,-,-
+US05E04,US05,4,Black Swan: Why It Gotta Be Black?,2013-02-18,Perform in different acts of a ballet about RuPaul's life,Talent Show,Soul Train dance-off,Divalicious,S0205,main,Q0057,-,-,-
+US05E05,US05,5,Snatch Game,2013-02-25,Snatch Game,Snatch Game,Style a cuddler into a red-carpet look,Deadliest Snatch,S0045,main,Q0055,-,-,-
+US05E06,US05,6,Can I Get An Amen?,2013-03-04,"Record a ""We Are the World""-inspired anthem titled ""Can I Get An Amen?""",Singing,Apply drag makeup in the dark,Favorite Body Part,S0046,main,Q0054,-,-,-
+US05E07,US05,7,RuPaul Roast,2013-03-11,"Roast RuPaul, as well as the judges and fellow queens, in front of a live audience",Comedy,Reading is Fundamental,-,S0047,main,-,-,-,-
+US05E08,US05,8,Scent of a Drag Queen,2013-03-18,"Create, market, and film a commercial for a signature fragrance",Acting,Whatcha Packin',Company spokeswoman,S0048,main,Q0053,-,-,-
+US05E09,US05,9,Drama Queens,2013-04-01,Star in a faux Latin telenovela alongside Wilmer Valderrama,Acting,"Create fake sob stories, cry in front of RuPaul",Spanish Telenovela Realness,S0049,main,Q0052,-,-,-
+US05E10,US05,10,Super Troopers,2013-04-08,Military-to-drag makeover with color guard performance,Makeover,Drag booty camp with fitness trainer,-,S0206,main,Q0051,-,-,-
+US05E11,US05,11,Sugar Ball,2013-04-15,Design three outfits for the Sugar Ball,Design,Everybody Loves Puppets,"Super Duper Sweet 16, Sugar Mama: Executive Realness, and Candy Couture",S0051,main,Q0050,-,-,-
+US05E12,US05,12,"The Final Three, Hunty",2013-04-22,"Star in RuPaul's music video ""The Beginning"" and shoot a courtroom scene.",Finale,-,-,-,main,-,-,-,-
+US05E13,US05,13,Countdown to the Crown,2013-04-29,-,Clip Show,-,-,-,main,-,-,-,-
+US05E14,US05,14,Reunited!,2013-05-06,-,Reunion,-,-,-,main,-,-,-,-
+US06E01,US06,1,RuPauls Big Opening,2014-02-24,Designing an outfit inspired by a TV show,Design,Jumping off a platform photoshoot,TV Shows,S0052,main,Q0074,-,-,-
+US06E02,US06,2,RuPauls Big Opening Part2,2014-03-03,Design an outfit inspired by party supplies,Design,Boudoir pillow fight with the Pit Crew,Party Boxes,S0053,main,Q0073,-,-,-
+US06E03,US06,3,Scream Queens,2014-03-10,"Star in horror film trailers for ""Drag Race Me to Hell""",Acting,Create beach-themed lip sync in pairs,Best Drag,S0054,main,Q0072,-,-,-
+US06E04,US06,4,Shade: The Rusical,2014-03-17,Performing live in the original production of Shade: The Rusical.,Rusical,Female or She-male?,Tony Awards,S0055,main,Q0071,-,-,-
+US06E05,US06,5,Snatch Game,2014-03-24,Snatch Game,Snatch Game,-,A Night of A Thousand Rupauls,S0056,main,Q0070,-,-,-
+US06E06,US06,6,Oh No She Betta Don't,2014-03-31,"Rapping in teams to ""Oh No She Better Don't""",Song/Verse,Reading is Fundamental,Crazy Sexy Cool,S0057,main,Q0069,-,-,-
+US06E07,US06,7,Glamazon by Colorevolution,2014-04-07,Record an infomercial for Rupaul's Glamazon cosmetics,Acting,Design nails and hand modeling fruits,Black & White,S0058,main,-,-,-,-
+US06E08,US06,8,Drag Queens of Comedy,2014-04-07,Performing a stand-up comedy act in front of a live audience of elderly people.,Comedy,Lip-sync to a RuPaul song upside down,-,S0059,main,Q0068,-,-,-
+US06E09,US06,9,Drag Queens of Talk,2014-04-14,Guest hosting The RuPaul Show and interviewing celebrity guests,Acting,“Hung Men” hangman challenge,Animal Kingdom Couture,S0060,main,Q0067,-,-,-
+US06E10,US06,10,Drag My Wedding,2014-04-21,Transform grooms into brides for a wedding,Makeover,Abstract painting with bodies for marriage equality,Wedding Makeover,S0061,main,Q0066,-,-,-
+US06E11,US06,11,Glitter Ball,2014-04-28,Glitter Ball,Design,Everybody Loves Puppets,"Banjee Girl Bling, Platinum Card Executive Realness, and Dripping in Jewels Eleganza",S0062,main,Q0065,-,-,-
+US06E12,US06,12,Sissy That Walk!,2014-05-05,"Star in a music video for RuPaul's song ""Sissy That Walk"" and act in two scenes",Finale,-,-,S0063,main,Q0064,-,-,-
+US06E13,US06,13,Countdown to the Crown,2014-05-12,-,Clip Show,-,-,-,main,-,-,-,-
+US06E14,US06,14,The Finale,2014-05-19,-,Finale,-,-,-,main,-,-,-,-
+US07E01,US07,1,Born Naked,2015-03-02,Create a resort-wear tearaway to reveal a nude illusion.,Design,Model 2 looks,-,S0064,main,Q0088,-,-,-
+US07E02,US07,2,Glamazonian Airways,2015-03-09,Perform in a pre-flight safety video for the first airline run by drag queens,Acting,Keep fish face as Pit Crew blow jets of air into queens faces,Jet Set Eleganza,S0065,main,Q0087,-,-,-
+US07E03,US07,3,Shakesqueer,2015-03-16,"""Hamlet it up"" in two twisted Shakespeare classics – Romy and Juliet and MacBitch",Acting,Soul Train dance-off,Bearded and Beautiful (inspired by Milk ),S0066,main,Q0086,-,-,-
+US07E04,US07,4,Spoof! (There It Is),2015-03-23,Create a music video parody of a RuPaul song.,Song/Verse,-,Green,S0067,main,Q0080,-,-,-
+US07E05,US07,5,The DESPY Awards,2015-03-30,Come up with funny banter and take jabs at the other contestants while presenting awards for different categories at the first ever DESPY Awards .,Comedy,Make paper versions of classic red carpet outfits,-,S0215,main,Q0085,-,-,-
+US07E06,US07,6,Ru Hollywood Stories,2015-04-06,"Reenact ""Whatever Happened to Merle Ginsberg"" from the point of view of Merle, RuPaul and Michelle Visage.",Acting,Pull cards out of Pit Crews' underpants to earn points,Death Becomes Her,S0069,main,Q0084,-,-,-
+US07E07,US07,7,Snatch Game,2015-04-13,Snatch Game,Snatch Game,-,Leather & Lace,S0070,main,Q0083,-,-,-
+US07E08,US07,8,Conjoined Queens,2015-04-20,Create a conjoined twin makeover with a previously eliminated contestant,Makeover,Create prison uniform look,-,S0071,main,Q0082,-,-,-
+US07E09,US07,9,Divine Inspiration,2015-04-27,Star in Musical versions of John Waters' most iconic films,Rusical,Reading is Fundamental,Ugliest dress ever,S0072,main,Q0081,-,-,-
+US07E10,US07,10,Prancing Queens,2015-05-04,Dancing in a live drag dance spectacular,Talent Show,Create “Fake Housewives of Drag Race” look using tape,"Half man, half woman",S0073,main,Q0080,-,-,-
+US07E11,US07,11,"Hello, Kitty Girls!",2015-05-11,Create two outfits only using products provided by Hello Kitty,Design,Everybody Loves Puppets,Hello Kitty BFF Hello Kitty Eleganza,S0074,main,Q0079,-,-,-
+US07E12,US07,12,And The Rest Is Drag,2015-05-18,"Star in the music video for RuPaul's single ""Born Naked""",Finale,-,Best Drag,S0075,main,Q0078,-,-,-
+US07E13,US07,13,Countdown to the Crown,2015-05-25,-,Clip Show,-,-,-,main,-,-,-,-
+US07E14,US07,14,The Grand Finale,2015-06-01,-,Finale,-,-,-,main,-,-,-,-
+US08E01,US08,1,Keeping it 100!,2016-03-07,Create an outfit based on design challenges from seasons past,Design,Photoshoot with past winners,-,S0076,main,Q0097,-,Assign the design challenges,-
+US08E02,US08,2,Bitch Perfect,2016-03-14,Perform in a collegiate acapella sing-off: Bitch Perfect,Singing,Latin dance-off to RuPaul's “Cha Cha Bitch”,Movie Premiere Realness,S0077,main,Q0099,-,-,-
+US08E03,US08,3,RuCo's Empire,2016-03-21,Perform in two Empire-inspired acting scenes,Acting,Drag up supreme court robes,Rollergirl Realness,S0216,main,Q0098,-,-,-
+US08E04,US08,4,New Wave Queens,2016-03-28,Sing live in '80s style New Wave girl bands,Girl Group,-,Neon Realness,S0079,main,Q0097,-,-,-
+US08E05,US08,5,Supermodel Snatch Game,2016-04-04,Snatch Game,Snatch Game,-,Iconic Madonna Looks,S0080,main,Q0096,-,-,-
+US08E06,US08,6,Wizards of Drag,2016-04-11,Give a The Wizard of Oz -themed makeovers to cast members of Little Women: LA,Makeover,Reading is Fundamental,Wizard of Oz couture,S0081,main,Q0095,-,-,-
+US08E07,US08,7,Shady Politics,2016-04-18,Work in pairs to shoot presidential campaign ads to smear their partner and stake their claim to be the first drag President of the U.S.A.,Acting,True/False guessing game with Pit Crew,Black & White Realness (inspired by Detox ),S0082,main,Q0094,-,-,-
+US08E08,US08,8,RuPaul Look Ball,2016-04-25,Ball Challenge,Design,Everybody Loves Puppets,"The Book Ball: Baby Drag Realness, That's My Mama Realness, and Autobiographical Eleganza Extravaganza",S0083,main,Q0093,-,-,-
+US08E09,US08,9,The Realness,2016-05-02,"Star in the music video for RuPaul's song ""The Realness""",Finale,-,-,S0084,main,Q0092,-,-,-
+US08E10,US08,10,The Grand Finale,2016-05-16,-,Finale,-,-,-,main,-,-,-,-
+US09E01,US09,1,Oh. My. Gaga!,2017-03-24,"Compete in the Miss Charisma, Uniqueness, Never & Talent pageant in two categories : one inspired by your hometown, the other inspired by your favorite Lady Gaga look",Talent Show,-,Frock Inspired by Your Home City Your Favorite Lady Gaga Drag,-,main,-,-,-,1 week getaway to The Grand Resort and Spa at Fort Lauderdale Beach.
+US09E02,US09,2,She Done Already Done Brought It On,2017-03-31,Perform in a cheer battle,Talent Show,-,White Party,S0085,main,Q0114,-,-,Custom wig wardrobe from Rock Star Wigs
+US09E03,US09,3,Draggily Ever After,2017-04-07,Create a fantasy fairy-tale princess and a sassy sidekick.,Design,-,-,S0086,main,Q0113,-,-,"$2,000 gift card from Casper, a mattress manufacturer"
+US09E04,US09,4,Good Morning Bitches!,2017-04-14,Star in morning talk shows,Acting,-,Naughty nighties,S0087,main,Q0112,-,-,"$1,000 and a one-year supply of burgers from Hamburger Mary's"
+US09E05,US09,5,Reality Stars: The Musical,2017-04-21,Perform in Kardashian: The Musical,Rusical,-,Faux Fur Realness,S0088,main,Q0111,-,-,A cruise for two with free airfare from AllOutVacations
+US09E06,US09,6,Snatch Game,2017-04-28,Snatch Game,Snatch Game,-,"Night of 1,000 Madonnas: The Shequel",S0089,main,Q0098,-,-,"$2,000 prize package from Sparkle"
+US09E07,US09,7,9021-HO,2017-05-05,"Act in the classic 90's high-school drama, 9021-HO",Acting,-,Big Hair Everywhere,S0090,main,Q0109,-,-,"$2,000 gift card from Fabric Planet"
+US09E08,US09,8,RuPaul Roast,2017-05-12,Perform a comedy roast of Michelle Visage,Comedy,Reading is Fundamental,-,S0091,main,Q0108,-,-,Five-year partnership with Squarespace
+US09E09,US09,9,Your Pilot's On Fire,2017-05-19,"Create, write, and co-star in a TV pilot",Acting,-,Club Kid Couture,S0092,main,Q0107,-,-,"$1,000 for The Spa on Rodeo and a supply of hair care products by Aquage"
+US09E10,US09,10,Makeovers: Crew Better Work,2017-05-26,"Makeover crew members and perform a lip-sync of ""Click Clack (Make that Money)"" by RuPaul",Makeover,-,-,S0093,main,Q0106,-,-,"2 custom gowns made by David Meister while their drag sister won a $2,000 gift certificate to Klein Epstein Parker custom suits"
+US09E11,US09,11,Gayest Ball Ever,2017-06-02,The Gayest Ball Ever,Design,Everybody Loves Puppets,"Rainbow-She-Betta-Do, Sexy Unicorn, and Village People Eleganza Extravaganza",S0094,main,Q0105,-,-,"2 VIP tickets to Cirque du Soleil's Zumanity: an Erotic Thrill Ride!, including air fare and deluxe Las Vegas accommodations."
+US09E12,US09,12,Category Is,2017-06-09,"Write and perform a rap on RuPaul's new single ""Category Is"" and guest star on RuPaul's podcast with Michelle Visage.",Finale,-,-,S0095,main,-,-,-,-
+US09E13,US09,13,Reunited,2017-06-16,-,Reunion,-,-,-,main,-,-,-,-
+US09E14,US09,14,Grand Finale,2017-06-23,-,Finale,-,-,S0096,main,-,-,-,-
+US10E01,US10,1,10s Across The Board,2018-03-22,Drag on a Dime: construct a runway outfit from 99¢-store items,Design,Stand out on runway in a sea of queens,-,S0097,main,Q0127,-,"$2,000 gift card from Fierce Queen Heels.",A luxury Hawaiian getaway to Hale Mohalu Guesthouse and Retreat
+US10E02,US10,2,PharmaRusical,2018-03-29,"Lip-sync and dance in ""PharmaRusical""",Rusical,Hay Girl Hay dance competition,Very Best Drag,S0098,main,Q0126,-,-,"A Suite Of Jewels From Fierce! Drag Jewels and a $2,000 gift card from Nailed by Christie"
+US10E03,US10,3,Tap That App,2018-04-05,Star in commercials for drag-themed dating apps,Acting,Screen tests for Ru's chocolate bar campaign,Feathers,S0099,main,Q0125,-,-,"A $2,000 gift card from Casper Sleep and a $3,000 gift card from Catherine D'Lish"
+US10E04,US10,4,The Last Ball on Earth,2018-04-12,Design three looks for The Last Ball on Earth,Design,Photobomb celebrity photographs,"Alaskan Winter Realness, Miami Summer Realness, and Martian Eleganza Extravaganza",S0100,main,Q0124,-,"A $1,000 credit from Postmates","A $2,000 gift card from D-Bleu-Dazzled and a wig wardrobe from RockStar Wigs"
+US10E05,US10,5,The Bossy Rossy Show,2018-04-19,Improv on The Bossy Rossy Show (hosted by Ross Mathews),Acting,Drag up army duffel bag contents,Denim & Diamonds,S0220,main,Q0123,-,-,-
+US10E06,US10,6,Drag Con Panel Extravaganza,2018-04-26,"In teams, produce and host DragCon panels",Acting,Identify objects by sitting on them,Hats Incredible,S0102,main,Q0122,-,-,-
+US10E07,US10,7,Snatch Game,2018-05-03,Snatch Game,Snatch Game,Reading is Fundamental,Mermaid Fantasy (Salute to Bette Midler),S0103,main,Q0121,-,-,-
+US10E08,US10,8,The Unauthorized Rusical,2018-05-10,"Perform in ""Cher: The Unauthorized Rusical""",Rusical,Slap Out Of It,Glitterific,S0104,main,Q0120,-,-,-
+US10E09,US10,9,Breastworld,2018-05-17,"Act in the series ""Breastworld""",Acting,"Pants down, bottoms up",Silver Foxy,S0105,main,-,-,-,-
+US10E10,US10,10,Social Media Kings Into Queens,2018-05-24,Give drag makeovers to social-media stars,Makeover,Create a super macho character and pose for a man's body spray,Drag Family Values,S0106,main,Q0119,-,-,-
+US10E11,US10,11,Evil Twins,2018-06-07,Present your best self and your evil twin,Acting,Resting Brunch Face,Double Trouble,S0107,main,Q0118,-,-,-
+US10E12,US10,12,American,2018-06-14,"Write and perform a solo verse on RuPaul's ""American""",Song/Verse,-,Final Four Eleganza Extravaganza,S0108,main,-,-,-,-
+US10E13,US10,13,Queens Reunited,2018-06-21,-,Reunion,-,-,-,main,-,-,-,-
+US10E14,US10,14,Grand Finale,2018-06-28,-,Finale,-,-,S0109,main,-,-,-,-
+US11E01,US11,1,Whatcha Unpackin?,2019-02-28,Create signature looks from materials belonging to former “RuPaul’s Drag Race” legends.,Design,Photo Shoot with Drag Race Legends,-,S0223,main,Q0141,-,"A $2,500 gift card from Arda Wigs","A seven-night stay in Paris, France courtesy of misterb&b"
+US11E02,US11,2,"Good God Girl, Get Out",2019-03-07,"Act in a drag queen version of ""Black Panther""and""Get Out""",Acting,Celebrity Photo Bomb,What's Your Sign?,S0111,main,Q0140,-,"A $1,000 gift card from Fierce Queen","A $2,500 gift card from The Crème Shop"
+US11E03,US11,3,Diva Worship,2019-03-14,Perform live in a Diva Evangelical Talk Show,Acting,Seduce Your Way Into a Seduction Concert,Fringe,S0224,main,Q0139,-,-,-
+US11E04,US11,4,Trump: The Rusical,2019-03-21,Trump: The Rusical,Rusical,Why You Maddow Tho?,Orange Alert,S0113,main,Q0138,-,-,-
+US11E05,US11,5,Monster Ball,2019-03-28,Showcase three Halloween inspired looks,Design,Transform yourself into living doll,"The Monster Ball (Trampy Trick or Treater, Witch, Please!, & MILF Eleganza)",S0225,main,Q0137,-,-,-
+US11E06,US11,6,The Draglympics,2019-04-04,"Perform in a free-style floor program which includes Fanography, Voguing, and Shablam",Talent Show,Galisthenics,All That Glitters Is Gold,S0115,main,Q0136,-,-,-
+US11E07,US11,7,From Farm to Runway,2019-04-11,Create a high fashion look made from organic materials to model on the runway,Design,Potato sack race,-,S0116,main,Q0135,-,-,-
+US11E08,US11,8,Snatch Game at Sea,2019-04-18,Snatch Game at Sea,Snatch Game,Pitch your own self-help book,Sequins on the Runway,S0117,main,-,-,-,-
+US11E09,US11,9,L.A.D.P.!,2019-04-25,Perform in an improv comedy police sketch,Acting,Reading is Fundamental,Face-Kini Realness,S0118,main,Q0134,-,-,-
+US11E10,US11,10,Dragracadabra,2019-05-02,Perform in your very own magic show,Talent Show,Balls to the Wall,Caftan Realness,S0119,main,Q0133,-,-,-
+US11E11,US11,11,Bring Back My Queens!,2019-05-09,Makeover returning contestants into a member of their own drag family,Makeover,Slap Out Of It,Drag Family Values,S0120,main,Q0132,-,-,-
+US11E12,US11,12,Queens Everywhere,2019-05-16,"Write and record a verse in a performance of RuPaul's hit single ""Queens Everywhere""",Finale,-,Best Drag,S0226,main,Q0127,-,-,-
+US11E13,US11,13,Reunited,2019-05-23,-,Reunion,-,-,-,main,-,-,-,-
+US11E14,US11,14,Grand Finale,2019-05-30,-,Finale,-,-,S0122,main,-,-,-,-
+US12E01,US12,1,I’m That Bitch,2020-02-28,"Write and perform an original rap number to ""I'm That Bitch"".",Song/Verse,Model 2 looks,Sparkle,S0123,main,-,-,-,"A cash tip of $5,000"
+US12E02,US12,2,You Don’t Know Me,2020-03-06,"Write and perform an original Fosse-inspired jazz number called ""You Don't Know Me"".",Song/Verse,Model 2 looks,Tulle,S0124,main,-,-,-,"A cash tip of $5,000"
+US12E03,US12,3,World’s Worst,2020-03-13,"Improv in a talent competition, called ""World's Worst"".",Acting,Queer-Peer Assessment,Buttons and Bows,S0125,main,Q0154,-,-,"$5,000 cash prize which was donated to The Trevor Project"
+US12E04,US12,4,The Ball Ball,2020-03-20,Showcase three looks in The Ball Ball,Design,“The Beehive Jive”,"Lady Baller, Basketball Wife Realess, and Balls to the Wall Eleganza",S0126,main,Q0153,-,"$2,500 cash prize and $2,500 donation in her name to Honeybees.org","$5,000 cash prize"
+US12E05,US12,5,Gay’s Anataomy,2020-03-27,"Overact in Gay's Anatomy, a parody of the popular TV show Grey's Anatomy",Acting,Pink Pill or Silver Pill,Planet of the Capes,S0127,main,Q0152,-,Assigning the roles for Gay's Anatomy,"$5,000 cash prize that was donated to The Trevor Project"
+US12E06,US12,6,Snatch Game,2020-04-03,Snatch Game,Snatch Game,-,Frozen Eleganza,S0128,main,Q0151,-,-,"$5,000 cash prize"
+US12E07,US12,7,Madonna: The Unauthorized Rusical,2020-04-10,Record vocals and perform to them in Madonna: The Unauthorized Rusical .,Rusical,-,Night of a 1000 Michelle Visages,S0129,main,Q0150,-,-,"$5,000 cash prize"
+US12E08,US12,8,Droop,2020-04-17,Create and market a product for a new drag queen lifestyle brand.,Acting,"In pairs, curate a box of FabFitFun products for another duo, then gift it to them with shade .",Black Wedding,S0130,main,Q0149,-,"$1,000 and a 1 year subscription to FabFitFun","$5,000 cash prize"
+US12E09,US12,9,Choices 2020,2020-04-24,Compete on the political stage to become America's first drag queen president,Acting,"Audition for the title of ""Kitty Girl 2020""",Stars and Stripes Forever,S0131,main,Q0148,-,"$2,500 gift card to Fierce Drag Jewels","$5,000 cash prize"
+US12E10,US12,10,Superfan Makeover,2020-05-01,"Makeover Drag Race super fans and teach them to lip sync to ""U Wear It Well"" against eachother on the mainstage.",Makeover,Reading is Fundamental (unaired),Drag Family Resemblance,S0132,main,-,-,Unknown,"$5,000 cash prize & a $5,000 gift card for Jazz Essence Hall"
+US12E11,US12,11,One-Queen Show,2020-05-08,The queens perform in their own one woman show,Talent Show,Everybody Loves Puppets,The Color Purple,S0133,main,Q0147,-,Decide the One-Queen Show's order,"$5,000 cash prize"
+US12E12,US12,12,Viva Drag Vegas,2020-05-15,Record and perform a medley of songs from RuPaul's Drag Race Live in Las Vegas,Finale,"Design an over-the-top, one-of-a-kind showgirl headdress, that screams 'Viva Drag Vegas'.",Eleganza Extravaganza,S0134,main,Q0146,-,"A trip for two to Las Vegas, including airfare, accommodation, and tickets to see RuPaul's Drag Race Live","$5,000 cash prize"
+US12E13,US12,13,Alone Together,2020-05-22,-,Clip Show,-,-,-,main,-,-,-,-
+US12E14,US12,14,Grand Finale,2020-05-29,-,Finale,-,-,S0135,main,-,-,-,-
+US13E01,US13,1,The Pork Chop,2021-01-01,The queens face off in Lip Sync For Your Life battles,LaLaPaRuZa,-,-,-,main,-,-,-,-
+US13E02,US13,2,Condragulations,2021-01-08,"Write original lyrics and perform them for RuPaul's song ""Condragulations""",Song/Verse,Show off two runway ready looks in the categories Day Time Drama Mama and Night Time is the Right Time,Lamé you Stay,S0136,main,-,-,-,"$5,000"
+US13E03,US13,3,Phenomenon,2021-01-15,"Write original lyrics and perform them for RuPaul's song ""Phenomenon""",Song/Verse,Show off two runway ready looks in the categories the Lady and the Vamp,"We’re Here, We’re Sheer, Get Used To It",S0137,main,-,-,-,"$5,000"
+US13E04,US13,4,RuPaulmark Channel,2021-01-22,Overact in cheesy RuPaulmark holiday movies.,Acting,-,Trains for Days,S0138,main,Q0167,-,-,"$5,000"
+US13E05,US13,5,The Bag Ball,2021-01-29,Showcase three looks in The Bag Ball,Design,Baby Got Back: Who Is the Most Misbehaved Baby?,"Mixed Bag, Money Bags, Bag Ball Extravaganza",S0139,main,Q0166,-,"$2,500 gift card from FierceQueen.com","$5,000"
+US13E06,US13,6,Disco-Mentary,2021-02-05,Dance in a documentary as a tribute to disco.,Talent Show,Create eye-popping dresses from wallpaper,Little Black Dress,S0235,main,Q0165,-,"A $2,500 gift card from Spoonflower","$5,000"
+US13E07,US13,7,Bossy Bossy Ruboot,2021-02-12,"Test their improv skills in the second instalment of the ""Bossy Rossy Show""",Acting,Reading is Fundamental,Bead It,S0141,main,Q0164,-,"A $2,500 gift card from ISLYNYC","$5,000"
+US13E08,US13,8,Social Media: The Unverified Rusical,2021-02-19,Record vocals and perform them to Social Media: The Unverified Rusical .,Rusical,-,"Yellow, Gorgeous!",S0236,main,-,-,-,"$5,000"
+US13E09,US13,9,The Snatch Game,2021-03-05,Snatch Game,Snatch Game,Quick drag,Fascinating Fascinators,S0143,main,Q0163,-,"$2,500 cash prize from Snag Tights","$5,000"
+US13E10,US13,10,Freaky Friday Queens,2021-03-12,Getting in pairs to Makeover each other.,Makeover,-,Drag Dopplegangers,S0144,main,Q0162,-,-,"$5,000"
+US13E11,US13,11,Pop! Goes the Queens,2021-03-19,"Create and advertise a brand of soft drinks, plus, write a catchy jingle",Acting,Are You Smarter Than The Pit Crew?,BEAST Couture,S0145,main,Q0161,-,"$2,500 gift card from JJ Malibu","$5,000"
+US13E12,US13,12,Nice Girls Roast,2021-03-26,A Roast of former Miss Congeniality title holders,Comedy,Comedy makeup,-,S0146,main,Q0160,-,"$2,500 worth of Anastasia Beverly Hills Cosmetics, power to choose performance order for Maxi Challenge","$5,000"
+US13E13,US13,13,"Henny, I Shrunk The Drag Queens!",2021-04-02,"Star in a drag parody of the film ""Honey, I Shrunk The Kids""",Acting,-,Haute Pockets,S0147,main,Q0159,-,-,"$5,000"
+US13E14,US13,14,Gettin’ Lucky,2021-04-09,"Write and perform a solo verse to be included on RuPaul's new song ""Lucky,"" and guest star on RuPaul and Michelle Visage's podcast to talk about their journey throughout the competition.",Finale,-,Drag Excellence,-,main,-,-,-,-
+US13E15,US13,15,Reunited,2021-04-16,-,Reunion,-,-,-,main,-,-,-,-
+US13E16,US13,16,Grand Finale,2021-04-23,-,Finale,-,"Black and White, Red All Over, and Grand Finale Eleganza Extravaganza",-,main,-,-,-,-
+US14E01,US14,1,Big Opening No. 1,2022-01-07,"The Charisma, Nerve and Talent Show",Talent Show,Pose for a photo while spinned around on the Lipsync for the Crown wheel,Signature Show-Stopping Drag,S0148,main,Q0178,-,"Cash prize of $2,500","Cash prize of $5,000"
+US14E02,US14,2,Big Opening No. 2,2022-01-14,"The Charisma, Nerve and Talent Show",Talent Show,Pose for a photo in a giant bowl of Tic-Tacs,Sickening Signature Drag,S0240,main,Q0172,-,"Cash prize of $2,500","Cash prize of $5,000"
+US14E03,US14,3,A Pair of Balls,2022-01-21,Ball with themes corresponding to the split premiere groups,Design,-,"Group 1) Hide & Chic; Group 2) Red, White, and Blue Ball",S0150,main,Q0181,-,-,"Cash prize of $5,000"
+US14E04,US14,4,She's A Super Tease,2022-01-28,"In two rivalling teams, produce attention grabbing superteases for Season 14.",Acting,-,Night of 1000 Jlo’s,S0151,main,Q0180,-,-,"$5,000 cash prize"
+US14E05,US14,5,Save A Queen,2022-02-04,"In teams, produce PSAs for a charity featuring the assigned porkchop queen, complete with rhyming",Acting,-,Spring Has Sprung,S0152,main,Q0178,-,-,"Cash prize of $5,000"
+US14E06,US14,6,Glamazon Prime,2022-02-11,Design an outfit out of items shopped online,Design,-,Glamazon Primetime,S0153,main,Q0177,-,-,"Cash prize of $5,000"
+US14E07,US14,7,The Daytona Wind,2022-02-18,Star in a Southern soap opera featuring three rivalling drag families,Acting,-,Chaps on the Runway,-,main,-,-,-,"Cash prize of $5,000"
+US14E08,US14,8,60s Girl Groups,2022-02-25,Sing and dance as three 60s girl groups,Girl Group,Reading is Fundamental,Heart On,S0242,main,Q0176,-,"Cash prize of $2,500","Cash prize of $5,000"
+US14E09,US14,9,Menzeses,2022-03-04,Drag Con discussion panels in teams,Acting,Photobomb celebrity photographs,Shoulder Pads,S0243,main,-,-,"Cash prize of $2,500","Cash prize of $5,000"
+US14E10,US14,10,Snatch Game,2022-03-11,Snatch Game,Snatch Game,Make a look out of bubble wrap,Holy Couture,-,main,-,-,"Cash prize of $2,500","Cash prize of $5,000"
+US14E11,US14,11,An Extra Special Episode,2022-03-18,The bottom 7 queens face each other in a lip sync smackdown tournament.,LaLaPaRuZa,-,-,-,main,Q0175,-,-,-
+US14E12,US14,12,Moulin Ru: The Rusical,2022-03-25,"Star in ""Moulin Ru: The Rusical"" (a parody of Moulin Rouge! )",Rusical,-,"Mirror, Mirror",S0250,main,-,-,-,"Cash prize of $5,000 and a trip to New York City to see Moulin Rouge! The Musical on Broadway"
+US14E13,US14,13,The Ross Mathews Roast,2022-04-01,A roast of Ross Mathews,Comedy,Paint a mural of RuPaul and Dolly Parton,Tutu Much,S0157,main,Q0173,-,"$1,500 worth of Anastasia Beverly Hills cosmetics for each queen","Cash prize of $5,000"
+US14E14,US14,14,Catwalk,2022-04-08,"Star in a music video for RuPaul's song ""Catwalk.""",Finale,-,"You’re a Winner, Baby",S0158,main,-,-,-,"Cash prize of $5,000"
+US14E15,US14,15,Reunited!,2022-04-15,-,Reunion,-,-,-,main,-,-,-,-
+US14E16,US14,16,Grand Finale,2022-04-22,-,Finale,-,-,-,main,-,-,-,-
+US15E01,US15,1,"One Night Only, Part 1",2023-01-06,Talent Show (Group 1 entrances),Talent Show,Sexy Car Wash Photoshoot (Group 1) and Windy Hog Photoshoot (Group 2),Who Is She?,,-,,-,-,-
+US15E02,US15,2,"One Night Only, Part 2",2023-01-06,Talent Show,Talent Show,-,Who Is She?,S0159,main,Q0197,-,-,-
+US15E03,US15,3,All Queens Go to Heaven,2023-01-13,Queer afterlife infomercial (teams),Acting,-,Metallica,S0160,main,Q0196,-,-,"$5,000 cash prize"
+US15E04,US15,4,Supersized Snatch Game,2023-01-20,Snatch Game,Snatch Game,-,Beautiful Nightmare,S0161,main,Q0191,-,-,"$5,000 cash prize"
+US15E05,US15,5,House of Fashion,2023-01-27,Home decor fashion line (teams),Design,Reading Challenge,Drag Race Fashion Week,S0162,main,Q0195,-,"$2,500 cash prize","$5,000 cash prize from Sunday Riley"
+US15E06,US15,6,Old Friends Gold,2023-02-03,Old lady girl groups (teams),Girl Group,-,Tie-Dye to Die For,S0163,main,Q0194,-,-,"$5,000 cash prize"
+US15E07,US15,7,The Daytona Wind 2,2023-02-10,80s soap opera acting,Acting,-,Puffa Please,S0164,main,Q0193,-,-,"$5,000 cash prize from got2be glued"
+US15E08,US15,8,Lip Sync LaLaPaRuZa Smackdown,2023-02-17,Lip Sync LaLaPaRuZa Smackdown,LaLaPaRuZa,-,,S0090,main,Q0192,-,-,-
+US15E09,US15,9,The Crystal Ball,2023-02-24,The Crystal Ball (design),Design,Photobomb moments from past seasons,Start Your Engines / My Favorite Ball / Crystallized Eleganza,S0203,main,Q0190,-,"$2,500 cash prize from PrettyLittleThing","$5,000 cash prize"
+US15E10,US15,10,50/50's Most Gagworthy Stars,2023-03-03,Interview celebrities for 50/50,Acting,-,Night of a Thousand Beyoncés,S0166,main,Q0186,-,-,"$5,000 cash prize"
+US15E11,US15,11,"Two Queens, One Joke",2023-03-10,Stand-up comedy (pairs),Comedy,Harlem Vogue Ball,Rip Her to Shreds,S0167,main,Q0188,-,"$2,500 cash prize","$5,000 cash prize from Bubly Sparkling Water"
+US15E12,US15,12,Wigloose: The Rusical!,2023-03-17,Wigloose: The Rusical!,Rusical,-,Everybody Say Glove!,S0204,main,Q0187,-,-,"$5,000 cash prize"
+US15E13,US15,13,Teacher Makeovers,2023-03-24,Makeover school teachers,Makeover,Spill The T,Drag Family Resemblance,S0169,main,Q0189,-,-,"$5,000 cash prize"
+US15E14,US15,14,Blame It on the Edit,2023-03-31,Verses to 'Blame It on the Edit',Song/Verse,-,Drag Excellence,S0170,main,,-,-,"$5,000 cash prize"
+US15E15,US15,15,Reunited,2023-04-07,Reunion,Reunion,-,,,-,,-,-,-
+US15E16,US15,16,Grand Finale,2023-04-14,Finale lip syncs for the crown,Finale,-,,S0022,main,,-,-,-
+US16E01,US16,1,Rate-A-Queen,2024-01-05,MTV Spring Break Talent Show,Talent Show,Photoshoot through a Doorbell Camera on RuPaul's porch,RuVeal Yourself,S0171,main,,-,"$2,500 cash prize","$5,000 cash prize and immunity from a future challenge"
+US16E02,US16,2,Queen Choice Awards,2024-01-12,Queen Choice Awards Talent Show,Talent Show,Get a photo taken at the She-MV,Made You Look,S0172,main,,-,-,-
+US16E03,US16,3,The Mother of All Balls,2024-01-19,The Mother of All Balls (design),Design,-,Mother Goose / Significant Mother / Eleganza,S0173,main,Q0211,-,-,-
+US16E04,US16,4,RDR Live!,2024-01-26,RDR Live sketch comedy,Acting,-,Everything Every-Cher All at Once,S0174,main,Q0210,-,-,-
+US16E05,US16,5,Girl Groups,2024-02-02,Girl group verses (teams),Girl Group,"Take a cover photo for an original memoir, inspired by RuPaul's The House of Hidden Meanings","Faster Pussycat, Wig, Wig",S0175,main,Q0209,-,-,-
+US16E06,US16,6,Welcome to the DollHouse,2024-02-09,Design your own drag doll,Design,Flamenco dance with the Pit Crew,Welcome to the Dollhouse,S0176,main,Q0208,-,-,-
+US16E07,US16,7,The Sound of Rusic,2024-02-16,The Sound of Rusic (Rusical),Rusical,-,I Can Buy Myself Flowers,S0177,main,Q0207,-,-,-
+US16E08,US16,8,Snatch Game,2024-02-23,Snatch Game,Snatch Game,Reading Challenge,Dancing Queen,S0178,main,Q0206,-,-,-
+US16E09,US16,9,See You Next Wednesday,2024-03-01,Neo-goth unconventional materials,Design,Spit Take in response to comments from RuPaul,See You Next Wednesday,S0252,main,Q0205,-,-,-
+US16E10,US16,10,Werq the World,2024-03-08,Verses to 'Power',Song/Verse,-,True Colors,S0180,main,,-,-,-
+US16E11,US16,11,Corporate Queens,2024-03-15,Drag awareness seminars (teams),Acting,"Vote who best fits the characteristic named by RuPaul. Instead of points, the majority voters earn $100.",Flashback: DragCon 1980,S0181,main,Q0204,-,-,-
+US16E12,US16,12,Bathroom Hunties,2024-03-22,Design your own bathroom (pairs),Design,"Paint a custom t-shirt using just a painted face , inspired by Tammy Faye .",Chain Reaction,S0182,main,Q0203,-,-,-
+US16E13,US16,13,Drag Race Vegas Live! Makeovers,2024-03-29,Makeover Pit Crew dancers,Makeover,-,Drag Family Resemblance,S0183,main,Q0202,-,-,-
+US16E14,US16,14,Booked and Blessed,2024-04-05,Promote a memoir concept,Acting,-,Fandango,S0184,main,Q0201,-,-,-
+US16E15,US16,15,Lip Sync LaLaPaRuza Smackdown – Reunited,2024-04-12,Lip Sync LaLaPaRuZa Smackdown,LaLaPaRuZa,-,,S0185,main,,-,-,-
+US16E16,US16,16,Grand Finale,2024-04-19,Finale lip syncs for the crown,Finale,-,Grande Finale Eleganza,S0186,main,,-,-,-
+US17E01,US17,1,Squirrel Games,2025-01-03,Drag Queens Got Talent (Talent Show),Talent Show,"Prior to the Werkroom Entrances, play Ru Light, Green Light with Drag Race Alum and local queens",Masked For Masked Singer,S0187,main,,-,"$2,500 cash prize","$5,000 cash prize"
+US17E02,US17,2,Drag Queens Got Talent - Part 2,2025-01-10,Talent Show Part 2,Talent Show,-,Is It Cake?,S0188,main,,-,-,"$5,000 cash prize"
+US17E03,US17,3,Monopulence!,2025-01-17,Design Monopoly looks,Design,-,Monopulence,S0262,main,Q0222,-,-,"$5,000 cash prize"
+US17E04,US17,4,"Bitch, I'm A Drag Queen!",2025-01-24,Singing challenge,Singing,-,Quilted For Your Pleasure,S0190,main,Q0223,-,-,"$5,000 cash prize"
+US17E05,US17,5,RDR Live!,2025-01-31,RDR Live sketch comedy,Acting,-,Tickled Pink,S0191,main,,-,-,"$5,000 cash prize"
+US17E06,US17,6,Let's Get Sea Sickening Ball,2025-02-07,Sea-themed ball (design),Design,Transport Anastasia Beverly Hills Lipsticks to a display case,Sea Sickening Ball,S0263,main,Q0224,-,$500 cash prize courtesy of Anastasia Beverly Hills,"$5,000 cash prize and a $5,000 donation to the American Friends of the Ocean Cleanup Foundation"
+US17E07,US17,7,Snatch Game,2025-02-14,Snatch Game,Snatch Game,-,Leather and Lace,S0264,main,Q0220,-,-,"$5,000 cash prize"
+US17E08,US17,8,The Wicked Wiz Of Oz: The Rusical!,2025-02-21,Wicked Wiz of Oz (Rusical),Rusical,-,Emerald City Eleganza,S0265,main,Q0225,-,-,"$5,000 cash prize"
+US17E09,US17,9,Heavens to Betsey!,2025-02-28,Design (Betsey Johnson),Design,Reading Challenge,Heavens to Betsey,S0266,main,Q0219,-,"$2,500 cash prize","$5,000 cash prize"
+US17E10,US17,10,The Villains Roast,2025-03-07,Roast,Comedy,Questions with Michelle Visage and the Badonka Dunk Tank,Villains,S0267,main,Q0221,-,-,"$5,000 cash prize"
+US17E11,US17,11,Ross Mathews vs. The Ducks,2025-03-14,Acting challenge,Acting,-,Feather Frenzy,S0268,main,Q0218,-,-,"$5,000 cash prize"
+US17E12,US17,12,"Charisma, Uniqueness, Nerve & Talent Monologues",2025-03-21,CUNT Monologues,Acting,"In pairs, fill in the blanks to write the other queen's Drag Race bios",Pearls of Wisdom,S0269,main,Q0217,-,"$1,000 cash prize","$5,000 cash prize (split among them, $2,500 each)"
+US17E13,US17,13,Drag Baby Mamas,2025-03-28,Makeover,Makeover,Spill The T,Drag Family Resemblance,S0270,main,,-,"$2,500 cash prize","$5,000 cash prize and $2,500 for the makeover partner"
+US17E14,US17,14,How's Your Headliner?,2025-04-04,Headliner act,Acting,-,Showgirl Realness,S0192,main,Q0216,-,-,"$5,000 cash prize and an invitation to join RuPaul's Drag Race Live!"
+US17E15,US17,15,Lip Sync Lalaparuza Smackdown,2025-04-11,Lip Sync LaLaPaRuZa Smackdown,LaLaPaRuZa,-,,S0193,main,,-,-,-
+US17E16,US17,16,Grand Finale,2025-04-18,Finale lip syncs for the crown,Finale,-,Grand Finale Eleganza,S0194,main,,-,-,-
+US18E01,US18,1,Premiere Part 1,2026-01-02,Talent Show,Talent Show,Act as a scream queen with masked dancers and pose for a photoshoot,"Reclaim, Renew, Rejoice",S0277,main,,-,"$2,500 cash prize","$5,000 cash prize"
+US18E02,US18,2,Premiere Part 2,2026-01-09,Talent Show,Talent Show,-,"Your Neck, Your Back, Your Pussy, and Your Crack",S0278,main,Q0239,-,-,"$5,000 cash prize"
+US18E03,US18,3,RDR Live Returns!,2026-01-16,RDR Live!,Acting,-,Animal Attraction,S0279,main,Q0238,-,-,"$5,000 cash prize"
+US18E04,US18,4,Red Carpet Mash-Ups,2026-01-23,"In pairs, design a look inspired by two iconic red carpet moments",Design,-,Red Carpet Mashups,S0280,main,Q0237,-,-,"$5,000 cash prize"
+US18E05,US18,5,"The Rate-A-Queen Talent Show, Part 1",2026-01-30,"Perform in the Rate-A-Queen Talent Show, Part 1",Talent Show,-,"Not Today, Satin",S0281,main,,-,-,"5,000 cash prize (split between them, $2,500 each)"
+US18E06,US18,6,"The Rate-A-Queen Talent Show, Part 2",2026-02-06,"Perform in the Rate-A-Queen Talent Show, Part 2",Talent Show,-,"Shake, Shake, Shake",S0030,main,Q0236,-,-,"$5,000 cash prize"
+US18E07,US18,7,Drag Queens For Change,2026-02-13,"In pairs, create comedic political ads that parody polarizing political issues",Acting,-,I Can See Right Through Her,S0282,main,Q0235,-,-,"$5,000 cash prize"
+US18E08,US18,8,Snatch Game Of Love: Island Edition,2026-02-20,Snatch Game of Love Island,Snatch Game,-,80s Ladies,S0283,main,Q0234,-,-,"$5,000 cash prize"
+US18E09,US18,9,Fannie: The Rusical,2026-02-27,Rusical,Rusical,"Grindr, I Hardly Know Her!",Beige Against The Machine,S0284,main,Q0233,-,"$2,500 cash prize (split between them, $1,250 each)","$5,000 cash prize"
+US18E10,US18,10,Drag in a Bag,2026-03-06,Design,Design,Reading Challenge,Party,S0526,main,,-,"$2,500 cash prize","$5,000 cash prize and a set of luggage from Away"
+US18E11,US18,11,A Toast to Alyssa Edwards,2026-03-13,Roast,Comedy,Advertise fragrances provided by Scent Bird,Swept Away,S0195,main,Q0232,-,"$2,500 cash prize","$5,000 cash prize"
+US18E12,US18,12,"Mammas, Don't Let Your Babies Grow Up to Be Drag Queens",2026-03-20,Give drag makeovers to queer cowboys,Makeover,Race while riding inflatable horses,Drag Family Resemblance,S0285,main,Q0231,-,"$2,500 cash prize","$5,000 cash prize and $2,500 cash prize for her partner"
+US18E13,US18,13,Karens Gone Wild,2026-03-27,"Improvise in the show ""Karens got Wild""",Acting,Everybody Loves Puppets,From Wholesome to Folsom,S0525,main,Q0230,-,-,"$5,000 cash prize and tickets to "" Stop! That! Train!"""
+US18E14,US18,14,Good Morning Bitches,2026-04-03,Talk show,Acting,-,Drag Excellence,S0196,main,Q0229,-,-,"$5,000 cash prize (split between them, $2,500 each)"
+US18E15,US18,15,Lip Sync RuPaul-A-Paruza Smackdown,2026-04-10,Lip Sync Smackdown,LaLaPaRuZa,-,-,,-,,-,-,-
+US18E16,US18,16,Grand Finale,2026-04-17,Finale,Finale,-,-,S0286,main,,-,-,-
+AS05E01,AS05,1,All Star Variety Extravaganza,2020-06-05,Werq The World Variety Extravaganza Show,Talent Show,Reading is Fundamental,-,S0352,main,Q0093,-,-,-
+AS05E02,AS05,2,I'm In Love!,2020-06-12,Write and perform,Girl Group,-,Love The Skin You're In,S0353,main,Q0005,-,-,-
+AS05E03,AS05,3,Get a Room!,2020-06-19,Design a signature suite,Design,-,Three Looks In One,S0354,main,Q0029,-,-,-
+AS05E04,AS05,4,SheMZ,2020-06-26,Improv,Acting,-,Camo Couture,S0355,main,Q0123,-,-,-
+AS05E05,AS05,5,Snatch Game of Love,2020-07-03,Snatch Game of Love,Snatch Game,-,Prom Queen Fantasy,S0356,main,Q0030,-,-,-
+AS05E06,AS05,6,The Charles Family Backyard Ball,2020-07-10,Showcase two looks,Design,-,-,S0357,main,Q0024,-,-,-
+AS05E07,AS05,7,Stand-Up Smackdown,2020-07-17,Face off in a,Comedy,-,Freak Out!,S0139,main,Q0122,-,-,-
+AS05E08,AS05,8,Clap Back!,2020-07-24,"Write, record, and perform a verse",Finale,•,All Star Eleganza,S0358,main,-,-,-,-
+AS01E01,AS01,1,It Takes Two,2012-10-22,Create an,PhotoShoot,-,Team,S0359,main,Q0014,-,-,-
+AS01E02,AS01,2,RuPaul's Gaff-In,2012-10-29,Perform and write original jokes doing celebrity impersonations for,Snatch Game,In Da Butt Ru,60s Glam,S0360,main,Q0008,-,-,-
+AS01E03,AS01,3,Queens Behaving Badly,2012-11-05,"Act ""naughty"" on the streets of Hollywood and do pranks",Acting,Queens With Guy Phones,Bad Girl Chic,S0221,main,Q0023,-,-,-
+AS01E04,AS01,4,All-Star Girl Groups,2012-11-12,Transform daughters of celebrities,MakeOver,-,-,S0361,main,Q0025,-,-,-
+AS01E05,AS01,5,Dynamic Drag Duos,2012-11-19,Create a Super Hero or Super Villain persona to your secret drag identity,Design,Basketball game of,-,S0362,main,-,-,-,-
+AS01E06,AS01,6,The Grand Finale,2012-11-26,Drag on a Time,Finale,•,-,S0363,main,Q0004,-,-,-
+AS02E01,AS02,1,All Star Talent Show Extravaganza,2016-08-25,All Star Talent Show,Talent Show,Reading is Fundamental,-,S0375,main,Q0051,-,-,-
+AS02E02,AS02,2,All Stars Snatch Game,2016-09-01,Celebrity impersonations in the,Snatch Game,-,: Latex Eleganza,S0376,main,Q0013,-,-,-
+AS02E03,AS02,3,HERstory of the World,2016-09-08,Perform in a rusical,Rusical,-,: The Future of Drag,S0200,main,Q0076,-,-,-
+AS02E04,AS02,4,Drag Movie Shequels,2016-09-15,Perform in a,Acting,-,: Two Looks in One,S0377,main,Q0052,-,-,-
+AS02E05,AS02,5,Revenge Of The Queens,2016-09-22,Performing a live,Comedy,-,-,S0378,main,Q0051,-,-,-
+AS02E06,AS02,6,Drag Fish Tank,2016-09-29,"Create, market, and film a commercial",Advert,"""Beastly Golf Challenge""",: Pants on the Runway,S0379,main,Q0013,-,-,-
+AS02E07,AS02,7,Family That Drags Together,2016-10-06,Drag Makeover,MakeOver,-,-,S0380,main,Q0052,-,-,-
+AS02E08,AS02,8,All Stars Supergroup,2016-10-13,Write original rap lyrics and perform,Finale,-,-,S0381,main,Q0049,-,-,-
+AS02E09,AS02,9,Reunited,2016-10-27,•,Reunion,•,-,-,main,-,-,-,-
+AS03E01,AS03,1,All-Star Variety Show,2018-01-25,Variety Show,Talent Show,Reading is Fundamental,-,S0320,main,Q0017,-,-,-
+AS03E02,AS03,2,Divas Lip Sync Live,2018-02-01,Go Full diva in a lip-syncing dance number,Rusical,-,RuDemption Realness,S0321,main,Q0094,-,-,-
+AS03E03,AS03,3,The B*tchelor,2018-02-08,The contestants',Acting,-,Wigs on Wigs on Wigs (inspired by Roxxxy Andrews),S0322,main,Q0069,-,-,-
+AS03E04,AS03,4,All Stars Snatch Game,2018-02-15,Snatch Game,Snatch Game,-,Flower Power,S0323,main,Q0092,-,-,-
+AS03E05,AS03,5,Pop Art Ball,2018-02-22,"Design wearable soup cans inspired by Andy Warhol, and  Studio 54 disco looks.",Design,The contestants pose for a photo that will be turned into a pop art portrait,Soup Can Realness and Studio 54 Disco Looks,S0324,main,Q0109,-,-,-
+AS03E06,AS03,6,Handmaids to Kitty Girls,2018-03-01,The contestants audition for RuPaul's new,Girl Group,-,-,S0325,main,Q0094,-,-,-
+AS03E07,AS03,7,My Best Squirrelfriend's Dragsmaids Wedding Trip,2018-03-08,The contestants’,Acting,-,Red For Filth,S0326,main,Q0017,-,-,-
+AS03E08,AS03,8,A Jury of Your Queers,2018-03-15,"Write, sing, and dance",Finale,•,Best Drag Eleganza Extravaganza,S0327,main,Q0021,-,-,-
+AS04E01,AS04,1,All Star Super Queen Variety Show,2018-12-14,Variety Show,Talent Show,Reading is Fundamental,-,S0287,main,Q0086,-,-,-
+AS04E02,AS04,2,"Super Girl Groups, Henny",2018-12-21,Audition for the new super,Girl Group,-,Eleguence After Dark,S0288,main,Q0108,-,-,-
+AS04E03,AS04,3,Snatch Game of Love,2018-12-28,Snatch Game of Love,Snatch Game,-,Boots The House Down,S0289,main,Q0070,-,-,-
+AS04E04,AS04,4,Jersey Justice,2019-01-04,Improvise,Acting,-,Swerves and Curves,S0290,main,Q0037,-,-,-
+AS04E05,AS04,5,Roast in Peace,2019-01-11,The Funeral,Comedy,-,Angelic White,S0291,main,-,-,-,-
+AS04E06,AS04,6,LaLaPaRUza,2019-01-18,Lip Sync Smackdown,LipSync,-,LaLaPaRUza Eleganza,-,main,Q0086,-,-,-
+AS04E07,AS04,7,Queens of Clubs,2019-01-25,Design and host,Design,-,Plastique Fantastique,S0292,main,Q0107,-,-,-
+AS04E08,AS04,8,RuPaul's Best Judy's Race,2019-02-01,Transform their best friends into their own drag sisters,MakeOver,-,Best Judy Realness,S0293,main,Q0023,-,-,-
+AS04E09,AS04,9,"Sex and the Kitty, Girl 3",2019-02-08,Star in,Acting,-,Kitty Girl Couture,S0294,main,Q0037,-,-,-
+AS04E10,AS04,10,Super Queen Grand Finale,2019-02-15,"Write, sing, and dance",Finale,•,All Star Eleganza,S0295,main,Q0091,-,-,-
+AS06E01,AS06,1,All Star Variety Extravaganza,2021-06-24,Variety Show,Talent Show,Reading is Fundamental,-,S0364,main,Q0059,-,-,-
+AS06E02,AS06,2,The Blue Ball,2021-06-24,The,Design,-,-,S0365,main,Q0041,-,-,-
+AS06E03,AS06,3,Side Hustles,2021-07-01,Write and star in a commercial,Advert,-,Rudemption Runway,S0366,main,Q0131,-,-,-
+AS06E04,AS06,4,Halftime Headliners,2021-07-08,"Headline in """,Rusical,-,The Frill of It All,S0367,main,Q0025,-,-,-
+AS06E05,AS06,5,Pink Table Talk,2021-07-15,Produce and host an intimate chat show,Acting,-,Clash of the Patterns,S0368,main,Q0136,-,-,-
+AS06E06,AS06,6,Rumerican Horror Story: Coven Girls,2021-07-22,Over-acting,Acting,-,"Oh, My Goth!",S0369,main,Q0130,-,-,-
+AS06E07,AS06,7,Show Up Queen,2021-07-29,Write and record a verse,Girl Group,-,Hot Tropics,S0370,main,Q0149,-,-,-
+AS06E08,AS06,8,Snatch Game of Love,2021-08-05,Snatch Game of Love,Snatch Game,-,Pop Art,S0371,main,Q0014,-,-,-
+AS06E09,AS06,9,Drag Tots,2021-08-12,Create and dress up,Design,All Star Class Superlatives,Drag Tots,S0372,main,Q0111,-,-,-
+AS06E10,AS06,10,Rudemption Lip-Sync Smackdown,2021-08-19,-,LipSync,-,-,-,main,-,-,-,-
+AS06E11,AS06,11,"The Charisma, Uniqueness, Nerve and Talent Monologues",2021-08-26,Entertain in the,Comedy,Pride photo op,"Oops! I Did It Again, A Fashionable Fashion Fail",S0373,main,Q0067,-,-,-
+AS06E12,AS06,12,This is Our Country,2021-09-02,"Write, record, and perform a verse",Finale,•,All Star Hall of Fame Eleganza Extravaganza,S0374,main,-,-,-,-
+AS07E01,AS07,1,Legends,2022-05-20,The queens must,Rumix,Reading is Fundamental,I'm Crowning,S0328,main,-,-,-,-
+AS07E02,AS07,2,Snatch Game,2022-05-20,The queens must give two celebrity impersonations in the,Snatch Game,-,The Pleather Principle,S0329,main,-,-,-,-
+AS07E03,AS07,3,The Realness of Fortune Ball,2022-05-27,The queens must showcase three looks in,Design,: Hungman: Fill in a Before-and-After word puzzle,-,S0322,main,-,-,-,-
+AS07E04,AS07,4,Fairytale Justice,2022-06-03,The queens must,Acting,-,Spikes on the Runway,S0330,main,-,-,-,-
+AS07E05,AS07,5,Draguation Speeches,2022-06-10,The queens must,Comedy,-,Veiled It,S0331,main,-,-,-,-
+AS07E06,AS07,6,Total Ru-quest Live,2022-06-17,The queens must,Girl Group,-,"Night of 1,000 Dolly Partons",S0332,main,-,-,-,-
+AS07E07,AS07,7,Legendary Legend Looks,2022-06-24,The queens must,Design,-,Legendary Legend Looks,S0333,main,-,-,-,-
+AS07E08,AS07,8,Santa's School For Girls,2022-07-01,The queens must,Acting,-,Knitty Knitty Bang Bang,S0334,main,-,-,-,-
+AS07E09,AS07,9,Dance Like a Drag Queen,2022-07-08,Create,Advert,-,What Lies Beneath,S0335,main,-,-,-,-
+AS07E10,AS07,10,The Kennedy Davenport Center Honors Hall of Shade,2022-07-15,Roast each other,Comedy,-,All Glow'd Up,S0336,main,-,-,-,-
+AS07E11,AS07,11,Drag Race Gives Back Variety Extravaganza,2022-07-22,Variety Show,Talent Show,-,-,S0337,main,-,-,-,-
+AS07E12,AS07,12,Lip Sync LaLaPaRuza Smackdown,2022-07-29,Lip Sync LaLaPaRuZa Smackdown for The Crown,Finale,•,Grand Finale Eleganza,-,main,-,-,-,-
+AS08E01,AS08,1,The Fame Games,2023-05-12,Write and perform,Girl Group,Model two looks on the runway,Famous Forever,S0308,main,Q0058,-,-,-
+AS08E02,AS08,2,It's RDR Live!,2023-05-12,Perform in a sketch comedy performance,Acting,-,Net Gala,S0309,main,Q0097,-,-,-
+AS08E03,AS08,3,The Supermarket Ball,2023-05-19,The Supermarket Ball,Design,-,-,S0310,main,Q0085,-,-,-
+AS08E04,AS08,4,Screen Queens,2023-05-26,Create trailers for a scripted series,Advert,-,Ass The World Turns,S0311,main,Q0064,-,-,-
+AS08E05,AS08,5,Snatch Game of Love,2023-06-02,Snatch Game of Love,Snatch Game,-,Ruveal Yourself,S0312,main,-,-,-,-
+AS08E06,AS08,6,JOAN: The Unauthorized Rusical!,2023-06-09,Joan: The Unauthorised Rusical,Rusical,-,Night of 1000 Grace Jones,S0313,main,Q0114,-,-,-
+AS08E07,AS08,7,Forensic Queens,2023-06-16,"Improvise in the new RuPrime series ""Forensic Queens""",Acting,-,Miss Fill In The Blank,S0314,main,Q0140,-,-,-
+AS08E08,AS08,8,You’re A Winner Baby!,2023-06-23,"Transform materials into your own signature look that screams ""I'm A Winner Baby!""",Design,-,I'm A Winner Baby!,S0315,main,Q0164,-,-,-
+AS08E09,AS08,9,"Carson Kressley, This is Your Gay Life",2023-06-30,The Carson Kressley Roast,Comedy,-,Snow Bunny,S0316,main,Q0105,-,-,-
+AS08E10,AS08,10,The Letter “L”,2023-07-07,Transform lesbians into fabulous drag queens,MakeOver,"In 45 minutes, transform their torsos inspired by a special Jean Paul Gaultier fragrance and",Drag Family Resemblance,S0317,main,Q0015,-,-,-
+AS08E11,AS08,11,The Fame Games Variety Extravaganza,2023-07-14,Showcase a solo performance in,Talent Show,Reading Challenge,-,S0318,main,-,-,-,-
+AS08E12,AS08,12,Grand Finale,2023-07-21,•,Finale,•,Finale Fabulosity,S0319,main,-,-,-,-
+AS09E01,AS09,1,Drag Queens Save the World,2024-05-17,The contestants must,Rumix,Reading is Fundamental,"Signature Look, Signature Fragrance",S0344,main,-,-,-,-
+AS09E02,AS09,2,The Paint Ball,2024-05-17,Serve three looks in The Paint Ball,Design,-,-,S0345,main,-,-,-,-
+AS09E03,AS09,3,Snatch Game of Love,2024-05-24,Snatch Game of Love,Snatch Game,-,A Tail and Two Titties,S0346,main,-,-,-,-
+AS09E04,AS09,4,Smokin' Hot Firefighter Makeovers,2024-05-31,"In duos,",MakeOver,-,Smoking Hot Pop Stars,S0347,main,-,-,-,-
+AS09E05,AS09,5,Property Queens,2024-06-07,"In duos, create dragged up real estates",Advert,Soul Train Dance Off,Day to Night Ruveal,S0348,main,-,-,-,-
+AS09E06,AS09,6,The National Drag Convention Roast,2024-06-14,The National Drag Convention,Comedy,Straw Poll,Atomic Blonde,S0349,main,-,-,-,-
+AS09E07,AS09,7,Meeting in the Ladies Room,2024-06-21,Act in the original film,Acting,Move the contents of one fruit basket to another basket using only their legs,"Widow, Weep For Me",S0215,main,-,-,-,-
+AS09E08,AS09,8,Make Your Own Kind of Rusic,2024-06-28,Create an outfit,Design,Photobomb,Make Your Own Kind of Rusic,S0350,main,-,-,-,-
+AS09E09,AS09,9,Rosemarie's Baby Shower: The Rusical,2024-07-05,Rosemarie's Baby Shower: The Rusical,Rusical,-,Bring Back My Pearls,S0351,main,-,-,-,-
+AS09E10,AS09,10,Lip-Sync Lalaparuza Smackdown,2024-07-12,Lip Sync LaLaPaRuZa Smackdown,LipSync,-,Lip Sync LaLaPaRuZa,S0069,main,-,-,-,-
+AS10E01,AS10,1,"Winner Winner, Chicken Dinner",2025-05-09,The contestants must,Rumix,-,Slits and Tits,S0296,main,-,-,-,-
+AS10E02,AS10,2,Murder on the Dance Floor,2025-05-09,Improvise,Acting,Move a softball up the Pit Crew's body without hands,Coming and Going,S0297,main,-,-,-,-
+AS10E03,AS10,3,Hoop Queens Makeovers,2025-05-16,Makeover,MakeOver,Shoot basketball free-throws,Drag Family Resemblance,S0298,main,-,-,-,-
+AS10E04,AS10,4,Eight Ball,2025-05-23,Design,Design,-,Eight Ball Eleganza,S0299,main,-,-,-,-
+AS10E05,AS10,5,Rappin’ Roast,2025-05-30,Write and perform verses,Comedy,-,Little Shop of Whores,S0300,main,-,-,-,-
+AS10E06,AS10,6,Starrbooty: The Rebooty,2025-06-06,Starrbooty: The Rebooty,Rusical,-,"Wild, Wild West",S0301,main,-,-,-,-
+AS10E07,AS10,7,Wicked Good,2025-06-13,"In pairs,",Design,-,Good Witch and Wicked Witch,S0302,main,-,-,-,-
+AS10E08,AS10,8,Stagecooch,2025-06-20,Perform in country girl groups,Girl Group,Clueless,"Night of a 1,000 Mileys",S0303,main,-,-,-,-
+AS10E09,AS10,9,The Golden Bitchelor,2025-06-27,Improvise,Acting,-,Paper Dolls,S0304,main,-,-,-,-
+AS10E10,AS10,10,Tournament of All Stars Snatch Game,2025-07-04,Snatch Game,Snatch Game,-,Tear-A-Me-Suit,S0305,main,Q0098,-,-,-
+AS10E11,AS10,11,Tournament of All Stars Talent Invitational,2025-07-11,Perform in the Tournament of All Stars,Talent Show,Reading Challenge,Foiled Again,S0306,main,Q0185,-,-,-
+AS10E12,AS10,12,Tournament of All Stars Smackdown for the Crown,2025-07-18,•,Finale,•,-,S0307,main,-,-,-,-
+AS11E01,AS11,1,Break Dancin’ 2: Electric Rugaloo,2026-05-08,Write and perform a verse,Rumix,-,La Toyas R Us,S0338,main,-,-,-,-
+AS11E02,AS11,2,Bar Queen Couture,2026-05-08,Design a couture outfit,Design,Put on a pair of oversized underwear without using hands,Bar Queen Couture,S0339,main,-,-,-,-
+AS11E03,AS11,3,Shop Til U Drop,2026-05-15,Host a live shopping show,Advert,-,"Paris, France",S0340,main,-,-,-,-
+AS11E04,AS11,4,Duets: It Takes Two,2026-05-22,"In pairs,",Girl Group,-,You Butter Ask Somebody,S0341,main,-,-,-,-
+AS11E05,AS11,5,How-To Videos,2026-05-29,Create short informational videos,Advert,-,Barn This Way,S0342,main,-,-,-,-
+AS11E06,AS11,6,Too Many Daddies,2026-06-05,Makeover a gay dad,MakeOver,Slap Out of It!,Drag Family Resemblance,S0343,main,-,-,-,-
+AS11E07,AS11,7,-,-,-,Design,-,-,-,main,-,-,-,-
+CA01E01,CA01,1,Eh-Leganza Eh-Xtravaganza,2020-07-02,Canuck Couture Fantasy:,Design,Photoshoot with a high speed fan and snow blowing in their faces,-,S0397,main,Q0252,-,-,-
+CA01E02,CA01,2,Her-Itage Moments,2020-07-09,Acting Challenge,Acting,The Nutsmacker: a crash course in ballet,Not My First Time,S0398,main,Q0251,-,-,-
+CA01E03,CA01,3,Not Sorry Aboot It,2020-07-16,"Write, record and perform in a song",Girl Groups,"Canada Gay-M: Be co-anchors for Canada's premier gay morning show and read off a teleprompter in English, French, and ""Gay-lish""",Québec-ky With The Good Hair,S0399,main,Q0250,-,-,-
+CA01E04,CA01,4,Single Use Queens,2020-07-23,Design and create,Design,Underwear Memory Matching,-,S0400,main,Q0249,-,-,-
+CA01E05,CA01,5,The Snatch Game,2020-07-30,Snatch Game,Snatch Game,Reading is Fundamental,Night of a 1000 Céline Dions,S0401,main,Q0248,-,-,-
+CA01E06,CA01,6,Star Sixty-Nine,2020-08-06,"In teams,",Advert,Psychic Hotline Operators,Canadian Tux-She-Do: Denim on Denim on Denim,S0402,main,Q0247,-,-,-
+CA01E07,CA01,7,Miss Loose Jaw,2020-08-13,Compete in Drag Race's very first pageant,Acting,-,Pageant Perfection,S0403,main,Q0246,-,-,-
+CA01E08,CA01,8,Welcome to the Family,2020-08-20,Makeover,Make Over,Everybody Loves Puppets,A Family Affair,S0404,main,Q0245,-,-,-
+CA01E09,CA01,9,The Snow Ball,2020-08-27,Showcase 3 frozen looks in,Design,Sing Canada's National Anthem as a local chanteuse,-,S0405,main,Q0241,-,-,-
+CA01E10,CA01,10,U Wear It Well,2020-09-03,Write and record a verse for a performance,Finale,-,Coronation Eleganza,-,main,-,-,-,-
+CA02E01,CA02,1,Lost and Fierce,2021-10-14,Create a haute-check couture look,Design,Pose for a,-,S0382,main,Q0264,-,-,-
+CA02E02,CA02,2,Under the Big Top,2021-10-21,Perform in the,Rusical,Queen of My Neighborhood Pageant,Circus Bezerkus,S0383,main,Q0263,-,-,-
+CA02E03,CA02,3,Screech,2021-10-28,Overact in a slasher film,Acting,-,Good Girl Gone Bad,S0384,main,Q0262,-,-,-
+CA02E04,CA02,4,Snatch Game,2021-11-04,Snatch Game,Snatch Game,Reading is Fundamental,Made in Canada,S0385,main,Q0261,-,-,-
+CA02E05,CA02,5,Bye Flop,2021-11-11,Perform as country pop,Girl Groups,"Pair up, get into quick drag, and give a lesson on safe sex",Monochromatica: Future Pop Princess,S0386,main,Q0260,-,-,-
+CA02E06,CA02,6,The Sinner's Ball,2021-11-18,Present three looks in,Design,Get into artiste quick drag and,-,S0387,main,Q0259,-,-,-
+CA02E07,CA02,7,The Roast of Brooke Lynn Hytes,2021-11-25,Partake in the,Comedy,"Sound off on the highs and lows of this season's fashion on Brad's new show,",Dungeons and Drag Queens,S0388,main,Q0258,-,-,-
+CA02E08,CA02,8,Prom,2021-12-02,Pair up with teenagers for a,Make Over,Receive live calls from family members,Cool Mom and Prom Queen,S0389,main,Q0257,-,-,-
+CA02E09,CA02,9,The Reunion,2021-12-09,-,Reunion,-,-,-,main,Q0256,-,-,-
+CA02E10,CA02,10,Queen of the North,2021-12-16,Write and record a verse for a performance,Finale,•,Coronation Eleganza,S0199,main,-,-,-,-
+CA03E01,CA03,1,Sidewalk to Catwalk,2022-07-14,Create an entirely new look,Design,Sissy That Sidewalk rooftop fashion show,Sidewalk to Catwalk,S0414,main,Q0276,-,-,-
+CA03E02,CA03,2,The Who-Knows,2022-07-21,Host the Who-Knows Awards Show,Stand Up,Take hockey jerseys and get into quick drag.,Goddesses of the Ancient World,S0415,main,Q0275,-,-,-
+CA03E03,CA03,3,Ruets,2022-07-28,"In pairs,",Lip Sync,Make Brooke laugh during a date.,Sleeves,S0416,main,Q0274,-,-,-
+CA03E04,CA03,4,Bitch Stole My Look,2022-08-04,Create a look,Design,Improv your way through a Tuck Talk sponsored by Trojan.,Bitch Stole My Look,S0417,main,Q0273,-,-,-
+CA03E05,CA03,5,Snatch Game,2022-08-11,Snatch Game,Snatch Game,Reading is Fundamental,Periodic Table of Elements,S0418,main,Q0272,-,-,-
+CA03E06,CA03,6,Cosmetic Queens,2022-08-18,Film a commercial,Advert,Drag Family,Paint,S0419,main,Q0271,-,-,-
+CA03E07,CA03,7,Squirrels Trip: The Rusical,2022-08-25,Perform in,Rusical,Audition,Dystopian Drag,S0420,main,Q0270,-,-,-
+CA03E08,CA03,8,Masquerade Ball,2022-09-01,Present three looks in,Design,-,-,S0421,main,Q0269,-,-,-
+CA03E09,CA03,9,True North Strong (and Fierce),2022-09-08,Write and record a verse,Finale,•,Coronation Eleganza,S0422,main,Q0268,-,-,-
+CA04E01,CA04,1,Premiere Ball,2023-11-16,Present three looks,Runway,-,-,S0423,main,-,-,-,-
+CA04E02,CA04,2,QV-She,2023-11-23,Advertise a drag look product,Advert,-,Gemstones,S0424,main,Q0287,-,-,-
+CA04E03,CA04,3,OH-SHE-GAGGIN,2023-11-30,Perform as rival girl groups,Girl Groups,Get into quick drag and,Sunglasses at Night,S0425,main,Q0286,-,-,-
+CA04E04,CA04,4,Out of the Closet,2023-12-07,Design a look,Design,Metallic Photoshoot,Out of the Closet,-,main,-,-,-,-
+CA04E05,CA04,5,Snatch Game,2023-12-14,Snatch Game,Snatch Game,Reading Challenge,Steampunk,S0426,main,Q0285,-,-,-
+CA04E06,CA04,6,Lip Sync Slay Offs,2023-12-21,Face off in the,Lip Sync,-,-,S0427,main,Q0284,-,-,-
+CA04E07,CA04,7,From Drags to Riches: The Rusical,2023-12-28,Star in,Rusical,Get in quick drag and,Always a Bridesmaid,S0428,main,Q0282,-,-,-
+CA04E08,CA04,8,A Star Is Born,2024-01-04,Makeover,Make Over,Get a makeover,A Star is Born,S0429,main,Q0281,-,-,-
+CA04E09,CA04,9,Grand Finale,2024-01-11,Write and record a verse,Finale,•,Coronation Eleganza,S0430,main,Q0280,-,-,-
+CA05E01,CA05,1,Go Off Queen,2024-11-21,Write a verse,Rumix,-,You Oughta Know... Me,S0406,main,-,-,-,-
+CA05E02,CA05,2,Greetings Queenlings,2024-11-28,"In teams,",Advert,-,Time and Place,S0407,main,Q0298,-,-,-
+CA05E03,CA05,3,The Slayoffs: Teams Edition,2024-12-05,Face off the,Lip Sync,-,-,S0408,main,Q0297,-,-,-
+CA05E04,CA05,4,Fast Fashion,2024-12-12,Design,Design,Boudoir photoshoot,-,S0409,main,Q0296,-,-,-
+CA05E05,CA05,5,The One Where They Went '90s,2024-12-19,"In teams,",Girl Groups,Get in quick drag and audition to be a '90s showcase supermodel,Grunge and Glamour,S0410,main,Q0295,-,-,-
+CA05E06,CA05,6,Snatch Game,2024-12-26,Snatch Game,Snatch Game,Reading Challenge,Alien Superstar,S0403,main,Q0294,-,-,-
+CA05E07,CA05,7,The Devil Wore Custom,2025-01-02,Design,Design,Get in quick drag and get interviewed to be Brooke Lynn's assistant,-,S0411,main,Q0293,-,-,-
+CA05E08,CA05,8,What Just Happened?!,2025-01-09,Be guests on the late night talk show,Acting,Get in quick drag and become a field reporter for Brad News,Statuesque,S0412,main,Q0292,-,-,-
+CA05E09,CA05,9,Grand Finale,2025-01-16,Write and record,Finale,•,Coronation Eleganza,S0413,main,Q0291,-,-,-
+CA06E01,CA06,1,Not Sorry Aboot It,2025-11-20,Write a verse,Rumix,-,More is More,S0049,main,-,-,-,-
+CA06E02,CA06,2,Yachty Girls,2025-11-27,"In teams,",Advert,-,In the Shadows,S0390,main,Q0310,-,-,-
+CA06E03,CA06,3,Pick Your Poison,2025-12-04,Choose between,Snatch Game,-,Scene Stealers (Design),S0391,main,Q0309,-,-,-
+CA06E04,CA06,4,Reading Battles are Back Back Back Again,2025-12-11,Reading Battles,Comedy,Get in quick drag and get a fashion consultation by Carson Kressley,My Chemical Reaction,S0392,main,Q0308,-,-,-
+CA06E05,CA06,5,The Shade,2025-12-18,"In teams,",Acting,Get in quick drag and sing karaoke to iconic verses from,A Perp Walk to Remember,S0393,main,Q0307,-,-,-
+CA06E06,CA06,6,Slayoffs,2025-12-25,Face off in the,Lip Sync,-,-,S0394,main,Q0306,-,-,-
+CA06E07,CA06,7,Paris (Ontario) Fashion Week,2026-01-01,Design,Design,Get in quick drag and star in a perfume commercial,-,S0395,main,Q0304,-,-,-
+CA06E08,CA06,8,"Charisma, Uniqueness, Nerve, and Talent",2026-01-08,-,Rusical,-,Uniqueness,S0396,main,Q0303,-,-,-
+CA06E09,CA06,9,Pop Queens of the North,2026-01-15,Write and record,Finale,•,Coronation Eleganza,S0196,main,Q0302,-,-,-
+UK01E01,UK01,1,The Royal Queens,2019-10-03,Rule the,Runway,Take part in a photoshoot challenge depicting the beheading of Anne Boleyn.,-,S0487,main,Q0319,-,-,-
+UK01E02,UK01,2,Downton Draggy,2019-10-10,Act in,Acting,-,Bond Girl Glamourama,S0488,main,Q0318,-,-,-
+UK01E03,UK01,3,Posh On A Penny,2019-10-17,Create a show-stopping outfit,Design,Dance around a maypole,-,S0004,main,Q0317,-,-,-
+UK01E04,UK01,4,The Snatch Game,2019-10-24,Snatch Game,Snatch Game,-,Weird Science,S0489,main,Q0316,-,-,-
+UK01E05,UK01,5,Girl Groups,2019-10-31,Record vocals and perform in a girl group,Girl Groups,Reading is Fundamental,A Day at the Races.,S0490,main,Q0315,-,-,-
+UK01E06,UK01,6,Thirsty Werk,2019-11-07,Create and,Advert,"Boxers, Briefs or Commando",Rainy Day Eleganza,S0491,main,Q0314,-,-,-
+UK01E07,UK01,7,The Family That Slays Together,2019-11-14,Drag Makeovers,Make Over,Everybody Loves Puppets,-,S0492,main,Q0313,-,-,-
+UK01E08,UK01,8,Grand Finale,2019-11-21,Write and record a verse for a performance,Finale,-,Final Three Eleganza Extravaganza,S0493,main,Q0312,-,-,-
+UK01E09,UK01,9,It's A Wrap!,2019-11-29,•,Reunion,•,-,-,main,-,-,-,-
+UK02E01,UK02,1,Royalty Returns,2021-01-14,Serve up two runway looks,Runway,Wimbled'hun Photoshoot,-,S0468,main,Q0327,-,-,-
+UK02E02,UK02,2,Rats: The Rusical,2021-01-21,Perform in,Rusical,Drag Race Cabinet: the queens must vote themselves in four categories.,"Surprise, Surprise",S0469,main,Q0331,-,-,-
+UK02E03,UK02,3,Who Wore It Best?,2021-01-28,Create and model a look on the runway,Design,Limbo for your Life,-,S0470,main,Q0330,-,-,-
+UK02E04,UK02,4,Morning Glory,2021-02-04,"Host ""Morning Glory""",Acting,Present a pastry in a sexual manner,Monster Mashup,S0471,main,-,-,-,-
+UK02E05,UK02,5,The RuRuvision Song Contest,2021-02-11,Record vocals and perform in a girl group,Girl Groups,-,A Day at the Seaside,S0019,main,Q0331,-,-,-
+UK02E06,UK02,6,Snatch Game,2021-02-18,Snatch Game,Snatch Game,-,PreHERstoric,S0472,main,Q0326,-,-,-
+UK02E07,UK02,7,Lockdown Supersheroes,2021-02-25,Create and model a look,Design,Reading is Fundamental,Lockdown Supersheroes,S0473,main,Q0325,-,-,-
+UK02E08,UK02,8,Stoned on the Runway,2021-03-04,Put on a,Stand Up,The Masc 4 Masc Singer,Stoned On The Runway,S0474,main,Q0324,-,-,-
+UK02E09,UK02,9,BeastEnders,2021-03-11,Pay tribute to iconic British,Acting,Everybody Loves Puppets,Panto Dames,S0475,main,-,-,-,-
+UK02E10,UK02,10,Grand Finale,2021-03-18,Write and record a verse for a performance,Finale,•,Final Four Eleganza Extravaganza,S0476,main,Q0323,-,-,-
+UK03E01,UK03,1,The Return of Royalty,2021-09-23,Serve up two runway looks,Runway,Ru's Dirty Charades,-,S0195,main,Q0342,-,-,-
+UK03E02,UK03,2,Dragoton,2021-09-30,Perform as dance instructors,Choreo,Rupermarket Sweeps,Red Carpet Show-Stoppers,S0431,main,Q0341,-,-,-
+UK03E03,UK03,3,Great Outdoors,2021-10-07,Create a camping-inspired look,Design,"Create a straight male character and market it in a Tinder spoof ""Findhr""",-,S0432,main,Q0328,-,-,-
+UK03E04,UK03,4,Big Drag Energy,2021-10-14,Record vocals and perform in a girl group,Girl Groups,-,A Night of a Thousand Spice Girls,S0433,main,-,-,-,-
+UK03E05,UK03,5,Draglexa,2021-10-21,Create and advertise,Advert,Pair up and compete on RuPaul's Dog Race,"Expenny, Henny: Expensive-looking Drag",S0434,main,Q0339,-,-,-
+UK03E06,UK03,6,Snatch Game,2021-10-28,Snatch Game,Snatch Game,Reading is Fundamental,Feeling Fruity,S0435,main,Q0338,-,-,-
+UK03E07,UK03,7,Miss Fugly Beauty Pageant,2021-11-04,Serve three looks on the runway,Design,-,"Fugly Swimwear, Charity Shop Chic and Fugly But Fashionable",S0436,main,Q0336,-,-,-
+UK03E08,UK03,8,Bra Wars,2021-11-11,Over acting,Acting,-,Scene Stealers,S0437,main,-,-,-,-
+UK03E09,UK03,9,The Pearly Gates Roast,2021-11-18,A,Comedy,-,"Oh My Goddess: Ethereal, Mythical Glamour",S0312,main,Q0335,-,-,-
+UK03E10,UK03,10,Grand Finale,2021-11-25,Write and record a verse for a performance,Finale,•,Final Three: Eleganza Extravaganza,S0438,main,-,-,-,-
+UK04E01,UK04,1,ST4RT Your Engines,2022-09-22,Serve up two runway looks,Runway,Photoshoot,Keeping it 100! and Ru Are You?,S0448,main,Q0354,-,-,-
+UK04E02,UK04,2,Yass-tonbury Festival,2022-09-29,Write and perform original lyrics,Girl Groups,-,Neon Nights,S0449,main,Q0353,-,-,-
+UK04E03,UK04,3,Naff-ta Awards,2022-10-06,Pairs bingo-inspired,Design,NAFF-TA Awards,Bingo She Better Don't!,S0450,main,Q0352,-,-,-
+UK04E04,UK04,4,Catty Man,2022-10-13,Improv,Acting,Line of Booty Duty,"The Mane Event- ""Love your hair, hope you win""",S0451,main,Q0351,-,-,-
+UK04E05,UK04,5,Lairy Poppins - The Rusical,2022-10-20,Lairy Poppins – The Rusical,Rusical,Reading is Fundamental,West End Wonders,S0452,main,-,-,-,-
+UK04E06,UK04,6,Snatch Game,2022-10-27,Snatch Game,Snatch Game,-,Tickled Pink,S0453,main,Q0349,-,-,-
+UK04E07,UK04,7,Makeover Challenge,2022-11-03,Makeover,Make Over,-,Family Makeover Realness,S0454,main,Q0348,-,-,-
+UK04E08,UK04,8,The Squirrel Games,2022-11-10,Act,Acting,-,Ruff and Ready,S0455,main,-,-,-,-
+UK04E09,UK04,9,Comedy Queens,2022-11-17,Roast,Comedy,-,Pretty in Punk,S0456,main,Q0347,-,-,-
+UK04E10,UK04,10,Grand Finale,2022-11-24,Write and record a verse for a performance,Finale,•,Grand Finale Eleganza,S0457,main,Q0346,-,-,-
+UK05E01,UK05,1,Tickety-Boo,2023-09-28,Serve up three looks:,Runway,-,Fierce Impressions Eleganza Extravaganza,S0477,main,-,-,-,-
+UK05E02,UK05,2,Purr-fect Looks,2023-10-05,Create and showcase a look,Design,Let the Cat out of the Bag,Pet-Shop Catwalk Couture,S0478,main,Q0364,-,-,-
+UK05E03,UK05,3,Club Bangers,2023-10-12,Write and perform original lyrics,Girl Groups,-,Night Of A Thousand Pop Icons,S0479,main,-,-,-,-
+UK05E04,UK05,4,DisasterClass,2023-10-19,Perform an inspirational seminar,Acting,Pose and deliver a sticky tag line in DTF bro drag,Slaycation,S0480,main,Q0363,-,-,-
+UK05E05,UK05,5,Panto Dames,2023-10-26,Perform in the Rusical,Rusical,Reading Challenge,"Mirror, Mirror",S0481,main,Q0362,-,-,-
+UK05E06,UK05,6,Snatch Game,2023-11-02,Snatch Game,Snatch Game,-,Heart Ons,S0482,main,Q0361,-,-,-
+UK05E07,UK05,7,Melodrama-Rama,2023-11-09,Screen Test,Acting,Everybody Loves Puppets,Pajamarama,S0483,main,Q0360,-,-,-
+UK05E08,UK05,8,Hotline Makeover,2023-11-16,Makeover,Make Over,-,Drag Family Resemblance,S0484,main,Q0359,-,-,-
+UK05E09,UK05,9,Dragiators' Roast,2023-11-23,Perform in a gladiator themed,Comedy,-,Poofs on Parade,S0485,main,Q0358,-,-,-
+UK05E10,UK05,10,Grand Finale,2023-11-30,Write their own verses and star in the music video,Finale,•,Grand Finale Eleganza - Dripping In Jewels,S0486,main,Q0357,-,-,-
+UK06E01,UK06,1,Cabaret Talent Show,2024-09-26,Perform in the Tickety Boo Cabaret Club,Talent Show,-,Queen Of Your Hometown,S0458,main,-,-,-,-
+UK06E02,UK06,2,Stitch & Strut,2024-10-03,"In teams,",Design,-,"Cocktail Party, Lady Boss, and Red Carpet",S0459,main,-,-,-,-
+UK06E03,UK06,3,Brit-flicks,2024-10-10,Act,Acting,Air Out Your Dirty Laundry: pick an item of clothing with a descriptor and give it to the person it fits best,New Romantics,S0460,main,Q0375,-,-,-
+UK06E04,UK06,4,Ghoul Power,2024-10-17,In,Girl Groups,-,Call Me Mother Nature,S0461,main,Q0374,-,-,-
+UK06E05,UK06,5,Sofa Showdown,2024-10-24,Improvise,Acting,Try to make RuPaul and Raven laugh while sitting in a pink furry chair,How's Your Headpiece?,S0462,main,Q0373,-,-,-
+UK06E06,UK06,6,Snatch Game,2024-10-31,Snatch Game,Snatch Game,Reading Challenge,Doctor Who Is She?,S0463,main,Q0372,-,-,-
+UK06E07,UK06,7,Pop of the Tops - Live: The Rusical,2024-11-07,Sing live in,Rusical,-,Night of a Thousand Princess Dianas,S0464,main,Q0371,-,-,-
+UK06E08,UK06,8,All in the Drag Family,2024-11-14,Makeover,Make Over,-,Drag Family Resemblance,S0465,main,Q0370,-,-,-
+UK06E09,UK06,9,Send in the Clowns,2024-11-21,Perform in the,Comedy,-,Semifinal Vinyl,S0466,main,Q0369,-,-,-
+UK06E10,UK06,10,Grand Finale,2024-11-28,"Write, record, and choreograph",Finale,•,Grand Finale Eleganza,S0467,main,Q0368,-,-,-
+UK07E01,UK07,1,Queens of the Brit Gala,2025-09-25,Present a signature look at the Brit Gala,Runway,-,Queen of your Hometown,S0439,main,-,-,-,-
+UK07E02,UK07,2,Rumble in the Jumble,2025-10-01,Create and model a look,Design,"Vote for the queen who best fits a category in ""The Tainters""",Rumble in the Jumble,S0440,main,Q0388,-,-,-
+UK07E03,UK07,3,Battle of the Brats,2025-10-09,In,Girl Groups,-,Cuddly Wuddly,S0441,main,Q0387,-,-,-
+UK07E04,UK07,4,Sweety Darlings!,2025-10-16,Act,Acting,-,Ab Fab: A Night of a Thousand Sweetie Darlings,S0442,main,Q0386,-,-,-
+UK07E05,UK07,5,Talent Ahoy!,2025-10-23,Perform in the,Talent Show,-,Having It Large,S0443,main,Q0385,-,-,-
+UK07E06,UK07,6,Peter Pansy: The Rusical,2025-10-30,Peter Pansy: The Rusical,Rusical,-,Battle Axe - Warrior Queen,S0444,main,Q0384,-,-,-
+UK07E07,UK07,7,Snatch Me Out!,2025-11-06,Snatch Me Out!,Snatch Game,Reading Challenge,Holiday Ho Ho Hos,S0445,main,Q0383,-,-,-
+UK07E08,UK07,8,The Hun Makeover,2025-11-13,Makeover,Make Over,-,Drag Family Resemblance,S0446,main,Q0382,-,-,-
+UK07E09,UK07,9,Comedy is a Bitch,2025-11-20,Perform in the,Comedy,-,English Country Garden Realness,S0447,main,Q0381,-,-,-
+UK07E10,UK07,10,Sing For The Crown,2025-11-27,"Write, record, and choreograph",Finale,•,Epic Eleganza,S0083,main,Q0380,-,-,-
+CW01E01,CW01,1,-,2022-11-18,Write and perform original lyrics,Girl Groups,-,Queen Of The World,S0499,main,Q0254,-,-,-
+CW01E02,CW01,2,Snatch Summit,2022-11-26,Compete in the,Snatch Game,Reading is Fundamental,Celestial Bodies,S0500,main,Q0262,-,-,-
+CW01E03,CW01,3,The Weather Ball,2022-12-02,Showcase three looks in,Design,-,-,S0325,main,Q0389,-,-,-
+CW01E04,CW01,4,Comedy Queens,2022-12-09,Perform a,Comedy,Record Cameo-style personalized messages,Plaid Girls Club,S0501,main,-,-,-,-
+CW01E05,CW01,5,Spy Queens,2022-12-16,Star in a movie trailer,Acting,-,Y2GAY: 2000s Club Kids,S0502,main,Q0335,-,-,-
+CW01E06,CW01,6,Grand Finale,2022-12-23,•,Finale,•,Coronation Eleganza Extravaganza,-,main,-,-,-,-
+CW02E01,CW02,1,Drag Pop,2024-07-19,Write and perform original lyrics,Girl Groups,-,Wonders of the World: My Very Best Drag,S0494,main,Q0390,-,-,-
+CW02E02,CW02,2,The Hole,2024-07-26,Improvise,Acting,-,Mother Nature,S0495,main,Q0349,-,-,-
+CW02E03,CW02,3,Glamorous Drag Queen Ball Challenge,2024-08-02,The Glamorous Drag Queen Ball Challenge,Design,"Audition for the new movie ""Drag-e""",-,S0496,main,Q0249,-,-,-
+CW02E04,CW02,4,Reading Battles,2024-08-09,Reading Battles,Comedy,"Lip sync to ""Just What They Want"" by",Razzle Dazzle,S0497,main,Q0111,-,-,-
+CW02E05,CW02,5,Snatch Game: The Rusical,2024-08-17,Snatch Game:,Snatch Game,-,Summer of '69,S0498,main,Q0268,-,-,-
+CW02E06,CW02,6,Grand Finale,2024-08-23,•,Finale,•,Crown Me,-,main,-,-,-,-
+GA01E01,GA01,1,Global Talent Extravaganza,2024-08-16,Global Glamazon Talent Extravaganza,Talent Show,-,Garden of Eden,S0042,main,-,-,-,-
+GA01E02,GA01,2,Global Talent Extravaganza: Part 2,2024-08-16,Global Glamazon Talent Extravaganza: Part 2,Talent Show,Get in 20-minutes quick drag and partake in a photoshoot,Money Makes The World Go Round,S0503,main,-,-,-,-
+GA01E03,GA01,3,International Queen Of Mystery Ball,2024-08-23,International Queen of Mystery Ball,Design,-,-,S0504,main,Q0399,-,-,-
+GA01E04,GA01,4,Everybody Say Love Girl Groups,2024-08-30,Write a verse and create a choreography for,Girl Groups,Guess the total population of their countries,Color My World,S0489,main,Q0398,-,-,-
+GA01E05,GA01,5,Boobie: The Shequels,2024-09-06,"Star in sequels of ""Boobie""",Acting,Reading Challenge,Browntown,S0505,main,Q0397,-,-,-
+GA01E06,GA01,6,It's 5 O'Clock Somewhere,2024-09-13,Create a cocktail dress,Design,Do makeup mid-air,It's 5 O'Clock Somewhere,S0109,main,Q0396,-,-,-
+GA01E07,GA01,7,Snatch Game Of Love,2024-09-20,Snatch Game of Love,Snatch Game,Get in 20-minutes quick drag and,Eat Me,S0506,main,Q0395,-,-,-
+GA01E08,GA01,8,Mmm... A Rich International Roast,2024-09-27,Star in an international Roast,Comedy,-,Blow Me Away,S0401,main,Q0255,-,-,-
+GA01E09,GA01,9,Re-United Nations Make-Overs,2024-10-04,Re-United Nations Make-Overs: Makeover one of the eliminated contestants,Make Over,Who is She?,Drag Family Resemblance,S0025,main,Q0394,-,-,-
+GA01E10,GA01,10,There's No Place Like Home,2024-10-11,Create a tourism spot showcasing your country,Advert,-,Star Trek: Queens in Outer Space,S0019,main,Q0393,-,-,-
+GA01E11,GA01,11,Global Lip-Sync Lalaparuza,2024-10-18,The eliminated contestants face off in a,Lip Sync,-,Lalaparuza Eleganza,-,main,-,-,-,-
+GA01E12,GA01,12,Dance Like The World Is Watching,2024-10-25,Write a verse and participate in the music video,Finale,•,Best Drag On Earth,S0211,main,-,-,-,-
+UW01E01,UW01,1,Global Glamazons,2022-02-01,Talent Show,Talent Show,-,"I'm A Winner, Baby!",S0521,main,Q0245,-,-,-
+UW01E02,UW01,2,RuPaul Ball,2022-02-08,Serve three looks on the,Design,-,-,S0522,main,Q0313,-,-,-
+UW01E03,UW01,3,West End Wendys,2022-02-15,West End Wendys - The Rusical,Rusical,Reading is Fundamental,Dot Dot Dot,S0523,main,Q0241,-,-,-
+UW01E04,UW01,4,Snatch Game,2022-02-22,Snatch Game,Snatch Game,-,Luck Be A Lady,S0128,main,Q0401,-,-,-
+UW01E05,UW01,5,Semifinals,2022-03-01,Perform their own version,Rumix,-,Werk of Art,S0524,main,Q0400,-,-,-
+UW01E06,UW01,6,Grand Finale,2022-03-08,•,Finale,•,Grand Finale Eleganza Extravaganza,-,main,-,-,-,-
+UW02E01,UW02,1,The Queens' Variety Show,2024-02-09,Talent Show,Talent Show,-,: For Queen And Country,S0514,main,Q0123,-,-,-
+UW02E02,UW02,2,The Happy Ending Ball,2024-02-16,The Happy Ending,Design,-,-,S0515,main,Q0406,-,-,-
+UW02E03,UW02,3,Drag Race World,2024-02-23,Advertise,Advert,-,: Ruveal Yourself!,S0516,main,Q0346,-,-,-
+UW02E04,UW02,4,Snatch Game,2024-03-01,Snatch Game,Snatch Game,-,: Gone Cruisin',S0517,main,Q0405,-,-,-
+UW02E05,UW02,5,Seven!: The Rusical,2024-03-08,Perform in,Rusical,Reading Challenge,: When I Glow Up,S0518,main,Q0319,-,-,-
+UW02E06,UW02,6,Strictly Come Prancing,2024-03-15,Perform in,Choreo,-,": Business in the Front, Party in the Back",S0519,main,Q0337,-,-,-
+UW02E07,UW02,7,Haters Wedding Roast,2024-03-22,Roast,Comedy,Dance,: Take Me Up The Aisle,S0520,main,Q0136,-,-,-
+UW02E08,UW02,8,Grand Finale,2024-03-29,•,Finale,•,Finale Eleganza Extravaganza,-,main,-,-,-,-
+UW03E01,UW03,1,RuRuvision Song Contest,2026-01-27,Perform an original song,Talent Show,-,: For Queen and Country,S0507,main,-,-,-,-
+UW03E02,UW03,2,Runway Ru-Mix,2026-02-03,Rework a previous look into a new look for the future,Design,-,": RuDemption, The RuMix",S0508,main,Q0281,-,-,-
+UW03E03,UW03,3,The Miss Snatch Game Pageant,2026-02-10,Miss Snatch Game Pageant,Snatch Game,-,: Let Them Eat Cake,S0509,main,Q0410,-,-,-
+UW03E04,UW03,4,Girl Groups From Outer Space,2026-02-17,In,Girl Groups,-,": You're A Star, Baby",S0510,main,Q0351,-,-,-
+UW03E05,UW03,5,Silent Movie Acting Challenge,2026-02-24,Act in silent movies,Acting,Reading Challenge,: Shevil Movie Villains,S0511,main,Q0008,-,-,-
+UW03E06,UW03,6,RuPaul's Fringe Festival,2026-03-03,"In duos,",Comedy,-,: RuVeal,S0512,main,Q0374,-,-,-
+UW03E07,UW03,7,Olympian Makeovers,2026-03-10,Give drag makeovers,Make Over,Assign the queens medals,: Drag Family Resemblance,S0513,main,Q0409,-,-,-
+UW03E08,UW03,8,Reunion & Lip Sync Smack Down For The Crown,2026-03-17,•,Finale,•,Finale Eleganza Extravaganza,-,main,-,-,-,-

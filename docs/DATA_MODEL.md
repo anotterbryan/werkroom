@@ -54,7 +54,8 @@ view changes.
 ### contestants — one row per queen per season
 `contestant_id` (PK), `queen_id`→queens, `season_id`→seasons, `placement`,
 `entrance_order`, `home_city`, `wins`, `highs`, `lows`, `bottoms`,
-`eliminated_episode`, `miss_congeniality`, `drag_name_used`
+`eliminated_episode`, `miss_congeniality`, `drag_name_used`, `image`
+(per-season cast photo URL, Fandom), `earnings` (total season winnings USD int)
 - `drag_name_used` = the name the performer competed under that season when it differs
   from her canonical `queens.drag_name` (e.g. Trinity Taylor → "Trinity The Tuck" in All
   Stars); `-` when the same. The `queen_id` is unchanged, so one identity spans every
@@ -107,6 +108,18 @@ appears in, across `episodes` ∪ `lip_syncs`).
 `appearance_type` (GUEST_JUDGE, MAINSTAGE_GUEST, WERKROOM_GUEST), `role_detail`,
 `is_drag_race_alum`, `alum_queen_id`→queens, `notes`
 
+### episode_roles — one row per queen-episode role credit (added 2026-06-10)
+`role_id` (PK, `R####`), `contestant_id`→contestants, `episode_id`→episodes,
+`role_type`, `role_detail`, `notes`
+- `role_type` vocabulary: `SNATCH_CHARACTER` (detail = celebrity impersonated),
+  `MINI_WINNER` (detail = mini challenge), later: `MAKEOVER_PARTNER`, `RUSICAL_ROLE`,
+  `ACTING_ROLE`, `GIRL_GROUP_VERSE`.
+- Sourced from the Fandom MD per-episode sections.
+
+### guests.csv — optional 11th table
+`person_name`, `known_for` — one-line bios consumed by `build_site_data.py` for
+`derived.guest_bios` (guest-judge hover bios). No PK/FK validation.
+
 ---
 
 ## Derived block (`site_data.js` → the global `DATA.derived`)
@@ -155,4 +168,9 @@ Members = every `winner_id` of any lip sync **plus** both participants of every
    `bottoms = #BTM + #ELIM` from `progression`, for every contestant.
 4. `songs.times_used` = distinct episodes the song appears in.
 
-All 31 checks currently pass.
+All 34 checks currently pass (31 originally; +3 on 2026-06-10 for `episode_roles`
+PK/FK). The CI gate is "all checks pass", whatever the count.
+
+`episodes` also carries `mini_challenge_winner_prize` and `maxi_challenge_prize`
+(free text, Fandom); `elimination_events` carries `farewell` (the eliminated
+queen's mirror message, Fandom).
