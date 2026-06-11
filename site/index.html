@@ -1082,6 +1082,76 @@ V({id:'artists',title:'Lip-Sync <em>Artists</em>',kicker:'The Competition',icon:
   m.append(host);
  }});
 
+/* ---------- 26b. THE MUSIC (Spotify) ---------- */
+V({id:'music',title:'The <em>Music</em>',kicker:'The Competition',icon:'disc',group:'The Competition',
+ desc:'Every lip-sync track, now playable — Spotify players, Ru-mix badges, and copy-paste track lists to build the playlists yourself.',
+ render(m){
+  m.innerHTML=head(this);
+  const ctrl=el('div',{class:'tabs fade'});m.append(ctrl);
+  ['All',...FRANCHISES].forEach(f=>{const b=el('button',{class:'tab'+(FRANCHISE===f?' on':'')},f);
+    b.addEventListener('click',()=>{FRANCHISE=f;go('music');});ctrl.append(b);});
+  const sbyid={};D.songs.forEach(s=>sbyid[s.song_id]=s);
+  const epsOf={};X.song_reuse.forEach(s=>{epsOf[s.song_id]=(s.episodes||[]).filter(e=>seasonAllowed(e.slice(0,4)));});
+  const inScope=X.song_reuse.filter(s=>s.title&&s.title!=='-'&&epsOf[s.song_id].length);
+  let season='All',q='',playable=false;
+  const bar=el('div',{class:'card fade',style:'display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:14px'});
+  const sel=el('select',{style:'background:rgba(255,255,255,.06);color:var(--cream);border:1px solid rgba(255,255,255,.14);border-radius:8px;padding:6px 8px;font:inherit;font-size:12.5px'});
+  sel.append(el('option',{value:'All'},'All seasons'));
+  SEASON_ORDER.filter(seasonAllowed).forEach(s=>sel.append(el('option',{value:s},seasonName(s))));
+  const search=el('input',{type:'search',placeholder:'Search title or artist…',style:'flex:1;min-width:160px;background:rgba(255,255,255,.06);color:var(--cream);border:1px solid rgba(255,255,255,.14);border-radius:8px;padding:6px 10px;font:inherit;font-size:12.5px'});
+  const tog=el('label',{style:'display:flex;align-items:center;gap:6px;font-size:12.5px;cursor:pointer'},
+    el('input',{type:'checkbox'}),'playable only');
+  const copy=el('button',{class:'tab',style:'margin-left:auto'},'⎘ copy track links');
+  bar.append(sel,search,tog,copy);m.append(bar);
+  const stats=el('div',{class:'grid',style:'grid-template-columns:repeat(auto-fit,minmax(140px,1fr));margin-bottom:14px'});m.append(stats);
+  const host=el('div',{class:'card fade'});m.append(host);
+  const list=()=>{
+    let rows=inScope.filter(s=>epsOf[s.song_id].some(e=>season==='All'||e.slice(0,4)===season));
+    if(q)rows=rows.filter(s=>(s.title+' '+(s.artist||'')).toLowerCase().includes(q));
+    if(playable)rows=rows.filter(s=>{const t=(sbyid[s.song_id]||{}).spotify_track_id;return t&&t!=='-';});
+    if(season==='All')rows.sort((a,b)=>b.times_used-a.times_used||a.title.localeCompare(b.title));
+    else rows.sort((a,b)=>{const ea=epsOf[a.song_id].find(e=>e.slice(0,4)===season)||'',eb=epsOf[b.song_id].find(e=>e.slice(0,4)===season)||'';return ea<eb?-1:1;});
+    return rows;};
+  const draw=()=>{
+    const rows=list();
+    const ids=rows.map(s=>(sbyid[s.song_id]||{}).spotify_track_id).filter(t=>t&&t!=='-');
+    const rumix=rows.filter(s=>(sbyid[s.song_id]||{}).is_rumix==='Yes').length;
+    stats.innerHTML=`<div class="card"><div class="stat">${rows.length}</div><div class="statlbl">songs in view</div></div>
+      <div class="card"><div class="stat">${ids.length}</div><div class="statlbl">playable on Spotify</div></div>
+      <div class="card"><div class="stat">${rumix}</div><div class="statlbl">Ru tracks</div></div>`;
+    host.innerHTML=`<div class="vkicker">${season==='All'?'All lip-sync tracks':'Playlist order — '+seasonName(season)} · click a row for the player + every use</div>`;
+    rows.forEach(s=>{
+      const sd=sbyid[s.song_id]||{};const tid=sd.spotify_track_id&&sd.spotify_track_id!=='-'?sd.spotify_track_id:null;
+      const wrap=el('div',{style:'border-bottom:1px solid rgba(255,255,255,.05)'});
+      const caret=el('span',{style:'color:var(--magenta);font-size:10px;width:10px;flex:none'},'▸');
+      const hdr=el('div',{style:'display:flex;align-items:center;gap:10px;padding:6px 0;cursor:pointer'},caret,
+        el('div',{style:'flex:1;font-size:13.5px;min-width:0'},`${s.title}${s.artist&&s.artist!=='-'?' — '+s.artist:''}`));
+      if(sd.is_rumix==='Yes')hdr.append(el('span',{class:'pill gold'},'Ru-mix'));
+      hdr.append(el('div',{style:'width:20px;text-align:right;color:var(--gold);font-weight:700'},s.times_used));
+      if(tid){const play=el('a',{href:'https://open.spotify.com/track/'+tid,target:'_blank',rel:'noopener',
+        style:'flex:none;color:#1ED760;font-size:16px;text-decoration:none;line-height:1',title:'Open in Spotify'},'▶');
+        play.addEventListener('click',ev=>ev.stopPropagation());hdr.append(play);}
+      else hdr.append(el('span',{style:'flex:none;color:rgba(247,240,230,.25);font-size:16px;line-height:1',title:'No Spotify match yet'},'▶'));
+      const det=el('div',{style:'display:none;padding:0 0 12px 20px'});let loaded=false;
+      hdr.addEventListener('click',()=>{const o=det.style.display==='none';det.style.display=o?'block':'none';caret.textContent=o?'▾':'▸';
+        if(o&&!loaded){loaded=true;
+          if(tid)det.prepend(el('iframe',{src:'https://open.spotify.com/embed/track/'+tid+'?theme=0',width:'100%',height:'80',frameborder:'0',allow:'encrypted-media',style:'border-radius:10px;margin:6px 0'}));
+          else det.prepend(el('div',{style:'font-size:11.5px;color:rgba(247,240,230,.6);margin:4px 0'},'No Spotify match yet for this track.'));}});
+      epsOf[s.song_id].filter(e=>season==='All'||e.slice(0,4)===season).forEach(eid=>det.append(el('div',{style:'font-size:12.5px;padding:3px 0'},epChip(eid))));
+      wrap.append(hdr,det);host.append(wrap);});
+    if(!rows.length)host.append(el('div',{style:'font-size:12.5px;color:rgba(247,240,230,.6);padding:8px 0'},'Nothing matches this filter.'));};
+  sel.addEventListener('change',e=>{season=e.target.value;draw();});
+  search.addEventListener('input',e=>{q=e.target.value.trim().toLowerCase();draw();});
+  tog.querySelector('input').addEventListener('change',e=>{playable=e.target.checked;draw();});
+  copy.addEventListener('click',()=>{
+    const ids=list().map(s=>(sbyid[s.song_id]||{}).spotify_track_id).filter(t=>t&&t!=='-');
+    const txt=ids.map(t=>'https://open.spotify.com/track/'+t).join('\n');
+    (navigator.clipboard?navigator.clipboard.writeText(txt):Promise.reject()).then(
+      ()=>{copy.textContent='✓ '+ids.length+' links copied — paste into a Spotify playlist';setTimeout(()=>copy.textContent='⎘ copy track links',2600);},
+      ()=>{prompt('Copy these links, then paste into a Spotify playlist:',txt);});});
+  draw();
+ }});
+
 /* ---------- 27. PLATFORM ERAS ---------- */
 V({id:'platforms',title:'Platform <em>Eras</em>',kicker:'The Competition',icon:'timer',group:'The Competition',
  desc:'The network journey — Logo to VH1 to MTV — and which seasons aired in each era.',
