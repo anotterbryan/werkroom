@@ -256,6 +256,8 @@ function lipSyncLine(l,fromQid){
 }
 
 /* ============ EXPLORER PACK: shared infrastructure ============ */
+/* Ask-the-Library endpoint — set to your Cloudflare Worker URL after deploy (see chatbot/README.md) */
+const CHAT_ENDPOINT = '';
 const PAL=['#e6007e','#f4b53f','#7ad1b5','#b78aed','#ef798a','#5aa7e0','#f0915e','#9ecf63'];
 const CGRID='rgba(247,240,230,.08)', CTXT='rgba(247,240,230,.72)';
 function mkChart(host,cfg,h){ /* Chart.js with graceful fallback (tables always accompany) */
@@ -2206,6 +2208,39 @@ V({id:'hostpack',title:'Host <em>Pack</em>',kicker:'Games',icon:'book',group:'Ga
   }
   drawCtrl();m.append(ctrl,out);
   if(pre)gen();
+ }});
+
+/* ASK THE LIBRARY (chatbot; needs CHAT_ENDPOINT — chatbot/README.md) */
+V({id:'ask',title:'Ask the <em>Library</em>',kicker:'Games',icon:'book',group:'Games',
+ desc:'The Werkroom Librarian — ask anything about the show and get an answer grounded in this database, with links to explore.',
+ render(m){m.innerHTML=head(this);
+  const card=el('div',{class:'card fade'});m.append(card);
+  if(!CHAT_ENDPOINT){
+    card.append(sectionHead('Not connected yet','var(--gold)'),
+      el('div',{style:'font-size:13px;line-height:1.7;color:rgba(247,240,230,.85)'},
+        'The Librarian needs her serverless brain deployed first — a 5-minute Cloudflare Worker setup that keeps the API key off this site. The code and step-by-step guide live in the repo at chatbot/README.md. Once deployed, set CHAT_ENDPOINT in index.html and she wakes up.'));
+    return;}
+  const log=el('div',{style:'display:flex;flex-direction:column;gap:10px;min-height:120px;margin-bottom:12px'});
+  const hist=[];
+  const add=(role,text,links)=>{const b=el('div',{style:`max-width:85%;padding:10px 14px;border-radius:14px;font-size:13.5px;line-height:1.6;${role==='user'?'align-self:flex-end;background:rgba(230,0,126,.18);border:1px solid rgba(230,0,126,.35)':'align-self:flex-start;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12)'}`},text);
+    if(links&&links.length){const lr=el('div',{style:'margin-top:6px;display:flex;gap:10px;flex-wrap:wrap'});
+      links.forEach(l=>lr.append(el('span',{style:'cursor:pointer;color:var(--gold);text-decoration:underline;font-size:12px',onclick:()=>go(l)},'explore →')));b.append(lr);}
+    log.append(b);return b;};
+  const row=el('div',{style:'display:flex;gap:8px'});
+  const inp=el('input',{type:'text',maxlength:'500',placeholder:'Who won the lip sync to…? Where is … from? Who did … play in Snatch Game?',
+    style:'flex:1;background:rgba(255,255,255,.06);color:var(--cream);border:1px solid rgba(255,255,255,.14);border-radius:10px;padding:10px 12px;font:inherit;font-size:13px'});
+  const send=el('button',{class:'tab'},'Ask');
+  const fire=async()=>{const q=inp.value.trim();if(!q)return;inp.value='';
+    add('user',q);const wait=add('bot','…thinking');
+    try{const r=await fetch(CHAT_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({question:q,history:hist})});
+      const j=await r.json();wait.remove();
+      if(j.answer){add('bot',j.answer,j.links);hist.push({role:'user',content:q},{role:'assistant',content:j.answer});}
+      else add('bot','Hmm, the Librarian tripped on her heels ('+(j.error||'unknown error')+'). Try again?');
+    }catch(e){wait.remove();add('bot','Could not reach the Librarian — is the Worker deployed and CORS happy?');}};
+  send.addEventListener('click',fire);inp.addEventListener('keydown',e=>{if(e.key==='Enter')fire();});
+  row.append(inp,send);card.append(log,row);
+  card.append(el('div',{style:'margin-top:10px;font-size:10.5px;color:rgba(247,240,230,.45)'},'Answers are grounded in this site’s database via a retrieval pack — the Librarian cites what she reads.'));
  }});
 
 function buildNav(){
