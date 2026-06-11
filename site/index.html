@@ -1342,7 +1342,8 @@ V({id:'health',title:'Data <em>Health</em>',kicker:'The Connections',icon:'chart
  }});
 
 /* ============================ NAV + ROUTER ============================ */
-const GROUPS=['Start','The Queens','The Competition','The Panel','The Connections','About'];
+const GROUPS=['Start','The Queens','The Competition','The Panel','The Connections',
+  'Explore Queens','Explore Runs','Explore Seasons','Explore Music','Explore Panel','The Vault','About'];
 /* ============ EXPLORER PACK: 30 views ============ */
 /* progression sequences per contestant (ordered) */
 let _SEQ=null;function seqs(){if(_SEQ)return _SEQ;_SEQ={};
@@ -1808,7 +1809,9 @@ function buildNav(){
     });};
   search.addEventListener('input',e=>render(e.target.value));render();
 }
+let _LAST_ROUTE=null;
 function go(route){
+  _LAST_ROUTE=route;
   const main=$('#main');main.scrollTop=0;window.scrollTo(0,0);
   let id=route,arg=null;
   if(route.includes(':')){[id,arg]=route.split(':');}
@@ -1824,6 +1827,8 @@ function go(route){
 window.addEventListener('mousemove',e=>{if(tt.style.opacity==='1')moveTip(e);});
 buildNav();
 go((location.hash||'#home').slice(1));
+window.addEventListener('hashchange',()=>{const r=(location.hash||'#home').slice(1);
+  if(r!==_LAST_ROUTE)go(r);});
 
 </script>
 </body>
