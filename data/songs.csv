@@ -4,7 +4,7 @@ S0003,The Greatest Love of All,Whitney Houston,1,6yJxCltgtmGxIgKOS6ndnu,No
 S0004,Would I Lie to You?,Eurythmics,2,0e3oKMtktdRlmCWQLK62TO,No
 S0005,Stronger,Britney Spears,2,5QhBKPqsnX1uY9fZNaAtZg,No
 S0007,Cover Girl (Put the Bass in Your Walk),RuPaul,3,38u74wUfcE5N47L2m9qYrZ,Yes
-S0008,My Lovin' (You're Never Gonna Get It),En Vogue,1,3R97rNX7JnmshCWBwOSFet,No
+S0008,My Lovin' (You're Never Gonna Get It),En Vogue,2,3R97rNX7JnmshCWBwOSFet,No
 S0010,Two of Hearts,Stacey Q,1,2dURQIBrw3XcHyVZlfdpC1,No
 S0011,Carry On,Martha Wash,1,3Cg0TgAFloolCYYtAkyyYa,No
 S0012,Black Velvet,Alannah Myles,1,3469whchIAwhnlg2Sfuf8Z,No
@@ -34,7 +34,7 @@ S0039,(You Make Me Feel Like) A Natural Woman,Aretha Franklin,1,5K09WxKdlkroDyEV
 S0040,No One Else on Earth,Wynonna Judd,1,52PGtJuGEFNVOnRdLac1Av,No
 S0041,Party in the U.S.A.,Miley Cyrus,1,-,No
 S0042,Only Girl (In the World),Rihanna,2,-,No
-S0043,When I Grow Up,The Pussycat Dolls,2,-,No
+S0043,When I Grow Up,The Pussycat Dolls,3,-,No
 S0045,Take Me Home,Cher,1,4K5JJ9YmKx2hqnOnvV1lvF,No
 S0046,I'm So Excited,The Pointer Sisters,1,1ot6jEe4w4hYnsOPjd3xKQ,No
 S0047,Whip My Hair,Willow Smith,1,-,No
@@ -44,15 +44,15 @@ S0051,Malambo No. 1,Yma Sumac,1,-,No
 S0052,Express Yourself,Madonna,1,4AJflRLCvU0qtZQnVUq5l1,No
 S0053,Turn the Beat Around,Vicki Sue Robinson,1,0XQxZZIgdcXBaxgL7zMKpK,No
 S0054,Shake It Up,Selena Gomez,1,-,No
-S0055,I'm Every Woman,Chaka Khan,1,1oFiPGBafH9Woo9AMwgBSl,No
+S0055,I'm Every Woman,Chaka Khan,2,1oFiPGBafH9Woo9AMwgBSl,No
 S0056,Head to Toe,Lisa Lisa and Cult Jam,1,5VzqFMyPERPObMOzZdELuK,No
 S0057,Whatta Man,"Salt-n-Pepa, En Vogue",1,5UKGE3tI0s5Lq0Puf6Fn0S,No
-S0058,Point of No Return,Exposé,1,0ozd432IdkUR3ItM8ieKt0,No
+S0058,Point of No Return,Exposé,2,0ozd432IdkUR3ItM8ieKt0,No
 S0059,Stupid Girls,Pink,1,1Ab6RxeKl3e07zP7Get7CX,No
 S0060,Vibeology,Paula Abdul,1,-,No
 S0061,Think,Aretha Franklin,1,4yQw7FR9lcvL6RHtegbJBh,No
 S0062,Stronger (What Doesn't Kill You),Kelly Clarkson,1,6D60klaHqbCl9ySc8VcRss,No
-S0063,Sissy That Walk,RuPaul,3,4KvHJkVdQQrskjVfGoYedT,Yes
+S0063,Sissy That Walk,RuPaul,4,4KvHJkVdQQrskjVfGoYedT,Yes
 S0064,Geronimo,RuPaul ft. Lucian Piane,1,6e0OWCPIC1W9zhRRu1Me0E,Yes
 S0065,Twist of Fate,Olivia Newton-John,1,-,No
 S0066,I Was Gonna Cancel,Kylie Minogue,1,4WiQmOTCwKGeq4IUKxQOZg,No
@@ -73,7 +73,7 @@ S0082,And I Am Telling You I'm Not Going,Jennifer Holliday,1,-,No
 S0083,You Make Me Feel (Mighty Real),Sylvester,3,7yBQK34HQlU7dofQlTVUjX,No
 S0084,The Realness,RuPaul,1,65mWyUO2xg3otC5ecOtFpP,Yes
 S0085,Love Shack,The B-52's,1,4W4wYHtsrgDiivRASVOINL,No
-S0086,Holding Out for a Hero,Bonnie Tyler,1,4ojl5o30oQFdavVkpYYgYk,No
+S0086,Holding Out for a Hero,Bonnie Tyler,2,4ojl5o30oQFdavVkpYYgYk,No
 S0087,I Wanna Go,Britney Spears,1,5cCAZS9VhLGEDV4NCfieeg,No
 S0088,Woman Up,Meghan Trainor,1,2bUWLYU3s6sbQqlo7075Og,No
 S0089,Music,Madonna,1,2BcOZ4vOeu2qZowIHrvTYy,No
@@ -90,7 +90,7 @@ S0099,Celebrity Skin,Hole,1,-,No
 S0100,Pound the Alarm,Nicki Minaj,1,-,No
 S0102,I'm Coming Out,Diana Ross,1,-,No
 S0103,Cut to the Feeling,Carly Rae Jepsen,1,-,No
-S0104,Groove Is in the Heart,Deee-Lite,1,2He3NOyqtLNE3RQPpeDdSb,No
+S0104,Groove Is in the Heart,Deee-Lite,2,2He3NOyqtLNE3RQPpeDdSb,No
 S0105,New Attitude,Patti LaBelle,1,-,No
 S0106,Good as Hell,Lizzo,1,6KgBpzTuTRPebChN0VTyzV,No
 S0107,Nasty Girl,Vanity 6,1,-,No
@@ -121,7 +121,7 @@ S0135,Survivor,Destiny's Child,1,2Mpj1Ul5OFPyyP4wB62Rvi,No
 S0136,Break My Heart,Dua Lipa,1,017PF4Q3l4DBUiWoXk4OWT,No
 S0137,If U Seek Amy,Britney Spears,1,2hdy9Wt9qp7M7d0U3ossu2,No
 S0138,100% Pure Love,Crystal Waters,1,7b8oqADZwbckLjszkHyIoj,No
-S0139,Fancy,Iggy Azalea ft. Charli XCX,2,-,No
+S0139,Fancy,Iggy Azalea ft. Charli XCX,1,-,No
 S0141,Whole Lotta Woman,Kelly Clarkson,1,1nukLnD50ey3rfs6jNnMJa,No
 S0143,Fascinated,Company B,1,1mk6Ts3Rl80ZiRuGdV8ydx,No
 S0144,Shackles (Praise You),Mary Mary,2,7JKEA8xYDoFp4q0QBW2PGg,No
@@ -264,7 +264,7 @@ S0288,Into You,Ariana Grande,1,-,No
 S0289,How Will I Know,Whitney Houston,1,5tdKaKLnC4SgtDZ6RlWeal,No
 S0290,The Bitch is Back,Tina Turner,1,3gSqBCp0ueCA1qzV8yknPC,No
 S0291,Jump To It,Aretha Franklin,1,3KA9RQid1Z7oX3RUJiWHn1,No
-S0292,You Spin Me Round (Like a Record),Dead Or Alive,1,1ChulFMnwxoD74Me8eX2TU,No
+S0292,You Spin Me Round (Like a Record),Dead Or Alive,2,1ChulFMnwxoD74Me8eX2TU,No
 S0293,Come Rain Or Come Shine,Judy Garland,1,7AgTjmzjrZ0WAOoKppsqP7,No
 S0294,When I Think Of You,Janet Jackson,1,-,No
 S0295,Fighter,Christina Aguilera,1,7nXq1vaZiz7PdbfojpPjW5,No
@@ -287,11 +287,11 @@ S0311,Bad Reputation,Joan Jett,1,-,No
 S0312,Hallucinate,Dua Lipa,2,1nYeVF5vIBxMxfPoL0SIWg,No
 S0313,I'm Not Perfect But I'm Perfect for You,Grace Jones,1,-,No
 S0314,About Damn Time,Lizzo,1,4a3D8glGZxhlJfOs1Czc3c,No
-S0315,These Boots Were Made For Walkin',Nancy Sinatra,1,2PneNdtypG6XcgmWmGd9FI,No
+S0315,These Boots Are Made for Walkin',Nancy Sinatra,1,2PneNdtypG6XcgmWmGd9FI,No
 S0316,Freak-A-Zoid,Midnight Star,1,42UpH9fz5utv8tkvOgh5Qb,No
 S0317,Jumpin' Jumpin',Destiny's Child,1,4pmc2AxSEq6g7hPVlJCPyP,No
 S0318,Rain On Me,Lady Gaga and Ariana Grande,1,-,No
-S0319,": ""Do You Wanna Funk?",Sylvester and Patrick Cowley,1,708DnJC8l1b4Bf4xg0GiBv,No
+S0319,Do Ya Wanna Funk,Sylvester and Patrick Cowley,1,708DnJC8l1b4Bf4xg0GiBv,No
 S0320,Anaconda,Nicki Minaj,1,-,No
 S0321,Jump (For My Love),The Pointer Sisters,1,3L9ClO1W5KmebIXTrlKShF,No
 S0322,Green Light,Lorde,2,-,No
@@ -301,13 +301,13 @@ S0325,Nobody's Supposed To Be Here (Hex Hector Dance Mix),Deborah Cox,2,3RRBSoFI
 S0326,Freaky Money,RuPaul feat. Big Freedia,1,7rBCdmVWBxi6rdybjr1K2w,Yes
 S0327,Wrecking Ball,Miley Cyrus,1,2vwlzO0Qp8kfEtzTsCXfyE,No
 S0328,Old MacDonald,Ella Fitzgerald,1,-,No
-S0329,Rumor Has It,Adele,1,2A73XBDBQgmdXO8VsXPWIs,No
+S0329,Rumour Has It,Adele,1,2A73XBDBQgmdXO8VsXPWIs,No
 S0330,Love Will Save The Day (Jellybean/David Morales Remix),Whitney Houston,1,7vA8t0N3TZEkxLt5uwTrsD,No
 S0331,Better in Color,Lizzo,1,0bt3YJTupDqdTKpnFFgs7f,No
 S0332,Why'd You Come in Here Lookin Like That,Dolly Parton,1,5oheUEVCpJllnImTs5nNiS,No
 S0333,I Want Love,Jessie J,1,-,No
 S0334,Super Freak,Rick James,1,-,No
-S0335,Designing Women,Dixie Carter,1,-,No
+S0335,The Night the Lights Went Out in Georgia,Dixie Carter,1,-,No
 S0336,Kings & Queens,Ava Max,1,7a53HqqArd4b9NF4XAmlbI,No
 S0337,Supernova,Kylie Minogue,1,1hIj5fZhmr8hsEpWhMOoiy,No
 S0338,Such A Wicked Love,La Toya Jackson,1,2ItCr57FOMd9UDwuerAWeq,No
@@ -317,7 +317,7 @@ S0341,No More Tears (Enough is Enough),Barbra Streisand,1,1wSPm3y4Lk6ABkVxCmwkZx
 S0342,Hazy Shade of Winter,The Bangles,1,0P2vAvvWni2tNXOdbH3JFk,No
 S0343,Super Bass,Nicki Minaj,1,-,No
 S0344,Million Dollar Bill (Freemasons Radio Mix),Whitney Houston,1,2RYGUlwksIdGBZTiFZwgk8,No
-S0345,Jump in the Line,Harry Belafonte,1,1zW2csx1vVJrKfvDrFQNVt,No
+S0345,"Jump in the Line (Shake, Senora)",Harry Belafonte,1,1zW2csx1vVJrKfvDrFQNVt,No
 S0346,Banana,Anitta ft. Becky G,1,7eeLYvJsK5QiDeX1loY9rW,No
 S0347,Black Cat,Janet Jackson,1,-,No
 S0348,Super Freaky Girl,Nicki Minaj,1,-,No
@@ -346,9 +346,9 @@ S0370,Dance Again,J. Lo,1,2xnoPV3NLescauc0ZJ1MDZ,No
 S0371,Sugar Walls,Sheena Easton,1,2Ulp8QRhy3KlclKzGYTzMy,No
 S0372,Boom Clap,Charli XCX,1,0Y1MWB026LYxGvhq4EcMiC,No
 S0373,Good Golly Miss Molly,Little Richard,1,-,No
-S0374,": ""Stupid Love",Lady Gaga,1,-,No
+S0374,Stupid Love,Lady Gaga,1,-,No
 S0375,Shake It Off,Taylor Swift,1,-,No
-S0376,Le Freak (Freak Out),Chic,1,7z3aH1QV2zwMKXxShBNOGe,No
+S0376,Le Freak,Chic,1,7z3aH1QV2zwMKXxShBNOGe,No
 S0377,Got To Be Real,Cheryl Lynn,1,58r4JuwHhXLAkttkaUZfLw,No
 S0378,Shut Up & Drive,Rihanna,1,-,No
 S0379,Cherry Bomb,Joan Jett and the Blackhearts,1,-,No
@@ -504,5 +504,27 @@ S0528,Just What They Want,RuPaul,1,0jq1oPbJ8seaxmHURGYlde,Yes
 S0529,Main Event,RuPaul,1,2n34dlulym84u2NUaHsqe5,Yes
 S0530,Pretty Gang (Ellis Miah Remix),RuPaul,1,0tPjD8bQ3k6Sb28npkJQyb,Yes
 S0531,Cha Cha Bitch,RuPaul ft. AB Soto,1,3fFWBzknKeYMz5uIidChsM,Yes
-S0532,Peanut Butter,RuPaul ft. Big Freedia,1,0OCMVtFWfemXv7IyVGM1ri,Yes
+S0532,Peanut Butter,RuPaul ft. Big Freedia,2,0OCMVtFWfemXv7IyVGM1ri,Yes
 S0533,Rhythm Nation,Janet Jackson,1,-,No
+S0534,Fancy,Reba McEntire,1,-,No
+S0535,Kitty Girl,RuPaul,1,-,Yes
+S0536,Adrenaline,RuPaul ft. Myah Marie,1,-,Yes
+S0537,Free Your Mind,En Vogue,1,-,No
+S0538,Girls Just Want to Have Fun,Cyndi Lauper,1,-,No
+S0539,Song for the Lonely,Cher,1,-,No
+S0540,Barbie Girl,Aqua,1,-,No
+S0541,Heartbreaker,Pat Benatar,1,-,No
+S0542,Focus,Ariana Grande,1,-,No
+S0543,Since U Been Gone,Kelly Clarkson,1,-,No
+S0544,Push It,Salt-N-Pepa,1,-,No
+S0545,Let's Hear It for the Boy,Deniece Williams,1,-,No
+S0546,Judas,Lady Gaga,1,-,No
+S0547,So What,P!nk,1,-,No
+S0548,Sisters Are Doin' It for Themselves,Eurythmics and Aretha Franklin,1,-,No
+S0549,Swish Swish,Katy Perry ft. Nicki Minaj,1,-,No
+S0550,Disease,Lady Gaga,1,-,No
+S0551,Joyride,Kesha,1,-,No
+S0552,Party Lights,Natalie Cole,1,-,No
+S0553,Show Me How You Burlesque,Christina Aguilera,1,-,No
+S0554,Raise Your Glass,P!nk,1,-,No
+S0555,"Whenever, Wherever",Shakira,1,-,No
