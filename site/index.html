@@ -52,13 +52,22 @@ aside{position:sticky;top:0;height:100vh;overflow-y:auto;padding:24px 16px;
 .navsearch::placeholder{color:rgba(247,240,230,.62)}
 .navgroup{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);
   margin:16px 0 7px;opacity:.8;font-weight:700}
-.navlink{display:flex;align-items:center;gap:9px;padding:7px 10px;border-radius:8px;font-size:13.5px;
+.navlink{display:flex;align-items:center;gap:9px;padding:9px 10px;border-radius:8px;font-size:13.5px;
   cursor:pointer;color:rgba(247,240,230,.92);transition:.15s;border:1px solid transparent}
 .navlink:hover{background:rgba(230,0,126,.16);color:#fff;transform:translateX(3px)}
 .navlink.active{background:linear-gradient(90deg,rgba(230,0,126,.34),transparent);
   border-color:rgba(230,0,126,.5);color:#fff}
 .navlink .ic{width:16px;height:16px;flex:none;opacity:.9}
 .navnum{margin-left:auto;font-size:10px;opacity:.5}
+/* accordion nav */
+.navgrouphead{display:flex;align-items:center;gap:8px;padding:9px 10px;margin-top:8px;border-radius:8px;cursor:pointer;
+  font-size:10px;letter-spacing:2.2px;text-transform:uppercase;color:var(--gold);font-weight:700;user-select:none}
+.navgrouphead:hover{background:rgba(244,181,63,.08)}
+.navgrouphead .ic{width:14px;height:14px;flex:none}
+.ngn{flex:1}
+.ngc{font-size:9px;opacity:.55}
+.ngcaret{font-size:9px;opacity:.85}
+.navgroupbody{margin-left:4px}
 
 main{padding:34px 40px 90px;max-width:1180px;width:100%}
 @media(max-width:860px){main{padding:74px 18px 80px}}
@@ -76,7 +85,11 @@ main{padding:34px 40px 90px;max-width:1180px;width:100%}
 
 /* ---------- Cards / common ---------- */
 .card{background:linear-gradient(150deg,rgba(61,22,84,.5),rgba(22,3,32,.62));
-  border:1px solid rgba(244,181,63,.18);border-radius:16px;padding:20px;box-shadow:var(--shadow)}
+  border:1px solid rgba(244,181,63,.18);border-radius:16px;padding:20px;box-shadow:var(--shadow);
+  transition:border-color .25s ease,transform .2s ease,box-shadow .25s ease}
+.card:hover{border-color:rgba(244,181,63,.34)}
+.bubble{cursor:pointer}
+.bubble:hover{transform:translateY(-3px);box-shadow:0 26px 60px -14px rgba(0,0,0,.85)}
 .grid{display:grid;gap:16px}
 .stat{font-family:var(--disp);font-weight:800;font-size:40px;color:var(--gold);line-height:1}
 .statlbl{font-size:11.5px;letter-spacing:2px;text-transform:uppercase;color:rgba(247,240,230,.82);margin-top:4px}
@@ -347,39 +360,90 @@ const ZODIAC=[['Capricorn',119],['Aquarius',218],['Pisces',320],['Aries',419],['
   ['Cancer',722],['Leo',822],['Virgo',922],['Libra',1022],['Scorpio',1121],['Sagittarius',1221],['Capricorn',1231]];
 function zodiac(bd){if(!bd||bd==='-')return null;const p=bd.split('-');if(p.length<3)return null;
   const md=+p[1]*100+ +p[2];return (ZODIAC.find(z=>md<=z[1])||ZODIAC[0])[0];}
-/* leaderboard factory: chart + dataTable from a spec */
-function boardView(s){V({id:s.id,title:s.title,kicker:s.kicker||'Explorers',icon:s.icon||'chart',group:s.group,desc:s.desc,
-  render(m){m.innerHTML=head(this);fTabs(m,s.id);
-    const rows=s.rows();
-    if(s.stats)statCards(m,s.stats(rows));
-    const card=el('div',{class:'card fade'});m.append(card);
-    if(s.chart){const c=s.chart(rows);if(c)mkChart(card,c,s.chartH||260);}
-    dataTable(card,{cols:s.cols,rows,csv:s.id,onRow:s.onRow||(r=>r.queen_id&&go('queen:'+r.queen_id)),page:s.page});
-    if(s.after)s.after(m,rows);
-  }});}
+/* leaderboard renderer: chart + dataTable from a spec, into any host */
+function boardInto(host,s){
+  const rows=s.rows();
+  if(s.stats)statCards(host,s.stats(rows));
+  const card=el('div',{class:'card fade'});host.append(card);
+  if(s.chart){const c=s.chart(rows);if(c)mkChart(card,c,s.chartH||260);}
+  dataTable(card,{cols:s.cols,rows,csv:s.id,onRow:s.onRow||(r=>r.queen_id&&go('queen:'+r.queen_id)),page:s.page});
+  if(s.after)s.after(host,rows);
+}
+/* leaderboard factory: registers a view around boardInto */
+function boardView(s){V({id:s.id,title:s.title,kicker:s.kicker||'Explorers',icon:s.icon||'chart',group:s.group,ord:s.ord,desc:s.desc,
+  render(m){m.innerHTML=head(this);fTabs(m,s.id);boardInto(m,s);}});}
+/* sub-tab bar for merged views — remembers the active tab per view across re-renders */
+const _SUBTAB={};
+function subTabs(m,vid,tabs){
+  const bar=el('div',{class:'tabs subtabs fade',style:'display:flex;gap:8px;flex-wrap:wrap;margin:2px 0 16px'});
+  const host=el('div');m.append(bar,host);
+  let cur=Math.min(_SUBTAB[vid]||0,tabs.length-1);
+  const draw=()=>{bar.innerHTML='';
+    tabs.forEach((t,i)=>{const b=el('button',{class:'tab'+(i===cur?' on':'')},t[0]);
+      b.addEventListener('click',()=>{if(i===cur)return;cur=i;_SUBTAB[vid]=i;draw();});bar.append(b);});
+    host.innerHTML='';tabs[cur][1](host);};
+  draw();
+}
 
 /* ---------- 0. OVERVIEW / HOME ---------- */
-V({id:'home',title:'The <em>Werkroom</em>',kicker:'A Drag Race Data Observatory',icon:'crown',group:'Start',
+const GROUP_ICONS={Home:'crown',Queens:'star',Seasons:'map','Track Records':'chart','Music & Lip Syncs':'disc',
+  Challenges:'sparkle','Panel & Guests':'mask',Connections:'web',Play:'book',Data:'grid',About:'book'};
+V({id:'home',title:'The <em>Werkroom</em>',kicker:'Home',icon:'crown',group:'Home',ord:1,
  desc:'An original, copyright-safe exploration of RuPaul’s Drag Race — every queen, episode, lip sync, guest judge and panel shift across the U.S. main series and All Stars, woven through one connected database.',
  render(m){
   const meta=D.meta;
   const cards=[['Seasons',meta.seasons,'atlas'],['Queens',meta.queens,'queens'],['Contestant runs',meta.contestants,'tallies'],
-    ['Episodes',meta.episodes,'episodes'],['Guest appearances',meta.appearances,'guestdir'],['Lip-sync songs',meta.songs,'songreuse']];
+    ['Episodes',meta.episodes,'episodes'],['Guest appearances',meta.appearances,'guestfreq'],['Lip-sync songs',meta.songs,'songreuse']];
   m.innerHTML=head(this)+`<div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(150px,1fr))">${
-    cards.map(c=>`<div class="card" style="cursor:pointer" onclick="go('${c[2]}')"><div class="stat">${c[1]}</div><div class="statlbl">${c[0]}</div></div>`).join('')}</div>
-    <div class="card" style="margin-top:18px"><div class="vkicker">How to read this</div>
-    <p style="font-size:14px;line-height:1.7;color:rgba(247,240,230,.92)">Every queen is a <b style="color:var(--gold)">hub</b>; her runs and guest spots are <b style="color:var(--rose)">spokes</b>. Returning queens share one identity across seasons, and alumni who reappear as guests link back to their original run. Use the left rail — grouped into <em>The Queens</em>, <em>The Competition</em>, <em>The Panel</em>, and <em>The Connections</em> — to move between the thirty views. Most are filterable and sortable; hover anything for detail.</p></div>
-    <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin-top:18px">${
-      VIEWS.filter(v=>v.id!=='home').slice(0,8).map(v=>`<div class="card" style="cursor:pointer" onclick="go('${v.id}')">
-        <div style="color:var(--gold)">${icon(v.icon)}</div>
-        <div style="font-family:var(--disp);font-weight:700;font-size:17px;margin:6px 0 4px">${v.title.replace(/<[^>]+>/g,'')}</div>
-        <div style="font-size:12.5px;color:rgba(247,240,230,.82);line-height:1.5">${v.desc||''}</div></div>`).join('')}</div>`;
-  m.append(el('div',{class:'card fade',style:'margin-top:18px',
-    html:'NEW: six explorer sections — galleries, charts, and The Vault master table — now live in the left rail.'}));
+    cards.map(c=>`<div class="card" style="cursor:pointer" onclick="go('${c[2]}')"><div class="stat">${c[1]}</div><div class="statlbl">${c[0]}</div></div>`).join('')}</div>`;
+  /* quick start */
+  const qs=el('div',{class:'chip-row fade',style:'margin:18px 0 2px;gap:8px'});
+  [['Cast Gallery','gallery'],['Trivia Night','trivia'],['The Music','music'],['Ask the Library','ask']].forEach(([t,id])=>{
+    const b=el('button',{class:'tab on quickstart',style:'font-size:12.5px;padding:9px 16px'},t);
+    b.addEventListener('click',()=>go(id));qs.append(b);});
+  m.append(qs);
+  /* bubble grid — one card per section of the left rail */
+  const playable=D.songs.filter(s=>s.spotify_track_id&&s.spotify_track_id!=='-').length;
+  const winCalls=D.progression.filter(p=>p.status==='WIN').length;
+  const snatchChars=D.episode_roles.filter(r=>r.role_type==='SNATCH_CHARACTER').length;
+  const gjCount=new Set(D.appearances.filter(a=>a.appearance_type==='GUEST_JUDGE').map(a=>a.person_name)).size;
+  const BUBBLES=[
+    ['Queens','Profiles, photo walls, crowns, hometowns and the lives behind the lashes',`${meta.queens} queens`],
+    ['Seasons','Season atlases, air-date timelines, platforms and the shape of the format',`${D.seasons.length} seasons`],
+    ['Track Records','Placements, win rates, comebacks, survivors and every weekly verdict',`${winCalls} WIN calls`],
+    ['Music & Lip Syncs','Every smackdown song — playable, ranked, and scored for deadliness',`${playable} playable songs`],
+    ['Challenges','The maxi-challenge recipe, the Snatch Game and the mini-crown counts',`${snatchChars} Snatch characters`],
+    ['Panel & Guests','The judging table through the years and the famous faces beside it',`${gjCount} guest judges`],
+    ['Connections','The webs tying queens, seasons and alumni returns together',`${X.returning_queens.length} returning queens`],
+    ['Play','Trivia night, printable host packs and the in-browser Librarian','3 ways to play'],
+    ['Data','The Vault — the master table behind every view, fully exportable',`${D.contestants.length} contestant rows`]];
+  const bg=el('div',{class:'grid fade',style:'grid-template-columns:repeat(auto-fit,minmax(210px,1fr));margin-top:16px'});
+  BUBBLES.forEach(([g,pitch,teaser])=>{
+    const views=VIEWS.filter(v=>v.group===g&&!v.hidden).sort((a,b)=>(a.ord||0)-(b.ord||0));
+    if(!views.length)return;
+    bg.append(el('div',{class:'card bubble',onclick:()=>go(views[0].id)},
+      el('div',{style:'color:var(--gold)',html:icon(GROUP_ICONS[g]||'star')}),
+      el('div',{style:'font-family:var(--disp);font-weight:800;font-size:18px;margin:6px 0 4px'},g),
+      el('div',{style:'font-size:12px;color:rgba(247,240,230,.8);line-height:1.5'},pitch),
+      el('div',{style:'display:flex;justify-content:space-between;align-items:center;gap:6px;margin-top:10px;flex-wrap:wrap'},
+        el('span',{class:'pill gold'},teaser),
+        el('span',{style:'font-size:10.5px;color:rgba(247,240,230,.55)'},views.length+' view'+(views.length===1?'':'s')))));});
+  m.append(bg);
+  /* winners strip */
+  const strip=el('div',{class:'card fade',style:'margin-top:18px'});
+  strip.append(sectionHead('The winners — click a crown','var(--gold)'));
+  const srow=el('div',{class:'winners-strip',style:'display:flex;flex-wrap:wrap;gap:10px;align-items:center'});
+  D.seasons.forEach(s=>{const c=D.contestants.find(x=>x.queen_id===s.winner_id&&x.season_id===s.season_id);
+    if(!c||!c.image||c.image==='-')return;
+    srow.append(el('img',{src:c.image,alt:qname[s.winner_id]||'',
+      title:(qname[s.winner_id]||'')+' · '+seasonName(s.season_id),
+      style:'width:54px;height:54px;border-radius:50%;object-fit:cover;border:2px solid rgba(244,181,63,.55);cursor:pointer',
+      onclick:()=>go('queen:'+s.winner_id)}));});
+  strip.append(srow);m.append(strip);
  }});
 
 /* ---------- 1. SEASON ATLAS ---------- */
-V({id:'atlas',title:'Season <em>Atlas</em>',kicker:'The Competition',icon:'grid',group:'The Competition',
+V({id:'atlas',title:'Season <em>Atlas</em>',kicker:'Seasons',icon:'grid',group:'Seasons',ord:1,
  desc:'Every season at a glance — winner, runners-up, Miss Congeniality, episode count and platform.',
  render(m){
   m.innerHTML=head(this);
@@ -518,7 +582,7 @@ V({id:'season',title:'Season <em>Detail</em>',kicker:'The Competition',icon:'gri
   render(m){renderSeasonDetail(m,'US01');}});
 
 /* ---------- 3. QUEEN INDEX ---------- */
-V({id:'queens',title:'The <em>Queens</em>',kicker:'The Queens',icon:'star',group:'The Queens',
+V({id:'queens',title:'The <em>Queens</em>',kicker:'Queens',icon:'star',group:'Queens',ord:1,
  desc:'All competing queens across eighteen seasons. Search, then click any name for her full record.',
  render(m){
   m.innerHTML=head(this);
@@ -567,7 +631,7 @@ function renderQueen(m,qid){
   const q=D.queens.find(x=>x.queen_id===qid);
   if(!q){m.innerHTML='<div class="empty">Queen not found</div>';return;}
   const guestApps=D.appearances.filter(a=>a.alum_queen_id===qid);
-  m.innerHTML=`<div class="vhead fade"><div class="vkicker">The Queens</div>
+  m.innerHTML=`<div class="vhead fade"><div class="vkicker">Queens</div>
     <h1 class="vtitle">${q.drag_name}</h1>
     <div class="vdesc">${[q.legal_name,q.hometown].filter(x=>x&&x!=='-').join(' · ')||'A competitor in the herstory.'}</div>
     <div style="margin-top:10px"><button class="tab" onclick="go('queens')">← All queens</button></div></div>`;
@@ -626,7 +690,7 @@ V({id:'queen',title:'Queen <em>Profile</em>',kicker:'The Queens',icon:'star',gro
   render(m){renderQueen(m,'Q0022');}});
 
 /* ---------- 5. PLACEMENT GRID ---------- */
-V({id:'placementgrid',title:'Placement <em>Grid</em>',kicker:'The Competition',icon:'grid',group:'The Competition',
+V({id:'placementgrid',title:'Placement <em>Grid</em>',kicker:'Track Records',icon:'grid',group:'Track Records',ord:1,
  desc:'A heat-map of every queen\u2019s weekly status across one season — win, high, safe, low, bottom, out.',
  render(m){
   m.innerHTML=head(this);
@@ -649,7 +713,7 @@ V({id:'placementgrid',title:'Placement <em>Grid</em>',kicker:'The Competition',i
  }});
 
 /* ---------- 6. WIN/HIGH/LOW/BTM TALLIES ---------- */
-V({id:'tallies',title:'Track <em>Record</em> Tallies',kicker:'The Competition',icon:'chart',group:'The Competition',
+V({id:'tallies',title:'Track <em>Record</em> Tallies',kicker:'Track Records',icon:'chart',group:'Track Records',ord:2,
  desc:'Cumulative wins, highs, lows and bottoms per queen — sortable. The statistical fingerprint of a run.',
  render(m){
   m.innerHTML=head(this);fTabs(m,'tallies');
@@ -666,7 +730,7 @@ V({id:'tallies',title:'Track <em>Record</em> Tallies',kicker:'The Competition',i
  }});
 
 /* ---------- 7. LIP-SYNC SONG REUSE ---------- */
-V({id:'songreuse',title:'Lip-Sync <em>Song Reuse</em>',kicker:'The Competition',icon:'disc',group:'The Competition',
+V({id:'songreuse',title:'Lip-Sync <em>Song Reuse</em>',kicker:'Music & Lip Syncs',icon:'disc',group:'Music & Lip Syncs',ord:2,
  desc:'Which songs the show returns to. Every track ever used for a Lip Sync for Your Life, ranked by how often it reappears.',
  render(m){
   m.innerHTML=head(this);
@@ -701,7 +765,7 @@ V({id:'songreuse',title:'Lip-Sync <em>Song Reuse</em>',kicker:'The Competition',
  }});
 
 /* ---------- 8. LIP-SYNC ASSASSIN LEADERBOARD ---------- */
-V({id:'assassin',title:'Lip-Sync <em>Assassins</em>',kicker:'The Competition',icon:'mic',group:'The Competition',
+V({id:'assassin',title:'Lip-Sync <em>Assassins</em>',kicker:'Music & Lip Syncs',icon:'mic',group:'Music & Lip Syncs',ord:3,
  desc:'Queens ranked by lip syncs won — the slayers who survived the smackdown most often. Click a queen for every lip sync she performed.',
  render(m){
   m.innerHTML=head(this);
@@ -735,11 +799,8 @@ V({id:'assassin',title:'Lip-Sync <em>Assassins</em>',kicker:'The Competition',ic
   m.append(host);
  }});
 
-/* ---------- 9. GUEST JUDGE FREQUENCY ---------- */
-V({id:'guestfreq',title:'Guest Judge <em>Frequency</em>',kicker:'The Panel',icon:'mask',group:'The Panel',
- desc:'The most recurring guest judges across the franchise — the famous faces Ru keeps inviting back.',
- render(m){
-  m.innerHTML=head(this);
+/* ---------- 9. GUEST JUDGES (Frequency + Directory) ---------- */
+function renderGuestFreqTab(m){
   const chartCard=el('div',{class:'card fade',style:'margin-bottom:14px'});
   chartCard.append(sectionHead('Top 12 most-invited guests','var(--gold)'));
   const topG=X.guest_freq.slice(0,12);
@@ -764,13 +825,16 @@ V({id:'guestfreq',title:'Guest Judge <em>Frequency</em>',kicker:'The Panel',icon
     wrap.append(hdr,det);host.append(wrap);
   });
   m.append(host);
+}
+V({id:'guestfreq',title:'Guest <em>Judges</em>',kicker:'Panel & Guests',icon:'mask',group:'Panel & Guests',ord:1,
+ desc:'The famous faces beside the panel — who Ru keeps inviting back, plus a searchable directory of every guest judge.',
+ render(m){
+  m.innerHTML=head(this);fTabs(m,'guestfreq');
+  subTabs(m,'guestfreq',[['Frequency',renderGuestFreqTab],['Directory',renderGuestDirTab]]);
  }});
 
-/* ---------- 10. PANEL EVOLUTION TIMELINE ---------- */
-V({id:'panel',title:'Panel <em>Evolution</em>',kicker:'The Panel',icon:'mask',group:'The Panel',
- desc:'How the judging table changed across eighteen seasons — hosts, main judges, and rotating chairs.',
- render(m){
-  m.innerHTML=head(this);
+/* ---------- 10. THE PANEL (Evolution + Service Ribbons + Tenure) ---------- */
+function renderPanelEvolution(m){
   const people={};D.panel.forEach(p=>{(people[p.person_name]=people[p.person_name]||{}).x=1;
     (people[p.person_name].seasons=people[p.person_name].seasons||{})[p.season_id]=p.role;});
   const order=Object.keys(people).sort((a,b)=>{
@@ -798,10 +862,16 @@ V({id:'panel',title:'Panel <em>Evolution</em>',kicker:'The Panel',icon:'mask',gr
     el('span',{},el('span',{class:'sw',style:'background:var(--gold)'}),'Host'),
     el('span',{},el('span',{class:'sw',style:'background:var(--magenta)'}),'Main judge'),
     el('span',{},el('span',{class:'sw',style:'background:rgba(116,224,200,.7)'}),'Rotating judge')),host);
+}
+V({id:'panel',title:'The <em>Panel</em>',kicker:'Panel & Guests',icon:'mask',group:'Panel & Guests',ord:3,
+ desc:'The judging table across eighteen seasons — hosts, main judges and rotating chairs, drawn as a timeline, service ribbons and tenure board.',
+ render(m){
+  m.innerHTML=head(this);fTabs(m,'panel');
+  subTabs(m,'panel',[['Evolution',renderPanelEvolution],['Service Ribbons',renderContinuityTab],['Tenure',renderTenureTab]]);
  }});
 
 /* ---------- 11. CROSS-FRANCHISE ALUMNI WEB ---------- */
-V({id:'alumniweb',title:'Alumni <em>Web</em>',kicker:'The Connections',icon:'web',group:'The Connections',
+V({id:'alumniweb',title:'Alumni <em>Web</em>',kicker:'Connections',icon:'web',group:'Connections',ord:1,
  desc:'The queen-as-hub network: alumni who returned as guests, each link tying a later season back to the queen\u2019s original run.',
  render(m){
   m.innerHTML=head(this);
@@ -852,7 +922,7 @@ function buildAlumniSVG(byq){
 }
 
 /* ---------- 12. RETURNING QUEENS TRACKER ---------- */
-V({id:'returning',title:'Returning <em>Queens</em>',kicker:'The Connections',icon:'heart',group:'The Connections',
+V({id:'returning',title:'Returning <em>Queens</em>',kicker:'Queens',icon:'heart',group:'Queens',ord:10,
  desc:'Queens who appear in more than one season of the database — the shared identities that stitch the herstory together.',
  render(m){
   m.innerHTML=head(this);
@@ -865,11 +935,8 @@ V({id:'returning',title:'Returning <em>Queens</em>',kicker:'The Connections',ico
   m.append(wrap);
  }});
 
-/* ---------- 13. HOMETOWN MAP / GEOGRAPHY ---------- */
-V({id:'hometowns',title:'Hometown <em>Geography</em>',kicker:'The Queens',icon:'map',group:'The Queens',
- desc:'Where the queens come from — the cities and regions that have sent the most competitors.',
- render(m){
-  m.innerHTML=head(this);fTabs(m,'hometowns');
+/* ---------- 13. QUEEN GEOGRAPHY (Cities + States & Nations) ---------- */
+function renderHometownCities(m){
   const contByQ={};D.contestants.forEach(c=>{(contByQ[c.queen_id]=contByQ[c.queen_id]||[]).push(c);});
   const qByHome={};const seen={};
   masterScoped().forEach(r=>{if(!r.hometown)return;const k=r.hometown+'|'+r.queen_id;if(seen[k])return;seen[k]=1;
@@ -891,13 +958,22 @@ V({id:'hometowns',title:'Hometown <em>Geography</em>',kicker:'The Queens',icon:'
         row.append(el('span',{style:'color:rgba(247,240,230,.7)'},'  — '+runs.map(c=>seasonName(c.season_id)+(c.placement?(' #'+c.placement):'')).join(', ')+`  ·  ${tw}W`+(best===1?'  · 👑':'')));
         det.append(row);});
       m.append(det);if(det.scrollIntoView)det.scrollIntoView({behavior:'smooth'});}});
+}
+V({id:'hometowns',title:'Queen <em>Geography</em>',kicker:'Queens',icon:'map',group:'Queens',ord:5,
+ desc:'Where the queens come from — the cities, states and nations that send competitors to the main stage.',
+ render(m){
+  m.innerHTML=head(this);fTabs(m,'hometowns');
+  subTabs(m,'hometowns',[['Cities',renderHometownCities],['States & Nations',h=>boardInto(h,GEOROLL_SPEC)]]);
  }});
 
-/* ---------- 14. CHALLENGE TYPE BREAKDOWN ---------- */
-V({id:'challenges',title:'Challenge <em>Types</em>',kicker:'The Competition',icon:'chart',group:'The Competition',
+/* ---------- 14. CHALLENGE TYPES (Overview + Mix by Season) ---------- */
+V({id:'challenges',title:'Challenge <em>Types</em>',kicker:'Challenges',icon:'chart',group:'Challenges',ord:1,
  desc:'The anatomy of a season — how often each kind of maxi challenge appears across the episodes we\u2019ve detailed.',
  render(m){
-  m.innerHTML=head(this);
+  m.innerHTML=head(this);fTabs(m,'challenges');
+  subTabs(m,'challenges',[['Overview',renderChallengeOverview],['Mix by Season',renderChallengeMixTab]]);
+ }});
+function renderChallengeOverview(m){
   const ent=Object.entries(X.challenge_types).sort((a,b)=>b[1]-a[1]);
   const max=Math.max(...ent.map(e=>e[1]),1);
   const chartCard=el('div',{class:'card fade',style:'margin-bottom:14px'});
@@ -922,13 +998,16 @@ V({id:'challenges',title:'Challenge <em>Types</em>',kicker:'The Competition',ico
     wrap.append(hdr,det);host.append(wrap);
   });
   m.append(host);
- }});
+}
 
-/* ---------- 15. SNATCH GAME INDEX ---------- */
-V({id:'snatch',title:'The <em>Snatch Game</em> Index',kicker:'The Competition',icon:'mask',group:'The Competition',
+/* ---------- 15. THE SNATCH GAME (Episodes + Characters) ---------- */
+V({id:'snatch',title:'The <em>Snatch Game</em>',kicker:'Challenges',icon:'mask',group:'Challenges',ord:2,
  desc:'Every Snatch Game across the seasons — the franchise\u2019s signature celebrity-impersonation challenge.',
  render(m){
-  m.innerHTML=head(this);
+  m.innerHTML=head(this);fTabs(m,'snatch');
+  subTabs(m,'snatch',[['Episodes',renderSnatchEpisodes],['Characters',h=>boardInto(h,SNATCHHALL_SPEC)]]);
+ }});
+function renderSnatchEpisodes(m){
   const snrows=D.episode_roles.filter(r=>r.role_type==='SNATCH_CHARACTER');
   statCards(m,[[X.snatch_index.length,'snatch episodes'],[snrows.length,'characters recorded']]);
   const host=el('div',{class:'grid fade',style:'grid-template-columns:repeat(auto-fit,minmax(200px,1fr))'});
@@ -962,10 +1041,10 @@ V({id:'snatch',title:'The <em>Snatch Game</em> Index',kicker:'The Competition',i
     rows:snrows.map(r=>{const c=cont[r.contestant_id]||{};
       return {queen:c.queen_id?cname(c):'?',queen_id:c.queen_id,celebrity:r.role_detail!=='-'?r.role_detail:'',episode:epLabel(r.episode_id)};}),
     csv:'snatch-characters',page:60,onRow:r=>r.queen_id&&go('queen:'+r.queen_id)});
- }});
+}
 
 /* ---------- 16. EPISODE BROWSER ---------- */
-V({id:'episodes',title:'Episode <em>Browser</em>',kicker:'The Competition',icon:'grid',group:'The Competition',
+V({id:'episodes',title:'Episode <em>Browser</em>',kicker:'Seasons',icon:'grid',group:'Seasons',ord:2,
  desc:'Search every episode by title or challenge. Each card shows the lip-sync track and that night\u2019s guest judges.',
  render(m){
   m.innerHTML=head(this);fTabs(m,'episodes');
@@ -983,7 +1062,7 @@ V({id:'episodes',title:'Episode <em>Browser</em>',kicker:'The Competition',icon:
  }});
 
 /* ---------- 17. WINNERS' CIRCLE ---------- */
-V({id:'winners',title:'Winners\u2019 <em>Circle</em>',kicker:'The Queens',icon:'crown',group:'The Queens',
+V({id:'winners',title:'Winners\u2019 <em>Circle</em>',kicker:'Queens',icon:'crown',group:'Queens',ord:3,
  desc:'Every champion of the U.S. main series, with the track record that carried them to the crown.',
  render(m){
   m.innerHTML=head(this);
@@ -1003,7 +1082,7 @@ V({id:'winners',title:'Winners\u2019 <em>Circle</em>',kicker:'The Queens',icon:'
  }});
 
 /* ---------- 18. MISS CONGENIALITY HALL ---------- */
-V({id:'missc',title:'Miss <em>Congeniality</em>',kicker:'The Queens',icon:'heart',group:'The Queens',
+V({id:'missc',title:'Miss <em>Congeniality</em>',kicker:'Queens',icon:'heart',group:'Queens',ord:4,
  desc:'The fan-voted hearts of each season — the queens the audience loved most.',
  render(m){
   m.innerHTML=head(this);
@@ -1019,11 +1098,8 @@ V({id:'missc',title:'Miss <em>Congeniality</em>',kicker:'The Queens',icon:'heart
   m.append(wrap);
  }});
 
-/* ---------- 19. ELIMINATION ORDER STREAMS ---------- */
-V({id:'elimorder',title:'Elimination <em>Order</em>',kicker:'The Competition',icon:'timer',group:'The Competition',
- desc:'Who went home when. The weekly cull of a chosen season, in sequence.',
- render(m){
-  m.innerHTML=head(this);
+/* ---------- 19. EXITS & FAREWELLS (Elimination Order + Farewell Wall) ---------- */
+function renderElimOrderTab(m){
   const ctrl=el('div',{class:'controls'});const sel=el('select');
   SEASON_ORDER.forEach(s=>sel.append(el('option',{value:s},seasonName(s))));
   ctrl.append(el('span',{style:'font-size:12.5px;color:var(--gold)'},'Season:'),sel);m.append(ctrl);
@@ -1039,13 +1115,16 @@ V({id:'elimorder',title:'Elimination <em>Order</em>',kicker:'The Competition',ic
       csv:'elim-order-'+sid,onRow:r=>go('queen:'+r.queen_id)});
   };
   sel.addEventListener('change',e=>draw(e.target.value));draw(SEASON_ORDER[0]);
+}
+V({id:'elimorder',title:'Exits &amp; <em>Farewells</em>',kicker:'Track Records',icon:'timer',group:'Track Records',ord:12,
+ desc:'Who went home when — the weekly cull in sequence, and every mirror message left behind.',
+ render(m){
+  m.innerHTML=head(this);fTabs(m,'elimorder');
+  subTabs(m,'elimorder',[['Elimination Order',renderElimOrderTab],['Farewell Wall',h=>boardInto(h,FAREWELLS_SPEC)]]);
  }});
 
-/* ---------- 20. GUEST JUDGE DIRECTORY ---------- */
-V({id:'guestdir',title:'Guest Judge <em>Directory</em>',kicker:'The Panel',icon:'mask',group:'The Panel',
- desc:'Searchable index of every guest judge and the episodes they sat for. Recurring judges include a short "known for" note.',
- render(m){
-  m.innerHTML=head(this);fTabs(m,'guestdir');
+/* ---------- 20. GUEST JUDGE DIRECTORY (tab of Guest Judges) ---------- */
+function renderGuestDirTab(m){
   const bios=X.guest_bios||{};
   const rows=X.guest_freq.map(g=>{
     const scoped=(g.episodes||[]).filter(eid=>{const e=_EP[eid];return e&&seasonAllowed(e.season_id);});
@@ -1061,10 +1140,10 @@ V({id:'guestdir',title:'Guest Judge <em>Directory</em>',kicker:'The Panel',icon:
       if(r._eps.length)r._eps.forEach(eid=>det.append(el('div',{style:'font-size:12.5px;padding:3px 0'},epChip(eid))));
       else det.append(el('div',{style:'font-size:11.5px;color:rgba(247,240,230,.5)'},'Season-level credit (episode not specified)'));
       m.append(det);if(det.scrollIntoView)det.scrollIntoView({behavior:'smooth'});}});
- }});
+}
 
 /* ---------- 21. APPEARANCE-TYPE SPLIT ---------- */
-V({id:'apptypes',title:'Appearance <em>Types</em>',kicker:'The Panel',icon:'chart',group:'The Panel',
+V({id:'apptypes',title:'Appearance <em>Types</em>',kicker:'Panel & Guests',icon:'chart',group:'Panel & Guests',ord:4,
  desc:'How involved each guest gets — sitting on the judges’ panel, appearing on the mainstage, or coming into the werkroom. (Finer splits — in the challenge, prepping the queens, Untucked — arrive as that data is added.) Click a season for the names.',
  render(m){
   m.innerHTML=head(this);
@@ -1124,7 +1203,7 @@ V({id:'apptypes',title:'Appearance <em>Types</em>',kicker:'The Panel',icon:'char
  }});
 
 /* ---------- 22. WIN-RATE SCATTER ---------- */
-V({id:'winscatter',title:'Wins vs <em>Placement</em>',kicker:'The Competition',icon:'chart',group:'The Competition',
+V({id:'winscatter',title:'Wins vs <em>Placement</em>',kicker:'Track Records',icon:'chart',group:'Track Records',ord:4,
  desc:'Does winning challenges predict winning the crown? Each dot a queen — challenge wins against final placement.',
  render(m){
   m.innerHTML=head(this);fTabs(m,'winscatter');
@@ -1145,7 +1224,7 @@ V({id:'winscatter',title:'Wins vs <em>Placement</em>',kicker:'The Competition',i
  }});
 
 /* ---------- 23. ENTRANCE ORDER vs OUTCOME ---------- */
-V({id:'entrance',title:'Entrance Order <em>&amp; Fate</em>',kicker:'The Competition',icon:'grid',group:'The Competition',
+V({id:'entrance',title:'Entrance Order <em>&amp; Fate</em>',kicker:'Track Records',icon:'grid',group:'Track Records',ord:11,
  desc:'Is there luck in walking in first? Entrance order against final placement. Click a season to expand; entrance order is filled where sourced.',
  render(m){
   m.innerHTML=head(this);
@@ -1181,7 +1260,7 @@ V({id:'entrance',title:'Entrance Order <em>&amp; Fate</em>',kicker:'The Competit
  }});
 
 /* ---------- 24. SEASON SIZE TIMELINE ---------- */
-V({id:'seasonsize',title:'Cast Size <em>Over Time</em>',kicker:'The Competition',icon:'chart',group:'The Competition',
+V({id:'seasonsize',title:'Cast Size <em>Over Time</em>',kicker:'Seasons',icon:'chart',group:'Seasons',ord:5,
  desc:'How the casts grew — number of competitors and episodes per season across the run.',
  render(m){
   m.innerHTML=head(this);
@@ -1196,7 +1275,7 @@ V({id:'seasonsize',title:'Cast Size <em>Over Time</em>',kicker:'The Competition'
  }});
 
 /* ---------- 25. THE PERFECT-RUN FINDER ---------- */
-V({id:'perfectrun',title:'The <em>Perfect Run</em> Finder',kicker:'The Competition',icon:'star',group:'The Competition',
+V({id:'perfectrun',title:'The <em>Perfect Run</em> Finder',kicker:'Track Records',icon:'star',group:'Track Records',ord:6,
  desc:'Queens who never hit the bottom — filtered for clean runs with zero recorded bottoms and at least one win.',
  render(m){
   m.innerHTML=head(this);
@@ -1214,7 +1293,7 @@ V({id:'perfectrun',title:'The <em>Perfect Run</em> Finder',kicker:'The Competiti
  }});
 
 /* ---------- 26. SONG ARTIST FREQUENCY ---------- */
-V({id:'artists',title:'Lip-Sync <em>Artists</em>',kicker:'The Competition',icon:'disc',group:'The Competition',
+V({id:'artists',title:'Lip-Sync <em>Artists</em>',kicker:'Music & Lip Syncs',icon:'disc',group:'Music & Lip Syncs',ord:7,
  desc:'Which recording artists soundtrack the smackdowns most often — counting every lip-sync track by performer.',
  render(m){
   m.innerHTML=head(this);
@@ -1247,7 +1326,7 @@ V({id:'artists',title:'Lip-Sync <em>Artists</em>',kicker:'The Competition',icon:
  }});
 
 /* ---------- 26b. THE MUSIC (Spotify) ---------- */
-V({id:'music',title:'The <em>Music</em>',kicker:'The Competition',icon:'disc',group:'The Competition',
+V({id:'music',title:'The <em>Music</em>',kicker:'Music & Lip Syncs',icon:'disc',group:'Music & Lip Syncs',ord:1,
  desc:'Every lip-sync track, now playable — Spotify players, Ru-mix badges, and copy-paste track lists to build the playlists yourself.',
  render(m){
   m.innerHTML=head(this);
@@ -1317,7 +1396,7 @@ V({id:'music',title:'The <em>Music</em>',kicker:'The Competition',icon:'disc',gr
  }});
 
 /* ---------- 27. PLATFORM ERAS ---------- */
-V({id:'platforms',title:'Platform <em>Eras</em>',kicker:'The Competition',icon:'timer',group:'The Competition',
+V({id:'platforms',title:'Platform <em>Eras</em>',kicker:'Seasons',icon:'timer',group:'Seasons',ord:6,
  desc:'The network journey — Logo to VH1 to MTV — and which seasons aired in each era.',
  render(m){
   m.innerHTML=head(this);
@@ -1331,11 +1410,8 @@ V({id:'platforms',title:'Platform <em>Eras</em>',kicker:'The Competition',icon:'
   m.append(wrap);
  }});
 
-/* ---------- 28. JUDGE TENURE LEADERBOARD ---------- */
-V({id:'tenure',title:'Judge <em>Tenure</em>',kicker:'The Panel',icon:'mask',group:'The Panel',
- desc:'The longest-serving members of the panel — ranked by number of seasons at the table.',
- render(m){
-  m.innerHTML=head(this);
+/* ---------- 28. JUDGE TENURE (tab of The Panel) ---------- */
+function renderTenureTab(m){
   const cnt={};D.panel.forEach(p=>{cnt[p.person_name]=(cnt[p.person_name]||{name:p.person_name,n:0,roles:new Set()});
     cnt[p.person_name].n++;cnt[p.person_name].roles.add(p.role);});
   const arr=Object.values(cnt).sort((a,b)=>b.n-a.n);const max=Math.max(...arr.map(a=>a.n),1);
@@ -1351,10 +1427,10 @@ V({id:'tenure',title:'Judge <em>Tenure</em>',kicker:'The Panel',icon:'mask',grou
     el('div',{class:'bar',style:`width:${90*a.n/max}px`}),
     el('div',{style:'width:50px;text-align:right;color:var(--gold);font-weight:700'},a.n+' szn'))));
   m.append(host);
- }});
+}
 
 /* ---------- 29. THE CONNECTION FINDER (two-queen path) ---------- */
-V({id:'connect',title:'The <em>Connection</em> Finder',kicker:'The Connections',icon:'web',group:'The Connections',
+V({id:'connect',title:'The <em>Connection</em> Finder',kicker:'Connections',icon:'web',group:'Connections',ord:2,
  desc:'Pick one queen and her whole web appears — castmates, lip-sync opponents, and the alumni appearances that tie her to other seasons.',
  render(m){
   m.innerHTML=head(this);
@@ -1409,8 +1485,7 @@ V({id:'health',title:'Data <em>Health</em>',kicker:'The Connections',icon:'chart
  }});
 
 /* ============================ NAV + ROUTER ============================ */
-const GROUPS=['Start','The Queens','The Competition','The Panel','The Connections',
-  'Explore Queens','Explore Runs','Explore Seasons','Explore Music','Explore Panel','The Vault','Games','About'];
+const GROUPS=['Home','Queens','Seasons','Track Records','Music & Lip Syncs','Challenges','Panel & Guests','Connections','Play','Data','About'];
 /* ============ EXPLORER PACK: 30 views ============ */
 /* progression sequences per contestant (ordered) */
 let _SEQ=null;function seqs(){if(_SEQ)return _SEQ;_SEQ={};
@@ -1420,7 +1495,7 @@ let _SEQ=null;function seqs(){if(_SEQ)return _SEQ;_SEQ={};
 const COMPETED=new Set(['WIN','HIGH','SAFE','LOW','BTM','ELIM','IMM','SURVIVAL','STAY','WDR','DISQ']);
 
 /* 1. CAST GALLERY */
-V({id:'gallery',title:'Cast <em>Gallery</em>',kicker:'Explore Queens',icon:'star',group:'Explore Queens',
+V({id:'gallery',title:'Cast <em>Gallery</em>',kicker:'Queens',icon:'star',group:'Queens',ord:2,
  desc:'The photo wall — every cast photo in the archive, season by season. Click a queen to open her profile.',
  render(m){m.innerHTML=head(this);fTabs(m,'gallery');
   const rows=masterScoped().filter(r=>r.image);
@@ -1439,7 +1514,7 @@ V({id:'gallery',title:'Cast <em>Gallery</em>',kicker:'Explore Queens',icon:'star
  }});
 
 /* 2. AGE EXPLORER */
-boardView({id:'ages',group:'Explore Queens',icon:'chart',title:'Age <em>Explorer</em>',
+boardView({id:'ages',group:'Queens',kicker:'Queens',ord:7,icon:'chart',title:'Age <em>Explorer</em>',
  desc:'Age at filming across the franchise — the distribution, the youngest ever cast, and the legends who proved age is just a number.',
  rows:()=>masterScoped().filter(r=>+r.age),
  stats:r=>[[r.length,'with known age'],[Math.min(...r.map(x=>+x.age)),'youngest'],[Math.max(...r.map(x=>+x.age)),'oldest'],[(r.reduce((s,x)=>s+ +x.age,0)/r.length).toFixed(1),'average']],
@@ -1448,10 +1523,8 @@ boardView({id:'ages',group:'Explore Queens',icon:'chart',title:'Age <em>Explorer
   return {type:'bar',data:{labels:ks,datasets:[{label:'queens',data:ks.map(k=>bins[k]),backgroundColor:PAL[0]}]},options:{plugins:{legend:{display:false}}}};},
  cols:[{k:'queen',label:'Queen'},{k:'age',label:'Age',num:1},{k:'season_label',label:'Season',filter:1},{k:'placement',label:'Place',num:1},{k:'franchise',label:'Franchise',filter:1}]});
 
-/* 3. ZODIAC WHEEL */
-V({id:'zodiac',title:'Zodiac <em>Wheel</em>',kicker:'Explore Queens',icon:'star',group:'Explore Queens',
- desc:'Star signs of the stars — derived from known birthdates. Do Scorpios really win more? The data answers.',
- render(m){m.innerHTML=head(this);fTabs(m,'zodiac');
+/* 3. ZODIAC WHEEL (tab of Birthdays & Stars) */
+function renderZodiacTab(m){
   const rows=masterScoped().map(r=>Object.assign({sign:zodiac(r.birthdate)},r)).filter(r=>r.sign);
   const by={};rows.forEach(r=>{(by[r.sign]=by[r.sign]||[]).push(r);});
   const signs=Object.keys(by).sort((a,b)=>by[b].length-by[a].length);
@@ -1467,10 +1540,10 @@ V({id:'zodiac',title:'Zodiac <em>Wheel</em>',kicker:'Explore Queens',icon:'star'
     onRow:r=>{const det=el('div',{class:'card fade'});det.append(sectionHead(r.sign,'var(--gold)'));
       by[r.sign].sort((a,b)=>(+a.placement||99)-(+b.placement||99)).forEach(x=>det.append(el('div',{style:'font-size:12.5px;padding:2px 0'},qLink(x.queen_id),` — ${x.season_label}${x.placement?' · #'+x.placement:''}`)));
       m.append(det);if(det.scrollIntoView)det.scrollIntoView({behavior:'smooth'});}});
- }});
+}
 
 /* 4. EARNINGS LEADERBOARD */
-boardView({id:'earnings',group:'Explore Queens',icon:'crown',title:'Earnings <em>Leaderboard</em>',
+boardView({id:'earnings',group:'Queens',kicker:'Queens',ord:8,icon:'crown',title:'Earnings <em>Leaderboard</em>',
  desc:'Documented prize money won on the show — challenge cash plus the crown. (US seasons; from the Fandom earnings tables.)',
  rows(){const by={};masterScoped().forEach(r=>{if(+r.earnings){by[r.queen_id]=by[r.queen_id]||{queen:r.canonical,queen_id:r.queen_id,total:0,seasons:0};by[r.queen_id].total+=+r.earnings;by[r.queen_id].seasons++;}});
   return Object.values(by).map(r=>(r.pretty='$'+r.total.toLocaleString(),r)).sort((a,b)=>b.total-a.total);},
@@ -1480,7 +1553,7 @@ boardView({id:'earnings',group:'Explore Queens',icon:'crown',title:'Earnings <em
  cols:[{k:'queen',label:'Queen'},{k:'pretty',label:'Winnings'},{k:'total',label:'USD',num:1},{k:'seasons',label:'Seasons counted',num:1}]});
 
 /* 5. NAME-OLOGY */
-V({id:'nameology',title:'<em>Name</em>-ology',kicker:'Explore Queens',icon:'star',group:'Explore Queens',
+V({id:'nameology',title:'<em>Name</em>-ology',kicker:'Queens',icon:'star',group:'Queens',ord:9,
  desc:'The science of the drag name — favorite first letters, name lengths, and the words queens reach for.',
  render(m){m.innerHTML=head(this);fTabs(m,'nameology');
   const names=[...new Set(masterScoped().map(r=>r.canonical))];
@@ -1496,8 +1569,8 @@ V({id:'nameology',title:'<em>Name</em>-ology',kicker:'Explore Queens',icon:'star
     rows:topw.map(([w,c])=>({word:w,count:c,examples:names.filter(n=>n.toLowerCase().includes(w)).slice(0,4).join(' · ')})),csv:'nameology',onRow:null});
  }});
 
-/* 6. STATES & NATIONS */
-boardView({id:'georoll',group:'Explore Queens',icon:'map',title:'States &amp; <em>Nations</em>',
+/* 6. STATES & NATIONS (tab of Queen Geography) */
+const GEOROLL_SPEC={id:'georoll',
  desc:'Hometowns rolled up to state and country — which scenes send the most queens to the main stage.',
  rows(){const by={};masterScoped().forEach(r=>{const src=r.home_city||r.hometown;if(!src)return;
    const part=src.split(',').map(x=>x.trim()).filter(Boolean);const region=part.length>1?part[part.length-1]:part[0];
@@ -1506,12 +1579,10 @@ boardView({id:'georoll',group:'Explore Queens',icon:'map',title:'States &amp; <e
  stats:r=>[[r.length,'regions'],[r[0]?r[0].region:'—','top region'],[r.filter(x=>x.winners).length,'regions with a crown']],
  chart(rows){const top=rows.slice(0,18);return {type:'bar',data:{labels:top.map(r=>r.region),datasets:[{label:'queens',data:top.map(r=>r.queens),backgroundColor:PAL[3]},{label:'crowns',data:top.map(r=>r.winners),backgroundColor:PAL[1]}]},options:{indexAxis:'y'}};},
  chartH:380,onRow:null,
- cols:[{k:'region',label:'State / country'},{k:'queens',label:'Queens',num:1},{k:'winners',label:'Crowns',num:1}]});
+ cols:[{k:'region',label:'State / country'},{k:'queens',label:'Queens',num:1},{k:'winners',label:'Crowns',num:1}]};
 
-/* 7. BIRTHDAY CALENDAR */
-V({id:'birthdays',title:'Birthday <em>Calendar</em>',kicker:'Explore Queens',icon:'heart',group:'Explore Queens',
- desc:'Queens by birth month — the calendar of legends, with every documented birthday.',
- render(m){m.innerHTML=head(this);fTabs(m,'birthdays');
+/* 7. BIRTHDAYS & STARS (Calendar + Zodiac) */
+function renderBirthdayCalendar(m){
   const MO=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
   const seen=new Set();const rows=[];
   masterScoped().forEach(r=>{if(r.birthdate&&!seen.has(r.queen_id)){seen.add(r.queen_id);
@@ -1522,10 +1593,15 @@ V({id:'birthdays',title:'Birthday <em>Calendar</em>',kicker:'Explore Queens',ico
   mkChart(card,{type:'bar',data:{labels:MO,datasets:[{label:'queens',data:MO.map((_,i)=>by[i+1]||0),backgroundColor:PAL[4]}]},options:{plugins:{legend:{display:false}}}},220);
   dataTable(card,{cols:[{k:'queen',label:'Queen'},{k:'month',label:'Month',filter:1},{k:'day',label:'Day',num:1},{k:'birthdate',label:'Birthdate'}],
     rows:rows.sort((a,b)=>a.m-b.m||a.day-b.day),csv:'birthdays'});
+}
+V({id:'birthdays',title:'Birthdays &amp; <em>Stars</em>',kicker:'Queens',icon:'heart',group:'Queens',ord:6,
+ desc:'Queens by birth month and star sign — the calendar of legends and the zodiac wheel, from every documented birthdate.',
+ render(m){m.innerHTML=head(this);fTabs(m,'birthdays');
+  subTabs(m,'birthdays',[['Calendar',renderBirthdayCalendar],['Zodiac',renderZodiacTab]]);
  }});
 
 /* 8. PLACEMENT PYRAMID */
-V({id:'pyramid',title:'Placement <em>Pyramid</em>',kicker:'Explore Runs',icon:'grid',group:'Explore Runs',
+V({id:'pyramid',title:'Placement <em>Pyramid</em>',kicker:'Track Records',icon:'grid',group:'Track Records',ord:3,
  desc:'Every final placement, stacked — pick a rank and see everyone who ever landed there.',
  render(m){m.innerHTML=head(this);fTabs(m,'pyramid');
   const rows=masterScoped().filter(r=>+r.placement);
@@ -1538,7 +1614,7 @@ V({id:'pyramid',title:'Placement <em>Pyramid</em>',kicker:'Explore Runs',icon:'g
  }});
 
 /* 9. WIN RATE INDEX */
-boardView({id:'winrate',group:'Explore Runs',icon:'chart',title:'Win <em>Rate</em> Index',
+boardView({id:'winrate',group:'Track Records',kicker:'Track Records',ord:5,icon:'chart',title:'Win <em>Rate</em> Index',
  desc:'Maxi-challenge wins per episode competed — the efficiency stat. Minimum four episodes to qualify.',
  rows(){const S=seqs();return masterScoped().map(r=>{
    const cid=r.queen_id&&(r.queen_id+''), seq=S[(D.contestants.find(c=>c.queen_id===r.queen_id&&c.season_id===r.season)||{}).contestant_id]||[];
@@ -1550,8 +1626,8 @@ boardView({id:'winrate',group:'Explore Runs',icon:'chart',title:'Win <em>Rate</e
  chartH:340,
  cols:[{k:'queen',label:'Queen'},{k:'season_label',label:'Season',filter:1},{k:'rate',label:'Win %',num:1},{k:'wins',label:'Wins',num:1},{k:'competed',label:'Episodes',num:1},{k:'placement',label:'Place',num:1}]});
 
-/* 10. BOTTOM SURVIVORS */
-boardView({id:'survivors',group:'Explore Runs',icon:'timer',title:'Bottom <em>Survivors</em>',
+/* 10. NINE LIVES (Bottom Survivors + Safe Streaks) */
+const SURVIVORS_SPEC={id:'survivors',
  desc:'The cats with nine lives — most bottom-two appearances survived in a single run.',
  rows(){return masterScoped().map(r=>{
    const survived=(+r.bottoms||0)-((+r.placement&&+r.placement>0&&r.bottoms>0)?1:0);
@@ -1560,10 +1636,10 @@ boardView({id:'survivors',group:'Explore Runs',icon:'timer',title:'Bottom <em>Su
  stats:r=>[[r[0]?r[0].queen:'—','most bottoms'],[r[0]?r[0].bottoms:'—','her count'],[r.filter(x=>+x.placement===1).length,'still won the crown']],
  chart(rows){const top=rows.slice(0,15);return {type:'bar',data:{labels:top.map(r=>r.queen),datasets:[{label:'bottom twos',data:top.map(r=>+r.bottoms),backgroundColor:PAL[4]}]},options:{indexAxis:'y',plugins:{legend:{display:false}}}};},
  chartH:340,
- cols:[{k:'queen',label:'Queen'},{k:'season_label',label:'Season',filter:1},{k:'bottoms',label:'Bottoms',num:1},{k:'ls_won',label:'LS won',num:1},{k:'placement',label:'Final place',num:1}]});
+ cols:[{k:'queen',label:'Queen'},{k:'season_label',label:'Season',filter:1},{k:'bottoms',label:'Bottoms',num:1},{k:'ls_won',label:'LS won',num:1},{k:'placement',label:'Final place',num:1}]};
 
-/* 11. SAFE STREAKS */
-boardView({id:'safestreaks',group:'Explore Runs',icon:'timer',title:'Safe <em>Streaks</em>',
+/* 11. SAFE STREAKS (tab of Nine Lives) */
+const SAFESTREAKS_SPEC={id:'safestreaks',
  desc:'Longest consecutive runs of pure SAFE — the queens the edit forgot, week after week.',
  rows(){const S=seqs();const out=[];
   D.contestants.forEach(c=>{if(!seasonAllowed(c.season_id))return;
@@ -1574,10 +1650,15 @@ boardView({id:'safestreaks',group:'Explore Runs',icon:'timer',title:'Safe <em>St
  stats:r=>[[r[0]?r[0].queen:'—','longest streak'],[r[0]?r[0].streak+' eps':'—','in a row'],[r.length,'streaks of 3+']],
  chart(rows){const top=rows.slice(0,15);return {type:'bar',data:{labels:top.map(r=>r.queen),datasets:[{label:'consecutive SAFEs',data:top.map(r=>r.streak),backgroundColor:PAL[5]}]},options:{indexAxis:'y',plugins:{legend:{display:false}}}};},
  chartH:340,
- cols:[{k:'queen',label:'Queen'},{k:'season_label',label:'Season',filter:1},{k:'streak',label:'SAFE streak',num:1},{k:'placement',label:'Final place',num:1}]});
+ cols:[{k:'queen',label:'Queen'},{k:'season_label',label:'Season',filter:1},{k:'streak',label:'SAFE streak',num:1},{k:'placement',label:'Final place',num:1}]};
+V({id:'survivors',title:'Nine <em>Lives</em>',kicker:'Track Records',icon:'timer',group:'Track Records',ord:8,
+ desc:'The cats with nine lives — the most bottom-two appearances survived, and the longest unbroken SAFE streaks.',
+ render(m){m.innerHTML=head(this);fTabs(m,'survivors');
+  subTabs(m,'survivors',[['Bottom Survivors',h=>boardInto(h,SURVIVORS_SPEC)],['Safe Streaks',h=>boardInto(h,SAFESTREAKS_SPEC)]]);
+ }});
 
 /* 12. COMEBACK ARCS */
-boardView({id:'comebacks',group:'Explore Runs',icon:'heart',title:'Comeback <em>Arcs</em>',
+boardView({id:'comebacks',group:'Track Records',kicker:'Track Records',ord:7,icon:'heart',title:'Comeback <em>Arcs</em>',
  desc:'Started in the bottom, finished on top — early-episode bottoms ranked by how high the queen ultimately placed.',
  rows(){const S=seqs();const out=[];
   D.contestants.forEach(c=>{if(!seasonAllowed(c.season_id))return;
@@ -1592,7 +1673,7 @@ boardView({id:'comebacks',group:'Explore Runs',icon:'heart',title:'Comeback <em>
  cols:[{k:'queen',label:'Queen'},{k:'season_label',label:'Season',filter:1},{k:'early_lows',label:'Lows in first 3 eps',num:1},{k:'placement',label:'Final place',num:1},{k:'wins',label:'Wins',num:1}]});
 
 /* 13. FIRST IMPRESSIONS */
-V({id:'firstimp',title:'First <em>Impressions</em>',kicker:'Explore Runs',icon:'chart',group:'Explore Runs',
+V({id:'firstimp',title:'First <em>Impressions</em>',kicker:'Track Records',icon:'chart',group:'Track Records',ord:9,
  desc:'Does the premiere predict the crown? Episode-one status cross-tabbed against final placement.',
  render(m){m.innerHTML=head(this);fTabs(m,'firstimp');
   const S=seqs();const buckets={};const rows=[];
@@ -1613,7 +1694,7 @@ V({id:'firstimp',title:'First <em>Impressions</em>',kicker:'Explore Runs',icon:'
  }});
 
 /* 14. SEASON TEMPERATURE */
-V({id:'temperature',title:'Season <em>Temperature</em>',kicker:'Explore Runs',icon:'chart',group:'Explore Runs',
+V({id:'temperature',title:'Season <em>Temperature</em>',kicker:'Track Records',icon:'chart',group:'Track Records',ord:10,
  desc:'The judging climate per season — the mix of WIN / HIGH / SAFE / LOW / BTM calls across every episode.',
  render(m){m.innerHTML=head(this);fTabs(m,'temperature');
   const STS=['WIN','HIGH','SAFE','LOW','BTM'];const per={};
@@ -1631,7 +1712,7 @@ V({id:'temperature',title:'Season <em>Temperature</em>',kicker:'Explore Runs',ic
  }});
 
 /* 15. AIR-DATE TIMELINE */
-V({id:'timeline',title:'Air-Date <em>Timeline</em>',kicker:'Explore Seasons',icon:'timer',group:'Explore Seasons',
+V({id:'timeline',title:'Air-Date <em>Timeline</em>',kicker:'Seasons',icon:'timer',group:'Seasons',ord:3,
  desc:'Seventeen years of runway — every episode plotted on the calendar, colored by franchise.',
  render(m){m.innerHTML=head(this);fTabs(m,'timeline');
   const eps=D.episodes.filter(e=>seasonAllowed(e.season_id)&&e.air_date&&e.air_date!=='-');
@@ -1649,7 +1730,7 @@ V({id:'timeline',title:'Air-Date <em>Timeline</em>',kicker:'Explore Seasons',ico
  }});
 
 /* 16. SEASON RHYTHM */
-boardView({id:'rhythm',group:'Explore Seasons',icon:'timer',title:'Season <em>Rhythm</em>',
+boardView({id:'rhythm',group:'Seasons',kicker:'Seasons',ord:4,icon:'timer',title:'Season <em>Rhythm</em>',
  desc:'Premiere-to-finale spans, weekly cadence, and the longest waits between episodes.',
  rows(){const out=[];SEASON_ORDER.filter(seasonAllowed).forEach(sid=>{
    const ds=D.episodes.filter(e=>e.season_id===sid&&e.air_date&&e.air_date!=='-').map(e=>e.air_date).sort();
@@ -1665,7 +1746,7 @@ boardView({id:'rhythm',group:'Explore Seasons',icon:'timer',title:'Season <em>Rh
  cols:[{k:'season',label:'Season'},{k:'premiere',label:'Premiere'},{k:'finale',label:'Finale'},{k:'episodes',label:'Eps',num:1},{k:'span_days',label:'Span (days)',num:1},{k:'cadence',label:'Days/ep',num:1},{k:'longest_gap',label:'Longest gap',num:1}]});
 
 /* 17. TITLE WORDS */
-boardView({id:'titlewords',group:'Explore Seasons',icon:'grid',title:'Title <em>Words</em>',
+boardView({id:'titlewords',group:'Seasons',kicker:'Seasons',ord:9,icon:'grid',title:'Title <em>Words</em>',
  desc:'The vocabulary of episode titles — the words the show can’t stop using.',
  rows(){const stop=new Set(['the','a','an','of','and','for','to','in','it','is','you','your','my','with','on']);
   const by={};D.episodes.filter(e=>seasonAllowed(e.season_id)&&e.title&&e.title!=='-').forEach(e=>{
@@ -1677,10 +1758,8 @@ boardView({id:'titlewords',group:'Explore Seasons',icon:'grid',title:'Title <em>
  chartH:420,onRow:null,
  cols:[{k:'word',label:'Word'},{k:'count',label:'Episodes',num:1},{k:'examples',label:'Examples'}]});
 
-/* 18. CHALLENGE MIX */
-V({id:'challengemix',title:'Challenge <em>Mix</em>',kicker:'Explore Seasons',icon:'chart',group:'Explore Seasons',
- desc:'How each season balances acting, design, Snatch Game, balls and the rest — the format recipe over time.',
- render(m){m.innerHTML=head(this);fTabs(m,'challengemix');
+/* 18. CHALLENGE MIX (tab of Challenge Types) */
+function renderChallengeMixTab(m){
   const types=[...new Set(D.episodes.map(e=>e.main_challenge_type).filter(t=>t&&t!=='-'))];
   const per={};D.episodes.forEach(e=>{if(!seasonAllowed(e.season_id)||!e.main_challenge_type||e.main_challenge_type==='-')return;
     per[e.season_id]=per[e.season_id]||{};per[e.season_id][e.main_challenge_type]=(per[e.season_id][e.main_challenge_type]||0)+1;});
@@ -1690,10 +1769,10 @@ V({id:'challengemix',title:'Challenge <em>Mix</em>',kicker:'Explore Seasons',ico
     options:{scales:{x:{stacked:true,ticks:{color:CTXT,font:{size:9}},grid:{color:CGRID}},y:{stacked:true,ticks:{color:CTXT},grid:{color:CGRID}}}}},340);
   const rows=[];ss.forEach(s=>types.forEach(t=>{if(per[s][t])rows.push({season:seasonName(s),type:t,episodes:per[s][t]});}));
   dataTable(card,{cols:[{k:'season',label:'Season',filter:1},{k:'type',label:'Challenge type',filter:1},{k:'episodes',label:'Episodes',num:1}],rows,csv:'challenge-mix',onRow:null});
- }});
+}
 
 /* 19. RUNWAY INDEX */
-boardView({id:'runways',group:'Explore Seasons',icon:'star',title:'Runway <em>Index</em>',
+boardView({id:'runways',group:'Seasons',kicker:'Seasons',ord:8,icon:'star',title:'Runway <em>Index</em>',
  desc:'Every recorded runway category — searchable, with repeat themes surfaced.',
  rows(){const by={};D.episodes.filter(e=>seasonAllowed(e.season_id)&&e.runway_theme&&e.runway_theme!=='-').forEach(e=>{
    const k=e.runway_theme.toLowerCase();by[k]=by[k]||{theme:e.runway_theme,count:0,eps:[]};by[k].count++;by[k].eps.push(e.episode_id);});
@@ -1703,7 +1782,7 @@ boardView({id:'runways',group:'Explore Seasons',icon:'star',title:'Runway <em>In
  cols:[{k:'theme',label:'Runway theme'},{k:'count',label:'Times',num:1},{k:'where',label:'Episodes'}]});
 
 /* 20. PRIZE TRACKER */
-boardView({id:'prizes',group:'Explore Seasons',icon:'crown',title:'Prize <em>Tracker</em>',
+boardView({id:'prizes',group:'Seasons',kicker:'Seasons',ord:7,icon:'crown',title:'Prize <em>Tracker</em>',
  desc:'Every documented challenge prize — the gifts, trips and cash that came with a win.',
  rows(){const out=[];D.episodes.filter(e=>seasonAllowed(e.season_id)).forEach(e=>{
    if(e.maxi_challenge_prize&&e.maxi_challenge_prize!=='-')out.push({episode:epLabel(e.episode_id),_sid:e.season_id,kind:'Maxi',prize:e.maxi_challenge_prize,cash:+(String(e.maxi_challenge_prize).replace(/[^0-9]/g,''))||0});
@@ -1713,17 +1792,17 @@ boardView({id:'prizes',group:'Explore Seasons',icon:'crown',title:'Prize <em>Tra
  chart:null,onRow:r=>go('season:'+r._sid),
  cols:[{k:'episode',label:'Episode'},{k:'kind',label:'Type',filter:1},{k:'prize',label:'Prize'},{k:'cash',label:'Cash value',num:1}]});
 
-/* 21. FAREWELL WALL */
-boardView({id:'farewells',group:'Explore Seasons',icon:'heart',title:'Farewell <em>Wall</em>',
+/* 21. FAREWELL WALL (tab of Exits & Farewells) */
+const FAREWELLS_SPEC={id:'farewells',
  desc:'The mirror messages — every goodbye scrawled in lipstick, searchable.',
  rows(){return D.elimination_events.filter(e=>seasonAllowed(e.season_id)&&e.farewell&&e.farewell!=='-')
    .map(e=>({queen:qname[e.queen_id]||e.queen_id,queen_id:e.queen_id,season:seasonName(e.season_id),episode:epLabel(e.episode_id),farewell:e.farewell}));},
  stats:r=>[[r.length,'messages'],[Math.max(...r.map(x=>x.farewell.length)),'longest (chars)']],
  chart:null,page:60,
- cols:[{k:'queen',label:'Queen'},{k:'season',label:'Season',filter:1},{k:'farewell',label:'Mirror message'}]});
+ cols:[{k:'queen',label:'Queen'},{k:'season',label:'Season',filter:1},{k:'farewell',label:'Mirror message'}]};
 
 /* 22. DEADLIEST SONGS */
-boardView({id:'deadliest',group:'Explore Music',icon:'mic',title:'Deadliest <em>Songs</em>',
+boardView({id:'deadliest',group:'Music & Lip Syncs',kicker:'Music & Lip Syncs',ord:4,icon:'mic',title:'Deadliest <em>Songs</em>',
  desc:'Which tracks end careers — every lip-sync song scored by eliminations, saves and double-edged endings.',
  rows(){const by={};D.lip_syncs.forEach(l=>{const e=_EP[l.episode_id];if(!e||!seasonAllowed(e.season_id))return;
    const s=_SONG[l.song_id];if(!s||!s.title)return;
@@ -1738,7 +1817,7 @@ boardView({id:'deadliest',group:'Explore Music',icon:'mic',title:'Deadliest <em>
  cols:[{k:'song',label:'Song'},{k:'artist',label:'Artist'},{k:'eliminations',label:'Sent home',num:1},{k:'saves',label:'Survivals',num:1},{k:'shantays',label:'Dbl shantay',num:1},{k:'sashays',label:'Dbl sashay',num:1},{k:'total',label:'Uses',num:1}]});
 
 /* 23. DOUBLE TROUBLE */
-boardView({id:'doubles',group:'Explore Music',icon:'mic',title:'Double <em>Trouble</em>',
+boardView({id:'doubles',group:'Music & Lip Syncs',kicker:'Music & Lip Syncs',ord:6,icon:'mic',title:'Double <em>Trouble</em>',
  desc:'Every double shantay, double sashay and lip-sync save — the nights the rules broke.',
  rows(){return D.lip_syncs.filter(l=>['SHANTAY','SASHAY','SURVIVAL'].includes(l.result_type)||l.was_save==='Yes')
    .filter(l=>{const e=_EP[l.episode_id];return e&&seasonAllowed(e.season_id);})
@@ -1750,7 +1829,7 @@ boardView({id:'doubles',group:'Explore Music',icon:'mic',title:'Double <em>Troub
  cols:[{k:'episode',label:'Episode'},{k:'kind',label:'Event',filter:1},{k:'queens',label:'Queens'},{k:'song',label:'Song'},{k:'notes',label:'Notes'}]});
 
 /* 24. RIVALRIES */
-boardView({id:'rivalries',group:'Explore Music',icon:'web',title:'Lip-Sync <em>Rivalries</em>',
+boardView({id:'rivalries',group:'Music & Lip Syncs',kicker:'Music & Lip Syncs',ord:5,icon:'web',title:'Lip-Sync <em>Rivalries</em>',
  desc:'Queens who met on the main stage more than once — and who owns each rivalry.',
  rows(){const by={};D.lip_syncs.forEach(l=>{
    if(!l.queen_a_id||!l.queen_b_id||l.queen_a_id==='-'||l.queen_b_id==='-')return;
@@ -1766,7 +1845,7 @@ boardView({id:'rivalries',group:'Explore Music',icon:'web',title:'Lip-Sync <em>R
  cols:[{k:'queen_a',label:'Queen A'},{k:'queen_b',label:'Queen B'},{k:'meetings',label:'Meetings',num:1},{k:'score',label:'Score (A–B)'},{k:'where',label:'Episodes'}]});
 
 /* 25. RU-MIX CATALOG */
-boardView({id:'rumixes',group:'Explore Music',icon:'disc',title:'Ru-mix <em>Catalog</em>',
+boardView({id:'rumixes',group:'Music & Lip Syncs',kicker:'Music & Lip Syncs',ord:8,icon:'disc',title:'Ru-mix <em>Catalog</em>',
  desc:'Mother’s own discography on the main stage — every RuPaul track ever lip-synced, with players.',
  rows(){return D.songs.filter(s=>s.is_rumix==='Yes').map(s=>{
    const reuse=X.song_reuse.find(x=>x.song_id===s.song_id)||{episodes:[]};
@@ -1778,7 +1857,7 @@ boardView({id:'rumixes',group:'Explore Music',icon:'disc',title:'Ru-mix <em>Cata
    {k:'artist',label:'Credit'},{k:'times',label:'Lip syncs',num:1},{k:'where',label:'Episodes'}]});
 
 /* 26. GUEST PROFESSIONS */
-V({id:'professions',title:'Guest <em>Professions</em>',kicker:'Explore Panel',icon:'mask',group:'Explore Panel',
+V({id:'professions',title:'Guest <em>Professions</em>',kicker:'Panel & Guests',icon:'mask',group:'Panel & Guests',ord:2,
  desc:'What Ru invites to the table — guest judges bucketed by what they’re famous for.',
  render(m){m.innerHTML=head(this);fTabs(m,'professions');
   const BUCKETS=[['Music','singer,songwriter,musician,rapper,dj,pop'],['Screen','actress,actor,television,film,host'],
@@ -1798,10 +1877,8 @@ V({id:'professions',title:'Guest <em>Professions</em>',kicker:'Explore Panel',ic
   dataTable(card,{cols:[{k:'name',label:'Guest judge'},{k:'bucket',label:'World',filter:1},{k:'detail',label:'Known for'}],rows,csv:'professions',onRow:null});
  }});
 
-/* 27. JUDGE CONTINUITY */
-V({id:'continuity',title:'Judge <em>Continuity</em>',kicker:'Explore Panel',icon:'mask',group:'Explore Panel',
- desc:'Who sat at the table, season by season — the panel’s eras drawn as service ribbons.',
- render(m){m.innerHTML=head(this);fTabs(m,'continuity');
+/* 27. SERVICE RIBBONS (tab of The Panel) */
+function renderContinuityTab(m){
   const order=SEASON_ORDER.filter(seasonAllowed);const idx={};order.forEach((s,i)=>idx[s]=i);
   const by={};D.panel.forEach(p=>{if(!(p.season_id in idx))return;
     by[p.person_name]=by[p.person_name]||{name:p.person_name,seasons:new Set(),roles:new Set()};
@@ -1815,10 +1892,10 @@ V({id:'continuity',title:'Judge <em>Continuity</em>',kicker:'Explore Panel',icon
   folks.forEach(f=>{h+=`<tr><td style="white-space:nowrap">${f.name}<span style="color:rgba(247,240,230,.5);font-size:10px"> ${[...f.roles].join(', ').toLowerCase()}</span></td>`+
     order.map(s=>`<td style="padding:3px"><div style="width:14px;height:14px;border-radius:4px;background:${f.seasons.has(s)?'var(--magenta)':'rgba(255,255,255,.05)'}"></div></td>`).join('')+'</tr>';});
   h+='</table></div>';card.innerHTML+=h;m.append(card);
- }});
+}
 
-/* 28. SNATCH GAME HALL */
-boardView({id:'snatchhall',group:'The Vault',icon:'mask',title:'Snatch Game <em>Hall</em>',
+/* 28. SNATCH GAME HALL (tab of The Snatch Game) */
+const SNATCHHALL_SPEC={id:'snatchhall',
  desc:'Every recorded Snatch Game character — who played whom, and the celebrities impersonated most.',
  rows(){const cont={};D.contestants.forEach(c=>cont[c.contestant_id]=c);
   return D.episode_roles.filter(r=>r.role_type==='SNATCH_CHARACTER').map(r=>{const c=cont[r.contestant_id]||{};
@@ -1828,10 +1905,10 @@ boardView({id:'snatchhall',group:'The Vault',icon:'mask',title:'Snatch Game <em>
   const top=Object.entries(by).sort((a,b)=>b[1]-a[1])[0];
   return [[r.length,'characters recorded'],[top?top[0]:'—','most impersonated'],['more coming','as Fandom ingest widens']];},
  chart:null,page:60,
- cols:[{k:'queen',label:'Queen'},{k:'celebrity',label:'Played'},{k:'season',label:'Season',filter:1},{k:'episode',label:'Episode'}]});
+ cols:[{k:'queen',label:'Queen'},{k:'celebrity',label:'Played'},{k:'season',label:'Season',filter:1},{k:'episode',label:'Episode'}]};
 
 /* 29. MINI-CHALLENGE CROWNS */
-boardView({id:'minicrowns',group:'The Vault',icon:'crown',title:'Mini-Challenge <em>Crowns</em>',
+boardView({id:'minicrowns',group:'Challenges',kicker:'Challenges',ord:3,icon:'crown',title:'Mini-Challenge <em>Crowns</em>',
  desc:'The quick-win leaderboard — recorded mini-challenge victories per queen.',
  rows(){const cont={};D.contestants.forEach(c=>cont[c.contestant_id]=c);const by={};
   D.episode_roles.filter(r=>r.role_type==='MINI_WINNER').forEach(r=>{const c=cont[r.contestant_id];if(!c||!seasonAllowed(c.season_id))return;
@@ -1843,7 +1920,7 @@ boardView({id:'minicrowns',group:'The Vault',icon:'crown',title:'Mini-Challenge 
  cols:[{k:'queen',label:'Queen'},{k:'wins',label:'Mini wins',num:1},{k:'where',label:'Episodes'}]});
 
 /* 30. THE VAULT (master table) */
-V({id:'vault',title:'The <em>Vault</em>',kicker:'The Vault',icon:'grid',group:'The Vault',
+V({id:'vault',title:'The <em>Vault</em>',kicker:'Data',icon:'grid',group:'Data',ord:1,
  desc:'The master table — every contestant-season row with every dimension in the database. Filter anything, sort everything, export it all.',
  render(m){m.innerHTML=head(this);fTabs(m,'vault');
   const rows=masterScoped();
@@ -2032,7 +2109,7 @@ function buildQuestions(cfg){ // cfg:{code,cats,diff,n}
 let _TRIVIA_CFG=null; // set by Trivia Night's "printable version" button; read once by Host Pack
 
 /* ---------- 31. TRIVIA NIGHT ---------- */
-V({id:'trivia',title:'Trivia <em>Night</em>',kicker:'Games',icon:'sparkle',group:'Games',
+V({id:'trivia',title:'Trivia <em>Night</em>',kicker:'Play',icon:'sparkle',group:'Play',ord:1,
  desc:'A quiz computed live from the database — every answer is real and one click away from its proof. Pick categories, share the pack code, and gather the girls.',
  render(m){
   m.innerHTML=head(this);fTabs(m,'trivia');
@@ -2140,7 +2217,7 @@ V({id:'trivia',title:'Trivia <em>Night</em>',kicker:'Games',icon:'sparkle',group
  }});
 
 /* ---------- 32. HOST PACK (printable) ---------- */
-V({id:'hostpack',title:'Host <em>Pack</em>',kicker:'Games',icon:'book',group:'Games',
+V({id:'hostpack',title:'Host <em>Pack</em>',kicker:'Play',icon:'book',group:'Play',ord:2,
  desc:'Printable rounds for a live trivia night — questions up front, answer key on its own page. Generate, print, host. A pack code reproduces the same game as Trivia Night.',
  render(m){
   m.innerHTML=head(this);fTabs(m,'hostpack');
@@ -2295,7 +2372,7 @@ async function libSearch(raw){
   if(!scored.length)return null;
   return {t:'Here’s what the library holds: '+scored.map(x=>x.f.t).join('  ◆  '),links:[...new Set(scored.map(x=>x.f.l))].slice(0,3)};
 }
-V({id:'ask',title:'Ask the <em>Library</em>',kicker:'Games',icon:'book',group:'Games',
+V({id:'ask',title:'Ask the <em>Library</em>',kicker:'Play',icon:'book',group:'Play',ord:3,
  desc:'The Werkroom Librarian — ask in plain English; she answers straight from the database, every time, no AI guesswork. Runs entirely in your browser.',
  render(m){m.innerHTML=head(this);
   const card=el('div',{class:'card fade'});m.append(card);
@@ -2319,6 +2396,9 @@ V({id:'ask',title:'Ask the <em>Library</em>',kicker:'Games',icon:'book',group:'G
   card.append(el('div',{style:'margin-top:10px;font-size:10.5px;color:rgba(247,240,230,.45)'},'100% in-browser · no servers, no AI APIs · every answer is a live database lookup'));
  }});
 
+let _navEnsure=null;
+function _navState(){try{return JSON.parse(localStorage.getItem('wr-nav')||'{}');}catch(e){return {};}}
+function _navSave(s){try{localStorage.setItem('wr-nav',JSON.stringify(s));}catch(e){}}
 function buildNav(){
   const nav=$('#nav');nav.innerHTML='';
   nav.append(el('div',{class:'brand',html:'THE <span class="crown">WERK</span>ROOM'}));
@@ -2326,21 +2406,46 @@ function buildNav(){
   const search=el('input',{class:'navsearch',type:'text',placeholder:'Jump to a view…'});
   nav.append(search);
   const groupWrap=el('div');nav.append(groupWrap);
+  const sections={};
+  const setOpen=(g,open)=>{const s=sections[g];if(!s)return;
+    s.body.style.display=open?'':'none';s.caret.textContent=open?'▾':'▸';};
   const render=(filter='')=>{groupWrap.innerHTML='';
-    GROUPS.forEach(g=>{const items=VIEWS.filter(v=>v.group===g&&!v.hidden&&v.title.replace(/<[^>]+>/g,'').toLowerCase().includes(filter.toLowerCase()));
-      if(!items.length)return;groupWrap.append(el('div',{class:'navgroup'},g));
-      items.forEach((v,i)=>{const num=VIEWS.filter(x=>!x.hidden).indexOf(v);
-        groupWrap.append(el('div',{class:'navlink','data-id':v.id,onclick:()=>go(v.id),html:`${icon(v.icon)}<span>${v.title.replace(/<[^>]+>/g,'')}</span><span class="navnum">${String(num).padStart(2,'0')}</span>`}));});
-    });};
+    const st=_navState();
+    const activeId=(_LAST_ROUTE||'home').split(':')[0];
+    const av=VIEWS.find(v=>v.id===activeId);const activeGroup=av&&av.group;
+    GROUPS.forEach(g=>{
+      const items=VIEWS.filter(v=>v.group===g&&!v.hidden).sort((a,b)=>(a.ord||0)-(b.ord||0));
+      const matched=filter?items.filter(v=>v.title.replace(/<[^>]+>/g,'').toLowerCase().includes(filter.toLowerCase())):items;
+      if(!matched.length)return;
+      const open=filter?true:(st[g]!=null?!!st[g]:g===activeGroup);
+      const caret=el('span',{class:'ngcaret'},open?'▾':'▸');
+      const hdr=el('div',{class:'navgrouphead'},
+        el('span',{class:'ngi',html:icon(GROUP_ICONS[g]||'star')}),
+        el('span',{class:'ngn'},g),el('span',{class:'ngc'},String(items.length)),caret);
+      const body=el('div',{class:'navgroupbody',style:open?'':'display:none'});
+      matched.forEach(v=>body.append(el('div',{class:'navlink','data-id':v.id,onclick:()=>go(v.id),
+        html:`${icon(v.icon)}<span>${v.title.replace(/<[^>]+>/g,'')}</span>`})));
+      hdr.addEventListener('click',()=>{const s=_navState();const now=body.style.display==='none';
+        setOpen(g,now);s[g]=now;_navSave(s);});
+      sections[g]={body,caret};
+      groupWrap.append(hdr,body);
+    });
+    setActive(activeId);
+  };
   search.addEventListener('input',e=>render(e.target.value));render();
+  _navEnsure=id=>{const v=VIEWS.find(x=>x.id===id);if(v&&v.group&&sections[v.group])setOpen(v.group,true);};
 }
 let _LAST_ROUTE=null;
+/* old view ids -> their merged survivors (kept alive for trivia links, the Librarian, and old #hashes) */
+const ROUTE_ALIASES={georoll:'hometowns',zodiac:'birthdays',safestreaks:'survivors',farewells:'elimorder',
+  challengemix:'challenges',snatchhall:'snatch',guestdir:'guestfreq',continuity:'panel',tenure:'panel'};
 function go(route){
+  if(ROUTE_ALIASES[route])route=ROUTE_ALIASES[route];
   _LAST_ROUTE=route;
   const main=$('#main');main.scrollTop=0;window.scrollTo(0,0);
   let id=route,arg=null;
   if(route.includes(':')){[id,arg]=route.split(':');}
-  setActive(id);
+  setActive(id);if(_navEnsure)_navEnsure(id);
   if(id==='season'&&arg){renderSeasonDetail(main,arg);}
   else if(id==='queen'&&arg){renderQueen(main,arg);}
   else{const v=VIEWS.find(x=>x.id===id)||VIEWS[0];v.render(main);}
