@@ -241,16 +241,16 @@ US18-Q0236,Q0236,US18,11,12,"Indianapolis, IN",0,0,0,1,6,No,-,https://static.wik
 US18-Q0237,Q0237,US18,12,10,"Boston, MA",0,0,0,2,4,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/f/f8/BriarBlushS18CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20251202174022,2000,25
 US18-Q0238,Q0238,US18,13,11,"Philadelphia, PA",0,0,0,2,3,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/d/d2/MandyMangoS18CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20251202174323,2000,29
 US18-Q0239,Q0239,US18,14,7,"New York, NY",0,0,0,1,2,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/b/b6/DDFuegoS18CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20251202174121,2000,37
-AS05-Q0103,Q0103,AS05,1,-,-,2,0,0,3,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/2/29/SheaCoule%C3%A9AS5CastMug.png/revision/latest/scale-to-width-down/105?cb=20200511080242,130000,-
-AS05-Q0012,Q0012,AS05,2,-,-,1,2,0,3,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/2/25/JujubeeAS5CastMug.png/revision/latest/scale-to-width-down/105?cb=20210902101633,0,-
-AS05-Q0118,Q0118,AS05,2,-,-,3,1,0,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/d/da/MizCrackerAS5CastMug.png/revision/latest/scale-to-width-down/105?cb=20200511080503,40000,-
-AS05-Q0122,Q0122,AS05,4,-,-,0,2,0,3,AS05E07,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/4/4c/BlairStClairAS5CastMug.png/revision/latest/scale-to-width-down/105?cb=20210902185738,0,-
-AS05-Q0024,Q0024,AS05,5,-,-,0,2,0,2,AS05E06,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/1/1d/AlexisMateoAS5CastMug.png/revision/latest/scale-to-width-down/105?cb=20210902185644,0,-
-AS05-Q0030,Q0030,AS05,6,-,-,1,0,0,4,AS05E05,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/a/a9/IndiaFerrahAS5CastMug.png/revision/latest/scale-to-width-down/105?cb=20210902190001,0,-
-AS05-Q0123,Q0123,AS05,7,-,-,0,1,0,2,AS05E04,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/3/34/MayhemMillerAS5CastMug.png/revision/latest/scale-to-width-down/105?cb=20210902190211,0,-
-AS05-Q0029,Q0029,AS05,8,-,-,0,0,0,2,AS05E03,No,Mariah Paris Balenciaga,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/d/df/MariahParisBalenciagaAS5CastMug.png/revision/latest/scale-to-width-down/105?cb=20210902190122,0,-
-AS05-Q0005,Q0005,AS05,9,-,-,0,0,1,1,AS05E02,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/c/c9/OnginaAS5CastMug.png/revision/latest/scale-to-width-down/105?cb=20210902190428,0,-
-AS05-Q0093,Q0093,AS05,10,-,-,0,0,0,1,AS05E01,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/2/29/DerrickBarryAS5CastMug.png/revision/latest/scale-to-width-down/105?cb=20210902185821,0,-
+AS05-Q0103,Q0103,AS05,1,-,"Chicago, Illinois",2,0,0,3,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/2/29/SheaCoule%C3%A9AS5CastMug.png/revision/latest/scale-to-width-down/105?cb=20200511080242,130000,30
+AS05-Q0012,Q0012,AS05,2,-,"Boston, Massachusetts",1,2,0,3,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/2/25/JujubeeAS5CastMug.png/revision/latest/scale-to-width-down/105?cb=20210902101633,0,34
+AS05-Q0118,Q0118,AS05,2,-,"New York City, New York",3,1,0,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/d/da/MizCrackerAS5CastMug.png/revision/latest/scale-to-width-down/105?cb=20200511080503,40000,35
+AS05-Q0122,Q0122,AS05,4,-,"Washington, D.C.",0,2,0,3,AS05E07,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/4/4c/BlairStClairAS5CastMug.png/revision/latest/scale-to-width-down/105?cb=20210902185738,0,24
+AS05-Q0024,Q0024,AS05,5,-,"Las Vegas, Nevada",0,2,0,2,AS05E06,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/1/1d/AlexisMateoAS5CastMug.png/revision/latest/scale-to-width-down/105?cb=20210902185644,0,39
+AS05-Q0030,Q0030,AS05,6,-,"Las Vegas, Nevada",1,0,0,4,AS05E05,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/a/a9/IndiaFerrahAS5CastMug.png/revision/latest/scale-to-width-down/105?cb=20210902190001,0,33
+AS05-Q0123,Q0123,AS05,7,-,"Riverside, California",0,1,0,2,AS05E04,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/3/34/MayhemMillerAS5CastMug.png/revision/latest/scale-to-width-down/105?cb=20210902190211,0,37
+AS05-Q0029,Q0029,AS05,8,-,"Los Angeles, California",0,0,0,2,AS05E03,No,Mariah Paris Balenciaga,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/d/df/MariahParisBalenciagaAS5CastMug.png/revision/latest/scale-to-width-down/105?cb=20210902190122,0,37
+AS05-Q0005,Q0005,AS05,9,-,"Los Angeles, California",0,0,1,1,AS05E02,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/c/c9/OnginaAS5CastMug.png/revision/latest/scale-to-width-down/105?cb=20210902190428,0,37
+AS05-Q0093,Q0093,AS05,10,-,"Las Vegas, Nevada",0,0,0,1,AS05E01,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/2/29/DerrickBarryAS5CastMug.png/revision/latest/scale-to-width-down/105?cb=20210902185821,0,35
 AS01-Q0035,Q0035,AS01,1,-,"San Diego, California",3,1,0,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/a/ad/ChadMichaelsAS1CastMug.png/revision/latest/scale-to-width-down/105?cb=20210901213726,-,41
 AS01-Q0011,Q0011,AS01,2,-,"Riverside, California",0,1,1,3,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/4/48/RavenAS1CastMug.png/revision/latest/scale-to-width-down/105?cb=20210901214355,-,33
 AS01-Q0012,Q0012,AS01,3,-,"Boston, Massachusetts",0,1,1,4,AS01E06,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/a/a7/JujubeeAS1CastMug.png/revision/latest/scale-to-width-down/105?cb=20210901213800,-,28
@@ -360,216 +360,216 @@ AS11-Q0222,Q0222,AS11,11,-,"Miami, Florida",0,1,0,0,,No,-,https://static.wikia.n
 AS11-Q0017,Q0017,AS11,11,-,"Los Angeles, California",2,0,0,0,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/4/49/MorganMcMichaelsAS11CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20260425183003,10500,44
 AS11-Q0202,Q0202,AS11,11,-,"Miami, Florida",0,1,0,0,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/b/be/MorphineLoveDionAS11CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20260425183018,500,29
 AS11-Q0019,Q0019,AS11,11,-,"Fort Worth, Texas",0,0,0,0,,No,Mystique Summers,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/e/eb/MystiqueSummersAS11CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20260425183034,500,42
-CA01-Q0242,Q0242,CA01,1,-,-,2,1,0,2,,No,-,-,-,-
-CA01-Q0243,Q0243,CA01,2,-,-,3,1,0,2,,No,-,-,-,-
-CA01-Q0244,Q0244,CA01,2,-,-,1,5,0,0,,No,-,-,-,-
-CA01-Q0241,Q0241,CA01,4,-,-,1,3,2,1,CA01E09,No,-,-,-,-
-CA01-Q0245,Q0245,CA01,5,-,-,2,1,1,2,CA01E08,No,-,-,-,-
-CA01-Q0246,Q0246,CA01,6,-,-,0,0,1,3,CA01E07,No,-,-,-,-
-CA01-Q0247,Q0247,CA01,7,-,-,0,2,3,1,CA01E06,No,-,-,-,-
-CA01-Q0248,Q0248,CA01,8,-,-,0,2,1,1,CA01E05,No,-,-,-,-
-CA01-Q0249,Q0249,CA01,9,-,-,0,0,0,3,CA01E04,No,-,-,-,-
-CA01-Q0250,Q0250,CA01,10,-,-,0,0,0,1,CA01E03,No,-,-,-,-
-CA01-Q0251,Q0251,CA01,11,-,-,0,0,1,1,CA01E02,No,-,-,-,-
-CA01-Q0252,Q0252,CA01,12,-,-,0,0,0,1,CA01E01,No,-,-,-,-
-CA02-Q0253,Q0253,CA02,1,-,-,2,3,0,2,,No,-,-,-,-
-CA02-Q0254,Q0254,CA02,2,-,-,1,2,3,1,,No,-,-,-,-
-CA02-Q0255,Q0255,CA02,2,-,-,2,4,1,0,,No,-,-,-,-
-CA02-Q0256,Q0256,CA02,4,-,-,1,4,0,3,CA02E09,No,-,-,-,-
-CA02-Q0257,Q0257,CA02,5,-,-,1,1,3,1,CA02E08,No,-,-,-,-
-CA02-Q0258,Q0258,CA02,6,-,-,0,2,0,1,CA02E07,No,-,-,-,-
-CA02-Q0259,Q0259,CA02,7,-,-,1,0,0,3,CA02E06,No,-,-,-,-
-CA02-Q0260,Q0260,CA02,8,-,-,0,1,2,2,CA02E05,No,-,-,-,-
-CA02-Q0261,Q0261,CA02,9,-,-,0,1,1,1,CA02E04,No,-,-,-,-
-CA02-Q0262,Q0262,CA02,10,-,-,0,1,0,1,CA02E03,No,-,-,-,-
-CA02-Q0263,Q0263,CA02,11,-,-,0,0,0,1,CA02E02,No,-,-,-,-
-CA02-Q0264,Q0264,CA02,12,-,-,0,0,0,1,CA02E01,No,-,-,-,-
-CA03-Q0265,Q0265,CA03,1,-,-,2,1,1,1,,No,-,-,-,-
-CA03-Q0266,Q0266,CA03,2,-,-,1,3,1,2,,No,-,-,-,-
-CA03-Q0267,Q0267,CA03,3,-,-,1,3,0,3,CA03E09,No,-,-,-,-
-CA03-Q0268,Q0268,CA03,3,-,-,2,2,1,2,CA03E09,No,-,-,-,-
-CA03-Q0269,Q0269,CA03,5,-,-,1,2,0,1,CA03E08,No,-,-,-,-
-CA03-Q0270,Q0270,CA03,6,-,-,0,2,2,2,CA03E07,No,-,-,-,-
-CA03-Q0271,Q0271,CA03,7,-,-,0,1,2,1,CA03E06,No,-,-,-,-
-CA03-Q0272,Q0272,CA03,8,-,-,1,1,0,1,CA03E05,No,-,-,-,-
-CA03-Q0273,Q0273,CA03,9,-,-,0,1,1,1,CA03E04,No,-,-,-,-
-CA03-Q0274,Q0274,CA03,10,-,-,0,1,0,1,CA03E03,No,-,-,-,-
-CA03-Q0275,Q0275,CA03,11,-,-,0,0,0,2,CA03E02,No,-,-,-,-
-CA03-Q0276,Q0276,CA03,12,-,-,0,0,0,1,CA03E01,No,-,-,-,-
-CA04-Q0277,Q0277,CA04,1,-,-,1,5,0,0,,No,-,-,-,-
-CA04-Q0278,Q0278,CA04,2,-,-,2,1,1,1,,No,-,-,-,-
-CA04-Q0279,Q0279,CA04,3,-,-,1,3,1,2,CA04E09,No,-,-,-,-
-CA04-Q0280,Q0280,CA04,3,-,-,1,1,1,3,CA04E09,No,-,-,-,-
-CA04-Q0281,Q0281,CA04,5,-,-,1,2,2,1,CA04E08,No,-,-,-,-
-CA04-Q0282,Q0282,CA04,6,-,-,1,1,2,2,CA04E07,No,-,-,-,-
-CA04-Q0283,Q0283,CA04,7,-,-,0,1,0,2,CA04E06,No,-,-,-,-
-CA04-Q0284,Q0284,CA04,7,-,-,1,2,0,2,CA04E06,No,-,-,-,-
-CA04-Q0285,Q0285,CA04,9,-,-,0,0,0,2,CA04E05,No,-,-,-,-
-CA04-Q0286,Q0286,CA04,10,-,-,0,0,1,1,CA04E03,No,-,-,-,-
-CA04-Q0287,Q0287,CA04,11,-,-,0,0,1,1,CA04E02,No,-,-,-,-
-CA05-Q0288,Q0288,CA05,1,-,-,2,2,0,2,,No,-,-,-,-
-CA05-Q0289,Q0289,CA05,2,-,-,1,1,1,2,,No,-,-,-,-
-CA05-Q0290,Q0290,CA05,3,-,-,1,4,1,1,CA05E09,No,-,-,-,-
-CA05-Q0291,Q0291,CA05,3,-,-,2,2,0,1,CA05E09,No,-,-,-,-
-CA05-Q0292,Q0292,CA05,5,-,-,1,1,1,2,CA05E08,No,-,-,-,-
-CA05-Q0293,Q0293,CA05,6,-,-,1,1,1,2,CA05E07,No,-,-,-,-
-CA05-Q0294,Q0294,CA05,7,-,-,0,0,0,2,CA05E06,No,-,-,-,-
-CA05-Q0295,Q0295,CA05,8,-,-,0,2,1,1,CA05E05,No,-,-,-,-
-CA05-Q0296,Q0296,CA05,9,-,-,0,1,0,1,CA05E04,No,-,-,-,-
-CA05-Q0297,Q0297,CA05,10,-,-,0,0,1,2,CA05E03,No,-,-,-,-
-CA05-Q0298,Q0298,CA05,11,-,-,0,0,1,1,CA05E02,No,-,-,-,-
-CA06-Q0299,Q0299,CA06,1,-,-,4,0,1,0,,No,-,-,-,-
-CA06-Q0300,Q0300,CA06,2,-,-,3,2,1,0,,No,-,-,-,-
-CA06-Q0301,Q0301,CA06,3,-,-,1,2,1,4,CA06E09,No,-,-,-,-
-CA06-Q0302,Q0302,CA06,3,-,-,1,2,0,3,CA06E09,No,-,-,-,-
-CA06-Q0303,Q0303,CA06,5,-,-,0,3,0,3,CA06E08,No,-,-,-,-
-CA06-Q0304,Q0304,CA06,6,-,-,1,3,1,1,CA06E07,No,-,-,-,-
-CA06-Q0305,Q0305,CA06,7,-,-,1,0,0,1,CA06E06,No,-,-,-,-
-CA06-Q0306,Q0306,CA06,7,-,-,0,3,1,1,CA06E06,No,-,-,-,-
-CA06-Q0307,Q0307,CA06,9,-,-,0,1,1,1,CA06E05,No,-,-,-,-
-CA06-Q0308,Q0308,CA06,10,-,-,0,0,1,1,CA06E04,No,-,-,-,-
-CA06-Q0309,Q0309,CA06,11,-,-,0,0,0,1,CA06E03,No,-,-,-,-
-CA06-Q0310,Q0310,CA06,12,-,-,0,0,0,1,CA06E02,No,-,-,-,-
-UK01-Q0240,Q0240,UK01,1,-,-,3,3,0,1,,No,-,-,-,-
-UK01-Q0311,Q0311,UK01,2,-,-,3,1,1,0,,No,-,-,-,-
-UK01-Q0312,Q0312,UK01,3,-,-,3,1,1,2,UK01E08,No,-,-,-,-
-UK01-Q0313,Q0313,UK01,4,-,-,0,0,3,2,UK01E07,No,-,-,-,-
-UK01-Q0314,Q0314,UK01,5,-,-,1,0,0,2,UK01E06,No,-,-,-,-
-UK01-Q0315,Q0315,UK01,6,-,-,0,1,0,2,UK01E05,No,-,-,-,-
-UK01-Q0316,Q0316,UK01,7,-,-,0,2,0,2,UK01E04,No,-,-,-,-
-UK01-Q0317,Q0317,UK01,8,-,-,0,1,0,2,UK01E03,No,-,-,-,-
-UK01-Q0318,Q0318,UK01,9,-,-,0,0,0,1,UK01E02,No,-,-,-,-
-UK01-Q0319,Q0319,UK01,10,-,-,0,0,0,1,UK01E01,No,-,-,-,-
-UK02-Q0320,Q0320,UK02,1,-,-,3,3,2,1,,No,-,-,-,-
-UK02-Q0321,Q0321,UK02,2,-,-,4,2,0,1,,No,-,-,-,-
-UK02-Q0322,Q0322,UK02,2,-,-,1,1,0,4,,No,-,-,-,-
-UK02-Q0323,Q0323,UK02,4,-,-,0,3,1,2,UK02E10,No,-,-,-,-
-UK02-Q0324,Q0324,UK02,5,-,-,2,2,1,1,UK02E08,No,-,-,-,-
-UK02-Q0325,Q0325,UK02,6,-,-,0,1,2,2,UK02E07,No,-,-,-,-
-UK02-Q0326,Q0326,UK02,7,-,-,0,1,0,3,UK02E06,No,-,-,-,-
-UK02-Q0327,Q0327,UK02,8,-,-,0,0,0,1,UK02E01,No,-,-,-,-
-UK02-Q0328,Q0328,UK02,9,-,-,1,1,1,0,,No,-,-,-,-
-UK02-Q0329,Q0329,UK02,10,-,-,0,0,1,1,,No,-,-,-,-
-UK02-Q0330,Q0330,UK02,11,-,-,1,0,0,2,UK02E05,No,-,-,-,-
-UK02-Q0331,Q0331,UK02,12,-,-,0,0,0,2,UK02E05,No,-,-,-,-
-UK03-Q0332,Q0332,UK03,1,-,-,2,3,1,1,,No,-,-,-,-
-UK03-Q0333,Q0333,UK03,2,-,-,4,2,0,0,,No,-,-,-,-
-UK03-Q0334,Q0334,UK03,2,-,-,2,3,0,0,,No,-,-,-,-
-UK03-Q0335,Q0335,UK03,4,-,-,1,1,1,4,UK03E09,No,-,-,-,-
-UK03-Q0336,Q0336,UK03,5,-,-,1,1,0,3,UK03E07,No,-,-,-,-
-UK03-Q0337,Q0337,UK03,6,-,-,1,0,1,1,UK03E06,No,-,-,-,-
-UK03-Q0338,Q0338,UK03,6,-,-,1,0,1,1,UK03E06,No,-,-,-,-
-UK03-Q0339,Q0339,UK03,8,-,-,0,0,1,2,UK03E05,No,-,-,-,-
-UK03-Q0328,Q0328,UK03,9,-,-,0,1,0,1,UK03E03,No,-,-,-,-
-UK03-Q0340,Q0340,UK03,10,-,-,0,1,0,0,,No,-,-,-,-
-UK03-Q0341,Q0341,UK03,11,-,-,0,0,0,2,UK03E02,No,-,-,-,-
-UK03-Q0342,Q0342,UK03,12,-,-,0,0,0,1,UK03E01,No,-,-,-,-
-UK04-Q0343,Q0343,UK04,1,-,-,4,2,0,0,,No,-,-,-,-
-UK04-Q0344,Q0344,UK04,2,-,-,4,1,2,0,,No,-,-,-,-
-UK04-Q0345,Q0345,UK04,3,-,-,1,0,0,5,UK04E10,No,-,-,-,-
-UK04-Q0346,Q0346,UK04,3,-,-,0,3,2,3,UK04E10,No,-,-,-,-
-UK04-Q0347,Q0347,UK04,5,-,-,1,2,1,2,UK04E09,No,-,-,-,-
-UK04-Q0348,Q0348,UK04,6,-,-,2,0,0,3,UK04E07,No,-,-,-,-
-UK04-Q0349,Q0349,UK04,7,-,-,1,1,2,1,UK04E06,No,-,-,-,-
-UK04-Q0350,Q0350,UK04,8,-,-,1,0,0,2,,No,-,-,-,-
-UK04-Q0351,Q0351,UK04,9,-,-,0,2,1,1,UK04E04,No,-,-,-,-
-UK04-Q0352,Q0352,UK04,10,-,-,1,0,1,1,UK04E03,No,-,-,-,-
-UK04-Q0353,Q0353,UK04,11,-,-,0,1,0,1,UK04E02,No,-,-,-,-
-UK04-Q0354,Q0354,UK04,12,-,-,0,0,0,1,UK04E01,No,-,-,-,-
-UK05-Q0355,Q0355,UK05,1,-,-,3,4,0,0,,No,-,-,-,-
-UK05-Q0356,Q0356,UK05,2,-,-,3,3,0,1,,No,-,-,-,-
-UK05-Q0357,Q0357,UK05,3,-,-,1,3,0,2,UK05E10,No,-,-,-,-
-UK05-Q0358,Q0358,UK05,4,-,-,0,2,0,4,UK05E09,No,-,-,-,-
-UK05-Q0359,Q0359,UK05,5,-,-,1,2,0,1,UK05E08,No,-,-,-,-
-UK05-Q0360,Q0360,UK05,6,-,-,1,1,1,2,UK05E07,No,-,-,-,-
-UK05-Q0361,Q0361,UK05,7,-,-,1,2,1,1,UK05E06,No,-,-,-,-
-UK05-Q0362,Q0362,UK05,8,-,-,1,0,1,1,UK05E05,No,-,-,-,-
-UK05-Q0363,Q0363,UK05,9,-,-,0,0,0,2,UK05E04,No,-,-,-,-
-UK05-Q0364,Q0364,UK05,10,-,-,0,1,0,1,UK05E02,No,-,-,-,-
-UK06-Q0365,Q0365,UK06,1,-,-,3,3,0,0,,No,-,-,-,-
-UK06-Q0366,Q0366,UK06,2,-,-,4,2,0,0,,No,-,-,-,-
-UK06-Q0367,Q0367,UK06,3,-,-,1,4,1,1,UK06E10,No,-,-,-,-
-UK06-Q0368,Q0368,UK06,3,-,-,1,3,0,4,UK06E10,No,-,-,-,-
-UK06-Q0369,Q0369,UK06,5,-,-,1,3,0,3,UK06E09,No,-,-,-,-
-UK06-Q0370,Q0370,UK06,6,-,-,0,1,2,1,UK06E08,No,-,-,-,-
-UK06-Q0371,Q0371,UK06,7,-,-,0,1,2,2,UK06E07,No,-,-,-,-
-UK06-Q0372,Q0372,UK06,8,-,-,0,1,0,1,UK06E06,No,-,-,-,-
-UK06-Q0373,Q0373,UK06,9,-,-,0,2,1,2,UK06E05,No,-,-,-,-
-UK06-Q0374,Q0374,UK06,10,-,-,0,0,2,1,UK06E04,No,-,-,-,-
-UK06-Q0375,Q0375,UK06,11,-,-,0,0,0,1,UK06E03,No,-,-,-,-
-UK06-Q0376,Q0376,UK06,12,-,-,0,0,0,0,,No,-,-,-,-
-UK07-Q0377,Q0377,UK07,1,-,-,3,2,0,2,,No,-,-,-,-
-UK07-Q0378,Q0378,UK07,2,-,-,2,4,0,0,,No,-,-,-,-
-UK07-Q0379,Q0379,UK07,3,-,-,0,4,0,3,UK07E10,No,-,-,-,-
-UK07-Q0380,Q0380,UK07,3,-,-,1,2,2,2,UK07E10,No,-,-,-,-
-UK07-Q0381,Q0381,UK07,5,-,-,0,1,2,2,UK07E09,No,-,-,-,-
-UK07-Q0382,Q0382,UK07,6,-,-,2,0,1,1,UK07E08,No,-,-,-,-
-UK07-Q0383,Q0383,UK07,7,-,-,1,2,1,1,UK07E07,No,-,-,-,-
-UK07-Q0384,Q0384,UK07,8,-,-,1,1,0,1,UK07E06,No,-,-,-,-
-UK07-Q0385,Q0385,UK07,9,-,-,0,0,2,1,UK07E05,No,-,-,-,-
-UK07-Q0386,Q0386,UK07,10,-,-,0,0,0,3,UK07E04,No,-,-,-,-
-UK07-Q0387,Q0387,UK07,11,-,-,0,0,0,2,UK07E03,No,-,-,-,-
-UK07-Q0388,Q0388,UK07,12,-,-,0,0,0,2,UK07E02,No,-,-,-,-
-CW01-Q0135,Q0135,CW01,1,-,-,1,2,0,1,,No,-,-,-,-
-CW01-Q0131,Q0131,CW01,2,-,-,2,0,1,1,,No,-,-,-,-
-CW01-Q0243,Q0243,CW01,3,-,-,2,0,0,1,,No,-,-,-,-
-CW01-Q0340,Q0340,CW01,3,-,-,3,0,1,0,,No,-,-,-,-
-CW01-Q0335,Q0335,CW01,5,-,-,1,0,1,2,CW01E05,No,-,-,-,-
-CW01-Q0253,Q0253,CW01,6,-,-,1,0,0,0,,No,-,-,-,-
-CW01-Q0389,Q0389,CW01,7,-,-,0,0,1,2,CW01E03,No,-,-,-,-
-CW01-Q0262,Q0262,CW01,8,-,-,0,0,0,2,CW01E02,No,-,-,-,-
-CW01-Q0254,Q0254,CW01,9,-,-,0,0,0,1,CW01E01,No,-,-,-,-
-CW02-Q0245,Q0245,CW02,1,-,-,2,3,0,0,,No,-,-,-,-
-CW02-Q0024,Q0024,CW02,2,-,-,1,0,2,1,,No,-,-,-,-
-CW02-Q0313,Q0313,CW02,3,-,-,0,4,0,1,,No,Cheryl,-,-,-
-CW02-Q0078,Q0078,CW02,3,-,-,2,1,2,0,,No,-,-,-,-
-CW02-Q0268,Q0268,CW02,5,-,-,0,1,1,2,CW02E05,No,-,-,-,-
-CW02-Q0111,Q0111,CW02,6,-,-,0,0,0,2,CW02E04,No,Eureka!,-,-,-
-CW02-Q0249,Q0249,CW02,7,-,-,0,0,0,2,CW02E03,No,-,-,-,-
-CW02-Q0349,Q0349,CW02,8,-,-,0,0,0,1,CW02E02,No,-,-,-,-
-CW02-Q0390,Q0390,CW02,9,-,-,0,0,0,1,CW02E01,No,-,-,-,-
-GA01-Q0052,Q0052,GA01,1,-,-,2,4,0,0,,No,-,-,-,-
-GA01-Q0334,Q0334,GA01,2,-,-,3,3,0,1,,No,-,-,-,-
-GA01-Q0391,Q0391,GA01,2,-,-,3,3,0,1,,No,-,-,-,-
-GA01-Q0392,Q0392,GA01,2,-,-,1,5,0,0,,No,-,-,-,-
-GA01-Q0393,Q0393,GA01,5,-,-,1,2,3,1,GA01E10,No,-,-,-,-
-GA01-Q0394,Q0394,GA01,6,-,-,1,0,1,4,GA01E09,No,-,-,-,-
-GA01-Q0255,Q0255,GA01,7,-,-,1,3,1,1,GA01E08,No,-,-,-,-
-GA01-Q0395,Q0395,GA01,8,-,-,0,1,0,3,GA01E07,No,-,-,-,-
-GA01-Q0396,Q0396,GA01,9,-,-,0,1,0,2,GA01E06,No,-,-,-,-
-GA01-Q0397,Q0397,GA01,10,-,-,0,1,0,1,GA01E05,No,-,-,-,-
-GA01-Q0398,Q0398,GA01,11,-,-,0,1,1,1,GA01E04,No,-,-,-,-
-GA01-Q0399,Q0399,GA01,12,-,-,0,1,0,1,GA01E03,No,-,-,-,-
-UW01-Q0314,Q0314,UW01,1,-,-,1,1,0,1,,No,-,-,-,-
-UW01-Q0121,Q0121,UW01,2,-,-,1,1,1,1,,No,Mo Heart,-,-,-
-UW01-Q0012,Q0012,UW01,3,-,-,1,0,0,3,,No,-,-,-,-
-UW01-Q0312,Q0312,UW01,3,-,-,1,1,0,1,,No,-,-,-,-
-UW01-Q0400,Q0400,UW01,5,-,-,2,0,0,3,UW01E05,No,-,-,-,-
-UW01-Q0401,Q0401,UW01,6,-,-,2,1,0,1,UW01E04,No,-,-,-,-
-UW01-Q0241,Q0241,UW01,7,-,-,2,0,0,1,UW01E03,No,-,-,-,-
-UW01-Q0313,Q0313,UW01,8,-,-,0,0,0,1,UW01E02,No,-,-,-,-
-UW01-Q0245,Q0245,UW01,9,-,-,0,0,0,1,UW01E01,No,-,-,-,-
-UW02-Q0326,Q0326,UW02,1,-,-,4,0,0,0,,No,-,-,-,-
-UW02-Q0402,Q0402,UW02,2,-,-,3,1,1,0,,No,-,-,-,-
-UW02-Q0403,Q0403,UW02,3,-,-,2,1,2,1,,No,-,-,-,-
-UW02-Q0404,Q0404,UW02,3,-,-,3,1,0,1,,No,-,-,-,-
-UW02-Q0136,Q0136,UW02,5,-,-,1,2,1,2,UW02E07,No,-,-,-,-
-UW02-Q0337,Q0337,UW02,6,-,-,0,1,0,3,UW02E06,No,-,-,-,-
-UW02-Q0319,Q0319,UW02,7,-,-,0,1,0,3,UW02E05,No,-,-,-,-
-UW02-Q0405,Q0405,UW02,8,-,-,1,0,0,2,UW02E04,No,-,-,-,-
-UW02-Q0346,Q0346,UW02,9,-,-,0,0,0,1,UW02E03,No,-,-,-,-
-UW02-Q0406,Q0406,UW02,10,-,-,0,0,0,1,UW02E02,No,-,-,-,-
-UW02-Q0123,Q0123,UW02,11,-,-,0,0,0,1,UW02E01,No,-,-,-,-
-UW03-Q0407,Q0407,UW03,1,-,-,2,3,1,0,,No,-,-,-,-
-UW03-Q0359,Q0359,UW03,2,-,-,2,2,0,1,,No,-,-,-,-
-UW03-Q0408,Q0408,UW03,3,-,-,1,3,0,2,,No,-,-,-,-
-UW03-Q0029,Q0029,UW03,3,-,-,2,1,1,1,,No,Mariah Balenciaga,-,-,-
-UW03-Q0409,Q0409,UW03,5,-,-,0,4,1,2,UW03E07,No,-,-,-,-
-UW03-Q0374,Q0374,UW03,6,-,-,0,0,1,1,UW03E06,No,-,-,-,-
-UW03-Q0008,Q0008,UW03,7,-,-,0,0,1,2,UW03E05,No,Serena Morena,-,-,-
-UW03-Q0351,Q0351,UW03,8,-,-,0,2,0,1,UW03E04,No,-,-,-,-
-UW03-Q0410,Q0410,UW03,9,-,-,0,0,1,1,UW03E03,No,-,-,-,-
-UW03-Q0281,Q0281,UW03,10,-,-,0,0,0,1,UW03E02,No,-,-,-,-
+CA01-Q0242,Q0242,CA01,1,-,"Toronto, Ontario",2,1,0,2,,No,-,-,-,28
+CA01-Q0243,Q0243,CA01,2,-,"Montreal, Quebec",3,1,0,2,,No,-,-,-,32
+CA01-Q0244,Q0244,CA01,2,-,"Toronto, Ontario",1,5,0,0,,No,-,-,-,29
+CA01-Q0241,Q0241,CA01,4,-,"Victoria, British Columbia",1,3,2,1,CA01E09,No,-,-,-,36
+CA01-Q0245,Q0245,CA01,5,-,"New York City, United States",2,1,1,2,CA01E08,No,-,-,-,23
+CA01-Q0246,Q0246,CA01,6,-,"Vancouver, British Columbia",0,0,1,3,CA01E07,No,-,-,-,24
+CA01-Q0247,Q0247,CA01,7,-,"Windsor, Ontario",0,2,3,1,CA01E06,No,-,-,-,24
+CA01-Q0248,Q0248,CA01,8,-,"Montreal, Quebec",0,2,1,1,CA01E05,No,-,-,-,22
+CA01-Q0249,Q0249,CA01,9,-,"Toronto, Ontario",0,0,0,3,CA01E04,No,-,-,-,37
+CA01-Q0250,Q0250,CA01,10,-,"East York, Ontario",0,0,0,1,CA01E03,No,-,-,-,37
+CA01-Q0251,Q0251,CA01,11,-,"Kitchener-Waterloo, Ontario",0,0,1,1,CA01E02,No,-,-,-,21
+CA01-Q0252,Q0252,CA01,12,-,"Essex, Ontario",0,0,0,1,CA01E01,No,-,-,-,31
+CA02-Q0253,Q0253,CA02,1,-,"Ottawa, Ontario",2,3,0,2,,No,-,-,-,34
+CA02-Q0254,Q0254,CA02,2,-,"Vancouver, British Columbia",1,2,3,1,,No,-,-,-,30
+CA02-Q0255,Q0255,CA02,2,-,"Montreal, Quebec",2,4,1,0,,No,-,-,-,26
+CA02-Q0256,Q0256,CA02,4,-,"Vancouver, British Columbia",1,4,0,3,CA02E09,No,-,-,-,29
+CA02-Q0257,Q0257,CA02,5,-,"Quebec City, Quebec",1,1,3,1,CA02E08,No,-,-,-,29
+CA02-Q0258,Q0258,CA02,6,-,"Toronto, Ontario",0,2,0,1,CA02E07,No,-,-,-,34
+CA02-Q0259,Q0259,CA02,7,-,"Vancouver, British Columbia",1,0,0,3,CA02E06,No,-,-,-,29
+CA02-Q0260,Q0260,CA02,8,-,"Toronto, Ontario",0,1,2,2,CA02E05,No,-,-,-,29
+CA02-Q0261,Q0261,CA02,9,-,"Montreal, Quebec",0,1,1,1,CA02E04,No,-,-,-,27
+CA02-Q0262,Q0262,CA02,10,-,"Calgary, Alberta",0,1,0,1,CA02E03,No,-,-,-,24
+CA02-Q0263,Q0263,CA02,11,-,"Montreal, Quebec",0,0,0,1,CA02E02,No,-,-,-,35
+CA02-Q0264,Q0264,CA02,12,-,"Vancouver, British Columbia",0,0,0,1,CA02E01,No,-,-,-,24
+CA03-Q0265,Q0265,CA03,1,-,"Montreal, Quebec",2,1,1,1,,No,-,-,-,33
+CA03-Q0266,Q0266,CA03,2,-,"Toronto, Ontario",1,3,1,2,,No,-,-,-,37
+CA03-Q0267,Q0267,CA03,3,-,"Ottawa, Ontario",1,3,0,3,CA03E09,No,-,-,-,25
+CA03-Q0268,Q0268,CA03,3,-,"Toronto, Ontario",2,2,1,2,CA03E09,No,-,-,-,25
+CA03-Q0269,Q0269,CA03,5,-,"Victoria, British Columbia",1,2,0,1,CA03E08,No,-,-,-,29
+CA03-Q0270,Q0270,CA03,6,-,"St. John's, Newfoundland and Labrador",0,2,2,2,CA03E07,No,-,-,-,32
+CA03-Q0271,Q0271,CA03,7,-,"Toronto, Ontario",0,1,2,1,CA03E06,No,-,-,-,29
+CA03-Q0272,Q0272,CA03,8,-,"Montreal, Quebec",1,1,0,1,CA03E05,No,-,-,-,25
+CA03-Q0273,Q0273,CA03,9,-,"Calgary, Alberta",0,1,1,1,CA03E04,No,-,-,-,27
+CA03-Q0274,Q0274,CA03,10,-,"Saskatoon, Saskatchewan",0,1,0,1,CA03E03,No,-,-,-,22
+CA03-Q0275,Q0275,CA03,11,-,"Toronto, Ontario",0,0,0,2,CA03E02,No,-,-,-,35
+CA03-Q0276,Q0276,CA03,12,-,"Toronto, Ontario",0,0,0,1,CA03E01,No,-,-,-,33
+CA04-Q0277,Q0277,CA04,1,-,"Vancouver, British Columbia",1,5,0,0,,No,-,-,-,27
+CA04-Q0278,Q0278,CA04,2,-,"Toronto, Ontario",2,1,1,1,,No,-,-,-,23
+CA04-Q0279,Q0279,CA04,3,-,"Montreal, Quebec",1,3,1,2,CA04E09,No,-,-,-,24
+CA04-Q0280,Q0280,CA04,3,-,"Calgary, Alberta",1,1,1,3,CA04E09,No,-,-,-,22
+CA04-Q0281,Q0281,CA04,5,-,"Edmonton, Alberta",1,2,2,1,CA04E08,No,-,-,-,44
+CA04-Q0282,Q0282,CA04,6,-,"Ottawa, Ontario",1,1,2,2,CA04E07,No,-,-,-,35
+CA04-Q0283,Q0283,CA04,7,-,"Ottawa, Ontario",0,1,0,2,CA04E06,No,-,-,-,31
+CA04-Q0284,Q0284,CA04,7,-,"Toronto, Ontario",1,2,0,2,CA04E06,No,-,-,-,57
+CA04-Q0285,Q0285,CA04,9,-,"Toronto, Ontario",0,0,0,2,CA04E05,No,-,-,-,24
+CA04-Q0286,Q0286,CA04,10,-,"Vancouver, British Columbia",0,0,1,1,CA04E03,No,-,-,-,31
+CA04-Q0287,Q0287,CA04,11,-,"Montreal, Quebec",0,0,1,1,CA04E02,No,-,-,-,31
+CA05-Q0288,Q0288,CA05,1,-,"Toronto, Ontario",2,2,0,2,,No,-,-,-,25
+CA05-Q0289,Q0289,CA05,2,-,"Toronto, Ontario",1,1,1,2,,No,-,-,-,21
+CA05-Q0290,Q0290,CA05,3,-,"Toronto, Ontario",1,4,1,1,CA05E09,No,-,-,-,32
+CA05-Q0291,Q0291,CA05,3,-,"Toronto, Ontario",2,2,0,1,CA05E09,No,-,-,-,39
+CA05-Q0292,Q0292,CA05,5,-,"Toronto, Ontario",1,1,1,2,CA05E08,No,-,-,-,29
+CA05-Q0293,Q0293,CA05,6,-,"Vancouver, British Columbia",1,1,1,2,CA05E07,No,-,-,-,26
+CA05-Q0294,Q0294,CA05,7,-,"Montreal, Quebec",0,0,0,2,CA05E06,No,-,-,-,36
+CA05-Q0295,Q0295,CA05,8,-,"Vancouver, British Columbia",0,2,1,1,CA05E05,No,-,-,-,52
+CA05-Q0296,Q0296,CA05,9,-,"Toronto, Ontario",0,1,0,1,CA05E04,No,-,-,-,32
+CA05-Q0297,Q0297,CA05,10,-,"Vancouver, British Columbia",0,0,1,2,CA05E03,No,-,-,-,32
+CA05-Q0298,Q0298,CA05,11,-,"St. John's, Newfoundland and Labrador",0,0,1,1,CA05E02,No,-,-,-,23
+CA06-Q0299,Q0299,CA06,1,-,"Toronto, Ontario",4,0,1,0,,No,-,-,-,27
+CA06-Q0300,Q0300,CA06,2,-,"St. Catharines, Ontario",3,2,1,0,,No,-,-,-,24
+CA06-Q0301,Q0301,CA06,3,-,"Vancouver, British Columbia",1,2,1,4,CA06E09,No,-,-,-,31
+CA06-Q0302,Q0302,CA06,3,-,"Moncton, New Brunswick",1,2,0,3,CA06E09,No,-,-,-,26
+CA06-Q0303,Q0303,CA06,5,-,"Toronto, Ontario",0,3,0,3,CA06E08,No,-,-,-,25
+CA06-Q0304,Q0304,CA06,6,-,"Ottawa, Ontario",1,3,1,1,CA06E07,No,-,-,-,29
+CA06-Q0305,Q0305,CA06,7,-,"Halifax, Nova Scotia",1,0,0,1,CA06E06,No,-,-,-,31
+CA06-Q0306,Q0306,CA06,7,-,"Montreal, Quebec",0,3,1,1,CA06E06,No,-,-,-,39
+CA06-Q0307,Q0307,CA06,9,-,"London, Ontario",0,1,1,1,CA06E05,No,-,-,-,24
+CA06-Q0308,Q0308,CA06,10,-,"Vancouver, British Columbia",0,0,1,1,CA06E04,No,-,-,-,27
+CA06-Q0309,Q0309,CA06,11,-,"Toronto, Ontario",0,0,0,1,CA06E03,No,-,-,-,25
+CA06-Q0310,Q0310,CA06,12,-,"Montreal, Quebec",0,0,0,1,CA06E02,No,-,-,-,25
+UK01-Q0240,Q0240,UK01,1,-,"Liverpool, England",3,3,0,1,,No,-,-,-,26
+UK01-Q0311,Q0311,UK01,2,-,"Brighouse, England",3,1,1,0,,No,-,-,-,35
+UK01-Q0312,Q0312,UK01,3,-,"East London, England",3,1,1,2,UK01E08,No,-,-,-,29
+UK01-Q0313,Q0313,UK01,4,-,"Chelmsford, England",0,0,3,2,UK01E07,No,-,-,-,25
+UK01-Q0314,Q0314,UK01,5,-,"Belfast, Northern Ireland",1,0,0,2,UK01E06,No,-,-,-,23
+UK01-Q0315,Q0315,UK01,6,-,"East London, England",0,1,0,2,UK01E05,No,-,-,-,34
+UK01-Q0316,Q0316,UK01,7,-,"Birmingham, England",0,2,0,2,UK01E04,No,-,-,-,30
+UK01-Q0317,Q0317,UK01,8,-,"North London, England",0,1,0,2,UK01E03,No,-,-,-,34
+UK01-Q0318,Q0318,UK01,9,-,"Cricklade, England",0,0,0,1,UK01E02,No,-,-,-,19
+UK01-Q0319,Q0319,UK01,10,-,"Leicester, England",0,0,0,1,UK01E01,No,-,-,-,21
+UK02-Q0320,Q0320,UK02,1,-,"Glasgow, Scotland",3,3,2,1,,No,-,-,-,23
+UK02-Q0321,Q0321,UK02,2,-,"Great Yarmouth, England",4,2,0,1,,No,-,-,-,26
+UK02-Q0322,Q0322,UK02,2,-,"Newport, Wales",1,1,0,4,,No,-,-,-,26
+UK02-Q0323,Q0323,UK02,4,-,"Dundee, Scotland",0,3,1,2,UK02E10,No,-,-,-,21
+UK02-Q0324,Q0324,UK02,5,-,"Worksop, England",2,2,1,1,UK02E08,No,-,-,-,23
+UK02-Q0325,Q0325,UK02,6,-,"Liverpool, England",0,1,2,2,UK02E07,No,-,-,-,32
+UK02-Q0326,Q0326,UK02,7,-,"South London, England",0,1,0,3,UK02E06,No,-,-,-,30
+UK02-Q0327,Q0327,UK02,8,-,"Brighton, England",0,0,0,1,UK02E01,No,-,-,-,30
+UK02-Q0328,Q0328,UK02,9,-,"Rochdale, England",1,1,1,0,,No,-,-,-,34
+UK02-Q0329,Q0329,UK02,10,-,"Worcester, England",0,0,1,1,,No,-,-,-,31
+UK02-Q0330,Q0330,UK02,11,-,"East London, England",1,0,0,2,UK02E05,No,-,-,-,27
+UK02-Q0331,Q0331,UK02,12,-,"Darlington, England",0,0,0,2,UK02E05,No,-,-,-,26
+UK03-Q0332,Q0332,UK03,1,-,"Royal Tunbridge Wells, England",2,3,1,1,,No,-,-,-,19
+UK03-Q0333,Q0333,UK03,2,-,"Dagenham, England",4,2,0,0,,No,-,-,-,32
+UK03-Q0334,Q0334,UK03,2,-,"Birmingham, England",2,3,0,0,,No,-,-,-,29
+UK03-Q0335,Q0335,UK03,4,-,"South London, England",1,1,1,4,UK03E09,No,-,-,-,29
+UK03-Q0336,Q0336,UK03,5,-,"East London, England",1,1,0,3,UK03E07,No,-,-,-,26
+UK03-Q0337,Q0337,UK03,6,-,"Newcastle upon Tyne, England",1,0,1,1,UK03E06,No,-,-,-,30
+UK03-Q0338,Q0338,UK03,6,-,"Medway, England",1,0,1,1,UK03E06,No,-,-,-,22
+UK03-Q0339,Q0339,UK03,8,-,"Rufford, England",0,0,1,2,UK03E05,No,-,-,-,24
+UK03-Q0328,Q0328,UK03,9,-,"Rochdale, England",0,1,0,1,UK03E03,No,-,-,-,35
+UK03-Q0340,Q0340,UK03,10,-,"Cardiff, Wales",0,1,0,0,,No,-,-,-,27
+UK03-Q0341,Q0341,UK03,11,-,"Burnley, England",0,0,0,2,UK03E02,No,-,-,-,29
+UK03-Q0342,Q0342,UK03,12,-,"Brighton, England",0,0,0,1,UK03E01,No,-,-,-,19
+UK04-Q0343,Q0343,UK04,1,-,"Liverpool, England",4,2,0,0,,No,-,-,-,29
+UK04-Q0344,Q0344,UK04,2,-,"Manchester, England",4,1,2,0,,No,-,-,-,38
+UK04-Q0345,Q0345,UK04,3,-,"Birmingham, England",1,0,0,5,UK04E10,No,-,-,-,29
+UK04-Q0346,Q0346,UK04,3,-,"Belfast, Northern Ireland",0,3,2,3,UK04E10,No,-,-,-,33
+UK04-Q0347,Q0347,UK04,5,-,"Brighton, England",1,2,1,2,UK04E09,No,-,-,-,29
+UK04-Q0348,Q0348,UK04,6,-,"Horsham, England",2,0,0,3,UK04E07,No,-,-,-,22
+UK04-Q0349,Q0349,UK04,7,-,"Brighouse, England",1,1,2,1,UK04E06,No,-,-,-,36
+UK04-Q0350,Q0350,UK04,8,-,"South London, England",1,0,0,2,,No,-,-,-,25
+UK04-Q0351,Q0351,UK04,9,-,"Clitheroe, England",0,2,1,1,UK04E04,No,-,-,-,23
+UK04-Q0352,Q0352,UK04,10,-,"Cheltenham, England",1,0,1,1,UK04E03,No,-,-,-,38
+UK04-Q0353,Q0353,UK04,11,-,"Surrey, England",0,1,0,1,UK04E02,No,-,-,-,23
+UK04-Q0354,Q0354,UK04,12,-,"Essex, England",0,0,0,1,UK04E01,No,-,-,-,32
+UK05-Q0355,Q0355,UK05,1,-,"Lanchester, England",3,4,0,0,,No,-,-,-,34
+UK05-Q0356,Q0356,UK05,2,-,"Newcastle upon Tyne, England",3,3,0,1,,No,-,-,-,39
+UK05-Q0357,Q0357,UK05,3,-,"Hartlepool, England",1,3,0,2,UK05E10,No,-,-,-,25
+UK05-Q0358,Q0358,UK05,4,-,"Royal Tunbridge Wells, England",0,2,0,4,UK05E09,No,-,-,-,20
+UK05-Q0359,Q0359,UK05,5,-,"Buxton, England",1,2,0,1,UK05E08,No,-,-,-,26
+UK05-Q0360,Q0360,UK05,6,-,"London, England",1,1,1,2,UK05E07,No,-,-,-,26
+UK05-Q0361,Q0361,UK05,7,-,"Redruth, England",1,2,1,1,UK05E06,No,-,-,-,36
+UK05-Q0362,Q0362,UK05,8,-,"Manchester, England",1,0,1,1,UK05E05,No,-,-,-,23
+UK05-Q0363,Q0363,UK05,9,-,"Doncaster, England",0,0,0,2,UK05E04,No,-,-,-,23
+UK05-Q0364,Q0364,UK05,10,-,"London, England",0,1,0,1,UK05E02,No,-,-,-,28
+UK06-Q0365,Q0365,UK06,1,-,"Lancashire, England",3,3,0,0,,No,-,-,-,26
+UK06-Q0366,Q0366,UK06,2,-,"Stockton on Tees, England",4,2,0,0,,No,-,-,-,43
+UK06-Q0367,Q0367,UK06,3,-,"Cardiff, Wales",1,4,1,1,UK06E10,No,-,-,-,24
+UK06-Q0368,Q0368,UK06,3,-,"London, England",1,3,0,4,UK06E10,No,-,-,-,32
+UK06-Q0369,Q0369,UK06,5,-,"Manchester, England",1,3,0,3,UK06E09,No,-,-,-,36
+UK06-Q0370,Q0370,UK06,6,-,"Belfast, Northern Ireland",0,1,2,1,UK06E08,No,-,-,-,23
+UK06-Q0371,Q0371,UK06,7,-,"Bala, Wales",0,1,2,2,UK06E07,No,-,-,-,21
+UK06-Q0372,Q0372,UK06,8,-,"Isle of Bute, Scotland",0,1,0,1,UK06E06,No,-,-,-,25
+UK06-Q0373,Q0373,UK06,9,-,"London, England",0,2,1,2,UK06E05,No,-,-,-,25
+UK06-Q0374,Q0374,UK06,10,-,"Nottingham, England",0,0,2,1,UK06E04,No,-,-,-,28
+UK06-Q0375,Q0375,UK06,11,-,"Folkestone, England",0,0,0,1,UK06E03,No,-,-,-,48
+UK06-Q0376,Q0376,UK06,12,-,"Manchester, England",0,0,0,0,,No,-,-,-,33
+UK07-Q0377,Q0377,UK07,1,-,"London, England",3,2,0,2,,No,-,-,-,25
+UK07-Q0378,Q0378,UK07,2,-,"Belfast, Northern Ireland",2,4,0,0,,No,-,-,-,22
+UK07-Q0379,Q0379,UK07,3,-,"Rhondda Valley, Wales",0,4,0,3,UK07E10,No,-,-,-,26
+UK07-Q0380,Q0380,UK07,3,-,"Leeds, England",1,2,2,2,UK07E10,No,-,-,-,26
+UK07-Q0381,Q0381,UK07,5,-,"Brighton, England",0,1,2,2,UK07E09,No,-,-,-,27
+UK07-Q0382,Q0382,UK07,6,-,"Dublin, Republic of Ireland",2,0,1,1,UK07E08,No,-,-,-,30
+UK07-Q0383,Q0383,UK07,7,-,"Guildford, England",1,2,1,1,UK07E07,No,-,-,-,28
+UK07-Q0384,Q0384,UK07,8,-,"South Shields, England",1,1,0,1,UK07E06,No,-,-,-,27
+UK07-Q0385,Q0385,UK07,9,-,"London, England",0,0,2,1,UK07E05,No,-,-,-,32
+UK07-Q0386,Q0386,UK07,10,-,"London, England",0,0,0,3,UK07E04,No,-,-,-,25
+UK07-Q0387,Q0387,UK07,11,-,"Coventry, England",0,0,0,2,UK07E03,No,-,-,-,22
+UK07-Q0388,Q0388,UK07,12,-,"Cornwall, England",0,0,0,2,UK07E02,No,-,-,-,30
+CW01-Q0135,Q0135,CW01,1,-,"Dallas, United States",1,2,0,1,,No,-,-,-,36
+CW01-Q0131,Q0131,CW01,2,-,"Chicago, United States",2,0,1,1,,No,-,-,-,31
+CW01-Q0243,Q0243,CW01,3,-,"Montreal, Canada",2,0,0,1,,No,-,-,-,34
+CW01-Q0340,Q0340,CW01,3,-,"Cardiff, United Kingdom",3,0,1,0,,No,-,-,-,29
+CW01-Q0335,Q0335,CW01,5,-,"South London, United Kingdom",1,0,1,2,CW01E05,No,-,-,-,30
+CW01-Q0253,Q0253,CW01,6,-,"Ottawa, Canada",1,0,0,0,,No,-,-,-,35
+CW01-Q0389,Q0389,CW01,7,-,"Auckland, New Zealand",0,0,1,2,CW01E03,No,-,-,-,32
+CW01-Q0262,Q0262,CW01,8,-,"Calgary, Canada",0,0,0,2,CW01E02,No,-,-,-,24
+CW01-Q0254,Q0254,CW01,9,-,"Vancouver, Canada",0,0,0,1,CW01E01,No,-,-,-,31
+CW02-Q0245,Q0245,CW02,1,-,"Toronto, Canada",2,3,0,0,,No,-,-,-,28
+CW02-Q0024,Q0024,CW02,2,-,"Las Vegas, United States",1,0,2,1,,No,-,-,-,44
+CW02-Q0313,Q0313,CW02,3,-,"Chelmsford, United Kingdom",0,4,0,1,,No,Cheryl,-,-,30
+CW02-Q0078,Q0078,CW02,3,-,"Dallas, United States",2,1,2,0,,No,-,-,-,43
+CW02-Q0268,Q0268,CW02,5,-,"Toronto, Canada",0,1,1,2,CW02E05,No,-,-,-,27
+CW02-Q0111,Q0111,CW02,6,-,"Los Angeles, United States",0,0,0,2,CW02E04,No,Eureka!,-,-,33
+CW02-Q0249,Q0249,CW02,7,-,"Toronto, Canada",0,0,0,2,CW02E03,No,-,-,-,42
+CW02-Q0349,Q0349,CW02,8,-,"Brighouse, United Kingdom",0,0,0,1,CW02E02,No,-,-,-,38
+CW02-Q0390,Q0390,CW02,9,-,"Paris, France",0,0,0,1,CW02E01,No,-,-,-,31
+GA01-Q0052,Q0052,GA01,1,-,"Dallas, United States",2,4,0,0,,No,-,-,-,44
+GA01-Q0334,Q0334,GA01,2,-,"Birmingham, United Kingdom",3,3,0,1,,No,-,-,-,32
+GA01-Q0391,Q0391,GA01,2,-,"Adelaide, Australia",3,3,0,1,,No,-,-,-,31
+GA01-Q0392,Q0392,GA01,2,-,"Rome, Italy",1,5,0,0,,No,-,-,-,33
+GA01-Q0393,Q0393,GA01,5,-,"Basel, Switzerland",1,2,3,1,GA01E10,No,-,-,-,25
+GA01-Q0394,Q0394,GA01,6,-,"Linköping, Sweden",1,0,1,4,GA01E09,No,-,-,-,31
+GA01-Q0255,Q0255,GA01,7,-,"Montreal, Canada",1,3,1,1,GA01E08,No,-,-,-,30
+GA01-Q0395,Q0395,GA01,8,-,"Morelia, Mexico",0,1,0,3,GA01E07,No,-,-,-,34
+GA01-Q0396,Q0396,GA01,9,-,"Saint-Denis, France",0,1,0,2,GA01E06,No,-,-,-,34
+GA01-Q0397,Q0397,GA01,10,-,"Marikina, Philippines",0,1,0,1,GA01E05,No,-,-,-,35
+GA01-Q0398,Q0398,GA01,11,-,"Rio de Janeiro, Brazil",0,1,1,1,GA01E04,No,-,-,-,34
+GA01-Q0399,Q0399,GA01,12,-,"City of Brussels, Belgium",0,1,0,1,GA01E03,No,-,-,-,27
+UW01-Q0314,Q0314,UW01,1,-,"Belfast, United Kingdom",1,1,0,1,,No,-,-,-,25
+UW01-Q0121,Q0121,UW01,2,-,"Kansas City, United States",1,1,1,1,,No,Mo Heart,-,-,34
+UW01-Q0012,Q0012,UW01,3,-,"Boston, United States",1,0,0,3,,No,-,-,-,36
+UW01-Q0312,Q0312,UW01,3,-,"London, United Kingdom",1,1,0,1,,No,-,-,-,31
+UW01-Q0400,Q0400,UW01,5,-,"Volendam, Netherlands",2,0,0,3,UW01E05,No,-,-,-,29
+UW01-Q0401,Q0401,UW01,6,-,"Bangkok, Thailand",2,1,0,1,UW01E04,No,-,-,-,32
+UW01-Q0241,Q0241,UW01,7,-,"Victoria, Canada",2,0,0,1,UW01E03,No,-,-,-,37
+UW01-Q0313,Q0313,UW01,8,-,"Chelmsford, United Kingdom",0,0,0,1,UW01E02,No,-,-,-,27
+UW01-Q0245,Q0245,UW01,9,-,"New York City, United States",0,0,0,1,UW01E01,No,-,-,-,25
+UW02-Q0326,Q0326,UW02,1,-,"South London, United Kingdom",4,0,0,0,,No,-,-,-,32
+UW02-Q0402,Q0402,UW02,2,-,"Sydney, Australia",3,1,1,0,,No,-,-,-,31
+UW02-Q0403,Q0403,UW02,3,-,"Nice, France",2,1,2,1,,No,-,-,-,23
+UW02-Q0404,Q0404,UW02,3,-,"Makati, Philippines",3,1,0,1,,No,-,-,-,26
+UW02-Q0136,Q0136,UW02,5,-,"New York City, United States",1,2,1,2,UW02E07,No,-,-,-,31
+UW02-Q0337,Q0337,UW02,6,-,"Newcastle upon Tyne, United Kingdom",0,1,0,3,UW02E06,No,-,-,-,31
+UW02-Q0319,Q0319,UW02,7,-,"Leicester, United Kingdom",0,1,0,3,UW02E05,No,-,-,-,25
+UW02-Q0405,Q0405,UW02,8,-,"Amsterdam, Netherlands",1,0,0,2,UW02E04,No,-,-,-,42
+UW02-Q0346,Q0346,UW02,9,-,"Belfast, United Kingdom",0,0,0,1,UW02E03,No,-,-,-,33
+UW02-Q0406,Q0406,UW02,10,-,"Madrid, Spain",0,0,0,1,UW02E02,No,-,-,-,25
+UW02-Q0123,Q0123,UW02,11,-,"Riverside, United States",0,0,0,1,UW02E01,No,-,-,-,41
+UW03-Q0407,Q0407,UW03,1,-,"Chiang Mai, Thailand",2,3,1,0,,No,-,-,-,23
+UW03-Q0359,Q0359,UW03,2,-,"Buxton, United Kingdom",2,2,0,1,,No,-,-,-,29
+UW03-Q0408,Q0408,UW03,3,-,"Stockholm, Sweden",1,3,0,2,,No,-,-,-,32
+UW03-Q0029,Q0029,UW03,3,-,"Los Angeles, United States",2,1,1,1,,No,Mariah Balenciaga,-,-,43
+UW03-Q0409,Q0409,UW03,5,-,"Cologne, Germany",0,4,1,2,UW03E07,No,-,-,-,25
+UW03-Q0374,Q0374,UW03,6,-,"Nottingham, United Kingdom",0,0,1,1,UW03E06,No,-,-,-,29
+UW03-Q0411,Q0411,UW03,7,-,"Aguascalientes, Mexico",0,0,1,2,UW03E05,No,-,-,-,37
+UW03-Q0351,Q0351,UW03,8,-,"Clitheroe, United Kingdom",0,2,0,1,UW03E04,No,-,-,-,26
+UW03-Q0410,Q0410,UW03,9,-,"Quezon City, Philippines",0,0,1,1,UW03E03,No,-,-,-,35
+UW03-Q0281,Q0281,UW03,10,-,"Edmonton, Canada",0,0,0,1,UW03E02,No,-,-,-,47
 AS11-Q0130,Q0130,AS11,,-,"Dallas, Texas",0,0,0,0,,No,-,-,-,38
 AS11-Q0142,Q0142,AS11,,-,"Los Angeles, California",0,0,0,0,,No,-,-,-,35
 AS11-Q0203,Q0203,AS11,,-,"New York City, New York",0,0,0,0,,No,-,-,-,28

@@ -12,7 +12,7 @@ US10,US main,Season 10,Logo TV,RuPaul,2018-03-22,14,Q0115,Q0119,-,100000
 US11,US main,Season 11,Logo TV,RuPaul,2019-02-28,14,Q0128,Q0132,-,100000
 US12,US main,Season 12,Logo TV,RuPaul,2020-02-28,14,Q0144,Q0147,-,100000
 US13,US main,Season 13,Logo TV,RuPaul,2021-01-01,16,Q0155,Q0164,-,100000
-US14,US main,Season 14,Logo TV,RuPaul,2022-01-07,16,Q0168,,-,150000
+US14,US main,Season 14,Logo TV,RuPaul,2022-01-07,16,Q0168,Q0179,-,150000
 US15,US main,Season 15,MTV,RuPaul,2023-01-06,16,Q0182,Q0186,-,200000
 US16,US main,Season 16,MTV,RuPaul,2024-01-05,16,Q0198,Q0199,-,200000
 US17,US main,Season 17,MTV,RuPaul,2025-01-03,16,Q0212,Q0220,-,200000
@@ -27,23 +27,23 @@ AS07,All Stars,All Stars 7,VH1,RuPaul,2022-05-20,12,Q0047,-,-,200000
 AS08,All Stars,All Stars 8,MTV,RuPaul,2023-05-12,12,Q0241,-,-,200000
 AS09,All Stars,All Stars 9,MTV,RuPaul,2024-05-17,12,Q0170,-,-,200000
 AS10,All Stars,All Stars 10,Paramount+,RuPaul,2025-05-09,12,Q0076,-,-,200000
-AS11,All Stars,All Stars 11,Paramount+,RuPaul,2026-05-08,7,-,-,-,-
-CA01,Canada's Drag Race,Canada's Drag Race 1,Crave,Brooke Lynn Hytes,2020-07-02,10,Q0242,-,-,-
-CA02,Canada's Drag Race,Canada's Drag Race 2,Crave,Brooke Lynn Hytes,2021-10-14,10,Q0253,-,-,-
-CA03,Canada's Drag Race,Canada's Drag Race 3,Crave,Brooke Lynn Hytes,2022-07-14,9,Q0265,-,-,-
-CA04,Canada's Drag Race,Canada's Drag Race 4,Crave,Brooke Lynn Hytes,2023-11-16,9,Q0277,-,-,-
-CA05,Canada's Drag Race,Canada's Drag Race 5,Crave,Brooke Lynn Hytes,2024-11-21,9,Q0288,-,-,-
-CA06,Canada's Drag Race,Canada's Drag Race 6,Crave,Brooke Lynn Hytes,2025-11-20,9,Q0299,-,-,-
-UK01,Drag Race UK,Drag Race UK 1,BBC Three,RuPaul,2019-10-03,9,Q0240,-,-,-
-UK02,Drag Race UK,Drag Race UK 2,BBC Three,RuPaul,2021-01-14,10,Q0320,-,-,-
-UK03,Drag Race UK,Drag Race UK 3,BBC Three,RuPaul,2021-09-23,10,Q0332,-,-,-
-UK04,Drag Race UK,Drag Race UK 4,BBC Three,RuPaul,2022-09-22,10,Q0343,-,-,-
-UK05,Drag Race UK,Drag Race UK 5,BBC Three,RuPaul,2023-09-28,10,Q0355,-,-,-
-UK06,Drag Race UK,Drag Race UK 6,BBC Three,RuPaul,2024-09-26,10,Q0365,-,-,-
-UK07,Drag Race UK,Drag Race UK 7,BBC Three,RuPaul,2025-09-25,10,Q0377,-,-,-
-CW01,Canada vs the World,Canada vs the World 1,Crave,RuPaul,2022-11-18,6,Q0135,-,-,-
-CW02,Canada vs the World,Canada vs the World 2,Crave,RuPaul,2024-07-19,6,Q0245,-,-,-
-GA01,Global All Stars,Global All Stars 1,WOW Presents Plus,RuPaul,2024-08-16,12,Q0052,-,-,-
-UW01,UK vs the World,UK vs the World 1,BBC Three,RuPaul,2022-02-01,6,Q0314,-,-,-
-UW02,UK vs the World,UK vs the World 2,BBC Three,RuPaul,2024-02-09,8,Q0326,-,-,-
-UW03,UK vs the World,UK vs the World 3,BBC Three,RuPaul,2026-01-27,8,Q0407,-,-,-
+AS11,All Stars,All Stars 11,Paramount+,RuPaul,2026-05-08,7,-,-,-,200000
+CA01,Canada's Drag Race,Canada's Drag Race 1,Crave,Brooke Lynn Hytes,2020-07-02,10,Q0242,Q0249,-,100000
+CA02,Canada's Drag Race,Canada's Drag Race 2,Crave,Brooke Lynn Hytes,2021-10-14,10,Q0253,Q0261,-,100000
+CA03,Canada's Drag Race,Canada's Drag Race 3,Crave,Brooke Lynn Hytes,2022-07-14,9,Q0265,-,-,100000
+CA04,Canada's Drag Race,Canada's Drag Race 4,Crave,Brooke Lynn Hytes,2023-11-16,9,Q0277,Q0284,-,100000
+CA05,Canada's Drag Race,Canada's Drag Race 5,Crave,Brooke Lynn Hytes,2024-11-21,9,Q0288,Q0295,-,100000
+CA06,Canada's Drag Race,Canada's Drag Race 6,Crave,Brooke Lynn Hytes,2025-11-20,9,Q0299,Q0308,-,100000
+UK01,Drag Race UK,Drag Race UK 1,BBC Three,RuPaul,2019-10-03,9,Q0240,-,-,0
+UK02,Drag Race UK,Drag Race UK 2,BBC Three,RuPaul,2021-01-14,10,Q0320,-,-,0
+UK03,Drag Race UK,Drag Race UK 3,BBC Three,RuPaul,2021-09-23,10,Q0332,-,-,0
+UK04,Drag Race UK,Drag Race UK 4,BBC Three,RuPaul,2022-09-22,10,Q0343,-,-,0
+UK05,Drag Race UK,Drag Race UK 5,BBC Three,RuPaul,2023-09-28,10,Q0355,-,-,0
+UK06,Drag Race UK,Drag Race UK 6,BBC Three,RuPaul,2024-09-26,10,Q0365,Q0370,-,25000
+UK07,Drag Race UK,Drag Race UK 7,BBC Three,RuPaul,2025-09-25,10,Q0377,Q0385,-,25000
+CW01,Canada vs the World,Canada vs the World 1,Crave,RuPaul,2022-11-18,6,Q0135,Q0389,-,100000
+CW02,Canada vs the World,Canada vs the World 2,Crave,RuPaul,2024-07-19,6,Q0245,Q0111,-,100000
+GA01,Global All Stars,Global All Stars 1,WOW Presents Plus,RuPaul,2024-08-16,12,Q0052,Q0396,-,200000
+UW01,UK vs the World,UK vs the World 1,BBC Three,RuPaul,2022-02-01,6,Q0314,-,-,0
+UW02,UK vs the World,UK vs the World 2,BBC Three,RuPaul,2024-02-09,8,Q0326,Q0406,-,50000
+UW03,UK vs the World,UK vs the World 3,BBC Three,RuPaul,2026-01-27,8,Q0407,Q0411,-,50000
