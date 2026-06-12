@@ -631,10 +631,33 @@ function renderQueen(m,qid){
   const q=D.queens.find(x=>x.queen_id===qid);
   if(!q){m.innerHTML='<div class="empty">Queen not found</div>';return;}
   const guestApps=D.appearances.filter(a=>a.alum_queen_id===qid);
-  m.innerHTML=`<div class="vhead fade"><div class="vkicker">Queens</div>
+  /* career facts across every run */
+  const _sc=u=>+((u.match(/scale-to-width-down\/(\d+)/)||[])[1]||9999);
+  let img=null;runs.forEach(c=>{if(c.image&&c.image!=='-'&&(!img||_sc(c.image)>=_sc(img)))img=c.image;});
+  const cids=new Set(runs.map(c=>c.contestant_id));
+  const snatchRoles=D.episode_roles.filter(r=>r.role_type==='SNATCH_CHARACTER'&&cids.has(r.contestant_id)&&r.role_detail&&r.role_detail!=='-');
+  const miniWins=D.episode_roles.filter(r=>r.role_type==='MINI_WINNER'&&cids.has(r.contestant_id)).length;
+  const totalWins=runs.reduce((s,c)=>s+(+c.wins||0),0);
+  const earnings=runs.reduce((s,c)=>s+(+c.earnings||0),0);
+  const bestPlace=Math.min(...runs.map(c=>+c.placement||99),99);
+  const lsAll=_LSQ[qid]||[],lsWon=lsAll.filter(l=>l.winner_id===qid).length,lsLost=lsAll.filter(l=>l.loser_id===qid).length;
+  const sign=zodiac(q.birthdate);
+  const pills=[
+    bestPlace===1?`<span class="pill gold">${icon('crown')} Crowned</span>`:(bestPlace<99?`<span class="pill gold">best finish #${bestPlace}</span>`:''),
+    `<span class="pill">${runs.length} season${runs.length===1?'':'s'}</span>`,
+    totalWins?`<span class="pill gold">${totalWins} challenge win${totalWins===1?'':'s'}</span>`:'',
+    lsAll.length?`<span class="pill mint">lip syncs ${lsWon}–${lsLost}</span>`:'',
+    miniWins?`<span class="pill mint">${miniWins} mini win${miniWins===1?'':'s'}</span>`:'',
+    earnings?`<span class="pill gold">$${earnings.toLocaleString()} documented</span>`:'',
+    sign?`<span class="pill">${sign}${q.birthdate&&q.birthdate!=='-'?' · b. '+q.birthdate:''}</span>`:''
+  ].filter(Boolean).join(' ');
+  m.innerHTML=`<div class="vhead fade" style="display:flex;gap:20px;align-items:flex-start;flex-wrap:wrap">
+    ${img?`<img src="${img}" alt="${q.drag_name.replace(/"/g,'&quot;')}" style="width:110px;height:110px;border-radius:18px;object-fit:cover;border:2px solid rgba(244,181,63,.5);box-shadow:var(--shadow);flex:none">`:''}
+    <div style="flex:1;min-width:240px"><div class="vkicker">Queens</div>
     <h1 class="vtitle">${q.drag_name}</h1>
     <div class="vdesc">${[q.legal_name,q.hometown].filter(x=>x&&x!=='-').join(' · ')||'A competitor in the herstory.'}</div>
-    <div style="margin-top:10px"><button class="tab" onclick="go('queens')">← All queens</button></div></div>`;
+    <div class="chip-row" style="margin-top:12px">${pills}</div>
+    <div style="margin-top:12px"><button class="tab" onclick="go('queens')">← All queens</button></div></div></div>`;
   const wrap=el('div',{class:'fade',style:'display:flex;flex-direction:column;gap:14px'});
   // ---- Competition record ----
   wrap.append(sectionHead('Competition record','var(--magenta)'));
@@ -663,6 +686,18 @@ function renderQueen(m,qid){
     }
     wrap.append(row);
   });
+  // ---- Snatch Game ----
+  if(snatchRoles.length){
+    wrap.append(sectionHead('Snatch Game','var(--rose)'));
+    const sg=el('div',{class:'card'});
+    snatchRoles.forEach(r=>{const row=el('div',{style:'font-size:12.5px;padding:4px 0;border-top:1px solid rgba(255,255,255,.05);line-height:1.5'});
+      row.append(el('b',{style:'color:var(--cream)'},r.role_detail),document.createTextNode('  ·  '));
+      row.append(epChip(r.episode_id));
+      sg.append(row);});
+    sg.append(el('div',{style:'margin-top:8px;font-size:10.5px'},
+      el('span',{style:'color:var(--gold);text-decoration:underline;cursor:pointer',onclick:()=>go('snatch')},'all Snatch Games →')));
+    wrap.append(sg);
+  }
   // ---- Lip-sync record ----
   const ls=(_LSQ[qid]||[]).slice().sort((a,b)=>a.episode_id<b.episode_id?-1:1);
   if(ls.length){
@@ -1918,6 +1953,44 @@ boardView({id:'minicrowns',group:'Challenges',kicker:'Challenges',ord:3,icon:'cr
  chart(rows){const top=rows.slice(0,15);return {type:'bar',data:{labels:top.map(r=>r.queen),datasets:[{label:'mini wins',data:top.map(r=>r.wins),backgroundColor:PAL[1]}]},options:{indexAxis:'y',plugins:{legend:{display:false}}}};},
  chartH:340,
  cols:[{k:'queen',label:'Queen'},{k:'wins',label:'Mini wins',num:1},{k:'where',label:'Episodes'}]});
+
+/* 29b. THE SECOND ACT (cross-franchise comebacks) */
+boardView({id:'secondact',group:'Connections',kicker:'Connections',ord:3,icon:'timer',title:'The <em>Second Act</em>',
+ desc:'Every comeback in the database — each returning run measured against the queen’s debut, across franchises. Who climbed, who slipped, and who finally took the crown. Franchise tabs scope by the comeback season.',
+ rows(){const byQ={};D.contestants.forEach(c=>{(byQ[c.queen_id]=byQ[c.queen_id]||[]).push(c);});
+  const fr={};D.seasons.forEach(s=>fr[s.season_id]=s.franchise);
+  const out=[];
+  Object.entries(byQ).forEach(([qid,rs])=>{
+    if(rs.length<2)return;
+    rs=rs.slice().sort((a,b)=>SEASON_ORDER.indexOf(a.season_id)-SEASON_ORDER.indexOf(b.season_id));
+    const debut=rs[0];
+    rs.slice(1).forEach((ret,i)=>{
+      if(!seasonAllowed(ret.season_id))return;
+      const dp=+debut.placement||null,rp=+ret.placement||null;
+      const delta=(dp&&rp)?dp-rp:null;
+      out.push({queen:cname(ret),queen_id:qid,run:'#'+(i+2),
+        debut:seasonName(debut.season_id),debut_place:dp||'',
+        comeback:seasonName(ret.season_id),comeback_fr:fr[ret.season_id]||'',comeback_place:rp||'',
+        delta:delta==null?'':delta,
+        verdict:rp===1?'👑 took the crown':delta==null?'—':delta>0?'climbed '+delta:delta<0?'slipped '+(-delta):'held steady',
+        wins_debut:+debut.wins||0,wins_back:+ret.wins||0});});});
+  return out.sort((a,b)=>(b.delta===''?-1e9:+b.delta)-(a.delta===''?-1e9:+a.delta));},
+ stats:r=>[[r.length,'comeback runs'],[r.filter(x=>+x.delta>0).length,'climbed the board'],
+   [r.filter(x=>+x.comeback_place===1).length,'redemption crowns'],[r[0]?r[0].queen:'—','biggest glow-up']],
+ chart(rows){const pts=rows.filter(x=>x.debut_place&&x.comeback_place);
+  const mk=a=>a.map(x=>({x:+x.debut_place,y:+x.comeback_place,label:x.queen+' · '+x.debut+' #'+x.debut_place+' → '+x.comeback+' #'+x.comeback_place}));
+  return {type:'scatter',data:{datasets:[
+    {label:'climbed',data:mk(pts.filter(x=>+x.delta>0)),backgroundColor:'#7ad1b5',pointRadius:4,pointHoverRadius:6},
+    {label:'slipped',data:mk(pts.filter(x=>+x.delta<0)),backgroundColor:'#ef798a',pointRadius:4,pointHoverRadius:6},
+    {label:'held steady',data:mk(pts.filter(x=>+x.delta===0)),backgroundColor:'#f4b53f',pointRadius:4,pointHoverRadius:6}]},
+   options:{scales:{x:{title:{display:true,text:'debut placement (1 = crown)',color:CTXT},ticks:{color:CTXT,font:{size:10}},grid:{color:CGRID}},
+     y:{reverse:true,title:{display:true,text:'comeback placement (1 = crown)',color:CTXT},ticks:{color:CTXT,font:{size:10}},grid:{color:CGRID}}},
+     plugins:{tooltip:{callbacks:{label:c=>c.raw.label}}}}};},
+ chartH:360,
+ cols:[{k:'queen',label:'Queen'},{k:'run',label:'Run'},{k:'debut',label:'Debut season'},{k:'debut_place',label:'Debut place',num:1},
+   {k:'comeback',label:'Comeback season',filter:1},{k:'comeback_place',label:'Comeback place',num:1},
+   {k:'delta',label:'Δ places',num:1},{k:'verdict',label:'Verdict',filter:1},
+   {k:'wins_debut',label:'W (debut)',num:1},{k:'wins_back',label:'W (comeback)',num:1}]});
 
 /* 30. THE VAULT (master table) */
 V({id:'vault',title:'The <em>Vault</em>',kicker:'Data',icon:'grid',group:'Data',ord:1,
