@@ -289,8 +289,8 @@ function mkChart(host,cfg,h){ /* Chart.js with graceful fallback (tables always 
     return new Chart(c.getContext('2d'),cfg);
   }catch(e){return null;}
 }
-/* generic data table: sort, global search, optional per-column filters, CSV export, paging */
-function dataTable(host,o){ // o:{cols:[{k,label,num,html(r),filter}],rows,csv,page=80,onRow}
+/* generic data table: sort, global search, optional per-column filters, paging */
+function dataTable(host,o){ // o:{cols:[{k,label,num,html(r),filter}],rows,page=80,onRow}
   const state={q:'',sk:o.cols[0].k,asc:true,page:o.page||80,sel:{}};
   const bar=el('div',{style:'display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:10px'});
   const inp=el('input',{type:'search',placeholder:'Filter rows…',style:'flex:1;min-width:140px;background:rgba(255,255,255,.06);color:var(--cream);border:1px solid rgba(255,255,255,.14);border-radius:8px;padding:6px 10px;font:inherit;font-size:12.5px'});
@@ -300,8 +300,7 @@ function dataTable(host,o){ // o:{cols:[{k,label,num,html(r),filter}],rows,csv,p
     sel.append(el('option',{value:''},'All '+c.label.toLowerCase()));
     [...new Set(o.rows.map(r=>r[c.k]).filter(v=>v&&v!=='-'))].sort().forEach(v=>sel.append(el('option',{value:v},String(v).slice(0,34))));
     sel.addEventListener('change',e=>{state.sel[c.k]=e.target.value;draw();});bar.append(sel);});
-  const csvB=el('button',{class:'tab',style:'margin-left:auto'},'⤓ CSV');bar.append(csvB);
-  const count=el('span',{style:'font-size:11px;color:rgba(247,240,230,.55)'});bar.append(count);
+  const count=el('span',{style:'margin-left:auto;font-size:11px;color:rgba(247,240,230,.55)'});bar.append(count);
   const wrap=el('div',{style:'overflow-x:auto'});const more=el('button',{class:'tab',style:'margin-top:8px;display:none'},'show all');
   host.append(bar,wrap,more);
   const view=()=>{let rows=o.rows.slice();
@@ -323,11 +322,6 @@ function dataTable(host,o){ // o:{cols:[{k,label,num,html(r),filter}],rows,csv,p
     if(o.onRow)$$('tr[data-i]',wrap).forEach(tr=>tr.onclick=()=>o.onRow(rows[+tr.dataset.i]));};
   inp.addEventListener('input',e=>{state.q=e.target.value.trim().toLowerCase();draw();});
   more.addEventListener('click',()=>{state.page=1e9;draw();});
-  csvB.addEventListener('click',()=>{const rows=view();
-    const esc=v=>{v=String(v??'');return /[",\n]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v;};
-    const txt=[o.cols.map(c=>esc(c.label)).join(',')].concat(rows.map(r=>o.cols.map(c=>esc(r[c.k])).join(','))).join('\n');
-    const a=el('a',{href:URL.createObjectURL(new Blob([txt],{type:'text/csv'})),download:(o.csv||'werkroom')+'.csv'});
-    document.body.append(a);a.click();a.remove();});
   draw();return {redraw:draw};
 }
 /* shared franchise tab bar for explorer views */
@@ -421,7 +415,7 @@ V({id:'home',title:'The <em>Werkroom</em>',kicker:'Home',icon:'crown',group:'Hom
     ['Panel & Guests','The judging table through the years and the famous faces beside it',`${gjCount} guest judges`],
     ['Connections','The webs tying queens, seasons and alumni returns together',`${X.returning_queens.length} returning queens`],
     ['Play','Trivia night, printable host packs and the in-browser Librarian','3 ways to play'],
-    ['Data','The Vault — the master table behind every view, fully exportable',`${D.contestants.length} contestant rows`]];
+    ['Data','The Vault — the master table behind every view, fully searchable',`${D.contestants.length} contestant rows`]];
   const bg=el('div',{class:'grid fade',style:'grid-template-columns:repeat(auto-fit,minmax(210px,1fr));margin-top:16px'});
   BUBBLES.forEach(([g,pitch,teaser])=>{
     const views=VIEWS.filter(v=>v.group===g&&!v.hidden).sort((a,b)=>(a.ord||0)-(b.ord||0));
@@ -1399,10 +1393,9 @@ V({id:'music',title:'The <em>Music</em>',kicker:'Music & Lip Syncs',icon:'disc',
   sel.append(el('option',{value:'All'},'All seasons'));
   SEASON_ORDER.filter(seasonAllowed).forEach(s=>sel.append(el('option',{value:s},seasonName(s))));
   const search=el('input',{type:'search',placeholder:'Search title or artist…',style:'flex:1;min-width:160px;background:rgba(255,255,255,.06);color:var(--cream);border:1px solid rgba(255,255,255,.14);border-radius:8px;padding:6px 10px;font:inherit;font-size:12.5px'});
-  const tog=el('label',{style:'display:flex;align-items:center;gap:6px;font-size:12.5px;cursor:pointer'},
+  const tog=el('label',{style:'margin-left:auto;display:flex;align-items:center;gap:6px;font-size:12.5px;cursor:pointer'},
     el('input',{type:'checkbox'}),'playable only');
-  const copy=el('button',{class:'tab',style:'margin-left:auto'},'⎘ copy track links');
-  bar.append(sel,search,tog,copy);m.append(bar);
+  bar.append(sel,search,tog);m.append(bar);
   const stats=el('div',{class:'grid',style:'grid-template-columns:repeat(auto-fit,minmax(140px,1fr));margin-bottom:14px'});m.append(stats);
   const host=el('div',{class:'card fade'});m.append(host);
   const list=()=>{
@@ -1443,12 +1436,6 @@ V({id:'music',title:'The <em>Music</em>',kicker:'Music & Lip Syncs',icon:'disc',
   sel.addEventListener('change',e=>{season=e.target.value;draw();});
   search.addEventListener('input',e=>{q=e.target.value.trim().toLowerCase();draw();});
   tog.querySelector('input').addEventListener('change',e=>{playable=e.target.checked;draw();});
-  copy.addEventListener('click',()=>{
-    const ids=list().map(s=>(sbyid[s.song_id]||{}).spotify_track_id).filter(t=>t&&t!=='-');
-    const txt=ids.map(t=>'https://open.spotify.com/track/'+t).join('\n');
-    (navigator.clipboard?navigator.clipboard.writeText(txt):Promise.reject()).then(
-      ()=>{copy.textContent='✓ '+ids.length+' links copied — paste into a Spotify playlist';setTimeout(()=>copy.textContent='⎘ copy track links',2600);},
-      ()=>{prompt('Copy these links, then paste into a Spotify playlist:',txt);});});
   draw();
  }});
 
@@ -2016,7 +2003,7 @@ boardView({id:'secondact',group:'Connections',kicker:'Connections',ord:3,icon:'t
 
 /* 30. THE VAULT (master table) */
 V({id:'vault',title:'The <em>Vault</em>',kicker:'Data',icon:'grid',group:'Data',ord:1,
- desc:'The master table — every contestant-season row with every dimension in the database. Filter anything, sort everything, export it all.',
+ desc:'The master table — every contestant-season row with every dimension in the database. Filter anything, sort everything.',
  render(m){m.innerHTML=head(this);fTabs(m,'vault');
   const rows=masterScoped();
   statCards(m,[[rows.length,'contestant rows'],[new Set(rows.map(r=>r.queen_id)).size,'queens'],
@@ -2501,22 +2488,22 @@ const SLUG_GROUP={};Object.keys(GROUP_SLUG).forEach(g=>SLUG_GROUP[GROUP_SLUG[g]]
 const SECTION_META={
  Queens:{title:'All About the <em>Queens</em>',
   intro:'Every queen who ever walked in — profiles, photo walls, geography, birthdays, prize money and the lives behind the lashes. One queen is one identity across the whole database: however many seasons she ran, every view resolves her back to a single hub.',
-  how:'Most views here open with <b>franchise tabs</b> — narrow to the main series or All Stars and every number recalculates live. Click any <b>queen</b> anywhere (a card, a table row, a photo) to open her full profile. Leaderboard tables sort by clicking a <b>column header</b>, filter with the search box or per-column dropdowns, and the <b>⤓ CSV</b> button exports exactly the rows you’ve filtered.'},
+  how:'Most views here open with <b>franchise tabs</b> — narrow to the main series or All Stars and every number recalculates live. Click any <b>queen</b> anywhere (a card, a table row, a photo) to open her full profile. Leaderboard tables sort by clicking a <b>column header</b> and filter with the search box or per-column dropdowns.'},
  Seasons:{title:'Season by <em>Season</em>',
   intro:'The franchise season by season — atlases, premieres, air-date timelines, platform eras, prize purses and the shape of the format as it grew from six queens on a soundstage to a streaming institution.',
-  how:'Start at the <b>Season Atlas</b> and click any season card to open its detail page: cast and placements, an episode-by-episode list, and the color-coded progression matrix. Episode rows expand with the <b>▸ caret</b> to reveal challenges, runways, lip syncs and guest judges. Franchise tabs narrow the scope; tables sort by column and export to CSV.'},
+  how:'Start at the <b>Season Atlas</b> and click any season card to open its detail page: cast and placements, an episode-by-episode list, and the color-coded progression matrix. Episode rows expand with the <b>▸ caret</b> to reveal challenges, runways, lip syncs and guest judges. Franchise tabs narrow the scope; tables sort by column.'},
  'Track Records':{title:'Track <em>Records</em>',
   intro:'The weekly verdicts that decide everything — placement grids, win rates, perfect runs, comeback arcs and the queens with nine lives. Every WIN, HIGH, SAFE, LOW and BTM call across the franchise lives in this section.',
-  how:'Status chips are color-coded everywhere: <span class="st st-WIN">WIN</span> <span class="st st-HIGH">HIGH</span> <span class="st st-SAFE">SAFE</span> <span class="st st-LOW">LOW</span> <span class="st st-BTM">BTM</span>. Click a queen’s name or row to jump to her profile, click <b>column headers</b> to re-sort, and use the <b>franchise tabs</b> to flip between the main series and All Stars. Most tables carry a filter box and <b>⤓ CSV</b> export.'},
+  how:'Status chips are color-coded everywhere: <span class="st st-WIN">WIN</span> <span class="st st-HIGH">HIGH</span> <span class="st st-SAFE">SAFE</span> <span class="st st-LOW">LOW</span> <span class="st st-BTM">BTM</span>. Click a queen’s name or row to jump to her profile, click <b>column headers</b> to re-sort, and use the <b>franchise tabs</b> to flip between the main series and All Stars. Most tables carry a filter box.'},
  'Music & Lip Syncs':{title:'Music & <em>Lip Syncs</em>',
   intro:'Every smackdown song in the archive — playable where Spotify knows it, ranked for deadliness, traced through reuse, rivalries, double shantays and Ru’s own catalog of Ru-mixes.',
-  how:'Open <b>The Music</b> for the playable jukebox — matched songs link straight out to Spotify. Underlined <b>queen names</b> open profiles and gold <b>episode chips</b> jump to the season; tables sort by column, filter as you type, and export to CSV. Franchise tabs re-scope every count.'},
+  how:'Open <b>The Music</b> for the playable jukebox — matched songs link straight out to Spotify. Underlined <b>queen names</b> open profiles and gold <b>episode chips</b> jump to the season; tables sort by column and filter as you type. Franchise tabs re-scope every count.'},
  Challenges:{title:'The <em>Challenges</em>',
   intro:'What the queens were actually asked to do — the maxi-challenge recipe over time, the Snatch Game hall of impersonations, and the mini-challenge crown counts.',
-  how:'Use the <b>sub-tabs</b> inside a view to flip between angles — The Snatch Game carries a Hall tab listing every recorded character. <b>Franchise tabs</b> re-scope the counts, table headers sort, and <b>⤓ CSV</b> downloads exactly the rows you’ve filtered.'},
+  how:'Use the <b>sub-tabs</b> inside a view to flip between angles — The Snatch Game carries a Hall tab listing every recorded character. <b>Franchise tabs</b> re-scope the counts and table headers sort.'},
  'Panel & Guests':{title:'Panel & <em>Guests</em>',
   intro:'The judging table and the famous faces beside it — who has judged, how often they came back, what they’re famous for, and how the panel itself shifted era by era.',
-  how:'<b>Guest Judges</b> ranks every visitor by appearances — click a column header to re-sort or type in the filter box to find a name. <b>The Panel</b> carries sub-tabs including service ribbons, one cell per season of tenure. Franchise tabs scope everything; <b>⤓ CSV</b> grabs the current table.'},
+  how:'<b>Guest Judges</b> ranks every visitor by appearances — click a column header to re-sort or type in the filter box to find a name. <b>The Panel</b> carries sub-tabs including service ribbons, one cell per season of tenure. Franchise tabs scope everything.'},
  Connections:{title:'The <em>Connections</em>',
   intro:'The webs that tie the franchise together — alumni returning to judge and host, the second acts after the crown, and a finder that links any queen to her castmates, rivals and returns.',
   how:'In the <b>Connection Finder</b>, pick a queen from the dropdown to map everyone she competed with, lip-synced against, and every alum return. In the <b>Alumni Web</b>, click any node or name to travel. Underlined names are always links — follow them.'},
@@ -2524,8 +2511,8 @@ const SECTION_META={
   intro:'The library after dark — a trivia night generated live from the database, a print-ready host pack for game nights, and a Librarian who answers questions with zero AI guesswork.',
   how:'<b>Trivia Night</b> deals fresh questions every round and scores you on the spot. The <b>Host Pack</b> is built for paper — hit print (Cmd/Ctrl-P) and the noir chrome strips itself away. <b>Ask the Library</b> in plain English; every answer is a live database lookup with explore links.'},
  Data:{title:'The <em>Data</em> Room',
-  intro:'The Vault — the master contestant table behind every view on this site, one row per queen per season, fully searchable and fully exportable.',
-  how:'Type in the filter box to search every column at once, use the <b>dropdowns</b> for exact matches, click a <b>column header</b> to sort (click again to flip), and hit <b>⤓ CSV</b> to download exactly what you’ve filtered. Click any row to open that queen’s profile.'}};
+  intro:'The Vault — the master contestant table behind every view on this site, one row per queen per season, fully searchable.',
+  how:'Type in the filter box to search every column at once, use the <b>dropdowns</b> for exact matches, and click a <b>column header</b> to sort (click again to flip). Click any row to open that queen’s profile.'}};
 /* cheap live teaser per view — computed fresh each render; missing/failed = no pill */
 const VIEW_TEASER={
  queens:()=>D.meta.queens+' queens',
@@ -2576,7 +2563,7 @@ const VIEW_TEASER={
  trivia:()=>'fresh questions every round',
  hostpack:()=>'print-ready',
  ask:()=>'instant database answers',
- vault:()=>D.contestants.length+' rows · CSV export'};
+ vault:()=>D.contestants.length+' rows · fully searchable'};
 function renderSectionHome(m,group){
   const meta=SECTION_META[group];
   const views=VIEWS.filter(v=>v.group===group&&!v.hidden).sort((a,b)=>(a.ord||0)-(b.ord||0));
