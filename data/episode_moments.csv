@@ -1,0 +1,82 @@
+moment_id,episode_id,moment_type,description
+M0001,US01E01,FIRST,Series premiere of RuPaul's Drag Race; Victoria (Porkchop) Parker was the first queen eliminated in franchise history.
+M0002,US02E04,FIRST,"The first-ever Snatch Game challenge, won by Tatianna as Britney Spears."
+M0003,US02E04,OTHER,Only episode to use the 'Heel or No Heel' device to reveal which queens were safe on the main stage.
+M0004,US02E08,RECORD,Raven became the first contestant to win two consecutive maxi challenges.
+M0005,US02E12,FIRST,"Sonique came out as transgender at the reunion, the first contestant in the show's history to do so."
+M0006,US03E06,OTHER,The Snatch Game celebrity-impersonation challenge takes place this episode.
+M0007,US03E09,TWIST,Non-elimination episode: no queen was sent home.
+M0008,US03E12,RETURN,Carmen Carrera returned to the competition.
+M0009,US03E15,OTHER,Grand finale: the winner of the season is crowned.
+M0010,US03E16,OTHER,Reunion episode revisiting the season and its contestants.
+M0011,US04E05,OTHER,The Snatch Game celebrity-impersonation challenge takes place this episode.
+M0012,US04E14,OTHER,Reunion episode revisiting the season and its contestants.
+M0013,US05E05,OTHER,The Snatch Game celebrity-impersonation challenge takes place this episode.
+M0014,US05E14,OTHER,Reunion episode revisiting the season and its contestants.
+M0015,US06E05,OTHER,The Snatch Game celebrity-impersonation challenge takes place this episode.
+M0016,US06E07,TWIST,Non-elimination episode: no queen was sent home.
+M0017,US06E14,OTHER,Reunion episode revisiting the season and its contestants.
+M0018,US07E07,OTHER,The Snatch Game celebrity-impersonation challenge takes place this episode.
+M0019,US07E08,RETURN,Trixie Mattel returned to the competition.
+M0020,US07E14,OTHER,Grand finale: the winner of the season is crowned.
+M0021,US08E02,TWIST,Double elimination: Dax ExclamationPoint and Laila McQueen sent home.
+M0022,US08E03,RETURN,Naysha Lopez returned to the competition.
+M0023,US08E05,OTHER,The Snatch Game celebrity-impersonation challenge takes place this episode.
+M0024,US08E10,OTHER,Grand finale: the winner of the season is crowned.
+M0025,US09E01,TWIST,Non-elimination episode: no queen was sent home.
+M0026,US09E02,RETURN,Cynthia Lee Fontaine returned to the competition.
+M0027,US09E06,OTHER,The Snatch Game celebrity-impersonation challenge takes place this episode.
+M0028,US09E13,OTHER,Reunion episode revisiting the season and its contestants.
+M0029,US09E14,OTHER,Grand finale: the winner of the season is crowned.
+M0030,US12E06,OTHER,The Snatch Game celebrity-impersonation challenge takes place this episode.
+M0031,US12E10,TWIST,Non-elimination episode: no queen was sent home.
+M0032,US12E14,OTHER,Grand finale: the winner of the season is crowned.
+M0033,US13E01,TWIST,"Premiere twist: contestants lip synced upon entering, with the winners eliminating others."
+M0034,US13E08,TWIST,Non-elimination episode: no queen was sent home.
+M0035,US13E09,OTHER,The Snatch Game celebrity-impersonation challenge takes place this episode.
+M0036,US13E15,OTHER,Reunion episode revisiting the season and its contestants.
+M0037,US13E16,OTHER,Grand finale: the winner of the season is crowned.
+M0038,US14E03,RETURN,Daya Betty & Orion Story returned to the competition.
+M0039,US14E09,TWIST,Non-elimination episode: no queen was sent home.
+M0040,US14E10,OTHER,The Snatch Game celebrity-impersonation challenge takes place this episode.
+M0041,US14E13,TWIST,Double elimination: DeJa Skye and Jorgeous sent home.
+M0042,US14E14,TWIST,Non-elimination episode: no queen was sent home.
+M0043,US14E15,OTHER,Reunion episode revisiting the season and its contestants.
+M0044,US14E16,TWIST,"Multiple eliminations: Angeria Paris VanMicheals, Bosco, and Daya Betty sent home."
+M0045,US14E16,OTHER,Grand finale: the winner of the season is crowned.
+M0046,US15E04,OTHER,The Snatch Game celebrity-impersonation challenge takes place this episode.
+M0047,US15E14,TWIST,Non-elimination episode: no queen was sent home.
+M0048,US15E15,OTHER,Reunion episode revisiting the season and its contestants.
+M0049,US15E16,TWIST,Double elimination: Luxx Noir London & Mistress Isabelle Brooks sent home.
+M0050,US15E16,OTHER,Grand finale: the winner of the season is crowned.
+M0051,US17E07,OTHER,The Snatch Game celebrity-impersonation challenge takes place this episode.
+M0052,US17E13,TWIST,Non-elimination episode: no queen was sent home.
+M0053,US17E15,TWIST,"Premiere twist: contestants lip synced upon entering, with the winners eliminating others."
+M0054,US17E16,TWIST,Double elimination: Lexi and Sam Star sent home.
+M0055,US17E16,OTHER,Grand finale: the winner of the season is crowned.
+M0056,US18E08,OTHER,The Snatch Game celebrity-impersonation challenge takes place this episode.
+M0057,US18E15,TWIST,"Premiere twist: contestants lip synced upon entering, with the winners eliminating others."
+M0058,US18E16,OTHER,Grand finale: the winner of the season is crowned.
+M0059,AS01E05,TWIST,Non-elimination episode: no queen was sent home.
+M0060,AS01E06,TWIST,Multiple queens eliminated in one episode: Jujubee and Shannel.
+M0061,AS02E02,OTHER,Adore Delano quit and left the competition during this episode.
+M0062,AS02E05,RETURN,Tatianna and Alyssa Edwards returned to the competition (lip sync winners and returning queens).
+M0063,AS03E01,RETURN,BeBe Zahara Benet returned to the competition (surprise contestant).
+M0064,AS03E06,RETURN,Morgan McMichaels returned to the competition (returned).
+M0065,AS03E06,OTHER,BenDeLaCreme quit and left the competition during this episode.
+M0066,AS03E08,TWIST,Multiple queens eliminated in one episode: BeBe Zahara Benet and Shangela.
+M0067,AS04E05,TWIST,Non-elimination episode: no queen was sent home.
+M0068,AS04E06,RETURN,Latrice Royale returned to the competition (returning contestant).
+M0069,AS04E06,FIRST,"Lip Sync One: Trinity vs Jasmine Lip Sync Two: Valentina vs Farrah Lip Sync Three: Naomi vs Gia Lip Sync Four: Monique vs Latrice For the first time in Drag Race Herstory, all of the eliminated All Stars get a chance to return to the compet"
+M0070,AS04E10,TWIST,Multiple queens eliminated in one episode: Monique Heart and Naomi Smalls.
+M0071,AS06E11,RETURN,Eureka returned to the competition (returned).
+M0072,AS07E02,FIRST,"- Guest Judge: Daphne Guinness - Maxi Challenge: The queens must give two celebrity impersonations in the Snatch Game - Runway Theme: The Pleather Principle - Top Two: Jinkx Monsoon and Trinity The Tuck - Lip Sync Song: ""Rumor Has It"" by Ad"
+M0073,AS07E10,FIRST,"- Special Guest: Wintergreen - Guest Judge: Ronan Farrow - Maxi Challenge: Roast each other at the first-ever Kennedy Davenport Center ""Hall of Shade"" Honors - Runway Theme: All Glow'd Up - Top Two: Jinkx Monsoon and Trinity The Tuck - Lip"
+M0074,AS07E11,TWIST,"Multiple queens eliminated in one episode: Jaida Essence Hall, Raja, The Vivienne & Yvie Oddly."
+M0075,AS08E05,OTHER,Heidi N Closet quit and left the competition during this episode.
+M0076,AS10E03,TWIST,"Multiple queens eliminated in one episode: DeJa Skye, Olivia Lux, and Phoenix."
+M0077,AS10E06,TWIST,"Multiple queens eliminated in one episode: Kerri Colby, Nicole Paige Brooks, and Tina Burner."
+M0078,AS10E09,TWIST,"Multiple queens eliminated in one episode: Acid Betty, Alyssa Hunter and Denali."
+M0079,AS10E12,RETURN,Kerri Colby returned to the competition (wildcard return).
+M0080,AS11E03,TWIST,"Multiple queens eliminated in one episode: Lucky Starzzz, Morgan McMichaels, Morphine Love Dion, and Mystique Summers."
+M0081,AS11E06,TWIST,"Multiple queens eliminated in one episode: April Carrion, Aura Mayari, Salina EsTitties, and Vivacious."

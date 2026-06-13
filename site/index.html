@@ -63,10 +63,13 @@ aside{position:sticky;top:0;height:100vh;overflow-y:auto;padding:24px 16px;
 .navgrouphead{display:flex;align-items:center;gap:8px;padding:9px 10px;margin-top:8px;border-radius:8px;cursor:pointer;
   font-size:10px;letter-spacing:2.2px;text-transform:uppercase;color:var(--gold);font-weight:700;user-select:none}
 .navgrouphead:hover{background:rgba(244,181,63,.08)}
+.navgrouphead.active{background:linear-gradient(90deg,rgba(244,181,63,.2),transparent);color:var(--gold)}
 .navgrouphead .ic{width:14px;height:14px;flex:none}
 .ngn{flex:1}
 .ngc{font-size:9px;opacity:.55}
-.ngcaret{font-size:9px;opacity:.85}
+.ngcaret{font-size:9px;opacity:.85;padding:8px 10px;margin:-8px -10px -8px 0;cursor:pointer;border-radius:6px}
+.ngcaret:hover{background:rgba(244,181,63,.22);opacity:1}
+.sectitle em{color:var(--gold);font-style:italic}
 .navgroupbody{margin-left:4px}
 
 main{padding:34px 40px 90px;max-width:1180px;width:100%}
@@ -203,7 +206,9 @@ const IC={
 };
 function icon(n){return `<svg class="ic" viewBox="0 0 16 16">${IC[n]||IC.star}</svg>`;}
 
-function setActive(id){$$('.navlink').forEach(l=>l.classList.toggle('active',l.dataset.id===id));}
+function setActive(id){$$('.navlink').forEach(l=>l.classList.toggle('active',l.dataset.id===id));
+  const slug=id==='sec'?String(_LAST_ROUTE||'').split(':')[1]:null;
+  $$('.navgrouphead').forEach(h=>h.classList.toggle('active',!!slug&&h.dataset.slug===slug));}
 
 /* ============================ 30 VIEWS ============================ */
 /* Each view: {id,title,kicker,desc,icon,group,render(main)} */
@@ -421,7 +426,7 @@ V({id:'home',title:'The <em>Werkroom</em>',kicker:'Home',icon:'crown',group:'Hom
   BUBBLES.forEach(([g,pitch,teaser])=>{
     const views=VIEWS.filter(v=>v.group===g&&!v.hidden).sort((a,b)=>(a.ord||0)-(b.ord||0));
     if(!views.length)return;
-    bg.append(el('div',{class:'card bubble',onclick:()=>go(views[0].id)},
+    bg.append(el('div',{class:'card bubble',onclick:()=>go('sec:'+(GROUP_SLUG[g]||'home'))},
       el('div',{style:'color:var(--gold)',html:icon(GROUP_ICONS[g]||'star')}),
       el('div',{style:'font-family:var(--disp);font-weight:800;font-size:18px;margin:6px 0 4px'},g),
       el('div',{style:'font-size:12px;color:rgba(247,240,230,.8);line-height:1.5'},pitch),
@@ -531,6 +536,8 @@ function renderSeasonDetail(m,sid){
       det.append(el('div',{style:'margin:3px 0'},
         el('span',{style:'color:var(--gold);font-size:10px;letter-spacing:1px;text-transform:uppercase;margin-right:7px'},label),
         (val&&val.nodeType)?val:document.createTextNode(val)));};
+    if(e.synopsis&&e.synopsis!=='-')
+      det.append(el('div',{style:'margin:2px 0 9px;font-size:12.5px;line-height:1.6;color:rgba(247,240,230,.9)'},e.synopsis));
     field('Main challenge', (e.main_challenge&&e.main_challenge!=='-')
       ? e.main_challenge+(e.main_challenge_type&&e.main_challenge_type!=='-'?` (${e.main_challenge_type})`:'') : null);
     field('Mini challenge', e.mini_challenge);
@@ -556,6 +563,17 @@ function renderSeasonDetail(m,sid){
       if(winners.length) field('Crowned', namesSpan(winners,'color:var(--gold);font-weight:700'));
       if(rus.length) field('Runner-up', namesSpan(rus));
       if(mc.length) field('Miss Congeniality', namesSpan(mc));
+    }
+    field('Untucked', e.untucked_notes);
+    const moms=(D.episode_moments||[]).filter(mm=>mm.episode_id===e.episode_id);
+    if(moms.length){
+      det.append(el('div',{style:'margin:9px 0 3px'},
+        el('span',{style:'color:var(--gold);font-size:10px;letter-spacing:1px;text-transform:uppercase'},'Moments / Notable')));
+      const ml=el('div',{});
+      moms.forEach(mm=>ml.append(el('div',{style:'display:flex;gap:8px;align-items:baseline;margin:4px 0'},
+        el('span',{class:'pill mint',style:'flex:none;font-size:9.5px'},(mm.moment_type||'NOTE').replace(/_/g,' ')),
+        el('span',{style:'color:rgba(247,240,230,.88)'},mm.description))));
+      det.append(ml);
     }
     if(!det.children.length){const t=e.main_challenge_type;
       det.append(el('div',{style:'color:rgba(247,240,230,.62)'},
@@ -1087,12 +1105,16 @@ V({id:'episodes',title:'Episode <em>Browser</em>',kicker:'Seasons',icon:'grid',g
   statCards(m,[[eps.length,'episodes'],[new Set(eps.map(e=>e.season_id)).size,'seasons'],
     [eps.filter(e=>e.main_challenge_type==='Snatch Game').length,'snatch games']]);
   const card=el('div',{class:'card fade'});m.append(card);
+  const momCount={};(D.episode_moments||[]).forEach(mm=>{momCount[mm.episode_id]=(momCount[mm.episode_id]||0)+1;});
   const rows=eps.map(e=>({episode_id:e.episode_id,_sid:e.season_id,season:seasonName(e.season_id),number:+e.episode_number,
     title:(e.title&&e.title!=='-')?e.title:'',air_date:(e.air_date&&e.air_date!=='-')?e.air_date:'',
     type:(e.main_challenge_type&&e.main_challenge_type!=='-')?e.main_challenge_type:'',
-    runway:(e.runway_theme&&e.runway_theme!=='-')?e.runway_theme:''}));
+    runway:(e.runway_theme&&e.runway_theme!=='-')?e.runway_theme:'',
+    synopsis:(e.synopsis&&e.synopsis!=='-')?'yes':'',moments:momCount[e.episode_id]||0}));
+  statCards(m,[[eps.filter(e=>e.synopsis&&e.synopsis!=='-').length,'with synopsis'],[(D.episode_moments||[]).length,'notable moments']]);
   dataTable(card,{cols:[{k:'episode_id',label:'ID'},{k:'season',label:'Season',filter:1},{k:'number',label:'Ep',num:1},
-    {k:'title',label:'Title'},{k:'air_date',label:'Air date'},{k:'type',label:'Challenge type',filter:1},{k:'runway',label:'Runway theme'}],
+    {k:'title',label:'Title'},{k:'air_date',label:'Air date'},{k:'type',label:'Challenge type',filter:1},{k:'runway',label:'Runway theme'},
+    {k:'synopsis',label:'Recap',filter:1},{k:'moments',label:'Moments',num:1}],
     rows,csv:'episodes',page:60,onRow:r=>go('season:'+r._sid)});
  }});
 
@@ -2469,6 +2491,118 @@ V({id:'ask',title:'Ask the <em>Library</em>',kicker:'Play',icon:'book',group:'Pl
   card.append(el('div',{style:'margin-top:10px;font-size:10.5px;color:rgba(247,240,230,.45)'},'100% in-browser · no servers, no AI APIs · every answer is a live database lookup'));
  }});
 
+/* ============================ SECTION HOMEPAGES ============================ */
+/* Every nav group gets a landing page at #sec:<slug>. Clicking a group HEADING in the
+   left rail opens it (and expands the accordion); the caret alone toggles expand/collapse. */
+const GROUP_SLUG={Home:'home',Queens:'queens',Seasons:'seasons','Track Records':'records',
+  'Music & Lip Syncs':'music','Challenges':'challenges','Panel & Guests':'panel',
+  Connections:'connections',Play:'play',Data:'data',About:'about'};
+const SLUG_GROUP={};Object.keys(GROUP_SLUG).forEach(g=>SLUG_GROUP[GROUP_SLUG[g]]=g);
+const SECTION_META={
+ Queens:{title:'All About the <em>Queens</em>',
+  intro:'Every queen who ever walked in — profiles, photo walls, geography, birthdays, prize money and the lives behind the lashes. One queen is one identity across the whole database: however many seasons she ran, every view resolves her back to a single hub.',
+  how:'Most views here open with <b>franchise tabs</b> — narrow to the main series or All Stars and every number recalculates live. Click any <b>queen</b> anywhere (a card, a table row, a photo) to open her full profile. Leaderboard tables sort by clicking a <b>column header</b>, filter with the search box or per-column dropdowns, and the <b>⤓ CSV</b> button exports exactly the rows you’ve filtered.'},
+ Seasons:{title:'Season by <em>Season</em>',
+  intro:'The franchise season by season — atlases, premieres, air-date timelines, platform eras, prize purses and the shape of the format as it grew from six queens on a soundstage to a streaming institution.',
+  how:'Start at the <b>Season Atlas</b> and click any season card to open its detail page: cast and placements, an episode-by-episode list, and the color-coded progression matrix. Episode rows expand with the <b>▸ caret</b> to reveal challenges, runways, lip syncs and guest judges. Franchise tabs narrow the scope; tables sort by column and export to CSV.'},
+ 'Track Records':{title:'Track <em>Records</em>',
+  intro:'The weekly verdicts that decide everything — placement grids, win rates, perfect runs, comeback arcs and the queens with nine lives. Every WIN, HIGH, SAFE, LOW and BTM call across the franchise lives in this section.',
+  how:'Status chips are color-coded everywhere: <span class="st st-WIN">WIN</span> <span class="st st-HIGH">HIGH</span> <span class="st st-SAFE">SAFE</span> <span class="st st-LOW">LOW</span> <span class="st st-BTM">BTM</span>. Click a queen’s name or row to jump to her profile, click <b>column headers</b> to re-sort, and use the <b>franchise tabs</b> to flip between the main series and All Stars. Most tables carry a filter box and <b>⤓ CSV</b> export.'},
+ 'Music & Lip Syncs':{title:'Music & <em>Lip Syncs</em>',
+  intro:'Every smackdown song in the archive — playable where Spotify knows it, ranked for deadliness, traced through reuse, rivalries, double shantays and Ru’s own catalog of Ru-mixes.',
+  how:'Open <b>The Music</b> for the playable jukebox — matched songs link straight out to Spotify. Underlined <b>queen names</b> open profiles and gold <b>episode chips</b> jump to the season; tables sort by column, filter as you type, and export to CSV. Franchise tabs re-scope every count.'},
+ Challenges:{title:'The <em>Challenges</em>',
+  intro:'What the queens were actually asked to do — the maxi-challenge recipe over time, the Snatch Game hall of impersonations, and the mini-challenge crown counts.',
+  how:'Use the <b>sub-tabs</b> inside a view to flip between angles — The Snatch Game carries a Hall tab listing every recorded character. <b>Franchise tabs</b> re-scope the counts, table headers sort, and <b>⤓ CSV</b> downloads exactly the rows you’ve filtered.'},
+ 'Panel & Guests':{title:'Panel & <em>Guests</em>',
+  intro:'The judging table and the famous faces beside it — who has judged, how often they came back, what they’re famous for, and how the panel itself shifted era by era.',
+  how:'<b>Guest Judges</b> ranks every visitor by appearances — click a column header to re-sort or type in the filter box to find a name. <b>The Panel</b> carries sub-tabs including service ribbons, one cell per season of tenure. Franchise tabs scope everything; <b>⤓ CSV</b> grabs the current table.'},
+ Connections:{title:'The <em>Connections</em>',
+  intro:'The webs that tie the franchise together — alumni returning to judge and host, the second acts after the crown, and a finder that links any queen to her castmates, rivals and returns.',
+  how:'In the <b>Connection Finder</b>, pick a queen from the dropdown to map everyone she competed with, lip-synced against, and every alum return. In the <b>Alumni Web</b>, click any node or name to travel. Underlined names are always links — follow them.'},
+ Play:{title:'Time to <em>Play</em>',
+  intro:'The library after dark — a trivia night generated live from the database, a print-ready host pack for game nights, and a Librarian who answers questions with zero AI guesswork.',
+  how:'<b>Trivia Night</b> deals fresh questions every round and scores you on the spot. The <b>Host Pack</b> is built for paper — hit print (Cmd/Ctrl-P) and the noir chrome strips itself away. <b>Ask the Library</b> in plain English; every answer is a live database lookup with explore links.'},
+ Data:{title:'The <em>Data</em> Room',
+  intro:'The Vault — the master contestant table behind every view on this site, one row per queen per season, fully searchable and fully exportable.',
+  how:'Type in the filter box to search every column at once, use the <b>dropdowns</b> for exact matches, click a <b>column header</b> to sort (click again to flip), and hit <b>⤓ CSV</b> to download exactly what you’ve filtered. Click any row to open that queen’s profile.'}};
+/* cheap live teaser per view — computed fresh each render; missing/failed = no pill */
+const VIEW_TEASER={
+ queens:()=>D.meta.queens+' queens',
+ gallery:()=>D.contestants.filter(c=>c.image&&c.image!=='-').length+' photos',
+ winners:()=>D.seasons.filter(s=>s.winner_id&&s.winner_id!=='-').length+' crowns',
+ missc:()=>D.contestants.filter(c=>c.miss_congeniality==='Yes').length+' sashes',
+ hometowns:()=>new Set(D.queens.map(q=>q.hometown).filter(h=>h&&h!=='-')).size+' hometowns',
+ birthdays:()=>D.queens.filter(q=>q.birthdate&&q.birthdate!=='-').length+' birthdays',
+ ages:()=>D.contestants.filter(c=>+c.age_at_filming).length+' known ages',
+ earnings:()=>'$'+D.contestants.reduce((s,c)=>s+(+c.earnings||0),0).toLocaleString()+' tracked',
+ nameology:()=>D.queens.length+' names decoded',
+ returning:()=>X.returning_queens.length+' encore runs',
+ atlas:()=>D.seasons.length+' seasons',
+ episodes:()=>D.episodes.length+' episodes',
+ timeline:()=>{const y=D.seasons.map(s=>+String(s.premiere_date||'').slice(0,4)).filter(Boolean);
+  return y.length?Math.min(...y)+'–'+Math.max(...y):null;},
+ seasonsize:()=>Math.max(...D.seasons.map(s=>contestantsBySeason(s.season_id).length))+' queens, biggest cast',
+ platforms:()=>new Set(D.seasons.map(s=>s.platform).filter(p=>p&&p!=='-')).size+' platforms',
+ prizes:()=>{const m=Math.max(...D.seasons.map(s=>+s.cash_prize||0));return m?'$'+m.toLocaleString()+' top prize':null;},
+ runways:()=>D.episodes.filter(e=>e.runway_theme&&e.runway_theme!=='-').length+' runway themes',
+ titlewords:()=>D.episodes.filter(e=>e.title&&e.title!=='-').length+' titles mined',
+ placementgrid:()=>D.progression.length.toLocaleString()+' verdicts',
+ tallies:()=>D.contestants.length+' runs tallied',
+ pyramid:()=>D.contestants.filter(c=>+c.placement===1).length+' at the apex',
+ winscatter:()=>D.progression.filter(p=>p.status==='WIN').length+' WIN calls',
+ winrate:()=>D.progression.filter(p=>p.status==='WIN').length+' wins indexed',
+ perfectrun:()=>X.tally.filter(t=>!(+t.bottoms)&&(+t.wins)>=1).length+' clean runs',
+ survivors:()=>D.progression.filter(p=>p.status==='BTM').length+' bottom calls',
+ elimorder:()=>D.elimination_events.length+' farewells',
+ music:()=>D.songs.filter(s=>s.spotify_track_id&&s.spotify_track_id!=='-').length+' playable songs',
+ songreuse:()=>{const c={};D.lip_syncs.forEach(l=>{if(l.song_id&&l.song_id!=='-')c[l.song_id]=(c[l.song_id]||0)+1;});
+  return Object.values(c).filter(n=>n>1).length+' repeat bookings';},
+ assassin:()=>D.lip_syncs.length+' lip syncs scored',
+ deadliest:()=>D.songs.length+' songs ranked',
+ doubles:()=>D.lip_syncs.filter(l=>l.result_type==='SHANTAY'||l.result_type==='SASHAY').length+' double calls',
+ artists:()=>new Set(D.songs.map(s=>s.artist).filter(a=>a&&a!=='-')).size+' artists',
+ rumixes:()=>{const n=D.songs.filter(s=>/rupaul/i.test(s.artist||'')).length;return n?n+' Ru tracks':null;},
+ challenges:()=>new Set(D.episodes.map(e=>e.main_challenge_type).filter(t=>t&&t!=='-')).size+' challenge types',
+ snatch:()=>D.episode_roles.filter(r=>r.role_type==='SNATCH_CHARACTER').length+' Snatch characters',
+ minicrowns:()=>D.episode_roles.filter(r=>r.role_type==='MINI_WINNER').length+' mini wins',
+ guestfreq:()=>new Set(D.appearances.filter(a=>a.appearance_type==='GUEST_JUDGE').map(a=>a.person_name)).size+' guest judges',
+ professions:()=>D.appearances.filter(a=>a.appearance_type==='GUEST_JUDGE').length+' judging visits',
+ panel:()=>D.panel.length+' panel seats',
+ apptypes:()=>new Set(D.appearances.map(a=>a.appearance_type)).size+' appearance types',
+ alumniweb:()=>X.alumni_links.length+' alumni links',
+ connect:()=>D.meta.queens+' queens to link',
+ secondact:()=>D.appearances.filter(a=>a.alum_queen_id&&a.alum_queen_id!=='-').length+' alum returns',
+ trivia:()=>'fresh questions every round',
+ hostpack:()=>'print-ready',
+ ask:()=>'instant database answers',
+ vault:()=>D.contestants.length+' rows · CSV export'};
+function renderSectionHome(m,group){
+  const meta=SECTION_META[group];
+  const views=VIEWS.filter(v=>v.group===group&&!v.hidden).sort((a,b)=>(a.ord||0)-(b.ord||0));
+  if(!meta||!views.length){m.innerHTML='<div class="empty">Section not found</div>';return;}
+  m.innerHTML=`<div class="vhead fade"><div class="vkicker">Section guide · ${views.length} view${views.length===1?'':'s'}</div>
+    <h1 class="vtitle">${meta.title}</h1><div class="vdesc">${meta.intro}</div>
+    <div style="margin-top:10px"><button class="tab" onclick="go('home')">← The Werkroom</button></div></div>`;
+  const how=el('div',{class:'card fade',style:'margin-bottom:16px'});
+  how.append(sectionHead('How to use this section','var(--gold)'));
+  how.append(el('div',{style:'font-size:13px;line-height:1.75;color:rgba(247,240,230,.88)',html:meta.how}));
+  m.append(how);
+  const grid=el('div',{class:'grid fade',style:'grid-template-columns:repeat(auto-fit,minmax(230px,1fr))'});
+  views.forEach(v=>{
+    let teaser=null;try{const f=VIEW_TEASER[v.id];if(f)teaser=f();}catch(e){}
+    grid.append(el('div',{class:'card bubble',onclick:()=>go(v.id)},
+      el('div',{style:'display:flex;align-items:center;gap:9px;color:var(--gold)',
+        html:icon(v.icon||'star')+`<span class="sectitle" style="font-family:var(--disp);font-weight:800;font-size:17px;color:var(--cream)">${v.title}</span>`}),
+      el('div',{style:'font-size:12px;color:rgba(247,240,230,.78);line-height:1.55;margin-top:7px'},String(v.desc||'').replace(/<[^>]+>/g,'')),
+      el('div',{style:'display:flex;justify-content:space-between;align-items:center;gap:6px;margin-top:10px;flex-wrap:wrap'},
+        teaser?el('span',{class:'pill gold'},teaser):el('span'),
+        el('span',{style:'font-size:10.5px;color:var(--rose)'},'open →'))));});
+  m.append(grid);
+}
+V({id:'sec',title:'Section <em>Guide</em>',kicker:'Section',icon:'grid',group:null,hidden:true,
+  render(m){renderSectionHome(m,'Queens');}});
+
 let _navEnsure=null;
 function _navState(){try{return JSON.parse(localStorage.getItem('wr-nav')||'{}');}catch(e){return {};}}
 function _navSave(s){try{localStorage.setItem('wr-nav',JSON.stringify(s));}catch(e){}}
@@ -2491,36 +2625,42 @@ function buildNav(){
       const matched=filter?items.filter(v=>v.title.replace(/<[^>]+>/g,'').toLowerCase().includes(filter.toLowerCase())):items;
       if(!matched.length)return;
       const open=filter?true:(st[g]!=null?!!st[g]:g===activeGroup);
-      const caret=el('span',{class:'ngcaret'},open?'▾':'▸');
-      const hdr=el('div',{class:'navgrouphead'},
+      const caret=el('span',{class:'ngcaret',title:'Expand / collapse'},open?'▾':'▸');
+      const hdr=el('div',{class:'navgrouphead','data-slug':GROUP_SLUG[g]||'',title:'Open the '+g+' section page'},
         el('span',{class:'ngi',html:icon(GROUP_ICONS[g]||'star')}),
         el('span',{class:'ngn'},g),el('span',{class:'ngc'},String(items.length)),caret);
       const body=el('div',{class:'navgroupbody',style:open?'':'display:none'});
       matched.forEach(v=>body.append(el('div',{class:'navlink','data-id':v.id,onclick:()=>go(v.id),
         html:`${icon(v.icon)}<span>${v.title.replace(/<[^>]+>/g,'')}</span>`})));
-      hdr.addEventListener('click',()=>{const s=_navState();const now=body.style.display==='none';
-        setOpen(g,now);s[g]=now;_navSave(s);});
+      /* caret = expand/collapse only; heading itself = open the section homepage (and expand) */
+      caret.addEventListener('click',ev=>{ev.stopPropagation();const s=_navState();
+        const now=body.style.display==='none';setOpen(g,now);s[g]=now;_navSave(s);});
+      hdr.addEventListener('click',()=>{const s=_navState();s[g]=true;_navSave(s);setOpen(g,true);
+        go('sec:'+(GROUP_SLUG[g]||'home'));});
       sections[g]={body,caret};
       groupWrap.append(hdr,body);
     });
     setActive(activeId);
   };
   search.addEventListener('input',e=>render(e.target.value));render();
-  _navEnsure=id=>{const v=VIEWS.find(x=>x.id===id);if(v&&v.group&&sections[v.group])setOpen(v.group,true);};
+  _navEnsure=(id,grp)=>{const v=VIEWS.find(x=>x.id===id);const g=grp||(v&&v.group);
+    if(g&&sections[g])setOpen(g,true);};
 }
 let _LAST_ROUTE=null;
 /* old view ids -> their merged survivors (kept alive for trivia links, the Librarian, and old #hashes) */
 const ROUTE_ALIASES={georoll:'hometowns',zodiac:'birthdays',safestreaks:'survivors',farewells:'elimorder',
-  challengemix:'challenges',snatchhall:'snatch',guestdir:'guestfreq',continuity:'panel',tenure:'panel'};
+  challengemix:'challenges',snatchhall:'snatch',guestdir:'guestfreq',continuity:'panel',tenure:'panel',
+  'sec:home':'home','sec:about':'health'};
 function go(route){
   if(ROUTE_ALIASES[route])route=ROUTE_ALIASES[route];
   _LAST_ROUTE=route;
   const main=$('#main');main.scrollTop=0;window.scrollTo(0,0);
   let id=route,arg=null;
   if(route.includes(':')){[id,arg]=route.split(':');}
-  setActive(id);if(_navEnsure)_navEnsure(id);
+  setActive(id);if(_navEnsure)_navEnsure(id,id==='sec'&&arg?SLUG_GROUP[arg]:null);
   if(id==='season'&&arg){renderSeasonDetail(main,arg);}
   else if(id==='queen'&&arg){renderQueen(main,arg);}
+  else if(id==='sec'&&arg&&SLUG_GROUP[arg]){renderSectionHome(main,SLUG_GROUP[arg]);}
   else{const v=VIEWS.find(x=>x.id===id)||VIEWS[0];v.render(main);}
   if(history&&history.replaceState)history.replaceState(null,'','#'+route);
   document.querySelector('aside').classList.remove('open');

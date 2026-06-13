@@ -31,7 +31,7 @@ BLANKS = ("", "-")  # values treated as "no data"
 
 TABLES = ["queens", "seasons", "contestants", "episodes", "progression",
           "songs", "lip_syncs", "elimination_events", "panel", "appearances",
-          "episode_roles"]
+          "episode_roles", "episode_moments"]
 
 # Per-table fields cast to int (None when blank). Everything else stays a string,
 # matching the historical site_data.json typing exactly.
