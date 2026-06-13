@@ -306,8 +306,8 @@ function mkChart(host,cfg,h){ /* Chart.js with graceful fallback (tables always 
   }catch(e){return null;}
 }
 /* generic data table: sort, global search, optional per-column filters, paging */
-function dataTable(host,o){ // o:{cols:[{k,label,num,html(r),filter}],rows,page=80,onRow}
-  const state={q:'',sk:o.cols[0].k,asc:true,page:o.page||80,sel:{}};
+function dataTable(host,o){ // o:{cols:[{k,label,num,html(r),filter}],rows,page=80,onRow,sort:{k,asc}}
+  const state={q:'',sk:o.sort&&o.sort.k||o.cols[0].k,asc:o.sort?!!o.sort.asc:true,page:o.page||80,sel:{}};
   const bar=el('div',{style:'display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:10px'});
   const inp=el('input',{type:'search',placeholder:'Filter rows…',style:'flex:1;min-width:140px;background:rgba(255,255,255,.06);color:var(--cream);border:1px solid rgba(255,255,255,.14);border-radius:8px;padding:6px 10px;font:inherit;font-size:12.5px'});
   bar.append(inp);
@@ -1064,13 +1064,122 @@ function renderChallengeOverview(m){
   m.append(host);
 }
 
-/* ---------- 15. THE SNATCH GAME (Episodes + Characters) ---------- */
+/* ---------- 15. THE SNATCH GAME (Episodes / By Queen / Impersonations / By Season) ---------- */
 V({id:'snatch',title:'The <em>Snatch Game</em>',kicker:'Challenges',icon:'mask',group:'Challenges',ord:2,
  desc:'Every Snatch Game across the seasons — the franchise\u2019s signature celebrity-impersonation challenge.',
  render(m){
   m.innerHTML=head(this);fTabs(m,'snatch');
-  subTabs(m,'snatch',[['Episodes',renderSnatchEpisodes],['Characters',h=>boardInto(h,SNATCHHALL_SPEC)]]);
+  subTabs(m,'snatch',[['Episodes',renderSnatchEpisodes],['By Queen',renderSnatchByQueen],
+    ['Impersonations',renderSnatchTally],['By Season',renderSnatchBySeason]]);
  }});
+/* base celebrity name = text before " (as "; full role_detail kept for detail rows */
+function snatchBase(rd){return String(rd||'').split(' (as ')[0].trim();}
+/* every recorded Snatch row, joined to its contestant/queen/season, scoped by franchise */
+function snatchJoined(){
+  const cont={};D.contestants.forEach(c=>cont[c.contestant_id]=c);
+  return D.episode_roles.filter(r=>r.role_type==='SNATCH_CHARACTER'&&r.role_detail&&r.role_detail!=='-')
+    .map(r=>{const c=cont[r.contestant_id]||{};
+      return {role_detail:r.role_detail,base:snatchBase(r.role_detail),
+        queen:c.queen_id?cname(c):'?',queen_id:c.queen_id,
+        season_id:c.season_id||'',season:seasonName(c.season_id||''),episode_id:r.episode_id};})
+    .filter(r=>r.season_id&&seasonAllowed(r.season_id));
+}
+/* ---- Tab: By Queen — every queen's character(s), linked to her profile ---- */
+function renderSnatchByQueen(m){
+  const rows=snatchJoined();
+  const distinctQueens=new Set(rows.map(r=>r.queen_id)).size;
+  const multi={};rows.forEach(r=>{multi[r.queen_id]=(multi[r.queen_id]||0)+1;});
+  const repeat=Object.values(multi).filter(n=>n>1).length;
+  statCards(m,[[rows.length,'Snatch performances'],[distinctQueens,'queens who played'],[repeat,'played more than once']]);
+  const card=el('div',{class:'card fade'});m.append(card);
+  card.append(sectionHead('Who played whom','var(--gold)'));
+  dataTable(card,{cols:[
+    {k:'queen',label:'Queen'},
+    {k:'role_detail',label:'Character'},
+    {k:'base',label:'Celebrity',html:r=>`<span class="celeblink" data-celeb="${encodeURIComponent(r.base)}" style="color:var(--rose);text-decoration:underline;cursor:pointer">${r.base}</span>`},
+    {k:'season',label:'Season',filter:1},
+    {k:'episode',label:'Episode',html:r=>epLabel(r.episode_id)}],
+    rows:rows.map(r=>({...r,episode:epLabel(r.episode_id)})),
+    page:60,onRow:r=>r.queen_id&&go('queen:'+r.queen_id)});
+  _wireCelebLinks(card);
+}
+/* ---- Tab: Impersonations — ranked tally of most-impersonated celebrities ---- */
+function renderSnatchTally(m){
+  const rows=snatchJoined();
+  const by={};
+  rows.forEach(r=>{const t=by[r.base]=by[r.base]||{base:r.base,queens:new Set(),plays:0};
+    t.queens.add(r.queen_id);t.plays++;});
+  const tally=Object.values(by).map(t=>({base:t.base,queens:t.queens.size,plays:t.plays}))
+    .sort((a,b)=>b.queens-a.queens||b.plays-a.plays||(a.base<b.base?-1:1));
+  const top=tally[0];
+  statCards(m,[[tally.length,'distinct celebrities'],[rows.length,'total performances'],
+    [top?`${top.base} (${top.queens})`:'-','most impersonated']]);
+  const card=el('div',{class:'card fade'});m.append(card);
+  const repeated=tally.filter(t=>t.queens>1);
+  if(repeated.length){const ch=repeated.slice(0,15);
+    mkChart(card,{type:'bar',data:{labels:ch.map(t=>t.base),
+      datasets:[{label:'queens who played them',data:ch.map(t=>t.queens),backgroundColor:PAL[4]}]},
+      options:{indexAxis:'y',plugins:{legend:{display:false}}}},340);}
+  card.append(sectionHead('Most-impersonated celebrities','var(--rose)'));
+  card.append(el('div',{style:'font-size:11.5px;color:rgba(247,240,230,.6);margin:-4px 0 10px'},
+    'Ranked by the number of distinct queens who impersonated each icon. Click a name to see who played them and when.'));
+  dataTable(card,{cols:[
+    {k:'base',label:'Celebrity',html:r=>`<span class="celeblink" data-celeb="${encodeURIComponent(r.base)}" style="color:var(--rose);text-decoration:underline;cursor:pointer">${r.base}</span>`},
+    {k:'queens',label:'Distinct queens',num:1},
+    {k:'plays',label:'Total performances',num:1}],
+    rows:tally,page:80,sort:{k:'queens',asc:false},onRow:r=>go('celeb:'+encodeURIComponent(r.base))});
+  _wireCelebLinks(card);
+}
+/* ---- Tab: By Season — characters that appeared in each season's Snatch Game ---- */
+function renderSnatchBySeason(m){
+  const rows=snatchJoined();
+  const bySeason={};
+  rows.forEach(r=>{(bySeason[r.season_id]=bySeason[r.season_id]||[]).push(r);});
+  const order=SEASON_ORDER.filter(s=>bySeason[s]);
+  statCards(m,[[order.length,'seasons with a Snatch Game'],[rows.length,'characters across them']]);
+  const host=el('div',{class:'fade'});m.append(host);
+  order.forEach(sid=>{
+    const list=bySeason[sid].slice().sort((a,b)=>epNum(a.episode_id)-epNum(b.episode_id)||(a.queen<b.queen?-1:1));
+    const card=el('div',{class:'card',style:'margin-bottom:12px'});
+    card.append(el('div',{style:'display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px'},
+      el('div',{style:'font-family:var(--disp);font-weight:800;font-size:18px;cursor:pointer;color:var(--cream)',onclick:()=>go('season:'+sid)},seasonName(sid)),
+      el('span',{class:'pill gold'},list.length+' character'+(list.length===1?'':'s'))));
+    const grid=el('div',{style:'margin-top:9px;display:grid;gap:5px'});
+    list.forEach(r=>{const row=el('div',{style:'font-size:12.5px;line-height:1.5;padding:4px 0;border-top:1px solid rgba(255,255,255,.05)'});
+      row.append(el('span',{style:'color:var(--cream);font-weight:600'},r.role_detail),document.createTextNode('  ·  '));
+      if(r.queen_id)row.append(qLink(r.queen_id));else row.append(document.createTextNode(r.queen));
+      row.append(document.createTextNode('  ·  '),epChip(r.episode_id));
+      grid.append(row);});
+    card.append(grid);host.append(card);
+  });
+  if(!order.length)host.innerHTML='<div class="empty">No Snatch Game characters recorded.</div>';
+}
+/* shared: turn .celeblink spans inside a host into celeb-drilldown navigations */
+function _wireCelebLinks(host){$$('.celeblink',host).forEach(s=>s.addEventListener('click',ev=>{
+  ev.stopPropagation();go('celeb:'+s.dataset.celeb);}));}
+/* dynamic celebrity drill-down: who played this celebrity, and when */
+function renderCeleb(m,enc){
+  const base=decodeURIComponent(enc);
+  const all=D.episode_roles.filter(r=>r.role_type==='SNATCH_CHARACTER'&&r.role_detail&&r.role_detail!=='-'&&snatchBase(r.role_detail)===base);
+  const cont={};D.contestants.forEach(c=>cont[c.contestant_id]=c);
+  const rows=all.map(r=>{const c=cont[r.contestant_id]||{};
+    return {role_detail:r.role_detail,queen:c.queen_id?cname(c):'?',queen_id:c.queen_id,
+      season_id:c.season_id||'',episode_id:r.episode_id};})
+    .sort((a,b)=>SEASON_ORDER.indexOf(a.season_id)-SEASON_ORDER.indexOf(b.season_id)||epNum(a.episode_id)-epNum(b.episode_id));
+  const distinct=new Set(rows.map(r=>r.queen_id)).size;
+  m.innerHTML=`<div class="vhead fade"><div class="vkicker">Snatch Game · Impersonation</div>
+    <h1 class="vtitle">${base}</h1>
+    <div class="vdesc">Every queen who brought ${base} to the Snatch Game library — across ${distinct} ${distinct===1?'queen':'queens'} and ${rows.length} ${rows.length===1?'performance':'performances'}.</div>
+    <div style="margin-top:10px"><button class="tab" onclick="go('snatch')">← The Snatch Game</button></div></div>`;
+  const card=el('div',{class:'card fade'});m.append(card);
+  card.append(sectionHead('Who played '+base,'var(--rose)'));
+  rows.forEach(r=>{const row=el('div',{style:'font-size:13px;line-height:1.55;padding:7px 0;border-top:1px solid rgba(255,255,255,.06);display:flex;flex-wrap:wrap;gap:8px;align-items:baseline'});
+    if(r.queen_id)row.append(qLink(r.queen_id));else row.append(el('span',{},r.queen));
+    if(r.role_detail!==base)row.append(el('span',{style:'color:rgba(247,240,230,.6);font-size:11.5px'},'— '+r.role_detail));
+    row.append(el('span',{style:'margin-left:auto'},epChip(r.episode_id)));
+    card.append(row);});
+  if(!rows.length)card.append(el('div',{class:'empty'},'No record found for this celebrity.'));
+}
 function renderSnatchEpisodes(m){
   const snrows=D.episode_roles.filter(r=>r.role_type==='SNATCH_CHARACTER');
   statCards(m,[[X.snatch_index.length,'snatch episodes'],[snrows.length,'characters recorded']]);
@@ -2517,7 +2626,7 @@ const SECTION_META={
   how:'Open <b>The Music</b> for the playable jukebox — matched songs link straight out to Spotify. Underlined <b>queen names</b> open profiles and gold <b>episode chips</b> jump to the season; tables sort by column and filter as you type. Franchise tabs re-scope every count.'},
  Challenges:{title:'The <em>Challenges</em>',
   intro:'What the queens were actually asked to do — the maxi-challenge recipe over time, the Snatch Game hall of impersonations, and the mini-challenge crown counts.',
-  how:'Use the <b>sub-tabs</b> inside a view to flip between angles — The Snatch Game carries a Hall tab listing every recorded character. <b>Franchise tabs</b> re-scope the counts and table headers sort.'},
+  how:'Use the <b>sub-tabs</b> inside a view to flip between angles — The Snatch Game carries Episodes, a By Queen table, an Impersonations leaderboard (click a celebrity to see who played them and when), and a By Season line-up. <b>Franchise tabs</b> re-scope the counts and table headers sort.'},
  'Panel & Guests':{title:'Panel & <em>Guests</em>',
   intro:'The judging table and the famous faces beside it — who has judged, how often they came back, what they’re famous for, and how the panel itself shifted era by era.',
   how:'<b>Guest Judges</b> ranks every visitor by appearances — click a column header to re-sort or type in the filter box to find a name. <b>The Panel</b> carries sub-tabs including service ribbons, one cell per season of tenure. Franchise tabs scope everything.'},
@@ -2664,6 +2773,7 @@ function go(route){
   setActive(id);if(_navEnsure)_navEnsure(id,id==='sec'&&arg?SLUG_GROUP[arg]:null);
   if(id==='season'&&arg){renderSeasonDetail(main,arg);}
   else if(id==='queen'&&arg){renderQueen(main,arg);}
+  else if(id==='celeb'&&arg){renderCeleb(main,arg);}
   else if(id==='sec'&&arg&&SLUG_GROUP[arg]){renderSectionHome(main,SLUG_GROUP[arg]);}
   else{const v=VIEWS.find(x=>x.id===id)||VIEWS[0];v.render(main);}
   if(history&&history.replaceState)history.replaceState(null,'','#'+route);
