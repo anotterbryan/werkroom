@@ -98,12 +98,12 @@ AP0096,Mike Ruiz,US01,US01E01,WERKROOM_GUEST,photographer (mini-challenge),No,,
 AP0097,Michelle Williams,US01,US01E02,GUEST_JUDGE,singer (Destiny's Child),No,,
 AP0098,Debra Wilson,US01,US01E03,GUEST_JUDGE,actress/comedian (MADtv),No,,
 AP0099,Lucy Lawless,US01,US01E05,GUEST_JUDGE,actress,No,,S1 guest judge
-AP0100,Maria Conchita Alonso,US01,,GUEST_JUDGE,actress/singer,No,,S1 guest judge; exact episode not yet verified
-AP0101,Robin Antin,US01,,GUEST_JUDGE,creator of The Pussycat Dolls,No,,S1 guest judge; exact episode not yet verified
+AP0100,Maria Conchita Alonso,US01,US01E06,GUEST_JUDGE,actress/singer,No,,S1 guest judge; exact episode not yet verified
+AP0101,Robin Antin,US01,US01E05,GUEST_JUDGE,creator of The Pussycat Dolls,No,,S1 guest judge; exact episode not yet verified
 AP0102,Jenny Shimizu,US01,US01E04,GUEST_JUDGE,model/actress,No,,S1 guest judge
-AP0103,Tori Spelling,US01,,GUEST_JUDGE,actress,No,,S1 guest judge; exact episode not yet verified
-AP0104,Dean McDermott,US01,,GUEST_JUDGE,actor,No,,S1 guest judge; exact episode not yet verified
-AP0105,Howard Bragman,US01,,GUEST_JUDGE,author/publicist,No,,S1 guest judge; exact episode not yet verified
+AP0103,Tori Spelling,US01,US01E03,GUEST_JUDGE,actress,No,,S1 guest judge; exact episode not yet verified
+AP0104,Dean McDermott,US01,US01E03,GUEST_JUDGE,actor,No,,S1 guest judge; exact episode not yet verified
+AP0105,Howard Bragman,US01,US01E03,GUEST_JUDGE,author/publicist,No,,S1 guest judge; exact episode not yet verified
 AP0106,Frank Gatson,US01,US01E02,GUEST_JUDGE,choreographer,No,,S1 guest judge
 AP0107,Tanya Tucker,US02,US02E03,GUEST_JUDGE,country music legend,No,,
 AP0108,Kathy Najimy,US02,US02E03,GUEST_JUDGE,actress (directed commercial),No,,
@@ -394,9 +394,9 @@ AP0392,Jennifer Lopez,US14,US14E04,MAINSTAGE_GUEST,virtual appearance,No,,S14 vi
 AP0393,Sarah McLachlan,US14,US14E05,MAINSTAGE_GUEST,virtual appearance,No,,S14 virtual; exact ep TBD
 AP0394,Trinity K. Bonet,US14,US14E16,WERKROOM_GUEST,alum guest,Yes,Q0067,S14 non-mainstage alum guest; exact ep TBD
 AP0395,Naomi Smalls,US14,US14E16,WERKROOM_GUEST,alum guest,Yes,Q0091,S14 non-mainstage alum guest; exact ep TBD
-AP0396,Mike Ruiz,US01,-,GUEST_JUDGE,photographer,No,,from Wikipedia guest-judge list
-AP0397,Gordon Espinet,US01,-,GUEST_JUDGE,make-up artist,No,,from Wikipedia guest-judge list
-AP0398,Jeffrey Moran,US01,-,GUEST_JUDGE,Absolut Vodka marketing/branding executive,No,,from Wikipedia guest-judge list
+AP0396,Mike Ruiz,US01,US01E01,GUEST_JUDGE,photographer,No,,from Wikipedia guest-judge list
+AP0397,Gordon Espinet,US01,US01E04,GUEST_JUDGE,make-up artist,No,,from Wikipedia guest-judge list
+AP0398,Jeffrey Moran,US01,US01E06,GUEST_JUDGE,Absolut Vodka marketing/branding executive,No,,from Wikipedia guest-judge list
 AP0399,Mike Ruiz,US02,US02E01,GUEST_JUDGE,photographer,No,,from Wikipedia guest-judge list
 AP0400,Kathy Griffin,US02,US02E01,GUEST_JUDGE,comedian,No,,from Wikipedia guest-judge list
 AP0401,Kim Coles,US02,US02E02,GUEST_JUDGE,actress and comedian,No,,from Wikipedia guest-judge list
@@ -816,3 +816,13 @@ AP0814,Kim Chi,US18,US18E16,MAINSTAGE_GUEST,-,Yes,Q0090,-
 AP0815,Norvina,US18,US18E16,MAINSTAGE_GUEST,-,No,,-
 AP0816,Onya Nurve,US18,US18E16,MAINSTAGE_GUEST,-,No,,-
 AP0817,Raja,US18,US18E16,MAINSTAGE_GUEST,-,Yes,Q0022,-
+AP0818,Bianca Del Rio,US10,US10E07,MAINSTAGE_GUEST,-,Yes,-,-
+AP0819,Alex Trebek,US10,US10E07,MAINSTAGE_GUEST,-,No,-,-
+AP0820,Chad Michaels,US10,US10E08,MAINSTAGE_GUEST,-,Yes,-,-
+AP0821,Yanis Marshall,US11,US11E04,MAINSTAGE_GUEST,-,No,-,-
+AP0822,Ginger Minj,US11,US11E04,MAINSTAGE_GUEST,-,Yes,-,-
+AP0823,Alyssa Edwards,US11,US11E07,MAINSTAGE_GUEST,-,Yes,-,-
+AP0824,Morgan McMichaels,US11,US11E08,MAINSTAGE_GUEST,-,Yes,-,-
+AP0825,Jinkx Monsoon,US11,US11E08,MAINSTAGE_GUEST,-,Yes,-,-
+AP0826,Delta Work,US11,US11E10,MAINSTAGE_GUEST,-,Yes,-,-
+AP0827,Kyle Marlett,US11,US11E10,MAINSTAGE_GUEST,-,No,-,-
