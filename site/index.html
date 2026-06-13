@@ -29,6 +29,12 @@ body{
 /* film-grain overlay */
 body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.018;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+/* initials placeholder for failed queen images (pageant-noir gradient chip) */
+.imgph{display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;
+  background:linear-gradient(135deg,var(--purple),var(--magenta) 70%,var(--gold));
+  color:var(--cream);font-family:var(--mono);font-weight:700;letter-spacing:.04em;
+  text-transform:uppercase;line-height:1;overflow:hidden;text-shadow:0 1px 2px rgba(0,0,0,.45);
+  font-size:clamp(10px,38%,30px)}
 a{color:inherit;text-decoration:none}
 ::selection{background:var(--magenta);color:#fff}
 ::-webkit-scrollbar{width:10px;height:10px}
@@ -182,6 +188,16 @@ const el=(t,a={},...kids)=>{const n=document.createElement(t);
   for(const k in a){if(k=='class')n.className=a[k];else if(k=='html')n.innerHTML=a[k];
     else if(k.startsWith('on'))n.addEventListener(k.slice(2),a[k]);else n.setAttribute(k,a[k]);}
   kids.flat().forEach(c=>n.append(c&&c.nodeType?c:document.createTextNode(c==null?'':c)));return n;};
+/* graceful queen-image fallback: swap a broken hotlinked image for an initials chip.
+   idempotent (clears onerror before swapping so it never loops). */
+function _initials(name){return String(name||'').trim().split(/\s+/).filter(Boolean).slice(0,2).map(w=>w[0].toUpperCase()).join('')||'?';}
+function imgFallback(img,name){
+  if(!img||img.dataset.phdone)return;img.dataset.phdone='1';img.onerror=null;
+  const cs=img.getAttribute('style')||'';const cls=img.className||'';
+  const ph=document.createElement('div');ph.className=('imgph '+cls).trim();
+  if(cs)ph.setAttribute('style',cs);ph.textContent=_initials(name);ph.setAttribute('aria-label',name||'');
+  if(img.parentNode)img.parentNode.replaceChild(ph,img);
+}
 const tt=$('#tt');
 function showTip(e,html){tt.innerHTML=html;tt.style.opacity=1;moveTip(e);}
 function moveTip(e){const p=12;let x=e.clientX+p,y=e.clientY+p;
@@ -434,9 +450,10 @@ V({id:'home',title:'The <em>Werkroom</em>',kicker:'Home',icon:'crown',group:'Hom
   const srow=el('div',{class:'winners-strip',style:'display:flex;flex-wrap:wrap;gap:10px;align-items:center'});
   D.seasons.forEach(s=>{const c=D.contestants.find(x=>x.queen_id===s.winner_id&&x.season_id===s.season_id);
     if(!c||!c.image||c.image==='-')return;
-    srow.append(el('img',{src:c.image,alt:qname[s.winner_id]||'',
+    srow.append(el('img',{src:c.image,alt:qname[s.winner_id]||'',referrerPolicy:'no-referrer',loading:'eager',
       title:(qname[s.winner_id]||'')+' · '+seasonName(s.season_id),
       style:'width:54px;height:54px;border-radius:50%;object-fit:cover;border:2px solid rgba(244,181,63,.55);cursor:pointer',
+      onerror:function(){imgFallback(this,qname[s.winner_id]||'')},
       onclick:()=>go('queen:'+s.winner_id)}));});
   strip.append(srow);m.append(strip);
  }});
@@ -615,7 +632,7 @@ V({id:'queens',title:'The <em>Queens</em>',kicker:'Queens',icon:'star',group:'Qu
       const img=_QIMG[c.queen_id];
       const card=el('div',{class:'card',style:'cursor:pointer;padding:14px'},
         el('div',{style:'display:flex;align-items:center;gap:8px'},
-          img?el('img',{src:img,alt:nm,style:'width:34px;height:34px;border-radius:50%;object-fit:cover;flex:none;border:1px solid rgba(244,181,63,.35)'}):'',
+          img?el('img',{src:img,alt:nm,referrerPolicy:'no-referrer',loading:'eager',style:'width:34px;height:34px;border-radius:50%;object-fit:cover;flex:none;border:1px solid rgba(244,181,63,.35)',onerror:function(){imgFallback(this,nm)}}):'',
           el('div',{style:'font-family:var(--disp);font-weight:700;font-size:16px'},nm)),
         el('div',{style:'font-size:11.5px;color:var(--gold);margin-top:3px'},seasonName(c.season_id)+' · '+(c.placement?('#'+c.placement):'')),
         el('div',{class:'chip-row',style:'margin-top:8px'},
@@ -664,7 +681,7 @@ function renderQueen(m,qid){
     sign?`<span class="pill">${sign}${q.birthdate&&q.birthdate!=='-'?' · b. '+q.birthdate:''}</span>`:''
   ].filter(Boolean).join(' ');
   m.innerHTML=`<div class="vhead fade" style="display:flex;gap:20px;align-items:flex-start;flex-wrap:wrap">
-    ${img?`<img src="${img}" alt="${q.drag_name.replace(/"/g,'&quot;')}" style="width:110px;height:110px;border-radius:18px;object-fit:cover;border:2px solid rgba(244,181,63,.5);box-shadow:var(--shadow);flex:none">`:''}
+    ${img?`<img src="${img}" alt="${q.drag_name.replace(/"/g,'&quot;')}" referrerpolicy="no-referrer" loading="eager" onerror="imgFallback(this,'${q.drag_name.replace(/\\/g,'\\\\').replace(/'/g,"\\'").replace(/"/g,'&quot;')}')" style="width:110px;height:110px;border-radius:18px;object-fit:cover;border:2px solid rgba(244,181,63,.5);box-shadow:var(--shadow);flex:none">`:''}
     <div style="flex:1;min-width:240px"><div class="vkicker">Queens</div>
     <h1 class="vtitle">${q.drag_name}</h1>
     <div class="vdesc">${[q.legal_name,q.hometown].filter(x=>x&&x!=='-').join(' · ')||'A competitor in the herstory.'}</div>
@@ -1123,7 +1140,7 @@ V({id:'winners',title:'Winners\u2019 <em>Circle</em>',kicker:'Queens',icon:'crow
     const cx=CANCELLED[s.winner_id];
     wrap.append(el('div',{class:'card',style:'cursor:pointer;text-align:center'+(cx?';opacity:.9':''),onclick:()=>go('queen:'+s.winner_id)},
       el('div',{style:'color:var(--gold);font-size:22px',html:icon('crown')}),
-      (c&&c.image&&c.image!=='-')?el('img',{src:c.image,alt:qname[s.winner_id]||'',style:'width:72px;height:72px;border-radius:14px;object-fit:cover;margin-top:8px;border:1px solid rgba(244,181,63,.4)'}):'',
+      (c&&c.image&&c.image!=='-')?el('img',{src:c.image,alt:qname[s.winner_id]||'',referrerPolicy:'no-referrer',loading:'eager',style:'width:72px;height:72px;border-radius:14px;object-fit:cover;margin-top:8px;border:1px solid rgba(244,181,63,.4)',onerror:function(){imgFallback(this,qname[s.winner_id]||'')}}):'',
       el('div',{style:'font-family:var(--disp);font-weight:800;font-size:19px;margin-top:6px'+(cx?';text-decoration:line-through;text-decoration-color:var(--magenta);text-decoration-thickness:2px':'')},qname[s.winner_id]||'—'),
       el('div',{style:'font-size:11.5px;color:var(--gold)'},seasonName(s.season_id)),
       cx?el('div',{style:'margin-top:7px'},el('span',{class:'pill',style:'background:rgba(230,0,126,.28);border-color:var(--magenta);color:#fff'},'✗ Cancelled')):'',
@@ -1142,7 +1159,7 @@ V({id:'missc',title:'Miss <em>Congeniality</em>',kicker:'Queens',icon:'heart',gr
     const c=D.contestants.find(x=>x.queen_id===s.miss_congeniality_id&&x.season_id===s.season_id);
     wrap.append(el('div',{class:'card',style:'cursor:pointer;text-align:center',onclick:()=>go('queen:'+s.miss_congeniality_id)},
       el('div',{style:'color:var(--mint)',html:icon('heart')}),
-      (c&&c.image&&c.image!=='-')?el('img',{src:c.image,alt:qname[s.miss_congeniality_id]||'',style:'width:72px;height:72px;border-radius:14px;object-fit:cover;margin-top:8px;border:1px solid rgba(116,224,200,.4)'}):'',
+      (c&&c.image&&c.image!=='-')?el('img',{src:c.image,alt:qname[s.miss_congeniality_id]||'',referrerPolicy:'no-referrer',loading:'eager',style:'width:72px;height:72px;border-radius:14px;object-fit:cover;margin-top:8px;border:1px solid rgba(116,224,200,.4)',onerror:function(){imgFallback(this,qname[s.miss_congeniality_id]||'')}}):'',
       el('div',{style:'font-family:var(--disp);font-weight:800;font-size:18px;margin-top:6px'},qname[s.miss_congeniality_id]||'—'),
       el('div',{style:'font-size:11.5px;color:var(--gold)'},seasonName(s.season_id))));
   });
@@ -1551,7 +1568,7 @@ V({id:'gallery',title:'Cast <em>Gallery</em>',kicker:'Queens',icon:'star',group:
     const g=el('div',{style:'display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:10px;margin-bottom:18px'});
     bySeason[s].sort((a,b)=>(+a.placement||99)-(+b.placement||99)).forEach(r=>{
       g.append(el('div',{style:'cursor:pointer;text-align:center',onclick:()=>go('queen:'+r.queen_id)},
-        el('img',{src:r.image,alt:r.queen,style:'width:96px;height:96px;object-fit:cover;border-radius:12px;border:1px solid rgba(255,255,255,.12)'}),
+        el('img',{src:r.image,alt:r.queen,referrerPolicy:'no-referrer',loading:'eager',style:'width:96px;height:96px;object-fit:cover;border-radius:12px;border:1px solid rgba(255,255,255,.12)',onerror:function(){imgFallback(this,r.queen)}}),
         el('div',{style:'font-size:11px;margin-top:4px;line-height:1.25'},r.queen),
         el('div',{style:'font-size:10px;color:var(--gold)'},r.placement?'#'+r.placement:'')));});
     card.append(g);});
@@ -2010,7 +2027,7 @@ V({id:'vault',title:'The <em>Vault</em>',kicker:'Data',icon:'grid',group:'Data',
     [new Set(rows.map(r=>r.season)).size,'seasons'],[Object.keys(rows[0]||{}).length-2,'columns']]);
   const card=el('div',{class:'card fade'});m.append(card);
   dataTable(card,{page:50,csv:'werkroom-master',rows,
-    cols:[{k:'queen',label:'Queen',html:r=>r.image?`<img src="${r.image}" style="width:26px;height:26px;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:6px">${r.queen}`:r.queen},
+    cols:[{k:'queen',label:'Queen',html:r=>r.image?`<img src="${r.image}" alt="${String(r.queen||'').replace(/"/g,'&quot;')}" referrerpolicy="no-referrer" loading="eager" onerror="imgFallback(this,'${String(r.queen||'').replace(/\\/g,'\\\\').replace(/'/g,"\\'").replace(/"/g,'&quot;')}')" style="width:26px;height:26px;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:6px">${r.queen}`:r.queen},
       {k:'season_label',label:'Season',filter:1},{k:'franchise',label:'Franchise',filter:1},
       {k:'placement',label:'Place',num:1},{k:'age',label:'Age',num:1},{k:'home_city',label:'Represented'},
       {k:'hometown',label:'Origin'},{k:'wins',label:'W',num:1},{k:'highs',label:'H',num:1},
