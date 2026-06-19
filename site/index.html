@@ -2989,6 +2989,260 @@ V({id:'ask',title:'Ask the <em>Library</em>',kicker:'Play',icon:'book',group:'Pl
   card.append(el('div',{style:'margin-top:10px;font-size:10.5px;color:rgba(247,240,230,.45)'},'100% in-browser · no servers, no AI APIs · every answer is a live database lookup'));
  }});
 
+/* ---------- 33. WINNER VIBE PREDICTOR (for fun) ---------- */
+/* A transparent, honest, deliberately-silly heuristic. We bucket every contestant by a
+   handful of traits, compute each bucket's winner-rate "lift" vs the base rate (with add-k
+   smoothing toward 1.0 so tiny buckets can't swing wild), then combine the trait log-lifts
+   into a single 0-100 "vibe score" via a logistic squash. It is NOT a real prediction —
+   ~48 crowns is far too few for stable signal. The breakdown shows every n so the user can
+   see exactly how thin the evidence is. Built once from masterRows(), cached. */
+const PRED_K=8;          // add-k smoothing strength (pulls small buckets toward base rate)
+const PRED_SCALE=0.7;    // how hard summed log-lifts move the squashed score
+function _predBuckets(){
+  if(_PREDM)return _PREDM;
+  const rows=masterRows().filter(r=>+r.placement);   // every contestant with a final placement
+  const total=rows.length, wins=rows.filter(r=>+r.placement===1).length;
+  const base=wins/total;                              // overall winner rate
+  // cast size per season -> normalize entrance order into thirds
+  const castSize={};rows.forEach(r=>{castSize[r.season]=(castSize[r.season]||0)+1;});
+  const F={};   // factor -> { bucketLabel -> {n, w} }
+  const bump=(f,b)=>{(F[f]=F[f]||{});(F[f][b]=F[f][b]||{n:0,w:0});};
+  rows.forEach(r=>{
+    const isWin=+r.placement===1;
+    const tag=(f,b)=>{if(b==null)return;bump(f,b);F[f][b].n++;if(isWin)F[f][b].w++;};
+    tag('zodiac',zodiac(r.birthdate));
+    tag('age',predAgeBand(r.age));
+    tag('entrance',predEntranceThird(r.entrance,castSize[r.season]));
+    tag('region',predRegion(r));
+    tag('letter',predLetter(r.canonical));
+    tag('length',predLenBand(r.canonical));
+  });
+  // shrunk rate r* = (w + k*base)/(n + k); lift = r*/base
+  const lift=(c)=>{if(!c||!c.n)return {lift:1,n:0,rate:0,shrunk:base};
+    const shrunk=(c.w+PRED_K*base)/(c.n+PRED_K);return {lift:shrunk/base,n:c.n,w:c.w,rate:c.w/c.n,shrunk};};
+  _PREDM={base,total,wins,F,castSize,lift};
+  return _PREDM;
+}
+let _PREDM=null;
+function predAgeBand(a){a=+a;if(!a)return null;return a<25?'Under 25':a<30?'25–29':a<35?'30–34':'35+';}
+function predEntranceThird(e,size){e=+e;if(!e||!size||size<2)return null;
+  const f=(e-1)/(size-1);return f<1/3?'First third':f<2/3?'Middle third':'Last third';}
+function predRegionOf(str){if(!str)return null;const p=String(str).split(',').map(x=>x.trim()).filter(Boolean);
+  return p.length>1?p[p.length-1].toUpperCase():(p[0]||'').toUpperCase()||null;}
+function predRegion(r){return predRegionOf(r.home_city||r.hometown);}
+function predLetter(name){const c=(String(name||'').trim()[0]||'').toUpperCase();return /[A-Z]/.test(c)?c:null;}
+function predLenBand(name){const L=String(name||'').replace(/\s+/g,' ').trim().length;if(!L)return null;
+  return L<=8?'Short (≤8)':L<=13?'Medium (9–13)':'Long (14+)';}
+/* score a single set of factor values -> {score 0-100, rows:[{factor,value,lift,n,rate}]} */
+function predScore(vals){const M=_predBuckets();let sum=0;const out=[];
+  const FACTS=[['zodiac','Zodiac sign'],['age','Age band'],['entrance','Entrance position'],
+    ['region','Home region'],['letter','Name initial'],['length','Name length']];
+  FACTS.forEach(([f,label])=>{const v=vals[f];
+    if(v==null){out.push({factor:label,value:'—',lift:null,n:0,rate:null,known:false});return;}
+    const c=(M.F[f]||{})[v];const L=M.lift(c);sum+=Math.log(L.lift);
+    out.push({factor:label,value:String(v),lift:L.lift,n:L.n,w:L.w,rate:L.rate,known:true});});
+  const score=Math.round(100/(1+Math.exp(-PRED_SCALE*sum)));
+  return {score,sum,rows:out,base:M.base};
+}
+/* derive the trait values for an existing contestant master-row */
+function predValsFromRow(r,castSize){
+  return {zodiac:zodiac(r.birthdate),age:predAgeBand(r.age),
+    entrance:predEntranceThird(r.entrance,castSize[r.season]),
+    region:predRegion(r),letter:predLetter(r.canonical),length:predLenBand(r.canonical)};
+}
+function predArrow(lift){if(lift==null)return ['–','rgba(247,240,230,.5)'];
+  if(lift>=1.08)return ['▲','var(--mint)'];if(lift<=0.92)return ['▼','var(--rose)'];return ['–','rgba(247,240,230,.7)'];}
+function predVerdict(score){
+  if(score>=62)return 'The stars (and the small print) are aligning — this one gives main-character energy.';
+  if(score>=52)return 'A solid vibe — historically the kind of profile that hangs around the top.';
+  if(score>=48)return 'Dead average — the data shrugs. Which is honestly most queens.';
+  if(score>=40)return 'Slightly underdog on paper — but underdogs win this show all the time.';
+  return 'The numbers are shady, but talent rewrites the numbers every single season.';}
+function predBreakdownTable(host,res){
+  const t=el('table',{style:'font-size:12.5px'});
+  t.append(el('tr',{},el('th',{},'Factor'),el('th',{},'Value'),el('th',{},'Winners in bucket'),
+    el('th',{},'Bucket rate'),el('th',{},'Base rate'),el('th',{},'n'),el('th',{},'Vibe')));
+  res.rows.forEach(r=>{const [ar,col]=predArrow(r.lift);
+    const tr=el('tr',{});
+    tr.append(el('td',{},r.factor));
+    tr.append(el('td',{style:'color:var(--gold)'},r.value));
+    tr.append(el('td',{},r.known?String(r.w):'—'));
+    tr.append(el('td',{},r.known?(100*r.rate).toFixed(0)+'%':'—'));
+    tr.append(el('td',{style:'color:rgba(247,240,230,.6)'},(100*res.base).toFixed(0)+'%'));
+    tr.append(el('td',{style:'color:rgba(247,240,230,.6)'},r.known?String(r.n):'no data'));
+    tr.append(el('td',{style:'color:'+col+';font-weight:700'},r.known?ar+' '+r.lift.toFixed(2)+'×':'–'));
+    t.append(tr);});
+  host.append(t);
+}
+function predScoreDial(score){
+  const col=score>=55?'var(--mint)':score>=45?'var(--gold)':'var(--rose)';
+  return el('div',{style:'display:flex;align-items:baseline;gap:12px;margin:6px 0 4px'},
+    el('div',{style:`font-family:var(--disp);font-weight:800;font-size:64px;line-height:1;color:${col}`},String(score)),
+    el('div',{style:'font-size:12px;letter-spacing:2px;text-transform:uppercase;color:rgba(247,240,230,.7)'},'Winner Vibe Score / 100'));
+}
+function predDisclaimer(){return el('div',{class:'card',style:'border-color:rgba(230,0,126,.45);background:rgba(230,0,126,.08);margin-bottom:18px'},
+  el('div',{style:'font-size:12.5px;line-height:1.6;color:rgba(247,240,230,.92)'},
+    el('b',{style:'color:var(--rose)'},'Just for fun. '),
+    'Drag Race is won on talent, charisma, nerve and the judges — not horoscopes. With only ~'+
+    _predBuckets().wins+' winners across '+_predBuckets().total+' contestant runs, every pattern below is a '+
+    'weak historical coincidence, not a real prediction. The score is a deliberately silly heuristic that '+
+    'shrinks tiny samples toward the average so they can’t lie too loudly. Read the n column and laugh.'));}
+function predMiniSummaryHTML(){const M=_predBuckets();
+  const zc=Object.values(M.F.zodiac||{}).map(c=>c.n);const zMin=Math.min(...zc),zMax=Math.max(...zc);
+  const ent=M.F.entrance||{};const eRow=t=>{const c=ent[t];return c?(100*c.w/c.n).toFixed(0)+'%':'—';};
+  const wrap=el('div',{class:'card fade',style:'margin-bottom:18px'});
+  wrap.append(sectionHead('What past winners actually have in common','var(--gold)'));
+  wrap.append(el('div',{style:'font-size:12.5px;line-height:1.8;color:rgba(247,240,230,.88)',html:
+    '<div>• <b>Zodiac is basically even.</b> Crowns spread across all twelve signs (buckets range '+zMin+'–'+zMax+' queens); no sign is a cheat code.</div>'+
+    '<div>• <b>Entrance order is roughly a coin flip.</b> First-third winner rate '+eRow('First third')+' vs last-third '+eRow('Last third')+' — both hug the '+(100*M.base).toFixed(0)+'% base rate.</div>'+
+    '<div>• <b>Region just tracks cast origins.</b> Big drag scenes send the most queens, so they hold the most crowns — volume, not destiny.</div>'+
+    '<div>• <b>Names tell you nothing.</b> First letter and length barely move once small buckets are shrunk toward average.</div>'}));
+  return wrap;}
+function predScoreAQueen(host){
+  const M=_predBuckets();
+  host.append(predDisclaimer());
+  const card=el('div',{class:'card',style:'max-width:640px'});
+  card.append(sectionHead('Build your queen','var(--magenta)'));
+  const lbl=t=>el('div',{style:'font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin:14px 0 6px'},t);
+  // name
+  card.append(lbl('Drag name (powers the name factors)'));
+  const nameI=el('input',{type:'text',placeholder:'e.g. Velveteen Mirage',style:'width:100%;max-width:300px'});
+  card.append(nameI);
+  // region dropdown (from real data)
+  const regions=[...new Set(masterRows().map(r=>predRegion(r)).filter(Boolean))]
+    .sort((a,b)=>(M.F.region[b]?M.F.region[b].n:0)-(M.F.region[a]?M.F.region[a].n:0));
+  card.append(lbl('Home region (state or country)'));
+  const regS=el('select',{style:'max-width:300px'});regS.append(el('option',{value:''},'— pick a region —'));
+  regions.forEach(rg=>regS.append(el('option',{value:rg},rg+'  ('+(M.F.region[rg]?M.F.region[rg].n:0)+' queens)')));
+  card.append(regS);
+  // zodiac: either pick a sign, or enter a birthday
+  card.append(lbl('Star sign — or a birthday to derive it'));
+  const zRow=el('div',{class:'chip-row',style:'gap:8px;align-items:center'});
+  const zS=el('select',{});zS.append(el('option',{value:''},'— unknown —'));
+  [...new Set(ZODIAC.map(z=>z[0]))].forEach(s=>zS.append(el('option',{value:s},s)));
+  const bdI=el('input',{type:'date',style:'color-scheme:dark'});
+  bdI.addEventListener('change',()=>{const z=zodiac(bdI.value);if(z)zS.value=z;});
+  zRow.append(zS,el('span',{style:'font-size:11px;color:rgba(247,240,230,.5)'},'or'),bdI);
+  card.append(zRow);
+  // age
+  card.append(lbl('Age at filming'));
+  const ageI=el('input',{type:'number',min:'18',max:'70',placeholder:'e.g. 27',style:'width:120px'});
+  card.append(ageI);
+  // entrance
+  card.append(lbl('Entrance order'));
+  const entRow=el('div',{class:'chip-row',style:'gap:8px;align-items:center'});
+  const entI=el('input',{type:'number',min:'1',max:'20',placeholder:'walked in #',style:'width:120px'});
+  const sizeI=el('input',{type:'number',min:'4',max:'20',value:'13',placeholder:'cast size',style:'width:120px'});
+  entRow.append(entI,el('span',{style:'font-size:11px;color:rgba(247,240,230,.5)'},'of'),sizeI,
+    el('span',{style:'font-size:11px;color:rgba(247,240,230,.5)'},'queens'));
+  card.append(entRow);
+  // flavor-only entrance look (explicitly unscored — no data exists)
+  card.append(lbl('Entrance look (flavor only — not scored, we have no look data)'));
+  const lookS=el('select',{style:'max-width:300px'});
+  ['','Bring the drama','Comedy queen','High fashion','Camp & kooky','Pageant polish','Spooky/alt'].forEach(o=>lookS.append(el('option',{value:o},o||'— skip —')));
+  card.append(lookS);
+  const go2=el('button',{class:'tab on',style:'display:block;margin-top:18px;font-size:14px;padding:10px 22px'},'★ Read her vibe');
+  card.append(go2);
+  host.append(card);
+  const out=el('div',{class:'fade',style:'margin-top:18px'});host.append(out);
+  go2.addEventListener('click',()=>{
+    const vals={
+      zodiac:zS.value||zodiac(bdI.value)||null,
+      age:predAgeBand(ageI.value),
+      entrance:predEntranceThird(entI.value,+sizeI.value),
+      region:regS.value?regS.value.toUpperCase():null,
+      letter:predLetter(nameI.value),
+      length:predLenBand(nameI.value)};
+    const res=predScore(vals);
+    out.innerHTML='';
+    const rc=el('div',{class:'card'});
+    rc.append(sectionHead((nameI.value.trim()||'Your queen')+'’s reading','var(--magenta)'));
+    rc.append(predScoreDial(res.score));
+    rc.append(el('div',{style:'font-size:13.5px;line-height:1.6;color:rgba(247,240,230,.9);margin:4px 0 14px'},predVerdict(res.score)));
+    const look=lookS.value;
+    if(look)rc.append(el('div',{class:'pill gold',style:'margin-bottom:12px'},'Entrance look: '+look+' (vibes only, unscored)'));
+    rc.append(sectionHead('Per-factor breakdown','var(--gold)'));
+    const wrap=el('div',{style:'overflow-x:auto'});rc.append(wrap);
+    predBreakdownTable(wrap,res);
+    rc.append(el('div',{style:'font-size:11px;color:rgba(247,240,230,.55);margin-top:10px'},
+      '▲ above the '+(100*res.base).toFixed(0)+'% base rate · ▼ below · – about average. Lifts are smoothed (add-'+PRED_K+') so a 1-queen bucket can’t scream.'));
+    out.append(rc);
+    if(out.scrollIntoView)out.scrollIntoView({behavior:'smooth'});
+  });
+}
+function predRankACast(host){
+  const M=_predBuckets();
+  host.append(predDisclaimer());
+  const ctrl=el('div',{class:'controls'});
+  const frS=el('select',{});FRANCHISES.forEach(f=>frS.append(el('option',{value:f},f)));
+  const seS=el('select',{});
+  ctrl.append(el('span',{style:'font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold)'},'Franchise'),frS,
+    el('span',{style:'font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold)'},'Season'),seS);
+  host.append(ctrl);
+  const out=el('div',{class:'fade'});host.append(out);
+  const fillSeasons=()=>{seS.innerHTML='';
+    D.seasons.filter(s=>s.franchise===frS.value).forEach(s=>seS.append(el('option',{value:s.season_id},s.season_label)));
+    draw();};
+  const draw=()=>{
+    const sid=seS.value;out.innerHTML='';
+    const cast=masterRows().filter(r=>r.season===sid);
+    if(!cast.length){out.append(el('div',{class:'card empty'},'No cast on file for that season.'));return;}
+    const castSize={};castSize[sid]=cast.length;
+    const scored=cast.map(r=>{const res=predScore(predValsFromRow(r,castSize));
+      return {queen:r.queen,queen_id:r.queen_id,score:res.score,placement:+r.placement||null,image:r.image};})
+      .sort((a,b)=>b.score-a.score);
+    scored.forEach((r,i)=>r.predRank=i+1);
+    const hasWinner=scored.some(r=>r.placement===1);
+    // model fit: Spearman-ish — does predicted order track actual placement?
+    const withPlace=scored.filter(r=>r.placement);
+    let hits=0,pairs=0;
+    for(let a=0;a<withPlace.length;a++)for(let b=a+1;b<withPlace.length;b++){pairs++;
+      const pa=withPlace[a],pb=withPlace[b];
+      // predRank a<b means model favors a; concordant if actual placement agrees (lower placement = better)
+      if((pa.predRank<pb.predRank)===(pa.placement<pb.placement))hits++;}
+    const concord=pairs?Math.round(100*hits/pairs):null;
+    const top=scored[0];
+    statCards(out,[[top.queen,'model’s pick'],[top.score,'top vibe score'],
+      [hasWinner?(scored.find(r=>r.placement===1)||{}).predRank+' / '+scored.length:'in progress','actual winner’s vibe rank'],
+      [concord!=null?concord+'%':'—','order agreement']]);
+    if(!hasWinner)out.append(el('div',{class:'pill gold',style:'margin-bottom:10px'},'No crowned winner yet — actual column shows current placements where known.'));
+    const card=el('div',{class:'card fade'});
+    card.append(sectionHead('Predicted vibe rank vs actual placement','var(--magenta)'));
+    const t=el('table',{style:'font-size:13px'});
+    t.append(el('tr',{},el('th',{},'Vibe rank'),el('th',{},'Queen'),el('th',{},'Vibe score'),el('th',{},'Actual place'),el('th',{},'Verdict')));
+    scored.forEach(r=>{const tr=el('tr',{style:'cursor:pointer'});
+      tr.addEventListener('click',()=>go('queen:'+r.queen_id));
+      let verdict='—',vc='rgba(247,240,230,.6)';
+      if(r.placement){const diff=r.placement-r.predRank;
+        if(r.placement===1&&r.predRank===1){verdict='called it ✦';vc='var(--mint)';}
+        else if(Math.abs(diff)<=1){verdict='close';vc='var(--gold)';}
+        else if(diff>0){verdict='model overrated';vc='var(--rose)';}
+        else{verdict='model slept on her';vc='var(--mint)';}}
+      tr.append(el('td',{style:'color:var(--gold)'},'#'+r.predRank),
+        el('td',{},qname[r.queen_id]||r.queen),
+        el('td',{style:'font-weight:700'},String(r.score)),
+        el('td',{},r.placement?'#'+r.placement:'—'),
+        el('td',{style:'color:'+vc},verdict));
+      t.append(tr);});
+    card.append(el('div',{style:'overflow-x:auto'},t));
+    card.append(el('div',{style:'font-size:11px;color:rgba(247,240,230,.55);margin-top:10px'},
+      'Order agreement = share of queen-pairs the model ranks in the same order as their real finish. ~50% is pure chance; '+
+      'the model rarely beats that by much, which is the whole point.'));
+    out.append(card);
+  };
+  frS.addEventListener('change',fillSeasons);seS.addEventListener('change',draw);
+  fillSeasons();
+}
+V({id:'predictor',title:'Winner Vibe <em>Predictor</em>',kicker:'Play · for fun',icon:'sparkle',group:'Play',ord:4,
+ desc:'A gloriously unscientific party trick: build a queen (or rank a real cast) and get a 0–100 “Winner Vibe Score” from the historical patterns hiding in the data. Spoiler — the patterns are weak, and that’s the joke.',
+ render(m){
+  _predBuckets();
+  m.innerHTML=head(this);
+  subTabs(m,'predictor',[
+    ['Score a queen',h=>{predScoreAQueen(h);h.append(predMiniSummaryHTML());}],
+    ['Rank a cast',h=>{predRankACast(h);h.append(predMiniSummaryHTML());}]]);
+ }});
+
 /* ============================ SECTION HOMEPAGES ============================ */
 /* Every nav group gets a landing page at #sec:<slug>. Clicking a group HEADING in the
    left rail opens it (and expands the accordion); the caret alone toggles expand/collapse. */
@@ -3077,6 +3331,7 @@ const VIEW_TEASER={
  trivia:()=>'fresh questions every round',
  hostpack:()=>'print-ready',
  ask:()=>'instant database answers',
+ predictor:()=>'a 0–100 vibe score · for fun',
  vault:()=>D.contestants.length+' rows · fully searchable'};
 function renderSectionHome(m,group){
   const meta=SECTION_META[group];
