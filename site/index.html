@@ -126,6 +126,18 @@ select,input[type=text]{background:rgba(0,0,0,.35);border:1px solid rgba(244,181
 .empty{padding:40px;text-align:center;color:rgba(247,240,230,.66);font-size:13.5px}
 .fade{animation:fade .5s ease}
 @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+/* animated franchise side-filter toggles */
+.frfilter{display:flex;flex-wrap:wrap;gap:7px;align-items:center;margin:2px 0 14px}
+.frtog{font-family:var(--mono);font-size:11.5px;padding:5px 12px;border-radius:20px;cursor:pointer;
+  background:rgba(0,0,0,.3);border:1px solid rgba(244,181,63,.3);color:rgba(247,240,230,.7);
+  transition:background .2s,border-color .2s,color .2s,transform .12s;user-select:none}
+.frtog:hover{border-color:var(--magenta);transform:translateY(-1px)}
+.frtog.on{background:var(--magenta);border-color:var(--magenta);color:#fff}
+.frtog .dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;vertical-align:middle;background:currentColor;opacity:.85}
+/* row reveal/collapse — opacity transition, then display:none after fade */
+.frrow{transition:opacity .32s ease}
+.frrow.fr-out{opacity:0}
+.frrow.fr-gone{display:none}
 .tooltip{position:fixed;pointer-events:none;background:#0c0114;border:1px solid var(--gold);
   border-radius:8px;padding:8px 11px;font-size:12.5px;z-index:9998;max-width:240px;box-shadow:var(--shadow);opacity:0;transition:opacity .12s}
 /* status cells */
@@ -344,6 +356,44 @@ function dataTable(host,o){ // o:{cols:[{k,label,num,html(r),filter}],rows,page=
 function fTabs(m,viewId){const ctrl=el('div',{class:'tabs fade'});m.append(ctrl);
   ['All',...FRANCHISES].forEach(f=>{const b=el('button',{class:'tab'+(FRANCHISE===f?' on':'')},f);
     b.addEventListener('click',()=>{FRANCHISE=f;go(viewId);});ctrl.append(b);});}
+/* animated, dynamic franchise side-filters. Multi-select toggle chips read the franchise
+   list straight from the data (FRANCHISES) so new franchises need no code change. Rows must
+   carry class "frrow" and data-fr="<franchise>[,<franchise>…]"; matching rows fade in/out.
+   o:{host, palette?}  → appended a .frfilter bar; re-applies on demand. */
+function franchiseToggles(host,o){o=o||{};
+  const present=[...new Set(FRANCHISES)].filter(f=>$$('.frrow['+'data-fr*="'+f+'"]',host).length||$$('.frrow',host).some(r=>(r.dataset.fr||'').split(',').includes(f)));
+  const list=present.length?present:[...FRANCHISES];
+  const active=new Set(list);            // start with all visible
+  const bar=el('div',{class:'frfilter fade'});
+  const COLORS={};list.forEach((f,i)=>COLORS[f]=PAL[i%PAL.length]);
+  const apply=()=>{
+    const all=active.size===0||active.size>=list.length;
+    $$('.frrow',host).forEach(r=>{
+      const frs=(r.dataset.fr||'').split(',').map(s=>s.trim()).filter(Boolean);
+      const show=all||frs.some(f=>active.has(f));
+      if(show){r.classList.remove('fr-gone');requestAnimationFrame(()=>r.classList.remove('fr-out'));}
+      else{r.classList.add('fr-out');setTimeout(()=>{if(r.classList.contains('fr-out'))r.classList.add('fr-gone');},320);}
+    });
+    if(o.onApply)o.onApply(all?null:active);
+  };
+  const mkChip=(label,kind)=>{const c=el('div',{class:'frtog'});
+    if(kind!=='all')c.append(el('span',{class:'dot',style:'color:'+COLORS[label]}));
+    c.append(document.createTextNode(label));return c;};
+  const allChip=mkChip('All','all');
+  const chips={};
+  const refresh=()=>{const all=active.size>=list.length;allChip.classList.toggle('on',all);
+    list.forEach(f=>chips[f].classList.toggle('on',active.has(f)));};
+  allChip.addEventListener('click',()=>{list.forEach(f=>active.add(f));refresh();apply();});
+  bar.append(allChip);
+  list.forEach(f=>{const c=mkChip(f);chips[f]=c;
+    c.addEventListener('click',()=>{
+      if(active.has(f))active.delete(f);else active.add(f);
+      if(active.size===0){list.forEach(x=>active.add(x));}  // never leave empty -> reset to all
+      refresh();apply();});
+    bar.append(c);});
+  host.prepend(bar);refresh();apply();
+  return {apply,active};
+}
 function statCards(m,items){m.append(el('div',{class:'grid fade',style:'grid-template-columns:repeat(auto-fit,minmax(140px,1fr));margin-bottom:14px',
   html:items.map(i=>`<div class="card"><div class="stat">${i[0]}</div><div class="statlbl">${i[1]}</div></div>`).join('')}));}
 /* contestant-level master join (built lazily, cached) */
@@ -493,22 +543,31 @@ function renderSeasonDetail(m,sid){
   const s=D.seasons.find(x=>x.season_id===sid);if(!s){m.innerHTML='<div class="empty">Season not found</div>';return;}
   const cs=contestantsBySeason(sid).sort((a,b)=>(+a.placement||99)-(+b.placement||99));
   const eps=D.episodes.filter(e=>e.season_id===sid).sort((a,b)=>+a.episode_number-+b.episode_number);
+  /* air-date span + episode cadence (gracefully handle blank air_date) */
+  const dts=eps.map(e=>e.air_date).filter(d=>d&&d!=='-').sort();
+  let runSpan='';
+  if(dts.length>=2){const span=Math.round((new Date(dts[dts.length-1])-new Date(dts[0]))/864e5);
+    const cad=(span/(dts.length-1)).toFixed(1);
+    runSpan=` · aired <b style="color:var(--gold)">${dts[0]} → ${dts[dts.length-1]}</b> (${span} days · ~${cad} days/ep)`;}
+  else if(dts.length===1){runSpan=` · aired <b style="color:var(--gold)">${dts[0]}</b>`;}
   m.innerHTML=`<div class="vhead fade"><div class="vkicker">${s.platform} · ${s.premiere_date||''}</div>
     <h1 class="vtitle">${seasonName(sid)}</h1>
-    <div class="vdesc">Winner <b style="color:var(--gold)">${qname[s.winner_id]||'—'}</b> · Miss Congeniality ${qname[s.miss_congeniality_id]||'—'} · ${eps.length} episodes${s.cash_prize?` · prize <b style="color:var(--gold)">$${Number(s.cash_prize).toLocaleString()}</b>`:''}</div>
+    <div class="vdesc">Winner <b style="color:var(--gold)">${qname[s.winner_id]||'—'}</b> · Miss Congeniality ${qname[s.miss_congeniality_id]||'—'} · ${eps.length} episodes${s.cash_prize?` · prize <b style="color:var(--gold)">$${Number(s.cash_prize).toLocaleString()}</b>`:''}${runSpan}</div>
     <div style="margin-top:10px"><button class="tab" onclick="go('atlas')">← All seasons</button></div></div>`;
   const grid=el('div',{class:'grid fade',style:'grid-template-columns:1.1fr 1fr;gap:18px'});
   // contestants
   const ct=el('div',{class:'card'});
   ct.innerHTML='<div class="vkicker">Cast & placement</div>';
-  const tbl=el('table');tbl.innerHTML='<tr><th>#</th><th>Queen</th><th title="Entrance order">Ent</th><th>W</th><th>H</th><th>L</th><th>B</th></tr>';
+  const tbl=el('table');tbl.innerHTML='<tr><th>#</th><th>Queen</th><th title="Age at filming">Age</th><th title="Entrance order">Ent</th><th>W</th><th>H</th><th>L</th><th>B</th></tr>';
   cs.forEach(c=>{const tr=el('tr',{style:'cursor:pointer',onclick:()=>go('queen:'+c.queen_id)});
     const isWin=(+c.placement===1)||(s.winner_id&&s.winner_id!=='-'&&s.winner_id===c.queen_id);
     const isRU=(+c.placement===2);
+    const age=(+c.age_at_filming)?(+c.age_at_filming):null;
     const pills=(isWin?` <span class="pill gold">${icon('crown')} Crowned</span>`:'')
       +(isRU?' <span class="pill">Runner-up</span>':'')
       +(c.miss_congeniality==='Yes'?' <span class="pill mint">Miss C</span>':'');
     tr.innerHTML=`<td>${c.placement||'—'}</td><td>${cname(c)}${pills}</td>
+      <td style="color:rgba(247,240,230,.82)">${age||'—'}</td>
       <td style="color:rgba(247,240,230,.82)">${c.entrance_order||'—'}</td>
       <td>${c.wins}</td><td>${c.highs}</td><td>${c.lows}</td><td>${c.bottoms}</td>`;tbl.append(tr);});
   ct.append(tbl);grid.append(ct);
@@ -537,9 +596,12 @@ function renderSeasonDetail(m,sid){
     else sub='♪ —';
     const wrap=el('div',{style:'border-bottom:1px solid rgba(255,255,255,.06)'});
     const caret=el('span',{style:'color:var(--magenta);font-size:10px;width:10px;flex:none;transition:transform .15s'},'▸');
+    const aired=(e.air_date&&e.air_date!=='-')?e.air_date:'';
     const hdr=el('div',{style:'padding:8px 0;cursor:pointer;display:flex;gap:8px;align-items:baseline'},caret,
       el('div',{style:'flex:1'},
-        el('div',{style:'font-size:13.5px;color:var(--cream)'},`${e.episode_number}. ${e.title&&e.title!=='-'?e.title:'(untitled)'}`),
+        el('div',{style:'display:flex;gap:8px;align-items:baseline;flex-wrap:wrap'},
+          el('span',{style:'font-size:13.5px;color:var(--cream)'},`${e.episode_number}. ${e.title&&e.title!=='-'?e.title:'(untitled)'}`),
+          aired?el('span',{style:'font-size:10.5px;color:var(--gold);font-family:var(--mono);letter-spacing:.5px;white-space:nowrap'},aired):''),
         el('div',{style:'font-size:11.5px;color:rgba(247,240,230,.76);margin-top:3px'},
           sub+(gjs.length?`  ·  GJ: ${gjs.join(', ')}`:''))));
     const det=el('div',{style:'display:none;padding:2px 0 12px 18px;font-size:12.5px;line-height:1.6'});
@@ -549,6 +611,7 @@ function renderSeasonDetail(m,sid){
         (val&&val.nodeType)?val:document.createTextNode(val)));};
     if(e.synopsis&&e.synopsis!=='-')
       det.append(el('div',{style:'margin:2px 0 9px;font-size:12.5px;line-height:1.6;color:rgba(247,240,230,.9)'},e.synopsis));
+    field('Air date', aired);
     field('Main challenge', (e.main_challenge&&e.main_challenge!=='-')
       ? e.main_challenge+(e.main_challenge_type&&e.main_challenge_type!=='-'?` (${e.main_challenge_type})`:'') : null);
     field('Mini challenge', e.mini_challenge);
@@ -1690,6 +1753,124 @@ V({id:'connect',title:'The <em>Connection</em> Finder',kicker:'Connections',icon
   a.addEventListener('change',draw);draw();
  }});
 
+/* ---------- 29c. CROSS-FRANCHISE CONNECTIONS ---------- */
+/* The threads that run between franchises: queens who competed in more than one, lip-sync
+   songs the show reached for in different franchises, and guest judges who turned up across
+   the map. Each angle carries animated franchise side-filters (read from the data). */
+V({id:'crossfranchise',title:'Cross-Franchise <em>Threads</em>',kicker:'Connections',icon:'web',group:'Connections',ord:4,
+ desc:'The connective tissue between the franchises — performers, songs and judges that crossed the borders. Toggle the franchise chips to fade the lists down to the crossings you care about.',
+ render(m){
+  m.innerHTML=head(this);
+  const fr={};D.seasons.forEach(s=>fr[s.season_id]=s.franchise);
+  /* franchise display ordering for a row's chips */
+  const frOrder=f=>{const i=FRANCHISES.indexOf(f);return i<0?99:i;};
+  const frChip=f=>`<span class="pill${f==='All Stars'?' mint':' gold'}" style="font-size:9px;margin:1px 2px 1px 0">${f}</span>`;
+
+  /* ---- 1) queens in more than one franchise ---- */
+  const byQ={};D.contestants.forEach(c=>{(byQ[c.queen_id]=byQ[c.queen_id]||[]).push(c);});
+  const multiQ=[];
+  Object.entries(byQ).forEach(([qid,rs])=>{
+    const frs=[...new Set(rs.map(c=>fr[c.season_id]).filter(Boolean))].sort((a,b)=>frOrder(a)-frOrder(b));
+    if(frs.length<2)return;
+    const runs=rs.slice().sort((a,b)=>SEASON_ORDER.indexOf(a.season_id)-SEASON_ORDER.indexOf(b.season_id));
+    multiQ.push({qid,name:qname[qid]||qid,frs,
+      n_fr:frs.length,n_seasons:runs.length,
+      best:Math.min(...runs.map(c=>+c.placement||99)),
+      runsByFr:frs.map(f=>({f,seasons:runs.filter(c=>fr[c.season_id]===f).map(c=>seasonName(c.season_id))}))});
+  });
+  multiQ.sort((a,b)=>b.n_fr-a.n_fr||b.n_seasons-a.n_seasons||a.name.localeCompare(b.name));
+
+  const queensTab=host=>{
+    if(!multiQ.length){host.innerHTML='<div class="empty">No queens span more than one franchise yet.</div>';return;}
+    statCards(host,[[multiQ.length,'queens in 2+ franchises'],
+      [multiQ.filter(q=>q.n_fr>=3).length,'in 3 or more'],
+      [multiQ.filter(q=>q.best===1).length,'with a crown somewhere']]);
+    const card=el('div',{class:'card fade'});host.append(card);
+    const wrap=el('div',{style:'overflow-x:auto'});
+    let h='<table><tr><th>Queen</th><th>Franchises</th><th title="Number of franchises">#Fr</th><th title="Total seasons">#Sea</th><th>Where she competed</th></tr>';
+    multiQ.forEach(q=>{
+      const where=q.runsByFr.map(g=>`<b style="color:var(--gold)">${g.f}:</b> ${g.seasons.join(', ')}`).join(' &nbsp;·&nbsp; ');
+      h+=`<tr class="frrow" data-fr="${q.frs.join(',')}" data-qid="${q.qid}" style="cursor:pointer">`+
+        `<td style="white-space:nowrap">${q.name}</td>`+
+        `<td>${q.frs.map(frChip).join('')}</td>`+
+        `<td style="color:var(--rose);font-weight:700">${q.n_fr}</td>`+
+        `<td style="color:rgba(247,240,230,.82)">${q.n_seasons}</td>`+
+        `<td style="font-size:12px">${where}</td></tr>`;});
+    h+='</table>';wrap.innerHTML=h;card.append(wrap);
+    $$('tr[data-qid]',wrap).forEach(tr=>tr.onclick=()=>go('queen:'+tr.dataset.qid));
+    franchiseToggles(card);
+  };
+
+  /* ---- 2) lip-sync songs used across different franchises ---- */
+  const epsAll={};D.episodes.forEach(e=>{if(e.lip_sync_song_id&&e.lip_sync_song_id!=='-')
+    (epsAll[e.lip_sync_song_id]=epsAll[e.lip_sync_song_id]||[]).push(e);});
+  D.lip_syncs.forEach(l=>{if(l.song_id&&l.song_id!=='-'){const e=_EP[l.episode_id];
+    if(e){(epsAll[l.song_id]=epsAll[l.song_id]||[]);if(!epsAll[l.song_id].some(x=>x.episode_id===e.episode_id))epsAll[l.song_id].push(e);}}});
+  const crossSongs=[];
+  Object.entries(epsAll).forEach(([sid,eps])=>{
+    const frs=[...new Set(eps.map(e=>fr[e.season_id]).filter(Boolean))].sort((a,b)=>frOrder(a)-frOrder(b));
+    if(frs.length<2)return;
+    const so=_SONG[sid];if(!so||!so.title||so.title==='-')return;
+    crossSongs.push({sid,title:so.title,artist:so.artist&&so.artist!=='-'?so.artist:'',frs,n_fr:frs.length,
+      uses:eps.length,seasons:[...new Set(eps.map(e=>e.season_id))].sort((a,b)=>SEASON_ORDER.indexOf(a)-SEASON_ORDER.indexOf(b))});});
+  crossSongs.sort((a,b)=>b.n_fr-a.n_fr||b.uses-a.uses||a.title.localeCompare(b.title));
+
+  const songsTab=host=>{
+    if(!crossSongs.length){host.innerHTML='<div class="empty">No lip-sync song has crossed franchises yet.</div>';return;}
+    statCards(host,[[crossSongs.length,'songs used in 2+ franchises'],
+      [crossSongs.filter(s=>s.n_fr>=3).length,'in 3 or more'],
+      [crossSongs[0]?crossSongs[0].uses:'—','most reuses (top song)']]);
+    const card=el('div',{class:'card fade'});host.append(card);
+    const wrap=el('div',{style:'overflow-x:auto'});
+    let h='<table><tr><th>Song</th><th>Artist</th><th>Franchises</th><th title="Franchise count">#Fr</th><th title="Total uses">Uses</th><th>Seasons</th></tr>';
+    crossSongs.forEach(s=>{
+      h+=`<tr class="frrow" data-fr="${s.frs.join(',')}">`+
+        `<td style="font-size:13px">${s.title}</td>`+
+        `<td style="color:rgba(247,240,230,.78);font-size:12px">${s.artist||'—'}</td>`+
+        `<td>${s.frs.map(frChip).join('')}</td>`+
+        `<td style="color:var(--rose);font-weight:700">${s.n_fr}</td>`+
+        `<td style="color:var(--gold);font-weight:700">${s.uses}</td>`+
+        `<td style="font-size:12px;color:rgba(247,240,230,.82)">${s.seasons.map(seasonName).join(', ')}</td></tr>`;});
+    h+='</table>';wrap.innerHTML=h;card.append(wrap);
+    franchiseToggles(card);
+  };
+
+  /* ---- 3) guest judges across franchises ---- */
+  const byJudge={};D.appearances.filter(a=>a.appearance_type==='GUEST_JUDGE'&&a.person_name&&a.person_name!=='-')
+    .forEach(a=>{(byJudge[a.person_name]=byJudge[a.person_name]||[]).push(a);});
+  const crossJudges=[];
+  Object.entries(byJudge).forEach(([name,aps])=>{
+    const frs=[...new Set(aps.map(a=>fr[a.season_id]).filter(Boolean))].sort((a,b)=>frOrder(a)-frOrder(b));
+    if(frs.length<2)return;
+    crossJudges.push({name,frs,n_fr:frs.length,visits:aps.length,
+      seasons:[...new Set(aps.map(a=>a.season_id))].sort((a,b)=>SEASON_ORDER.indexOf(a)-SEASON_ORDER.indexOf(b))});});
+  crossJudges.sort((a,b)=>b.n_fr-a.n_fr||b.visits-a.visits||a.name.localeCompare(b.name));
+
+  const judgesTab=host=>{
+    if(!crossJudges.length){host.innerHTML='<div class="empty">No guest judge spans more than one franchise yet. (Panel/guest data is fullest for the US main series and All Stars.)</div>';return;}
+    statCards(host,[[crossJudges.length,'judges across 2+ franchises'],
+      [crossJudges.filter(j=>j.n_fr>=3).length,'in 3 or more'],
+      [crossJudges[0]?crossJudges[0].visits:'—','most visits (top judge)']]);
+    const card=el('div',{class:'card fade'});host.append(card);
+    const wrap=el('div',{style:'overflow-x:auto'});
+    let h='<table><tr><th>Guest judge</th><th>Franchises</th><th title="Franchise count">#Fr</th><th title="Judging visits">Visits</th><th>Seasons</th></tr>';
+    crossJudges.forEach(j=>{
+      h+=`<tr class="frrow" data-fr="${j.frs.join(',')}">`+
+        `<td style="white-space:nowrap">${j.name}</td>`+
+        `<td>${j.frs.map(frChip).join('')}</td>`+
+        `<td style="color:var(--rose);font-weight:700">${j.n_fr}</td>`+
+        `<td style="color:var(--gold);font-weight:700">${j.visits}</td>`+
+        `<td style="font-size:12px;color:rgba(247,240,230,.82)">${j.seasons.map(seasonName).join(', ')}</td></tr>`;});
+    h+='</table>';wrap.innerHTML=h;card.append(wrap);
+    franchiseToggles(card);
+  };
+
+  subTabs(m,'crossfranchise',[
+    ['Queens · '+multiQ.length,queensTab],
+    ['Lip-sync songs · '+crossSongs.length,songsTab],
+    ['Guest judges · '+crossJudges.length,judgesTab]]);
+ }});
+
 /* ---------- 30. DATA HEALTH / METHODOLOGY ---------- */
 V({id:'health',title:'Data <em>Health</em>',kicker:'The Connections',icon:'chart',group:'About',hidden:true,
  desc:'Transparency on coverage — what\u2019s verified, what\u2019s still flagged, and how the database was built.',
@@ -2681,8 +2862,8 @@ const SECTION_META={
   intro:'The judging table and the famous faces beside it — who has judged, how often they came back, what they’re famous for, and how the panel itself shifted era by era.',
   how:'<b>Guest Judges</b> ranks every visitor by appearances — click a column header to re-sort or type in the filter box to find a name. <b>The Panel</b> carries sub-tabs including service ribbons, one cell per season of tenure. Franchise tabs scope everything.'},
  Connections:{title:'The <em>Connections</em>',
-  intro:'The webs that tie the franchise together — alumni returning to judge and host, the second acts after the crown, and a finder that links any queen to her castmates, rivals and returns.',
-  how:'In the <b>Connection Finder</b>, pick a queen from the dropdown to map everyone she competed with, lip-synced against, and every alum return. In the <b>Alumni Web</b>, click any node or name to travel. Underlined names are always links — follow them.'},
+  intro:'The webs that tie the franchise together — alumni returning to judge and host, the second acts after the crown, the threads that cross between franchises, and a finder that links any queen to her castmates, rivals and returns.',
+  how:'In the <b>Connection Finder</b>, pick a queen from the dropdown to map everyone she competed with, lip-synced against, and every alum return. <b>Cross-Franchise Threads</b> gathers the queens, lip-sync songs and guest judges that span more than one franchise — flip the <b>sub-tabs</b> for each angle and tap the animated <b>franchise chips</b> to fade the list down to the crossings you want. In the <b>Alumni Web</b>, click any node or name to travel. Underlined names are always links — follow them.'},
  Play:{title:'Time to <em>Play</em>',
   intro:'The library after dark — a trivia night generated live from the database, a print-ready host pack for game nights, and a Librarian who answers questions with zero AI guesswork.',
   how:'<b>Trivia Night</b> deals fresh questions every round and scores you on the spot. The <b>Host Pack</b> is built for paper — hit print (Cmd/Ctrl-P) and the noir chrome strips itself away. <b>Ask the Library</b> in plain English; every answer is a live database lookup with explore links.'},
@@ -2736,6 +2917,9 @@ const VIEW_TEASER={
  alumniweb:()=>X.alumni_links.length+' alumni links',
  connect:()=>D.meta.queens+' queens to link',
  secondact:()=>D.appearances.filter(a=>a.alum_queen_id&&a.alum_queen_id!=='-').length+' alum returns',
+ crossfranchise:()=>{const fr={};D.seasons.forEach(s=>fr[s.season_id]=s.franchise);const byQ={};
+  D.contestants.forEach(c=>{(byQ[c.queen_id]=byQ[c.queen_id]||new Set()).add(fr[c.season_id]);});
+  return Object.values(byQ).filter(s=>s.size>=2).length+' queens cross over';},
  trivia:()=>'fresh questions every round',
  hostpack:()=>'print-ready',
  ask:()=>'instant database answers',
