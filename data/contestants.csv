@@ -1,365 +1,365 @@
 contestant_id,queen_id,season_id,placement,entrance_order,home_city,wins,highs,lows,bottoms,eliminated_episode,miss_congeniality,drag_name_used,image,earnings,age_at_filming
 US01-Q0001,Q0001,US01,1,9,"Minneapolis, MN",2,1,0,1,,No,-,-,-,28
-US01-Q0002,Q0002,US01,2,2,"Denver, CO",1,3,1,0,,Yes,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/6/6f/NinaFlowersS1CastMug.png/revision/latest/scale-to-width-down/105?cb=20210901221108,-,34
-US01-Q0003,Q0003,US01,3,3,"Ft. Lauderdale, FL",1,1,1,3,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/a/ae/RebeccaGlasscockS1CastMug.png/revision/latest/scale-to-width-down/105?cb=20210901221254,-,26
-US01-Q0004,Q0004,US01,4,1,"Las Vegas, NV",0,1,1,2,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/a/a7/ShannelS1CastMug.png/revision/latest/scale-to-width-down/105?cb=20210901221334,-,29
-US01-Q0005,Q0005,US01,5,4,"Los Angeles, CA",2,2,0,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/c/c3/OnginaS1CastMug.png/revision/latest/scale-to-width-down/105?cb=20210901221201,-,26
-US01-Q0006,Q0006,US01,6,8,"Chicago, IL",0,0,1,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/5/57/JadeSotomayorS1CastMug.png/revision/latest/scale-to-width-down/105?cb=20210901221034,-,25
-US01-Q0007,Q0007,US01,7,6,"Cleveland, OH",0,0,0,3,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/a/a4/AkashiaS1CastMug.png/revision/latest/scale-to-width-down/105?cb=20210901220911,-,24
-US01-Q0008,Q0008,US01,8,7,"Long Beach, CA",0,0,0,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/9/96/TammieBrownS1CastMug.png/revision/latest/scale-to-width-down/105?cb=20210901221428,-,29
-US01-Q0009,Q0009,US01,9,5,"Raleigh, NC",0,0,0,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/5/5c/VictoriaParkerS1CastMug.png/revision/latest/scale-to-width-down/105?cb=20210901221612,-,39
-US02-Q0010,Q0010,US02,1,12,"Orlando, FL",3,3,1,0,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/d/d5/TyraSanchezS2CastMug.png/revision/latest/scale-to-width-down/105?cb=20220212225535,-,21
-US02-Q0011,Q0011,US02,2,3,"Riverside, CA",2,3,0,2,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/6/68/RavenS2CastMug.png/revision/latest/scale-to-width-down/105?cb=20220212225637,-,30
-US02-Q0012,Q0012,US02,3,4,"Boston, MA",0,2,1,4,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/0/06/JujubeeS2CastMug.png/revision/latest/scale-to-width-down/105?cb=20220212225724,-,25
-US02-Q0013,Q0013,US02,4,10,"Falls Church, VA",1,1,1,2,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/6/63/TatiannaS2CastMug.png/revision/latest/scale-to-width-down/105?cb=20220212225734,-,21
-US02-Q0014,Q0014,US02,5,11,"Rochester, NY",0,4,1,1,,Yes,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/9/98/PandoraBoxxS2CastMug.png/revision/latest/scale-to-width-down/105?cb=20220212225746,-,37
-US02-Q0015,Q0015,US02,6,8,"San Juan, PR",1,2,0,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/9/98/JessicaWildS2CastMug.png/revision/latest/scale-to-width-down/105?cb=20220212225756,-,29
-US02-Q0016,Q0016,US02,7,5,"New York, NY",1,0,0,3,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/b/b1/SaharaDavenportS2CastMug.png/revision/latest/scale-to-width-down/105?cb=20220212225810,-,25
-US02-Q0017,Q0017,US02,8,6,"Mira Loma, CA",1,0,0,2,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/7/76/MorganMcMichaelsS2CastMug.png/revision/latest/scale-to-width-down/105?cb=20220212225820,-,28
-US02-Q0018,Q0018,US02,9,9,"Atlanta, GA",0,0,1,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/9/97/SoniqueS2CastMug.png/revision/latest/scale-to-width-down/105?cb=20220212225838,-,26
-US02-Q0019,Q0019,US02,10,7,"Bedford, TX",0,0,1,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/d/d6/MystiqueSummersMadisonS2CastMug.png/revision/latest/scale-to-width-down/105?cb=20220212225847,-,25
+US01-Q0002,Q0002,US01,2,2,"Denver, CO",1,3,1,0,,Yes,-,images/queens/US01-Q0002.webp,-,34
+US01-Q0003,Q0003,US01,3,3,"Ft. Lauderdale, FL",1,1,1,3,,No,-,images/queens/US01-Q0003.webp,-,26
+US01-Q0004,Q0004,US01,4,1,"Las Vegas, NV",0,1,1,2,,No,-,images/queens/US01-Q0004.webp,-,29
+US01-Q0005,Q0005,US01,5,4,"Los Angeles, CA",2,2,0,1,,No,-,images/queens/US01-Q0005.webp,-,26
+US01-Q0006,Q0006,US01,6,8,"Chicago, IL",0,0,1,1,,No,-,images/queens/US01-Q0006.webp,-,25
+US01-Q0007,Q0007,US01,7,6,"Cleveland, OH",0,0,0,3,,No,-,images/queens/US01-Q0007.webp,-,24
+US01-Q0008,Q0008,US01,8,7,"Long Beach, CA",0,0,0,1,,No,-,images/queens/US01-Q0008.webp,-,29
+US01-Q0009,Q0009,US01,9,5,"Raleigh, NC",0,0,0,1,,No,-,images/queens/US01-Q0009.webp,-,39
+US02-Q0010,Q0010,US02,1,12,"Orlando, FL",3,3,1,0,,No,-,images/queens/US02-Q0010.webp,-,21
+US02-Q0011,Q0011,US02,2,3,"Riverside, CA",2,3,0,2,,No,-,images/queens/US02-Q0011.webp,-,30
+US02-Q0012,Q0012,US02,3,4,"Boston, MA",0,2,1,4,,No,-,images/queens/US02-Q0012.webp,-,25
+US02-Q0013,Q0013,US02,4,10,"Falls Church, VA",1,1,1,2,,No,-,images/queens/US02-Q0013.webp,-,21
+US02-Q0014,Q0014,US02,5,11,"Rochester, NY",0,4,1,1,,Yes,-,images/queens/US02-Q0014.webp,-,37
+US02-Q0015,Q0015,US02,6,8,"San Juan, PR",1,2,0,1,,No,-,images/queens/US02-Q0015.webp,-,29
+US02-Q0016,Q0016,US02,7,5,"New York, NY",1,0,0,3,,No,-,images/queens/US02-Q0016.webp,-,25
+US02-Q0017,Q0017,US02,8,6,"Mira Loma, CA",1,0,0,2,,No,-,images/queens/US02-Q0017.webp,-,28
+US02-Q0018,Q0018,US02,9,9,"Atlanta, GA",0,0,1,1,,No,-,images/queens/US02-Q0018.webp,-,26
+US02-Q0019,Q0019,US02,10,7,"Bedford, TX",0,0,1,1,,No,-,images/queens/US02-Q0019.webp,-,25
 US02-Q0020,Q0020,US02,11,1,"Atlanta, GA",0,0,0,1,,No,-,-,-,36
-US02-Q0021,Q0021,US02,12,2,"Studio City, CA",0,0,0,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/7/7f/ShangelaS2CastMug.png/revision/latest/scale-to-width-down/105?cb=20220212225914,-,28
-US03-Q0022,Q0022,US03,1,12,"Los Angeles, CA",3,4,1,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/f/f8/RajaS3CastMug.jpeg/revision/latest/scale-to-width-down/105?cb=20210901153542,-,36
-US03-Q0023,Q0023,US03,2,4,"New York, NY",3,4,1,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/8/88/ManilaLuzonS3CastMug.jpeg/revision/latest/scale-to-width-down/105?cb=20210901153322,-,28
-US03-Q0024,Q0024,US03,3,9,"St. Petersburg, FL",3,2,2,4,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/e/ee/AlexisMateoS3CastMug.jpeg/revision/latest/scale-to-width-down/110?cb=20210901152949,-,30
-US03-Q0025,Q0025,US03,4,7,"Manatí, PR",1,4,2,2,,Yes,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/c/c8/YaraSofiaS3CastMug.jpeg/revision/latest/scale-to-width-down/105?cb=20210901153820,-,26
+US02-Q0021,Q0021,US02,12,2,"Studio City, CA",0,0,0,1,,No,-,images/queens/US02-Q0021.webp,-,28
+US03-Q0022,Q0022,US03,1,12,"Los Angeles, CA",3,4,1,1,,No,-,images/queens/US03-Q0022.webp,-,36
+US03-Q0023,Q0023,US03,2,4,"New York, NY",3,4,1,1,,No,-,images/queens/US03-Q0023.webp,-,28
+US03-Q0024,Q0024,US03,3,9,"St. Petersburg, FL",3,2,2,4,,No,-,images/queens/US03-Q0024.webp,-,30
+US03-Q0025,Q0025,US03,4,7,"Manatí, PR",1,4,2,2,,Yes,-,images/queens/US03-Q0025.webp,-,26
 US03-Q0026,Q0026,US03,5,2,"Elmwood Park, NJ",0,1,3,3,,No,-,-,-,25
-US03-Q0021,Q0021,US03,6,13,"Los Angeles, CA",2,2,1,3,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/f/fa/ShangelaS3CastMug.jpeg/revision/latest/scale-to-width-down/105?cb=20210901153612,-,29
-US03-Q0027,Q0027,US03,7,1,"Norwalk, CA",0,1,0,3,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/9/95/DeltaWorkS3CastMug.jpeg/revision/latest/scale-to-width-down/105?cb=20210901153220,-,34
+US03-Q0021,Q0021,US03,6,13,"Los Angeles, CA",2,2,1,3,,No,-,images/queens/US03-Q0021.webp,-,29
+US03-Q0027,Q0027,US03,7,1,"Norwalk, CA",0,1,0,3,,No,-,images/queens/US03-Q0027.webp,-,34
 US03-Q0028,Q0028,US03,8,5,"Back Swamp, NC",1,1,0,2,,No,-,-,-,25
-US03-Q0029,Q0029,US03,9,8,"Atlanta, GA",0,0,2,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/2/20/MariahParisBalenciagaS3CastMug.jpeg/revision/latest/scale-to-width-down/105?cb=20210901153356,-,29
-US03-Q0030,Q0030,US03,10,10,"Dayton, OH",0,0,0,2,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/0/06/IndiaFerrahS3CastMug.jpeg/revision/latest/scale-to-width-down/105?cb=20210901153250,-,23
-US03-Q0031,Q0031,US03,11,11,"New York, NY",0,1,0,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/6/66/MimiImfurstS3CastMug.jpeg/revision/latest/scale-to-width-down/105?cb=20210901153428,-,27
-US03-Q0032,Q0032,US03,12,3,"Atlanta, GA",0,0,0,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/4/44/PhoenixS3CastMug.jpeg/revision/latest/scale-to-width-down/105?cb=20210901153457,-,29
-US03-Q0033,Q0033,US03,13,6,"Los Angeles, CA",0,0,0,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/8/8b/VenusD-LiteS3CastMug.jpeg/revision/latest/scale-to-width-down/105?cb=20210901153732,-,26
-US04-Q0034,Q0034,US04,1,12,"Pittsburgh, PA",4,2,1,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/f/fd/SharonNeedlesS4CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20210901183314,-,29
-US04-Q0035,Q0035,US04,2,11,"San Diego, CA",2,3,1,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/e/ea/ChadMichaelsS4CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20210901182655,-,40
+US03-Q0029,Q0029,US03,9,8,"Atlanta, GA",0,0,2,1,,No,-,images/queens/US03-Q0029.webp,-,29
+US03-Q0030,Q0030,US03,10,10,"Dayton, OH",0,0,0,2,,No,-,images/queens/US03-Q0030.webp,-,23
+US03-Q0031,Q0031,US03,11,11,"New York, NY",0,1,0,1,,No,-,images/queens/US03-Q0031.webp,-,27
+US03-Q0032,Q0032,US03,12,3,"Atlanta, GA",0,0,0,1,,No,-,images/queens/US03-Q0032.webp,-,29
+US03-Q0033,Q0033,US03,13,6,"Los Angeles, CA",0,0,0,1,,No,-,images/queens/US03-Q0033.webp,-,26
+US04-Q0034,Q0034,US04,1,12,"Pittsburgh, PA",4,2,1,1,,No,-,images/queens/US04-Q0034.webp,-,29
+US04-Q0035,Q0035,US04,2,11,"San Diego, CA",2,3,1,1,,No,-,images/queens/US04-Q0035.webp,-,40
 US04-Q0036,Q0036,US04,2,4,"Chicago, IL",2,3,2,1,,No,-,-,-,25
-US04-Q0037,Q0037,US04,4,13,"South Beach, FL",2,2,1,3,,Yes,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/7/7a/LatriceRoyaleS4CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20210901184848,-,39
-US04-Q0038,Q0038,US04,5,10,"Dorado, PR",0,2,2,2,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/0/01/KenyaMichaelsS4CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20210901182838,-,21
-US04-Q0039,Q0039,US04,6,8,"Chicago, IL",0,0,2,2,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/f/f9/DidaRitzS4CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20210901182729,-,25
-US04-Q0040,Q0040,US04,7,1,"Los Angeles, CA",2,1,0,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/7/7c/WillamS4CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20210901183352,-,29
-US04-Q0041,Q0041,US04,8,3,"Queens, NY",0,0,0,3,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/a/af/JigglyCalienteS4CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20210901182804,-,30
-US04-Q0042,Q0042,US04,9,6,"New York, NY",0,0,0,3,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/6/6f/MilanS4CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20210901183104,-,36
-US04-Q0043,Q0043,US04,10,5,"Carolina, PR",1,0,1,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/0/04/MadameLaQueerS4CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20210901183034,-,29
-US04-Q0044,Q0044,US04,11,9,"Chicago, IL",0,1,0,2,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/d/d9/ThePrincessS4CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20210901183203,-,32
-US04-Q0045,Q0045,US04,12,2,"Fort Lauderdale, FL",0,1,0,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/a/a5/LashauwnBeyondS4CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20210901182915,-,21
-US04-Q0046,Q0046,US04,13,7,"Tampa, FL",0,0,0,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/6/68/AlisaSummersS4CastMug.png/revision/latest/scale-to-width-down/105?cb=20210901182614,-,23
-US05-Q0047,Q0047,US05,1,6,"Seattle, WA",2,7,0,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/b/b4/JinkxMonsoonS5CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20210901194046,-,24
-US05-Q0048,Q0048,US05,2,9,"Pittsburgh, PA",2,4,2,0,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/8/8e/AlaskaS5CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20210901193454,-,27
-US05-Q0049,Q0049,US05,2,2,"Orlando, FL",2,5,2,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/7/7e/RoxxxyAndrewsS5CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20210901194328,-,28
-US05-Q0050,Q0050,US05,4,1,"Los Angeles, CA",1,1,1,3,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/9/96/DetoxS5CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20210901193714,-,27
-US05-Q0051,Q0051,US05,5,14,"Las Vegas, NV",1,1,1,4,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/0/00/CocoMontreseS5CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20210901193644,-,37
-US05-Q0052,Q0052,US05,6,5,"Mesquite, TX",1,1,1,3,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/4/45/AlyssaEdwardsS5CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20210901193559,-,32
-US05-Q0053,Q0053,US05,7,11,"New York, NY",1,2,2,1,,Yes,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/6/6c/IvyWintersS5CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20210901193930,-,25
-US05-Q0054,Q0054,US05,8,3,"Gainesville, FL",0,1,1,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/f/f2/JadeJolieS5CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20210901194014,-,25
-US05-Q0055,Q0055,US05,9,13,"San Juan, PR",1,1,1,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/c/c9/LineyshaSparxS5CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20210901194127,-,24
-US05-Q0056,Q0056,US05,10,8,"New York, NY",0,0,1,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/e/ea/ViviennePinayS5CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20210901194651,-,26
-US05-Q0057,Q0057,US05,10,10,"San Francisco, CA",0,0,0,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/9/90/HoneyMahoganyS5CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20210901193755,-,28
+US04-Q0037,Q0037,US04,4,13,"South Beach, FL",2,2,1,3,,Yes,-,images/queens/US04-Q0037.webp,-,39
+US04-Q0038,Q0038,US04,5,10,"Dorado, PR",0,2,2,2,,No,-,images/queens/US04-Q0038.webp,-,21
+US04-Q0039,Q0039,US04,6,8,"Chicago, IL",0,0,2,2,,No,-,images/queens/US04-Q0039.webp,-,25
+US04-Q0040,Q0040,US04,7,1,"Los Angeles, CA",2,1,0,1,,No,-,images/queens/US04-Q0040.webp,-,29
+US04-Q0041,Q0041,US04,8,3,"Queens, NY",0,0,0,3,,No,-,images/queens/US04-Q0041.webp,-,30
+US04-Q0042,Q0042,US04,9,6,"New York, NY",0,0,0,3,,No,-,images/queens/US04-Q0042.webp,-,36
+US04-Q0043,Q0043,US04,10,5,"Carolina, PR",1,0,1,1,,No,-,images/queens/US04-Q0043.webp,-,29
+US04-Q0044,Q0044,US04,11,9,"Chicago, IL",0,1,0,2,,No,-,images/queens/US04-Q0044.webp,-,32
+US04-Q0045,Q0045,US04,12,2,"Fort Lauderdale, FL",0,1,0,1,,No,-,images/queens/US04-Q0045.webp,-,21
+US04-Q0046,Q0046,US04,13,7,"Tampa, FL",0,0,0,1,,No,-,images/queens/US04-Q0046.webp,-,23
+US05-Q0047,Q0047,US05,1,6,"Seattle, WA",2,7,0,1,,No,-,images/queens/US05-Q0047.webp,-,24
+US05-Q0048,Q0048,US05,2,9,"Pittsburgh, PA",2,4,2,0,,No,-,images/queens/US05-Q0048.webp,-,27
+US05-Q0049,Q0049,US05,2,2,"Orlando, FL",2,5,2,1,,No,-,images/queens/US05-Q0049.webp,-,28
+US05-Q0050,Q0050,US05,4,1,"Los Angeles, CA",1,1,1,3,,No,-,images/queens/US05-Q0050.webp,-,27
+US05-Q0051,Q0051,US05,5,14,"Las Vegas, NV",1,1,1,4,,No,-,images/queens/US05-Q0051.webp,-,37
+US05-Q0052,Q0052,US05,6,5,"Mesquite, TX",1,1,1,3,,No,-,images/queens/US05-Q0052.webp,-,32
+US05-Q0053,Q0053,US05,7,11,"New York, NY",1,2,2,1,,Yes,-,images/queens/US05-Q0053.webp,-,25
+US05-Q0054,Q0054,US05,8,3,"Gainesville, FL",0,1,1,1,,No,-,images/queens/US05-Q0054.webp,-,25
+US05-Q0055,Q0055,US05,9,13,"San Juan, PR",1,1,1,1,,No,-,images/queens/US05-Q0055.webp,-,24
+US05-Q0056,Q0056,US05,10,8,"New York, NY",0,0,1,1,,No,-,images/queens/US05-Q0056.webp,-,26
+US05-Q0057,Q0057,US05,10,10,"San Francisco, CA",0,0,0,1,,No,-,images/queens/US05-Q0057.webp,-,28
 US05-Q0058,Q0058,US05,12,12,"Owensboro, KY",0,0,0,2,,No,-,-,-,27
-US05-Q0059,Q0059,US05,13,4,"Tallahassee, FL",0,0,0,2,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/d/da/SerenaChaChaS5CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20210901194406,-,21
-US05-Q0060,Q0060,US05,14,7,"Cincinnati, OH",0,0,0,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/f/f8/PennyTrationS5CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20210901194246,-,39
+US05-Q0059,Q0059,US05,13,4,"Tallahassee, FL",0,0,0,2,,No,-,images/queens/US05-Q0059.webp,-,21
+US05-Q0060,Q0060,US05,14,7,"Cincinnati, OH",0,0,0,1,,No,-,images/queens/US05-Q0060.webp,-,39
 US06-Q0061,Q0061,US06,1,8,"New York, NY",3,4,0,0,,No,-,-,-,37
-US06-Q0062,Q0062,US06,2,1,"Azusa, CA",3,2,2,2,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/d/d2/AdoreDelanoS6CastMug.png/revision/latest/scale-to-width-down/105?cb=20210831221400,-,23
-US06-Q0063,Q0063,US06,2,13,"West Hollywood, CA",2,0,3,0,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/f/f6/CourtneyActS6CastMug.png/revision/latest/scale-to-width-down/105?cb=20210831221731,-,31
-US06-Q0064,Q0064,US06,4,14,"Rochester, NY",1,1,3,4,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/6/61/DarienneLakeS6CastMug.png/revision/latest/scale-to-width-down/105?cb=20210831221802,-,41
-US06-Q0065,Q0065,US06,5,2,"Seattle, WA",2,4,1,2,,Yes,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/d/df/BenDeLaCremeS6CastMug.png/revision/latest/scale-to-width-down/105?cb=20210831221456,-,31
-US06-Q0066,Q0066,US06,6,10,"Worcester, MA",0,1,3,2,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/d/dc/JoslynFoxS6CastMug.png/revision/latest/scale-to-width-down/105?cb=20210831221905,-,26
+US06-Q0062,Q0062,US06,2,1,"Azusa, CA",3,2,2,2,,No,-,images/queens/US06-Q0062.webp,-,23
+US06-Q0063,Q0063,US06,2,13,"West Hollywood, CA",2,0,3,0,,No,-,images/queens/US06-Q0063.webp,-,31
+US06-Q0064,Q0064,US06,4,14,"Rochester, NY",1,1,3,4,,No,-,images/queens/US06-Q0064.webp,-,41
+US06-Q0065,Q0065,US06,5,2,"Seattle, WA",2,4,1,2,,Yes,-,images/queens/US06-Q0065.webp,-,31
+US06-Q0066,Q0066,US06,6,10,"Worcester, MA",0,1,3,2,,No,-,images/queens/US06-Q0066.webp,-,26
 US06-Q0067,Q0067,US06,7,9,"Atlanta, GA",0,3,0,3,,No,-,-,-,22
-US06-Q0068,Q0068,US06,8,4,"Van Nuys, CA",1,0,0,2,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/5/55/LaganjaEstranjaS6CastMug.png/revision/latest/scale-to-width-down/105?cb=20210831222017,-,24
-US06-Q0069,Q0069,US06,9,11,"New York, NY",0,1,1,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/7/72/MilkS6CastMug.png/revision/latest/scale-to-width-down/105?cb=20210831222122,-,25
-US06-Q0070,Q0070,US06,10,3,"Chicago, IL",0,2,0,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/2/2a/GiaGunnS6CastMug.png/revision/latest/scale-to-width-down/105?cb=20210831221834,-,23
-US06-Q0071,Q0071,US06,11,5,"Guaynabo, PR",0,1,0,2,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/c/cd/AprilCarri%C3%B3nS6CastMug.png/revision/latest/scale-to-width-down/105?cb=20210831221431,-,24
-US06-Q0072,Q0072,US06,12,7,"New York, NY",0,0,0,2,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/1/1f/VivaciousS6CastMug.png/revision/latest/scale-to-width-down/105?cb=20210831222243,-,40
-US06-Q0073,Q0073,US06,13,12,"Seattle, WA",0,0,0,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/4/43/MagnoliaCrawfordS6CastMug.png/revision/latest/scale-to-width-down/105?cb=20210831222049,-,28
-US06-Q0074,Q0074,US06,13,6,"Los Angeles, CA",0,0,0,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/a/ab/KellyMantleS6CastMug.png/revision/latest/scale-to-width-down/105?cb=20210831221948,-,37
-US07-Q0075,Q0075,US07,1,4,"Atlanta, GA",3,2,2,0,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/c/c7/VioletChachkiS7CastMug.png/revision/latest/scale-to-width-down/105?cb=20210831214337,-,22
-US07-Q0076,Q0076,US07,2,2,"Orlando, FL",3,2,0,2,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/1/1d/GingerMinjS7CastMug.png/revision/latest/scale-to-width-down/105?cb=20210831213428,-,29
-US07-Q0077,Q0077,US07,2,11,"Brooklyn, NY",2,1,1,2,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/c/c0/PearlS7CastMug.png/revision/latest/scale-to-width-down/105?cb=20210831214103,-,23
-US07-Q0078,Q0078,US07,4,12,"Dallas, TX",2,3,0,3,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/8/83/KennedyDavenportS7CastMug.png/revision/latest/scale-to-width-down/105?cb=20210831213752,-,33
-US07-Q0079,Q0079,US07,5,6,"Boston, MA",2,4,0,2,,Yes,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/2/23/KatyaS7CastMug.png/revision/latest/scale-to-width-down/105?cb=20210831213652,-,32
-US07-Q0080,Q0080,US07,6,9,"Milwaukee, WI",0,1,0,2,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/6/6d/TrixieMattelS7CastMug.png/revision/latest/scale-to-width-down/105?cb=20210831214237,-,24
-US07-Q0081,Q0081,US07,7,1,"New York, NY",0,2,4,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/9/95/MissFameS7CastMug.png/revision/latest/scale-to-width-down/105?cb=20210831213916,-,29
+US06-Q0068,Q0068,US06,8,4,"Van Nuys, CA",1,0,0,2,,No,-,images/queens/US06-Q0068.webp,-,24
+US06-Q0069,Q0069,US06,9,11,"New York, NY",0,1,1,1,,No,-,images/queens/US06-Q0069.webp,-,25
+US06-Q0070,Q0070,US06,10,3,"Chicago, IL",0,2,0,1,,No,-,images/queens/US06-Q0070.webp,-,23
+US06-Q0071,Q0071,US06,11,5,"Guaynabo, PR",0,1,0,2,,No,-,images/queens/US06-Q0071.webp,-,24
+US06-Q0072,Q0072,US06,12,7,"New York, NY",0,0,0,2,,No,-,images/queens/US06-Q0072.webp,-,40
+US06-Q0073,Q0073,US06,13,12,"Seattle, WA",0,0,0,1,,No,-,images/queens/US06-Q0073.webp,-,28
+US06-Q0074,Q0074,US06,13,6,"Los Angeles, CA",0,0,0,1,,No,-,images/queens/US06-Q0074.webp,-,37
+US07-Q0075,Q0075,US07,1,4,"Atlanta, GA",3,2,2,0,,No,-,images/queens/US07-Q0075.webp,-,22
+US07-Q0076,Q0076,US07,2,2,"Orlando, FL",3,2,0,2,,No,-,images/queens/US07-Q0076.webp,-,29
+US07-Q0077,Q0077,US07,2,11,"Brooklyn, NY",2,1,1,2,,No,-,images/queens/US07-Q0077.webp,-,23
+US07-Q0078,Q0078,US07,4,12,"Dallas, TX",2,3,0,3,,No,-,images/queens/US07-Q0078.webp,-,33
+US07-Q0079,Q0079,US07,5,6,"Boston, MA",2,4,0,2,,Yes,-,images/queens/US07-Q0079.webp,-,32
+US07-Q0080,Q0080,US07,6,9,"Milwaukee, WI",0,1,0,2,,No,-,images/queens/US07-Q0080.webp,-,24
+US07-Q0081,Q0081,US07,7,1,"New York, NY",0,2,4,1,,No,-,images/queens/US07-Q0081.webp,-,29
 US07-Q0082,Q0082,US07,8,3,"Nashville, TN",0,2,0,3,,No,-,-,-,25
-US07-Q0083,Q0083,US07,9,5,"Hudson, WI",2,0,0,2,US07E08,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/2/27/MaxS7CastMug.png/revision/latest/scale-to-width-down/105?cb=20210831213840,-,22
-US07-Q0084,Q0084,US07,10,10,"Cayey, PR",0,0,1,4,US07E08,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/e/e1/KandyHoS7CastMug.png/revision/latest/scale-to-width-down/105?cb=20210831213618,-,28
+US07-Q0083,Q0083,US07,9,5,"Hudson, WI",2,0,0,2,US07E08,No,-,images/queens/US07-Q0083.webp,-,22
+US07-Q0084,Q0084,US07,10,10,"Cayey, PR",0,0,1,4,US07E08,No,-,images/queens/US07-Q0084.webp,-,28
 US07-Q0085,Q0085,US07,11,8,"Rochester, NY",0,1,0,2,US07E08,No,-,-,-,43
-US07-Q0086,Q0086,US07,12,7,"Los Angeles, CA",0,0,1,2,US07E08,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/1/19/JasmineMastersS7CastMug.png/revision/latest/scale-to-width-down/105?cb=20210831213547,-,37
+US07-Q0086,Q0086,US07,12,7,"Los Angeles, CA",0,0,1,2,US07E08,No,-,images/queens/US07-Q0086.webp,-,37
 US07-Q0087,Q0087,US07,13,13,"Iowa City, IA",0,0,1,2,US07E08,No,-,-,-,28
-US07-Q0088,Q0088,US07,14,14,"Tucson, AZ",0,0,0,2,US07E08,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/9/9f/TempestDuJourS7CastMug.png/revision/latest/scale-to-width-down/105?cb=20210831214209,-,46
+US07-Q0088,Q0088,US07,14,14,"Tucson, AZ",0,0,0,2,US07E08,No,-,images/queens/US07-Q0088.webp,-,46
 US08-Q0089,Q0089,US08,1,9,"New York, NY",3,0,0,1,,No,-,-,-,29
-US08-Q0090,Q0090,US08,2,7,"Chicago, IL",2,1,2,0,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/5/5b/KimChiS8CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20210831181350,-,27
-US08-Q0091,Q0091,US08,2,1,"Redlands, CA",1,4,0,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/1/13/NaomiSmallsS8CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20210831181512,-,21
+US08-Q0090,Q0090,US08,2,7,"Chicago, IL",2,1,2,0,,No,-,images/queens/US08-Q0090.webp,-,27
+US08-Q0091,Q0091,US08,2,1,"Redlands, CA",1,4,0,1,,No,-,images/queens/US08-Q0091.webp,-,21
 US08-Q0092,Q0092,US08,4,11,"Shreveport, LA",1,1,1,3,,No,-,-,-,29
-US08-Q0093,Q0093,US08,5,12,"Las Vegas, NV",1,2,2,2,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/a/aa/DerrickBarryS8CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20210831181307,-,32
-US08-Q0094,Q0094,US08,6,8,"Brooklyn, NY",0,3,0,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/2/27/ThorgyThorS8CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20210831181822,-,31
-US08-Q0095,Q0095,US08,7,6,"Seattle, WA",1,0,2,2,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/f/f0/RobbieTurnerS8CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20210831181632,-,33
-US08-Q0096,Q0096,US08,8,5,"Brooklyn, NY",0,3,0,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/0/0b/AcidBettyS8CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20210831180922,-,37
-US08-Q0097,Q0097,US08,9,4,"Chicago, IL",0,0,0,2,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/a/ac/NayshaLopezS8CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20210831181543,-,31
+US08-Q0093,Q0093,US08,5,12,"Las Vegas, NV",1,2,2,2,,No,-,images/queens/US08-Q0093.webp,-,32
+US08-Q0094,Q0094,US08,6,8,"Brooklyn, NY",0,3,0,1,,No,-,images/queens/US08-Q0094.webp,-,31
+US08-Q0095,Q0095,US08,7,6,"Seattle, WA",1,0,2,2,,No,-,images/queens/US08-Q0095.webp,-,33
+US08-Q0096,Q0096,US08,8,5,"Brooklyn, NY",0,3,0,1,,No,-,images/queens/US08-Q0096.webp,-,37
+US08-Q0097,Q0097,US08,9,4,"Chicago, IL",0,0,0,2,,No,-,images/queens/US08-Q0097.webp,-,31
 US08-Q0098,Q0098,US08,10,2,"Austin, TX",0,0,0,1,,Yes,-,-,-,34
-US08-Q0099,Q0099,US08,11,3,"Savannah, GA",0,0,0,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/8/8b/DaxExclamationPointS8CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20210831181240,-,31
-US08-Q0100,Q0100,US08,11,10,"Gloucester, MA",0,0,0,2,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/a/a0/LailaMcQueenS8CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20210831181435,-,22
-US09-Q0101,Q0101,US09,1,6,"Brooklyn, NY",2,5,1,0,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/3/3a/SashaVelourS9CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20240217194339,-,29
-US09-Q0102,Q0102,US09,2,1,"New York, NY",1,4,1,2,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/2/25/PeppermintS9CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20240217195036,-,37
-US09-Q0103,Q0103,US09,3,8,"Chicago, IL",4,3,0,2,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/2/2a/SheaCoule%C3%A9S9CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20240217194404,-,27
-US09-Q0104,Q0104,US09,3,9,"Orlando, FL",3,2,2,2,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/9/9d/TrinityTaylorS9CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20240217194416,-,31
-US09-Q0105,Q0105,US09,5,7,"New York, NY",1,1,2,2,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/4/4c/AlexisMichelleS9CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20240217194528,-,32
+US08-Q0099,Q0099,US08,11,3,"Savannah, GA",0,0,0,1,,No,-,images/queens/US08-Q0099.webp,-,31
+US08-Q0100,Q0100,US08,11,10,"Gloucester, MA",0,0,0,2,,No,-,images/queens/US08-Q0100.webp,-,22
+US09-Q0101,Q0101,US09,1,6,"Brooklyn, NY",2,5,1,0,,No,-,images/queens/US09-Q0101.webp,-,29
+US09-Q0102,Q0102,US09,2,1,"New York, NY",1,4,1,2,,No,-,images/queens/US09-Q0102.webp,-,37
+US09-Q0103,Q0103,US09,3,8,"Chicago, IL",4,3,0,2,,No,-,images/queens/US09-Q0103.webp,-,27
+US09-Q0104,Q0104,US09,3,9,"Orlando, FL",3,2,2,2,,No,-,images/queens/US09-Q0104.webp,-,31
+US09-Q0105,Q0105,US09,5,7,"New York, NY",1,1,2,2,,No,-,images/queens/US09-Q0105.webp,-,32
 US09-Q0106,Q0106,US09,6,12,"Riverdale, GA",1,2,1,3,,No,-,-,-,34
-US09-Q0107,Q0107,US09,7,2,"Echo Park, CA",1,2,0,1,,Yes,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/8/83/ValentinaS9CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20240217194428,-,25
-US09-Q0108,Q0108,US09,8,5,"Las Vegas, NV",0,0,2,2,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/1/1a/FarrahMoanS9CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20240217194152,-,22
-US09-Q0109,Q0109,US09,9,13,"Brooklyn, NY",0,0,0,2,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/e/ed/AjaS9CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20240217194632,-,22
+US09-Q0107,Q0107,US09,7,2,"Echo Park, CA",1,2,0,1,,Yes,-,images/queens/US09-Q0107.webp,-,25
+US09-Q0108,Q0108,US09,8,5,"Las Vegas, NV",0,0,2,2,,No,-,images/queens/US09-Q0108.webp,-,22
+US09-Q0109,Q0109,US09,9,13,"Brooklyn, NY",0,0,0,2,,No,-,images/queens/US09-Q0109.webp,-,22
 US09-Q0110,Q0098,US09,10,-,"Austin, TX",0,0,0,2,,No,-,-,-,35
-US09-Q0111,Q0111,US09,11,3,"Johnson City, TN",0,2,0,0,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/6/6b/EurekaS9CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20240217194933,-,25
-US09-Q0112,Q0112,US09,12,4,"Boston, MA",0,0,1,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/1/1f/CharlieHidesS9CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20240217194814,-,52
-US09-Q0113,Q0113,US09,13,10,"Las Vegas, NV",0,0,0,2,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/3/39/KimoraBlacS9CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20240217194237,-,27
-US09-Q0114,Q0114,US09,14,11,"Milwaukee, WI",0,0,0,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/5/53/JaymesMansfieldS9CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20240217194226,-,26
-US10-Q0115,Q0115,US10,1,14,"Brooklyn, NY",3,1,2,0,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/a/a9/AquariaS10CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20210831163055,-,21
-US10-Q0111,Q0111,US10,2,1,"Johnson City, TN",2,4,0,2,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/9/9e/EurekaS10CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20210831163344,-,27
-US10-Q0116,Q0116,US10,2,7,"Nashville, TN",1,2,1,3,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/6/6a/KameronMichaelsS10CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20210831163523,-,31
-US10-Q0117,Q0117,US10,4,2,"Dallas, TX",2,3,2,2,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/0/09/AsiaO%27HaraS10CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20210831163151,-,35
-US10-Q0118,Q0118,US10,5,3,"New York, NY",1,3,2,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/d/dc/MizCrackerS10CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20210831163727,-,33
+US09-Q0111,Q0111,US09,11,3,"Johnson City, TN",0,2,0,0,,No,-,images/queens/US09-Q0111.webp,-,25
+US09-Q0112,Q0112,US09,12,4,"Boston, MA",0,0,1,1,,No,-,images/queens/US09-Q0112.webp,-,52
+US09-Q0113,Q0113,US09,13,10,"Las Vegas, NV",0,0,0,2,,No,-,images/queens/US09-Q0113.webp,-,27
+US09-Q0114,Q0114,US09,14,11,"Milwaukee, WI",0,0,0,1,,No,-,images/queens/US09-Q0114.webp,-,26
+US10-Q0115,Q0115,US10,1,14,"Brooklyn, NY",3,1,2,0,,No,-,images/queens/US10-Q0115.webp,-,21
+US10-Q0111,Q0111,US10,2,1,"Johnson City, TN",2,4,0,2,,No,-,images/queens/US10-Q0111.webp,-,27
+US10-Q0116,Q0116,US10,2,7,"Nashville, TN",1,2,1,3,,No,-,images/queens/US10-Q0116.webp,-,31
+US10-Q0117,Q0117,US10,4,2,"Dallas, TX",2,3,2,2,,No,-,images/queens/US10-Q0117.webp,-,35
+US10-Q0118,Q0118,US10,5,3,"New York, NY",1,3,2,1,,No,-,images/queens/US10-Q0118.webp,-,33
 US10-Q0119,Q0119,US10,6,6,"The Bronx, NY",0,4,0,3,,Yes,-,-,-,27
-US10-Q0120,Q0120,US10,7,12,"Chicago, IL",1,0,1,3,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/f/f0/TheVixenS10CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20210831164009,-,26
-US10-Q0121,Q0121,US10,8,10,"Kansas City, MO",0,1,1,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/f/fe/MoniqueHeartS10CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20210831163838,-,31
+US10-Q0120,Q0120,US10,7,12,"Chicago, IL",1,0,1,3,,No,-,images/queens/US10-Q0120.webp,-,26
+US10-Q0121,Q0121,US10,8,10,"Kansas City, MO",0,1,1,1,,No,-,images/queens/US10-Q0121.webp,-,31
 US10-Q0122,Q0122,US10,9,5,"Indianapolis, IN",0,2,0,1,,No,-,-,-,22
-US10-Q0123,Q0123,US10,10,8,"Riverside, CA",1,0,0,2,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/9/96/MayhemMillerS10CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20210831163657,-,35
+US10-Q0123,Q0123,US10,10,8,"Riverside, CA",1,0,0,2,,No,-,images/queens/US10-Q0123.webp,-,35
 US10-Q0124,Q0124,US10,11,11,"New York, NY",0,1,1,1,,No,-,-,-,29
-US10-Q0125,Q0125,US10,12,4,"New York, NY",0,1,0,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/6/62/YuhuaHamasakiS10CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20210831164124,-,27
-US10-Q0126,Q0126,US10,13,9,"Albuquerque, NM",0,0,0,2,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/1/15/KalorieKarbdashianWilliamsS10CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20210831163436,-,27
+US10-Q0125,Q0125,US10,12,4,"New York, NY",0,1,0,1,,No,-,images/queens/US10-Q0125.webp,-,27
+US10-Q0126,Q0126,US10,13,9,"Albuquerque, NM",0,0,0,2,,No,-,images/queens/US10-Q0126.webp,-,27
 US10-Q0127,Q0127,US10,14,13,"Tampa, FL",0,0,0,1,,No,-,-,-,25
-US11-Q0128,Q0128,US11,1,9,"Denver, CO",1,4,1,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/3/3c/YvieOddlyS11CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20210831153546,-,24
+US11-Q0128,Q0128,US11,1,9,"Denver, CO",1,4,1,1,,No,-,images/queens/US11-Q0128.webp,-,24
 US11-Q0129,Q0129,US11,2,11,"Nashville, TN",3,4,1,2,,No,-,-,-,32
 US11-Q0130,Q0130,US11,3,8,"Dallas, TX",2,3,0,3,,No,-,-,-,30
 US11-Q0131,Q0131,US11,3,10,"Chicago, IL",2,1,3,2,,No,-,-,-,28
 US11-Q0127,Q0127,US11,5,1,"Los Angeles, CA",0,3,2,3,,No,-,-,-,26
-US11-Q0132,Q0132,US11,6,2,"Columbus, OH",2,1,3,1,,Yes,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/9/97/NinaWestS11CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20210831152853,-,39
-US11-Q0133,Q0133,US11,7,3,"New York, NY",0,2,1,3,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/d/d5/ShugaCainS11CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20210831153221,-,40
-US11-Q0134,Q0134,US11,8,4,"Dallas, TX",1,4,0,2,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/4/44/PlastiqueTiaraS11CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20210907152402,-,21
-US11-Q0135,Q0135,US11,9,13,"Dallas, TX",0,0,0,4,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/f/f8/Ra%27JahO%27HaraS11CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20210831153040,-,33
-US11-Q0136,Q0136,US11,10,6,"Brooklyn, NY",1,0,0,2,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/3/3b/ScarletEnvyS11CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20210831153122,-,26
-US11-Q0137,Q0137,US11,11,12,"Cherry Hill, NJ",0,0,1,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/4/42/ArielVersaceS11CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20210831152449,-,26
+US11-Q0132,Q0132,US11,6,2,"Columbus, OH",2,1,3,1,,Yes,-,images/queens/US11-Q0132.webp,-,39
+US11-Q0133,Q0133,US11,7,3,"New York, NY",0,2,1,3,,No,-,images/queens/US11-Q0133.webp,-,40
+US11-Q0134,Q0134,US11,8,4,"Dallas, TX",1,4,0,2,,No,-,images/queens/US11-Q0134.webp,-,21
+US11-Q0135,Q0135,US11,9,13,"Dallas, TX",0,0,0,4,,No,-,images/queens/US11-Q0135.webp,-,33
+US11-Q0136,Q0136,US11,10,6,"Brooklyn, NY",1,0,0,2,,No,-,images/queens/US11-Q0136.webp,-,26
+US11-Q0137,Q0137,US11,11,12,"Cherry Hill, NJ",0,0,1,1,,No,-,images/queens/US11-Q0137.webp,-,26
 US11-Q0138,Q0138,US11,12,5,"Minneapolis, MN",0,0,1,2,,No,-,-,-,30
-US11-Q0139,Q0139,US11,13,7,"New York, NY",0,0,0,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/f/f1/HoneyDavenportS11CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20210831152652,-,32
-US11-Q0140,Q0140,US11,14,14,"Las Vegas, NV",0,0,0,2,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/8/8c/KahannaMontreseS11CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20210831152729,-,25
-US11-Q0141,Q0141,US11,15,15,"Los Angeles, CA",0,0,0,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/0/02/SojuS11CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20210831153424,-,27
-US12-Q0142,Q0142,US12,2,7,"Springfield, MO",1,4,2,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/d/d8/CrystalMethydS12CastMug.png/revision/latest/scale-to-width-down/105?cb=20210901203840,7000,28
-US12-Q0143,Q0143,US12,2,6,"Los Angeles, CA",4,2,2,0,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/b/b8/GigiGoodeS12CastMug.png/revision/latest/scale-to-width-down/105?cb=20210901203939,25500,21
+US11-Q0139,Q0139,US11,13,7,"New York, NY",0,0,0,1,,No,-,images/queens/US11-Q0139.webp,-,32
+US11-Q0140,Q0140,US11,14,14,"Las Vegas, NV",0,0,0,2,,No,-,images/queens/US11-Q0140.webp,-,25
+US11-Q0141,Q0141,US11,15,15,"Los Angeles, CA",0,0,0,1,,No,-,images/queens/US11-Q0141.webp,-,27
+US12-Q0142,Q0142,US12,2,7,"Springfield, MO",1,4,2,1,,No,-,images/queens/US12-Q0142.webp,7000,28
+US12-Q0143,Q0143,US12,2,6,"Los Angeles, CA",4,2,2,0,,No,-,images/queens/US12-Q0143.webp,25500,21
 US12-Q0144,Q0144,US12,1,12,"Milwaukee, WI",3,3,0,1,,No,-,-,117000,32
-US12-Q0145,Q0145,US12,-,10,"New York, NY",2,3,2,0,US12E13,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/e/ea/SherryPieS12CastMug.png/revision/latest/scale-to-width-down/105?cb=20210901204619,10000,27
-US12-Q0146,Q0146,US12,5,4,"New York, NY",0,6,1,3,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/e/e7/JackieCoxS12CastMug.png/revision/latest/scale-to-width-down/105?cb=20210901204041,5500,34
+US12-Q0145,Q0145,US12,-,10,"New York, NY",2,3,2,0,US12E13,No,-,images/queens/US12-Q0145.webp,10000,27
+US12-Q0146,Q0146,US12,5,4,"New York, NY",0,6,1,3,,No,-,images/queens/US12-Q0146.webp,5500,34
 US12-Q0147,Q0147,US12,6,5,"Ramseur, NC",1,2,1,4,,Yes,-,-,17000,24
-US12-Q0148,Q0148,US12,7,3,"Kansas City, MO",1,1,0,2,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/3/3d/WidowVon%27DuS12CastMug.png/revision/latest/scale-to-width-down/105?cb=20210901204655,7000,30
-US12-Q0149,Q0149,US12,8,11,"New York, NY",0,3,0,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/a/a9/JanS12CastMug.png/revision/latest/scale-to-width-down/105?cb=20210901204227,2000,26
-US12-Q0150,Q0150,US12,9,1,"New York, NY",0,1,1,3,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/3/3e/BritaS12CastMug.png/revision/latest/scale-to-width-down/105?cb=20210901203733,2000,34
-US12-Q0151,Q0151,US12,10,13,"Acworth, GA",0,2,1,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/2/26/AidenZhaneS12CastMug.png/revision/latest/scale-to-width-down/105?cb=20210901203704,2000,29
-US12-Q0152,Q0152,US12,11,2,"New York, NY",0,1,1,2,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/5/5f/NickyDollS12CastMug.png/revision/latest/scale-to-width-down/105?cb=20210901204259,2000,28
+US12-Q0148,Q0148,US12,7,3,"Kansas City, MO",1,1,0,2,,No,-,images/queens/US12-Q0148.webp,7000,30
+US12-Q0149,Q0149,US12,8,11,"New York, NY",0,3,0,1,,No,-,images/queens/US12-Q0149.webp,2000,26
+US12-Q0150,Q0150,US12,9,1,"New York, NY",0,1,1,3,,No,-,images/queens/US12-Q0150.webp,2000,34
+US12-Q0151,Q0151,US12,10,13,"Acworth, GA",0,2,1,1,,No,-,images/queens/US12-Q0151.webp,2000,29
+US12-Q0152,Q0152,US12,11,2,"New York, NY",0,1,1,2,,No,-,images/queens/US12-Q0152.webp,2000,28
 US12-Q0153,Q0153,US12,12,8,"San Francisco, CA",0,0,1,1,,No,-,-,2000,28
-US12-Q0154,Q0154,US12,13,9,"Los Angeles, CA",0,0,1,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/6/6a/DahliaSinS12CastMug.png/revision/latest/scale-to-width-down/105?cb=20210901203910,2000,28
-US13-Q0155,Q0155,US13,1,5,"Los Angeles, CA",5,2,0,2,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/7/7d/SymoneS13CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20211216235826,120000,25
-US13-Q0156,Q0156,US13,2,1,"New York, NY",2,4,1,3,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/6/63/KandyMuseS13CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20210902182209,5000,25
-US13-Q0157,Q0157,US13,3,7,"Los Angeles, CA",3,4,2,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/b/bd/GottmikS13CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20210902181947,10000,23
-US13-Q0158,Q0158,US13,3,9,"New York, NY",3,5,2,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/7/74/Ros%C3%A9S13CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20210902182428,15000,31
-US13-Q0159,Q0159,US13,5,10,"New York, NY",3,1,3,2,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/4/4f/OliviaLuxS13CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20210902182353,12000,26
-US13-Q0160,Q0160,US13,6,8,"Utica, MN",1,2,3,3,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/d/dc/UticaQueenS13CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20210902182704,7000,25
-US13-Q0161,Q0161,US13,7,11,"New York, NY",1,2,2,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/4/44/TinaBurnerS13CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20210902182624,4500,40
-US13-Q0162,Q0162,US13,8,3,"Chicago, IL",1,2,1,2,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/3/36/DenaliS13CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20210902181626,7000,28
+US12-Q0154,Q0154,US12,13,9,"Los Angeles, CA",0,0,1,1,,No,-,images/queens/US12-Q0154.webp,2000,28
+US13-Q0155,Q0155,US13,1,5,"Los Angeles, CA",5,2,0,2,,No,-,images/queens/US13-Q0155.webp,120000,25
+US13-Q0156,Q0156,US13,2,1,"New York, NY",2,4,1,3,,No,-,images/queens/US13-Q0156.webp,5000,25
+US13-Q0157,Q0157,US13,3,7,"Los Angeles, CA",3,4,2,1,,No,-,images/queens/US13-Q0157.webp,10000,23
+US13-Q0158,Q0158,US13,3,9,"New York, NY",3,5,2,1,,No,-,images/queens/US13-Q0158.webp,15000,31
+US13-Q0159,Q0159,US13,5,10,"New York, NY",3,1,3,2,,No,-,images/queens/US13-Q0159.webp,12000,26
+US13-Q0160,Q0160,US13,6,8,"Utica, MN",1,2,3,3,,No,-,images/queens/US13-Q0160.webp,7000,25
+US13-Q0161,Q0161,US13,7,11,"New York, NY",1,2,2,1,,No,-,images/queens/US13-Q0161.webp,4500,40
+US13-Q0162,Q0162,US13,8,3,"Chicago, IL",1,2,1,2,,No,-,images/queens/US13-Q0162.webp,7000,28
 US13-Q0163,Q0163,US13,9,13,"Las Vegas, NV",0,2,1,2,,No,-,-,2000,26
-US13-Q0164,Q0164,US13,10,4,"Atlanta, GA",1,1,1,2,,Yes,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/e/e0/LaLaRiS13CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20210902182255,12000,30
-US13-Q0165,Q0165,US13,11,6,"Atlanta, GA",0,1,2,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/3/35/TamishaImanS13CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20210902182545,2000,49
-US13-Q0166,Q0166,US13,12,2,"Phoenix, AZ",0,0,2,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/a/a7/JoeyJayS13CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20210902182023,2000,30
-US13-Q0167,Q0167,US13,13,12,"Chicago, IL",0,0,2,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/e/e5/KahmoraHallS13CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20210902182128,2000,28
-US14-Q0168,Q0168,US14,1,4,"Denver, CO",1,5,0,2,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/b/b4/WillowPillS14CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20211203020201,159500,26
-US14-Q0169,Q0169,US14,2,13,"Sacramento, CA",3,4,1,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/c/c1/LadyCamdenS14CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20211203020204,67000,31
+US13-Q0164,Q0164,US13,10,4,"Atlanta, GA",1,1,1,2,,Yes,-,images/queens/US13-Q0164.webp,12000,30
+US13-Q0165,Q0165,US13,11,6,"Atlanta, GA",0,1,2,1,,No,-,images/queens/US13-Q0165.webp,2000,49
+US13-Q0166,Q0166,US13,12,2,"Phoenix, AZ",0,0,2,1,,No,-,images/queens/US13-Q0166.webp,2000,30
+US13-Q0167,Q0167,US13,13,12,"Chicago, IL",0,0,2,1,,No,-,images/queens/US13-Q0167.webp,2000,28
+US14-Q0168,Q0168,US14,1,4,"Denver, CO",1,5,0,2,,No,-,images/queens/US14-Q0168.webp,159500,26
+US14-Q0169,Q0169,US14,2,13,"Sacramento, CA",3,4,1,1,,No,-,images/queens/US14-Q0169.webp,67000,31
 US14-Q0170,Q0170,US14,3,12,"Atlanta, GA",2,4,0,3,,No,-,-,14500,27
-US14-Q0171,Q0171,US14,3,2,"Seattle, WA",3,2,1,2,US14E16,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/5/56/BoscoS14CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20211203020202,22000,28
-US14-Q0172,Q0172,US14,3,14,"Springfield, MO",1,3,1,4,US14E16,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/6/69/DayaBettyS14CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20211203020203,7000,25
-US14-Q0173,Q0173,US14,6,9,"Fresno, CA",1,3,2,2,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/a/a4/DeJaSkyeS14CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20211203020203,7000,31
-US14-Q0174,Q0174,US14,6,8,"Nashville, TN",1,3,0,5,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/f/fa/JorgeousS14CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20211203020203,7000,21
-US14-Q0175,Q0175,US14,8,10,"New York City, NY",0,1,1,5,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/0/0c/JasmineKennedieS14CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20211203020203,2000,22
-US14-Q0176,Q0176,US14,9,5,"Los Angeles, CA",0,0,0,2,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/3/30/KerriColbyS14CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20211203020203,4500,24
-US14-Q0177,Q0177,US14,10,11,"Fayetteville, AR",0,0,1,2,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/d/dd/MaddyMorphosisS14CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20211203020204,2000,26
-US14-Q0178,Q0178,US14,11,7,"Grand Rapids, MI",0,0,0,2,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/4/4a/OrionStoryS14CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20211203020204,2000,25
-US14-Q0179,Q0179,US14,12,3,"Los Angeles, CA",1,0,1,0,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/3/3c/KornbreadJet%C3%A9S14CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20211203020204,15000,29
-US14-Q0180,Q0180,US14,13,1,"Cataño, PR",0,0,1,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/e/ec/AlyssaHunterS14CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20211203020245,2000,26
-US14-Q0181,Q0181,US14,14,6,"Los Angeles, CA",0,0,0,2,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/3/3c/JuneJambalayaS14CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20211203020203,2000,29
-US15-Q0182,Q0182,US15,1,-,"Los Angeles, CA",4,4,1,0,16,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/6/60/SashaColbyS15CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20221213185937,-,37
-US15-Q0183,Q0183,US15,2,-,"Las Vegas, NV",3,2,1,2,16,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/c/c7/AnetraS15CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20221213193201,-,24
+US14-Q0171,Q0171,US14,3,2,"Seattle, WA",3,2,1,2,US14E16,No,-,images/queens/US14-Q0171.webp,22000,28
+US14-Q0172,Q0172,US14,3,14,"Springfield, MO",1,3,1,4,US14E16,No,-,images/queens/US14-Q0172.webp,7000,25
+US14-Q0173,Q0173,US14,6,9,"Fresno, CA",1,3,2,2,,No,-,images/queens/US14-Q0173.webp,7000,31
+US14-Q0174,Q0174,US14,6,8,"Nashville, TN",1,3,0,5,,No,-,images/queens/US14-Q0174.webp,7000,21
+US14-Q0175,Q0175,US14,8,10,"New York City, NY",0,1,1,5,,No,-,images/queens/US14-Q0175.webp,2000,22
+US14-Q0176,Q0176,US14,9,5,"Los Angeles, CA",0,0,0,2,,No,-,images/queens/US14-Q0176.webp,4500,24
+US14-Q0177,Q0177,US14,10,11,"Fayetteville, AR",0,0,1,2,,No,-,images/queens/US14-Q0177.webp,2000,26
+US14-Q0178,Q0178,US14,11,7,"Grand Rapids, MI",0,0,0,2,,No,-,images/queens/US14-Q0178.webp,2000,25
+US14-Q0179,Q0179,US14,12,3,"Los Angeles, CA",1,0,1,0,,No,-,images/queens/US14-Q0179.webp,15000,29
+US14-Q0180,Q0180,US14,13,1,"Cataño, PR",0,0,1,1,,No,-,images/queens/US14-Q0180.webp,2000,26
+US14-Q0181,Q0181,US14,14,6,"Los Angeles, CA",0,0,0,2,,No,-,images/queens/US14-Q0181.webp,2000,29
+US15-Q0182,Q0182,US15,1,-,"Los Angeles, CA",4,4,1,0,16,No,-,images/queens/US15-Q0182.webp,-,37
+US15-Q0183,Q0183,US15,2,-,"Las Vegas, NV",3,2,1,2,16,No,-,images/queens/US15-Q0183.webp,-,24
 US15-Q0184,Q0184,US15,3,-,"East Orange, NJ",2,4,0,2,16,No,-,-,-,22
 US15-Q0185,Q0185,US15,4,-,"Houston, TX",1,6,1,2,16,No,-,-,-,24
 US15-Q0186,Q0186,US15,5,-,"Miami, FL",0,2,0,1,10,Yes,-,-,-,32
-US15-Q0187,Q0187,US15,6,-,"Los Angeles, CA",0,1,0,4,12,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/2/20/SalinaEsTittiesS15CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20221213185822,-,31
+US15-Q0187,Q0187,US15,6,-,"Los Angeles, CA",0,1,0,4,12,No,-,images/queens/US15-Q0187.webp,-,31
 US15-Q0188,Q0188,US15,7,-,"New York, NY",0,3,0,1,11,No,-,-,-,25
-US15-Q0189,Q0189,US15,8,-,"Ansonia, CT",2,2,2,2,13,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/3/31/LooseyLaDucaS15CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20221213190343,-,32
-US15-Q0190,Q0190,US15,9,-,"Los Angeles, CA",0,0,1,2,9,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/1/15/SpiceS15CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20221213190113,-,23
-US15-Q0191,Q0191,US15,10,-,"Los Angeles, CA",0,0,0,1,4,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/0/0a/SugarS15CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20221213190212,-,23
-US15-Q0192,Q0192,US15,11,-,"Queens, NY",0,1,2,3,8,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/2/27/JaxS15CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20221213185104,-,25
-US15-Q0193,Q0193,US15,12,-,"Nashville, TN",1,0,1,1,7,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/0/0b/AuraMayariS15CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20221213184850,-,30
-US15-Q0194,Q0194,US15,13,-,"Hartford, CT",0,1,0,1,6,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/c/c0/RobinFierceS15CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20221213185708,-,26
-US15-Q0195,Q0195,US15,14,-,"West Hartford, CT",0,0,0,3,5,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/b/bc/AmethystS15CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20221213180206,-,27
-US15-Q0196,Q0196,US15,15,-,"San Francisco, CA",0,0,0,1,3,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/7/70/PrincessPoppyS15CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20221213193044,-,26
-US15-Q0197,Q0197,US15,16,-,"Seattle, WA",0,0,0,1,2,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/7/72/IreneDuboisS15CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20221213180636,-,29
-US16-Q0198,Q0198,US16,1,-,"Brooklyn, NY",3,3,2,0,16,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/e/ea/NymphiaWindS16CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20240107012409,218950,27
-US16-Q0199,Q0199,US16,2,5,"Philadelphia, PA",4,5,0,1,16,Yes,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/d/df/SapphiraCrist%C3%A1lS16CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20240107012501,62400,34
-US16-Q0200,Q0200,US16,3,-,"Boston, MA",4,4,1,2,16,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/5/5e/PlaneJaneS16CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20240107012428,45100,24
-US16-Q0201,Q0201,US16,4,1,"Kansas City, MO",2,5,2,2,14,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/0/03/QS16CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20240107012449,12700,26
+US15-Q0189,Q0189,US15,8,-,"Ansonia, CT",2,2,2,2,13,No,-,images/queens/US15-Q0189.webp,-,32
+US15-Q0190,Q0190,US15,9,-,"Los Angeles, CA",0,0,1,2,9,No,-,images/queens/US15-Q0190.webp,-,23
+US15-Q0191,Q0191,US15,10,-,"Los Angeles, CA",0,0,0,1,4,No,-,images/queens/US15-Q0191.webp,-,23
+US15-Q0192,Q0192,US15,11,-,"Queens, NY",0,1,2,3,8,No,-,images/queens/US15-Q0192.webp,-,25
+US15-Q0193,Q0193,US15,12,-,"Nashville, TN",1,0,1,1,7,No,-,images/queens/US15-Q0193.webp,-,30
+US15-Q0194,Q0194,US15,13,-,"Hartford, CT",0,1,0,1,6,No,-,images/queens/US15-Q0194.webp,-,26
+US15-Q0195,Q0195,US15,14,-,"West Hartford, CT",0,0,0,3,5,No,-,images/queens/US15-Q0195.webp,-,27
+US15-Q0196,Q0196,US15,15,-,"San Francisco, CA",0,0,0,1,3,No,-,images/queens/US15-Q0196.webp,-,26
+US15-Q0197,Q0197,US15,16,-,"Seattle, WA",0,0,0,1,2,No,-,images/queens/US15-Q0197.webp,-,29
+US16-Q0198,Q0198,US16,1,-,"Brooklyn, NY",3,3,2,0,16,No,-,images/queens/US16-Q0198.webp,218950,27
+US16-Q0199,Q0199,US16,2,5,"Philadelphia, PA",4,5,0,1,16,Yes,-,images/queens/US16-Q0199.webp,62400,34
+US16-Q0200,Q0200,US16,3,-,"Boston, MA",4,4,1,2,16,No,-,images/queens/US16-Q0200.webp,45100,24
+US16-Q0201,Q0201,US16,4,1,"Kansas City, MO",2,5,2,2,14,No,-,images/queens/US16-Q0201.webp,12700,26
 US16-Q0202,Q0202,US16,5,4,"Miami, FL",0,0,2,4,13,No,-,-,52700,25
-US16-Q0203,Q0203,US16,6,7,"Brooklyn, NY",0,3,1,1,12,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/d/de/DawnS16CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20240107012730,2700,24
+US16-Q0203,Q0203,US16,6,7,"Brooklyn, NY",0,3,1,1,12,No,-,images/queens/US16-Q0203.webp,2700,24
 US16-Q0204,Q0204,US16,7,-,"Miami, FL",1,2,2,4,11,No,-,-,4050,34
-US16-Q0205,Q0205,US16,8,-,"New York, NY",2,0,1,1,9,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/f/f0/PlasmaS16CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20240107012439,12000,24
-US16-Q0206,Q0206,US16,9,2,"New York, NY",0,0,0,1,8,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/d/dd/XunamiMuseS16CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20240107012510,14500,33
-US16-Q0207,Q0207,US16,10,-,"Brooklyn, NY",1,0,0,1,7,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/8/89/MegamiS16CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20240107012313,3250,33
-US16-Q0208,Q0208,US16,11,-,"Brownsville, TX",1,0,0,3,6,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/5/57/GenevaKarrS16CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20240107012706,3250,30
+US16-Q0205,Q0205,US16,8,-,"New York, NY",2,0,1,1,9,No,-,images/queens/US16-Q0205.webp,12000,24
+US16-Q0206,Q0206,US16,9,2,"New York, NY",0,0,0,1,8,No,-,images/queens/US16-Q0206.webp,14500,33
+US16-Q0207,Q0207,US16,10,-,"Brooklyn, NY",1,0,0,1,7,No,-,images/queens/US16-Q0207.webp,3250,33
+US16-Q0208,Q0208,US16,11,-,"Brownsville, TX",1,0,0,3,6,No,-,images/queens/US16-Q0208.webp,3250,30
 US16-Q0209,Q0209,US16,12,3,"Los Angeles, CA",0,0,0,1,5,No,-,-,2000,26
-US16-Q0210,Q0210,US16,13,6,"Las Vegas, NV",0,0,0,1,4,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/d/df/MirageS16CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20240107012347,2000,26
-US16-Q0211,Q0211,US16,14,-,"Los Angeles, CA",0,0,0,1,3,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/0/08/HershiiLiqCour-Jet%C3%A9S16CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20240107012303,2000,31
-US17-Q0212,Q0212,US17,1,9,"Cleveland, OH",4,4,1,1,16,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/e/ee/OnyaNurveS17CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20241204224923,222500,31
-US17-Q0213,Q0213,US17,2,6,"Tampa, FL",2,2,1,2,16,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/f/fb/JewelsSparklesS17CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20241220192743,36320,22
-US17-Q0214,Q0214,US17,3,8,"Leeds, AL",3,4,1,3,16,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/f/f6/SamStarS17CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20241204224524,25850,24
-US17-Q0215,Q0215,US17,3,1,"Louisville, KY",2,4,2,1,16,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/c/c2/LexiS17CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20241205013840,18200,33
-US17-Q0216,Q0216,US17,5,10,"Fort Lauderdale, FL",3,4,0,1,14,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/4/44/SuzieTootS17CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20241204223733,65220,24
-US17-Q0217,Q0217,US17,6,7,"New York, NY",0,1,0,4,12,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/0/09/LanaJa%27RaeS17CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20241205014055,4900,22
+US16-Q0210,Q0210,US16,13,6,"Las Vegas, NV",0,0,0,1,4,No,-,images/queens/US16-Q0210.webp,2000,26
+US16-Q0211,Q0211,US16,14,-,"Los Angeles, CA",0,0,0,1,3,No,-,images/queens/US16-Q0211.webp,2000,31
+US17-Q0212,Q0212,US17,1,9,"Cleveland, OH",4,4,1,1,16,No,-,images/queens/US17-Q0212.webp,222500,31
+US17-Q0213,Q0213,US17,2,6,"Tampa, FL",2,2,1,2,16,No,-,images/queens/US17-Q0213.webp,36320,22
+US17-Q0214,Q0214,US17,3,8,"Leeds, AL",3,4,1,3,16,No,-,images/queens/US17-Q0214.webp,25850,24
+US17-Q0215,Q0215,US17,3,1,"Louisville, KY",2,4,2,1,16,No,-,images/queens/US17-Q0215.webp,18200,33
+US17-Q0216,Q0216,US17,5,10,"Fort Lauderdale, FL",3,4,0,1,14,No,-,images/queens/US17-Q0216.webp,65220,24
+US17-Q0217,Q0217,US17,6,7,"New York, NY",0,1,0,4,12,No,-,images/queens/US17-Q0217.webp,4900,22
 US17-Q0218,Q0218,US17,7,4,"Pittsburgh, PA",1,0,0,3,11,No,-,-,7780,23
-US17-Q0219,Q0219,US17,9,3,"Boston, MA",0,0,1,3,9,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/d/d7/KoriKingS17CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20241204225634,2260,25
-US17-Q0220,Q0220,US17,11,12,"Asbury Park, NJ",0,2,0,1,7,Yes,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/6/69/CrystalEnvyS17CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20241206064226,12200,26
-US17-Q0221,Q0221,US17,8,5,"Seattle, WA",1,2,2,2,10,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/c/cd/ArriettyS17CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20241204225754,7420,27
-US17-Q0222,Q0222,US17,14,14,"Miami, FL",0,0,0,1,3,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/9/9a/LuckyStarzzzS17CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20241205015218,2180,28
-US17-Q0223,Q0223,US17,13,2,"Los Angeles, CA",0,0,0,2,4,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/b/ba/JoellaS17CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20241204225658,2300,24
-US17-Q0224,Q0224,US17,12,11,"Chattanooga, TN",0,1,0,2,6,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/2/26/HormonaLisaS17CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20241204224951,2180,30
-US17-Q0225,Q0225,US17,10,13,"Los Angeles, CA",0,0,1,2,8,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/9/9a/AcaciaForgotS17CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20241204225608,2760,27
-US18-Q0226,Q0226,US18,1,14,"Orlando, FL",4,4,0,1,16,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/1/13/MykiMeeksS18CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20251202174432,224500,29
-US18-Q0227,Q0227,US18,2,3,"Denver, CO",2,1,1,3,16,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/4/40/NiniCocoS18CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20251202174453,37000,29
-US18-Q0228,Q0228,US18,3,13,"Los Angeles, CA",2,4,1,1,16,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/3/3b/DarleneMitchellS18CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20251202174101,19500,34
+US17-Q0219,Q0219,US17,9,3,"Boston, MA",0,0,1,3,9,No,-,images/queens/US17-Q0219.webp,2260,25
+US17-Q0220,Q0220,US17,11,12,"Asbury Park, NJ",0,2,0,1,7,Yes,-,images/queens/US17-Q0220.webp,12200,26
+US17-Q0221,Q0221,US17,8,5,"Seattle, WA",1,2,2,2,10,No,-,images/queens/US17-Q0221.webp,7420,27
+US17-Q0222,Q0222,US17,14,14,"Miami, FL",0,0,0,1,3,No,-,images/queens/US17-Q0222.webp,2180,28
+US17-Q0223,Q0223,US17,13,2,"Los Angeles, CA",0,0,0,2,4,No,-,images/queens/US17-Q0223.webp,2300,24
+US17-Q0224,Q0224,US17,12,11,"Chattanooga, TN",0,1,0,2,6,No,-,images/queens/US17-Q0224.webp,2180,30
+US17-Q0225,Q0225,US17,10,13,"Los Angeles, CA",0,0,1,2,8,No,-,images/queens/US17-Q0225.webp,2760,27
+US18-Q0226,Q0226,US18,1,14,"Orlando, FL",4,4,0,1,16,No,-,images/queens/US18-Q0226.webp,224500,29
+US18-Q0227,Q0227,US18,2,3,"Denver, CO",2,1,1,3,16,No,-,images/queens/US18-Q0227.webp,37000,29
+US18-Q0228,Q0228,US18,3,13,"Los Angeles, CA",2,4,1,1,16,No,-,images/queens/US18-Q0228.webp,19500,34
 US18-Q0229,Q0229,US18,4,8,"Miami, FL",2,3,2,4,14,No,-,-,59500,24
-US18-Q0230,Q0230,US18,5,4,"Seattle, WA",3,6,1,1,13,Yes,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/5/5b/JaneDon%27tS18CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20251202174204,25000,32
-US18-Q0231,Q0231,US18,6,5,"St. Petersburg, FL",0,1,3,1,12,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/9/91/DiscordAddamsS18CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20251202174143,5750,34
-US18-Q0232,Q0232,US18,7,2,"Sumter, SC",0,1,0,4,11,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/f/f6/KenyaPleaserS18CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20251202174256,5750,27
-US18-Q0233,Q0233,US18,8,1,"Miami, FL",1,0,1,1,9,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/e/ea/AthenaDionS18CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20251202173958,7000,38
-US18-Q0234,Q0234,US18,9,6,"West Palm Beach, FL",1,1,1,1,8,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/0/00/MiaStarrS18CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20251202174355,4500,39
+US18-Q0230,Q0230,US18,5,4,"Seattle, WA",3,6,1,1,13,Yes,-,images/queens/US18-Q0230.webp,25000,32
+US18-Q0231,Q0231,US18,6,5,"St. Petersburg, FL",0,1,3,1,12,No,-,images/queens/US18-Q0231.webp,5750,34
+US18-Q0232,Q0232,US18,7,2,"Sumter, SC",0,1,0,4,11,No,-,images/queens/US18-Q0232.webp,5750,27
+US18-Q0233,Q0233,US18,8,1,"Miami, FL",1,0,1,1,9,No,-,images/queens/US18-Q0233.webp,7000,38
+US18-Q0234,Q0234,US18,9,6,"West Palm Beach, FL",1,1,1,1,8,No,-,images/queens/US18-Q0234.webp,4500,39
 US18-Q0235,Q0235,US18,10,9,"Montgomery, AL",1,0,1,1,7,No,-,-,7000,38
-US18-Q0236,Q0236,US18,11,12,"Indianapolis, IN",0,1,0,2,6,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/6/64/CiaraMystS18CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20251202174042,2000,31
-US18-Q0237,Q0237,US18,12,10,"Boston, MA",0,0,0,2,4,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/f/f8/BriarBlushS18CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20251202174022,2000,25
-US18-Q0238,Q0238,US18,13,11,"Philadelphia, PA",0,0,0,3,3,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/d/d2/MandyMangoS18CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20251202174323,2000,29
-US18-Q0239,Q0239,US18,14,7,"New York, NY",0,0,0,1,2,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/b/b6/DDFuegoS18CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20251202174121,2000,37
-AS05-Q0103,Q0103,AS05,1,-,"Chicago, Illinois",2,0,0,3,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/2/29/SheaCoule%C3%A9AS5CastMug.png/revision/latest/scale-to-width-down/105?cb=20200511080242,130000,30
-AS05-Q0012,Q0012,AS05,2,-,"Boston, Massachusetts",1,2,0,3,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/2/25/JujubeeAS5CastMug.png/revision/latest/scale-to-width-down/105?cb=20210902101633,0,34
-AS05-Q0118,Q0118,AS05,2,-,"New York City, New York",3,1,0,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/d/da/MizCrackerAS5CastMug.png/revision/latest/scale-to-width-down/105?cb=20200511080503,40000,35
-AS05-Q0122,Q0122,AS05,4,-,"Washington, D.C.",0,2,0,3,AS05E07,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/4/4c/BlairStClairAS5CastMug.png/revision/latest/scale-to-width-down/105?cb=20210902185738,0,24
-AS05-Q0024,Q0024,AS05,5,-,"Las Vegas, Nevada",0,2,0,2,AS05E06,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/1/1d/AlexisMateoAS5CastMug.png/revision/latest/scale-to-width-down/105?cb=20210902185644,0,39
-AS05-Q0030,Q0030,AS05,6,-,"Las Vegas, Nevada",1,0,0,4,AS05E05,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/a/a9/IndiaFerrahAS5CastMug.png/revision/latest/scale-to-width-down/105?cb=20210902190001,0,33
-AS05-Q0123,Q0123,AS05,7,-,"Riverside, California",0,1,0,2,AS05E04,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/3/34/MayhemMillerAS5CastMug.png/revision/latest/scale-to-width-down/105?cb=20210902190211,0,37
-AS05-Q0029,Q0029,AS05,8,-,"Los Angeles, California",0,0,0,2,AS05E03,No,Mariah Paris Balenciaga,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/d/df/MariahParisBalenciagaAS5CastMug.png/revision/latest/scale-to-width-down/105?cb=20210902190122,0,37
-AS05-Q0005,Q0005,AS05,9,-,"Los Angeles, California",0,0,1,1,AS05E02,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/c/c9/OnginaAS5CastMug.png/revision/latest/scale-to-width-down/105?cb=20210902190428,0,37
-AS05-Q0093,Q0093,AS05,10,-,"Las Vegas, Nevada",0,0,0,1,AS05E01,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/2/29/DerrickBarryAS5CastMug.png/revision/latest/scale-to-width-down/105?cb=20210902185821,0,35
-AS01-Q0035,Q0035,AS01,1,-,"San Diego, California",3,1,0,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/a/ad/ChadMichaelsAS1CastMug.png/revision/latest/scale-to-width-down/105?cb=20210901213726,-,41
-AS01-Q0011,Q0011,AS01,2,-,"Riverside, California",0,1,1,3,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/4/48/RavenAS1CastMug.png/revision/latest/scale-to-width-down/105?cb=20210901214355,-,33
-AS01-Q0012,Q0012,AS01,3,-,"Boston, Massachusetts",0,1,1,4,AS01E06,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/a/a7/JujubeeAS1CastMug.png/revision/latest/scale-to-width-down/105?cb=20210901213800,-,28
-AS01-Q0004,Q0004,AS01,3,-,"Long Beach, California",3,1,0,2,AS01E06,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/a/af/ShannelAS1CastMug.png/revision/latest/scale-to-width-down/105?cb=20210901214430,-,32
-AS01-Q0024,Q0024,AS01,5,-,"Tampa, Florida",1,0,2,1,AS01E04,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/9/97/AlexisMateoAS1CastMug.png/revision/latest/scale-to-width-down/105?cb=20210901213645,-,32
-AS01-Q0025,Q0025,AS01,5,-,"Las Vegas, Nevada",1,0,2,1,AS01E04,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/b/b6/YaraSofiaAS1CastMug.png/revision/latest/scale-to-width-down/105?cb=20210901214559,-,28
-AS01-Q0037,Q0037,AS01,7,-,"Miami Beach, Florida",1,0,0,2,AS01E03,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/a/a4/LatriceRoyaleAS1CastMug.png/revision/latest/scale-to-width-down/105?cb=20210901213832,-,40
-AS01-Q0023,Q0023,AS01,7,-,"New York City, New York",1,0,0,2,AS01E03,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/2/2d/ManilaLuzonAS1CastMug.png/revision/latest/scale-to-width-down/105?cb=20210901213911,-,30
-AS01-Q0002,Q0002,AS01,9,-,"Denver, Colorado",0,0,0,1,AS01E02,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/2/27/NinaFlowersAS1CastMug.png/revision/latest/scale-to-width-down/105?cb=20210901214123,-,38
-AS01-Q0008,Q0008,AS01,9,-,"Long Beach, California",0,0,0,1,AS01E02,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/b/bf/TammieBrownAS1CastMug.png/revision/latest/scale-to-width-down/105?cb=20210901214513,-,31
-AS01-Q0031,Q0031,AS01,11,-,"New York City, New York",0,0,0,1,AS01E01,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/f/f5/MimiImfurstAS1CastMug.png/revision/latest/scale-to-width-down/105?cb=20210901213953,-,29
-AS01-Q0014,Q0014,AS01,11,-,"Los Angeles, California",0,0,0,1,AS01E01,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/3/37/PandoraBoxxAS1CastMug.png/revision/latest/scale-to-width-down/105?cb=20210901214240,-,39
-AS02-Q0048,Q0048,AS02,1,-,"Los Angeles, California",4,1,0,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/2/2e/AlaskaAS2CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20210902090139,-,30
-AS02-Q0050,Q0050,AS02,2,-,"Los Angeles, California",3,0,0,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/d/d8/DetoxAS2CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20210902090441,-,30
-AS02-Q0079,Q0079,AS02,2,-,"Boston, Massachusetts",3,0,0,2,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/d/d0/KatyaAS2CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20210902090624,-,33
-AS02-Q0049,Q0049,AS02,4,-,"Orlando, Florida",1,0,0,6,AS02E08,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/5/5b/RoxxxyAndrewsAS2CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20210902090738,-,31
-AS02-Q0052,Q0052,AS02,5,-,"Dallas, Texas",2,1,0,2,AS02E07,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/1/15/AlyssaEdwardsAS2CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20210902090313,-,35
-AS02-Q0013,Q0013,AS02,6,-,"Washington, D.C.",2,0,0,2,AS02E06,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/9/96/TatiannaAS2CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20210902090817,-,27
-AS02-Q0036,Q0036,AS02,7,-,"New York City, New York",1,1,0,2,AS02E05,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/6/69/PhiPhiO%27HaraAS2CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20210902090701,-,29
-AS02-Q0076,Q0076,AS02,8,-,"Orlando, Florida",0,1,0,2,AS02E05,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/8/89/GingerMinjAS2CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20210902090535,-,31
-AS02-Q0062,Q0062,AS02,9,-,"Azusa, California",0,0,0,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/f/fc/AdoreDelanoAS2CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20210902090103,-,25
-AS02-Q0051,Q0051,AS02,10,-,"Las Vegas, Nevada",0,0,0,2,AS02E05,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/f/f8/CocoMontreseAS2CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20210902090357,-,41
-AS03-Q0080,Q0080,AS03,1,-,"Los Angeles, California",2,1,0,2,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/4/40/TrixieMattelAS3CastMug.png/revision/latest/scale-to-width-down/105?cb=20210902100842,-,28
-AS03-Q0078,Q0078,AS03,2,-,"Dallas, Texas",1,0,0,4,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/3/33/KennedyDavenportAS3CastMug.png/revision/latest/scale-to-width-down/105?cb=20210902100502,-,35
-AS03-Q0001,Q0001,AS03,3,-,"Minneapolis, Minnesota",2,1,0,2,AS03E08,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/9/93/BeBeZaharaBenetAS3CastMug.png/revision/latest/scale-to-width-down/105?cb=20210902100331,-,36
-AS03-Q0021,Q0021,AS03,3,-,"Los Angeles, California",3,1,0,3,AS03E08,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/8/8c/ShangelaAS3CastMug.png/revision/latest/scale-to-width-down/105?cb=20210902100716,-,35
-AS03-Q0017,Q0017,AS03,5,-,"Los Angeles, California",0,0,0,2,AS03E07,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/4/47/MorganMcMichaelsAS3CastMug.png/revision/latest/scale-to-width-down/105?cb=20210902100636,-,36
-AS03-Q0065,Q0065,AS03,6,-,"Seattle, Washington",5,0,0,0,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/f/f5/BenDeLaCremeAS3CastMug.png/revision/latest/scale-to-width-down/105?cb=20210902100255,-,35
-AS03-Q0109,Q0109,AS03,7,-,"New York City, New York",1,1,0,3,AS03E06,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/4/4e/AjaAS3CastMug.png/revision/latest/scale-to-width-down/105?cb=20210902100206,-,23
-AS03-Q0092,Q0092,AS03,8,-,"Shreveport, Louisiana",0,0,1,4,AS03E06,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/3/3b/ChiChiDeVayneAS3CastMug.png/revision/latest/scale-to-width-down/105?cb=20210902101001,-,32
-AS03-Q0069,Q0069,AS03,9,-,"New York City, New York",0,0,0,2,AS03E06,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/d/d0/MilkAS3CastMug.png/revision/latest/scale-to-width-down/105?cb=20210902100548,-,29
-AS03-Q0094,Q0094,AS03,10,-,"New York City, New York",0,1,0,2,AS03E06,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/c/ce/ThorgyThorAS3CastMug.png/revision/latest/scale-to-width-down/105?cb=20210902100810,-,33
-AS04-Q0119,Q0119,AS04,1,-,"New York City, New York",3,1,1,2,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/5/51/Mon%C3%A9tXChangeAS4CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20210902104516,-,28
-AS04-Q0104,Q0104,AS04,1,-,"Orlando, Florida",4,1,1,1,,No,Trinity The Tuck,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/a/a5/TrinityTheTuckAS4CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20210902104710,-,33
-AS04-Q0121,Q0121,AS04,3,-,"Kansas City, Missouri",3,1,0,3,AS04E10,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/e/ea/MoniqueHeartAS4CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20210902105027,-,32
-AS04-Q0091,Q0091,AS04,3,-,"Redlands, California",1,3,0,4,AS04E10,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/2/28/NaomiSmallsAS4CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20210902104627,-,24
-AS04-Q0037,Q0037,AS04,5,-,"Miami Beach, Florida",1,0,1,3,AS04E09,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/e/e3/LatriceRoyaleAS4CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20210902104346,-,46
-AS04-Q0023,Q0023,AS04,6,-,"Los Angeles, California",3,1,1,1,AS04E08,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/c/c3/ManilaLuzonAS4CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20210902104419,-,36
-AS04-Q0107,Q0107,AS04,7,-,"Los Angeles, California",1,1,0,3,AS04E07,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/4/43/ValentinaAS4CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20210902104836,-,27
-AS04-Q0070,Q0070,AS04,8,-,"Los Angeles, California",0,0,0,2,AS04E06,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/e/e3/GiaGunnAS4CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20210902104206,-,28
-AS04-Q0108,Q0108,AS04,9,-,"Los Angeles, California",0,0,0,3,AS04E06,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/f/f8/FarrahMoanAS4CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20210902104132,-,24
-AS04-Q0086,Q0086,AS04,10,-,"Los Angeles, California",0,0,0,2,AS04E06,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/1/10/JasmineMastersAS4CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20210902104305,-,41
-AS06-Q0018,Q0018,AS06,1,-,"Los Angeles, California",1,3,0,3,,No,Kylie Sonique Love,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/f/fe/KylieSoniqueLoveAS6CastMug.png/revision/latest/scale-to-width-down/105?cb=20210905182730,111000,37
-AS06-Q0111,Q0111,AS06,2,-,"Los Angeles, California",1,5,1,1,AS06E09,No,Eureka!,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/7/76/EurekaAS6CastMug.png/revision/latest/scale-to-width-down/105?cb=20210902113542,25000,30
-AS06-Q0076,Q0076,AS06,2,-,"Orlando, Florida",2,1,1,3,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/a/a2/GingerMinjAS6CastMug.png/revision/latest/scale-to-width-down/105?cb=20210902113644,61000,35
-AS06-Q0135,Q0135,AS06,2,-,"Dallas, Texas",2,3,0,2,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/c/c7/Ra%27JahO%27HaraAS6CastMug.png/revision/latest/scale-to-width-down/105?cb=20210902114106,30000,34
-AS06-Q0067,Q0067,AS06,5,-,"Atlanta, Georgia",2,2,0,4,AS06E11,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/c/cd/TrinityKBonetAS6CastMug.png/revision/latest/scale-to-width-down/105?cb=20210902114353,10000,29
-AS06-Q0014,Q0014,AS06,6,-,"Los Angeles, California",0,2,0,2,AS06E08,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/e/e4/PandoraBoxxAS6CastMug.png/revision/latest/scale-to-width-down/105?cb=20210902114008,0,48
-AS06-Q0149,Q0149,AS06,7,-,"New York City, New York",1,1,0,3,AS06E07,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/d/dc/JanAS6CastMug.png/revision/latest/scale-to-width-down/105?cb=20210902113723,5000,27
-AS06-Q0130,Q0130,AS06,8,-,"Dallas, Texas",0,1,1,3,AS06E06,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/c/c7/A%27keriaCDavenportAS6CastMug.png/revision/latest/scale-to-width-down/105?cb=20210902113500,0,32
-AS06-Q0136,Q0136,AS06,9,-,"New York City, New York",0,0,0,1,AS06E05,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/4/43/ScarletEnvyAS6CastMug.png/revision/latest/scale-to-width-down/105?cb=20210902114146,0,28
-AS06-Q0025,Q0025,AS06,10,-,"Las Vegas, Nevada",1,1,0,2,AS06E04,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/8/8b/YaraSofiaAS6CastMug.png/revision/latest/scale-to-width-down/105?cb=20210902114425,5000,36
-AS06-Q0131,Q0131,AS06,11,-,"Los Angeles, California",5,0,1,1,AS06E03,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/1/1d/SilkyNutmegGanacheAS6CastMug.png/revision/latest/scale-to-width-down/105?cb=20210902114818,0,29
-AS06-Q0041,Q0041,AS06,12,-,"New York City, New York",1,0,0,1,AS06E02,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/2/2b/JigglyCalienteAS6CastMug.png/revision/latest/scale-to-width-down/105?cb=20210902113758,0,39
-AS06-Q0059,Q0059,AS06,13,-,"Fort Lauderdale, Florida",0,0,0,1,AS06E01,No,Serena ChaCha,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/a/a0/SerenaChaChaAS6CastMug.png/revision/latest/scale-to-width-down/105?cb=20210902114226,0,29
-AS07-Q0047,Q0047,AS07,1,-,"Portland, Oregon",5,0,0,0,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/3/3c/JinkxMonsoonAS7CastMug.jpeg/revision/latest/scale-to-width-down/105?cb=20220413193645,-,33
-AS07-Q0119,Q0119,AS07,2,-,New York City,3,4,0,0,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/2/20/Mon%C3%A9tXChangeAS7CastMug.jpeg/revision/latest/scale-to-width-down/105?cb=20220413193645,-,31
-AS07-Q0104,Q0104,AS07,3,-,"Orlando, Florida",4,2,0,1,,No,Trinity The Tuck,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/b/bf/TrinityTheTuckAS7CastMug.jpeg/revision/latest/scale-to-width-down/105?cb=20220413193645,-,35
-AS07-Q0103,Q0103,AS07,3,-,"Chicago, Illinois",2,5,0,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/6/63/SheaCoule%C3%A9AS7CastMug.jpeg/revision/latest/scale-to-width-down/105?cb=20220413193645,-,32
-AS07-Q0022,Q0022,AS07,5,-,"Los Angeles, California",2,4,0,0,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/b/bb/RajaAS7CastMug.jpeg/revision/latest/scale-to-width-down/105?cb=20220413193645,-,47
-AS07-Q0128,Q0128,AS07,5,-,"Denver, Colorado",1,4,0,0,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/1/1e/YvieOddlyAS7CastMug.jpeg/revision/latest/scale-to-width-down/105?cb=20220413193646,-,27
-AS07-Q0144,Q0144,AS07,5,-,"Milwaukee, Wisconsin",2,1,0,0,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/4/48/JaidaEssenceHallAS7CastMug.jpeg/revision/latest/scale-to-width-down/105?cb=20220413193642,-,34
-AS07-Q0240,Q0240,AS07,5,-,"Liverpool, United Kingdom",3,2,0,0,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/3/3d/TheVivienneAS7CastMug.jpeg/revision/latest/scale-to-width-down/105?cb=20220413193645,-,29
-AS08-Q0241,Q0241,AS08,1,-,"Victoria, Canada",4,3,0,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/e/e5/JimboAS8CastMug.jpeg/revision/latest/scale-to-width-down/105?cb=20230512065232,-,39
-AS08-Q0156,Q0156,AS08,2,-,"New York City, New York",2,2,0,2,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/6/67/KandyMuseAS8CastMug.jpeg/revision/latest/scale-to-width-down/105?cb=20230512065446,-,27
-AS08-Q0015,Q0015,AS08,3,-,"Boston, Massachusetts",1,4,0,3,AS08E10,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/9/9d/JessicaWildAS8CastMug.jpeg/revision/latest/scale-to-width-down/105?cb=20230420161703,-,42
-AS08-Q0105,Q0105,AS08,4,-,"New York City, New York",1,2,0,3,AS08E09,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/8/8f/AlexisMichelleAS8CastMug.jpeg/revision/latest/scale-to-width-down/105?cb=20230512064853,-,38
-AS08-Q0164,Q0164,AS08,5,-,"Atlanta, Georgia",2,3,0,1,AS08E08,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/6/65/LaLaRiAS8CastMug.jpeg/revision/latest/scale-to-width-down/105?cb=20230512065544,-,31
-AS08-Q0140,Q0140,AS08,6,-,"Las Vegas, Nevada",1,0,0,4,AS08E07,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/2/2e/KahannaMontreseAS8CastMug.jpeg/revision/latest/scale-to-width-down/105?cb=20230420161811,-,28
-AS08-Q0114,Q0114,AS08,7,-,"Las Vegas, Nevada",1,3,0,2,AS08E06,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/c/c9/JaymesMansfieldAS8CastMug.jpeg/revision/latest/scale-to-width-down/105?cb=20230512065103,-,32
-AS08-Q0147,Q0147,AS08,8,-,"Los Angeles, California",0,1,0,0,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/b/bf/HeidiNClosetAS8CastMug.jpeg/revision/latest/scale-to-width-down/105?cb=20230512064945,-,27
-AS08-Q0064,Q0064,AS08,9,-,"Rochester, New York",0,0,0,3,AS08E04,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/d/d7/DarienneLakeAS8CastMug.jpeg/revision/latest/scale-to-width-down/105?cb=20230420161515,-,50
-AS08-Q0085,Q0085,AS08,10,-,"Rochester, New York",0,0,0,1,AS08E03,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/e/ec/MrsKashaDavisAS8CastMug.jpeg/revision/latest/scale-to-width-down/105?cb=20230512070245,-,51
-AS08-Q0097,Q0097,AS08,11,-,"Los Angeles, California",0,0,0,1,AS08E02,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/2/25/NayshaLopezAS8CastMug.jpeg/revision/latest/scale-to-width-down/105?cb=20230512064708,-,37
-AS08-Q0058,Q0058,AS08,12,-,"Chicago, Illinois",0,0,0,1,AS08E01,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/d/d3/MonicaBeverlyHillzAS8CastMug.jpeg/revision/latest/scale-to-width-down/105?cb=20230512070142,-,37
-AS09-Q0170,Q0170,AS09,1,-,"Atlanta, Georgia",3,4,0,0,,No,Angeria Paris VanMicheals,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/c/cd/AngeriaParisVanMichealsAS9CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20240423195621,-,29
-AS09-Q0049,Q0049,AS09,2,-,"Orlando, Florida",4,2,0,0,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/4/46/RoxxxyAndrewsAS9CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20240423195720,-,40
-AS09-Q0127,Q0127,AS09,2,-,"Los Angeles, California",1,5,0,0,,No,Vanessa Vanjie,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/0/09/VanessaVanjieAS9CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20240423195745,-,31
-AS09-Q0157,Q0157,AS09,4,-,"Los Angeles, California",2,3,0,0,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/5/52/GottmikAS9CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20240423195638,-,26
-AS09-Q0174,Q0174,AS09,4,-,"Los Angeles, California",2,2,0,0,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/e/e8/JorgeousAS9CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20240423195651,-,23
-AS09-Q0132,Q0132,AS09,4,-,"Columbus, Ohio",2,4,0,0,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/4/44/NinaWestAS9CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20240715233410,-,45
-AS09-Q0134,Q0134,AS09,4,-,"Dallas, Texas",4,3,0,0,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/6/67/PlastiqueTiaraAS9CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20240423195710,-,26
-AS09-Q0004,Q0004,AS09,4,-,"Las Vegas, Nevada",2,5,0,0,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/d/db/ShannelAS9CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20240423195737,-,44
-AS10-Q0076,Q0076,AS10,1,-,"Orlando, Florida",4,1,0,0,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/4/45/GingerMinjAS10CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20250423192853,230000,39
-AS10-Q0174,Q0174,AS10,2,-,"Los Angeles, California",2,2,0,0,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/d/de/JorgeousAS10CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20250423185444,40000,24
-AS10-Q0171,Q0171,AS10,3,-,"Seattle, Washington",3,1,0,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/1/14/BoscoAS10CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20250423185906,20000,31
-AS10-Q0218,Q0218,AS10,3,-,"Pittsburgh, Pennsylvania",2,0,1,2,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/8/88/LydiaBKollinsAS10CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20250423190337,10000,23
-AS10-Q0109,Q0109,AS10,5,-,"New York City, New York",1,0,1,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/7/7f/AjaAS10CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20250423184324,10000,30
-AS10-Q0172,Q0172,AS10,5,-,"Chicago, Illinois",2,0,0,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/6/62/DayaBettyAS10CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20250423191919,10000,28
-AS10-Q0197,Q0197,AS10,5,-,"Seattle, Washington",3,0,0,1,,No,Irene the Alien,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/e/ea/IrenetheAlienAS10CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20250518072516,12500,30
-AS10-Q0176,Q0176,AS10,5,-,"Los Angeles, California",0,0,0,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/4/46/KerriColbyAS10CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20250423190115,0,27
-AS10-Q0185,Q0185,AS10,9,-,"Houston, Texas",1,1,0,2,AS10E11,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/c/cf/MistressIsabelleBrooksAS10CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20250423190653,5000,25
-AS10-Q0098,Q0098,AS10,10,-,"Austin, Texas",0,0,0,1,AS10E10,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/a/a1/CynthiaLeeFontaineAS10CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20250423193009,0,43
-AS10-Q0096,Q0096,AS10,11,-,"New York City, New York",0,1,0,0,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/5/52/AcidBettyAS10CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20250423192812,0,46
-AS10-Q0180,Q0180,AS10,11,-,"Los Angeles, California",0,0,0,0,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/a/a2/AlyssaHunterAS10CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20250423192537,0,31
-AS10-Q0162,Q0162,AS10,11,-,"Chicago, Illinois",1,0,0,0,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/e/e2/DenaliAS10CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20250423193144,1000,32
-AS10-Q0020,Q0020,AS10,11,-,"Atlanta, Georgia",0,1,0,0,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/0/09/NicolePaigeBrooksAS10CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20250423191201,0,50
-AS10-Q0161,Q0161,AS10,11,-,"New York City, New York",1,0,0,0,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/c/c2/TinaBurnerAS10CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20250423191301,0,43
-AS10-Q0173,Q0173,AS10,11,-,"Las Vegas, Nevada",0,1,0,0,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/7/76/DeJaSkyeAS10CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20250423182929,0,34
-AS10-Q0159,Q0159,AS10,11,-,"New York City, New York",0,0,0,0,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/f/fe/OliviaLuxAS10CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20250425100416,0,31
-AS10-Q0032,Q0032,AS10,11,-,"Atlanta, Georgia",0,0,0,0,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/4/43/PhoenixAS10CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20250423184409,0,43
-AS11-Q0071,Q0071,AS11,11,-,"Los Angeles, California",0,0,0,0,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/b/be/AprilCarri%C3%B3nAS11CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20260425183151,0,37
-AS11-Q0193,Q0193,AS11,11,-,"Chicago, Illinois",1,0,0,0,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/7/74/AuraMayariAS11CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20260425183159,0,35
-AS11-Q0187,Q0187,AS11,11,-,"Los Angeles, California",1,1,0,0,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/5/53/SalinaEsTittiesAS11CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20260425183215,10000,35
-AS11-Q0072,Q0072,AS11,11,-,"New York City, New York",1,0,0,0,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/4/4b/VivaciousAS11CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20260425183231,0,52
-AS11-Q0222,Q0222,AS11,11,-,"Miami, Florida",0,1,0,0,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/f/f9/LuckyStarzzzAS11CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20260425182947,500,28
-AS11-Q0017,Q0017,AS11,11,-,"Los Angeles, California",2,0,0,0,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/4/49/MorganMcMichaelsAS11CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20260425183003,10500,44
-AS11-Q0202,Q0202,AS11,11,-,"Miami, Florida",0,1,0,0,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/b/be/MorphineLoveDionAS11CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20260425183018,500,29
-AS11-Q0019,Q0019,AS11,11,-,"Fort Worth, Texas",0,0,0,0,,No,Mystique Summers,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/e/eb/MystiqueSummersAS11CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20260425183034,500,42
+US18-Q0236,Q0236,US18,11,12,"Indianapolis, IN",0,1,0,2,6,No,-,images/queens/US18-Q0236.webp,2000,31
+US18-Q0237,Q0237,US18,12,10,"Boston, MA",0,0,0,2,4,No,-,images/queens/US18-Q0237.webp,2000,25
+US18-Q0238,Q0238,US18,13,11,"Philadelphia, PA",0,0,0,3,3,No,-,images/queens/US18-Q0238.webp,2000,29
+US18-Q0239,Q0239,US18,14,7,"New York, NY",0,0,0,1,2,No,-,images/queens/US18-Q0239.webp,2000,37
+AS05-Q0103,Q0103,AS05,1,-,"Chicago, Illinois",2,0,0,3,,No,-,images/queens/AS05-Q0103.webp,130000,30
+AS05-Q0012,Q0012,AS05,2,-,"Boston, Massachusetts",1,2,0,3,,No,-,images/queens/AS05-Q0012.webp,0,34
+AS05-Q0118,Q0118,AS05,2,-,"New York City, New York",3,1,0,1,,No,-,images/queens/AS05-Q0118.webp,40000,35
+AS05-Q0122,Q0122,AS05,4,-,"Washington, D.C.",0,2,0,3,AS05E07,No,-,images/queens/AS05-Q0122.webp,0,24
+AS05-Q0024,Q0024,AS05,5,-,"Las Vegas, Nevada",0,2,0,2,AS05E06,No,-,images/queens/AS05-Q0024.webp,0,39
+AS05-Q0030,Q0030,AS05,6,-,"Las Vegas, Nevada",1,0,0,4,AS05E05,No,-,images/queens/AS05-Q0030.webp,0,33
+AS05-Q0123,Q0123,AS05,7,-,"Riverside, California",0,1,0,2,AS05E04,No,-,images/queens/AS05-Q0123.webp,0,37
+AS05-Q0029,Q0029,AS05,8,-,"Los Angeles, California",0,0,0,2,AS05E03,No,Mariah Paris Balenciaga,images/queens/AS05-Q0029.webp,0,37
+AS05-Q0005,Q0005,AS05,9,-,"Los Angeles, California",0,0,1,1,AS05E02,No,-,images/queens/AS05-Q0005.webp,0,37
+AS05-Q0093,Q0093,AS05,10,-,"Las Vegas, Nevada",0,0,0,1,AS05E01,No,-,images/queens/AS05-Q0093.webp,0,35
+AS01-Q0035,Q0035,AS01,1,-,"San Diego, California",3,1,0,1,,No,-,images/queens/AS01-Q0035.webp,-,41
+AS01-Q0011,Q0011,AS01,2,-,"Riverside, California",0,1,1,3,,No,-,images/queens/AS01-Q0011.webp,-,33
+AS01-Q0012,Q0012,AS01,3,-,"Boston, Massachusetts",0,1,1,4,AS01E06,No,-,images/queens/AS01-Q0012.webp,-,28
+AS01-Q0004,Q0004,AS01,3,-,"Long Beach, California",3,1,0,2,AS01E06,No,-,images/queens/AS01-Q0004.webp,-,32
+AS01-Q0024,Q0024,AS01,5,-,"Tampa, Florida",1,0,2,1,AS01E04,No,-,images/queens/AS01-Q0024.webp,-,32
+AS01-Q0025,Q0025,AS01,5,-,"Las Vegas, Nevada",1,0,2,1,AS01E04,No,-,images/queens/AS01-Q0025.webp,-,28
+AS01-Q0037,Q0037,AS01,7,-,"Miami Beach, Florida",1,0,0,2,AS01E03,No,-,images/queens/AS01-Q0037.webp,-,40
+AS01-Q0023,Q0023,AS01,7,-,"New York City, New York",1,0,0,2,AS01E03,No,-,images/queens/AS01-Q0023.webp,-,30
+AS01-Q0002,Q0002,AS01,9,-,"Denver, Colorado",0,0,0,1,AS01E02,No,-,images/queens/AS01-Q0002.webp,-,38
+AS01-Q0008,Q0008,AS01,9,-,"Long Beach, California",0,0,0,1,AS01E02,No,-,images/queens/AS01-Q0008.webp,-,31
+AS01-Q0031,Q0031,AS01,11,-,"New York City, New York",0,0,0,1,AS01E01,No,-,images/queens/AS01-Q0031.webp,-,29
+AS01-Q0014,Q0014,AS01,11,-,"Los Angeles, California",0,0,0,1,AS01E01,No,-,images/queens/AS01-Q0014.webp,-,39
+AS02-Q0048,Q0048,AS02,1,-,"Los Angeles, California",4,1,0,1,,No,-,images/queens/AS02-Q0048.webp,-,30
+AS02-Q0050,Q0050,AS02,2,-,"Los Angeles, California",3,0,0,1,,No,-,images/queens/AS02-Q0050.webp,-,30
+AS02-Q0079,Q0079,AS02,2,-,"Boston, Massachusetts",3,0,0,2,,No,-,images/queens/AS02-Q0079.webp,-,33
+AS02-Q0049,Q0049,AS02,4,-,"Orlando, Florida",1,0,0,6,AS02E08,No,-,images/queens/AS02-Q0049.webp,-,31
+AS02-Q0052,Q0052,AS02,5,-,"Dallas, Texas",2,1,0,2,AS02E07,No,-,images/queens/AS02-Q0052.webp,-,35
+AS02-Q0013,Q0013,AS02,6,-,"Washington, D.C.",2,0,0,2,AS02E06,No,-,images/queens/AS02-Q0013.webp,-,27
+AS02-Q0036,Q0036,AS02,7,-,"New York City, New York",1,1,0,2,AS02E05,No,-,images/queens/AS02-Q0036.webp,-,29
+AS02-Q0076,Q0076,AS02,8,-,"Orlando, Florida",0,1,0,2,AS02E05,No,-,images/queens/AS02-Q0076.webp,-,31
+AS02-Q0062,Q0062,AS02,9,-,"Azusa, California",0,0,0,1,,No,-,images/queens/AS02-Q0062.webp,-,25
+AS02-Q0051,Q0051,AS02,10,-,"Las Vegas, Nevada",0,0,0,2,AS02E05,No,-,images/queens/AS02-Q0051.webp,-,41
+AS03-Q0080,Q0080,AS03,1,-,"Los Angeles, California",2,1,0,2,,No,-,images/queens/AS03-Q0080.webp,-,28
+AS03-Q0078,Q0078,AS03,2,-,"Dallas, Texas",1,0,0,4,,No,-,images/queens/AS03-Q0078.webp,-,35
+AS03-Q0001,Q0001,AS03,3,-,"Minneapolis, Minnesota",2,1,0,2,AS03E08,No,-,images/queens/AS03-Q0001.webp,-,36
+AS03-Q0021,Q0021,AS03,3,-,"Los Angeles, California",3,1,0,3,AS03E08,No,-,images/queens/AS03-Q0021.webp,-,35
+AS03-Q0017,Q0017,AS03,5,-,"Los Angeles, California",0,0,0,2,AS03E07,No,-,images/queens/AS03-Q0017.webp,-,36
+AS03-Q0065,Q0065,AS03,6,-,"Seattle, Washington",5,0,0,0,,No,-,images/queens/AS03-Q0065.webp,-,35
+AS03-Q0109,Q0109,AS03,7,-,"New York City, New York",1,1,0,3,AS03E06,No,-,images/queens/AS03-Q0109.webp,-,23
+AS03-Q0092,Q0092,AS03,8,-,"Shreveport, Louisiana",0,0,1,4,AS03E06,No,-,images/queens/AS03-Q0092.webp,-,32
+AS03-Q0069,Q0069,AS03,9,-,"New York City, New York",0,0,0,2,AS03E06,No,-,images/queens/AS03-Q0069.webp,-,29
+AS03-Q0094,Q0094,AS03,10,-,"New York City, New York",0,1,0,2,AS03E06,No,-,images/queens/AS03-Q0094.webp,-,33
+AS04-Q0119,Q0119,AS04,1,-,"New York City, New York",3,1,1,2,,No,-,images/queens/AS04-Q0119.webp,-,28
+AS04-Q0104,Q0104,AS04,1,-,"Orlando, Florida",4,1,1,1,,No,Trinity The Tuck,images/queens/AS04-Q0104.webp,-,33
+AS04-Q0121,Q0121,AS04,3,-,"Kansas City, Missouri",3,1,0,3,AS04E10,No,-,images/queens/AS04-Q0121.webp,-,32
+AS04-Q0091,Q0091,AS04,3,-,"Redlands, California",1,3,0,4,AS04E10,No,-,images/queens/AS04-Q0091.webp,-,24
+AS04-Q0037,Q0037,AS04,5,-,"Miami Beach, Florida",1,0,1,3,AS04E09,No,-,images/queens/AS04-Q0037.webp,-,46
+AS04-Q0023,Q0023,AS04,6,-,"Los Angeles, California",3,1,1,1,AS04E08,No,-,images/queens/AS04-Q0023.webp,-,36
+AS04-Q0107,Q0107,AS04,7,-,"Los Angeles, California",1,1,0,3,AS04E07,No,-,images/queens/AS04-Q0107.webp,-,27
+AS04-Q0070,Q0070,AS04,8,-,"Los Angeles, California",0,0,0,2,AS04E06,No,-,images/queens/AS04-Q0070.webp,-,28
+AS04-Q0108,Q0108,AS04,9,-,"Los Angeles, California",0,0,0,3,AS04E06,No,-,images/queens/AS04-Q0108.webp,-,24
+AS04-Q0086,Q0086,AS04,10,-,"Los Angeles, California",0,0,0,2,AS04E06,No,-,images/queens/AS04-Q0086.webp,-,41
+AS06-Q0018,Q0018,AS06,1,-,"Los Angeles, California",1,3,0,3,,No,Kylie Sonique Love,images/queens/AS06-Q0018.webp,111000,37
+AS06-Q0111,Q0111,AS06,2,-,"Los Angeles, California",1,5,1,1,AS06E09,No,Eureka!,images/queens/AS06-Q0111.webp,25000,30
+AS06-Q0076,Q0076,AS06,2,-,"Orlando, Florida",2,1,1,3,,No,-,images/queens/AS06-Q0076.webp,61000,35
+AS06-Q0135,Q0135,AS06,2,-,"Dallas, Texas",2,3,0,2,,No,-,images/queens/AS06-Q0135.webp,30000,34
+AS06-Q0067,Q0067,AS06,5,-,"Atlanta, Georgia",2,2,0,4,AS06E11,No,-,images/queens/AS06-Q0067.webp,10000,29
+AS06-Q0014,Q0014,AS06,6,-,"Los Angeles, California",0,2,0,2,AS06E08,No,-,images/queens/AS06-Q0014.webp,0,48
+AS06-Q0149,Q0149,AS06,7,-,"New York City, New York",1,1,0,3,AS06E07,No,-,images/queens/AS06-Q0149.webp,5000,27
+AS06-Q0130,Q0130,AS06,8,-,"Dallas, Texas",0,1,1,3,AS06E06,No,-,images/queens/AS06-Q0130.webp,0,32
+AS06-Q0136,Q0136,AS06,9,-,"New York City, New York",0,0,0,1,AS06E05,No,-,images/queens/AS06-Q0136.webp,0,28
+AS06-Q0025,Q0025,AS06,10,-,"Las Vegas, Nevada",1,1,0,2,AS06E04,No,-,images/queens/AS06-Q0025.webp,5000,36
+AS06-Q0131,Q0131,AS06,11,-,"Los Angeles, California",5,0,1,1,AS06E03,No,-,images/queens/AS06-Q0131.webp,0,29
+AS06-Q0041,Q0041,AS06,12,-,"New York City, New York",1,0,0,1,AS06E02,No,-,images/queens/AS06-Q0041.webp,0,39
+AS06-Q0059,Q0059,AS06,13,-,"Fort Lauderdale, Florida",0,0,0,1,AS06E01,No,Serena ChaCha,images/queens/AS06-Q0059.webp,0,29
+AS07-Q0047,Q0047,AS07,1,-,"Portland, Oregon",5,0,0,0,,No,-,images/queens/AS07-Q0047.webp,-,33
+AS07-Q0119,Q0119,AS07,2,-,New York City,3,4,0,0,,No,-,images/queens/AS07-Q0119.webp,-,31
+AS07-Q0104,Q0104,AS07,3,-,"Orlando, Florida",4,2,0,1,,No,Trinity The Tuck,images/queens/AS07-Q0104.webp,-,35
+AS07-Q0103,Q0103,AS07,3,-,"Chicago, Illinois",2,5,0,1,,No,-,images/queens/AS07-Q0103.webp,-,32
+AS07-Q0022,Q0022,AS07,5,-,"Los Angeles, California",2,4,0,0,,No,-,images/queens/AS07-Q0022.webp,-,47
+AS07-Q0128,Q0128,AS07,5,-,"Denver, Colorado",1,4,0,0,,No,-,images/queens/AS07-Q0128.webp,-,27
+AS07-Q0144,Q0144,AS07,5,-,"Milwaukee, Wisconsin",2,1,0,0,,No,-,images/queens/AS07-Q0144.webp,-,34
+AS07-Q0240,Q0240,AS07,5,-,"Liverpool, United Kingdom",3,2,0,0,,No,-,images/queens/AS07-Q0240.webp,-,29
+AS08-Q0241,Q0241,AS08,1,-,"Victoria, Canada",4,3,0,1,,No,-,images/queens/AS08-Q0241.webp,-,39
+AS08-Q0156,Q0156,AS08,2,-,"New York City, New York",2,2,0,2,,No,-,images/queens/AS08-Q0156.webp,-,27
+AS08-Q0015,Q0015,AS08,3,-,"Boston, Massachusetts",1,4,0,3,AS08E10,No,-,images/queens/AS08-Q0015.webp,-,42
+AS08-Q0105,Q0105,AS08,4,-,"New York City, New York",1,2,0,3,AS08E09,No,-,images/queens/AS08-Q0105.webp,-,38
+AS08-Q0164,Q0164,AS08,5,-,"Atlanta, Georgia",2,3,0,1,AS08E08,No,-,images/queens/AS08-Q0164.webp,-,31
+AS08-Q0140,Q0140,AS08,6,-,"Las Vegas, Nevada",1,0,0,4,AS08E07,No,-,images/queens/AS08-Q0140.webp,-,28
+AS08-Q0114,Q0114,AS08,7,-,"Las Vegas, Nevada",1,3,0,2,AS08E06,No,-,images/queens/AS08-Q0114.webp,-,32
+AS08-Q0147,Q0147,AS08,8,-,"Los Angeles, California",0,1,0,0,,No,-,images/queens/AS08-Q0147.webp,-,27
+AS08-Q0064,Q0064,AS08,9,-,"Rochester, New York",0,0,0,3,AS08E04,No,-,images/queens/AS08-Q0064.webp,-,50
+AS08-Q0085,Q0085,AS08,10,-,"Rochester, New York",0,0,0,1,AS08E03,No,-,images/queens/AS08-Q0085.webp,-,51
+AS08-Q0097,Q0097,AS08,11,-,"Los Angeles, California",0,0,0,1,AS08E02,No,-,images/queens/AS08-Q0097.webp,-,37
+AS08-Q0058,Q0058,AS08,12,-,"Chicago, Illinois",0,0,0,1,AS08E01,No,-,images/queens/AS08-Q0058.webp,-,37
+AS09-Q0170,Q0170,AS09,1,-,"Atlanta, Georgia",3,4,0,0,,No,Angeria Paris VanMicheals,images/queens/AS09-Q0170.webp,-,29
+AS09-Q0049,Q0049,AS09,2,-,"Orlando, Florida",4,2,0,0,,No,-,images/queens/AS09-Q0049.webp,-,40
+AS09-Q0127,Q0127,AS09,2,-,"Los Angeles, California",1,5,0,0,,No,Vanessa Vanjie,images/queens/AS09-Q0127.webp,-,31
+AS09-Q0157,Q0157,AS09,4,-,"Los Angeles, California",2,3,0,0,,No,-,images/queens/AS09-Q0157.webp,-,26
+AS09-Q0174,Q0174,AS09,4,-,"Los Angeles, California",2,2,0,0,,No,-,images/queens/AS09-Q0174.webp,-,23
+AS09-Q0132,Q0132,AS09,4,-,"Columbus, Ohio",2,4,0,0,,No,-,images/queens/AS09-Q0132.webp,-,45
+AS09-Q0134,Q0134,AS09,4,-,"Dallas, Texas",4,3,0,0,,No,-,images/queens/AS09-Q0134.webp,-,26
+AS09-Q0004,Q0004,AS09,4,-,"Las Vegas, Nevada",2,5,0,0,,No,-,images/queens/AS09-Q0004.webp,-,44
+AS10-Q0076,Q0076,AS10,1,-,"Orlando, Florida",4,1,0,0,,No,-,images/queens/AS10-Q0076.webp,230000,39
+AS10-Q0174,Q0174,AS10,2,-,"Los Angeles, California",2,2,0,0,,No,-,images/queens/AS10-Q0174.webp,40000,24
+AS10-Q0171,Q0171,AS10,3,-,"Seattle, Washington",3,1,0,1,,No,-,images/queens/AS10-Q0171.webp,20000,31
+AS10-Q0218,Q0218,AS10,3,-,"Pittsburgh, Pennsylvania",2,0,1,2,,No,-,images/queens/AS10-Q0218.webp,10000,23
+AS10-Q0109,Q0109,AS10,5,-,"New York City, New York",1,0,1,1,,No,-,images/queens/AS10-Q0109.webp,10000,30
+AS10-Q0172,Q0172,AS10,5,-,"Chicago, Illinois",2,0,0,1,,No,-,images/queens/AS10-Q0172.webp,10000,28
+AS10-Q0197,Q0197,AS10,5,-,"Seattle, Washington",3,0,0,1,,No,Irene the Alien,images/queens/AS10-Q0197.webp,12500,30
+AS10-Q0176,Q0176,AS10,5,-,"Los Angeles, California",0,0,0,1,,No,-,images/queens/AS10-Q0176.webp,0,27
+AS10-Q0185,Q0185,AS10,9,-,"Houston, Texas",1,1,0,2,AS10E11,No,-,images/queens/AS10-Q0185.webp,5000,25
+AS10-Q0098,Q0098,AS10,10,-,"Austin, Texas",0,0,0,1,AS10E10,No,-,images/queens/AS10-Q0098.webp,0,43
+AS10-Q0096,Q0096,AS10,11,-,"New York City, New York",0,1,0,0,,No,-,images/queens/AS10-Q0096.webp,0,46
+AS10-Q0180,Q0180,AS10,11,-,"Los Angeles, California",0,0,0,0,,No,-,images/queens/AS10-Q0180.webp,0,31
+AS10-Q0162,Q0162,AS10,11,-,"Chicago, Illinois",1,0,0,0,,No,-,images/queens/AS10-Q0162.webp,1000,32
+AS10-Q0020,Q0020,AS10,11,-,"Atlanta, Georgia",0,1,0,0,,No,-,images/queens/AS10-Q0020.webp,0,50
+AS10-Q0161,Q0161,AS10,11,-,"New York City, New York",1,0,0,0,,No,-,images/queens/AS10-Q0161.webp,0,43
+AS10-Q0173,Q0173,AS10,11,-,"Las Vegas, Nevada",0,1,0,0,,No,-,images/queens/AS10-Q0173.webp,0,34
+AS10-Q0159,Q0159,AS10,11,-,"New York City, New York",0,0,0,0,,No,-,images/queens/AS10-Q0159.webp,0,31
+AS10-Q0032,Q0032,AS10,11,-,"Atlanta, Georgia",0,0,0,0,,No,-,images/queens/AS10-Q0032.webp,0,43
+AS11-Q0071,Q0071,AS11,11,-,"Los Angeles, California",0,0,0,0,,No,-,images/queens/AS11-Q0071.webp,0,37
+AS11-Q0193,Q0193,AS11,11,-,"Chicago, Illinois",1,0,0,0,,No,-,images/queens/AS11-Q0193.webp,0,35
+AS11-Q0187,Q0187,AS11,11,-,"Los Angeles, California",1,1,0,0,,No,-,images/queens/AS11-Q0187.webp,10000,35
+AS11-Q0072,Q0072,AS11,11,-,"New York City, New York",1,0,0,0,,No,-,images/queens/AS11-Q0072.webp,0,52
+AS11-Q0222,Q0222,AS11,11,-,"Miami, Florida",0,1,0,0,,No,-,images/queens/AS11-Q0222.webp,500,28
+AS11-Q0017,Q0017,AS11,11,-,"Los Angeles, California",2,0,0,0,,No,-,images/queens/AS11-Q0017.webp,10500,44
+AS11-Q0202,Q0202,AS11,11,-,"Miami, Florida",0,1,0,0,,No,-,images/queens/AS11-Q0202.webp,500,29
+AS11-Q0019,Q0019,AS11,11,-,"Fort Worth, Texas",0,0,0,0,,No,Mystique Summers,images/queens/AS11-Q0019.webp,500,42
 CA01-Q0242,Q0242,CA01,1,-,"Toronto, Ontario",2,1,0,2,,No,-,-,-,28
 CA01-Q0243,Q0243,CA01,2,-,"Montreal, Quebec",3,1,0,2,,No,-,-,-,32
 CA01-Q0244,Q0244,CA01,2,-,"Toronto, Ontario",1,5,0,0,,No,-,-,-,29
