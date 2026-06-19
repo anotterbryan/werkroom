@@ -85,6 +85,17 @@ main{padding:34px 40px 90px;max-width:1180px;width:100%}
   height:56px;padding:0 16px;background:rgba(18,3,28,.95);border-bottom:1px solid rgba(244,181,63,.25);z-index:15}
   .burger{font-size:22px;color:var(--gold);background:none;border:none;cursor:pointer}}
 
+/* ---------- Back control ---------- */
+.backbar{margin-bottom:18px}
+.backbtn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:9px 18px 9px 14px;
+  font-family:var(--mono);font-size:13px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;
+  color:var(--gold);background:rgba(42,14,58,.65);border:1px solid rgba(244,181,63,.35);border-radius:999px;
+  cursor:pointer;transition:background .15s,border-color .15s,color .15s;-webkit-tap-highlight-color:transparent}
+.backbtn:hover{background:rgba(230,0,126,.18);border-color:var(--magenta);color:var(--cream)}
+.backbtn .barrow{font-size:16px;line-height:1}
+@media(max-width:860px){.backbar{margin-bottom:14px}
+  .backbtn{padding:11px 20px 11px 15px;font-size:13.5px}}
+
 /* ---------- View header ---------- */
 .vhead{margin-bottom:26px;position:relative}
 .vkicker{font-size:11.5px;letter-spacing:4px;text-transform:uppercase;color:var(--magenta);font-weight:700;margin-bottom:8px}
@@ -3525,8 +3536,35 @@ let _LAST_ROUTE=null;
 const ROUTE_ALIASES={georoll:'hometowns',zodiac:'birthdays',safestreaks:'survivors',farewells:'elimorder',
   challengemix:'challenges',snatchhall:'snatch',guestdir:'guestfreq',continuity:'panel',tenure:'panel',
   'sec:home':'home','sec:about':'health'};
+
+/* ---------------- in-app navigation history ----------------
+   NAV_STACK holds the routes the user has VISITED, in order, so the Back
+   control can return to the *previous view* — including drill-down routes
+   (queen:/season:/celeb:/sec:) that the hash router would otherwise treat
+   as one history entry. We use history.replaceState (never pushState) so we
+   own a single browser entry and never fight the browser's own history;
+   the in-app stack is the single source of truth for "previous view".
+   _navSilent suppresses pushing a new entry when a navigation is itself a
+   Back action (pop) or a same-route re-render, preventing infinite loops. */
+const NAV_STACK=[];
+let _navSilent=false;
+const HOME_ROUTE='home';
+function goBack(){
+  if(!NAV_STACK.length)return;
+  const prev=NAV_STACK.pop();   // route we are returning to
+  _navSilent=true;              // don't re-push it on the way back
+  go(prev);
+  _navSilent=false;
+}
 function go(route){
   if(ROUTE_ALIASES[route])route=ROUTE_ALIASES[route];
+  // record where we were *before* navigating, so Back can return to it.
+  // Skip when this go() is itself a Back pop, a no-op re-render of the
+  // current route, or the initial load (_LAST_ROUTE null).
+  if(!_navSilent && _LAST_ROUTE && route!==_LAST_ROUTE){
+    NAV_STACK.push(_LAST_ROUTE);
+    if(NAV_STACK.length>100)NAV_STACK.shift();
+  }
   _LAST_ROUTE=route;
   const main=$('#main');main.scrollTop=0;window.scrollTo(0,0);
   let id=route,arg=null;
@@ -3537,6 +3575,16 @@ function go(route){
   else if(id==='celeb'&&arg){renderCeleb(main,arg);}
   else if(id==='sec'&&arg&&SLUG_GROUP[arg]){renderSectionHome(main,SLUG_GROUP[arg]);}
   else{const v=VIEWS.find(x=>x.id===id)||VIEWS[0];v.render(main);}
+  // Back control: injected at the top of #main AFTER the view renders (every
+  // renderer sets main.innerHTML first, wiping #main, so prepending here is
+  // safe for all views and all drill-down routes). Hidden on the home view
+  // and whenever there is nothing to go back to.
+  if(NAV_STACK.length && route!==HOME_ROUTE){
+    const back=el('button',{class:'backbtn',type:'button','aria-label':'Go back to the previous view',
+      onclick:goBack},[el('span',{class:'barrow','aria-hidden':'true'},'←'),'Back']);
+    const bar=el('div',{class:'backbar fade'},back);
+    main.insertBefore(bar,main.firstChild);
+  }
   if(history&&history.replaceState)history.replaceState(null,'','#'+route);
   document.querySelector('aside').classList.remove('open');
   // footer
@@ -3545,8 +3593,18 @@ function go(route){
 window.addEventListener('mousemove',e=>{if(tt.style.opacity==='1')moveTip(e);});
 buildNav();
 go((location.hash||'#home').slice(1));
-window.addEventListener('hashchange',()=>{const r=(location.hash||'#home').slice(1);
-  if(r!==_LAST_ROUTE)go(r);});
+/* External hash changes (browser/phone back-forward, deep-link edits, manual
+   hash typing) route through go(). If the new hash is the route directly
+   beneath the top of our in-app stack, treat it as a Back action (pop) so the
+   stack stays in sync; otherwise render it as a normal (silent) navigation so
+   we never spuriously grow the stack from browser-driven hash changes. */
+window.addEventListener('hashchange',()=>{
+  let r=(location.hash||'#home').slice(1);
+  if(ROUTE_ALIASES[r])r=ROUTE_ALIASES[r];
+  if(r===_LAST_ROUTE)return;
+  if(NAV_STACK.length && NAV_STACK[NAV_STACK.length-1]===r){goBack();return;}
+  _navSilent=true;go(r);_navSilent=false;
+});
 
 </script>
 </body>
