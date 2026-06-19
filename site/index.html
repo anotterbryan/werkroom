@@ -117,6 +117,8 @@ button.tab{background:rgba(0,0,0,.3);border:1px solid rgba(244,181,63,.3);color:
   font-family:var(--mono);font-size:12.5px;padding:7px 13px;border-radius:20px;cursor:pointer;transition:.15s}
 button.tab:hover{border-color:var(--magenta)}
 button.tab.on{background:var(--magenta);border-color:var(--magenta);color:#fff}
+.mrow:hover{background:rgba(244,181,63,.07)}
+.mrow-on{background:linear-gradient(90deg,rgba(30,215,96,.18),transparent);box-shadow:inset 3px 0 0 #1ED760}
 .controls{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px;align-items:center}
 select,input[type=text]{background:rgba(0,0,0,.35);border:1px solid rgba(244,181,63,.3);color:var(--cream);
   font-family:var(--mono);font-size:12.5px;padding:7px 10px;border-radius:8px}
@@ -266,6 +268,21 @@ D.lip_syncs.forEach(l=>{[...new Set([l.queen_a_id,l.queen_b_id,l.winner_id,l.los
   .forEach(q=>{(_LSQ[q]=_LSQ[q]||[]).push(l);});});
 function qLink(qid){return el('span',{style:'color:var(--rose);cursor:pointer;text-decoration:underline',
   onclick:ev=>{ev.stopPropagation();go('queen:'+qid);}},qname[qid]||qid);}
+/* song_id -> Set(season_id): lip-sync songs carry season_id="-", so attribute them
+   to seasons via usage (lip_syncs, episodes.lip_sync_song_id, derived.song_reuse). */
+const _SONG_SEASONS=(()=>{
+  const ep2s={};D.episodes.forEach(e=>{ep2s[e.episode_id]=e.season_id;});
+  const m={};const add=(sid,seas)=>{if(!sid||sid==='-'||!seas||seas==='-')return;(m[sid]=m[sid]||new Set()).add(seas);};
+  D.lip_syncs.forEach(l=>add(l.song_id,ep2s[l.episode_id]));
+  D.episodes.forEach(e=>add(e.lip_sync_song_id,e.season_id));
+  (X.song_reuse||[]).forEach(sr=>(sr.episodes||[]).forEach(eid=>add(sr.song_id,ep2s[eid])));
+  // performance songs (cast/rusical/etc) carry an explicit season_id
+  D.songs.forEach(s=>add(s.song_id,s.season_id));
+  return m;
+})();
+function songSeasons(sid){return _SONG_SEASONS[sid]||new Set();}
+/* episodes a lip-sync song was used in, scoped to a season (for episode chips) */
+const _SONG_EPS=(()=>{const m={};(X.song_reuse||[]).forEach(sr=>{m[sr.song_id]=sr.episodes||[];});return m;})();
 /* per-season display name: the as-competed name when set, else canonical */
 function cname(c){return (c&&c.drag_name_used&&c.drag_name_used!=='-')?c.drag_name_used:(qname[c.queen_id]||c.queen_id);}
 /* franchise filter (global) */
@@ -1770,66 +1787,167 @@ V({id:'artists',title:'Lip-Sync <em>Artists</em>',kicker:'Music & Lip Syncs',ico
  }});
 
 /* ---------- 26b. THE MUSIC (Spotify) ---------- */
+/* In-view UI state (persists across re-renders within a session). */
+let MUSIC_TAB='season';   // 'season' | 'rumix' | 'cast'
+let MUSIC_SEASON='';      // selected season_id within the current franchise scope
 V({id:'music',title:'The <em>Music</em>',kicker:'Music & Lip Syncs',icon:'disc',group:'Music & Lip Syncs',ord:1,
- desc:'Every lip-sync track, now playable — Spotify players, Ru-mix badges, and copy-paste track lists to build the playlists yourself.',
+ desc:'A jukebox for the whole archive — pick a franchise and season for its playlist (lip syncs, cast &amp; challenge songs, Ru-mixes), or browse Ru’s catalogue and the original challenge songs. Tap any track to load it in the shared Spotify player.',
  render(m){
   m.innerHTML=head(this);
+  // ---- franchise tabs (global FRANCHISE) ----
   const ctrl=el('div',{class:'tabs fade'});m.append(ctrl);
   ['All',...FRANCHISES].forEach(f=>{const b=el('button',{class:'tab'+(FRANCHISE===f?' on':'')},f);
-    b.addEventListener('click',()=>{FRANCHISE=f;go('music');});ctrl.append(b);});
+    b.addEventListener('click',()=>{FRANCHISE=f;MUSIC_SEASON='';go('music');});ctrl.append(b);});
+  // header note
+  m.append(el('div',{class:'fade',style:'font-size:12px;color:rgba(247,240,230,.62);margin:2px 0 14px;line-height:1.5'},
+    'Most tracks play in-page via Spotify; a handful of multi-track Rusicals have no single Spotify track yet and show a muted note.'));
+
   const sbyid={};D.songs.forEach(s=>sbyid[s.song_id]=s);
-  const epsOf={};X.song_reuse.forEach(s=>{epsOf[s.song_id]=(s.episodes||[]).filter(e=>seasonAllowed(e.slice(0,4)));});
-  const inScope=X.song_reuse.filter(s=>s.title&&s.title!=='-'&&epsOf[s.song_id].length);
-  let season='All',q='',playable=false;
-  const bar=el('div',{class:'card fade',style:'display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:14px'});
-  const sel=el('select',{style:'background:rgba(255,255,255,.06);color:var(--cream);border:1px solid rgba(255,255,255,.14);border-radius:8px;padding:6px 8px;font:inherit;font-size:12.5px'});
-  sel.append(el('option',{value:'All'},'All seasons'));
-  SEASON_ORDER.filter(seasonAllowed).forEach(s=>sel.append(el('option',{value:s},seasonName(s))));
-  const search=el('input',{type:'search',placeholder:'Search title or artist…',style:'flex:1;min-width:160px;background:rgba(255,255,255,.06);color:var(--cream);border:1px solid rgba(255,255,255,.14);border-radius:8px;padding:6px 10px;font:inherit;font-size:12.5px'});
-  const tog=el('label',{style:'margin-left:auto;display:flex;align-items:center;gap:6px;font-size:12.5px;cursor:pointer'},
-    el('input',{type:'checkbox'}),'playable only');
-  bar.append(sel,search,tog);m.append(bar);
-  const stats=el('div',{class:'grid',style:'grid-template-columns:repeat(auto-fit,minmax(140px,1fr));margin-bottom:14px'});m.append(stats);
-  const host=el('div',{class:'card fade'});m.append(host);
-  const list=()=>{
-    let rows=inScope.filter(s=>epsOf[s.song_id].some(e=>season==='All'||e.slice(0,4)===season));
-    if(q)rows=rows.filter(s=>(s.title+' '+(s.artist||'')).toLowerCase().includes(q));
-    if(playable)rows=rows.filter(s=>{const t=(sbyid[s.song_id]||{}).spotify_track_id;return t&&t!=='-';});
-    if(season==='All')rows.sort((a,b)=>b.times_used-a.times_used||a.title.localeCompare(b.title));
-    else rows.sort((a,b)=>{const ea=epsOf[a.song_id].find(e=>e.slice(0,4)===season)||'',eb=epsOf[b.song_id].find(e=>e.slice(0,4)===season)||'';return ea<eb?-1:1;});
-    return rows;};
-  const draw=()=>{
-    const rows=list();
-    const ids=rows.map(s=>(sbyid[s.song_id]||{}).spotify_track_id).filter(t=>t&&t!=='-');
-    const rumix=rows.filter(s=>(sbyid[s.song_id]||{}).is_rumix==='Yes').length;
-    stats.innerHTML=`<div class="card"><div class="stat">${rows.length}</div><div class="statlbl">songs in view</div></div>
-      <div class="card"><div class="stat">${ids.length}</div><div class="statlbl">playable on Spotify</div></div>
-      <div class="card"><div class="stat">${rumix}</div><div class="statlbl">Ru tracks</div></div>`;
-    host.innerHTML=`<div class="vkicker">${season==='All'?'All lip-sync tracks':'Playlist order — '+seasonName(season)} · click a row for the player + every use</div>`;
-    rows.forEach(s=>{
-      const sd=sbyid[s.song_id]||{};const tid=sd.spotify_track_id&&sd.spotify_track_id!=='-'?sd.spotify_track_id:null;
-      const wrap=el('div',{style:'border-bottom:1px solid rgba(255,255,255,.05)'});
-      const caret=el('span',{style:'color:var(--magenta);font-size:10px;width:10px;flex:none'},'▸');
-      const hdr=el('div',{style:'display:flex;align-items:center;gap:10px;padding:6px 0;cursor:pointer'},caret,
-        el('div',{style:'flex:1;font-size:13.5px;min-width:0'},`${s.title}${s.artist&&s.artist!=='-'?' — '+s.artist:''}`));
-      if(sd.is_rumix==='Yes')hdr.append(el('span',{class:'pill gold'},'Ru-mix'));
-      hdr.append(el('div',{style:'width:20px;text-align:right;color:var(--gold);font-weight:700'},s.times_used));
-      if(tid){const play=el('a',{href:'https://open.spotify.com/track/'+tid,target:'_blank',rel:'noopener',
-        style:'flex:none;color:#1ED760;font-size:16px;text-decoration:none;line-height:1',title:'Open in Spotify'},'▶');
-        play.addEventListener('click',ev=>ev.stopPropagation());hdr.append(play);}
-      else hdr.append(el('span',{style:'flex:none;color:rgba(247,240,230,.25);font-size:16px;line-height:1',title:'No Spotify match yet'},'▶'));
-      const det=el('div',{style:'display:none;padding:0 0 12px 20px'});let loaded=false;
-      hdr.addEventListener('click',()=>{const o=det.style.display==='none';det.style.display=o?'block':'none';caret.textContent=o?'▾':'▸';
-        if(o&&!loaded){loaded=true;
-          if(tid)det.prepend(el('iframe',{src:'https://open.spotify.com/embed/track/'+tid+'?theme=0',width:'100%',height:'80',frameborder:'0',allow:'encrypted-media',style:'border-radius:10px;margin:6px 0'}));
-          else det.prepend(el('div',{style:'font-size:11.5px;color:rgba(247,240,230,.6);margin:4px 0'},'No Spotify match yet for this track.'));}});
-      epsOf[s.song_id].filter(e=>season==='All'||e.slice(0,4)===season).forEach(eid=>det.append(el('div',{style:'font-size:12.5px;padding:3px 0'},epChip(eid))));
-      wrap.append(hdr,det);host.append(wrap);});
-    if(!rows.length)host.append(el('div',{style:'font-size:12.5px;color:rgba(247,240,230,.6);padding:8px 0'},'Nothing matches this filter.'));};
-  sel.addEventListener('change',e=>{season=e.target.value;draw();});
-  search.addEventListener('input',e=>{q=e.target.value.trim().toLowerCase();draw();});
-  tog.querySelector('input').addEventListener('change',e=>{playable=e.target.checked;draw();});
-  draw();
+  const isPlay=s=>s&&s.spotify_track_id&&s.spotify_track_id!=='-';
+  const allowedSeasons=SEASON_ORDER.filter(seasonAllowed);
+
+  // ---- section tabs (sub-tabs within the view) ----
+  const subBar=el('div',{class:'tabs fade',style:'margin-bottom:12px'});m.append(subBar);
+  const SECTIONS=[['season','Season Playlist'],['rumix','Ru-mixes'],['cast','Cast & Rusical Songs']];
+  SECTIONS.forEach(([id,lbl])=>{const b=el('button',{class:'tab'+(MUSIC_TAB===id?' on':'')},lbl);
+    b.addEventListener('click',()=>{MUSIC_TAB=id;render();});subBar.append(b);});
+
+  const body=el('div',{});m.append(body);
+
+  /* ---- shared Spotify player (one iframe, swap src on click) ---- */
+  function makePlayer(){
+    const wrap=el('div',{class:'card fade',style:'position:sticky;top:8px;z-index:5;margin-bottom:14px;padding:10px'});
+    const note=el('div',{style:'font-size:11.5px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(247,240,230,.5);font-weight:700;margin-bottom:7px'},'Now cued — tap any track below');
+    const frame=el('iframe',{width:'100%',height:'80',frameborder:'0',allow:'encrypted-media',loading:'lazy',
+      style:'border-radius:12px;display:none',title:'Spotify player'});
+    wrap.append(note,frame);
+    let activeRow=null;
+    return {node:wrap,
+      play(tid,label,row){
+        frame.style.display='block';
+        frame.src='https://open.spotify.com/embed/track/'+tid+'?theme=0';
+        note.textContent=label||'Now playing';
+        if(activeRow&&activeRow!==row)activeRow.classList.remove('mrow-on');
+        if(row){row.classList.add('mrow-on');activeRow=row;}
+      }};
+  }
+
+  /* ---- one playable/clickable song row sharing a player ---- */
+  function songRow(s,player,opts){
+    opts=opts||{};
+    const tid=isPlay(s)?s.spotify_track_id:null;
+    const row=el('div',{class:'mrow',style:'display:flex;align-items:center;gap:10px;padding:8px 8px;border-radius:8px;border-bottom:1px solid rgba(255,255,255,.05);'+(tid?'cursor:pointer':'')});
+    const label=`${s.title}${s.artist&&s.artist!=='-'?' — '+s.artist:''}`;
+    const titleCol=el('div',{style:'flex:1;min-width:0'},
+      el('div',{style:'font-size:13.5px;line-height:1.25'},label));
+    if(opts.sub)titleCol.append(el('div',{style:'font-size:11px;color:rgba(247,240,230,.55);margin-top:2px'},opts.sub));
+    row.append(titleCol);
+    if(s.is_rumix==='Yes')row.append(el('span',{class:'pill gold',style:'flex:none'},'Ru-mix'));
+    if(opts.chip)row.append(el('span',{style:'flex:none'},opts.chip));
+    if(tid){
+      const open=el('a',{href:'https://open.spotify.com/track/'+s.spotify_track_id,target:'_blank',rel:'noopener',
+        title:'Open in Spotify',style:'flex:none;color:#1ED760;text-decoration:none;font-size:11px;letter-spacing:1px'},'Open ↗');
+      open.addEventListener('click',ev=>ev.stopPropagation());
+      const playBtn=el('span',{title:'Play here',style:'flex:none;color:#1ED760;font-size:17px;line-height:1'},'▶');
+      row.append(playBtn,open);
+      row.addEventListener('click',()=>player.play(s.spotify_track_id,label,row));
+    } else {
+      row.append(el('span',{style:'flex:none;font-size:10.5px;color:rgba(247,240,230,.4);letter-spacing:.5px'},'no Spotify track'));
+    }
+    return row;
+  }
+
+  function emptyNote(t){return el('div',{style:'font-size:12.5px;color:rgba(247,240,230,.55);padding:10px 0'},t);}
+  function groupBlock(parent,title,color,songs,player,opts){
+    if(!songs.length)return;
+    const sec=el('div',{class:'card fade',style:'margin-bottom:14px'});
+    const np=songs.filter(isPlay).length;
+    sec.append(sectionHead(`${title} · ${songs.length} song${songs.length===1?'':'s'}`+(np<songs.length?` · ${np} playable`:''),color));
+    songs.forEach(s=>sec.append(songRow(s,player,(opts&&opts.row)?opts.row(s):{})));
+    parent.append(sec);
+  }
+
+  /* =================== TAB 1: SEASON PLAYLIST =================== */
+  function renderSeason(){
+    body.innerHTML='';
+    // season selector (cascades from the franchise scope)
+    const bar=el('div',{class:'card fade',style:'display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:14px'});
+    bar.append(el('span',{style:'font-size:11.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);font-weight:700'},'Season'));
+    const sel=el('select',{});
+    if(!MUSIC_SEASON||!allowedSeasons.includes(MUSIC_SEASON))MUSIC_SEASON=allowedSeasons[0]||'';
+    allowedSeasons.forEach(s=>{const o=el('option',{value:s},seasonName(s));if(s===MUSIC_SEASON)o.setAttribute('selected','');sel.append(o);});
+    sel.value=MUSIC_SEASON;
+    sel.addEventListener('change',e=>{MUSIC_SEASON=e.target.value;renderSeason();});
+    bar.append(sel);body.append(bar);
+    if(!MUSIC_SEASON){body.append(emptyNote('No seasons in this franchise.'));return;}
+    const seas=MUSIC_SEASON;
+
+    // Lip syncs used this season
+    const lipSongs=D.songs.filter(s=>s.catalog==='LIPSYNC'&&songSeasons(s.song_id).has(seas))
+      .sort((a,b)=>(a.title||'').localeCompare(b.title||''));
+    // Cast & challenge songs attributed to this season (non-LIPSYNC, non Ru-mix shown separately? keep Ru-mixes in their own group)
+    const castSongs=D.songs.filter(s=>s.catalog!=='LIPSYNC'&&s.season_id===seas&&s.is_rumix!=='Yes')
+      .sort((a,b)=>(a.title||'').localeCompare(b.title||''));
+    // Ru-mixes for this season (RuPaul tracks attributed by season_id or by usage)
+    const rumixSongs=D.songs.filter(s=>s.is_rumix==='Yes'&&(s.season_id===seas||songSeasons(s.song_id).has(seas)))
+      .sort((a,b)=>(a.title||'').localeCompare(b.title||''));
+
+    const all=[...lipSongs,...castSongs,...rumixSongs];
+    const np=all.filter(isPlay).length;
+    statCards(body,[[all.length,'songs this season'],[np,'playable'],[all.length-np,'no track yet']]);
+
+    const player=makePlayer();body.append(player.node);
+
+    const epChipFor=s=>{const eps=(_SONG_EPS[s.song_id]||[]).filter(e=>e.slice(0,4)===seas);return eps.length?epChip(eps[0]):null;};
+    groupBlock(body,'Lip Syncs','var(--magenta)',lipSongs,player,{row:s=>({chip:epChipFor(s)})});
+    groupBlock(body,'Cast & Challenge Songs','var(--mint)',castSongs,player);
+    groupBlock(body,'Ru-mixes','var(--gold)',rumixSongs,player);
+    if(!all.length)body.append(emptyNote('No catalogued songs for this season yet.'));
+  }
+
+  /* =================== TAB 2: RU-MIXES (all) =================== */
+  function renderRumix(){
+    body.innerHTML='';
+    let songs=D.songs.filter(s=>s.is_rumix==='Yes');
+    if(FRANCHISE!=='All')songs=songs.filter(s=>{const ss=songSeasons(s.song_id);return [...ss].some(seasonAllowed)||(s.season_id!=='-'&&seasonAllowed(s.season_id));});
+    songs.sort((a,b)=>(+b.times_used||0)-(+a.times_used||0)||(a.title||'').localeCompare(b.title||''));
+    const np=songs.filter(isPlay).length;
+    statCards(body,[[songs.length,'Ru-mixes'],[np,'playable'],[songs.length-np,'no track yet']]);
+    body.append(el('div',{class:'vkicker fade'},'RuPaul’s catalogue — originals &amp; the Ru-mixes the queens lip sync to'));
+    const player=makePlayer();body.append(player.node);
+    const sec=el('div',{class:'card fade'});
+    songs.forEach(s=>sec.append(songRow(s,player,{sub:s.catalog!=='LIPSYNC'?s.catalog.replace('_',' ').toLowerCase():''})));
+    if(!songs.length)sec.append(emptyNote('No Ru-mixes in this franchise scope.'));
+    body.append(sec);
+  }
+
+  /* =================== TAB 3: CAST & RUSICAL (all, by season) =================== */
+  function renderCast(){
+    body.innerHTML='';
+    let songs=D.songs.filter(s=>s.catalog!=='LIPSYNC');
+    if(FRANCHISE!=='All')songs=songs.filter(s=>s.season_id==='-'||seasonAllowed(s.season_id));
+    const np=songs.filter(isPlay).length;
+    statCards(body,[[songs.length,'cast &amp; rusical songs'],[np,'playable'],[songs.length-np,'no track yet']]);
+    body.append(el('div',{class:'vkicker fade'},'Original challenge songs — Rusicals, girl-group verses, songwriting &amp; cast singles, grouped by season'));
+    const player=makePlayer();body.append(player.node);
+    // group by season_id in SEASON_ORDER, then Unattributed
+    const order=[...allowedSeasons];if(FRANCHISE==='All')order.push('-');else if(songs.some(s=>s.season_id==='-'))order.push('-');
+    order.forEach(seas=>{
+      const grp=songs.filter(s=>s.season_id===seas).sort((a,b)=>(a.title||'').localeCompare(b.title||''));
+      if(!grp.length)return;
+      groupBlock(body,seas==='-'?'Unattributed':seasonName(seas),seas==='-'?'rgba(247,240,230,.6)':'var(--mint)',grp,player);
+    });
+    if(!songs.length)body.append(emptyNote('No cast or rusical songs in this franchise scope.'));
+  }
+
+  function render(){
+    // refresh sub-tab active state
+    [...subBar.children].forEach((b,i)=>b.classList.toggle('on',SECTIONS[i][0]===MUSIC_TAB));
+    if(MUSIC_TAB==='rumix')renderRumix();
+    else if(MUSIC_TAB==='cast')renderCast();
+    else renderSeason();
+  }
+  render();
  }});
 
 /* ---------- 27. PLATFORM ERAS ---------- */
