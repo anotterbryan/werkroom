@@ -926,6 +926,160 @@ V({id:'assassin',title:'Lip-Sync <em>Assassins</em>',kicker:'Music & Lip Syncs',
   m.append(host);
  }});
 
+/* ---------- 8b. LIP-SYNC BROWSER (cascading filters + type) ---------- */
+/* friendly classification of result_type into the three on-show lip-sync stakes */
+const LS_TYPE_DEF=[
+  {key:'LIFE', label:'Lip Sync for Your Life', rts:['NORMAL','SURVIVAL','SHANTAY','SASHAY'], color:'var(--rose)'},
+  {key:'WIN',  label:'Lip Sync for the Win',   rts:['TOPS'],  color:'var(--gold)'},
+  {key:'CROWN',label:'Lip Sync for the Crown', rts:['CROWN'], color:'var(--magenta)'}];
+const LS_TYPE_OF={};LS_TYPE_DEF.forEach(t=>t.rts.forEach(r=>LS_TYPE_OF[r]=t));
+V({id:'lipsyncs',title:'Lip-Sync <em>Battles</em>',kicker:'Music & Lip Syncs',icon:'mic',group:'Music & Lip Syncs',ord:4,
+ desc:'Every head-to-head lip sync, filterable by franchise, season, and stakes — Lip Sync for Your Life, for the Win, or for the Crown.',
+ render(m){
+  m.innerHTML=head(this);
+  // franchise tab bar (global FRANCHISE) — re-renders the view, like the Music view
+  const ctrl=el('div',{class:'tabs fade'});m.append(ctrl);
+  ['All',...FRANCHISES].forEach(f=>{const b=el('button',{class:'tab'+(FRANCHISE===f?' on':'')},f);
+    b.addEventListener('click',()=>{FRANCHISE=f;go('lipsyncs');});ctrl.append(b);});
+  // local state for season + type (reset when franchise changes via go())
+  let season='All',type='All';
+  const bar=el('div',{class:'card fade',style:'display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:14px'});
+  const selStyle='background:rgba(255,255,255,.06);color:var(--cream);border:1px solid rgba(255,255,255,.14);border-radius:8px;padding:6px 8px;font:inherit;font-size:12.5px';
+  const selS=el('select',{style:selStyle});
+  selS.append(el('option',{value:'All'},'All seasons'));
+  SEASON_ORDER.filter(seasonAllowed).forEach(s=>selS.append(el('option',{value:s},seasonName(s))));
+  const selT=el('select',{style:selStyle});
+  selT.append(el('option',{value:'All'},'All lip-sync types'));
+  LS_TYPE_DEF.forEach(t=>selT.append(el('option',{value:t.key},t.label)));
+  bar.append(selS,selT);m.append(bar);
+  const stats=el('div',{class:'grid',style:'grid-template-columns:repeat(auto-fit,minmax(140px,1fr));margin-bottom:14px'});m.append(stats);
+  const host=el('div',{class:'card fade'});m.append(host);
+  const rowsAll=D.lip_syncs.map(l=>({l,e:_EP[l.episode_id]})).filter(x=>x.e);
+  const list=()=>rowsAll.filter(x=>{
+    if(!seasonAllowed(x.e.season_id))return false;
+    if(season!=='All'&&x.e.season_id!==season)return false;
+    const t=LS_TYPE_OF[x.l.result_type];if(!t)return false;
+    if(type!=='All'&&t.key!==type)return false;
+    return true;})
+    .sort((a,b)=>{const sa=SEASON_ORDER.indexOf(a.e.season_id),sb=SEASON_ORDER.indexOf(b.e.season_id);
+      return sa-sb||(epNum(a.e.episode_id)-epNum(b.e.episode_id));});
+  const draw=()=>{
+    const rows=list();
+    const byType={};LS_TYPE_DEF.forEach(t=>byType[t.key]=0);
+    rows.forEach(x=>{const t=LS_TYPE_OF[x.l.result_type];if(t)byType[t.key]++;});
+    stats.innerHTML=`<div class="card"><div class="stat">${rows.length}</div><div class="statlbl">lip syncs in view</div></div>`+
+      LS_TYPE_DEF.map(t=>`<div class="card"><div class="stat" style="color:${t.color}">${byType[t.key]}</div><div class="statlbl">${t.label}</div></div>`).join('');
+    host.innerHTML='';
+    host.append(el('div',{class:'vkicker',style:'margin-bottom:6px'},
+      (type==='All'?'All lip-sync battles':LS_TYPE_DEF.find(t=>t.key===type).label)+
+      (season==='All'?'':' · '+seasonName(season))+' · winner in mint, eliminated in rose'));
+    let curS=null;
+    rows.forEach(x=>{
+      const l=x.l,t=LS_TYPE_OF[l.result_type];
+      if(x.e.season_id!==curS){curS=x.e.season_id;
+        host.append(sectionHead(seasonName(curS),'var(--gold)'));}
+      const wrap=el('div',{style:'border-bottom:1px solid rgba(255,255,255,.05);padding:7px 0;display:flex;flex-wrap:wrap;gap:8px;align-items:baseline'});
+      wrap.append(el('span',{class:'pill',style:`flex:none;border-color:${t.color};color:${t.color}`},t.label.replace('Lip Sync for ','')));
+      wrap.append(epChip(l.episode_id));
+      const song=songText(l.song_id);
+      wrap.append(el('span',{style:'color:rgba(247,240,230,.85);font-size:12.5px'},'♪ '+(song||'—')));
+      // the matchup + outcome
+      const out=el('span',{style:'font-size:12.5px'});
+      if(l.result_type==='SHANTAY'||l.result_type==='SASHAY'){
+        const a=l.queen_a_id,b=l.queen_b_id;
+        if(a&&a!=='-'){out.append(qLink(a));out.append(document.createTextNode(' vs '));}
+        if(b&&b!=='-')out.append(qLink(b));
+        out.append(document.createTextNode('  ·  '));
+        out.append(el('span',{style:'color:'+(l.result_type==='SHANTAY'?'var(--mint)':'var(--rose)')},
+          l.result_type==='SHANTAY'?'double shantay (both stay)':'double sashay (both out)'));
+      } else {
+        if(l.winner_id&&l.winner_id!=='-'){out.append(el('span',{style:'color:var(--mint)'},'WON '));out.append(qLink(l.winner_id));}
+        else out.append(el('span',{style:'color:rgba(247,240,230,.5)'},'winner —'));
+        if(l.loser_id&&l.loser_id!=='-'){
+          out.append(document.createTextNode('   vs   '));
+          out.append(el('span',{style:'color:var(--rose)'},l.result_type==='NORMAL'||l.result_type==='CROWN'?'OUT ':'lost '));
+          out.append(qLink(l.loser_id));
+        }
+      }
+      wrap.append(out);host.append(wrap);
+    });
+    if(!rows.length)host.append(el('div',{style:'font-size:12.5px;color:rgba(247,240,230,.6);padding:8px 0'},'No lip syncs match this filter.'));
+  };
+  selS.addEventListener('change',e=>{season=e.target.value;draw();});
+  selT.addEventListener('change',e=>{type=e.target.value;draw();});
+  draw();
+ }});
+
+/* ---------- 8c. WINNINGS & PRIZE EVOLUTION (all seasons) ---------- */
+/* currency by franchise — labelled where known from the data; no conversions invented */
+const FR_CCY={'US main':'US$','All Stars':'US$','Global All Stars':'US$',
+  "Canada's Drag Race":'CA$','Canada vs the World':'CA$',
+  'Drag Race UK':'£','UK vs the World':'£'};
+V({id:'winnings',title:'The <em>Winnings</em>',kicker:'Seasons',icon:'crown',group:'Seasons',ord:4,
+ desc:'Every season’s champion and grand prize across all 48 seasons — sortable by prize, date, or franchise, and charted over time. Prizes are in each franchise’s own currency; no conversions are invented.',
+ render(m){
+  m.innerHTML=head(this);
+  fTabs(m,'winnings');
+  const ses=D.seasons.filter(s=>seasonAllowed(s.season_id))
+    .slice().sort((a,b)=>{const pa=a.premiere_date,pb=b.premiere_date;
+      if(pa&&pa!=='-'&&pb&&pb!=='-')return pa<pb?-1:pa>pb?1:0;
+      return SEASON_ORDER.indexOf(a.season_id)-SEASON_ORDER.indexOf(b.season_id);});
+  const ccy=s=>FR_CCY[s.franchise]||'';
+  const prizeNum=s=>{const v=parseInt(s.cash_prize,10);return Number.isFinite(v)?v:null;};
+  const prizeText=s=>{const v=prizeNum(s);if(v===null)return '—';if(v===0)return 'No cash prize';
+    return ccy(s)+v.toLocaleString('en-US');};
+  // stat cards
+  const withPrize=ses.filter(s=>prizeNum(s)>0);
+  const maxS=withPrize.slice().sort((a,b)=>prizeNum(b)-prizeNum(a))[0];
+  statCards(m,[[ses.length,'seasons'],
+    [maxS?prizeText(maxS):'—','top prize'+(maxS?' · '+seasonName(maxS.season_id):'')],
+    [new Set(ses.map(s=>s.franchise)).size,'franchises']]);
+  // chart: prize vs premiere date, colored by franchise (note: mixed currencies)
+  const frList=[...new Set(ses.map(s=>s.franchise))];
+  const COL={};frList.forEach((f,i)=>COL[f]=PAL[i%PAL.length]);
+  const chartCard=el('div',{class:'card fade',style:'margin-bottom:14px'});
+  chartCard.append(sectionHead('Grand prize over time (mixed currencies — see table)','var(--gold)'));
+  const datasets=frList.map(f=>({label:f,backgroundColor:COL[f],borderColor:COL[f],
+    data:ses.filter(s=>s.franchise===f&&prizeNum(s)!==null&&s.premiere_date&&s.premiere_date!=='-')
+      .map(s=>({x:s.premiere_date,y:prizeNum(s),sid:s.season_id}))}));
+  if(typeof Chart!=='undefined'&&datasets.some(d=>d.data.length)){
+    const c=el('canvas',{style:'width:100%;height:300px'});
+    const box=el('div',{style:'position:relative;height:300px;margin:4px 0 6px'});box.append(c);chartCard.append(box);
+    try{new Chart(c.getContext('2d'),{type:'scatter',data:{datasets},
+      options:{responsive:true,maintainAspectRatio:false,
+        plugins:{legend:{labels:{color:CTXT,font:{size:11}}},
+          tooltip:{callbacks:{label:ctx=>{const p=ctx.raw;const s=D.seasons.find(x=>x.season_id===p.sid)||{};
+            return seasonName(p.sid)+': '+(FR_CCY[s.franchise]||'')+(p.y).toLocaleString('en-US')+' ('+p.x+')';}}}},
+        scales:{x:{type:'category',labels:[...new Set(ses.filter(s=>s.premiere_date&&s.premiere_date!=='-').map(s=>s.premiere_date))].sort(),
+            ticks:{color:CTXT,font:{size:9},maxRotation:60,minRotation:60,callback:function(v){const l=this.getLabelForValue(v);return l?l.slice(0,7):l;}},grid:{color:CGRID}},
+          y:{ticks:{color:CTXT,font:{size:10},callback:v=>v>=1000?(v/1000)+'k':v},grid:{color:CGRID}}}}});
+      chartCard.append(el('div',{style:'font-size:10.5px;color:rgba(247,240,230,.5);margin-top:2px'},'Y axis combines US$, CA$ and £ — compare within a franchise, not across.'));
+      m.append(chartCard);
+    }catch(e){}
+  }
+  // sortable table
+  const card=el('div',{class:'card fade'});m.append(card);
+  const rows=ses.map(s=>{const w=s.winner_id&&s.winner_id!=='-'?s.winner_id:null;
+    const c=w?D.contestants.find(x=>x.queen_id===w&&x.season_id===s.season_id):null;
+    return {season_id:s.season_id,season:seasonName(s.season_id),franchise:s.franchise,
+      winner_id:w,winner:w?(qname[w]||w):'TBD',image:c&&c.image&&c.image!=='-'?c.image:'',
+      prize_n:prizeNum(s)===null?-1:prizeNum(s),prize:prizeText(s),
+      premiere:s.premiere_date&&s.premiere_date!=='-'?s.premiere_date:'—'};});
+  dataTable(card,{page:60,sort:{k:'premiere',asc:true},
+    cols:[
+      {k:'season',label:'Season',filter:1},
+      {k:'franchise',label:'Franchise',filter:1},
+      {k:'winner',label:'Winner',html:r=>{
+        const img=r.image?`<img src="${r.image}" alt="" referrerpolicy="no-referrer" loading="eager" style="width:26px;height:26px;border-radius:6px;object-fit:cover;vertical-align:middle;margin-right:7px;border:1px solid rgba(244,181,63,.35)" onerror="imgFallback(this,'${(r.winner||'').replace(/'/g,'')}')">`:'';
+        if(!r.winner_id)return img+'<span style="color:rgba(247,240,230,.55)">TBD</span>';
+        return img+`<span style="color:var(--rose);text-decoration:underline">${r.winner}</span>`;}},
+      {k:'prize_n',label:'Grand prize',num:1,html:r=>`<span style="color:var(--gold);font-weight:700">${r.prize}</span>`},
+      {k:'premiere',label:'Premiere'},
+    ],
+    rows,
+    onRow:r=>{if(r.winner_id)go('queen:'+r.winner_id);}});
+ }});
+
 /* ---------- 9. GUEST JUDGES (Frequency + Directory) ---------- */
 function renderGuestFreqTab(m){
   const chartCard=el('div',{class:'card fade',style:'margin-bottom:14px'});
