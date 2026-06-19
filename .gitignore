@@ -21,3 +21,6 @@ reference/
 scratch/
 exports/
 *.tmp
+
+# Spotify Web API credentials/token (never commit)
+scripts/.spotify_auth.json
