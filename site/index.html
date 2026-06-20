@@ -204,6 +204,13 @@ button.opt:disabled{cursor:default}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <script>
 /* ============================ APP CODE ============================ */
+/* ============================================================
+   FEEDBACK LINK — paste the Google Form (or any) URL between the
+   quotes to switch every "Report an inaccuracy" / "Report an error"
+   control from its disabled "(coming soon)" state to a live link.
+   Leave empty ("") until the form exists. One-line edit, nothing else. */
+const FEEDBACK_URL = "";
+/* ============================================================ */
 const D=DATA, X=D.derived;
 const qname=X.qname, slabel=X.slabel;
 const SEASON_ORDER=D.seasons.map(s=>s.season_id);
@@ -246,6 +253,68 @@ const IC={
  timer:'<circle cx="8" cy="9" r="5" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M8 9V6M6 2h4" stroke="currentColor" stroke-width="1.3"/>',
 };
 function icon(n){return `<svg class="ic" viewBox="0 0 16 16">${IC[n]||IC.star}</svg>`;}
+
+/* ---------- Feedback + welcome (see FEEDBACK_URL near top) ---------- */
+const FEEDBACK_ON=!!(FEEDBACK_URL && String(FEEDBACK_URL).trim());
+/* The prominent button used inside the welcome card. */
+function feedbackButton(label){
+  label=label||'Report an inaccuracy';
+  if(FEEDBACK_ON){
+    return el('a',{class:'fbbtn',href:FEEDBACK_URL,target:'_blank',rel:'noopener',
+      style:'display:inline-flex;align-items:center;gap:7px;min-height:40px;padding:9px 18px;border-radius:999px;'
+        +'font-family:var(--mono);font-size:12.5px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;cursor:pointer;'
+        +'color:#3a2400;background:linear-gradient(120deg,var(--gold),var(--rose));border:1px solid var(--gold)'},
+      el('span',{html:icon('heart')}),label);
+  }
+  return el('span',{style:'display:inline-flex;align-items:baseline;gap:8px;flex-wrap:wrap'},
+    el('span',{class:'fbbtn',style:'display:inline-flex;align-items:center;gap:7px;min-height:40px;padding:9px 18px;border-radius:999px;'
+      +'font-family:var(--mono);font-size:12.5px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;cursor:not-allowed;'
+      +'color:rgba(247,240,230,.6);background:rgba(0,0,0,.3);border:1px solid rgba(244,181,63,.3)','aria-disabled':'true'},
+      el('span',{html:icon('heart')}),label),
+    el('span',{style:'font-size:11px;color:rgba(247,240,230,.55);font-style:italic'},'(coming soon)'));
+}
+/* Small persistent link for the footer — same FEEDBACK_URL. */
+function feedbackFootLink(){
+  const base='color:var(--rose);font-weight:700';
+  if(FEEDBACK_ON){
+    return el('a',{href:FEEDBACK_URL,target:'_blank',rel:'noopener',
+      style:base+';text-decoration:underline;cursor:pointer'},'Report an error');
+  }
+  return el('span',{style:'color:rgba(247,240,230,.5);font-style:italic',
+    title:'A feedback form is on the way'},'Report an error (coming soon)');
+}
+const WELCOME_DISMISS_KEY='wr-welcome-dismissed';
+function welcomeDismissed(){try{return localStorage.getItem(WELCOME_DISMISS_KEY)==='1';}catch(e){return false;}}
+function dismissWelcome(){try{localStorage.setItem(WELCOME_DISMISS_KEY,'1');}catch(e){}}
+const FAN_DISCLAIMER='Werkroom is a non-commercial, fan-made project and is not affiliated with or endorsed by World of Wonder or RuPaul’s Drag Race. Data and images are sourced from Fandom and Wikipedia for informational and fan use.';
+/* Builds the welcome banner card for the home view (dismissible, remembered). */
+function welcomeCard(){
+  const card=el('div',{class:'card fade welcome-card',
+    style:'position:relative;margin-bottom:20px;border-color:rgba(244,181,63,.4);'
+      +'background:linear-gradient(150deg,rgba(230,0,126,.18),rgba(42,14,58,.62) 55%,rgba(22,3,32,.7))'});
+  const close=el('button',{class:'welcome-x',type:'button','aria-label':'Dismiss welcome',
+    style:'position:absolute;top:10px;right:12px;background:none;border:none;color:var(--gold);'
+      +'font-size:20px;line-height:1;cursor:pointer;opacity:.75;padding:4px 6px'},'×');
+  close.addEventListener('click',()=>{dismissWelcome();card.remove();});
+  card.append(close);
+  card.append(el('div',{class:'vkicker',style:'margin:0 0 6px'},'Welcome to the Werkroom'));
+  card.append(el('h2',{style:'font-family:var(--disp);font-weight:800;font-size:clamp(24px,3.2vw,34px);'
+    +'line-height:1.04;color:var(--cream);margin-bottom:10px;padding-right:26px'},'Hey, Squirrelfriends!'));
+  card.append(el('p',{style:'font-size:14px;line-height:1.65;color:rgba(247,240,230,.9);max-width:680px',
+    html:'This is a labor-of-love archive of the <em style="color:var(--gold);font-style:normal">Drag Race</em> universe — '
+      +'every season, every queen, every lip sync and every song, woven through one connected database. '
+      +'It’s very much a <strong>work in progress that has only just gotten started</strong>, so there '
+      +'will be gaps and the occasional error — please be patient as it grows. New data and features land all the time.'}));
+  card.append(el('p',{style:'font-size:13.5px;line-height:1.6;color:rgba(247,240,230,.82);margin-top:10px;max-width:680px',
+    html:'Made with love by <strong style="color:var(--rose)">Bryan</strong> — a longtime fan who just wanted one place to explore the herstory.'}));
+  const fb=el('div',{style:'display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:14px'});
+  fb.append(el('span',{style:'font-size:13.5px;color:rgba(247,240,230,.85)'},'Notice something off? I’d love to fix it —'));
+  fb.append(feedbackButton('Report an inaccuracy'));
+  card.append(fb);
+  card.append(el('div',{style:'margin-top:16px;padding-top:12px;border-top:1px solid rgba(244,181,63,.18);'
+    +'font-size:10.5px;line-height:1.6;color:rgba(247,240,230,.5)'},FAN_DISCLAIMER));
+  return card;
+}
 
 function setActive(id){$$('.navlink').forEach(l=>l.classList.toggle('active',l.dataset.id===id));
   const slug=id==='sec'?String(_LAST_ROUTE||'').split(':')[1]:null;
@@ -487,8 +556,11 @@ V({id:'home',title:'The <em>Werkroom</em>',kicker:'Home',icon:'crown',group:'Hom
   const meta=D.meta;
   const cards=[['Seasons',meta.seasons,'atlas'],['Queens',meta.queens,'queens'],['Contestant runs',meta.contestants,'tallies'],
     ['Episodes',meta.episodes,'episodes'],['Guest appearances',meta.appearances,'guestfreq'],['Lip-sync songs',meta.songs,'songreuse']];
-  m.innerHTML=head(this)+`<div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(150px,1fr))">${
-    cards.map(c=>`<div class="card" style="cursor:pointer" onclick="go('${c[2]}')"><div class="stat">${c[1]}</div><div class="statlbl">${c[0]}</div></div>`).join('')}</div>`;
+  m.innerHTML=head(this);
+  /* welcome banner — prominent at the top of home, dismissible (remembered) */
+  if(!welcomeDismissed())m.append(welcomeCard());
+  m.append(el('div',{class:'grid',style:'grid-template-columns:repeat(auto-fit,minmax(150px,1fr))',
+    html:cards.map(c=>`<div class="card" style="cursor:pointer" onclick="go('${c[2]}')"><div class="stat">${c[1]}</div><div class="statlbl">${c[0]}</div></div>`).join('')}));
   /* quick start */
   const qs=el('div',{class:'chip-row fade',style:'margin:18px 0 2px;gap:8px'});
   [['Cast Gallery','gallery'],['Trivia Night','trivia'],['The Music','music'],['Ask the Library','ask']].forEach(([t,id])=>{
@@ -3588,7 +3660,11 @@ function go(route){
   if(history&&history.replaceState)history.replaceState(null,'','#'+route);
   document.querySelector('aside').classList.remove('open');
   // footer
-  main.append(el('div',{class:'foot',html:'THE WERKROOM · an original, copyright-safe data observatory of the U.S. main series · built from a hand-verified relational database · no official logos, trade dress, or photographs used'}));
+  const foot=el('div',{class:'foot'});
+  foot.append(el('div',{html:'THE WERKROOM · an original, copyright-safe data observatory of the U.S. main series · built from a hand-verified relational database · no official logos, trade dress, or photographs used'}));
+  foot.append(el('div',{style:'margin-top:8px'},'Spot a mistake? ',feedbackFootLink(),'.'));
+  foot.append(el('div',{style:'margin-top:8px;opacity:.8'},FAN_DISCLAIMER));
+  main.append(foot);
 }
 window.addEventListener('mousemove',e=>{if(tt.style.opacity==='1')moveTip(e);});
 buildNav();
