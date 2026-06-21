@@ -287,6 +287,28 @@ const WELCOME_DISMISS_KEY='wr-welcome-dismissed';
 function welcomeDismissed(){try{return localStorage.getItem(WELCOME_DISMISS_KEY)==='1';}catch(e){return false;}}
 function dismissWelcome(){try{localStorage.setItem(WELCOME_DISMISS_KEY,'1');}catch(e){}}
 const FAN_DISCLAIMER='Werkroom is a non-commercial, fan-made project and is not affiliated with or endorsed by World of Wonder or RuPaul’s Drag Race. Data and images are sourced from Fandom and Wikipedia for informational and fan use.';
+/* The welcome / about copy, shared by the dismissible home banner (welcomeCard)
+   and the permanent About & Feedback view. Appends the heading + body paragraphs
+   to a host element; never duplicates the disclaimer text (uses FAN_DISCLAIMER).
+   `headingPad` leaves room for the banner's × close button when needed. */
+function welcomeHeading(host,headingPad){
+  host.append(el('div',{class:'vkicker',style:'margin:0 0 6px'},'Welcome to the Werkroom'));
+  host.append(el('h2',{style:'font-family:var(--disp);font-weight:800;font-size:clamp(24px,3.2vw,34px);'
+    +'line-height:1.04;color:var(--cream);margin-bottom:10px'+(headingPad?';padding-right:26px':'')},'Hey, Squirrelfriends!'));
+}
+function welcomeBody(host){
+  host.append(el('p',{style:'font-size:14px;line-height:1.65;color:rgba(247,240,230,.9);max-width:680px',
+    html:'This is a labor-of-love archive of the <em style="color:var(--gold);font-style:normal">Drag Race</em> universe — '
+      +'every season, every queen, every lip sync and every song, woven through one connected database. '
+      +'It’s very much a <strong>work in progress that has only just gotten started</strong>, so there '
+      +'will be gaps and the occasional error — please be patient as it grows. New data and features land all the time.'}));
+  host.append(el('p',{style:'font-size:13.5px;line-height:1.6;color:rgba(247,240,230,.82);margin-top:10px;max-width:680px',
+    html:'Made with love by <strong style="color:var(--rose)">Bryan</strong> — a longtime fan who just wanted one place to explore the herstory.'}));
+}
+function fanDisclaimerBlock(){
+  return el('div',{style:'margin-top:16px;padding-top:12px;border-top:1px solid rgba(244,181,63,.18);'
+    +'font-size:10.5px;line-height:1.6;color:rgba(247,240,230,.5)'},FAN_DISCLAIMER);
+}
 /* Builds the welcome banner card for the home view (dismissible, remembered). */
 function welcomeCard(){
   const card=el('div',{class:'card fade welcome-card',
@@ -297,23 +319,20 @@ function welcomeCard(){
       +'font-size:20px;line-height:1;cursor:pointer;opacity:.75;padding:4px 6px'},'×');
   close.addEventListener('click',()=>{dismissWelcome();card.remove();});
   card.append(close);
-  card.append(el('div',{class:'vkicker',style:'margin:0 0 6px'},'Welcome to the Werkroom'));
-  card.append(el('h2',{style:'font-family:var(--disp);font-weight:800;font-size:clamp(24px,3.2vw,34px);'
-    +'line-height:1.04;color:var(--cream);margin-bottom:10px;padding-right:26px'},'Hey, Squirrelfriends!'));
-  card.append(el('p',{style:'font-size:14px;line-height:1.65;color:rgba(247,240,230,.9);max-width:680px',
-    html:'This is a labor-of-love archive of the <em style="color:var(--gold);font-style:normal">Drag Race</em> universe — '
-      +'every season, every queen, every lip sync and every song, woven through one connected database. '
-      +'It’s very much a <strong>work in progress that has only just gotten started</strong>, so there '
-      +'will be gaps and the occasional error — please be patient as it grows. New data and features land all the time.'}));
-  card.append(el('p',{style:'font-size:13.5px;line-height:1.6;color:rgba(247,240,230,.82);margin-top:10px;max-width:680px',
-    html:'Made with love by <strong style="color:var(--rose)">Bryan</strong> — a longtime fan who just wanted one place to explore the herstory.'}));
+  welcomeHeading(card,true);
+  welcomeBody(card);
   const fb=el('div',{style:'display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:14px'});
   fb.append(el('span',{style:'font-size:13.5px;color:rgba(247,240,230,.85)'},'Notice something off? I’d love to fix it —'));
   fb.append(feedbackButton('Report an inaccuracy'));
   card.append(fb);
-  card.append(el('div',{style:'margin-top:16px;padding-top:12px;border-top:1px solid rgba(244,181,63,.18);'
-    +'font-size:10.5px;line-height:1.6;color:rgba(247,240,230,.5)'},FAN_DISCLAIMER));
+  card.append(fanDisclaimerBlock());
   return card;
+}
+/* Build the Google Form embed URL from FEEDBACK_URL by adding embedded=true,
+   respecting any existing query string. '' if no form is configured. */
+function feedbackEmbedUrl(){
+  if(!FEEDBACK_ON)return '';
+  return FEEDBACK_URL+(FEEDBACK_URL.indexOf('?')>=0?'&':'?')+'embedded=true';
 }
 
 function setActive(id){$$('.navlink').forEach(l=>l.classList.toggle('active',l.dataset.id===id));
@@ -2240,6 +2259,52 @@ V({id:'health',title:'Data <em>Health</em>',kicker:'The Connections',icon:'chart
     <p style="font-size:14px;line-height:1.7;color:rgba(247,240,230,.92)">Seasons 1\u201314 were verified episode-by-episode; 15\u201318 carry a complete guest-judge layer. Where an exact episode couldn\u2019t be confirmed from a reliable source, the entry is <b style="color:var(--rose)">left blank rather than guessed</b> \u2014 ${tbd} appearances remain honestly flagged. Every queen is one identity across the database, so returning competitors and alumni guests resolve to a single hub. No official logos, trade dress, or photographs are used; the visual identity is original.</p></div>`;
  }});
 
+/* ABOUT & FEEDBACK — permanent home for the welcome message + the embedded
+   Google Form. Reuses welcomeHeading/welcomeBody/fanDisclaimerBlock so the copy
+   stays in sync with the dismissible home banner. */
+V({id:'about',title:'About &amp; <em>Feedback</em>',kicker:'About',icon:'heart',group:'About',ord:1,
+ desc:'What the Werkroom is, who made it, and how to tell me when something’s wrong.',
+ render(m){
+  m.innerHTML=head(this);
+  /* welcome / about copy */
+  const intro=el('div',{class:'card fade',style:'margin-bottom:16px;border-color:rgba(244,181,63,.4);'
+    +'background:linear-gradient(150deg,rgba(230,0,126,.14),rgba(42,14,58,.55) 55%,rgba(22,3,32,.65))'});
+  welcomeHeading(intro,false);
+  welcomeBody(intro);
+  intro.append(fanDisclaimerBlock());
+  m.append(intro);
+  /* how to help */
+  const help=el('div',{class:'card fade',style:'margin-bottom:16px'});
+  help.append(sectionHead('How to help','var(--gold)'));
+  help.append(el('p',{style:'font-size:14px;line-height:1.7;color:rgba(247,240,230,.9);max-width:680px',
+    html:'Spot anything wrong, missing, or just plain off? You’re my best fact-checkers. '
+      +'Use the form below to flag a bad placement, a mislabeled lip-sync song, a typo, a missing '
+      +'queen — anything. Every report helps the herstory get more accurate.'}));
+  m.append(help);
+  /* embedded Google Form */
+  const formCard=el('div',{class:'card fade'});
+  formCard.append(sectionHead('Send feedback','var(--magenta)'));
+  const embed=feedbackEmbedUrl();
+  if(embed){
+    formCard.append(el('p',{style:'font-size:13px;color:rgba(247,240,230,.8);margin-bottom:12px'},
+      'Prefer a full window? ',
+      el('a',{href:FEEDBACK_URL,target:'_blank',rel:'noopener',
+        style:'color:var(--rose);font-weight:700;text-decoration:underline;cursor:pointer'},
+        'Open the form in a new tab'),
+      ' — or fill it out right here:'));
+    const frame=el('iframe',{src:embed,width:'100%',height:'1200',frameborder:'0',
+      marginheight:'0',marginwidth:'0',loading:'lazy',title:'Werkroom feedback form',
+      style:'width:100%;max-width:100%;border:1px solid rgba(244,181,63,.3);border-radius:12px;'
+        +'background:rgba(0,0,0,.2);display:block'});
+    frame.append('Loading the feedback form…');
+    formCard.append(frame);
+  } else {
+    formCard.append(el('p',{style:'font-size:14px;line-height:1.7;color:rgba(247,240,230,.85);font-style:italic'},
+      'A feedback form is on the way — check back soon.'));
+  }
+  m.append(formCard);
+ }});
+
 /* ============================ NAV + ROUTER ============================ */
 const GROUPS=['Home','Queens','Seasons','Track Records','Music & Lip Syncs','Challenges','Panel & Guests','Connections','Play','Data','About'];
 /* ============ EXPLORER PACK: 30 views ============ */
@@ -3478,7 +3543,10 @@ const SECTION_META={
   how:'<b>Trivia Night</b> deals fresh questions every round and scores you on the spot. The <b>Host Pack</b> is built for paper — hit print (Cmd/Ctrl-P) and the noir chrome strips itself away. <b>Ask the Library</b> in plain English; every answer is a live database lookup with explore links.'},
  Data:{title:'The <em>Data</em> Room',
   intro:'The Vault — the master contestant table behind every view on this site, one row per queen per season, fully searchable.',
-  how:'Type in the filter box to search every column at once, use the <b>dropdowns</b> for exact matches, and click a <b>column header</b> to sort (click again to flip). Click any row to open that queen’s profile.'}};
+  how:'Type in the filter box to search every column at once, use the <b>dropdowns</b> for exact matches, and click a <b>column header</b> to sort (click again to flip). Click any row to open that queen’s profile.'},
+ About:{title:'About & <em>Feedback</em>',
+  intro:'What the Werkroom is, who built it, and the open invitation to help make it better. A labor-of-love archive that grows by the day — and gets more accurate every time a fan flags something.',
+  how:'<b>About & Feedback</b> is the permanent home for the welcome note and the feedback form — fill it out right on the page or pop it open in a new tab. Spot a wrong placement, a mislabeled song, or a missing queen? That form is the fastest way to get it fixed.'}};
 /* cheap live teaser per view — computed fresh each render; missing/failed = no pill */
 const VIEW_TEASER={
  queens:()=>D.meta.queens+' queens',
@@ -3607,7 +3675,7 @@ let _LAST_ROUTE=null;
 /* old view ids -> their merged survivors (kept alive for trivia links, the Librarian, and old #hashes) */
 const ROUTE_ALIASES={georoll:'hometowns',zodiac:'birthdays',safestreaks:'survivors',farewells:'elimorder',
   challengemix:'challenges',snatchhall:'snatch',guestdir:'guestfreq',continuity:'panel',tenure:'panel',
-  'sec:home':'home','sec:about':'health'};
+  'sec:home':'home'};
 
 /* ---------------- in-app navigation history ----------------
    NAV_STACK holds the routes the user has VISITED, in order, so the Back
