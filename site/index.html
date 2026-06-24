@@ -658,6 +658,151 @@ V({id:'atlas',title:'Season <em>Atlas</em>',kicker:'Seasons',icon:'grid',group:'
  }});
 
 /* ---------- 2. SEASON DETAIL (dynamic) ---------- */
+/* Season-summary front matter helpers. Everything is read from the computed
+   derived.season_summary block (build_site_data.py); cards self-hide when a
+   field has no data, so this degrades gracefully for thin international seasons. */
+function _qIdByName(nm){if(!nm)return null;for(const k in qname){if(qname[k]===nm)return k;}return null;}
+/* hero: winner photo + name, season label + franchise */
+function renderSeasonHero(m,s,sid,cs,SUM){
+  const winName=(SUM&&SUM.winner)||qname[s.winner_id]||null;
+  const winCon=cs.find(c=>c.queen_id===s.winner_id)
+    ||(winName?cs.find(c=>cname(c)===winName):null);
+  const img=(winCon&&winCon.image&&winCon.image!=='-')?winCon.image:'';
+  const winId=s.winner_id&&s.winner_id!=='-'?s.winner_id:(winCon?winCon.queen_id:null);
+  const esc=t=>String(t==null?'':t).replace(/"/g,'&quot;');
+  const initSafe=esc(winName||'').replace(/\\/g,'\\\\').replace(/'/g,"\\'");
+  const photo=img
+    ? `<img src="${esc(img)}" alt="${esc(winName)}" referrerpolicy="no-referrer" loading="eager" onerror="imgFallback(this,'${initSafe}')" style="width:104px;height:104px;border-radius:18px;object-fit:cover;border:2px solid rgba(244,181,63,.55);box-shadow:var(--shadow);flex:none">`
+    : (winName?`<div class="imgph" style="width:104px;height:104px;border-radius:18px;font-size:30px;flex:none">${_initials(winName)}</div>`:'');
+  const hero=el('div',{class:'card fade',style:'display:flex;gap:20px;align-items:center;flex-wrap:wrap;background:linear-gradient(135deg,rgba(61,22,84,.62),rgba(230,0,126,.16) 70%,rgba(244,181,63,.12));border-color:rgba(244,181,63,.32)'});
+  const left=el('div',{style:'flex:1;min-width:200px'});
+  left.innerHTML=`<div class="vkicker" style="margin-bottom:6px">${s.franchise||''} · ${s.platform||''}</div>
+    <h1 class="vtitle" style="font-size:clamp(26px,4vw,42px)">${seasonName(sid)}</h1>`;
+  if(winName){
+    const wl=el('div',{style:'margin-top:10px;display:flex;align-items:center;gap:8px;flex-wrap:wrap'});
+    wl.append(el('span',{class:'pill gold',style:'font-size:12px',html:`${icon('crown')} Winner`}));
+    const wn=el('span',{style:'font-family:var(--disp);font-weight:800;font-size:22px;color:var(--gold);'+(winId?'cursor:pointer':''),
+      onclick:winId?(()=>go('queen:'+winId)):null},winName);
+    wl.append(wn);left.append(wl);
+  }else{
+    left.append(el('div',{style:'margin-top:10px;color:rgba(247,240,230,.7);font-size:13px'},'Winner — to be crowned'));
+  }
+  const sub=[];
+  if(SUM&&SUM.runners_up&&SUM.runners_up.length)sub.push('Runner-up: '+SUM.runners_up.join(', '));
+  if(SUM&&SUM.miss_congeniality)sub.push('Miss Congeniality: '+SUM.miss_congeniality);
+  if(SUM&&SUM.finale_format)sub.push(SUM.finale_format);
+  if(s.cash_prize&&s.cash_prize!=='-')sub.push('Prize $'+Number(s.cash_prize).toLocaleString());
+  if(sub.length)left.append(el('div',{style:'margin-top:9px;font-size:12.5px;color:rgba(247,240,230,.82);line-height:1.7'},sub.join('  ·  ')));
+  if(photo){const ph=el('div',{html:photo});hero.append(ph.firstChild);}
+  hero.append(left);
+  m.append(hero);
+}
+/* "At a glance" stat bar */
+function renderSeasonGlance(m,s,SUM){
+  const items=[];
+  if(SUM.cast_size)items.push([SUM.cast_size,'queens']);
+  if(SUM.episode_count)items.push([SUM.episode_count,'episodes']);
+  if(SUM.premiere&&SUM.finale)items.push([`${SUM.premiere.slice(0,7)}<span style="font-size:20px;color:var(--magenta)"> → </span>${SUM.finale.slice(0,7)}`,'premiere → finale']);
+  else if(SUM.premiere)items.push([SUM.premiere.slice(0,7),'premiere']);
+  if(SUM.avg_gap_days!=null)items.push([`~${SUM.avg_gap_days}`,'days / episode']);
+  if(SUM.guest_judges_count)items.push([SUM.guest_judges_count,'guest judges']);
+  if(!items.length)return;
+  const wrap=el('div',{class:'grid fade',style:'grid-template-columns:repeat(auto-fit,minmax(130px,1fr));margin:16px 0 4px'});
+  items.forEach(i=>wrap.append(el('div',{class:'card',style:'padding:16px'},
+    el('div',{class:'stat',style:'font-size:26px',html:String(i[0])}),
+    el('div',{class:'statlbl'},i[1]))));
+  m.append(wrap);
+}
+/* "Superlatives" cards — only those with data render */
+function renderSeasonSuperlatives(m,sid,SUM){
+  const cards=[];
+  const mk=(label,color,bodyNodes)=>{
+    const c=el('div',{class:'card'});
+    c.append(sectionHead(label,color));
+    bodyNodes.forEach(n=>c.append(n));
+    return c;};
+  const big=(txt,color)=>el('div',{style:`font-family:var(--disp);font-weight:800;font-size:19px;color:${color||'var(--cream)'};line-height:1.25`},txt);
+  const sub=txt=>el('div',{style:'font-size:12px;color:rgba(247,240,230,.78);margin-top:5px;line-height:1.55'},txt);
+  /* front-runner */
+  if(SUM.front_runner&&SUM.front_runner.wins>0){
+    cards.push(mk('Front-runner','var(--gold)',[
+      big(SUM.front_runner.names.join(', '),'var(--gold)'),
+      sub(`${SUM.front_runner.wins} challenge win${SUM.front_runner.wins===1?'':'s'} — the most of the season.`)]));
+  }
+  /* lip-sync assassin */
+  if(SUM.lipsync_assassin&&SUM.lipsync_assassin.count>0){
+    cards.push(mk('Lip-sync assassin','var(--rose)',[
+      big(SUM.lipsync_assassin.names.join(', '),'var(--rose)'),
+      sub(`Won ${SUM.lipsync_assassin.count} lip sync${SUM.lipsync_assassin.count===1?'':'s'} this season.`)]));
+  }
+  /* cinderella / lowest-to-win */
+  if(SUM.cinderella){
+    const w=SUM.cinderella.wins;
+    cards.push(mk(SUM.cinderella.low_win?'Cinderella story':'Lowest-to-win watch','var(--mint)',[
+      big(SUM.cinderella.name,'var(--mint)'),
+      sub(SUM.cinderella.low_win
+        ? `Took the crown with just ${w} maxi-challenge win${w===1?'':'s'}.`
+        : `Crowned with ${w} maxi-challenge win${w===1?'':'s'}.`)]));
+  }
+  /* never-bottom finalists */
+  if(SUM.never_bottom&&SUM.never_bottom.length){
+    cards.push(mk('Never in the bottom','var(--mint)',[
+      big(SUM.never_bottom.join(', '),'var(--mint)'),
+      sub('Reached the top 4 without ever landing in the bottom.')]));
+  }
+  /* comebacks */
+  if(SUM.comebacks&&SUM.comebacks.length){
+    cards.push(mk('Comeback','var(--rose)',[
+      big(SUM.comebacks.join(', '),'var(--rose)'),
+      sub('Eliminated, then returned to the competition.')]));
+  }
+  /* snatch game */
+  if(SUM.snatch_game){
+    const sg=SUM.snatch_game;
+    const winTxt=Array.isArray(sg.winner)?sg.winner.join(' & '):(sg.winner||null);
+    const body=[];
+    body.push(big(winTxt||'—','var(--gold)'));
+    const bits=[];
+    if(winTxt)bits.push('won the Snatch Game');
+    if(sg.character_count)bits.push(`${sg.character_count} characters played`);
+    body.push(sub(bits.length?bits.join(' · '):(sg.title||'Snatch Game')));
+    cards.push(mk('Snatch Game','var(--gold)',body));
+  }
+  /* most-used song */
+  if(SUM.most_used_song){
+    cards.push(mk('Most-used lip-sync song','var(--rose)',[
+      big('“'+SUM.most_used_song.title+'”','var(--rose)'),
+      sub(`Lip-synced in ${SUM.most_used_song.count} episodes this season.`)]));
+  }
+  /* twists strip (double elims / non-elims / DQs / withdrawals) */
+  const twists=[];
+  if(SUM.double_eliminations&&SUM.double_eliminations.count)twists.push(`${SUM.double_eliminations.count} double elimination${SUM.double_eliminations.count===1?'':'s'}`);
+  if(SUM.non_eliminations&&SUM.non_eliminations.count)twists.push(`${SUM.non_eliminations.count} non-elimination${SUM.non_eliminations.count===1?'':'s'}`);
+  if(SUM.disqualifications&&SUM.disqualifications.count)twists.push('DQ: '+SUM.disqualifications.names.join(', '));
+  if(SUM.withdrawals&&SUM.withdrawals.count)twists.push('Withdrew: '+SUM.withdrawals.names.join(', '));
+  if(twists.length){
+    cards.push(mk('Twists','var(--magenta)',[
+      el('div',{style:'display:flex;flex-wrap:wrap;gap:6px'},
+        ...twists.map(t=>el('span',{class:'pill',style:'font-size:11px'},t)))]));
+  }
+  if(!cards.length)return;
+  m.append(sectionHead('Superlatives','var(--magenta)'));
+  const wrap=el('div',{class:'grid fade',style:'grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin:0 0 6px'});
+  cards.forEach(c=>wrap.append(c));
+  m.append(wrap);
+}
+/* "Season Story" prose block — renders narrative if present, else a subtle note */
+function renderSeasonStory(m,sid){
+  const txt=((X.season_narratives||{})[sid]||'').trim();
+  const card=el('div',{class:'card fade',style:'margin:16px 0'});
+  card.append(sectionHead('Season Story','var(--gold)'));
+  if(txt){
+    card.append(el('div',{style:'font-size:13.5px;line-height:1.75;color:rgba(247,240,230,.92)'},txt));
+  }else{
+    card.append(el('div',{style:'font-size:12.5px;color:rgba(247,240,230,.5);font-style:italic'},'Story coming soon.'));
+  }
+  m.append(card);
+}
 function renderSeasonDetail(m,sid){
   const s=D.seasons.find(x=>x.season_id===sid);if(!s){m.innerHTML='<div class="empty">Season not found</div>';return;}
   const cs=contestantsBySeason(sid).sort((a,b)=>(+a.placement||99)-(+b.placement||99));
@@ -669,10 +814,19 @@ function renderSeasonDetail(m,sid){
     const cad=(span/(dts.length-1)).toFixed(1);
     runSpan=` · aired <b style="color:var(--gold)">${dts[0]} → ${dts[dts.length-1]}</b> (${span} days · ~${cad} days/ep)`;}
   else if(dts.length===1){runSpan=` · aired <b style="color:var(--gold)">${dts[0]}</b>`;}
-  m.innerHTML=`<div class="vhead fade"><div class="vkicker">${s.platform} · ${s.premiere_date||''}</div>
-    <h1 class="vtitle">${seasonName(sid)}</h1>
-    <div class="vdesc">Winner <b style="color:var(--gold)">${qname[s.winner_id]||'—'}</b> · Miss Congeniality ${qname[s.miss_congeniality_id]||'—'} · ${eps.length} episodes${s.cash_prize?` · prize <b style="color:var(--gold)">$${Number(s.cash_prize).toLocaleString()}</b>`:''}${runSpan}</div>
-    <div style="margin-top:10px"><button class="tab" onclick="go('atlas')">← All seasons</button></div></div>`;
+  m.innerHTML='';
+  /* ===================== SEASON SUMMARY FRONT MATTER ===================== */
+  const SUM=(X.season_summary||{})[sid]||null;
+  renderSeasonHero(m,s,sid,cs,SUM);
+  if(SUM){
+    renderSeasonGlance(m,s,SUM);
+    renderSeasonSuperlatives(m,sid,SUM);
+  }
+  renderSeasonStory(m,sid);
+  /* "All seasons" backstop link (the global Back bar handles drill-down history) */
+  m.append(el('div',{class:'fade',style:'margin:4px 0 20px'},
+    el('button',{class:'tab',onclick:()=>go('atlas')},'← All seasons')));
+  /* ===================== EXISTING SEASON DETAIL (below) ================== */
   const grid=el('div',{class:'grid fade',style:'grid-template-columns:1.1fr 1fr;gap:18px'});
   // contestants
   const ct=el('div',{class:'card'});
