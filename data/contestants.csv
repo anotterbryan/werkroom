@@ -610,3 +610,13 @@ DU03-Q0435,Q0435,DU03,7,8,"Sydney, Australia",0,0,0,3,4,No,-,images/queens/DU03-
 DU03-Q0436,Q0436,DU03,8,6,"Sydney, Australia",0,0,1,1,3,No,-,images/queens/DU03-Q0436.webp,-,26
 DU03-Q0437,Q0437,DU03,9,4,"Sydney, Australia",0,0,0,2,2,No,-,images/queens/DU03-Q0437.webp,-,26
 DU03-Q0438,Q0438,DU03,10,5,"Sydney, Australia",0,0,0,1,1,No,-,images/queens/DU03-Q0438.webp,-,27
+DU04-Q0439,Q0439,DU04,1,1,"Melbourne, Australia",3,1,0,0,,No,-,images/queens/DU04-Q0439.webp,53000,32
+DU04-Q0440,Q0440,DU04,2,4,"Brisbane, Australia",1,1,1,1,,No,-,images/queens/DU04-Q0440.webp,0,33
+DU04-Q0441,Q0441,DU04,2,2,"Sydney, Australia",2,3,1,0,,No,-,images/queens/DU04-Q0441.webp,2500,32
+DU04-Q0442,Q0442,DU04,4,6,"Brisbane, Australia",0,3,1,2,8,No,-,images/queens/DU04-Q0442.webp,0,24
+DU04-Q0443,Q0443,DU04,5,3,"Auckland, New Zealand",1,2,0,2,7,No,-,images/queens/DU04-Q0443.webp,2500,27
+DU04-Q0444,Q0444,DU04,6,5,"Melbourne, Australia",0,1,0,2,6,No,-,images/queens/DU04-Q0444.webp,0,24
+DU04-Q0445,Q0445,DU04,7,8,"Melbourne, Australia",1,1,1,1,5,No,-,images/queens/DU04-Q0445.webp,0,24
+DU04-Q0446,Q0446,DU04,8,10,"Auckland, New Zealand",0,0,0,3,4,No,-,images/queens/DU04-Q0446.webp,0,28
+DU04-Q0447,Q0447,DU04,9,9,"Sydney, Australia",0,0,0,2,3,No,-,images/queens/DU04-Q0447.webp,0,27
+DU04-Q0448,Q0448,DU04,10,7,"Wellington, New Zealand",0,0,1,1,2,No,-,images/queens/DU04-Q0448.webp,0,26
