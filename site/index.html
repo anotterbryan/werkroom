@@ -261,6 +261,26 @@ function imgFallback(img,name){
   if(cs)ph.setAttribute('style',cs);ph.textContent=_initials(name);ph.setAttribute('aria-label',name||'');
   if(img.parentNode)img.parentNode.replaceChild(ph,img);
 }
+/* Clickable queen avatar that ALWAYS links to her profile — including the
+   no-photo case. The click handler lives on the WRAPPER, so it survives the
+   img→initials swap done by imgFallback() (and an initials-only tile is just
+   as clickable as a photo tile). `imgStyle` is the per-call image sizing/shape;
+   `wrapStyle` lets a caller tweak the wrapper (e.g. flex:none). Reuses
+   imgFallback()/_initials() — no duplicated placeholder logic. */
+function queenAvatar(qid,name,imgUrl,imgStyle,wrapStyle){
+  const has=imgUrl&&imgUrl!=='-';
+  const w=el('span',{class:'q-avatar',style:'display:inline-flex;cursor:pointer;'+(wrapStyle||''),
+    title:name||'',role:'link','aria-label':name||'',
+    onclick:ev=>{ev.stopPropagation();go('queen:'+qid);}});
+  if(has){
+    w.append(el('img',{src:imgUrl,alt:name||'',referrerPolicy:'no-referrer',loading:'eager',
+      style:imgStyle||'',onerror:function(){imgFallback(this,name||'');}}));
+  }else{
+    /* no photo: render the initials chip directly, styled like the image slot */
+    w.append(el('div',{class:'imgph',style:imgStyle||''},_initials(name||'')));
+  }
+  return w;
+}
 const tt=$('#tt');
 function showTip(e,html){tt.innerHTML=html;tt.style.opacity=1;moveTip(e);}
 function moveTip(e){const p=12;let x=e.clientX+p,y=e.clientY+p;
@@ -424,6 +444,10 @@ function cname(c){return (c&&c.drag_name_used&&c.drag_name_used!=='-')?c.drag_na
 let FRANCHISE='All';
 const FRANCHISES=[...new Set(D.seasons.map(s=>s.franchise))];
 function seasonAllowed(sid){if(FRANCHISE==='All')return true;const s=D.seasons.find(x=>x.season_id===sid);return s&&s.franchise===FRANCHISE;}
+/* Atlas region filter: 'All' or one of REGION_ORDER. Separate from FRANCHISE so the
+   Atlas can filter by region without disturbing the franchise-scoped views. */
+let ATLAS_REGION='All';
+function seasonInAtlasScope(sid){if(ATLAS_REGION==='All')return true;const s=D.seasons.find(x=>x.season_id===sid);return s&&s.region===ATLAS_REGION;}
 /* ---- region grouping (read dynamically from DATA.seasons[].region) ----
    The display order is fixed; Main Series is always first (the flagship). Any
    region or franchise present in the data appears automatically — nothing is
@@ -704,13 +728,15 @@ V({id:'home',title:'The <em>Werkroom</em>',kicker:'Home',icon:'crown',group:'Hom
   const strip=el('div',{class:'card fade',style:'margin-top:18px'});
   strip.append(sectionHead('The winners — click a crown','var(--gold)'));
   const srow=el('div',{class:'winners-strip',style:'display:flex;flex-wrap:wrap;gap:10px;align-items:center'});
-  D.seasons.forEach(s=>{const c=D.contestants.find(x=>x.queen_id===s.winner_id&&x.season_id===s.season_id);
-    if(!c||!c.image||c.image==='-')return;
-    srow.append(el('img',{src:c.image,alt:qname[s.winner_id]||'',referrerPolicy:'no-referrer',loading:'eager',
-      title:(qname[s.winner_id]||'')+' · '+seasonName(s.season_id),
-      style:'width:54px;height:54px;border-radius:50%;object-fit:cover;border:2px solid rgba(244,181,63,.55);cursor:pointer',
-      onerror:function(){imgFallback(this,qname[s.winner_id]||'')},
-      onclick:()=>go('queen:'+s.winner_id)}));});
+  /* every crowned winner is a clickable crown — photo OR initials, both link to her profile */
+  D.seasons.forEach(s=>{if(!s.winner_id||s.winner_id==='-')return;
+    const c=D.contestants.find(x=>x.queen_id===s.winner_id&&x.season_id===s.season_id);
+    const img=(c&&c.image&&c.image!=='-')?c.image:'';
+    const nm=qname[s.winner_id]||'';
+    const av=queenAvatar(s.winner_id,nm+' · '+seasonName(s.season_id),img,
+      'width:54px;height:54px;border-radius:50%;object-fit:cover;border:2px solid rgba(244,181,63,.55)',
+      'flex:none');
+    srow.append(av);});
   strip.append(srow);m.append(strip);
  }});
 
@@ -778,16 +804,22 @@ V({id:'atlas',title:'Season <em>Atlas</em>',kicker:'Seasons',icon:'grid',group:'
  desc:'Every franchise grouped by region — Main Series leads, then the world. Each region opens to its franchises and every season at a glance.',
  render(m){
   m.innerHTML=head(this);
+  /* Region chips (fixed REGION_ORDER, read from the data) replace the old
+     per-franchise pills: pick a region to jump straight to its franchises →
+     seasons. Franchises stay grouped WITHIN each region section below. */
   const ctrl=el('div',{class:'controls'});
-  ctrl.append(el('span',{style:'font-size:11px;color:var(--gold)'},'Franchise:'));
-  ['All',...FRANCHISES].forEach(f=>{const b=el('button',{class:'tab'+(FRANCHISE===f?' on':'')},f);
-    b.addEventListener('click',()=>{FRANCHISE=f;go('atlas');});ctrl.append(b);});
+  ctrl.append(el('span',{style:'font-size:11px;color:var(--gold)'},'Region:'));
+  ['All',...regionsPresent()].forEach(r=>{const b=el('button',{class:'tab'+(ATLAS_REGION===r?' on':'')},r);
+    b.addEventListener('click',()=>{ATLAS_REGION=r;go('atlas');});ctrl.append(b);});
   m.append(ctrl);
-  statCards(m,[[D.seasons.filter(s=>seasonAllowed(s.season_id)).length,'seasons'],
-    [new Set(D.contestants.filter(c=>seasonAllowed(c.season_id)).map(c=>c.queen_id)).size,'queens in scope'],
-    [D.episodes.filter(e=>seasonAllowed(e.season_id)).length,'episodes in scope']]);
+  /* Atlas scope = the chosen region (all franchises within it), independent of FRANCHISE. */
+  statCards(m,[[D.seasons.filter(s=>seasonInAtlasScope(s.season_id)).length,'seasons'],
+    [new Set(D.contestants.filter(c=>seasonInAtlasScope(c.season_id)).map(c=>c.queen_id)).size,'queens in scope'],
+    [D.episodes.filter(e=>seasonInAtlasScope(e.season_id)).length,'episodes in scope']]);
   const wrapAll=el('div',{class:'fade'});
-  regionsPresent().forEach(region=>{const sec=regionSection(region);if(sec)wrapAll.append(sec);});
+  /* render only the selected region, or every region when 'All' */
+  const regions=ATLAS_REGION==='All'?regionsPresent():regionsPresent().filter(r=>r===ATLAS_REGION);
+  regions.forEach(region=>{const sec=regionSection(region);if(sec)wrapAll.append(sec);});
   m.append(wrapAll);
  }});
 
@@ -1143,7 +1175,8 @@ V({id:'queens',title:'The <em>Queens</em>',kicker:'Queens',icon:'star',group:'Qu
       const img=_QIMG[c.queen_id];
       const card=el('div',{class:'card',style:'cursor:pointer;padding:14px'},
         el('div',{style:'display:flex;align-items:center;gap:8px'},
-          img?el('img',{src:img,alt:nm,referrerPolicy:'no-referrer',loading:'eager',style:'width:34px;height:34px;border-radius:50%;object-fit:cover;flex:none;border:1px solid rgba(244,181,63,.35)',onerror:function(){imgFallback(this,nm)}}):'',
+          /* avatar always renders (photo or initials) and always links to the profile */
+          queenAvatar(c.queen_id,nm,img,'width:34px;height:34px;border-radius:50%;object-fit:cover;border:1px solid rgba(244,181,63,.35)','flex:none'),
           el('div',{style:'font-family:var(--disp);font-weight:700;font-size:16px'},nm)),
         el('div',{style:'font-size:11.5px;color:var(--gold);margin-top:3px'},seasonName(c.season_id)+' · '+(c.placement?('#'+c.placement):'')),
         el('div',{class:'chip-row',style:'margin-top:8px'},
