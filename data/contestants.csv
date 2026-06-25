@@ -580,16 +580,16 @@ AS11-Q0078,Q0078,AS11,,-,"Dallas, Texas",0,0,0,0,,No,-,images/queens/AS11-Q0078.
 AS11-Q0214,Q0214,AS11,,-,"Leeds, Alabama",0,0,0,0,,No,-,images/queens/AS11-Q0214.webp,-,26
 AS11-Q0133,Q0133,AS11,,-,"New York City, New York",0,0,0,0,,No,-,images/queens/AS11-Q0133.webp,-,48
 AS11-Q0131,Q0131,AS11,,12,"Houston, Texas",1,0,0,0,,No,-,images/queens/AS11-Q0131.webp,-,35
-DU01-Q0412,Q0412,DU01,1,7,"Auckland, New Zealand",1,2,0,1,,No,-,K,30000,34
-DU01-Q0413,Q0413,DU01,2,1,"Melbourne, Australia",0,2,1,1,2,No,-,A,0,28
-DU01-Q0414,Q0414,DU01,2,10,"Melbourne, Australia",1,1,3,1,,No,-,K,3000,32
-DU01-Q0415,Q0415,DU01,2,5,"Perth, Australia",3,1,1,1,,No,-,S,5000,27
-DU01-Q0416,Q0416,DU01,5,4,"Auckland, New Zealand",1,0,2,3,7,No,-,E,0,27
-DU01-Q0417,Q0417,DU01,6,2,"Sydney, Australia",0,1,2,2,6,No,-,M,0,46
-DU01-Q0418,Q0418,DU01,7,8,"Sydney, Australia",0,0,1,1,5,No,-,E,0,22
-DU01-Q0389,Q0389,DU01,8,9,"Auckland, New Zealand",1,1,0,1,4,No,-,A,5000,31
-DU01-Q0419,Q0419,DU01,9,6,"Sydney, Australia",0,0,1,2,3,No,-,C,0,30
-DU01-Q0420,Q0420,DU01,10,3,"Newcastle, Australia",0,0,0,1,1,No,-,J,0,30
+DU01-Q0412,Q0412,DU01,1,7,"Auckland, New Zealand",1,2,0,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/6/69/KitaMeanDRDU1CastMug.jpg,30000,34
+DU01-Q0413,Q0413,DU01,2,1,"Melbourne, Australia",0,2,1,1,2,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/1/1b/ArtSimoneDRDU1CastMug.jpg,0,28
+DU01-Q0414,Q0414,DU01,2,10,"Melbourne, Australia",1,1,3,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/8/86/KarenFromFinanceDRDU1CastMug.jpg,3000,32
+DU01-Q0415,Q0415,DU01,2,5,"Perth, Australia",3,1,1,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/e/ec/ScarletAdamsDRDU1CastMug.jpg,5000,27
+DU01-Q0416,Q0416,DU01,5,4,"Auckland, New Zealand",1,0,2,3,7,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/7/7c/ElektraShockDRDU1CastMug.jpg,0,27
+DU01-Q0417,Q0417,DU01,6,2,"Sydney, Australia",0,1,2,2,6,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/e/e9/MaxiShieldDRDU1CastMug.jpg,0,46
+DU01-Q0418,Q0418,DU01,7,8,"Sydney, Australia",0,0,1,1,5,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/9/9e/EtceteraEtceteraDRDU1CastMug.jpg,0,22
+DU01-Q0389,Q0389,DU01,8,9,"Auckland, New Zealand",1,1,0,1,4,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/6/6b/AnitaWigl%27itDRDU1CastMug.jpg,5000,31
+DU01-Q0419,Q0419,DU01,9,6,"Sydney, Australia",0,0,1,2,3,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/a/a1/CocoJumboDRDU1CastMug.jpg,0,30
+DU01-Q0420,Q0420,DU01,10,3,"Newcastle, Australia",0,0,0,1,1,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/a/a7/JojoZahoDRDU1CastMug.jpg,0,30
 DU02-Q0421,Q0421,DU02,1,3,"Sydney, Australia",3,3,0,1,,No,-,images/queens/DU02-Q0421.webp,-,37
 DU02-Q0402,Q0402,DU02,2,1,"Sydney, Australia",3,2,0,1,,No,-,images/queens/DU02-Q0402.webp,-,30
 DU02-Q0391,Q0391,DU02,2,10,"Sydney, Australia",2,0,1,2,,No,-,images/queens/DU02-Q0391.webp,-,29
@@ -780,80 +780,80 @@ NL02-Q0578,Q0578,NL02,7,2,Amsterdam,0,0,1,3,4,No,-,images/queens/NL02-Q0578.webp
 NL02-Q0579,Q0579,NL02,8,7,Amsterdam,0,1,0,1,3,No,-,images/queens/NL02-Q0579.webp,-,43
 NL02-Q0580,Q0580,NL02,9,1,Amsterdam,0,0,0,2,2,No,-,images/queens/NL02-Q0580.webp,-,25
 NL02-Q0581,Q0581,NL02,10,3,Amsterdam,0,0,0,1,1,No,-,images/queens/NL02-Q0581.webp,-,24
-BE01-Q0582,Q0582,BE01,1,7,Brussels,3,2,0,0,,No,-,x.jpeg,-,24
-BE01-Q0583,Q0583,BE01,2,4,Brussels,2,0,1,1,,No,-,x.jpeg,-,27
-BE01-Q0584,Q0584,BE01,3,8,Ghent,1,1,2,2,8,No,-,x.jpeg,-,26
-BE01-Q0585,Q0585,BE01,4,9,Brussels,1,1,0,2,7,No,-,x.jpeg,-,37
-BE01-Q0586,Q0586,BE01,5,3,Liège,0,2,0,2,6,No,-,x.jpeg,-,23
-BE01-Q0587,Q0587,BE01,6,5,Ghent,0,0,1,3,5,Yes,-,x.jpeg,-,26
-BE01-Q0588,Q0588,BE01,7,2,Brussels,0,0,1,2,4,No,-,x.jpeg,-,35
-BE01-Q0589,Q0589,BE01,8,1,Liège,0,0,0,1,3,No,-,x.jpeg,-,34
-BE01-Q0590,Q0590,BE01,9,10,Mouscron,0,0,0,2,2,No,-,x.jpeg,-,21
-BE01-Q0591,Q0591,BE01,10,6,Mons,0,0,0,1,1,No,-,x.jpeg,-,36
-BE02-Q0592,Q0592,BE02,1,2,Brussels,3,4,0,1,,No,-,x.jpg,-,29
-BE02-Q0593,Q0593,BE02,2,6,Brussels,3,0,1,1,,No,-,x.jpg,-,37
-BE02-Q0594,Q0594,BE02,3,7,Brussels,1,0,0,3,,No,-,x.jpg,-,31
-BE02-Q0595,Q0595,BE02,3,5,Brussels,0,1,0,2,,No,-,x.jpg,-,27
-BE02-Q0596,Q0596,BE02,5,8,Ghent,1,1,1,3,6,No,-,x.jpg,-,29
-BE02-Q0597,Q0597,BE02,6,3,Antwerp,0,0,1,1,5,Yes,-,x.jpg,-,43
-BE02-Q0598,Q0598,BE02,7,9,Brussels,0,0,1,0,,No,-,x.jpg,-,23
-BE02-Q0599,Q0599,BE02,8,4,Luxembourg,0,1,0,1,3,No,-,x.jpg,-,33
-BE02-Q0600,Q0600,BE02,9,1,Liège,0,0,0,1,2,No,-,x.jpg,-,35
-DE01-Q0601,Q0601,DE01,1,10,"Vienna,Austria",3,3,0,2,,No,-,PandoraNoxGR1MiniPromo.jpg,-,29
-DE01-Q0602,Q0602,DE01,2,8,"Vienna,Austria",2,3,0,1,,No,-,MetamorkidGR1MiniPromo.jpg,-,24
-DE01-Q0603,Q0603,DE01,3,1,"Berlin,Germany",2,1,2,0,,No,-,YvonneNightstandGR1MiniPromo.jpg,-,29
-DE01-Q0604,Q0604,DE01,4,11,"Wiesbaden,Germany",2,1,1,1,10,No,-,KellyHeeltonGR1MiniPromo.jpg,-,41
-DE01-Q0605,Q0605,DE01,5,9,"Düsseldorf,Germany",2,0,1,3,8,No,-,LoreleyRiversGR1MiniPromo.jpg,-,24
-DE01-Q0606,Q0606,DE01,6,2,"Basel,Switzerland",0,2,0,4,7,Yes,-,VictoriaShakespearsGR1MiniPromo.jpg,-,29
-DE01-Q0607,Q0607,DE01,7,6,"Berlin,Germany",1,0,2,1,6,No,-,NikitaVegazGR1MiniPromo.jpg,-,38
-DE01-Q0393,Q0393,DE01,8,7,"Basel,Switzerland",0,1,0,4,5,No,-,TessaTesticleGR1MiniPromo.jpg,-,25
-DE01-Q0608,Q0608,DE01,9,3,"Frankfurt,Germany",0,1,0,1,4,No,-,L%C3%A9L%C3%A9CocoonGR1MiniPromo.jpg,-,23
-DE01-Q0409,Q0409,DE01,10,4,"Cologne,Germany",0,0,0,1,3,No,-,TheOnlyNaomyGR1MiniPromo.jpg,-,22
-DE01-Q0609,Q0609,DE01,11,5,"Munich,Germany",0,1,0,1,2,No,-,BarbieQGR1MiniPromo.jpg,-,25
-SE01-Q0610,Q0610,SE01,1,3,Stockholm,3,1,1,0,,No,-,AdmiraThunderpussyDRSV1CastMug.png,-,28
-SE01-Q0408,Q0408,SE01,2,1,Stockholm,1,0,1,1,,No,-,FontanaDRSV1CastMug.png,-,29
-SE01-Q0394,Q0394,SE01,3,9,Linköping,1,2,1,3,8,No,-,VanityVainDRSV1CastMug.png,-,31
-SE01-Q0611,Q0611,SE01,4,2,Helsingborg,1,1,0,3,7,No,-,ElecktraDRSV1CastMug.png,-,35
-SE01-Q0612,Q0612,SE01,5,4,"Liverpool,UK",0,0,2,2,6,No,-,AntoninaNutshellDRSV1CastMug.png,-,29
-SE01-Q0613,Q0613,SE01,6,5,"Berlin,Germany",0,2,0,1,5,No,-,SantanaSexmachineDRSV1CastMug.png,-,28
-SE01-Q0614,Q0614,SE01,7,7,Värnamo,1,2,0,1,4,No,-,ImaaQueenDRSV1CastMug.png,-,28
-SE01-Q0615,Q0615,SE01,8,8,"Tokyo,Japan",0,0,1,2,3,No,-,EndigoDRSV1CastMug.png,-,31
-SE01-Q0616,Q0616,SE01,9,6,Mora,0,0,0,1,1,No,-,AlmightyAphroditeyDRSV1CastMug.png,-,20
-PH01-Q0617,Q0617,PH01,1,6,"Daet, Camarines Norte",1,4,1,0,,No,-,PreciousPaulaNicoleDRP1MiniPromo.jpg,1100000,34
-PH01-Q0404,Q0404,PH01,2,4,"Makati City, Metro Manila",2,5,1,0,,No,-,MarinaSummersDRP1MiniPromo.jpg,180000,25
-PH01-Q0618,Q0618,PH01,3,12,"Cabanatuan, Nueva Ecija",2,3,1,2,,No,-,XilhoueteDRP1MiniPromo.jpg,160000,34
-PH01-Q0397,Q0397,PH01,3,2,"Marikina City, Metro Manila",0,5,0,1,,No,-,EvaLeQueenDRP1MiniPromo.jpg,40000,34
-PH01-Q0410,Q0410,PH01,5,7,"Quezon City, Metro Manila",2,1,1,3,9,No,-,MintyFreshDRP1MiniPromo.jpg,180000,31
-PH01-Q0619,Q0619,PH01,6,11,"Mandaluyong, Metro Manila",0,1,0,3,8,No,-,BrigidingDRP1MiniPromo.jpg,0,29
-PH01-Q0620,Q0620,PH01,7,9,"San Jose del Monte, Bulacan",1,2,2,1,7,No,-,ViñasDeLuxeDRP1MiniPromo.jpg,80000,25
-PH01-Q0621,Q0621,PH01,8,5,"Davao City, Davao del Sur",0,1,0,3,5,Yes,-,LadyMorganaDRP1MiniPromo.jpg,40000,30
-PH01-Q0622,Q0622,PH01,9,3,"Cainta, Rizal",1,1,0,2,4,No,-,TuringDRP1MiniPromo.jpg,80000,29
-PH01-Q0623,Q0623,PH01,10,8,"Melbourne, Australia",0,0,1,1,3,No,-,GigiEraDRP1MiniPromo.jpg,0,38
-PH01-Q0624,Q0624,PH01,11,1,"Bolinao, Pangasinan",0,0,0,1,2,No,-,CorazonDRP1MiniPromo.jpg,20000,34
-PH01-Q0625,Q0625,PH01,12,10,"Calumpit, Bulacan",0,0,0,1,1,No,-,PrinceDRP1MiniPromo.jpg,0,25
-PH02-Q0626,Q0626,PH02,1,5,"Sta. Maria, Ilocos Sur",2,4,1,1,,No,-,CaptivatingKatkatDRPH2MiniPromo.jpg,1180000,42
-PH02-Q0627,Q0627,PH02,2,1,"Makati City, Metro Manila",1,3,1,2,,No,-,ArizonaBrandyDRPH2MiniPromo.jpg,100000,25
-PH02-Q0628,Q0628,PH02,3,6,"Marikina City, Metro Manila",1,3,1,2,,No,-,M1ssJadeSoDRPH2MiniPromo.jpg,80000,23
-PH02-Q0629,Q0629,PH02,3,5,"Mandaluyong, Metro Manila",2,3,0,1,,No,-,BernieDRPH2MiniPromo.jpg,180000,36
-PH02-Q0630,Q0630,PH02,5,3,"Cagayan de Oro, Misamis Oriental",0,4,0,2,9,Yes,-,HanaBeshieDRPH2MiniPromo.jpg,60000,24
-PH02-Q0631,Q0631,PH02,5,6,"Rosario, Cavite",1,4,0,1,9,No,-,ØVCüntDRPH2MiniPromo.jpg,80000,24
-PH02-Q0632,Q0632,PH02,7,1,"Tayabas, Quezon Province",1,2,0,2,6,No,-,DeeDeeMariéHollidayDRPH2MiniPromo.jpg,80000,39
-PH02-Q0633,Q0633,PH02,8,2,"Vigan, Ilocos Sur",0,1,1,2,5,No,-,MatilduhDRPH2MiniPromo.jpg,60000,24
-PH02-Q0634,Q0634,PH02,9,4,Hong Kong,1,0,1,1,4,No,-,VeruschkaLevelsDRPH2MiniPromo.jpg,100000,36
-PH02-Q0635,Q0635,PH02,10,3,"Pasig City, Metro Manila",0,0,0,2,3,No,-,TinyDeluxeDRPH2MiniPromo.jpg,0,22
-PH02-Q0636,Q0636,PH02,11,2,"Mandaluyong, Metro Manila",0,0,0,1,2,No,-,AstridMercuryDRPH2MiniPromo.jpg,0,29
-PH02-Q0637,Q0637,PH02,11,4,"Cebu City, Cebu",0,0,0,1,1,No,-,NicolePardauxDRPH2MiniPromo.jpg,0,37
-PH03-Q0638,Q0638,PH03,1,11,"Manila, Metro Manila",3,2,0,0,,No,-,MaxieDRPH3MiniPromo.jpg,1285000,25
-PH03-Q0639,Q0639,PH03,2,6,"Cagayan de Oro, Misamis Oriental",1,4,0,1,,No,-,KhiannaDRPH3MiniPromo.jpg,140000,22
-PH03-Q0640,Q0640,PH03,3,1,"Manila, Metro Manila",2,0,2,1,,No,-,AngelDRPH3MiniPromo.jpg,185000,23
-PH03-Q0641,Q0641,PH03,3,5,"Marikina City, Metro Manila",0,3,0,2,,No,-,TitaBabyDRPH3MiniPromo.jpg,45000,46
-PH03-Q0642,Q0642,PH03,5,9,"Caloocan City, Metro Manila",1,2,0,2,9,No,-,ZymbaDingDRPH3MiniPromo.jpg,100000,22
-PH03-Q0643,Q0643,PH03,6,4,"Marikina City, Metro Manila",1,2,2,1,,No,-,MyxChanelDRPH3MiniPromo.jpg,100000,27
-PH03-Q0644,Q0644,PH03,7,10,"Manila, Metro Manila",0,1,0,2,7,No,-,PopstarBenchDRPH3MiniPromo.jpg,0,26
-PH03-Q0645,Q0645,PH03,8,3,"San Francisco, USA",0,3,0,1,6,No,-,JohnFedellagaDRPH3MiniPromo.jpg,20000,33
-PH03-Q0646,Q0646,PH03,9,7,"Caloocan City, Metro Manila",0,0,1,2,5,No,-,JQuinnDRPH3MiniPromo.jpg,0,25
-PH03-Q0647,Q0647,PH03,10,8,"Bacolod, Negros Occidental",0,2,0,0,4,No,-,YudipotaDRPH3MiniPromo.jpg,0,27
-PH03-Q0648,Q0648,PH03,11,2,"Manila, Metro Manila",0,0,1,1,3,Yes,-,VersexDRPH3MiniPromo.jpg,60000,25
+BE01-Q0582,Q0582,BE01,1,7,Brussels,3,2,0,0,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/4/4e/DragCouenneDRBE1CastMug.jpg,-,24
+BE01-Q0583,Q0583,BE01,2,4,Brussels,2,0,1,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/d/d7/AthenaSorgelikisDRBE1CastMug.jpg,-,27
+BE01-Q0584,Q0584,BE01,3,8,Ghent,1,1,2,2,8,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/e/e5/SusanDRBE1CastMug.jpg,-,26
+BE01-Q0585,Q0585,BE01,4,9,Brussels,1,1,0,2,7,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/8/85/MademoiselleBoopDRBE1CastMug.jpg,-,37
+BE01-Q0586,Q0586,BE01,5,3,Liège,0,2,0,2,6,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/c/c8/PeachDRBE1CastMug.jpg,-,23
+BE01-Q0587,Q0587,BE01,6,5,Ghent,0,0,1,3,5,Yes,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/6/60/ValenciagaDRBE1CastMug.jpg,-,26
+BE01-Q0588,Q0588,BE01,7,2,Brussels,0,0,1,2,4,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/d/d0/MoccaBoneDRBE1CastMug.jpg,-,35
+BE01-Q0589,Q0589,BE01,8,1,Liège,0,0,0,1,3,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/2/23/EdnaSorgelsenDRBE1CastMug.jpg,-,34
+BE01-Q0590,Q0590,BE01,9,10,Mouscron,0,0,0,2,2,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/2/2d/AmandaTearsDRBE1CastMug.jpg,-,21
+BE01-Q0591,Q0591,BE01,10,6,Mons,0,0,0,1,1,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/d/dd/BrittanyVonBottoksDRBE1CastMug.jpg,-,36
+BE02-Q0592,Q0592,BE02,1,2,Brussels,3,4,0,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/8/87/AlvildaDRBE2CastMug.jpg,-,29
+BE02-Q0593,Q0593,BE02,2,6,Brussels,3,0,1,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/d/de/LaVeuveDRBE2CastMug.jpg,-,37
+BE02-Q0594,Q0594,BE02,3,7,Brussels,1,0,0,3,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/f/fa/LoulouVelvetDRBE2CastMug.jpg,-,31
+BE02-Q0595,Q0595,BE02,3,5,Brussels,0,1,0,2,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/a/ad/GabannaDRBE2CastMug.jpg,-,27
+BE02-Q0596,Q0596,BE02,5,8,Ghent,1,1,1,3,6,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/9/94/ChloeClarkeDRBE2CastMug.jpg,-,29
+BE02-Q0597,Q0597,BE02,6,3,Antwerp,0,0,1,1,5,Yes,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/c/cc/StarDRBE2CastMug.jpg,-,43
+BE02-Q0598,Q0598,BE02,7,9,Brussels,0,0,1,0,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/b/b8/MorphaeDRBE2CastMug.jpg,-,23
+BE02-Q0599,Q0599,BE02,8,4,Luxembourg,0,1,0,1,3,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/c/c0/MadameYokoDRBE2CastMug.jpg,-,33
+BE02-Q0600,Q0600,BE02,9,1,Liège,0,0,0,1,2,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/2/24/SarahLoganDRBE2CastMug.jpg,-,35
+DE01-Q0601,Q0601,DE01,1,10,"Vienna,Austria",3,3,0,2,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/8/8f/PandoraNoxDRGR1CastMug.jpg,-,29
+DE01-Q0602,Q0602,DE01,2,8,"Vienna,Austria",2,3,0,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/0/06/MetamorkidDRGR1CastMug.jpg,-,24
+DE01-Q0603,Q0603,DE01,3,1,"Berlin,Germany",2,1,2,0,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/5/5d/YvonneNightstandDRGR1CastMug.jpg,-,29
+DE01-Q0604,Q0604,DE01,4,11,"Wiesbaden,Germany",2,1,1,1,10,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/3/31/KellyHeeltonDRGR1CastMug.jpg,-,41
+DE01-Q0605,Q0605,DE01,5,9,"Düsseldorf,Germany",2,0,1,3,8,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/c/ce/LoreleyRiversDRGR1CastMug.jpg,-,24
+DE01-Q0606,Q0606,DE01,6,2,"Basel,Switzerland",0,2,0,4,7,Yes,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/3/3b/VictoriaShakespearsDRGR1CastMug.jpg,-,29
+DE01-Q0607,Q0607,DE01,7,6,"Berlin,Germany",1,0,2,1,6,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/7/75/NikitaVegazDRGR1CastMug.jpg,-,38
+DE01-Q0393,Q0393,DE01,8,7,"Basel,Switzerland",0,1,0,4,5,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/b/b9/TessaTesticleDRGR1CastMug.jpg,-,25
+DE01-Q0608,Q0608,DE01,9,3,"Frankfurt,Germany",0,1,0,1,4,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/7/75/L%C3%A9L%C3%A9CocoonDRGR1CastMug.jpg,-,23
+DE01-Q0409,Q0409,DE01,10,4,"Cologne,Germany",0,0,0,1,3,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/9/91/TheOnlyNaomyDRGR1CastMug.jpg,-,22
+DE01-Q0609,Q0609,DE01,11,5,"Munich,Germany",0,1,0,1,2,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/5/5d/BarbieQDRGR1CastMug.jpg,-,25
+SE01-Q0610,Q0610,SE01,1,3,Stockholm,3,1,1,0,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/e/ef/AdmiraThunderpussyDRSV1CastMug.png,-,28
+SE01-Q0408,Q0408,SE01,2,1,Stockholm,1,0,1,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/2/22/FontanaDRSV1CastMug.png,-,29
+SE01-Q0394,Q0394,SE01,3,9,Linköping,1,2,1,3,8,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/a/a2/VanityVainDRSV1CastMug.png,-,31
+SE01-Q0611,Q0611,SE01,4,2,Helsingborg,1,1,0,3,7,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/7/79/ElecktraDRSV1CastMug.png,-,35
+SE01-Q0612,Q0612,SE01,5,4,"Liverpool,UK",0,0,2,2,6,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/7/7e/AntoninaNutshellDRSV1CastMug.png,-,29
+SE01-Q0613,Q0613,SE01,6,5,"Berlin,Germany",0,2,0,1,5,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/7/70/SantanaSexmachineDRSV1CastMug.png,-,28
+SE01-Q0614,Q0614,SE01,7,7,Värnamo,1,2,0,1,4,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/9/90/ImaaQueenDRSV1CastMug.png,-,28
+SE01-Q0615,Q0615,SE01,8,8,"Tokyo,Japan",0,0,1,2,3,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/4/44/EndigoDRSV1CastMug.png,-,31
+SE01-Q0616,Q0616,SE01,9,6,Mora,0,0,0,1,1,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/a/a8/AlmightyAphroditeyDRSV1CastMug.png,-,20
+PH01-Q0617,Q0617,PH01,1,6,"Daet, Camarines Norte",1,4,1,0,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/f/f4/PreciousPaulaNicoleDRP1CastMug.jpg,1100000,34
+PH01-Q0404,Q0404,PH01,2,4,"Makati City, Metro Manila",2,5,1,0,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/b/b6/MarinaSummersDRP1CastMug.jpg,180000,25
+PH01-Q0618,Q0618,PH01,3,12,"Cabanatuan, Nueva Ecija",2,3,1,2,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/6/63/XilhoueteDRP1CastMug.jpg,160000,34
+PH01-Q0397,Q0397,PH01,3,2,"Marikina City, Metro Manila",0,5,0,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/7/7f/EvaLeQueenDRP1CastMug.jpg,40000,34
+PH01-Q0410,Q0410,PH01,5,7,"Quezon City, Metro Manila",2,1,1,3,9,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/6/68/MintyFreshDRP1CastMug.jpg,180000,31
+PH01-Q0619,Q0619,PH01,6,11,"Mandaluyong, Metro Manila",0,1,0,3,8,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/0/00/BrigidingDRP1CastMug.jpg,0,29
+PH01-Q0620,Q0620,PH01,7,9,"San Jose del Monte, Bulacan",1,2,2,1,7,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/c/cd/Vi%C3%B1asDeluxeDRP1CastMug.jpg,80000,25
+PH01-Q0621,Q0621,PH01,8,5,"Davao City, Davao del Sur",0,1,0,3,5,Yes,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/0/02/LadyMorganaDRP1CastMug.jpg,40000,30
+PH01-Q0622,Q0622,PH01,9,3,"Cainta, Rizal",1,1,0,2,4,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/f/f1/TuringDRP1CastMug.jpg,80000,29
+PH01-Q0623,Q0623,PH01,10,8,"Melbourne, Australia",0,0,1,1,3,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/c/cc/GigiEraDRP1CastMug.jpg,0,38
+PH01-Q0624,Q0624,PH01,11,1,"Bolinao, Pangasinan",0,0,0,1,2,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/4/48/CorazonDRP1CastMug.jpg,20000,34
+PH01-Q0625,Q0625,PH01,12,10,"Calumpit, Bulacan",0,0,0,1,1,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/8/8a/PrinceDRP1CastMug.jpg,0,25
+PH02-Q0626,Q0626,PH02,1,5,"Sta. Maria, Ilocos Sur",2,4,1,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/8/8e/CaptivatingKatkatDRPH2CastMug.jpg,1180000,42
+PH02-Q0627,Q0627,PH02,2,1,"Makati City, Metro Manila",1,3,1,2,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/6/69/ArizonaBrandyDRPH2CastMug.jpg,100000,25
+PH02-Q0628,Q0628,PH02,3,6,"Marikina City, Metro Manila",1,3,1,2,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/7/72/M1ssJadeSoDRPH2CastMug.jpg,80000,23
+PH02-Q0629,Q0629,PH02,3,5,"Mandaluyong, Metro Manila",2,3,0,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/a/a5/BernieDRPH2CastMug.jpg,180000,36
+PH02-Q0630,Q0630,PH02,5,3,"Cagayan de Oro, Misamis Oriental",0,4,0,2,9,Yes,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/f/fd/HanaBeshieDRPH2CastMug.jpg,60000,24
+PH02-Q0631,Q0631,PH02,5,6,"Rosario, Cavite",1,4,0,1,9,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/8/80/%C3%98VC%C3%BCntDRPH2CastMug.jpg,80000,24
+PH02-Q0632,Q0632,PH02,7,1,"Tayabas, Quezon Province",1,2,0,2,6,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/9/96/DeeDeeMari%C3%A9HollidayDRPH2CastMug.jpg,80000,39
+PH02-Q0633,Q0633,PH02,8,2,"Vigan, Ilocos Sur",0,1,1,2,5,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/4/42/MatilduhDRPH2CastMug.jpg,60000,24
+PH02-Q0634,Q0634,PH02,9,4,Hong Kong,1,0,1,1,4,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/9/97/VeruschkaLevelsDRPH2CastMug.jpg,100000,36
+PH02-Q0635,Q0635,PH02,10,3,"Pasig City, Metro Manila",0,0,0,2,3,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/d/d3/TinyDeluxeDRPH2CastMug.jpg,0,22
+PH02-Q0636,Q0636,PH02,11,2,"Mandaluyong, Metro Manila",0,0,0,1,2,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/0/0c/AstridMercuryDRPH2CastMug.jpg,0,29
+PH02-Q0637,Q0637,PH02,11,4,"Cebu City, Cebu",0,0,0,1,1,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/d/d0/NicolePardauxDRPH2CastMug.jpg,0,37
+PH03-Q0638,Q0638,PH03,1,11,"Manila, Metro Manila",3,2,0,0,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/4/41/MaxieDRPH3CastMug.jpg,1285000,25
+PH03-Q0639,Q0639,PH03,2,6,"Cagayan de Oro, Misamis Oriental",1,4,0,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/d/d6/KhiannaDRPH3CastMug.jpg,140000,22
+PH03-Q0640,Q0640,PH03,3,1,"Manila, Metro Manila",2,0,2,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/c/cf/AngelDRPH3CastMug.jpg,185000,23
+PH03-Q0641,Q0641,PH03,3,5,"Marikina City, Metro Manila",0,3,0,2,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/c/cf/TitaBabyDRPH3CastMug.jpg,45000,46
+PH03-Q0642,Q0642,PH03,5,9,"Caloocan City, Metro Manila",1,2,0,2,9,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/f/fa/ZymbaDingDRPH3CastMug.jpg,100000,22
+PH03-Q0643,Q0643,PH03,6,4,"Marikina City, Metro Manila",1,2,2,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/5/5b/MyxChanelDRPH3CastMug.jpg,100000,27
+PH03-Q0644,Q0644,PH03,7,10,"Manila, Metro Manila",0,1,0,2,7,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/f/f0/PopstarBenchDRPH3CastMug.jpg,0,26
+PH03-Q0645,Q0645,PH03,8,3,"San Francisco, USA",0,3,0,1,6,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/c/c9/JohnFedellagaDRPH3CastMug.jpg,20000,33
+PH03-Q0646,Q0646,PH03,9,7,"Caloocan City, Metro Manila",0,0,1,2,5,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/3/3a/JQuinnDRPH3CastMug.jpg,0,25
+PH03-Q0647,Q0647,PH03,10,8,"Bacolod, Negros Occidental",0,2,0,0,4,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/d/d0/YudipotaDRPH3CastMug.jpg,0,27
+PH03-Q0648,Q0648,PH03,11,2,"Manila, Metro Manila",0,0,1,1,3,Yes,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/3/3f/VersexDRPH3CastMug.jpg,60000,25
 PHSR01-Q0619,Q0619,PHSR01,1,3,-,5,3,0,0,,No,-,images/queens/PHSR01-Q0619.webp,2260000,-
 PHSR01-Q0620,Q0620,PHSR01,2,5,-,3,2,1,2,,No,-,images/queens/PHSR01-Q0620.webp,200000,-
 PHSR01-Q0627,Q0627,PHSR01,3,1,-,3,3,0,2,,No,-,images/queens/PHSR01-Q0627.webp,120000,-
