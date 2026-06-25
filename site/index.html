@@ -366,7 +366,12 @@ function feedbackEmbedUrl(){
   return FEEDBACK_URL+(FEEDBACK_URL.indexOf('?')>=0?'&':'?')+'embedded=true';
 }
 
-function setActive(id){$$('.navlink').forEach(l=>l.classList.toggle('active',l.dataset.id===id));
+function setActive(id){
+  /* region routes (#region:<r>) highlight their Regions-group navlink (which
+     carries data-region, not data-id); everything else matches on data-id. */
+  const reg=id==='region'?(typeof resolveRegion==='function'?resolveRegion(String(_LAST_ROUTE||'').split(':').slice(1).join(':')):null):null;
+  $$('.navlink').forEach(l=>l.classList.toggle('active',
+    l.dataset.id===id || (!!reg && l.dataset.region===reg)));
   const slug=id==='sec'?String(_LAST_ROUTE||'').split(':')[1]:null;
   $$('.navgrouphead').forEach(h=>h.classList.toggle('active',!!slug&&h.dataset.slug===slug));}
 
@@ -727,6 +732,48 @@ function seasonCard(s){
 /* Region → Franchise → seasons atlas. Regions render in REGION_ORDER (Main Series
    first, flagship-styled); each region holds its franchises (read from the data),
    each franchise lists its seasons as cards. Regions collapse on mobile. */
+const _isMobile=()=>(typeof innerWidth!=='undefined'&&innerWidth<=640);
+/* Build ONE region-section node (the .region-sec/.region-head/.fr-block markup
+   shared by the Atlas and the per-region landing views). Returns null if the
+   region has no in-scope franchises. opts.startOpen forces the body open
+   (used by the landing views, where the region is the whole page). */
+function regionSection(region,opts){
+  opts=opts||{};
+  const byRegion=franchisesByRegion();
+  const frs=(byRegion[region]||[]).filter(f=>D.seasons.some(s=>s.franchise===f&&seasonAllowed(s.season_id)));
+  if(!frs.length)return null;
+  const flagship=region==='Main Series';
+  const sec=el('div',{class:'region-sec'+(flagship?' flagship':'')});
+  const seasonCount=D.seasons.filter(s=>s.region===region&&seasonAllowed(s.season_id)).length;
+  /* Main Series always open; other regions collapse on small screens (unless a
+     landing view forces them open, since the region IS the page there). */
+  const startCollapsed=!opts.startOpen&&!flagship&&_isMobile();
+  const caret=el('span',{class:'region-caret'},startCollapsed?'▸':'▾');
+  const head=el('div',{class:'region-head'},
+    el('div',{},
+      el('div',{class:'region-title'},region),
+      el('div',{class:'region-meta'},frs.length+' franchise'+(frs.length===1?'':'s')+' · '+seasonCount+' seasons')),
+    flagship?el('span',{class:'region-flag'},'Flagship'):'',
+    caret);
+  const body=el('div',{class:'region-body'+(startCollapsed?' collapsed':'')});
+  head.addEventListener('click',()=>{const c=body.classList.toggle('collapsed');caret.textContent=c?'▸':'▾';});
+  /* On the Main Series landing, surface US main + All Stars first as the flagship. */
+  const orderedFrs=opts.flagshipOrder
+    ? [...frs].sort((a,b)=>{const w=f=>f==='RuPaul’s Drag Race'||/main|drag race$/i.test(f)?0:(f==='All Stars'?1:2);return w(a)-w(b);})
+    : frs;
+  orderedFrs.forEach(f=>{
+    const ses=D.seasons.filter(s=>s.franchise===f&&seasonAllowed(s.season_id));
+    const blk=el('div',{class:'fr-block'});
+    blk.append(el('div',{class:'fr-block-head'},
+      el('span',{class:'fr-block-name'},f),
+      el('span',{class:'fr-block-sub'},ses.length+' season'+(ses.length===1?'':'s'))));
+    const grid=el('div',{class:'grid',style:'grid-template-columns:repeat(auto-fit,minmax(250px,1fr))'});
+    ses.forEach(s=>grid.append(seasonCard(s)));
+    blk.append(grid);body.append(blk);
+  });
+  sec.append(head,body);
+  return sec;
+}
 V({id:'atlas',title:'Season <em>Atlas</em>',kicker:'Seasons',icon:'grid',group:'Seasons',ord:1,
  desc:'Every franchise grouped by region — Main Series leads, then the world. Each region opens to its franchises and every season at a glance.',
  render(m){
@@ -739,41 +786,51 @@ V({id:'atlas',title:'Season <em>Atlas</em>',kicker:'Seasons',icon:'grid',group:'
   statCards(m,[[D.seasons.filter(s=>seasonAllowed(s.season_id)).length,'seasons'],
     [new Set(D.contestants.filter(c=>seasonAllowed(c.season_id)).map(c=>c.queen_id)).size,'queens in scope'],
     [D.episodes.filter(e=>seasonAllowed(e.season_id)).length,'episodes in scope']]);
-  const byRegion=franchisesByRegion();
   const wrapAll=el('div',{class:'fade'});
-  const isMobile=()=>(typeof innerWidth!=='undefined'&&innerWidth<=640);
-  regionsPresent().forEach(region=>{
-    /* franchises in this region that have at least one in-scope season */
-    const frs=(byRegion[region]||[]).filter(f=>D.seasons.some(s=>s.franchise===f&&seasonAllowed(s.season_id)));
-    if(!frs.length)return;
-    const flagship=region==='Main Series';
-    const sec=el('div',{class:'region-sec'+(flagship?' flagship':'')});
-    const seasonCount=D.seasons.filter(s=>s.region===region&&seasonAllowed(s.season_id)).length;
-    /* Main Series always open; other regions collapse on small screens */
-    const startCollapsed=!flagship&&isMobile();
-    const caret=el('span',{class:'region-caret'},startCollapsed?'▸':'▾');
-    const head=el('div',{class:'region-head'},
-      el('div',{},
-        el('div',{class:'region-title'},region),
-        el('div',{class:'region-meta'},frs.length+' franchise'+(frs.length===1?'':'s')+' · '+seasonCount+' seasons')),
-      flagship?el('span',{class:'region-flag'},'Flagship'):'',
-      caret);
-    const body=el('div',{class:'region-body'+(startCollapsed?' collapsed':'')});
-    head.addEventListener('click',()=>{const c=body.classList.toggle('collapsed');caret.textContent=c?'▸':'▾';});
-    frs.forEach(f=>{
-      const ses=D.seasons.filter(s=>s.franchise===f&&seasonAllowed(s.season_id));
-      const blk=el('div',{class:'fr-block'});
-      blk.append(el('div',{class:'fr-block-head'},
-        el('span',{class:'fr-block-name'},f),
-        el('span',{class:'fr-block-sub'},ses.length+' season'+(ses.length===1?'':'s'))));
-      const grid=el('div',{class:'grid',style:'grid-template-columns:repeat(auto-fit,minmax(250px,1fr))'});
-      ses.forEach(s=>grid.append(seasonCard(s)));
-      blk.append(grid);body.append(blk);
-    });
-    sec.append(head,body);wrapAll.append(sec);
-  });
+  regionsPresent().forEach(region=>{const sec=regionSection(region);if(sec)wrapAll.append(sec);});
   m.append(wrapAll);
  }});
+
+/* ---- per-region LANDING views (reachable from the sidebar "Regions" group) ----
+   Each region is a first-class route (#region/Europe): one short intro line, then
+   that region's franchises → seasons, reusing the exact Atlas region-section card
+   styling via regionSection(). Slugs are URL-safe; lookups are case-insensitive.
+   A one-line intro per region; Main Series leads with US main + All Stars. */
+const REGION_INTRO={
+  'Main Series':'The flagship — RuPaul’s Drag Race and All Stars, where the format was born.',
+  'Americas':'The franchise across the Americas — Canada, Brasil, México and more.',
+  'Europe':'Drag Race goes continental — the UK and its European sisters.',
+  'Asia-Pacific':'From Down Under to the Philippines and Thailand — the Pacific rim of the format.',
+  'Global':'The all-stars-of-the-world editions and cross-border specials.'};
+const REGION_SLUG=r=>String(r).toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+const SLUG_REGION={};REGION_ORDER.forEach(r=>{SLUG_REGION[REGION_SLUG(r)]=r;});
+/* resolve an incoming arg (slug or exact name, any case) back to a real region */
+function resolveRegion(arg){
+  if(!arg)return null;
+  const a=decodeURIComponent(arg);
+  const present=regionsPresent();
+  let hit=present.find(r=>r===a);if(hit)return hit;
+  hit=present.find(r=>r.toLowerCase()===a.toLowerCase());if(hit)return hit;
+  const byslug=SLUG_REGION[a.toLowerCase()];if(byslug&&present.includes(byslug))return byslug;
+  hit=present.find(r=>REGION_SLUG(r)===a.toLowerCase());return hit||null;
+}
+function renderRegionLanding(m,region){
+  const flagship=region==='Main Series';
+  /* keep the franchise filter from hiding a region's seasons: landing pages
+     always show the whole region, so render with FRANCHISE forced to 'All'. */
+  const savedFr=FRANCHISE;FRANCHISE='All';
+  const seasonCount=D.seasons.filter(s=>s.region===region).length;
+  const frCount=(franchisesByRegion()[region]||[]).filter(f=>D.seasons.some(s=>s.franchise===f)).length;
+  m.innerHTML=head({kicker:flagship?'Regions · Flagship':'Regions',
+    title:region.replace(/&/g,'&amp;')+(flagship?' <em>Main Series</em>':''),
+    desc:(REGION_INTRO[region]||'')+`  ·  ${frCount} franchise${frCount===1?'':'s'} · ${seasonCount} season${seasonCount===1?'':'s'}.`});
+  const wrap=el('div',{class:'fade'});
+  const sec=regionSection(region,{startOpen:true,flagshipOrder:flagship});
+  if(sec)wrap.append(sec);
+  else wrap.append(el('div',{class:'card'},'No seasons in this region yet.'));
+  m.append(wrap);
+  FRANCHISE=savedFr;
+}
 
 /* ---------- 2. SEASON DETAIL (dynamic) ---------- */
 /* Season-summary front matter helpers. Everything is read from the computed
@@ -3915,11 +3972,46 @@ function buildNav(){
   const sections={};
   const setOpen=(g,open)=>{const s=sections[g];if(!s)return;
     s.body.style.display=open?'':'none';s.caret.textContent=open?'▾':'▸';};
+  /* Build the special "Regions" nav group: items are the regions present in the
+     data, in REGION_ORDER, each linking to its #region: landing view, with a live
+     season count — mirroring how the other groups show their item counts. The
+     active region (route #region:<r>) highlights its item like a .navlink.active.
+     Placed right after Home, before Queens. */
+  const buildRegionsGroup=(filter,st,activeRegion)=>{
+    const regions=regionsPresent();
+    const matched=filter?regions.filter(r=>r.toLowerCase().includes(filter.toLowerCase())):regions;
+    if(!matched.length)return null;
+    const g='Regions';
+    const open=filter?true:(st[g]!=null?!!st[g]:(activeRegion!=null));
+    const caret=el('span',{class:'ngcaret',title:'Expand / collapse'},open?'▾':'▸');
+    const hdr=el('div',{class:'navgrouphead',title:'Browse seasons by region'},
+      el('span',{class:'ngi',html:icon('map')}),
+      el('span',{class:'ngn'},g),el('span',{class:'ngc'},String(regions.length)),caret);
+    const body=el('div',{class:'navgroupbody',style:open?'':'display:none'});
+    matched.forEach(r=>{
+      const cnt=D.seasons.filter(s=>s.region===r).length;
+      const link=el('div',{class:'navlink'+(r===activeRegion?' active':''),'data-region':r,
+        onclick:()=>go('region:'+r),
+        html:`${icon(r==='Main Series'?'crown':'map')}<span>${r}</span>`});
+      link.append(el('span',{class:'ngc',style:'margin-left:auto'},String(cnt)));
+      body.append(link);
+    });
+    caret.addEventListener('click',ev=>{ev.stopPropagation();const s=_navState();
+      const now=body.style.display==='none';body.style.display=now?'':'none';caret.textContent=now?'▾':'▸';
+      s[g]=now;_navSave(s);});
+    /* heading opens the flagship region (Main Series) landing and expands the group */
+    hdr.addEventListener('click',()=>{const s=_navState();s[g]=true;_navSave(s);
+      body.style.display='';caret.textContent='▾';go('region:'+(regions[0]||'Main Series'));});
+    return {hdr,body};
+  };
   const render=(filter='')=>{groupWrap.innerHTML='';
     const st=_navState();
     const activeId=(_LAST_ROUTE||'home').split(':')[0];
+    const activeRegion=activeId==='region'?resolveRegion(String(_LAST_ROUTE).split(':').slice(1).join(':')):null;
     const av=VIEWS.find(v=>v.id===activeId);const activeGroup=av&&av.group;
     GROUPS.forEach(g=>{
+      /* inject the Regions group immediately after Home, before Queens */
+      if(g==='Queens'){const rg=buildRegionsGroup(filter,st,activeRegion);if(rg)groupWrap.append(rg.hdr,rg.body);}
       const items=VIEWS.filter(v=>v.group===g&&!v.hidden).sort((a,b)=>(a.ord||0)-(b.ord||0));
       const matched=filter?items.filter(v=>v.title.replace(/<[^>]+>/g,'').toLowerCase().includes(filter.toLowerCase())):items;
       if(!matched.length)return;
@@ -3984,7 +4076,8 @@ function go(route){
   let id=route,arg=null;
   if(route.includes(':')){[id,arg]=route.split(':');}
   setActive(id);if(_navEnsure)_navEnsure(id,id==='sec'&&arg?SLUG_GROUP[arg]:null);
-  if(id==='season'&&arg){renderSeasonDetail(main,arg);}
+  if(id==='region'&&arg){const r=resolveRegion(arg);if(r){renderRegionLanding(main,r);}else{(VIEWS.find(x=>x.id==='atlas')||VIEWS[0]).render(main);}}
+  else if(id==='season'&&arg){renderSeasonDetail(main,arg);}
   else if(id==='queen'&&arg){renderQueen(main,arg);}
   else if(id==='celeb'&&arg){renderCeleb(main,arg);}
   else if(id==='sec'&&arg&&SLUG_GROUP[arg]){renderSectionHome(main,SLUG_GROUP[arg]);}
