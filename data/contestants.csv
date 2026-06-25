@@ -580,16 +580,16 @@ AS11-Q0078,Q0078,AS11,,-,"Dallas, Texas",0,0,0,0,,No,-,images/queens/AS11-Q0078.
 AS11-Q0214,Q0214,AS11,,-,"Leeds, Alabama",0,0,0,0,,No,-,images/queens/AS11-Q0214.webp,-,26
 AS11-Q0133,Q0133,AS11,,-,"New York City, New York",0,0,0,0,,No,-,images/queens/AS11-Q0133.webp,-,48
 AS11-Q0131,Q0131,AS11,,12,"Houston, Texas",1,0,0,0,,No,-,images/queens/AS11-Q0131.webp,-,35
-DU01-Q0412,Q0412,DU01,1,7,"Auckland, New Zealand",1,2,0,1,,No,-,images/queens/DU01-Q0412.webp,30000,34
-DU01-Q0413,Q0413,DU01,2,1,"Melbourne, Australia",0,2,1,1,2,No,-,images/queens/DU01-Q0413.webp,0,28
-DU01-Q0414,Q0414,DU01,2,10,"Melbourne, Australia",1,1,3,1,,No,-,images/queens/DU01-Q0414.webp,3000,32
-DU01-Q0415,Q0415,DU01,2,5,"Perth, Australia",3,1,1,1,,No,-,images/queens/DU01-Q0415.webp,5000,27
-DU01-Q0416,Q0416,DU01,5,4,"Auckland, New Zealand",1,0,2,3,7,No,-,images/queens/DU01-Q0416.webp,0,27
-DU01-Q0417,Q0417,DU01,6,2,"Sydney, Australia",0,1,2,2,6,No,-,images/queens/DU01-Q0417.webp,0,46
-DU01-Q0418,Q0418,DU01,7,8,"Sydney, Australia",0,0,1,1,5,No,-,images/queens/DU01-Q0418.webp,0,22
-DU01-Q0389,Q0389,DU01,8,9,"Auckland, New Zealand",1,1,0,1,4,No,-,images/queens/DU01-Q0389.webp,5000,31
-DU01-Q0419,Q0419,DU01,9,6,"Sydney, Australia",0,0,1,2,3,No,-,images/queens/DU01-Q0419.webp,0,30
-DU01-Q0420,Q0420,DU01,10,3,"Newcastle, Australia",0,0,0,1,1,No,-,images/queens/DU01-Q0420.webp,0,30
+DU01-Q0412,Q0412,DU01,1,7,"Auckland, New Zealand",1,2,0,1,,No,-,K,30000,34
+DU01-Q0413,Q0413,DU01,2,1,"Melbourne, Australia",0,2,1,1,2,No,-,A,0,28
+DU01-Q0414,Q0414,DU01,2,10,"Melbourne, Australia",1,1,3,1,,No,-,K,3000,32
+DU01-Q0415,Q0415,DU01,2,5,"Perth, Australia",3,1,1,1,,No,-,S,5000,27
+DU01-Q0416,Q0416,DU01,5,4,"Auckland, New Zealand",1,0,2,3,7,No,-,E,0,27
+DU01-Q0417,Q0417,DU01,6,2,"Sydney, Australia",0,1,2,2,6,No,-,M,0,46
+DU01-Q0418,Q0418,DU01,7,8,"Sydney, Australia",0,0,1,1,5,No,-,E,0,22
+DU01-Q0389,Q0389,DU01,8,9,"Auckland, New Zealand",1,1,0,1,4,No,-,A,5000,31
+DU01-Q0419,Q0419,DU01,9,6,"Sydney, Australia",0,0,1,2,3,No,-,C,0,30
+DU01-Q0420,Q0420,DU01,10,3,"Newcastle, Australia",0,0,0,1,1,No,-,J,0,30
 DU02-Q0421,Q0421,DU02,1,3,"Sydney, Australia",3,3,0,1,,No,-,images/queens/DU02-Q0421.webp,-,37
 DU02-Q0402,Q0402,DU02,2,1,"Sydney, Australia",3,2,0,1,,No,-,images/queens/DU02-Q0402.webp,-,30
 DU02-Q0391,Q0391,DU02,2,10,"Sydney, Australia",2,0,1,2,,No,-,images/queens/DU02-Q0391.webp,-,29
@@ -610,125 +610,125 @@ DU03-Q0435,Q0435,DU03,7,8,"Hamilton, New Zealand",0,0,0,3,4,No,-,images/queens/D
 DU03-Q0436,Q0436,DU03,8,6,"Auckland, New Zealand",0,0,1,1,3,No,-,images/queens/DU03-Q0436.webp,-,26
 DU03-Q0437,Q0437,DU03,9,4,"Sydney, Australia",0,0,0,2,2,No,-,images/queens/DU03-Q0437.webp,-,26
 DU03-Q0438,Q0438,DU03,10,5,"Sydney, Australia",0,0,0,1,1,No,-,images/queens/DU03-Q0438.webp,-,27
-DU04-Q0439,Q0439,DU04,1,1,"Melbourne, Australia",3,1,0,0,,No,-,images/queens/DU04-Q0439.webp,53000,32
-DU04-Q0440,Q0440,DU04,2,4,"Brisbane, Australia",1,1,1,1,,No,-,images/queens/DU04-Q0440.webp,0,33
-DU04-Q0441,Q0441,DU04,2,2,"Sydney, Australia",2,3,1,0,,No,-,images/queens/DU04-Q0441.webp,2500,32
-DU04-Q0442,Q0442,DU04,4,6,"Brisbane, Australia",0,3,1,2,8,No,-,images/queens/DU04-Q0442.webp,0,24
-DU04-Q0443,Q0443,DU04,5,3,"Auckland, New Zealand",1,2,0,2,7,No,-,images/queens/DU04-Q0443.webp,2500,27
-DU04-Q0444,Q0444,DU04,6,5,"Melbourne, Australia",0,1,0,2,6,No,-,images/queens/DU04-Q0444.webp,0,24
-DU04-Q0445,Q0445,DU04,7,8,"Melbourne, Australia",1,1,1,1,5,No,-,images/queens/DU04-Q0445.webp,0,24
-DU04-Q0446,Q0446,DU04,8,10,"Auckland, New Zealand",0,0,0,3,4,No,-,images/queens/DU04-Q0446.webp,0,28
-DU04-Q0447,Q0447,DU04,9,9,"Sydney, Australia",0,0,0,2,3,No,-,images/queens/DU04-Q0447.webp,0,27
-DU04-Q0448,Q0448,DU04,10,7,"Wellington, New Zealand",0,0,1,1,2,No,-,images/queens/DU04-Q0448.webp,0,26
-ES01-Q0449,Q0449,ES01,1,4,"Seville, Andalusia",3,2,1,0,,No,-,images/queens/ES01-Q0449.webp,-,31
-ES01-Q0450,Q0450,ES01,2,6,"Madrid, C. Madrid",1,1,0,2,,No,-,images/queens/ES01-Q0450.webp,-,31
-ES01-Q0451,Q0451,ES01,2,2,"Barcelona, Catalonia",1,2,0,2,,No,-,images/queens/ES01-Q0451.webp,-,22
-ES01-Q0452,Q0452,ES01,4,5,"Madrid, C. Madrid",1,3,2,1,7,Yes,-,images/queens/ES01-Q0452.webp,-,38
-ES01-Q0453,Q0453,ES01,5,7,"Barcelona, Catalonia",0,0,0,3,6,No,-,images/queens/ES01-Q0453.webp,-,24
-ES01-Q0454,Q0454,ES01,6,3,"Valencia, Valencian Community",1,0,0,2,5,No,-,images/queens/ES01-Q0454.webp,-,25
-ES01-Q0406,Q0406,ES01,7,1,"Badajoz, Extremadura",0,0,0,2,4,No,-,images/queens/ES01-Q0406.webp,-,23
-ES01-Q0455,Q0455,ES01,8,8,Bolivia,0,0,1,0,,No,-,images/queens/ES01-Q0455.webp,-,20
-ES01-Q0456,Q0456,ES01,9,9,"Las Palmas, Canary Islands",0,0,0,1,2,No,-,images/queens/ES01-Q0456.webp,-,30
-ES01-Q0457,Q0457,ES01,10,10,"Cádiz, Andalusia",0,0,0,1,1,No,-,images/queens/ES01-Q0457.webp,-,29
-ES02-Q0458,Q0458,ES02,1,12,"Barcelona, Catalonia",3,5,0,0,,No,-,images/queens/ES02-Q0458.webp,-,45
-ES02-Q0459,Q0459,ES02,2,5,"Cádiz, Andalusia",2,1,0,2,,No,-,images/queens/ES02-Q0459.webp,-,25
-ES02-Q0460,Q0460,ES02,2,3,"Alicante, Valencian Community",2,3,0,1,,No,-,images/queens/ES02-Q0460.webp,-,30
-ES02-Q0461,Q0461,ES02,4,7,"Barcelona, Catalonia",1,2,1,3,11,No,-,images/queens/ES02-Q0461.webp,-,34
-ES02-Q0462,Q0462,ES02,5,11,Belgium,0,3,0,2,8,No,-,images/queens/ES02-Q0462.webp,-,31
-ES02-Q0463,Q0463,ES02,6,4,"Las Palmas, Canary Islands",1,1,1,1,7,No,-,images/queens/ES02-Q0463.webp,-,30
-ES02-Q0464,Q0464,ES02,7,10,Dominican Republic,0,1,1,2,6,No,-,images/queens/ES02-Q0464.webp,-,25
-ES02-Q0465,Q0465,ES02,8,2,"Madrid, C. Madrid",1,0,2,1,5,No,-,images/queens/ES02-Q0465.webp,-,33
-ES02-Q0466,Q0466,ES02,9,8,"Cádiz, Andalusia",0,0,1,2,4,No,-,images/queens/ES02-Q0466.webp,-,18
-ES02-Q0467,Q0467,ES02,10,1,"Cádiz, Andalusia",0,0,0,3,3,Yes,-,images/queens/ES02-Q0467.webp,-,35
-ES02-Q0468,Q0468,ES02,11,6,"Madrid, C. Madrid",0,0,0,1,2,No,-,images/queens/ES02-Q0468.webp,-,33
-ES02-Q0469,Q0469,ES02,12,9,"Lugo, Galicia",0,0,0,1,1,No,-,images/queens/ES02-Q0469.webp,-,28
-ES03-Q0470,Q0470,ES03,1,5,"Barcelona, Catalonia",4,1,0,1,,No,-,images/queens/ES03-Q0470.webp,40000,27
-ES03-Q0471,Q0471,ES03,2,8,"Zaragoza, Aragon",2,2,1,1,,No,-,images/queens/ES03-Q0471.webp,5000,39
-ES03-Q0472,Q0472,ES03,3,2,"Alicante, Valencian Community",0,3,0,2,11,No,-,images/queens/ES03-Q0472.webp,0,35
-ES03-Q0473,Q0473,ES03,3,10,"Málaga, Andalusia",1,0,2,4,11,No,-,images/queens/ES03-Q0473.webp,0,30
-ES03-Q0474,Q0474,ES03,5,9,"Barcelona, Catalonia",0,3,1,3,9,No,-,images/queens/ES03-Q0474.webp,0,24
-ES03-Q0475,Q0475,ES03,6,4,"Madrid, C. Madrid",1,2,1,1,8,No,-,images/queens/ES03-Q0475.webp,2500,30
-ES03-Q0476,Q0476,ES03,7,3,"Seville, Andalusia",0,3,2,2,7,No,-,images/queens/ES03-Q0476.webp,0,28
-ES03-Q0477,Q0477,ES03,7,1,"Cádiz, Andalusia",2,0,0,1,7,No,-,images/queens/ES03-Q0477.webp,5000,38
-ES03-Q0478,Q0478,ES03,9,12,Mexico,0,2,1,1,6,No,-,images/queens/ES03-Q0478.webp,2000,34
-ES03-Q0457,Q0457,ES03,10,13,"Cádiz, Andalusia",0,2,1,1,5,No,-,images/queens/ES03-Q0457.webp,0,31
-ES03-Q0479,Q0479,ES03,11,11,"Salamanca, Castile and León",0,1,0,1,3,No,-,images/queens/ES03-Q0479.webp,0,31
-ES03-Q0480,Q0480,ES03,12,7,"Las Palmas, Canary Islands",0,0,0,2,2,No,-,images/queens/ES03-Q0480.webp,0,32
-ES03-Q0481,Q0481,ES03,13,6,Venezuela,0,0,0,1,1,Yes,-,images/queens/ES03-Q0481.webp,3000,41
-ES04-Q0482,Q0482,ES04,1,5,"Madrid, C. Madrid",2,3,0,1,,No,-,images/queens/ES04-Q0482.webp,35000,28
-ES04-Q0483,Q0483,ES04,2,9,"Valencia, Valencian Community",1,3,2,0,,No,-,images/queens/ES04-Q0483.webp,2500,30
-ES04-Q0484,Q0484,ES04,3,10,"Barcelona, Catalonia",1,1,0,1,,No,-,images/queens/ES04-Q0484.webp,2500,23
-ES04-Q0485,Q0485,ES04,4,8,"Castellón de la Plana, Valencian Community",1,2,2,4,11,No,-,images/queens/ES04-Q0485.webp,2500,22
-ES04-Q0486,Q0486,ES04,5,6,Venezuela,1,2,1,3,9,No,-,images/queens/ES04-Q0486.webp,2500,28
-ES04-Q0487,Q0487,ES04,6,12,"Seville, Andalusia",1,2,0,1,8,No,-,images/queens/ES04-Q0487.webp,2500,31
-ES04-Q0488,Q0488,ES04,7,4,"Seville, Andalusia",1,2,1,3,7,No,-,images/queens/ES04-Q0488.webp,2500,44
-ES04-Q0489,Q0489,ES04,8,11,"Madrid, C. Madrid",1,0,1,2,5,No,-,images/queens/ES04-Q0489.webp,2500,31
-ES04-Q0490,Q0490,ES04,9,7,"Barcelona, Catalonia",0,1,0,1,4,No,-,images/queens/ES04-Q0490.webp,0,38
-ES04-Q0491,Q0491,ES04,10,1,"Santa Cruz de Tenerife, Canary Islands",0,0,1,1,3,Yes,-,images/queens/ES04-Q0491.webp,3000,37
-ES04-Q0492,Q0492,ES04,11,2,"Valencia, Valencian Community",0,0,0,1,2,No,-,images/queens/ES04-Q0492.webp,1000,39
-ES04-Q0493,Q0493,ES04,12,3,"Cádiz, Andalusia",0,0,0,1,1,No,-,images/queens/ES04-Q0493.webp,0,26
-ES05-Q0494,Q0494,ES05,1,10,"Torremolinos, Andalusia",2,3,1,1,,No,-,images/queens/ES05-Q0494.webp,55000,39
-ES05-Q0495,Q0495,ES05,2,2,"Córdoba, Andalusia",2,1,1,2,,No,-,images/queens/ES05-Q0495.webp,5000,32
-ES05-Q0496,Q0496,ES05,3,3,"Valencia, Valencian Community",2,2,2,0,,No,-,images/queens/ES05-Q0496.webp,2500,27
-ES05-Q0497,Q0497,ES05,3,9,"Copenhagen, Denmark",1,2,3,1,,No,-,images/queens/ES05-Q0497.webp,3000,29
-ES05-Q0498,Q0498,ES05,5,8,"Málaga, Andalusia",1,2,0,2,9,No,-,images/queens/ES05-Q0498.webp,3000,20
-ES05-Q0499,Q0499,ES05,6,1,"Barcelona, Catalonia",0,1,0,4,8,No,-,images/queens/ES05-Q0499.webp,0,27
-ES05-Q0500,Q0500,ES05,7,4,"Valencia, Valencian Community",0,4,1,1,7,No,-,images/queens/ES05-Q0500.webp,1500,27
-ES05-Q0501,Q0501,ES05,8,11,"Alicante, Valencian Community",1,0,0,1,6,No,-,images/queens/ES05-Q0501.webp,2500,23
-ES05-Q0502,Q0502,ES05,9,5,Venezuela,0,0,0,2,5,No,-,images/queens/ES05-Q0502.webp,0,52
-ES05-Q0503,Q0503,ES05,10,7,"Tenerife, Canary Islands",0,0,0,1,4,No,-,images/queens/ES05-Q0503.webp,0,27
-ES05-Q0504,Q0504,ES05,10,12,"Barcelona, Catalonia",0,0,0,1,4,No,-,images/queens/ES05-Q0504.webp,0,26
-ES05-Q0505,Q0505,ES05,12,6,"Badajoz, Extremadura",0,0,1,1,2,Yes,-,images/queens/ES05-Q0505.webp,3000,28
-ESAS01-Q0463,Q0463,ESAS01,1,-,"Las Palmas, Canary Islands",4,1,0,0,,No,-,images/queens/ESAS01-Q0463.webp,-,30
-ESAS01-Q0467,Q0467,ESAS01,2,-,"Cádiz, Andalusia",2,2,0,0,,Yes,-,images/queens/ESAS01-Q0467.webp,-,35
-ESAS01-Q0472,Q0472,ESAS01,3,-,"Alicante, Valencian Community",1,0,1,2,,No,-,images/queens/ESAS01-Q0472.webp,-,35
-ESAS01-Q0462,Q0462,ESAS01,3,-,Belgium,2,0,0,1,,No,-,images/queens/ESAS01-Q0462.webp,-,31
-ESAS01-Q0452,Q0452,ESAS01,5,-,"Madrid, C. Madrid",1,0,1,2,5,No,-,images/queens/ESAS01-Q0452.webp,-,38
-ESAS01-Q0451,Q0451,ESAS01,6,-,"Barcelona, Catalonia",0,1,0,2,4,No,-,images/queens/ESAS01-Q0451.webp,-,22
-ESAS01-Q0476,Q0476,ESAS01,7,-,"Seville, Andalusia",0,0,0,1,3,No,-,images/queens/ESAS01-Q0476.webp,-,28
-ESAS01-Q0465,Q0465,ESAS01,8,-,"Madrid, C. Madrid",0,0,0,2,2,No,Onyx Unleashed,images/queens/ESAS01-Q0465.webp,-,33
-ESAS01-Q0477,Q0477,ESAS01,9,-,"Cádiz, Andalusia",0,0,0,1,1,No,-,images/queens/ESAS01-Q0477.webp,-,38
-FR01-Q0506,Q0506,FR01,1,10,Clermont-Ferrand,2,2,0,1,,No,-,images/queens/FR01-Q0506.webp,-,30
-FR01-Q0403,Q0403,FR01,2,6,Nice,1,2,1,0,,No,-,images/queens/FR01-Q0403.webp,-,23
-FR01-Q0396,Q0396,FR01,2,5,Saint-Denis,2,2,0,2,,No,-,images/queens/FR01-Q0396.webp,-,30
-FR01-Q0507,Q0507,FR01,4,4,Paris,0,2,1,2,7,No,-,images/queens/FR01-Q0507.webp,-,36
-FR01-Q0508,Q0508,FR01,5,2,Paris,0,2,2,2,6,No,-,images/queens/FR01-Q0508.webp,-,36
-FR01-Q0509,Q0509,FR01,6,3,Bordeaux,0,1,1,1,5,Yes,-,images/queens/FR01-Q0509.webp,-,25
-FR01-Q0510,Q0510,FR01,7,1,Paris,1,0,1,1,4,No,-,images/queens/FR01-Q0510.webp,-,23
-FR01-Q0511,Q0511,FR01,8,9,Palaiseau,0,0,0,1,3,No,-,images/queens/FR01-Q0511.webp,-,31
-FR01-Q0512,Q0512,FR01,9,7,Toulouse,0,0,0,2,2,No,-,images/queens/FR01-Q0512.webp,-,32
-FR01-Q0390,Q0390,FR01,10,8,Paris,0,0,0,1,1,No,-,images/queens/FR01-Q0390.webp,-,29
-FR02-Q0513,Q0513,FR02,1,10,Paris,2,6,0,0,,No,-,images/queens/FR02-Q0513.webp,-,31
-FR02-Q0514,Q0514,FR02,2,2,Bordeaux,4,1,1,1,,No,-,images/queens/FR02-Q0514.webp,-,33
-FR02-Q0515,Q0515,FR02,3,1,Saint-Denis,0,2,3,1,9,No,-,images/queens/FR02-Q0515.webp,-,24
-FR02-Q0516,Q0516,FR02,3,11,Paris,1,3,0,3,9,No,-,images/queens/FR02-Q0516.webp,-,32
-FR02-Q0517,Q0517,FR02,5,6,Arles,1,0,0,2,8,No,-,images/queens/FR02-Q0517.webp,-,26
-FR02-Q0518,Q0518,FR02,6,8,Paris,1,1,0,3,7,No,-,images/queens/FR02-Q0518.webp,-,29
-FR02-Q0519,Q0519,FR02,7,4,"Geneva, Switzerland",0,2,0,0,,Yes,-,images/queens/FR02-Q0519.webp,-,31
-FR02-Q0520,Q0520,FR02,8,3,Nice,0,2,1,2,5,No,-,images/queens/FR02-Q0520.webp,-,44
-FR02-Q0521,Q0521,FR02,9,5,Lyon,0,0,0,2,3,No,-,images/queens/FR02-Q0521.webp,-,27
-FR02-Q0522,Q0522,FR02,10,9,Lille,0,0,0,1,2,No,-,images/queens/FR02-Q0522.webp,-,23
-FR02-Q0523,Q0523,FR02,11,7,Paris,0,0,0,1,1,No,-,images/queens/FR02-Q0523.webp,-,32
-FR03-Q0524,Q0524,FR03,1,2,Paris,0,1,0,1,,No,-,images/queens/FR03-Q0524.webp,0,29
-FR03-Q0525,Q0525,FR03,2,8,Marseille,2,2,0,2,,No,-,images/queens/FR03-Q0525.webp,2000,34
-FR03-Q0526,Q0526,FR03,3,5,Perpignan,1,4,0,2,8,No,-,images/queens/FR03-Q0526.webp,1000,28
-FR03-Q0527,Q0527,FR03,3,10,Paris,2,3,1,1,8,No,-,images/queens/FR03-Q0527.webp,2000,26
-FR03-Q0528,Q0528,FR03,5,1,Avignon,0,3,1,2,7,No,-,images/queens/FR03-Q0528.webp,0,23
-FR03-Q0529,Q0529,FR03,6,4,"Canary Islands, Spain",1,1,1,1,6,No,-,images/queens/FR03-Q0529.webp,1000,21
-FR03-Q0530,Q0530,FR03,7,6,Réunion,1,1,1,1,5,Yes,-,images/queens/FR03-Q0530.webp,1000,25
-FR03-Q0531,Q0531,FR03,8,9,Lyon,0,0,0,2,3,No,-,images/queens/FR03-Q0531.webp,0,34
-FR03-Q0532,Q0532,FR03,9,7,Paris,0,1,0,1,2,No,-,images/queens/FR03-Q0532.webp,0,24
-FR03-Q0533,Q0533,FR03,10,3,Lyon,0,0,0,1,1,No,-,images/queens/FR03-Q0533.webp,0,27
-FRAS01-Q0515,Q0515,FRAS01,1,3,-,3,3,1,0,,No,-,images/queens/FRAS01-Q0515.webp,37500,-
-FRAS01-Q0509,Q0509,FRAS01,2,7,-,3,1,0,0,,No,-,images/queens/FRAS01-Q0509.webp,5000,-
-FRAS01-Q0528,Q0528,FRAS01,3,2,-,3,0,1,1,,No,-,images/queens/FRAS01-Q0528.webp,2500,-
-FRAS01-Q0517,Q0517,FRAS01,3,6,-,2,1,1,1,,No,-,images/queens/FRAS01-Q0517.webp,2500,-
-FRAS01-Q0519,Q0519,FRAS01,5,10,-,0,2,1,2,7,No,-,images/queens/FRAS01-Q0519.webp,0,-
-FRAS01-Q0510,Q0510,FRAS01,6,4,-,2,1,0,3,6,Yes,-,images/queens/FRAS01-Q0510.webp,0,-
-FRAS01-Q0508,Q0508,FRAS01,7,1,-,0,1,0,2,5,No,-,images/queens/FRAS01-Q0508.webp,0,-
-FRAS01-Q0516,Q0516,FRAS01,8,5,-,1,1,1,1,4,No,-,images/queens/FRAS01-Q0516.webp,0,-
-FRAS01-Q0396,Q0396,FRAS01,9,9,"Saint-Denis, France",0,0,0,2,3,No,-,images/queens/FRAS01-Q0396.webp,0,-
-FRAS01-Q0532,Q0532,FRAS01,10,8,-,0,0,0,2,2,No,-,images/queens/FRAS01-Q0532.webp,0,-
+DU04-Q0439,Q0439,DU04,1,1,"Melbourne, Australia",3,1,0,0,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/8/87/LazySusanDRDU4CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20241009205103,53000,32
+DU04-Q0440,Q0440,DU04,2,4,"Brisbane, Australia",1,1,1,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/4/4b/MandyMoobsDRDU4CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20241009210809,0,33
+DU04-Q0441,Q0441,DU04,2,2,"Sydney, Australia",2,3,1,0,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/e/e0/VybeDRDU4CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20241009210852,2500,32
+DU04-Q0442,Q0442,DU04,4,6,"Brisbane, Australia",0,3,1,2,8,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/9/9c/FreyaArmaniDRDU4CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20241009205035,0,24
+DU04-Q0443,Q0443,DU04,5,3,"Auckland, New Zealand",1,2,0,2,7,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/1/1d/NikitaImanDRDU4CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20241009205245,2500,27
+DU04-Q0444,Q0444,DU04,6,5,"Melbourne, Australia",0,1,0,2,6,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/e/e1/MaxDragQueenDRDU4CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20241009210820,0,24
+DU04-Q0445,Q0445,DU04,7,8,"Melbourne, Australia",1,1,1,1,5,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/3/30/BrendaBressedDRDU4CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20241009210732,0,24
+DU04-Q0446,Q0446,DU04,8,10,"Auckland, New Zealand",0,0,0,3,4,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/f/fe/LucinaInnocenceDRDU4CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20241009210753,0,28
+DU04-Q0447,Q0447,DU04,9,9,"Sydney, Australia",0,0,0,2,3,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/f/ff/KarnaFordDRDU4CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20241009205048,0,27
+DU04-Q0448,Q0448,DU04,10,7,"Wellington, New Zealand",0,0,1,1,2,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/0/07/OliviaDreamsDRDU4CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20241009210839,0,26
+ES01-Q0449,Q0449,ES01,1,4,"Seville, Andalusia",3,2,1,0,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/3/3a/CarmenDE1Promo.jpeg/revision/latest/scale-to-width-down/110?cb=20210426123940,-,31
+ES01-Q0450,Q0450,ES01,2,6,"Madrid, C. Madrid",1,1,0,2,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/1/15/KillerDE1Promo.jpeg/revision/latest/scale-to-width-down/110?cb=20210426124413,-,31
+ES01-Q0451,Q0451,ES01,2,2,"Barcelona, Catalonia",1,2,0,2,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/e/e7/SagittariaDE1Promo.jpeg/revision/latest/scale-to-width-down/110?cb=20210426124545,-,22
+ES01-Q0452,Q0452,ES01,4,5,"Madrid, C. Madrid",1,3,2,1,7,Yes,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/8/8f/PupiDE1Promo.jpeg/revision/latest/scale-to-width-down/110?cb=20210426124447,-,38
+ES01-Q0453,Q0453,ES01,5,7,"Barcelona, Catalonia",0,0,0,3,6,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/7/7a/DovimaDE1Promo.jpeg/revision/latest/scale-to-width-down/110?cb=20210426124016,-,24
+ES01-Q0454,Q0454,ES01,6,3,"Valencia, Valencian Community",1,0,0,2,5,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/9/92/HugaceoDE1Promo.jpeg/revision/latest/scale-to-width-down/110?cb=20210426124216,-,25
+ES01-Q0406,Q0406,ES01,7,1,"Badajoz, Extremadura",0,0,0,2,4,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/2/29/ArantxaDE1Promo.jpeg/revision/latest/scale-to-width-down/110?cb=20210426123709,-,23
+ES01-Q0455,Q0455,ES01,8,8,Bolivia,0,0,1,0,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/b/b0/IntiDE1Promo.jpeg/revision/latest/scale-to-width-down/110?cb=20210426124244,-,20
+ES01-Q0456,Q0456,ES01,9,9,"Las Palmas, Canary Islands",0,0,0,1,2,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/b/b7/VulcanoDE1Promo.jpeg/revision/latest/scale-to-width-down/110?cb=20210426124109,-,30
+ES01-Q0457,Q0457,ES01,10,10,"Cádiz, Andalusia",0,0,0,1,1,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/1/1c/MacarenaDE1Promo.jpeg/revision/latest/scale-to-width-down/110?cb=20210426124608,-,29
+ES02-Q0458,Q0458,ES02,1,12,"Barcelona, Catalonia",3,5,0,0,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/c/c6/SharonneDRE2Promo.jpg/revision/latest/scale-to-width-down/110?cb=20220322063330,-,45
+ES02-Q0459,Q0459,ES02,2,5,"Cádiz, Andalusia",2,1,0,2,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/7/77/EstrellaXtravaganzaDRE2Promo.jpg/revision/latest/scale-to-width-down/110?cb=20220322032744,-,25
+ES02-Q0460,Q0460,ES02,2,3,"Alicante, Valencian Community",2,3,0,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/7/73/VeneditaVonD%C3%A4shDRE2Promo.jpg/revision/latest/scale-to-width-down/110?cb=20220322063226,-,30
+ES02-Q0461,Q0461,ES02,4,7,"Barcelona, Catalonia",1,2,1,3,11,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/6/6a/MarinaDRE2Promo.jpg/revision/latest/scale-to-width-down/110?cb=20220322064049,-,34
+ES02-Q0462,Q0462,ES02,5,11,Belgium,0,3,0,2,8,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/2/2e/JurijiDerKleeDRE2Promo.jpg/revision/latest/scale-to-width-down/110?cb=20220322045130,-,31
+ES02-Q0463,Q0463,ES02,6,4,"Las Palmas, Canary Islands",1,1,1,1,7,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/8/89/DragSethlasDRE2Promo.jpg/revision/latest/scale-to-width-down/110?cb=20220322031847,-,30
+ES02-Q0464,Q0464,ES02,7,10,Dominican Republic,0,1,1,2,6,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/c/c6/DiamanteMerybrownDRE2Promo.jpg/revision/latest/scale-to-width-down/110?cb=20220322025534,-,25
+ES02-Q0465,Q0465,ES02,8,2,"Madrid, C. Madrid",1,0,2,1,5,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/d/df/OnyxDRE2Promo.jpg/revision/latest/scale-to-width-down/110?cb=20220322063753,-,33
+ES02-Q0466,Q0466,ES02,9,8,"Cádiz, Andalusia",0,0,1,2,4,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/9/99/JotaCarajotaDRE2Promo.jpg/revision/latest/scale-to-width-down/110?cb=20220322034125,-,18
+ES02-Q0467,Q0467,ES02,10,1,"Cádiz, Andalusia",0,0,0,3,3,Yes,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/f/f1/SamanthaBallentinesDRE2Promo.jpg/revision/latest/scale-to-width-down/110?cb=20220322063616,-,35
+ES02-Q0468,Q0468,ES02,11,6,"Madrid, C. Madrid",0,0,0,1,2,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/6/68/ArielRecDRE2Promo.jpg/revision/latest/scale-to-width-down/110?cb=20220322025124,-,33
+ES02-Q0469,Q0469,ES02,12,9,"Lugo, Galicia",0,0,0,1,1,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/7/7d/MarisaPrisaDRE2Promo.jpg/revision/latest/scale-to-width-down/110?cb=20220322063923,-,28
+ES03-Q0470,Q0470,ES03,1,5,"Barcelona, Catalonia",4,1,0,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/2/26/PititaDRES3PromoAlt.jpg/revision/latest/scale-to-width-down/110?cb=20230405154525,40000,27
+ES03-Q0471,Q0471,ES03,2,8,"Zaragoza, Aragon",2,2,1,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/5/51/VaniaVainillaDRES3PromoAlt.jpg/revision/latest/scale-to-width-down/110?cb=20230405154524,5000,39
+ES03-Q0472,Q0472,ES03,3,2,"Alicante, Valencian Community",0,3,0,2,11,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/1/17/HornellaG%C3%B3ngoraDRES3PromoAlt.jpg/revision/latest/scale-to-width-down/110?cb=20230405154523,0,35
+ES03-Q0473,Q0473,ES03,3,10,"Málaga, Andalusia",1,0,2,4,11,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/d/d3/KellyRollerDRES3PromoAlt.jpg/revision/latest/scale-to-width-down/110?cb=20230405154523,0,30
+ES03-Q0474,Q0474,ES03,5,9,"Barcelona, Catalonia",0,3,1,3,9,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/a/a2/CloverBishDRES3PromoAlt.jpg/revision/latest/scale-to-width-down/110?cb=20230405154523,0,24
+ES03-Q0475,Q0475,ES03,6,4,"Madrid, C. Madrid",1,2,1,1,8,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/7/7c/BestiahDRES3PromoAlt.jpg/revision/latest/scale-to-width-down/110?cb=20230405154522,2500,30
+ES03-Q0476,Q0476,ES03,7,3,"Seville, Andalusia",0,3,2,2,7,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/e/e0/PakitaDRES3PromoAlt.jpg/revision/latest/scale-to-width-down/110?cb=20230405154524,0,28
+ES03-Q0477,Q0477,ES03,7,1,"Cádiz, Andalusia",2,0,0,1,7,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/9/96/PinkChadoraDRES3PromoAlt.jpg/revision/latest/scale-to-width-down/110?cb=20230405154524,5000,38
+ES03-Q0478,Q0478,ES03,9,12,Mexico,0,2,1,1,6,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/9/9c/VisaDRES3PromoAlt.jpg/revision/latest/scale-to-width-down/110?cb=20230405154525,2000,34
+ES03-Q0457,Q0457,ES03,10,13,"Cádiz, Andalusia",0,2,1,1,5,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/8/85/TheMacarenaDRES3PromoAlt.jpg/revision/latest/scale-to-width-down/110?cb=20230417122736,0,31
+ES03-Q0479,Q0479,ES03,11,11,"Salamanca, Castile and León",0,1,0,1,3,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/6/69/ChanelAnorexDRES3PromoAlt.jpg/revision/latest/scale-to-width-down/110?cb=20230405154523,0,31
+ES03-Q0480,Q0480,ES03,12,7,"Las Palmas, Canary Islands",0,0,0,2,2,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/1/17/DragChuchiDRES3PromoAlt.jpg/revision/latest/scale-to-width-down/110?cb=20230405154523,0,32
+ES03-Q0481,Q0481,ES03,13,6,Venezuela,0,0,0,1,1,Yes,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/d/d5/MariaEdiliaDRES3PromoAlt.jpg/revision/latest/scale-to-width-down/110?cb=20230405154523,3000,41
+ES04-Q0482,Q0482,ES04,1,5,"Madrid, C. Madrid",2,3,0,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/6/69/LeCoc%C3%B3DRES4MiniPromo2.jpg/revision/latest/scale-to-width-down/110?cb=20240908192701,35000,28
+ES04-Q0483,Q0483,ES04,2,9,"Valencia, Valencian Community",1,3,2,0,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/a/aa/VampirashianDRES4MiniPromo2.jpg/revision/latest/scale-to-width-down/110?cb=20240908194521,2500,30
+ES04-Q0484,Q0484,ES04,3,10,"Barcelona, Catalonia",1,1,0,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/2/24/ChloeVittuDRES4MiniPromo2.jpg/revision/latest/scale-to-width-down/110?cb=20240908191607,2500,23
+ES04-Q0485,Q0485,ES04,4,8,"Castellón de la Plana, Valencian Community",1,2,2,4,11,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/2/28/LaNi%C3%B1aDelantroDRES4MiniPromo2.jpg/revision/latest/scale-to-width-down/110?cb=20240908192510,2500,22
+ES04-Q0486,Q0486,ES04,5,6,Venezuela,1,2,1,3,9,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/7/7e/MarianaStarsDRES4MiniPromo2.jpg/revision/latest/scale-to-width-down/110?cb=20240908193037,2500,28
+ES04-Q0487,Q0487,ES04,6,12,"Seville, Andalusia",1,2,0,1,8,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/6/6a/MeguiYeillowDRES4MiniPromo2.jpg/revision/latest/scale-to-width-down/110?cb=20240908193501,2500,31
+ES04-Q0488,Q0488,ES04,7,4,"Seville, Andalusia",1,2,1,3,7,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/6/66/AngelitalaPerversaDRES4MiniPromo2.jpg/revision/latest/scale-to-width-down/110?cb=20240908191350,2500,44
+ES04-Q0489,Q0489,ES04,8,11,"Madrid, C. Madrid",1,0,1,2,5,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/4/4a/MissKhristoDRES4MiniPromo2.jpg/revision/latest/scale-to-width-down/110?cb=20240908193737,2500,31
+ES04-Q0490,Q0490,ES04,9,7,"Barcelona, Catalonia",0,1,0,1,4,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/1/11/KellyPassa%21%3FDRES4MiniPromo2.jpg/revision/latest/scale-to-width-down/110?cb=20240908192121,0,38
+ES04-Q0491,Q0491,ES04,10,1,"Santa Cruz de Tenerife, Canary Islands",0,0,1,1,3,Yes,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/b/bf/DitaDuboisDRES4MiniPromo2.jpg/revision/latest/scale-to-width-down/110?cb=20240908191902,3000,37
+ES04-Q0492,Q0492,ES04,11,2,"Valencia, Valencian Community",0,0,0,1,2,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/2/29/PorcaTheclubkidDRES4MiniPromo2.jpg/revision/latest/scale-to-width-down/110?cb=20240908194147,1000,39
+ES04-Q0493,Q0493,ES04,12,3,"Cádiz, Andalusia",0,0,0,1,1,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/6/6b/ShaniLaSantaDRES4MiniPromo2.jpg/revision/latest/scale-to-width-down/110?cb=20240908194346,0,26
+ES05-Q0494,Q0494,ES05,1,10,"Torremolinos, Andalusia",2,3,1,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/0/0f/Sat%C3%ADnGrecoDRES5MiniPromo.jpg/revision/latest/scale-to-width-down/110?cb=20250907202945,55000,39
+ES05-Q0495,Q0495,ES05,2,2,"Córdoba, Andalusia",2,1,1,2,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/5/53/MargaritaKalifataDRES5MiniPromo.jpg/revision/latest/scale-to-width-down/110?cb=20250907202914,5000,32
+ES05-Q0496,Q0496,ES05,3,3,"Valencia, Valencian Community",2,2,2,0,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/6/6f/LacaUdillaDRES5MiniPromo.jpg/revision/latest/scale-to-width-down/110?cb=20250907202852,2500,27
+ES05-Q0497,Q0497,ES05,3,9,"Copenhagen, Denmark",1,2,3,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/2/21/NixDRES5MiniPromo.jpg/revision/latest/scale-to-width-down/110?cb=20250907202926,3000,29
+ES05-Q0498,Q0498,ES05,5,8,"Málaga, Andalusia",1,2,0,2,9,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/1/12/DafneMuglerDRES5MiniPromo.jpg/revision/latest/scale-to-width-down/110?cb=20250907202731,3000,20
+ES05-Q0499,Q0499,ES05,6,1,"Barcelona, Catalonia",0,1,0,4,8,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/e/e5/AlexandradelRavalDRES5MiniPromo.jpg/revision/latest/scale-to-width-down/110?cb=20250907202719,0,27
+ES05-Q0500,Q0500,ES05,7,4,"Valencia, Valencian Community",0,4,1,1,7,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/5/56/FerrxnDRES5MiniPromo.jpg/revision/latest/scale-to-width-down/110?cb=20250907202821,1500,27
+ES05-Q0501,Q0501,ES05,8,11,"Alicante, Valencian Community",1,0,0,1,6,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/8/8b/Den%C3%A9bolaMurnauDRES5MiniPromo.jpg/revision/latest/scale-to-width-down/110?cb=20250907202751,2500,23
+ES05-Q0502,Q0502,ES05,9,5,Venezuela,0,0,0,2,5,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/6/6e/KrystalForeverDRES5MiniPromo.jpg/revision/latest/scale-to-width-down/110?cb=20250907202835,0,52
+ES05-Q0503,Q0503,ES05,10,7,"Tenerife, Canary Islands",0,0,0,1,4,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/6/6b/EvaHarringtonDRES5MiniPromo.jpg/revision/latest/scale-to-width-down/110?cb=20250907202805,0,27
+ES05-Q0504,Q0504,ES05,10,12,"Barcelona, Catalonia",0,0,0,1,4,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/7/73/LaEsc%C3%A1ndaloDRES5MiniPromo.jpg/revision/latest/scale-to-width-down/110?cb=20250907202902,0,26
+ES05-Q0505,Q0505,ES05,12,6,"Badajoz, Extremadura",0,0,1,1,2,Yes,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/0/07/NoriDRES5MiniPromo.jpg/revision/latest/scale-to-width-down/110?cb=20250907202936,3000,28
+ESAS01-Q0463,Q0463,ESAS01,1,-,"Las Palmas, Canary Islands",4,1,0,0,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/d/d0/DragSethlasDRESAS1PromoAlt.jpg/revision/latest/scale-to-width-down/110?cb=20240114200121,-,30
+ESAS01-Q0467,Q0467,ESAS01,2,-,"Cádiz, Andalusia",2,2,0,0,,Yes,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/d/d2/SamanthaBallentinesDRESAS1PromoAlt.jpg/revision/latest/scale-to-width-down/110?cb=20240114205341,-,35
+ESAS01-Q0472,Q0472,ESAS01,3,-,"Alicante, Valencian Community",1,0,1,2,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/0/06/HornellaG%C3%B3ngoraDRESAS1PromoAlt.jpg/revision/latest/scale-to-width-down/110?cb=20240114200853,-,35
+ESAS01-Q0462,Q0462,ESAS01,3,-,Belgium,2,0,0,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/f/ff/JurijiDerKleeDRESAS1PromoAlt.jpg/revision/latest/scale-to-width-down/110?cb=20240114201649,-,31
+ESAS01-Q0452,Q0452,ESAS01,5,-,"Madrid, C. Madrid",1,0,1,2,5,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/c/c9/PupiPoissonDRESAS1PromoAlt.jpg/revision/latest/scale-to-width-down/110?cb=20240114204011,-,38
+ESAS01-Q0451,Q0451,ESAS01,6,-,"Barcelona, Catalonia",0,1,0,2,4,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/d/df/SagittariaDRESAS1PromoAlt.jpg/revision/latest/scale-to-width-down/110?cb=20240114204553,-,22
+ESAS01-Q0476,Q0476,ESAS01,7,-,"Seville, Andalusia",0,0,0,1,3,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/5/5f/PakitaDRESAS1PromoAlt.jpg/revision/latest/scale-to-width-down/110?cb=20240114203048,-,28
+ESAS01-Q0465,Q0465,ESAS01,8,-,"Madrid, C. Madrid",0,0,0,2,2,No,Onyx Unleashed,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/5/56/OnyxUnleashedDRESAS1PromoAlt.jpg/revision/latest/scale-to-width-down/110?cb=20240114202229,-,33
+ESAS01-Q0477,Q0477,ESAS01,9,-,"Cádiz, Andalusia",0,0,0,1,1,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/2/22/PinkChadoraDRESAS1PromoAlt.jpg/revision/latest/scale-to-width-down/110?cb=20240114203505,-,38
+FR01-Q0506,Q0506,FR01,1,10,Clermont-Ferrand,2,2,0,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/8/8f/PalomaMiniPromo.jpg/revision/latest/scale-to-width-down/110,-,30
+FR01-Q0403,Q0403,FR01,2,6,Nice,1,2,1,0,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/e/e8/LaGrandeDameMiniPromo.jpg/revision/latest/scale-to-width-down/110,-,23
+FR01-Q0396,Q0396,FR01,2,5,Saint-Denis,2,2,0,2,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/e/e9/SoadeMuseMiniPromo.jpg/revision/latest/scale-to-width-down/110,-,30
+FR01-Q0507,Q0507,FR01,4,4,Paris,0,2,1,2,7,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/8/82/LolitaBananaMiniPromo.jpg/revision/latest/scale-to-width-down/110,-,36
+FR01-Q0508,Q0508,FR01,5,2,Paris,0,2,2,2,6,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/a/aa/LaBigBerthaMiniPromo.jpg/revision/latest/scale-to-width-down/110,-,36
+FR01-Q0509,Q0509,FR01,6,3,Bordeaux,0,1,1,1,5,Yes,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/6/69/ElipsMiniPromo.jpg/revision/latest/scale-to-width-down/110,-,25
+FR01-Q0510,Q0510,FR01,7,1,Paris,1,0,1,1,4,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/d/db/KamHughMiniPromo.jpg/revision/latest/scale-to-width-down/110,-,23
+FR01-Q0511,Q0511,FR01,8,9,Palaiseau,0,0,0,1,3,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/6/6f/LaBrioch%C3%A9eMiniPromo.jpg/revision/latest/scale-to-width-down/110,-,31
+FR01-Q0512,Q0512,FR01,9,7,Toulouse,0,0,0,2,2,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/6/6f/LovaLadivaMiniPromo.jpg/revision/latest/scale-to-width-down/110,-,32
+FR01-Q0390,Q0390,FR01,10,8,Paris,0,0,0,1,1,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/7/74/LaKahenaMiniPromo.jpg/revision/latest/scale-to-width-down/110,-,29
+FR02-Q0513,Q0513,FR02,1,10,Paris,2,6,0,0,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/5/54/KeionaAltPromo2.jpg/revision/latest/scale-to-width-down/110,-,31
+FR02-Q0514,Q0514,FR02,2,2,Bordeaux,4,1,1,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/1/1f/SaraForeverAltPromo2.jpg/revision/latest/scale-to-width-down/110,-,33
+FR02-Q0515,Q0515,FR02,3,1,Saint-Denis,0,2,3,1,9,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/0/06/MamiWattaAltPromo2.jpg/revision/latest/scale-to-width-down/110,-,24
+FR02-Q0516,Q0516,FR02,3,11,Paris,1,3,0,3,9,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/3/30/PunaniAltPromo2.jpg/revision/latest/scale-to-width-down/110,-,32
+FR02-Q0517,Q0517,FR02,5,6,Arles,1,0,0,2,8,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/a/a7/PicheAltPromo2.jpg/revision/latest/scale-to-width-down/110,-,26
+FR02-Q0518,Q0518,FR02,6,8,Paris,1,1,0,3,7,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/9/9d/CookieKuntyAltPromo2.jpg/revision/latest/scale-to-width-down/110,-,29
+FR02-Q0519,Q0519,FR02,7,4,"Geneva, Switzerland",0,2,0,0,,Yes,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/7/77/MoonAltPromo2.jpg/revision/latest/scale-to-width-down/110,-,31
+FR02-Q0520,Q0520,FR02,8,3,Nice,0,2,1,2,5,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/6/69/GingerBitchAltPromo2.jpg/revision/latest/scale-to-width-down/110,-,44
+FR02-Q0521,Q0521,FR02,9,5,Lyon,0,0,0,2,3,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/c/c2/KittySpaceAltPromo2.jpg/revision/latest/scale-to-width-down/110,-,27
+FR02-Q0522,Q0522,FR02,10,9,Lille,0,0,0,1,2,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/2/23/VespiAltPromo2.jpg/revision/latest/scale-to-width-down/110,-,23
+FR02-Q0523,Q0523,FR02,11,7,Paris,0,0,0,1,1,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/f/f0/RoseAltPromo2.jpg/revision/latest/scale-to-width-down/110,-,32
+FR03-Q0524,Q0524,FR03,1,2,Paris,0,1,0,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/9/99/LeFilipDRFR3CastMug.jpg/revision/latest/scale-to-width-down/110,0,29
+FR03-Q0525,Q0525,FR03,2,8,Marseille,2,2,0,2,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/d/d5/RubyOnTheNailDRFR3CastMug.jpg/revision/latest/scale-to-width-down/110,2000,34
+FR03-Q0526,Q0526,FR03,3,5,Perpignan,1,4,0,2,8,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/1/1b/LeonaWinterDRFR3CastMug.jpg/revision/latest/scale-to-width-down/110,1000,28
+FR03-Q0527,Q0527,FR03,3,10,Paris,2,3,1,1,8,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/c/c7/LulaStregaDRFR3CastMug.jpg/revision/latest/scale-to-width-down/110,2000,26
+FR03-Q0528,Q0528,FR03,5,1,Avignon,0,3,1,2,7,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/3/3b/MistyPhoenixDRFR3CastMug.jpg/revision/latest/scale-to-width-down/110,0,23
+FR03-Q0529,Q0529,FR03,6,4,"Canary Islands, Spain",1,1,1,1,6,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/3/35/PerseoDRFR3CastMug.jpg/revision/latest/scale-to-width-down/110,1000,21
+FR03-Q0530,Q0530,FR03,7,6,Réunion,1,1,1,1,5,Yes,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/8/8d/NormaBellDRFR3CastMug.jpg/revision/latest/scale-to-width-down/110,1000,25
+FR03-Q0531,Q0531,FR03,8,9,Lyon,0,0,0,2,3,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/6/61/EdehaNoireDRFR3CastMug.jpg/revision/latest/scale-to-width-down/110,0,34
+FR03-Q0532,Q0532,FR03,9,7,Paris,0,1,0,1,2,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/1/10/MagneticaDRFR3CastMug.jpg/revision/latest/scale-to-width-down/110,0,24
+FR03-Q0533,Q0533,FR03,10,3,Lyon,0,0,0,1,1,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/f/f3/AfroditeAmourDRFR3CastMug.jpg/revision/latest/scale-to-width-down/110,0,27
+FRAS01-Q0515,Q0515,FRAS01,1,3,-,3,3,1,0,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/6/6c/MamiWattaFRAS1MiniPromo.jpg/revision/latest/scale-to-width-down/110,37500,-
+FRAS01-Q0509,Q0509,FRAS01,2,7,-,3,1,0,0,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/e/e8/ElipsFRAS1MiniPromo.jpg/revision/latest/scale-to-width-down/110,5000,-
+FRAS01-Q0528,Q0528,FRAS01,3,2,-,3,0,1,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/0/0a/MistyPhoenixFRAS1MiniPromo.jpg/revision/latest/scale-to-width-down/110,2500,-
+FRAS01-Q0517,Q0517,FRAS01,3,6,-,2,1,1,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/5/52/PicheFRAS1MiniPromo.jpg/revision/latest/scale-to-width-down/110,2500,-
+FRAS01-Q0519,Q0519,FRAS01,5,10,-,0,2,1,2,7,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/5/52/MoonFRAS1MiniPromo.jpg/revision/latest/scale-to-width-down/110,0,-
+FRAS01-Q0510,Q0510,FRAS01,6,4,-,2,1,0,3,6,Yes,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/0/03/KamHughFRAS1MiniPromo.jpg/revision/latest/scale-to-width-down/110,0,-
+FRAS01-Q0508,Q0508,FRAS01,7,1,-,0,1,0,2,5,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/d/d6/LaBigBerthaFRAS1MiniPromo.jpg/revision/latest/scale-to-width-down/110,0,-
+FRAS01-Q0516,Q0516,FRAS01,8,5,-,1,1,1,1,4,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/8/8c/PunaniFRAS1MiniPromo.jpg/revision/latest/scale-to-width-down/110,0,-
+FRAS01-Q0396,Q0396,FRAS01,9,9,"Saint-Denis, France",0,0,0,2,3,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/2/2c/SoadeMuseFRAS1MiniPromo.jpg/revision/latest/scale-to-width-down/110,0,-
+FRAS01-Q0532,Q0532,FRAS01,10,8,-,0,0,0,2,2,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/1/15/MagneticaFRAS1MiniPromo.jpg/revision/latest/scale-to-width-down/110,0,-
 IT01-Q0534,Q0534,IT01,1,8,Turin,0,1,0,0,,No,-,images/queens/IT01-Q0534.webp,-,27
 IT01-Q0535,Q0535,IT01,2,2,Lecce,2,0,0,0,,No,-,images/queens/IT01-Q0535.webp,-,33
 IT01-Q0536,Q0536,IT01,2,5,Palermo,1,1,0,2,,No,-,images/queens/IT01-Q0536.webp,-,35
@@ -760,100 +760,100 @@ IT03-Q0560,Q0560,IT03,10,9,Cagliari,0,1,0,1,4,No,-,images/queens/IT03-Q0560.webp
 IT03-Q0561,Q0561,IT03,11,2,"Tirana,Albania",0,1,0,1,3,No,-,images/queens/IT03-Q0561.webp,-,32
 IT03-Q0562,Q0562,IT03,12,7,Milan,0,0,0,1,2,No,-,images/queens/IT03-Q0562.webp,-,31
 IT03-Q0563,Q0563,IT03,13,10,Padua,0,0,0,1,1,No,-,images/queens/IT03-Q0563.webp,-,29
-NL01-Q0564,Q0564,NL01,1,10,Amsterdam,4,0,0,0,,No,-,images/queens/NL01-Q0564.webp,-,31
-NL01-Q0400,Q0400,NL01,2,3,Amsterdam,2,1,0,1,,No,-,images/queens/NL01-Q0400.webp,-,28
-NL01-Q0565,Q0565,NL01,3,8,Rotterdam,1,0,3,3,8,Yes,-,images/queens/NL01-Q0565.webp,-,30
-NL01-Q0566,Q0566,NL01,4,1,Amsterdam,0,1,1,5,8,No,-,images/queens/NL01-Q0566.webp,-,25
-NL01-Q0567,Q0567,NL01,5,2,Amsterdam,0,4,0,1,6,No,-,images/queens/NL01-Q0567.webp,-,26
-NL01-Q0568,Q0568,NL01,6,7,"Antwerp,Belgium",0,4,0,1,5,No,-,images/queens/NL01-Q0568.webp,-,26
-NL01-Q0569,Q0569,NL01,7,5,Amsterdam,0,0,1,2,4,No,-,images/queens/NL01-Q0569.webp,-,23
-NL01-Q0570,Q0570,NL01,8,4,Rotterdam,0,0,1,2,3,No,-,images/queens/NL01-Q0570.webp,-,30
-NL01-Q0571,Q0571,NL01,9,9,Amsterdam,0,0,0,1,2,No,-,images/queens/NL01-Q0571.webp,-,34
-NL01-Q0572,Q0572,NL01,10,6,Urk,0,0,0,1,1,No,-,images/queens/NL01-Q0572.webp,-,21
-NL02-Q0573,Q0573,NL02,1,9,Rotterdam,1,1,2,0,,No,-,images/queens/NL02-Q0573.webp,-,41
-NL02-Q0574,Q0574,NL02,2,4,Amsterdam,2,2,0,1,,No,-,images/queens/NL02-Q0574.webp,-,38
-NL02-Q0575,Q0575,NL02,3,5,Enschede,1,3,0,3,8,No,-,images/queens/NL02-Q0575.webp,-,22
-NL02-Q0405,Q0405,NL02,4,10,Amsterdam,3,2,0,1,7,No,-,images/queens/NL02-Q0405.webp,-,40
-NL02-Q0576,Q0576,NL02,5,6,Amsterdam,0,1,2,2,6,Yes,-,images/queens/NL02-Q0576.webp,-,46
-NL02-Q0577,Q0577,NL02,6,8,Amsterdam,1,0,0,2,5,No,-,images/queens/NL02-Q0577.webp,-,21
-NL02-Q0578,Q0578,NL02,7,2,Amsterdam,0,0,1,3,4,No,-,images/queens/NL02-Q0578.webp,-,35
-NL02-Q0579,Q0579,NL02,8,7,Amsterdam,0,1,0,1,3,No,-,images/queens/NL02-Q0579.webp,-,43
-NL02-Q0580,Q0580,NL02,9,1,Amsterdam,0,0,0,2,2,No,-,images/queens/NL02-Q0580.webp,-,25
-NL02-Q0581,Q0581,NL02,10,3,Amsterdam,0,0,0,1,1,No,-,images/queens/NL02-Q0581.webp,-,24
-BE01-Q0582,Q0582,BE01,1,7,Brussels,3,2,0,0,,No,-,images/queens/BE01-Q0582.webp,-,24
-BE01-Q0583,Q0583,BE01,2,4,Brussels,2,0,1,1,,No,-,images/queens/BE01-Q0583.webp,-,27
-BE01-Q0584,Q0584,BE01,3,8,Ghent,1,1,2,2,8,No,-,images/queens/BE01-Q0584.webp,-,26
-BE01-Q0585,Q0585,BE01,4,9,Brussels,1,1,0,2,7,No,-,images/queens/BE01-Q0585.webp,-,37
-BE01-Q0586,Q0586,BE01,5,3,Liège,0,2,0,2,6,No,-,images/queens/BE01-Q0586.webp,-,23
-BE01-Q0587,Q0587,BE01,6,5,Ghent,0,0,1,3,5,Yes,-,images/queens/BE01-Q0587.webp,-,26
-BE01-Q0588,Q0588,BE01,7,2,Brussels,0,0,1,2,4,No,-,images/queens/BE01-Q0588.webp,-,35
-BE01-Q0589,Q0589,BE01,8,1,Liège,0,0,0,1,3,No,-,images/queens/BE01-Q0589.webp,-,34
-BE01-Q0590,Q0590,BE01,9,10,Mouscron,0,0,0,2,2,No,-,images/queens/BE01-Q0590.webp,-,21
-BE01-Q0591,Q0591,BE01,10,6,Mons,0,0,0,1,1,No,-,images/queens/BE01-Q0591.webp,-,36
-BE02-Q0592,Q0592,BE02,1,2,Brussels,3,4,0,1,,No,-,images/queens/BE02-Q0592.webp,-,29
-BE02-Q0593,Q0593,BE02,2,6,Brussels,3,0,1,1,,No,-,images/queens/BE02-Q0593.webp,-,37
-BE02-Q0594,Q0594,BE02,3,7,Brussels,1,0,0,3,,No,-,images/queens/BE02-Q0594.webp,-,31
-BE02-Q0595,Q0595,BE02,3,5,Brussels,0,1,0,2,,No,-,images/queens/BE02-Q0595.webp,-,27
-BE02-Q0596,Q0596,BE02,5,8,Ghent,1,1,1,3,6,No,-,images/queens/BE02-Q0596.webp,-,29
-BE02-Q0597,Q0597,BE02,6,3,Antwerp,0,0,1,1,5,Yes,-,images/queens/BE02-Q0597.webp,-,43
-BE02-Q0598,Q0598,BE02,7,9,Brussels,0,0,1,0,,No,-,images/queens/BE02-Q0598.webp,-,23
-BE02-Q0599,Q0599,BE02,8,4,Luxembourg,0,1,0,1,3,No,-,images/queens/BE02-Q0599.webp,-,33
-BE02-Q0600,Q0600,BE02,9,1,Liège,0,0,0,1,2,No,-,images/queens/BE02-Q0600.webp,-,35
-DE01-Q0601,Q0601,DE01,1,10,"Vienna,Austria",3,3,0,2,,No,-,images/queens/DE01-Q0601.webp,-,29
-DE01-Q0602,Q0602,DE01,2,8,"Vienna,Austria",2,3,0,1,,No,-,images/queens/DE01-Q0602.webp,-,24
-DE01-Q0603,Q0603,DE01,3,1,"Berlin,Germany",2,1,2,0,,No,-,images/queens/DE01-Q0603.webp,-,29
-DE01-Q0604,Q0604,DE01,4,11,"Wiesbaden,Germany",2,1,1,1,10,No,-,images/queens/DE01-Q0604.webp,-,41
-DE01-Q0605,Q0605,DE01,5,9,"Düsseldorf,Germany",2,0,1,3,8,No,-,images/queens/DE01-Q0605.webp,-,24
-DE01-Q0606,Q0606,DE01,6,2,"Basel,Switzerland",0,2,0,4,7,Yes,-,images/queens/DE01-Q0606.webp,-,29
-DE01-Q0607,Q0607,DE01,7,6,"Berlin,Germany",1,0,2,1,6,No,-,images/queens/DE01-Q0607.webp,-,38
-DE01-Q0393,Q0393,DE01,8,7,"Basel,Switzerland",0,1,0,4,5,No,-,images/queens/DE01-Q0393.webp,-,25
-DE01-Q0608,Q0608,DE01,9,3,"Frankfurt,Germany",0,1,0,1,4,No,-,images/queens/DE01-Q0608.webp,-,23
-DE01-Q0409,Q0409,DE01,10,4,"Cologne,Germany",0,0,0,1,3,No,-,images/queens/DE01-Q0409.webp,-,22
-DE01-Q0609,Q0609,DE01,11,5,"Munich,Germany",0,1,0,1,2,No,-,images/queens/DE01-Q0609.webp,-,25
-SE01-Q0610,Q0610,SE01,1,3,Stockholm,3,1,1,0,,No,-,images/queens/SE01-Q0610.webp,-,28
-SE01-Q0408,Q0408,SE01,2,1,Stockholm,1,0,1,1,,No,-,images/queens/SE01-Q0408.webp,-,29
-SE01-Q0394,Q0394,SE01,3,9,Linköping,1,2,1,3,8,No,-,images/queens/SE01-Q0394.webp,-,31
-SE01-Q0611,Q0611,SE01,4,2,Helsingborg,1,1,0,3,7,No,-,images/queens/SE01-Q0611.webp,-,35
-SE01-Q0612,Q0612,SE01,5,4,"Liverpool,UK",0,0,2,2,6,No,-,images/queens/SE01-Q0612.webp,-,29
-SE01-Q0613,Q0613,SE01,6,5,"Berlin,Germany",0,2,0,1,5,No,-,images/queens/SE01-Q0613.webp,-,28
-SE01-Q0614,Q0614,SE01,7,7,Värnamo,1,2,0,1,4,No,-,images/queens/SE01-Q0614.webp,-,28
-SE01-Q0615,Q0615,SE01,8,8,"Tokyo,Japan",0,0,1,2,3,No,-,images/queens/SE01-Q0615.webp,-,31
-SE01-Q0616,Q0616,SE01,9,6,Mora,0,0,0,1,1,No,-,images/queens/SE01-Q0616.webp,-,20
-PH01-Q0617,Q0617,PH01,1,6,"Daet, Camarines Norte",1,4,1,0,,No,-,images/queens/PH01-Q0617.webp,1100000,34
-PH01-Q0404,Q0404,PH01,2,4,"Makati City, Metro Manila",2,5,1,0,,No,-,images/queens/PH01-Q0404.webp,180000,25
-PH01-Q0618,Q0618,PH01,3,12,"Cabanatuan, Nueva Ecija",2,3,1,2,,No,-,images/queens/PH01-Q0618.webp,160000,34
-PH01-Q0397,Q0397,PH01,3,2,"Marikina City, Metro Manila",0,5,0,1,,No,-,images/queens/PH01-Q0397.webp,40000,34
-PH01-Q0410,Q0410,PH01,5,7,"Quezon City, Metro Manila",2,1,1,3,9,No,-,images/queens/PH01-Q0410.webp,180000,31
-PH01-Q0619,Q0619,PH01,6,11,"Mandaluyong, Metro Manila",0,1,0,3,8,No,-,images/queens/PH01-Q0619.webp,0,29
-PH01-Q0620,Q0620,PH01,7,9,"San Jose del Monte, Bulacan",1,2,2,1,7,No,-,images/queens/PH01-Q0620.webp,80000,25
-PH01-Q0621,Q0621,PH01,8,5,"Davao City, Davao del Sur",0,1,0,3,5,Yes,-,images/queens/PH01-Q0621.webp,40000,30
-PH01-Q0622,Q0622,PH01,9,3,"Cainta, Rizal",1,1,0,2,4,No,-,images/queens/PH01-Q0622.webp,80000,29
-PH01-Q0623,Q0623,PH01,10,8,"Melbourne, Australia",0,0,1,1,3,No,-,images/queens/PH01-Q0623.webp,0,38
-PH01-Q0624,Q0624,PH01,11,1,"Bolinao, Pangasinan",0,0,0,1,2,No,-,images/queens/PH01-Q0624.webp,20000,34
-PH01-Q0625,Q0625,PH01,12,10,"Calumpit, Bulacan",0,0,0,1,1,No,-,images/queens/PH01-Q0625.webp,0,25
-PH02-Q0626,Q0626,PH02,1,5,"Sta. Maria, Ilocos Sur",2,4,1,1,,No,-,images/queens/PH02-Q0626.webp,1180000,42
-PH02-Q0627,Q0627,PH02,2,1,"Makati City, Metro Manila",1,3,1,2,,No,-,images/queens/PH02-Q0627.webp,100000,25
-PH02-Q0628,Q0628,PH02,3,6,"Marikina City, Metro Manila",1,3,1,2,,No,-,images/queens/PH02-Q0628.webp,80000,23
-PH02-Q0629,Q0629,PH02,3,5,"Mandaluyong, Metro Manila",2,3,0,1,,No,-,images/queens/PH02-Q0629.webp,180000,36
-PH02-Q0630,Q0630,PH02,5,3,"Cagayan de Oro, Misamis Oriental",0,4,0,2,9,Yes,-,images/queens/PH02-Q0630.webp,60000,24
-PH02-Q0631,Q0631,PH02,5,6,"Rosario, Cavite",1,4,0,1,9,No,-,images/queens/PH02-Q0631.webp,80000,24
-PH02-Q0632,Q0632,PH02,7,1,"Tayabas, Quezon Province",1,2,0,2,6,No,-,images/queens/PH02-Q0632.webp,80000,39
-PH02-Q0633,Q0633,PH02,8,2,"Vigan, Ilocos Sur",0,1,1,2,5,No,-,images/queens/PH02-Q0633.webp,60000,24
-PH02-Q0634,Q0634,PH02,9,4,Hong Kong,1,0,1,1,4,No,-,images/queens/PH02-Q0634.webp,100000,36
-PH02-Q0635,Q0635,PH02,10,3,"Pasig City, Metro Manila",0,0,0,2,3,No,-,images/queens/PH02-Q0635.webp,0,22
-PH02-Q0636,Q0636,PH02,11,2,"Mandaluyong, Metro Manila",0,0,0,1,2,No,-,images/queens/PH02-Q0636.webp,0,29
-PH02-Q0637,Q0637,PH02,11,4,"Cebu City, Cebu",0,0,0,1,1,No,-,images/queens/PH02-Q0637.webp,0,37
-PH03-Q0638,Q0638,PH03,1,11,"Manila, Metro Manila",3,2,0,0,,No,-,images/queens/PH03-Q0638.webp,1285000,25
-PH03-Q0639,Q0639,PH03,2,6,"Cagayan de Oro, Misamis Oriental",1,4,0,1,,No,-,images/queens/PH03-Q0639.webp,140000,22
-PH03-Q0640,Q0640,PH03,3,1,"Manila, Metro Manila",2,0,2,1,,No,-,images/queens/PH03-Q0640.webp,185000,23
-PH03-Q0641,Q0641,PH03,3,5,"Marikina City, Metro Manila",0,3,0,2,,No,-,images/queens/PH03-Q0641.webp,45000,46
-PH03-Q0642,Q0642,PH03,5,9,"Caloocan City, Metro Manila",1,2,0,2,9,No,-,images/queens/PH03-Q0642.webp,100000,22
-PH03-Q0643,Q0643,PH03,6,4,"Marikina City, Metro Manila",1,2,2,1,,No,-,images/queens/PH03-Q0643.webp,100000,27
-PH03-Q0644,Q0644,PH03,7,10,"Manila, Metro Manila",0,1,0,2,7,No,-,images/queens/PH03-Q0644.webp,0,26
-PH03-Q0645,Q0645,PH03,8,3,"San Francisco, USA",0,3,0,1,6,No,-,images/queens/PH03-Q0645.webp,20000,33
-PH03-Q0646,Q0646,PH03,9,7,"Caloocan City, Metro Manila",0,0,1,2,5,No,-,images/queens/PH03-Q0646.webp,0,25
-PH03-Q0647,Q0647,PH03,10,8,"Bacolod, Negros Occidental",0,2,0,0,4,No,-,images/queens/PH03-Q0647.webp,0,27
-PH03-Q0648,Q0648,PH03,11,2,"Manila, Metro Manila",0,0,1,1,3,Yes,-,images/queens/PH03-Q0648.webp,60000,25
+NL01-Q0564,Q0564,NL01,1,10,Amsterdam,4,0,0,0,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/1/13/EnvyPeruDRHL1CastMug.jpg/revision/latest/scale-to-width-down/110?cb=20210831144623,-,31
+NL01-Q0400,Q0400,NL01,2,3,Amsterdam,2,1,0,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/e/ed/JaneyJack%C3%A9DRHL1CastMug.jpg/revision/latest/scale-to-width-down/110?cb=20210831144711,-,28
+NL01-Q0565,Q0565,NL01,3,8,Rotterdam,1,0,3,3,8,Yes,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/c/ce/Ma%27MaQueenDRHL1CastMug.jpg/revision/latest/scale-to-width-down/110?cb=20210831144834,-,30
+NL01-Q0566,Q0566,NL01,4,1,Amsterdam,0,1,1,5,8,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/d/dc/MissAbbyOMGDRHL1CastMug.jpg/revision/latest/scale-to-width-down/110?cb=20210831144958,-,25
+NL01-Q0567,Q0567,NL01,5,2,Amsterdam,0,4,0,1,6,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/5/54/ChelseaBoyDRHL1CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20210418214010,-,26
+NL01-Q0568,Q0568,NL01,6,7,"Antwerp,Belgium",0,4,0,1,5,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/7/7d/SederginneDRHL1CastMug.jpg/revision/latest/scale-to-width-down/110?cb=20210831145223,-,26
+NL01-Q0569,Q0569,NL01,7,5,Amsterdam,0,0,1,2,4,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/9/99/MadameMadnessDRHL1CastMug.jpg/revision/latest/scale-to-width-down/110?cb=20210831144754,-,23
+NL01-Q0570,Q0570,NL01,8,4,Rotterdam,0,0,1,2,3,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/c/c9/MeganSchoonbroodDRHL1CastMug.jpg/revision/latest/scale-to-width-down/110?cb=20210831144920,-,30
+NL01-Q0571,Q0571,NL01,9,9,Amsterdam,0,0,0,1,2,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/d/de/PattyPam-PamDRHL1CastMug.jpg/revision/latest/scale-to-width-down/110?cb=20210831145033,-,34
+NL01-Q0572,Q0572,NL01,10,6,Urk,0,0,0,1,1,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/b/b3/RoemDRHL1CastMug.jpg/revision/latest/scale-to-width-down/110?cb=20210831145137,-,21
+NL02-Q0573,Q0573,NL02,1,9,Rotterdam,1,1,2,0,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/e/e7/VanessaVanCartierDRH2Promo.png/revision/latest/scale-to-width-down/110?cb=20210805034748,-,41
+NL02-Q0574,Q0574,NL02,2,4,Amsterdam,2,2,0,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/0/0d/MyLittlePunyDRH2Promo.png/revision/latest/scale-to-width-down/110?cb=20210805035413,-,38
+NL02-Q0575,Q0575,NL02,3,5,Enschede,1,3,0,3,8,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/6/62/VivaldiDRH2Promo.png/revision/latest/scale-to-width-down/110?cb=20210805034922,-,22
+NL02-Q0405,Q0405,NL02,4,10,Amsterdam,3,2,0,1,7,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/2/29/KetaMinajDRH2Promo.png/revision/latest/scale-to-width-down/110?cb=20210805035552,-,40
+NL02-Q0576,Q0576,NL02,5,6,Amsterdam,0,1,2,2,6,Yes,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/b/bc/TabithaDRH2Promo.png/revision/latest/scale-to-width-down/110?cb=20210805035202,-,46
+NL02-Q0577,Q0577,NL02,6,8,Amsterdam,1,0,0,2,5,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/c/c6/TheCountessDRH2Promo.png/revision/latest/scale-to-width-down/110?cb=20210805035056,-,21
+NL02-Q0578,Q0578,NL02,7,2,Amsterdam,0,0,1,3,4,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/4/46/Ivy-ElyseDRH2Promo.png/revision/latest/scale-to-width-down/110?cb=20210805035748,-,35
+NL02-Q0579,Q0579,NL02,8,7,Amsterdam,0,1,0,1,3,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/6/69/LoveMasisiDRH2Promo.png/revision/latest/scale-to-width-down/110?cb=20210805035457,-,43
+NL02-Q0580,Q0580,NL02,9,1,Amsterdam,0,0,0,2,2,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/2/20/ReggyBDRH2Promo.png/revision/latest/scale-to-width-down/110?cb=20210805035321,-,25
+NL02-Q0581,Q0581,NL02,10,3,Amsterdam,0,0,0,1,1,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/5/5b/JuicyKutoureDRH2Promo.png/revision/latest/scale-to-width-down/110?cb=20210805035654,-,24
+BE01-Q0582,Q0582,BE01,1,7,Brussels,3,2,0,0,,No,-,x.jpeg,-,24
+BE01-Q0583,Q0583,BE01,2,4,Brussels,2,0,1,1,,No,-,x.jpeg,-,27
+BE01-Q0584,Q0584,BE01,3,8,Ghent,1,1,2,2,8,No,-,x.jpeg,-,26
+BE01-Q0585,Q0585,BE01,4,9,Brussels,1,1,0,2,7,No,-,x.jpeg,-,37
+BE01-Q0586,Q0586,BE01,5,3,Liège,0,2,0,2,6,No,-,x.jpeg,-,23
+BE01-Q0587,Q0587,BE01,6,5,Ghent,0,0,1,3,5,Yes,-,x.jpeg,-,26
+BE01-Q0588,Q0588,BE01,7,2,Brussels,0,0,1,2,4,No,-,x.jpeg,-,35
+BE01-Q0589,Q0589,BE01,8,1,Liège,0,0,0,1,3,No,-,x.jpeg,-,34
+BE01-Q0590,Q0590,BE01,9,10,Mouscron,0,0,0,2,2,No,-,x.jpeg,-,21
+BE01-Q0591,Q0591,BE01,10,6,Mons,0,0,0,1,1,No,-,x.jpeg,-,36
+BE02-Q0592,Q0592,BE02,1,2,Brussels,3,4,0,1,,No,-,x.jpg,-,29
+BE02-Q0593,Q0593,BE02,2,6,Brussels,3,0,1,1,,No,-,x.jpg,-,37
+BE02-Q0594,Q0594,BE02,3,7,Brussels,1,0,0,3,,No,-,x.jpg,-,31
+BE02-Q0595,Q0595,BE02,3,5,Brussels,0,1,0,2,,No,-,x.jpg,-,27
+BE02-Q0596,Q0596,BE02,5,8,Ghent,1,1,1,3,6,No,-,x.jpg,-,29
+BE02-Q0597,Q0597,BE02,6,3,Antwerp,0,0,1,1,5,Yes,-,x.jpg,-,43
+BE02-Q0598,Q0598,BE02,7,9,Brussels,0,0,1,0,,No,-,x.jpg,-,23
+BE02-Q0599,Q0599,BE02,8,4,Luxembourg,0,1,0,1,3,No,-,x.jpg,-,33
+BE02-Q0600,Q0600,BE02,9,1,Liège,0,0,0,1,2,No,-,x.jpg,-,35
+DE01-Q0601,Q0601,DE01,1,10,"Vienna,Austria",3,3,0,2,,No,-,PandoraNoxGR1MiniPromo.jpg,-,29
+DE01-Q0602,Q0602,DE01,2,8,"Vienna,Austria",2,3,0,1,,No,-,MetamorkidGR1MiniPromo.jpg,-,24
+DE01-Q0603,Q0603,DE01,3,1,"Berlin,Germany",2,1,2,0,,No,-,YvonneNightstandGR1MiniPromo.jpg,-,29
+DE01-Q0604,Q0604,DE01,4,11,"Wiesbaden,Germany",2,1,1,1,10,No,-,KellyHeeltonGR1MiniPromo.jpg,-,41
+DE01-Q0605,Q0605,DE01,5,9,"Düsseldorf,Germany",2,0,1,3,8,No,-,LoreleyRiversGR1MiniPromo.jpg,-,24
+DE01-Q0606,Q0606,DE01,6,2,"Basel,Switzerland",0,2,0,4,7,Yes,-,VictoriaShakespearsGR1MiniPromo.jpg,-,29
+DE01-Q0607,Q0607,DE01,7,6,"Berlin,Germany",1,0,2,1,6,No,-,NikitaVegazGR1MiniPromo.jpg,-,38
+DE01-Q0393,Q0393,DE01,8,7,"Basel,Switzerland",0,1,0,4,5,No,-,TessaTesticleGR1MiniPromo.jpg,-,25
+DE01-Q0608,Q0608,DE01,9,3,"Frankfurt,Germany",0,1,0,1,4,No,-,L%C3%A9L%C3%A9CocoonGR1MiniPromo.jpg,-,23
+DE01-Q0409,Q0409,DE01,10,4,"Cologne,Germany",0,0,0,1,3,No,-,TheOnlyNaomyGR1MiniPromo.jpg,-,22
+DE01-Q0609,Q0609,DE01,11,5,"Munich,Germany",0,1,0,1,2,No,-,BarbieQGR1MiniPromo.jpg,-,25
+SE01-Q0610,Q0610,SE01,1,3,Stockholm,3,1,1,0,,No,-,AdmiraThunderpussyDRSV1CastMug.png,-,28
+SE01-Q0408,Q0408,SE01,2,1,Stockholm,1,0,1,1,,No,-,FontanaDRSV1CastMug.png,-,29
+SE01-Q0394,Q0394,SE01,3,9,Linköping,1,2,1,3,8,No,-,VanityVainDRSV1CastMug.png,-,31
+SE01-Q0611,Q0611,SE01,4,2,Helsingborg,1,1,0,3,7,No,-,ElecktraDRSV1CastMug.png,-,35
+SE01-Q0612,Q0612,SE01,5,4,"Liverpool,UK",0,0,2,2,6,No,-,AntoninaNutshellDRSV1CastMug.png,-,29
+SE01-Q0613,Q0613,SE01,6,5,"Berlin,Germany",0,2,0,1,5,No,-,SantanaSexmachineDRSV1CastMug.png,-,28
+SE01-Q0614,Q0614,SE01,7,7,Värnamo,1,2,0,1,4,No,-,ImaaQueenDRSV1CastMug.png,-,28
+SE01-Q0615,Q0615,SE01,8,8,"Tokyo,Japan",0,0,1,2,3,No,-,EndigoDRSV1CastMug.png,-,31
+SE01-Q0616,Q0616,SE01,9,6,Mora,0,0,0,1,1,No,-,AlmightyAphroditeyDRSV1CastMug.png,-,20
+PH01-Q0617,Q0617,PH01,1,6,"Daet, Camarines Norte",1,4,1,0,,No,-,PreciousPaulaNicoleDRP1MiniPromo.jpg,1100000,34
+PH01-Q0404,Q0404,PH01,2,4,"Makati City, Metro Manila",2,5,1,0,,No,-,MarinaSummersDRP1MiniPromo.jpg,180000,25
+PH01-Q0618,Q0618,PH01,3,12,"Cabanatuan, Nueva Ecija",2,3,1,2,,No,-,XilhoueteDRP1MiniPromo.jpg,160000,34
+PH01-Q0397,Q0397,PH01,3,2,"Marikina City, Metro Manila",0,5,0,1,,No,-,EvaLeQueenDRP1MiniPromo.jpg,40000,34
+PH01-Q0410,Q0410,PH01,5,7,"Quezon City, Metro Manila",2,1,1,3,9,No,-,MintyFreshDRP1MiniPromo.jpg,180000,31
+PH01-Q0619,Q0619,PH01,6,11,"Mandaluyong, Metro Manila",0,1,0,3,8,No,-,BrigidingDRP1MiniPromo.jpg,0,29
+PH01-Q0620,Q0620,PH01,7,9,"San Jose del Monte, Bulacan",1,2,2,1,7,No,-,ViñasDeLuxeDRP1MiniPromo.jpg,80000,25
+PH01-Q0621,Q0621,PH01,8,5,"Davao City, Davao del Sur",0,1,0,3,5,Yes,-,LadyMorganaDRP1MiniPromo.jpg,40000,30
+PH01-Q0622,Q0622,PH01,9,3,"Cainta, Rizal",1,1,0,2,4,No,-,TuringDRP1MiniPromo.jpg,80000,29
+PH01-Q0623,Q0623,PH01,10,8,"Melbourne, Australia",0,0,1,1,3,No,-,GigiEraDRP1MiniPromo.jpg,0,38
+PH01-Q0624,Q0624,PH01,11,1,"Bolinao, Pangasinan",0,0,0,1,2,No,-,CorazonDRP1MiniPromo.jpg,20000,34
+PH01-Q0625,Q0625,PH01,12,10,"Calumpit, Bulacan",0,0,0,1,1,No,-,PrinceDRP1MiniPromo.jpg,0,25
+PH02-Q0626,Q0626,PH02,1,5,"Sta. Maria, Ilocos Sur",2,4,1,1,,No,-,CaptivatingKatkatDRPH2MiniPromo.jpg,1180000,42
+PH02-Q0627,Q0627,PH02,2,1,"Makati City, Metro Manila",1,3,1,2,,No,-,ArizonaBrandyDRPH2MiniPromo.jpg,100000,25
+PH02-Q0628,Q0628,PH02,3,6,"Marikina City, Metro Manila",1,3,1,2,,No,-,M1ssJadeSoDRPH2MiniPromo.jpg,80000,23
+PH02-Q0629,Q0629,PH02,3,5,"Mandaluyong, Metro Manila",2,3,0,1,,No,-,BernieDRPH2MiniPromo.jpg,180000,36
+PH02-Q0630,Q0630,PH02,5,3,"Cagayan de Oro, Misamis Oriental",0,4,0,2,9,Yes,-,HanaBeshieDRPH2MiniPromo.jpg,60000,24
+PH02-Q0631,Q0631,PH02,5,6,"Rosario, Cavite",1,4,0,1,9,No,-,ØVCüntDRPH2MiniPromo.jpg,80000,24
+PH02-Q0632,Q0632,PH02,7,1,"Tayabas, Quezon Province",1,2,0,2,6,No,-,DeeDeeMariéHollidayDRPH2MiniPromo.jpg,80000,39
+PH02-Q0633,Q0633,PH02,8,2,"Vigan, Ilocos Sur",0,1,1,2,5,No,-,MatilduhDRPH2MiniPromo.jpg,60000,24
+PH02-Q0634,Q0634,PH02,9,4,Hong Kong,1,0,1,1,4,No,-,VeruschkaLevelsDRPH2MiniPromo.jpg,100000,36
+PH02-Q0635,Q0635,PH02,10,3,"Pasig City, Metro Manila",0,0,0,2,3,No,-,TinyDeluxeDRPH2MiniPromo.jpg,0,22
+PH02-Q0636,Q0636,PH02,11,2,"Mandaluyong, Metro Manila",0,0,0,1,2,No,-,AstridMercuryDRPH2MiniPromo.jpg,0,29
+PH02-Q0637,Q0637,PH02,11,4,"Cebu City, Cebu",0,0,0,1,1,No,-,NicolePardauxDRPH2MiniPromo.jpg,0,37
+PH03-Q0638,Q0638,PH03,1,11,"Manila, Metro Manila",3,2,0,0,,No,-,MaxieDRPH3MiniPromo.jpg,1285000,25
+PH03-Q0639,Q0639,PH03,2,6,"Cagayan de Oro, Misamis Oriental",1,4,0,1,,No,-,KhiannaDRPH3MiniPromo.jpg,140000,22
+PH03-Q0640,Q0640,PH03,3,1,"Manila, Metro Manila",2,0,2,1,,No,-,AngelDRPH3MiniPromo.jpg,185000,23
+PH03-Q0641,Q0641,PH03,3,5,"Marikina City, Metro Manila",0,3,0,2,,No,-,TitaBabyDRPH3MiniPromo.jpg,45000,46
+PH03-Q0642,Q0642,PH03,5,9,"Caloocan City, Metro Manila",1,2,0,2,9,No,-,ZymbaDingDRPH3MiniPromo.jpg,100000,22
+PH03-Q0643,Q0643,PH03,6,4,"Marikina City, Metro Manila",1,2,2,1,,No,-,MyxChanelDRPH3MiniPromo.jpg,100000,27
+PH03-Q0644,Q0644,PH03,7,10,"Manila, Metro Manila",0,1,0,2,7,No,-,PopstarBenchDRPH3MiniPromo.jpg,0,26
+PH03-Q0645,Q0645,PH03,8,3,"San Francisco, USA",0,3,0,1,6,No,-,JohnFedellagaDRPH3MiniPromo.jpg,20000,33
+PH03-Q0646,Q0646,PH03,9,7,"Caloocan City, Metro Manila",0,0,1,2,5,No,-,JQuinnDRPH3MiniPromo.jpg,0,25
+PH03-Q0647,Q0647,PH03,10,8,"Bacolod, Negros Occidental",0,2,0,0,4,No,-,YudipotaDRPH3MiniPromo.jpg,0,27
+PH03-Q0648,Q0648,PH03,11,2,"Manila, Metro Manila",0,0,1,1,3,Yes,-,VersexDRPH3MiniPromo.jpg,60000,25
 PHSR01-Q0619,Q0619,PHSR01,1,3,-,5,3,0,0,,No,-,images/queens/PHSR01-Q0619.webp,2260000,-
 PHSR01-Q0620,Q0620,PHSR01,2,5,-,3,2,1,2,,No,-,images/queens/PHSR01-Q0620.webp,200000,-
 PHSR01-Q0627,Q0627,PHSR01,3,1,-,3,3,0,2,,No,-,images/queens/PHSR01-Q0627.webp,120000,-
@@ -901,49 +901,49 @@ TH03-Q0679,Q0679,TH03,8,6,Samut Prakan,0,2,0,2,5,Yes,-,images/queens/TH03-Q0679.
 TH03-Q0680,Q0680,TH03,9,7,Chiang Mai,0,0,1,2,4,No,-,images/queens/TH03-Q0680.webp,0,22
 TH03-Q0681,Q0681,TH03,10,4,Ratchaburi,0,1,0,1,3,No,-,images/queens/TH03-Q0681.webp,0,27
 TH03-Q0682,Q0682,TH03,11,1,Bangkok,0,0,0,2,2,No,-,images/queens/TH03-Q0682.webp,0,27
-BR01-Q0683,Q0683,BR01,1,-,"Rio de Janeiro, RJ",4,3,0,1,,No,-,images/queens/BR01-Q0683.webp,155000,30
-BR01-Q0684,Q0684,BR01,2,-,"Rio de Janeiro, RJ",2,1,1,2,,No,-,images/queens/BR01-Q0684.webp,7500,46
-BR01-Q0685,Q0685,BR01,2,-,"Salvador, BA",2,4,2,1,,No,-,images/queens/BR01-Q0685.webp,2500,23
-BR01-Q0398,Q0398,BR01,2,-,"Rio de Janeiro, RJ",1,4,3,1,,No,-,images/queens/BR01-Q0398.webp,10000,33
-BR01-Q0686,Q0686,BR01,5,-,"Piraúba, MG",1,2,1,3,10,No,-,images/queens/BR01-Q0686.webp,10000,26
-BR01-Q0687,Q0687,BR01,6,-,"Monte Santo de Minas, MG",1,0,0,2,8,No,-,images/queens/BR01-Q0687.webp,0,22
-BR01-Q0688,Q0688,BR01,7,-,"Campinas, SP",0,3,1,3,7,No,-,images/queens/BR01-Q0688.webp,5000,26
-BR01-Q0689,Q0689,BR01,8,-,"Taguatinga, DF",0,3,1,1,6,No,-,images/queens/BR01-Q0689.webp,0,29
-BR01-Q0690,Q0690,BR01,9,-,"Belo Horizonte, MG",0,0,0,2,5,Yes,-,images/queens/BR01-Q0690.webp,0,26
-BR01-Q0691,Q0691,BR01,10,-,"São José do Rio Preto, SP",0,0,0,1,4,No,-,images/queens/BR01-Q0691.webp,0,26
-BR01-Q0692,Q0692,BR01,11,-,"Belém, PA",0,2,0,1,3,No,-,images/queens/BR01-Q0692.webp,0,34
-BR01-Q0693,Q0693,BR01,12,-,"Jaquirana, RS",0,0,0,2,2,No,-,images/queens/BR01-Q0693.webp,0,42
-BR02-Q0694,Q0694,BR02,1,4,"Carnaíba, PE",3,0,1,0,,No,-,images/queens/BR02-Q0694.webp,150000,31
-BR02-Q0695,Q0695,BR02,2,8,"Belo Horizonte, MG",1,1,2,3,,No,-,images/queens/BR02-Q0695.webp,6000,30
-BR02-Q0696,Q0696,BR02,3,9,"Sapé, PB",0,3,0,3,10,No,-,images/queens/BR02-Q0696.webp,5000,30
-BR02-Q0697,Q0697,BR02,3,2,"Recife, PE",1,2,2,3,10,No,-,images/queens/BR02-Q0697.webp,0,30
-BR02-Q0698,Q0698,BR02,5,7,"São Paulo, SP",1,4,1,1,9,No,-,images/queens/BR02-Q0698.webp,0,36
-BR02-Q0699,Q0699,BR02,6,5,"Cidade Ocidental, GO",2,1,1,2,7,No,-,images/queens/BR02-Q0699.webp,10000,26
-BR02-Q0700,Q0700,BR02,7,10,"Irecê, BA",1,1,1,2,6,No,-,images/queens/BR02-Q0700.webp,0,34
-BR02-Q0701,Q0701,BR02,8,6,"Vinhedo, SP",0,2,0,1,5,No,-,images/queens/BR02-Q0701.webp,0,36
-BR02-Q0702,Q0702,BR02,9,1,"Vila Velha, ES",0,0,1,1,3,No,-,images/queens/BR02-Q0702.webp,0,35
-BR02-Q0703,Q0703,BR02,10,3,"Niterói, RJ",0,1,0,1,2,No,-,images/queens/BR02-Q0703.webp,0,21
-MX01-Q0704,Q0704,MX01,1,9,"Guadalajara, JA",5,3,1,0,,No,-,images/queens/MX01-Q0704.webp,568000,35
-MX01-Q0395,Q0395,MX01,2,10,"Morelia, MI",1,4,0,2,,No,-,images/queens/MX01-Q0395.webp,0,33
-MX01-Q0705,Q0705,MX01,2,11,"León, GT",3,2,1,1,,No,-,images/queens/MX01-Q0705.webp,61000,24
-MX01-Q0706,Q0706,MX01,2,5,"Mexico City, DF",1,4,0,1,,No,-,images/queens/MX01-Q0706.webp,36000,41
-MX01-Q0707,Q0707,MX01,5,7,"Ocotlán de Morelos, OA",0,3,1,2,9,Yes,-,images/queens/MX01-Q0707.webp,36000,33
-MX01-Q0708,Q0708,MX01,6,3,"Mexico City, DF",0,2,3,1,7,No,-,images/queens/MX01-Q0708.webp,36000,28
-MX01-Q0709,Q0709,MX01,7,8,"Ciudad Juárez, CH",1,1,0,3,6,No,-,images/queens/MX01-Q0709.webp,27000,26
-MX01-Q0411,Q0411,MX01,8,2,"Aguascalientes, AG",0,0,1,3,5,No,-,images/queens/MX01-Q0411.webp,0,34
-MX01-Q0710,Q0710,MX01,9,1,"Mexico City, DF",0,0,0,1,4,No,-,images/queens/MX01-Q0710.webp,0,32
-MX01-Q0711,Q0711,MX01,10,4,"Querétaro City, QT",0,0,1,2,3,No,-,images/queens/MX01-Q0711.webp,9000,24
-MX01-Q0712,Q0712,MX01,11,6,"Puerto Vallarta, JA",0,0,0,2,2,No,-,images/queens/MX01-Q0712.webp,0,25
-MX02-Q0713,Q0713,MX02,1,12,"Mexicali, BC",1,3,1,1,,No,-,images/queens/MX02-Q0713.webp,550000,22
-MX02-Q0714,Q0714,MX02,2,13,"Mexico City, DF",2,4,0,0,,No,-,images/queens/MX02-Q0714.webp,18000,35
-MX02-Q0715,Q0715,MX02,2,4,"Chihuahua, CH",2,3,1,2,,No,-,images/queens/MX02-Q0715.webp,0,20
-MX02-Q0716,Q0716,MX02,2,7,"Tepatitlán de Morelos, JA",3,0,1,2,,No,-,images/queens/MX02-Q0716.webp,0,27
-MX02-Q0717,Q0717,MX02,5,2,"Mexico City, DF",1,4,2,2,10,No,-,images/queens/MX02-Q0717.webp,36000,26
-MX02-Q0718,Q0718,MX02,6,9,"Aguascalientes, AG",1,1,0,4,9,No,-,images/queens/MX02-Q0718.webp,18000,27
-MX02-Q0719,Q0719,MX02,7,11,"Mexico City, DF",2,0,0,2,7,Yes,-,images/queens/MX02-Q0719.webp,9000,36
-MX02-Q0720,Q0720,MX02,8,5,"Mexico City, DF",0,0,2,1,6,No,-,images/queens/MX02-Q0720.webp,0,27
-MX02-Q0721,Q0721,MX02,9,1,"Ciudad Madero, TM",0,1,1,2,5,No,-,images/queens/MX02-Q0721.webp,0,29
-MX02-Q0722,Q0722,MX02,10,10,"Querétaro City, QT",0,1,0,1,4,No,-,images/queens/MX02-Q0722.webp,0,29
-MX02-Q0723,Q0723,MX02,11,6,"Monterrey, NL",0,0,0,1,3,No,-,images/queens/MX02-Q0723.webp,0,31
-MX02-Q0724,Q0724,MX02,12,3,"Mexico City, DF",0,0,0,1,2,Yes,-,images/queens/MX02-Q0724.webp,9000,33
-MX02-Q0725,Q0725,MX02,13,8,"Aguascalientes, AG",0,0,0,1,1,No,-,images/queens/MX02-Q0725.webp,0,23
+BR01-Q0683,Q0683,BR01,1,-,"Rio de Janeiro, RJ",4,3,0,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/9/9d/OrganzzaDRBR1CastMug.jpg,155000,30
+BR01-Q0684,Q0684,BR01,2,-,"Rio de Janeiro, RJ",2,1,1,2,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/c/cd/BetinaPolaroidDRBR1CastMug.jpg,7500,46
+BR01-Q0685,Q0685,BR01,2,-,"Salvador, BA",2,4,2,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/6/6b/HellenaMaldittaDRBR1CastMug.jpg,2500,23
+BR01-Q0398,Q0398,BR01,2,-,"Rio de Janeiro, RJ",1,4,3,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/d/df/MirandaLebr%C3%A3oDRBR1CastMug.jpg,10000,33
+BR01-Q0686,Q0686,BR01,5,-,"Piraúba, MG",1,2,1,3,10,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/f/f3/ShannonSkarlletDRBR1CastMug.jpg,10000,26
+BR01-Q0687,Q0687,BR01,6,-,"Monte Santo de Minas, MG",1,0,0,2,8,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/8/8b/NazaDRBR1CastMug.jpg,0,22
+BR01-Q0688,Q0688,BR01,7,-,"Campinas, SP",0,3,1,3,7,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/3/3a/DallasDeVilDRBR1CastMug.jpg,5000,26
+BR01-Q0689,Q0689,BR01,8,-,"Taguatinga, DF",0,3,1,1,6,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/f/f3/RubiOceanDRBR1CastMug.jpg,0,29
+BR01-Q0690,Q0690,BR01,9,-,"Belo Horizonte, MG",0,0,0,2,5,Yes,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/4/41/AquarelaDRBR1CastMug.jpg,0,26
+BR01-Q0691,Q0691,BR01,10,-,"São José do Rio Preto, SP",0,0,0,1,4,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/4/43/MelusineSparkleDRBR1CastMug.jpg,0,26
+BR01-Q0692,Q0692,BR01,11,-,"Belém, PA",0,2,0,1,3,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/5/54/TristanSoledadeDRBR1CastMug.jpg,0,34
+BR01-Q0693,Q0693,BR01,12,-,"Jaquirana, RS",0,0,0,2,2,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/9/9d/DivaMoreDRBR1CastMug.jpg,0,42
+BR02-Q0694,Q0694,BR02,1,4,"Carnaíba, PE",3,0,1,0,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/b/bd/RubyNoxDRBR2CastMug.jpg,150000,31
+BR02-Q0695,Q0695,BR02,2,8,"Belo Horizonte, MG",1,1,2,3,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/f/f8/MellodyQueenDRBR2CastMug.jpg,6000,30
+BR02-Q0696,Q0696,BR02,3,9,"Sapé, PB",0,3,0,3,10,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/f/fb/MelinaBlleyDRBR2CastMug.jpg,5000,30
+BR02-Q0697,Q0697,BR02,3,2,"Recife, PE",1,2,2,3,10,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/2/2a/PoseidonDragDRBR2CastMug.jpg,0,30
+BR02-Q0698,Q0698,BR02,5,7,"São Paulo, SP",1,4,1,1,9,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/7/72/BhelchiDRBR2CastMug.jpg,0,36
+BR02-Q0699,Q0699,BR02,6,5,"Cidade Ocidental, GO",2,1,1,2,7,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/6/6e/AdoraBlackDRBR2CastMug.jpg,10000,26
+BR02-Q0700,Q0700,BR02,7,10,"Irecê, BA",1,1,1,2,6,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/5/54/Desir%C3%A9eBeckDRBR2CastMug.jpg,0,34
+BR02-Q0701,Q0701,BR02,8,6,"Vinhedo, SP",0,2,0,1,5,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/f/f8/MercedezVulc%C3%A3oDRBR2CastMug.jpg,0,36
+BR02-Q0702,Q0702,BR02,9,1,"Vila Velha, ES",0,0,1,1,3,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/1/1f/PaolaHoffmannVanCartierDRBR2CastMug.jpg,0,35
+BR02-Q0703,Q0703,BR02,10,3,"Niterói, RJ",0,1,0,1,2,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/f/fa/ChanelDRBR2CastMug.jpg,0,21
+MX01-Q0704,Q0704,MX01,1,9,"Guadalajara, JA",5,3,1,0,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/3/38/CristianPeraltaDRMX1CastMug.jpg,568000,35
+MX01-Q0395,Q0395,MX01,2,10,"Morelia, MI",1,4,0,2,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/d/db/GalaVaroDRMX1CastMug.jpg,0,33
+MX01-Q0705,Q0705,MX01,2,11,"León, GT",3,2,1,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/d/d1/MatrakaDRMX1CastMug.jpg,61000,24
+MX01-Q0706,Q0706,MX01,2,5,"Mexico City, DF",1,4,0,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/a/a7/ReginaVoceDRMX1CastMug.jpg,36000,41
+MX01-Q0707,Q0707,MX01,5,7,"Ocotlán de Morelos, OA",0,3,1,2,9,Yes,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/1/11/LadyKeroDRMX1CastMug.jpg,36000,33
+MX01-Q0708,Q0708,MX01,6,3,"Mexico City, DF",0,2,3,1,7,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/8/81/MargaretYYaDRMX1CastMug.jpg,36000,28
+MX01-Q0709,Q0709,MX01,7,8,"Ciudad Juárez, CH",1,1,0,3,6,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/1/1b/ArgennisDRMX1CastMug.jpg,27000,26
+MX01-Q0411,Q0411,MX01,8,2,"Aguascalientes, AG",0,0,1,3,5,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/6/68/SerenaMorenaDRMX1CastMug.jpg,0,34
+MX01-Q0710,Q0710,MX01,9,1,"Mexico City, DF",0,0,0,1,4,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/e/e8/PixiePixieDRMX1CastMug.jpg,0,32
+MX01-Q0711,Q0711,MX01,10,4,"Querétaro City, QT",0,0,1,2,3,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/0/0d/VermelhaNoirDRMX1CastMug.jpg,9000,24
+MX01-Q0712,Q0712,MX01,11,6,"Puerto Vallarta, JA",0,0,0,2,2,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/6/66/MissVallartaDRMX1CastMug.jpg,0,25
+MX02-Q0713,Q0713,MX02,1,12,"Mexicali, BC",1,3,1,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/8/82/LeexaFoxDRMX2CastMug.jpg,550000,22
+MX02-Q0714,Q0714,MX02,2,13,"Mexico City, DF",2,4,0,0,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/e/ed/EvaBluntDRMX2CastMug.jpg,18000,35
+MX02-Q0715,Q0715,MX02,2,4,"Chihuahua, CH",2,3,1,2,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/3/31/HoracioPotasioDRMX2CastMug.jpg,0,20
+MX02-Q0716,Q0716,MX02,2,7,"Tepatitlán de Morelos, JA",3,0,1,2,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/f/f4/JenaryBloomDRMX2CastMug.jpg,0,27
+MX02-Q0717,Q0717,MX02,5,2,"Mexico City, DF",1,4,2,2,10,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/1/18/ElektraVandergeldDRMX2CastMug.jpg,36000,26
+MX02-Q0718,Q0718,MX02,6,9,"Aguascalientes, AG",1,1,0,4,9,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/1/15/UniqueDRMX2CastMug.jpg,18000,27
+MX02-Q0719,Q0719,MX02,7,11,"Mexico City, DF",2,0,0,2,7,Yes,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/8/8e/LunaLansmanDRMX2CastMug.jpg,9000,36
+MX02-Q0720,Q0720,MX02,8,5,"Mexico City, DF",0,0,2,1,6,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/5/52/SuculentaDRMX2CastMug.jpg,0,27
+MX02-Q0721,Q0721,MX02,9,1,"Ciudad Madero, TM",0,1,1,2,5,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/3/34/AvaPocketDRMX2CastMug.jpg,0,29
+MX02-Q0722,Q0722,MX02,10,10,"Querétaro City, QT",0,1,0,1,4,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/6/6c/Gar%C3%A7onneDRMX2CastMug.jpg,0,29
+MX02-Q0723,Q0723,MX02,11,6,"Monterrey, NL",0,0,0,1,3,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/8/84/Mar%C3%ADaBonitaDRMX2CastMug.jpg,0,31
+MX02-Q0724,Q0724,MX02,12,3,"Mexico City, DF",0,0,0,1,2,Yes,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/4/41/NinadelaFuenteDRMX2CastMug.jpg,9000,33
+MX02-Q0725,Q0725,MX02,13,8,"Aguascalientes, AG",0,0,0,1,1,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/1/1b/IgnusArsDRMX2CastMug.jpg,0,23
