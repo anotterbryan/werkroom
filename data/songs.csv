@@ -23,12 +23,12 @@ S0026,Even Angels,Fantasia,1,0g5HMIpIO92FFVSxsD8RqB,No,LIPSYNC,-
 S0027,Straight Up,Paula Abdul,1,0leaVjBZ7xvvdoTDnMC7RQ,No,LIPSYNC,-
 S0028,I Think About You,Patti LaBelle,1,4doSpsX1xxbf55TMA85I3G,No,LIPSYNC,-
 S0029,Champion (DJ BunJoe's Olympic Mix),RuPaul,1,7MMq6tyXkzTzGbSTLLkHVM,Yes,LIPSYNC,-
-S0030,Toxic,Britney Spears,2,6I9VzXrHxO9rA9A5euc8Ak,No,LIPSYNC,-
+S0030,Toxic,Britney Spears,3,6I9VzXrHxO9rA9A5euc8Ak,No,LIPSYNC,-
 S0031,Bad Girls,Donna Summer,1,1ibRqifchaAfeNdQGpbRVW,No,LIPSYNC,-
 S0032,This Will Be (An Everlasting Love),Natalie Cole,1,0PDCewmZCp0P5s00bptcdd,No,LIPSYNC,-
 S0033,Trouble,Pink,1,0qrGSKtrEj7PJAGVBFE9vG,No,LIPSYNC,-
 S0034,Vogue,Madonna,1,3WFgRhgECxQYyy8Ldhk2PG,No,LIPSYNC,-
-S0035,Born This Way,Lady Gaga,3,30XU4suKzCeoCK9YFzdufg,No,LIPSYNC,-
+S0035,Born This Way,Lady Gaga,4,30XU4suKzCeoCK9YFzdufg,No,LIPSYNC,-
 S0038,I've Got to Use My Imagination,Gladys Knight & the Pips,1,5r3q5qzU1LoxfORgwuvLCa,No,LIPSYNC,-
 S0039,(You Make Me Feel Like) A Natural Woman,Aretha Franklin,1,5K09WxKdlkroDyEVyOSySy,No,LIPSYNC,-
 S0040,No One Else on Earth,Wynonna Judd,1,52PGtJuGEFNVOnRdLac1Av,No,LIPSYNC,-
@@ -94,7 +94,7 @@ S0104,Groove Is in the Heart,Deee-Lite,2,2He3NOyqtLNE3RQPpeDdSb,No,LIPSYNC,-
 S0105,New Attitude,Patti LaBelle,1,71DxDMPiElIeGgvJvtITXR,No,LIPSYNC,-
 S0106,Good as Hell,Lizzo,1,6KgBpzTuTRPebChN0VTyzV,No,LIPSYNC,-
 S0107,Nasty Girl,Vanity 6,1,6cPWiAwPwUnjb63PvkHk2E,No,LIPSYNC,-
-S0108,Call Me Mother,RuPaul,3,0SENYBHXBj0TI1ZygWwxee,Yes,LIPSYNC,-
+S0108,Call Me Mother,RuPaul,4,0SENYBHXBj0TI1ZygWwxee,Yes,LIPSYNC,-
 S0109,Bang Bang,"Jessie J, Ariana Grande, Nicki Minaj",2,0puf9yIluy9W0vpMEUoAnN,No,LIPSYNC,-
 S0111,Work Bitch,Britney Spears,2,3KliPMvk1EvFZu9cvkj8p1,No,LIPSYNC,-
 S0113,Living in America,James Brown,1,0T1OrvV6bOQVL2vSQiDn6W,No,LIPSYNC,-
@@ -775,7 +775,7 @@ S0799,I'm Feeling Sexy Tonight,Chona Cruz,1,-,No,LIPSYNC,PH01
 S0800,Shine,Regine Velasquez,1,-,No,LIPSYNC,PH01
 S0801,Ate Sandali,Maris Racal,1,-,No,LIPSYNC,PH01
 S0802,Amakabogera,Maymay Entrata,1,-,No,LIPSYNC,PH01
-S0803,Born Naked,RuPaul,1,-,No,LIPSYNC,PH01
+S0803,Born Naked,RuPaul,2,-,No,LIPSYNC,PH01
 S0804,Dyosa,Yumi Lacsamana,1,-,No,LIPSYNC,PH01
 S0805,You'll Always Be My Number One,Vernie Varga,1,-,No,LIPSYNC,PH01
 S0806,Sissy That Walk,"RuPaul; ""Call Me Mother"" by RuPaul; ""Sirena"" by Gloc-9 feat. Ebe Dancel",1,-,No,LIPSYNC,PH01
@@ -807,3 +807,27 @@ S0831,Misbehave,Lola Amour,1,-,No,LIPSYNC,PHSR01
 S0832,Race Car,Calista,1,-,No,LIPSYNC,PHSR01
 S0833,Power,Morissette Amon,1,-,No,LIPSYNC,PHSR01
 S0834,Born to Do Drag,Marina Summers,1,-,No,LIPSYNC,PHSR01
+S0835,รักยังไม่ต้องการ,Marsha Vadhanapanich,1,-,No,LIPSYNC,TH01
+S0836,OK นะคะ,Katreeya English,1,-,No,LIPSYNC,TH01
+S0837,Dhoom Dhoom,Tata Young,1,-,No,LIPSYNC,TH01
+S0838,เพลงสุดท้าย,Suda Chuenban,1,-,No,LIPSYNC,TH01
+S0839,Crazy In Love,Beyoncé,1,-,No,LIPSYNC,TH01
+S0840,I Will Survive (Mor Lam version),Saisunee Sukgrit,1,-,No,LIPSYNC,TH02
+S0841,ขอใจเธอแลกเบอร์โทร,Yinglee SriJumpol,1,-,No,LIPSYNC,TH02
+S0842,จดหมายจากเมียเช่า,Mani Maniwan,1,-,No,LIPSYNC,TH02
+S0843,สุดฤทธิ์สุดเดช,Mai Charoenpura,1,-,No,LIPSYNC,TH02
+S0844,เจ็บนิด...นิด,Rhatha Phongam,1,-,No,LIPSYNC,TH02
+S0845,กินจุ๊บจิ๊บ,Pornchita na Songkhla,1,-,No,LIPSYNC,TH02
+S0846,Lady Marmalade,"Christina Aguilera, Lil' Kim, Mýa and Pink",1,-,No,LIPSYNC,TH02
+S0847,หางเครื่อง,Sukanya Nakpradit,1,-,No,LIPSYNC,TH02
+S0848,This Is Me,Keala Settle,1,-,No,LIPSYNC,TH02
+S0849,Last Dance,Selena Quintanilla,1,-,No,LIPSYNC,TH02
+S0850,ผีเสื้อราตรี,2002 Ratree,1,-,No,LIPSYNC,TH03
+S0851,บุ๋ง,Maria Lynn Ehren,1,-,No,LIPSYNC,TH03
+S0852,ฟ้ารักพ่อ,Badmixy,1,-,No,LIPSYNC,TH03
+S0853,Condragulations,RuPaul,1,-,No,LIPSYNC,TH03
+S0854,Burning For You,Kratae,1,-,No,LIPSYNC,TH03
+S0855,We Are Beautiful,Silvy,1,-,No,LIPSYNC,TH03
+S0856,Music Lover,Marsha,1,-,No,LIPSYNC,TH03
+S0857,ร (W8),Gene Kasidit,1,-,No,LIPSYNC,TH03
+S0858,ประวัติศาสตร์,Christina Aguilar,1,-,No,LIPSYNC,TH03
