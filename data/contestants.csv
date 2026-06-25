@@ -799,3 +799,14 @@ BE02-Q0597,Q0597,BE02,6,3,Antwerp,0,0,1,1,5,Yes,-,images/queens/BE02-Q0597.webp,
 BE02-Q0598,Q0598,BE02,7,9,Brussels,0,0,1,0,,No,-,images/queens/BE02-Q0598.webp,-,23
 BE02-Q0599,Q0599,BE02,8,4,Luxembourg,0,1,0,1,3,No,-,images/queens/BE02-Q0599.webp,-,33
 BE02-Q0600,Q0600,BE02,9,1,Liège,0,0,0,1,2,No,-,images/queens/BE02-Q0600.webp,-,35
+DE01-Q0601,Q0601,DE01,1,10,"Vienna,Austria",3,3,0,2,,No,-,images/queens/DE01-Q0601.webp,-,29
+DE01-Q0602,Q0602,DE01,2,8,"Vienna,Austria",2,3,0,1,,No,-,images/queens/DE01-Q0602.webp,-,24
+DE01-Q0603,Q0603,DE01,3,1,"Berlin,Germany",2,1,2,0,,No,-,images/queens/DE01-Q0603.webp,-,29
+DE01-Q0604,Q0604,DE01,4,11,"Wiesbaden,Germany",2,1,1,1,10,No,-,images/queens/DE01-Q0604.webp,-,41
+DE01-Q0605,Q0605,DE01,5,9,"Düsseldorf,Germany",2,0,1,3,8,No,-,images/queens/DE01-Q0605.webp,-,24
+DE01-Q0606,Q0606,DE01,6,2,"Basel,Switzerland",0,2,0,4,7,Yes,-,images/queens/DE01-Q0606.webp,-,29
+DE01-Q0607,Q0607,DE01,7,6,"Berlin,Germany",1,0,2,1,6,No,-,images/queens/DE01-Q0607.webp,-,38
+DE01-Q0393,Q0393,DE01,8,7,"Basel,Switzerland",0,1,0,4,5,No,-,images/queens/DE01-Q0393.webp,-,25
+DE01-Q0608,Q0608,DE01,9,3,"Frankfurt,Germany",0,1,0,1,4,No,-,images/queens/DE01-Q0608.webp,-,23
+DE01-Q0409,Q0409,DE01,10,4,"Cologne,Germany",0,0,0,1,3,No,-,images/queens/DE01-Q0409.webp,-,22
+DE01-Q0609,Q0609,DE01,11,5,"Munich,Germany",0,1,0,1,2,No,-,images/queens/DE01-Q0609.webp,-,25
