@@ -620,3 +620,71 @@ DU04-Q0445,Q0445,DU04,7,8,"Melbourne, Australia",1,1,1,1,5,No,-,images/queens/DU
 DU04-Q0446,Q0446,DU04,8,10,"Auckland, New Zealand",0,0,0,3,4,No,-,images/queens/DU04-Q0446.webp,0,28
 DU04-Q0447,Q0447,DU04,9,9,"Sydney, Australia",0,0,0,2,3,No,-,images/queens/DU04-Q0447.webp,0,27
 DU04-Q0448,Q0448,DU04,10,7,"Wellington, New Zealand",0,0,1,1,2,No,-,images/queens/DU04-Q0448.webp,0,26
+ES01-Q0449,Q0449,ES01,1,4,"Seville, Andalusia",3,2,1,0,,No,-,images/queens/ES01-Q0449.webp,-,31
+ES01-Q0450,Q0450,ES01,2,6,"Madrid, C. Madrid",1,1,0,2,,No,-,images/queens/ES01-Q0450.webp,-,31
+ES01-Q0451,Q0451,ES01,2,2,"Barcelona, Catalonia",1,2,0,2,,No,-,images/queens/ES01-Q0451.webp,-,22
+ES01-Q0452,Q0452,ES01,4,5,"Madrid, C. Madrid",1,3,2,1,7,Yes,-,images/queens/ES01-Q0452.webp,-,38
+ES01-Q0453,Q0453,ES01,5,7,"Barcelona, Catalonia",0,0,0,3,6,No,-,images/queens/ES01-Q0453.webp,-,24
+ES01-Q0454,Q0454,ES01,6,3,"Valencia, Valencian Community",1,0,0,2,5,No,-,images/queens/ES01-Q0454.webp,-,25
+ES01-Q0406,Q0406,ES01,7,1,"Badajoz, Extremadura",0,0,0,2,4,No,-,images/queens/ES01-Q0406.webp,-,23
+ES01-Q0455,Q0455,ES01,8,8,Bolivia,0,0,1,0,,No,-,images/queens/ES01-Q0455.webp,-,20
+ES01-Q0456,Q0456,ES01,9,9,"Las Palmas, Canary Islands",0,0,0,1,2,No,-,images/queens/ES01-Q0456.webp,-,30
+ES01-Q0457,Q0457,ES01,10,10,"Cádiz, Andalusia",0,0,0,1,1,No,-,images/queens/ES01-Q0457.webp,-,29
+ES02-Q0458,Q0458,ES02,1,12,"Barcelona, Catalonia",3,5,0,0,,No,-,images/queens/ES02-Q0458.webp,-,45
+ES02-Q0459,Q0459,ES02,2,5,"Cádiz, Andalusia",2,1,0,2,,No,-,images/queens/ES02-Q0459.webp,-,25
+ES02-Q0460,Q0460,ES02,2,3,"Alicante, Valencian Community",2,3,0,1,,No,-,images/queens/ES02-Q0460.webp,-,30
+ES02-Q0461,Q0461,ES02,4,7,"Barcelona, Catalonia",1,2,1,3,11,No,-,images/queens/ES02-Q0461.webp,-,34
+ES02-Q0462,Q0462,ES02,5,11,Belgium,0,3,0,2,8,No,-,images/queens/ES02-Q0462.webp,-,31
+ES02-Q0463,Q0463,ES02,6,4,"Las Palmas, Canary Islands",1,1,1,1,7,No,-,images/queens/ES02-Q0463.webp,-,30
+ES02-Q0464,Q0464,ES02,7,10,Dominican Republic,0,1,1,2,6,No,-,images/queens/ES02-Q0464.webp,-,25
+ES02-Q0465,Q0465,ES02,8,2,"Madrid, C. Madrid",1,0,2,1,5,No,-,images/queens/ES02-Q0465.webp,-,33
+ES02-Q0466,Q0466,ES02,9,8,"Cádiz, Andalusia",0,0,1,2,4,No,-,images/queens/ES02-Q0466.webp,-,18
+ES02-Q0467,Q0467,ES02,10,1,"Cádiz, Andalusia",0,0,0,3,3,Yes,-,images/queens/ES02-Q0467.webp,-,35
+ES02-Q0468,Q0468,ES02,11,6,"Madrid, C. Madrid",0,0,0,1,2,No,-,images/queens/ES02-Q0468.webp,-,33
+ES02-Q0469,Q0469,ES02,12,9,"Lugo, Galicia",0,0,0,1,1,No,-,images/queens/ES02-Q0469.webp,-,28
+ES03-Q0470,Q0470,ES03,1,5,"Barcelona, Catalonia",4,1,0,1,,No,-,images/queens/ES03-Q0470.webp,40000,27
+ES03-Q0471,Q0471,ES03,2,8,"Zaragoza, Aragon",2,2,1,1,,No,-,images/queens/ES03-Q0471.webp,5000,39
+ES03-Q0472,Q0472,ES03,3,2,"Alicante, Valencian Community",0,3,0,2,11,No,-,images/queens/ES03-Q0472.webp,0,35
+ES03-Q0473,Q0473,ES03,3,10,"Málaga, Andalusia",1,0,2,4,11,No,-,images/queens/ES03-Q0473.webp,0,30
+ES03-Q0474,Q0474,ES03,5,9,"Barcelona, Catalonia",0,3,1,3,9,No,-,images/queens/ES03-Q0474.webp,0,24
+ES03-Q0475,Q0475,ES03,6,4,"Madrid, C. Madrid",1,2,1,1,8,No,-,images/queens/ES03-Q0475.webp,2500,30
+ES03-Q0476,Q0476,ES03,7,3,"Seville, Andalusia",0,3,2,2,7,No,-,images/queens/ES03-Q0476.webp,0,28
+ES03-Q0477,Q0477,ES03,7,1,"Cádiz, Andalusia",2,0,0,1,7,No,-,images/queens/ES03-Q0477.webp,5000,38
+ES03-Q0478,Q0478,ES03,9,12,Mexico,0,2,1,1,6,No,-,images/queens/ES03-Q0478.webp,2000,34
+ES03-Q0457,Q0457,ES03,10,13,"Cádiz, Andalusia",0,2,1,1,5,No,-,images/queens/ES03-Q0457.webp,0,31
+ES03-Q0479,Q0479,ES03,11,11,"Salamanca, Castile and León",0,1,0,1,3,No,-,images/queens/ES03-Q0479.webp,0,31
+ES03-Q0480,Q0480,ES03,12,7,"Las Palmas, Canary Islands",0,0,0,2,2,No,-,images/queens/ES03-Q0480.webp,0,32
+ES03-Q0481,Q0481,ES03,13,6,Venezuela,0,0,0,1,1,Yes,-,images/queens/ES03-Q0481.webp,3000,41
+ES04-Q0482,Q0482,ES04,1,5,"Madrid, C. Madrid",2,3,0,1,,No,-,images/queens/ES04-Q0482.webp,35000,28
+ES04-Q0483,Q0483,ES04,2,9,"Valencia, Valencian Community",1,3,2,0,,No,-,images/queens/ES04-Q0483.webp,2500,30
+ES04-Q0484,Q0484,ES04,3,10,"Barcelona, Catalonia",1,1,0,1,,No,-,images/queens/ES04-Q0484.webp,2500,23
+ES04-Q0485,Q0485,ES04,4,8,"Castellón de la Plana, Valencian Community",1,2,2,4,11,No,-,images/queens/ES04-Q0485.webp,2500,22
+ES04-Q0486,Q0486,ES04,5,6,Venezuela,1,2,1,3,9,No,-,images/queens/ES04-Q0486.webp,2500,28
+ES04-Q0487,Q0487,ES04,6,12,"Seville, Andalusia",1,2,0,1,8,No,-,images/queens/ES04-Q0487.webp,2500,31
+ES04-Q0488,Q0488,ES04,7,4,"Seville, Andalusia",1,2,1,3,7,No,-,images/queens/ES04-Q0488.webp,2500,44
+ES04-Q0489,Q0489,ES04,8,11,"Madrid, C. Madrid",1,0,1,2,5,No,-,images/queens/ES04-Q0489.webp,2500,31
+ES04-Q0490,Q0490,ES04,9,7,"Barcelona, Catalonia",0,1,0,1,4,No,-,images/queens/ES04-Q0490.webp,0,38
+ES04-Q0491,Q0491,ES04,10,1,"Santa Cruz de Tenerife, Canary Islands",0,0,1,1,3,Yes,-,images/queens/ES04-Q0491.webp,3000,37
+ES04-Q0492,Q0492,ES04,11,2,"Valencia, Valencian Community",0,0,0,1,2,No,-,images/queens/ES04-Q0492.webp,1000,39
+ES04-Q0493,Q0493,ES04,12,3,"Cádiz, Andalusia",0,0,0,1,1,No,-,images/queens/ES04-Q0493.webp,0,26
+ES05-Q0494,Q0494,ES05,1,10,"Torremolinos, Andalusia",2,3,1,1,,No,-,images/queens/ES05-Q0494.webp,55000,39
+ES05-Q0495,Q0495,ES05,2,2,"Córdoba, Andalusia",2,1,1,2,,No,-,images/queens/ES05-Q0495.webp,5000,32
+ES05-Q0496,Q0496,ES05,3,3,"Valencia, Valencian Community",2,2,2,0,,No,-,images/queens/ES05-Q0496.webp,2500,27
+ES05-Q0497,Q0497,ES05,3,9,"Copenhagen, Denmark",1,2,3,1,,No,-,images/queens/ES05-Q0497.webp,3000,29
+ES05-Q0498,Q0498,ES05,5,8,"Málaga, Andalusia",1,2,0,2,9,No,-,images/queens/ES05-Q0498.webp,3000,20
+ES05-Q0499,Q0499,ES05,6,1,"Barcelona, Catalonia",0,1,0,4,8,No,-,images/queens/ES05-Q0499.webp,0,27
+ES05-Q0500,Q0500,ES05,7,4,"Valencia, Valencian Community",0,4,1,1,7,No,-,images/queens/ES05-Q0500.webp,1500,27
+ES05-Q0501,Q0501,ES05,8,11,"Alicante, Valencian Community",1,0,0,1,6,No,-,images/queens/ES05-Q0501.webp,2500,23
+ES05-Q0502,Q0502,ES05,9,5,Venezuela,0,0,0,2,5,No,-,images/queens/ES05-Q0502.webp,0,52
+ES05-Q0503,Q0503,ES05,10,7,"Tenerife, Canary Islands",0,0,0,1,4,No,-,images/queens/ES05-Q0503.webp,0,27
+ES05-Q0504,Q0504,ES05,10,12,"Barcelona, Catalonia",0,0,0,1,4,No,-,images/queens/ES05-Q0504.webp,0,26
+ES05-Q0505,Q0505,ES05,12,6,"Badajoz, Extremadura",0,0,1,1,2,Yes,-,images/queens/ES05-Q0505.webp,3000,28
+ESAS01-Q0463,Q0463,ESAS01,1,-,"Las Palmas, Canary Islands",4,1,0,0,,No,-,images/queens/ESAS01-Q0463.webp,-,30
+ESAS01-Q0467,Q0467,ESAS01,2,-,"Cádiz, Andalusia",2,2,0,0,,Yes,-,images/queens/ESAS01-Q0467.webp,-,35
+ESAS01-Q0472,Q0472,ESAS01,3,-,"Alicante, Valencian Community",1,0,1,2,,No,-,images/queens/ESAS01-Q0472.webp,-,35
+ESAS01-Q0462,Q0462,ESAS01,3,-,Belgium,2,0,0,1,,No,-,images/queens/ESAS01-Q0462.webp,-,31
+ESAS01-Q0452,Q0452,ESAS01,5,-,"Madrid, C. Madrid",1,0,1,2,5,No,-,images/queens/ESAS01-Q0452.webp,-,38
+ESAS01-Q0451,Q0451,ESAS01,6,-,"Barcelona, Catalonia",0,1,0,2,4,No,-,images/queens/ESAS01-Q0451.webp,-,22
+ESAS01-Q0476,Q0476,ESAS01,7,-,"Seville, Andalusia",0,0,0,1,3,No,-,images/queens/ESAS01-Q0476.webp,-,28
+ESAS01-Q0465,Q0465,ESAS01,8,-,"Madrid, C. Madrid",0,0,0,2,2,No,Onyx Unleashed,images/queens/ESAS01-Q0465.webp,-,33
+ESAS01-Q0477,Q0477,ESAS01,9,-,"Cádiz, Andalusia",0,0,0,1,1,No,-,images/queens/ESAS01-Q0477.webp,-,38
