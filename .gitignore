@@ -29,3 +29,6 @@ scripts/.spotify_auth.json
 node_modules/
 package-lock.json
 work/
+
+# secrets — never commit
+.env
