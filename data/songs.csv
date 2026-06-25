@@ -18,7 +18,7 @@ S0021,Looking for a New Love,Jody Watley,1,64M7vSptOdMCuHwYzKuplj,No,LIPSYNC,-
 S0022,Knock on Wood,Amii Stewart,2,7uPY04JODJM6EKFoJp65LL,No,LIPSYNC,-
 S0023,MacArthur Park,Donna Summer,1,6wgQL5O7VhTUsBFuudWxy7,No,LIPSYNC,-
 S0024,Mickey (Spanish version),Toni Basil,1,7EC4tkhP1HK9oM34HBWyIp,No,LIPSYNC,-
-S0025,Believe,Cher,2,2goLsvvODILDzeeiT4dAoR,No,LIPSYNC,-
+S0025,Believe,Cher,3,2goLsvvODILDzeeiT4dAoR,No,LIPSYNC,-
 S0026,Even Angels,Fantasia,1,0g5HMIpIO92FFVSxsD8RqB,No,LIPSYNC,-
 S0027,Straight Up,Paula Abdul,1,0leaVjBZ7xvvdoTDnMC7RQ,No,LIPSYNC,-
 S0028,I Think About You,Patti LaBelle,1,4doSpsX1xxbf55TMA85I3G,No,LIPSYNC,-
@@ -28,7 +28,7 @@ S0031,Bad Girls,Donna Summer,1,1ibRqifchaAfeNdQGpbRVW,No,LIPSYNC,-
 S0032,This Will Be (An Everlasting Love),Natalie Cole,1,0PDCewmZCp0P5s00bptcdd,No,LIPSYNC,-
 S0033,Trouble,Pink,1,0qrGSKtrEj7PJAGVBFE9vG,No,LIPSYNC,-
 S0034,Vogue,Madonna,1,3WFgRhgECxQYyy8Ldhk2PG,No,LIPSYNC,-
-S0035,Born This Way,Lady Gaga,1,30XU4suKzCeoCK9YFzdufg,No,LIPSYNC,-
+S0035,Born This Way,Lady Gaga,2,30XU4suKzCeoCK9YFzdufg,No,LIPSYNC,-
 S0038,I've Got to Use My Imagination,Gladys Knight & the Pips,1,5r3q5qzU1LoxfORgwuvLCa,No,LIPSYNC,-
 S0039,(You Make Me Feel Like) A Natural Woman,Aretha Franklin,1,5K09WxKdlkroDyEVyOSySy,No,LIPSYNC,-
 S0040,No One Else on Earth,Wynonna Judd,1,52PGtJuGEFNVOnRdLac1Av,No,LIPSYNC,-
@@ -718,3 +718,26 @@ S0742,Boys (Summertime Love),Sabrina,1,-,No,LIPSYNC,FRAS01
 S0743,I Had a Dream,Nicky Doll,1,-,No,LIPSYNC,FRAS01
 S0744,Recommence-moi,Santa,1,-,No,LIPSYNC,FRAS01
 S0745,Born to Be Alive,"Patrick Hernandez (Elips vs. Piche) ""Kongolese sous BBL"" by Théodora and Jeez Suave (Mami Watta vs. Misty Phoenix) ""Abracadabra"" by Lady Gaga (Elips vs. Mami Watta)",1,-,No,LIPSYNC,FRAS01
+S0746,Occhi di Gatto,Cristina D'Avena,1,-,No,LIPSYNC,IT01
+S0747,Comprami,Viola Valentino,1,-,No,LIPSYNC,IT01
+S0748,Fiesta (Spanish Version),Raffaella Carrà,1,-,No,LIPSYNC,IT01
+S0749,Champion,RuPaul Charles,1,-,Yes,LIPSYNC,IT01
+S0750,Cicale,Heather Parisi,1,-,No,LIPSYNC,IT01
+S0751,Non Sono Una Signora,Loredana Bertè,1,-,No,LIPSYNC,IT01
+S0752,La Bambola,Patty Pravo,1,-,No,LIPSYNC,IT02
+S0753,Bagno a mezzanotte,Elodie,1,-,No,LIPSYNC,IT02
+S0754,Down Down Down,Lollipop,1,-,No,LIPSYNC,IT02
+S0755,Jem,Cristina D'Avena,1,-,No,LIPSYNC,IT02
+S0756,The Rhythm of the Night,Corona,1,-,No,LIPSYNC,IT02
+S0757,Pem Pem,Elettra Lamborghini,1,-,No,LIPSYNC,IT02
+S0758,Far l'Amore,Bob Sinclar and Raffaella Carrà,1,-,No,LIPSYNC,IT02
+S0759,Festival,Paola & Chiara,1,-,No,LIPSYNC,IT02
+S0760,Pazzeska,M¥SS KETA ft. Gué,1,-,No,LIPSYNC,IT03
+S0761,2 Be Loved (Am I Ready),Lizzo,1,-,No,LIPSYNC,IT03
+S0762,Mare caos,Paola & Chiara,1,-,No,LIPSYNC,IT03
+S0763,Tribale,Elodie,1,-,No,LIPSYNC,IT03
+S0764,Vamos a bailar (Esta vida nueva),"Paola & Chiara, Tiziano Ferro and Gabry Ponte",1,-,No,LIPSYNC,IT03
+S0765,Up & Down (Don't Fall in Love with Me),Billy More,1,-,No,LIPSYNC,IT03
+S0766,Mon amour,Annalisa,1,-,No,LIPSYNC,IT03
+S0767,Siamo donne,Sabrina Salerno and Jo Squillo,1,-,No,LIPSYNC,IT03
+S0768,Furore,Paola & Chiara,1,-,No,LIPSYNC,IT03

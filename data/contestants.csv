@@ -729,3 +729,34 @@ FRAS01-Q0508,Q0508,FRAS01,7,1,-,0,1,0,2,5,No,-,images/queens/FRAS01-Q0508.webp,0
 FRAS01-Q0516,Q0516,FRAS01,8,5,-,1,1,1,1,4,No,-,images/queens/FRAS01-Q0516.webp,0,-
 FRAS01-Q0396,Q0396,FRAS01,9,9,"Saint-Denis, France",0,0,0,2,3,No,-,images/queens/FRAS01-Q0396.webp,0,-
 FRAS01-Q0532,Q0532,FRAS01,10,8,-,0,0,0,2,2,No,-,images/queens/FRAS01-Q0532.webp,0,-
+IT01-Q0534,Q0534,IT01,1,8,Turin,0,1,0,0,,No,-,images/queens/IT01-Q0534.webp,-,27
+IT01-Q0535,Q0535,IT01,2,2,Lecce,2,0,0,0,,No,-,images/queens/IT01-Q0535.webp,-,33
+IT01-Q0536,Q0536,IT01,2,5,Palermo,1,1,0,2,,No,-,images/queens/IT01-Q0536.webp,-,35
+IT01-Q0537,Q0537,IT01,4,7,Bologna,0,2,1,3,6,Yes,-,images/queens/IT01-Q0537.webp,-,33
+IT01-Q0538,Q0538,IT01,5,3,Carbonia,0,0,0,3,5,No,-,images/queens/IT01-Q0538.webp,-,36
+IT01-Q0539,Q0539,IT01,6,1,Naples,1,0,0,2,4,No,-,images/queens/IT01-Q0539.webp,-,27
+IT01-Q0540,Q0540,IT01,7,6,Milan,1,0,0,0,4,No,-,images/queens/IT01-Q0540.webp,-,46
+IT01-Q0541,Q0541,IT01,8,4,Arezzo,0,1,0,1,2,No,-,images/queens/IT01-Q0541.webp,-,32
+IT02-Q0542,Q0542,IT02,1,9,Riesi,4,0,0,0,,No,-,images/queens/IT02-Q0542.webp,-,34
+IT02-Q0543,Q0543,IT02,2,2,Palermo,1,2,2,0,,No,-,images/queens/IT02-Q0543.webp,-,24
+IT02-Q0392,Q0392,IT02,2,1,Rome,1,1,0,0,,Yes,-,images/queens/IT02-Q0392.webp,-,31
+IT02-Q0544,Q0544,IT02,4,5,Palermo,1,2,1,2,8,No,-,images/queens/IT02-Q0544.webp,-,32
+IT02-Q0545,Q0545,IT02,5,3,Corato,0,0,0,2,7,No,-,images/queens/IT02-Q0545.webp,-,33
+IT02-Q0546,Q0546,IT02,6,10,"New York City,USA",0,0,2,2,6,No,-,images/queens/IT02-Q0546.webp,-,25
+IT02-Q0547,Q0547,IT02,7,6,Florence,0,0,0,3,4,No,-,images/queens/IT02-Q0547.webp,-,29
+IT02-Q0548,Q0548,IT02,8,8,Rome,0,1,0,2,3,No,-,images/queens/IT02-Q0548.webp,-,33
+IT02-Q0549,Q0549,IT02,9,7,Catania,0,0,0,1,2,No,-,images/queens/IT02-Q0549.webp,-,28
+IT02-Q0550,Q0550,IT02,10,4,Frosinone,0,0,0,1,1,No,-,images/queens/IT02-Q0550.webp,-,29
+IT03-Q0551,Q0551,IT03,1,5,Milan,3,2,0,2,,No,-,images/queens/IT03-Q0551.webp,-,34
+IT03-Q0552,Q0552,IT03,2,4,Rome,2,6,0,0,,No,-,images/queens/IT03-Q0552.webp,-,36
+IT03-Q0553,Q0553,IT03,3,1,Rome,2,1,1,4,12,No,-,images/queens/IT03-Q0553.webp,-,37
+IT03-Q0554,Q0554,IT03,3,13,Rome,2,4,1,2,12,Yes,-,images/queens/IT03-Q0554.webp,-,44
+IT03-Q0555,Q0555,IT03,5,6,Naples,1,1,2,2,9,No,-,images/queens/IT03-Q0555.webp,-,29
+IT03-Q0556,Q0556,IT03,6,11,Palermo,0,2,0,2,8,No,-,images/queens/IT03-Q0556.webp,-,24
+IT03-Q0557,Q0557,IT03,7,3,Milan,0,0,1,2,7,No,-,images/queens/IT03-Q0557.webp,-,25
+IT03-Q0558,Q0558,IT03,8,8,"London,UK",0,0,2,2,6,No,-,images/queens/IT03-Q0558.webp,-,44
+IT03-Q0559,Q0559,IT03,9,12,Bologna,0,1,1,2,5,No,-,images/queens/IT03-Q0559.webp,-,38
+IT03-Q0560,Q0560,IT03,10,9,Cagliari,0,1,0,1,4,No,-,images/queens/IT03-Q0560.webp,-,24
+IT03-Q0561,Q0561,IT03,11,2,"Tirana,Albania",0,1,0,1,3,No,-,images/queens/IT03-Q0561.webp,-,32
+IT03-Q0562,Q0562,IT03,12,7,Milan,0,0,0,1,2,No,-,images/queens/IT03-Q0562.webp,-,31
+IT03-Q0563,Q0563,IT03,13,10,Padua,0,0,0,1,1,No,-,images/queens/IT03-Q0563.webp,-,29
