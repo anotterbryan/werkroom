@@ -151,6 +151,37 @@ select,input[type=text]{background:rgba(0,0,0,.35);border:1px solid rgba(244,181
 .frrow{transition:opacity .32s ease}
 .frrow.fr-out{opacity:0}
 .frrow.fr-gone{display:none}
+/* region-grouped franchise side-filter */
+.frfilter.byregion{display:block}
+.frgroup{margin:0 0 11px}
+.frgroup-head{display:flex;align-items:center;gap:8px;margin:0 0 6px;cursor:pointer;user-select:none}
+.frgroup-name{font-family:var(--mono);font-size:10.5px;letter-spacing:2px;text-transform:uppercase;font-weight:700;color:var(--gold)}
+.frgroup-head:hover .frgroup-name{color:var(--rose)}
+.frgroup-name .rdot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:6px;vertical-align:middle;opacity:.9}
+.frgroup-head .rstate{font-size:9.5px;color:rgba(247,240,230,.5);font-family:var(--mono)}
+.frgroup-chips{display:flex;flex-wrap:wrap;gap:7px}
+.frgroup.flagship .frgroup-name{color:var(--magenta)}
+.frgroup.flagship{padding:7px 9px;border:1px solid rgba(230,0,126,.3);border-radius:12px;background:rgba(230,0,126,.06)}
+/* ---------- region → franchise atlas ---------- */
+.region-sec{margin:0 0 30px}
+.region-head{display:flex;align-items:center;gap:11px;cursor:pointer;user-select:none;
+  padding:11px 14px;border-radius:14px;border:1px solid rgba(244,181,63,.22);
+  background:linear-gradient(140deg,rgba(61,22,84,.42),rgba(22,3,32,.5))}
+.region-head:hover{border-color:rgba(244,181,63,.4)}
+.region-sec.flagship .region-head{border-color:rgba(230,0,126,.5);
+  background:linear-gradient(135deg,rgba(61,22,84,.72),rgba(230,0,126,.22) 75%,rgba(244,181,63,.14))}
+.region-title{font-family:var(--disp);font-weight:800;font-size:clamp(20px,3vw,28px);color:var(--cream);line-height:1.05}
+.region-sec.flagship .region-title{color:var(--gold)}
+.region-meta{font-size:10.5px;letter-spacing:2px;text-transform:uppercase;color:rgba(247,240,230,.62);font-family:var(--mono)}
+.region-caret{margin-left:auto;font-size:14px;color:var(--gold);flag:none}
+.region-flag{font-size:9px;letter-spacing:2px;text-transform:uppercase;font-weight:700;
+  padding:3px 9px;border-radius:20px;background:rgba(230,0,126,.2);border:1px solid rgba(230,0,126,.5);color:var(--rose)}
+.region-body{margin-top:14px}
+.region-body.collapsed{display:none}
+.fr-block{margin:0 0 18px}
+.fr-block-head{display:flex;align-items:baseline;gap:10px;margin:0 0 9px;flex-wrap:wrap}
+.fr-block-name{font-family:var(--disp);font-weight:800;font-size:17px;color:var(--gold)}
+.fr-block-sub{font-size:11px;color:rgba(247,240,230,.6);font-family:var(--mono)}
 .tooltip{position:fixed;pointer-events:none;background:#0c0114;border:1px solid var(--gold);
   border-radius:8px;padding:8px 11px;font-size:12.5px;z-index:9998;max-width:240px;box-shadow:var(--shadow);opacity:0;transition:opacity .12s}
 /* status cells */
@@ -388,6 +419,25 @@ function cname(c){return (c&&c.drag_name_used&&c.drag_name_used!=='-')?c.drag_na
 let FRANCHISE='All';
 const FRANCHISES=[...new Set(D.seasons.map(s=>s.franchise))];
 function seasonAllowed(sid){if(FRANCHISE==='All')return true;const s=D.seasons.find(x=>x.season_id===sid);return s&&s.franchise===FRANCHISE;}
+/* ---- region grouping (read dynamically from DATA.seasons[].region) ----
+   The display order is fixed; Main Series is always first (the flagship). Any
+   region or franchise present in the data appears automatically — nothing is
+   hardcoded, so future franchises slot into their region with no code change. */
+const REGION_ORDER=['Main Series','Americas','Europe','Asia-Pacific','Global'];
+/* franchise -> region, taken from the first season carrying that franchise */
+const FRANCHISE_REGION=(()=>{const m={};D.seasons.forEach(s=>{if(s.franchise&&s.region&&!(s.franchise in m))m[s.franchise]=s.region;});return m;})();
+function franchiseRegion(fr){return FRANCHISE_REGION[fr]||'Global';}
+/* the regions actually present, in REGION_ORDER (unknown regions, if any, appended) */
+function regionsPresent(){
+  const seen=[...new Set(D.seasons.map(s=>s.region).filter(Boolean))];
+  const ordered=REGION_ORDER.filter(r=>seen.includes(r));
+  seen.forEach(r=>{if(!ordered.includes(r))ordered.push(r);});
+  return ordered;}
+/* {region: [franchise,…]} in REGION_ORDER, franchises in first-appearance (≈premiere) order */
+function franchisesByRegion(){
+  const out={};regionsPresent().forEach(r=>out[r]=[]);
+  FRANCHISES.forEach(f=>{const r=franchiseRegion(f);(out[r]=out[r]||[]).push(f);});
+  return out;}
 function epChip(eid){return el('span',{style:'cursor:pointer;color:var(--gold);text-decoration:underline',
   onclick:ev=>{const e=_EP[eid];if(e){ev.stopPropagation();go('season:'+e.season_id);}}},epLabel(eid));}
 /* colored section header for detail views */
@@ -480,7 +530,7 @@ function franchiseToggles(host,o){o=o||{};
   const present=[...new Set(FRANCHISES)].filter(f=>$$('.frrow['+'data-fr*="'+f+'"]',host).length||$$('.frrow',host).some(r=>(r.dataset.fr||'').split(',').includes(f)));
   const list=present.length?present:[...FRANCHISES];
   const active=new Set(list);            // start with all visible
-  const bar=el('div',{class:'frfilter fade'});
+  const bar=el('div',{class:'frfilter byregion fade'});
   const COLORS={};list.forEach((f,i)=>COLORS[f]=PAL[i%PAL.length]);
   const apply=()=>{
     const all=active.size===0||active.size>=list.length;
@@ -495,18 +545,50 @@ function franchiseToggles(host,o){o=o||{};
   const mkChip=(label,kind)=>{const c=el('div',{class:'frtog'});
     if(kind!=='all')c.append(el('span',{class:'dot',style:'color:'+COLORS[label]}));
     c.append(document.createTextNode(label));return c;};
-  const allChip=mkChip('All','all');
   const chips={};
-  const refresh=()=>{const all=active.size>=list.length;allChip.classList.toggle('on',all);
-    list.forEach(f=>chips[f].classList.toggle('on',active.has(f)));};
+  /* group present franchises by region (only regions that actually have a chip here) */
+  const groups=[];const REGION_DOT={'Main Series':'var(--magenta)','Americas':'#f0915e',
+    'Europe':'#5aa7e0','Asia-Pacific':'#7ad1b5','Global':'#b78aed'};
+  regionsPresent().forEach(region=>{
+    const frs=(franchisesByRegion()[region]||[]).filter(f=>list.includes(f));
+    if(frs.length)groups.push({region,frs});});
+  /* leftovers whose region isn't in the present set */
+  const grouped=new Set(groups.flatMap(g=>g.frs));
+  const orphans=list.filter(f=>!grouped.has(f));
+  if(orphans.length)groups.push({region:'Other',frs:orphans});
+  /* top "All" chip (resets to every franchise) */
+  const allRow=el('div',{class:'frgroup'});
+  const allChip=mkChip('All franchises','all');
   allChip.addEventListener('click',()=>{list.forEach(f=>active.add(f));refresh();apply();});
-  bar.append(allChip);
-  list.forEach(f=>{const c=mkChip(f);chips[f]=c;
-    c.addEventListener('click',()=>{
-      if(active.has(f))active.delete(f);else active.add(f);
-      if(active.size===0){list.forEach(x=>active.add(x));}  // never leave empty -> reset to all
+  allRow.append(el('div',{class:'frgroup-chips'},allChip));
+  bar.append(allRow);
+  const refreshFns=[];
+  groups.forEach(({region,frs})=>{
+    const g=el('div',{class:'frgroup'+(region==='Main Series'?' flagship':'')});
+    const state=el('span',{class:'rstate'});
+    const nameEl=el('span',{class:'frgroup-name'},
+      el('span',{class:'rdot',style:'background:'+(REGION_DOT[region]||'var(--gold)')}),region);
+    const headEl=el('div',{class:'frgroup-head',title:'Toggle every '+region+' franchise'},nameEl,state);
+    /* region-level toggle: if all of its franchises are on -> turn them off; else turn all on */
+    headEl.addEventListener('click',()=>{
+      const allOn=frs.every(f=>active.has(f));
+      if(allOn){frs.forEach(f=>active.delete(f));}else{frs.forEach(f=>active.add(f));}
+      if(active.size===0){list.forEach(x=>active.add(x));}  // never leave empty
       refresh();apply();});
-    bar.append(c);});
+    const chipWrap=el('div',{class:'frgroup-chips'});
+    frs.forEach(f=>{const c=mkChip(f);chips[f]=c;
+      c.addEventListener('click',()=>{
+        if(active.has(f))active.delete(f);else active.add(f);
+        if(active.size===0){list.forEach(x=>active.add(x));}
+        refresh();apply();});
+      chipWrap.append(c);});
+    g.append(headEl,chipWrap);bar.append(g);
+    refreshFns.push(()=>{const on=frs.filter(f=>active.has(f)).length;
+      state.textContent=on===frs.length?'all':(on===0?'none':on+'/'+frs.length);});
+  });
+  const refresh=()=>{const allOn=active.size>=list.length;allChip.classList.toggle('on',allOn);
+    list.forEach(f=>{if(chips[f])chips[f].classList.toggle('on',active.has(f));});
+    refreshFns.forEach(fn=>fn());};
   host.prepend(bar);refresh();apply();
   return {apply,active};
 }
@@ -628,8 +710,25 @@ V({id:'home',title:'The <em>Werkroom</em>',kicker:'Home',icon:'crown',group:'Hom
  }});
 
 /* ---------- 1. SEASON ATLAS ---------- */
+/* one season card (shared by the atlas + any season picker) */
+function seasonCard(s){
+  const win=qname[s.winner_id]||'—', mc=qname[s.miss_congeniality_id]||'—';
+  const cs=contestantsBySeason(s.season_id).sort((a,b)=>(+a.placement||99)-(+b.placement||99));
+  const runners=cs.filter(c=>+c.placement>1&&+c.placement<=3).map(c=>cname(c));
+  return el('div',{class:'card',style:'cursor:pointer',onclick:()=>go('season:'+s.season_id)},
+    el('div',{style:'display:flex;justify-content:space-between;align-items:center'},
+      el('div',{class:'vkicker',style:'margin:0'},s.platform+' · '+ (s.premiere_date||'')),
+      el('span',{class:'pill'+(s.franchise==='All Stars'?' mint':' gold'),style:'font-size:9px'},s.franchise)),
+    el('div',{style:'font-family:var(--disp);font-weight:800;font-size:24px;color:var(--cream);margin-top:6px'},seasonName(s.season_id)),
+    el('div',{style:'margin:10px 0 4px',html:`<span class="pill gold">${icon('crown')} ${win}</span>`}),
+    el('div',{style:'font-size:12.5px;color:rgba(247,240,230,.85);line-height:1.7;margin-top:6px'},
+      `Runners-up: ${runners.join(', ')||'—'}`,el('br'),`Miss C: ${mc}`,el('br'),`${s.episode_count} episodes`));
+}
+/* Region → Franchise → seasons atlas. Regions render in REGION_ORDER (Main Series
+   first, flagship-styled); each region holds its franchises (read from the data),
+   each franchise lists its seasons as cards. Regions collapse on mobile. */
 V({id:'atlas',title:'Season <em>Atlas</em>',kicker:'Seasons',icon:'grid',group:'Seasons',ord:1,
- desc:'Every season at a glance — winner, runners-up, Miss Congeniality, episode count and platform.',
+ desc:'Every franchise grouped by region — Main Series leads, then the world. Each region opens to its franchises and every season at a glance.',
  render(m){
   m.innerHTML=head(this);
   const ctrl=el('div',{class:'controls'});
@@ -640,21 +739,40 @@ V({id:'atlas',title:'Season <em>Atlas</em>',kicker:'Seasons',icon:'grid',group:'
   statCards(m,[[D.seasons.filter(s=>seasonAllowed(s.season_id)).length,'seasons'],
     [new Set(D.contestants.filter(c=>seasonAllowed(c.season_id)).map(c=>c.queen_id)).size,'queens in scope'],
     [D.episodes.filter(e=>seasonAllowed(e.season_id)).length,'episodes in scope']]);
-  const wrap=el('div',{class:'grid fade',style:'grid-template-columns:repeat(auto-fit,minmax(250px,1fr))'});
-  D.seasons.filter(s=>seasonAllowed(s.season_id)).forEach(s=>{
-    const win=qname[s.winner_id]||'—', mc=qname[s.miss_congeniality_id]||'—';
-    const cs=contestantsBySeason(s.season_id).sort((a,b)=>(+a.placement||99)-(+b.placement||99));
-    const runners=cs.filter(c=>+c.placement>1&&+c.placement<=3).map(c=>cname(c));
-    wrap.append(el('div',{class:'card',style:'cursor:pointer',onclick:()=>go('season:'+s.season_id)},
-      el('div',{style:'display:flex;justify-content:space-between;align-items:center'},
-        el('div',{class:'vkicker',style:'margin:0'},s.platform+' · '+ (s.premiere_date||'')),
-        el('span',{class:'pill'+(s.franchise==='All Stars'?' mint':' gold'),style:'font-size:9px'},s.franchise)),
-      el('div',{style:'font-family:var(--disp);font-weight:800;font-size:24px;color:var(--cream);margin-top:6px'},seasonName(s.season_id)),
-      el('div',{style:'margin:10px 0 4px',html:`<span class="pill gold">${icon('crown')} ${win}</span>`}),
-      el('div',{style:'font-size:12.5px;color:rgba(247,240,230,.85);line-height:1.7;margin-top:6px'},
-        `Runners-up: ${runners.join(', ')||'—'}`,el('br'),`Miss C: ${mc}`,el('br'),`${s.episode_count} episodes`)));
+  const byRegion=franchisesByRegion();
+  const wrapAll=el('div',{class:'fade'});
+  const isMobile=()=>(typeof innerWidth!=='undefined'&&innerWidth<=640);
+  regionsPresent().forEach(region=>{
+    /* franchises in this region that have at least one in-scope season */
+    const frs=(byRegion[region]||[]).filter(f=>D.seasons.some(s=>s.franchise===f&&seasonAllowed(s.season_id)));
+    if(!frs.length)return;
+    const flagship=region==='Main Series';
+    const sec=el('div',{class:'region-sec'+(flagship?' flagship':'')});
+    const seasonCount=D.seasons.filter(s=>s.region===region&&seasonAllowed(s.season_id)).length;
+    /* Main Series always open; other regions collapse on small screens */
+    const startCollapsed=!flagship&&isMobile();
+    const caret=el('span',{class:'region-caret'},startCollapsed?'▸':'▾');
+    const head=el('div',{class:'region-head'},
+      el('div',{},
+        el('div',{class:'region-title'},region),
+        el('div',{class:'region-meta'},frs.length+' franchise'+(frs.length===1?'':'s')+' · '+seasonCount+' seasons')),
+      flagship?el('span',{class:'region-flag'},'Flagship'):'',
+      caret);
+    const body=el('div',{class:'region-body'+(startCollapsed?' collapsed':'')});
+    head.addEventListener('click',()=>{const c=body.classList.toggle('collapsed');caret.textContent=c?'▸':'▾';});
+    frs.forEach(f=>{
+      const ses=D.seasons.filter(s=>s.franchise===f&&seasonAllowed(s.season_id));
+      const blk=el('div',{class:'fr-block'});
+      blk.append(el('div',{class:'fr-block-head'},
+        el('span',{class:'fr-block-name'},f),
+        el('span',{class:'fr-block-sub'},ses.length+' season'+(ses.length===1?'':'s'))));
+      const grid=el('div',{class:'grid',style:'grid-template-columns:repeat(auto-fit,minmax(250px,1fr))'});
+      ses.forEach(s=>grid.append(seasonCard(s)));
+      blk.append(grid);body.append(blk);
+    });
+    sec.append(head,body);wrapAll.append(sec);
   });
-  m.append(wrap);
+  m.append(wrapAll);
  }});
 
 /* ---------- 2. SEASON DETAIL (dynamic) ---------- */
