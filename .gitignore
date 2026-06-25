@@ -24,3 +24,8 @@ exports/
 
 # Spotify Web API credentials/token (never commit)
 scripts/.spotify_auth.json
+
+# stray installs / scratch
+node_modules/
+package-lock.json
+work/
