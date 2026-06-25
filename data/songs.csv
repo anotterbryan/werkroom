@@ -179,7 +179,7 @@ S0203,Thats What I Want,Lil Nas X,1,0e8nrvls4Qqv5Rfa2UhqmO,No,LIPSYNC,-
 S0204,Running Up That Hill (A Deal with God),Kate Bush,1,1PtQJZVZIdWIYdARpZRDFO,No,LIPSYNC,-
 S0205,Oops!... I Did It Again,Britney Spears,1,6naxalmIoLFWR0siv8dnQQ,No,LIPSYNC,-
 S0206,Two to Make It Right,Seduction,1,0n6Eg4mD1tfhnLs5jswEM2,No,LIPSYNC,-
-S0207,The Beginning,RuPaul,1,2kCXEZLsTDf6vdgQHJkboU,Yes,LIPSYNC,-
+S0207,The Beginning,RuPaul,2,2kCXEZLsTDf6vdgQHJkboU,Yes,LIPSYNC,-
 S0208,Supermodel (You Better Work),RuPaul,1,36Rpz4MZQhGknLEmTmHr8v,Yes,LIPSYNC,-
 S0209,I Hear You Knocking,Wynonna Judd,1,1LFvcyg3bpq7AffqwuZ13K,No,LIPSYNC,-
 S0210,Jealous of My Boogie (Gomi and RasJek Edit),RuPaul,1,1QnYyVU3qF90dMdvlOAxbw,Yes,LIPSYNC,-
@@ -269,7 +269,7 @@ S0293,Come Rain Or Come Shine,Judy Garland,1,7AgTjmzjrZ0WAOoKppsqP7,No,LIPSYNC,-
 S0294,When I Think Of You,Janet Jackson,1,3mJ6pNcFM2CkykCYSREdKT,No,LIPSYNC,-
 S0295,Fighter,Christina Aguilera,1,7nXq1vaZiz7PdbfojpPjW5,No,LIPSYNC,-
 S0296,Think U The Shit (Fart),Ice Spice,1,4w2Furap0ZzaiK4J14E9sR,No,LIPSYNC,-
-S0297,Murder on the Dancefloor,Sophie Ellis-Bextor,1,0ndXb2CwhrqtyHK6o6eVNd,No,LIPSYNC,-
+S0297,Murder on the Dancefloor,Sophie Ellis-Bextor,2,0ndXb2CwhrqtyHK6o6eVNd,No,LIPSYNC,-
 S0298,Pocketbook,Jennifer Hudson ft. Ludacris,1,1KV4dpojhhHm6YqgGxyodQ,No,LIPSYNC,-
 S0299,Love Sensation,Loleatta Holloway,1,3su8VunluUL4Oj7UTTEREt,No,LIPSYNC,-
 S0300,HOT TO GO!,Chappell Roan,1,4xdBrk0nFZaP54vvZj0yx7,No,LIPSYNC,-
@@ -480,7 +480,7 @@ S0504,bad idea right?,Olivia Rodrigo,1,3IX0yuEVvDbnqUwMBB3ouC,No,LIPSYNC,-
 S0505,Take On Me,A-Ha,1,2WfaOiMkCvy7F5fcp2zZ8L,No,LIPSYNC,-
 S0506,Mah Na Mah Na,The Muppets,1,4LwdFPmc5LYY2qAmzi23pe,No,LIPSYNC,-
 S0507,Tattoo,Loreen,1,1DmW5Ep6ywYwxc2HMT5BG6,No,LIPSYNC,-
-S0508,I Begin to Wonder,Dannii Minogue,1,5OKjyuulniceXswXHLYZqV,No,LIPSYNC,-
+S0508,I Begin to Wonder,Dannii Minogue,2,5OKjyuulniceXswXHLYZqV,No,LIPSYNC,-
 S0509,Angel of My Dreams,Jade,1,46cW6zufU9Woo11TLs2i6X,No,LIPSYNC,-
 S0510,I Heard A Rumor,Bananarama,1,7yPwc5aPWLWjO37iAey7Ww,No,LIPSYNC,-
 S0511,Axel F,Crazy Frog,1,0Bo5fjMtTfCD8vHGebivqc,No,LIPSYNC,-
@@ -601,3 +601,24 @@ S0625,Snatch Game: The Rusical,"The Cast of Canada's Drag Race: Canada vs the Wo
 S0626,Dance Like The World Is Watching,"RuPaul, The Cast of RuPaul's Drag Race Global All Stars, Season 1",0,24QpENTCgg8HvbBi1TbqgH,Yes,SONGWRITING,GA01
 S0627,West End Wendys: The Rusical,"The Cast of RuPaul's Drag Race UK vs the World, Season 1",0,5gOF9FNJu3wpKol2lH3IBn,Yes,RUSICAL,UK01
 S0628,I'm in Love with an Alien,"The Cast of RuPaul's Drag Race UK vs the World, Season 3",0,-,Yes,GIRL_GROUP,UK03
+S0629,Tragedy,Bee Gees,1,-,No,LIPSYNC,DU01
+S0630,I'm That Bitch,RuPaul,1,-,No,LIPSYNC,DU01
+S0631,Shake Your Groove Thing,Peaches & Herb,1,-,No,LIPSYNC,DU01
+S0632,Absolutely Everybody,Vanessa Amorosi,1,-,No,LIPSYNC,DU01
+S0633,Better The Devil You Know,Kylie Minogue,1,-,No,LIPSYNC,DU01
+S0634,Untouched,The Veronicas,1,-,No,LIPSYNC,DU01
+S0635,Physical,Olivia-Newton-John,1,-,No,LIPSYNC,DU01
+S0636,Get Outta My Way,Kylie Minogue,1,-,No,LIPSYNC,DU02
+S0637,I Touch Myself,The Divinyls,1,-,No,LIPSYNC,DU02
+S0638,Starstruck,Years & Years ft. Kylie Minogue,1,-,No,LIPSYNC,DU02
+S0639,Dance in the Dark,Lady Gaga,1,-,No,LIPSYNC,DU02
+S0640,Chains - S&M Remix,Tina Arena,1,-,No,LIPSYNC,DU02
+S0641,Heartbreak In This City,Steps ft. Michelle Visage,1,-,No,LIPSYNC,DU02
+S0642,Wow,Kylie Minogue,1,-,No,LIPSYNC,DU02
+S0643,Down Under,Men at Work,1,-,No,LIPSYNC,DU03
+S0644,Holding Out For A Hero,Adam Lambert,1,-,No,LIPSYNC,DU03
+S0645,Secrets,Kylie Minogue,1,-,No,LIPSYNC,DU03
+S0646,Hot N Cold,Katy Perry,1,-,No,LIPSYNC,DU03
+S0647,Are You Gonna Be My Girl,Jet,1,-,No,LIPSYNC,DU03
+S0648,Not About You,Haiku Hands,1,-,No,LIPSYNC,DU03
+S0649,Walking on Broken Glass,Annie Lennox,1,-,No,LIPSYNC,DU03
