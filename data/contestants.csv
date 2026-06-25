@@ -590,26 +590,26 @@ DU01-Q0418,Q0418,DU01,7,8,"Sydney, Australia",0,0,1,1,5,No,-,E,0,22
 DU01-Q0389,Q0389,DU01,8,9,"Auckland, New Zealand",1,1,0,1,4,No,-,A,5000,31
 DU01-Q0419,Q0419,DU01,9,6,"Sydney, Australia",0,0,1,2,3,No,-,C,0,30
 DU01-Q0420,Q0420,DU01,10,3,"Newcastle, Australia",0,0,0,1,1,No,-,J,0,30
-DU02-Q0421,Q0421,DU02,1,3,"Sydney, Australia",3,3,0,1,,No,-,images/queens/DU02-Q0421.webp,-,37
-DU02-Q0402,Q0402,DU02,2,1,"Sydney, Australia",3,2,0,1,,No,-,images/queens/DU02-Q0402.webp,-,30
-DU02-Q0391,Q0391,DU02,2,10,"Sydney, Australia",2,0,1,2,,No,-,images/queens/DU02-Q0391.webp,-,29
-DU02-Q0422,Q0422,DU02,4,6,"Sydney, Australia",1,0,1,2,7,No,-,images/queens/DU02-Q0422.webp,-,30
-DU02-Q0423,Q0423,DU02,5,4,"Sydney, Australia",0,0,0,3,6,No,-,images/queens/DU02-Q0423.webp,-,21
-DU02-Q0424,Q0424,DU02,6,7,"Sydney, Australia",1,2,1,1,5,No,-,images/queens/DU02-Q0424.webp,-,25
-DU02-Q0425,Q0425,DU02,7,5,"Sydney, Australia",0,1,0,1,4,No,-,images/queens/DU02-Q0425.webp,-,505
-DU02-Q0426,Q0426,DU02,8,8,"Sydney, Australia",0,0,0,1,3,No,-,images/queens/DU02-Q0426.webp,-,28
-DU02-Q0427,Q0427,DU02,9,9,"Sydney, Australia",0,0,0,1,2,No,-,images/queens/DU02-Q0427.webp,-,25
-DU02-Q0428,Q0428,DU02,10,2,"Sydney, Australia",0,0,0,1,1,No,-,images/queens/DU02-Q0428.webp,-,27
-DU03-Q0429,Q0429,DU03,1,7,"Melbourne, Australia",3,3,0,0,,No,-,images/queens/DU03-Q0429.webp,-,33
-DU03-Q0430,Q0430,DU03,2,10,"Ballarat, Australia",1,2,0,2,,No,-,images/queens/DU03-Q0430.webp,-,31
-DU03-Q0431,Q0431,DU03,3,3,"Auckland, New Zealand",1,3,0,2,8,No,-,images/queens/DU03-Q0431.webp,-,25
-DU03-Q0432,Q0432,DU03,4,1,"Sydney, Australia",2,1,0,1,7,No,-,images/queens/DU03-Q0432.webp,-,34
-DU03-Q0433,Q0433,DU03,5,9,"Melbourne, Australia",0,2,1,2,6,No,-,images/queens/DU03-Q0433.webp,-,51
-DU03-Q0434,Q0434,DU03,6,2,"Melbourne, Australia",1,0,1,1,5,No,-,images/queens/DU03-Q0434.webp,-,25
-DU03-Q0435,Q0435,DU03,7,8,"Hamilton, New Zealand",0,0,0,3,4,No,-,images/queens/DU03-Q0435.webp,-,24
-DU03-Q0436,Q0436,DU03,8,6,"Auckland, New Zealand",0,0,1,1,3,No,-,images/queens/DU03-Q0436.webp,-,26
-DU03-Q0437,Q0437,DU03,9,4,"Sydney, Australia",0,0,0,2,2,No,-,images/queens/DU03-Q0437.webp,-,26
-DU03-Q0438,Q0438,DU03,10,5,"Sydney, Australia",0,0,0,1,1,No,-,images/queens/DU03-Q0438.webp,-,27
+DU02-Q0421,Q0421,DU02,1,3,"Sydney, Australia",3,3,0,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/9/92/SpankieJackzonDRDU2CastMug.png,-,37
+DU02-Q0402,Q0402,DU02,2,1,"Sydney, Australia",3,2,0,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/b/bb/HannahCondaDRDU2CastMug.png,-,30
+DU02-Q0391,Q0391,DU02,2,10,"Sydney, Australia",2,0,1,2,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/0/0d/KweenKongDRDU2CastMug.png,-,29
+DU02-Q0422,Q0422,DU02,4,6,"Sydney, Australia",1,0,1,2,7,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/1/19/MollyPoppinzDRDU2CastMug.png,-,30
+DU02-Q0423,Q0423,DU02,5,4,"Sydney, Australia",0,0,0,3,6,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/9/93/BeverlyKillsDRDU2CastMug.png,-,21
+DU02-Q0424,Q0424,DU02,6,7,"Sydney, Australia",1,2,1,1,5,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/1/16/YuriGuaiiDRDU2CastMug.png,-,25
+DU02-Q0425,Q0425,DU02,7,5,"Sydney, Australia",0,1,0,1,4,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/b/ba/MinnieCooperDRDU2CastMug.png,-,505
+DU02-Q0426,Q0426,DU02,8,8,"Sydney, Australia",0,0,0,1,3,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/0/0d/PomaraFifthDRDU2CastMug.png,-,28
+DU02-Q0427,Q0427,DU02,9,9,"Sydney, Australia",0,0,0,1,2,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/0/00/AubreyHaiveDRDU2CastMug.png,-,25
+DU02-Q0428,Q0428,DU02,10,2,"Sydney, Australia",0,0,0,1,1,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/6/6f/Fa%C3%BAxF%C3%BArDRDU2CastMug.png,-,27
+DU03-Q0429,Q0429,DU03,1,7,"Melbourne, Australia",3,3,0,0,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/a/a4/IsisAvisLorenDRDU3CastMug.jpg,-,33
+DU03-Q0430,Q0430,DU03,2,10,"Ballarat, Australia",1,2,0,2,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/1/1d/GabriellaLabucciDRDU3CastMug.jpg,-,31
+DU03-Q0431,Q0431,DU03,3,3,"Auckland, New Zealand",1,3,0,2,8,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/4/47/FlorDRDU3CastMug.jpg,-,25
+DU03-Q0432,Q0432,DU03,4,1,"Sydney, Australia",2,1,0,1,7,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/3/35/HollywouldStarDRDU3CastMug.jpg,-,34
+DU03-Q0433,Q0433,DU03,5,9,"Melbourne, Australia",0,2,1,2,6,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/2/2d/BumpaLoveDRDU3CastMug.jpg,-,51
+DU03-Q0434,Q0434,DU03,6,2,"Melbourne, Australia",1,0,1,1,5,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/6/67/AshleyMadisonDRDU3CastMug.jpg,-,25
+DU03-Q0435,Q0435,DU03,7,8,"Hamilton, New Zealand",0,0,0,3,4,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/1/1e/RitaMenuDRDU3CastMug.jpg,-,24
+DU03-Q0436,Q0436,DU03,8,6,"Auckland, New Zealand",0,0,1,1,3,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/d/dc/IvannaDrinkDRDU3CastMug.jpg,-,26
+DU03-Q0437,Q0437,DU03,9,4,"Sydney, Australia",0,0,0,2,2,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/1/12/IvoryGlazeDRDU3CastMug.jpg,-,26
+DU03-Q0438,Q0438,DU03,10,5,"Sydney, Australia",0,0,0,1,1,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/c/c4/AmylDRDU3CastMug.jpg,-,27
 DU04-Q0439,Q0439,DU04,1,1,"Melbourne, Australia",3,1,0,0,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/8/87/LazySusanDRDU4CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20241009205103,53000,32
 DU04-Q0440,Q0440,DU04,2,4,"Brisbane, Australia",1,1,1,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/4/4b/MandyMoobsDRDU4CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20241009210809,0,33
 DU04-Q0441,Q0441,DU04,2,2,"Sydney, Australia",2,3,1,0,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/e/e0/VybeDRDU4CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20241009210852,2500,32
@@ -729,37 +729,37 @@ FRAS01-Q0508,Q0508,FRAS01,7,1,-,0,1,0,2,5,No,-,https://static.wikia.nocookie.net
 FRAS01-Q0516,Q0516,FRAS01,8,5,-,1,1,1,1,4,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/8/8c/PunaniFRAS1MiniPromo.jpg/revision/latest/scale-to-width-down/110,0,-
 FRAS01-Q0396,Q0396,FRAS01,9,9,"Saint-Denis, France",0,0,0,2,3,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/2/2c/SoadeMuseFRAS1MiniPromo.jpg/revision/latest/scale-to-width-down/110,0,-
 FRAS01-Q0532,Q0532,FRAS01,10,8,-,0,0,0,2,2,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/1/15/MagneticaFRAS1MiniPromo.jpg/revision/latest/scale-to-width-down/110,0,-
-IT01-Q0534,Q0534,IT01,1,8,Turin,0,1,0,0,,No,-,images/queens/IT01-Q0534.webp,-,27
-IT01-Q0535,Q0535,IT01,2,2,Lecce,2,0,0,0,,No,-,images/queens/IT01-Q0535.webp,-,33
-IT01-Q0536,Q0536,IT01,2,5,Palermo,1,1,0,2,,No,-,images/queens/IT01-Q0536.webp,-,35
-IT01-Q0537,Q0537,IT01,4,7,Bologna,0,2,1,3,6,Yes,-,images/queens/IT01-Q0537.webp,-,33
-IT01-Q0538,Q0538,IT01,5,3,Carbonia,0,0,0,3,5,No,-,images/queens/IT01-Q0538.webp,-,36
-IT01-Q0539,Q0539,IT01,6,1,Naples,1,0,0,2,4,No,-,images/queens/IT01-Q0539.webp,-,27
-IT01-Q0540,Q0540,IT01,7,6,Milan,1,0,0,0,4,No,-,images/queens/IT01-Q0540.webp,-,46
-IT01-Q0541,Q0541,IT01,8,4,Arezzo,0,1,0,1,2,No,-,images/queens/IT01-Q0541.webp,-,32
-IT02-Q0542,Q0542,IT02,1,9,Riesi,4,0,0,0,,No,-,images/queens/IT02-Q0542.webp,-,34
-IT02-Q0543,Q0543,IT02,2,2,Palermo,1,2,2,0,,No,-,images/queens/IT02-Q0543.webp,-,24
-IT02-Q0392,Q0392,IT02,2,1,Rome,1,1,0,0,,Yes,-,images/queens/IT02-Q0392.webp,-,31
-IT02-Q0544,Q0544,IT02,4,5,Palermo,1,2,1,2,8,No,-,images/queens/IT02-Q0544.webp,-,32
-IT02-Q0545,Q0545,IT02,5,3,Corato,0,0,0,2,7,No,-,images/queens/IT02-Q0545.webp,-,33
-IT02-Q0546,Q0546,IT02,6,10,"New York City,USA",0,0,2,2,6,No,-,images/queens/IT02-Q0546.webp,-,25
-IT02-Q0547,Q0547,IT02,7,6,Florence,0,0,0,3,4,No,-,images/queens/IT02-Q0547.webp,-,29
-IT02-Q0548,Q0548,IT02,8,8,Rome,0,1,0,2,3,No,-,images/queens/IT02-Q0548.webp,-,33
-IT02-Q0549,Q0549,IT02,9,7,Catania,0,0,0,1,2,No,-,images/queens/IT02-Q0549.webp,-,28
-IT02-Q0550,Q0550,IT02,10,4,Frosinone,0,0,0,1,1,No,-,images/queens/IT02-Q0550.webp,-,29
-IT03-Q0551,Q0551,IT03,1,5,Milan,3,2,0,2,,No,-,images/queens/IT03-Q0551.webp,-,34
-IT03-Q0552,Q0552,IT03,2,4,Rome,2,6,0,0,,No,-,images/queens/IT03-Q0552.webp,-,36
-IT03-Q0553,Q0553,IT03,3,1,Rome,2,1,1,4,12,No,-,images/queens/IT03-Q0553.webp,-,37
-IT03-Q0554,Q0554,IT03,3,13,Rome,2,4,1,2,12,Yes,-,images/queens/IT03-Q0554.webp,-,44
-IT03-Q0555,Q0555,IT03,5,6,Naples,1,1,2,2,9,No,-,images/queens/IT03-Q0555.webp,-,29
-IT03-Q0556,Q0556,IT03,6,11,Palermo,0,2,0,2,8,No,-,images/queens/IT03-Q0556.webp,-,24
-IT03-Q0557,Q0557,IT03,7,3,Milan,0,0,1,2,7,No,-,images/queens/IT03-Q0557.webp,-,25
-IT03-Q0558,Q0558,IT03,8,8,"London,UK",0,0,2,2,6,No,-,images/queens/IT03-Q0558.webp,-,44
-IT03-Q0559,Q0559,IT03,9,12,Bologna,0,1,1,2,5,No,-,images/queens/IT03-Q0559.webp,-,38
-IT03-Q0560,Q0560,IT03,10,9,Cagliari,0,1,0,1,4,No,-,images/queens/IT03-Q0560.webp,-,24
-IT03-Q0561,Q0561,IT03,11,2,"Tirana,Albania",0,1,0,1,3,No,-,images/queens/IT03-Q0561.webp,-,32
-IT03-Q0562,Q0562,IT03,12,7,Milan,0,0,0,1,2,No,-,images/queens/IT03-Q0562.webp,-,31
-IT03-Q0563,Q0563,IT03,13,10,Padua,0,0,0,1,1,No,-,images/queens/IT03-Q0563.webp,-,29
+IT01-Q0534,Q0534,IT01,1,8,Turin,0,1,0,0,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/6/62/ElecktraBionicDRIT1CastMug.jpg,-,27
+IT01-Q0535,Q0535,IT01,2,2,Lecce,2,0,0,0,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/4/44/FaridaKantDRIT1CastMug.jpg,-,33
+IT01-Q0536,Q0536,IT01,2,5,Palermo,1,1,0,2,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/e/e5/LeRicheDRIT1CastMug.jpg,-,35
+IT01-Q0537,Q0537,IT01,4,7,Bologna,0,2,1,3,6,Yes,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/f/f3/LuquishaLubambaDRIT1CastMug.jpg,-,33
+IT01-Q0538,Q0538,IT01,5,3,Carbonia,0,0,0,3,5,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/9/98/AvaHangarDRIT1CastMug.jpg,-,36
+IT01-Q0539,Q0539,IT01,6,1,Naples,1,0,0,2,4,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/b/bd/DivinityDRIT1CastMug.jpg,-,27
+IT01-Q0540,Q0540,IT01,7,6,Milan,1,0,0,0,4,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/2/26/EnormaJeanDRIT1CastMug.jpg,-,46
+IT01-Q0541,Q0541,IT01,8,4,Arezzo,0,1,0,1,2,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/c/ca/IvanaVampDRIT1CastMug.jpg,-,32
+IT02-Q0542,Q0542,IT02,1,9,Riesi,4,0,0,0,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/d/dd/LaDiamondDRIT2CastMug.jpg,-,34
+IT02-Q0543,Q0543,IT02,2,2,Palermo,1,2,2,0,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/5/57/AuraEternalDRIT2CastMug.jpg,-,24
+IT02-Q0392,Q0392,IT02,2,1,Rome,1,1,0,0,,Yes,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/7/71/NehelleniaDRIT2CastMug.jpg,-,31
+IT02-Q0544,Q0544,IT02,4,5,Palermo,1,2,1,2,8,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/b/b3/LaPetiteNoireDRIT2CastMug.jpg,-,32
+IT02-Q0545,Q0545,IT02,5,3,Corato,0,0,0,2,7,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/5/5d/SkandaloveDRIT2CastMug.jpg,-,33
+IT02-Q0546,Q0546,IT02,6,10,"New York City,USA",0,0,2,2,6,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/d/d5/Gioffr%C3%A9DRIT2CastMug.jpg,-,25
+IT02-Q0547,Q0547,IT02,7,6,Florence,0,0,0,3,4,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/9/99/PantheraVirusDRIT2CastMug.jpg,-,29
+IT02-Q0548,Q0548,IT02,8,8,Rome,0,1,0,2,3,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/e/e9/ObamaDRIT2CastMug.jpg,-,33
+IT02-Q0549,Q0549,IT02,9,7,Catania,0,0,0,1,2,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/4/4d/TanissaYonc%C3%A8DRI2CastMug.jpg,-,28
+IT02-Q0550,Q0550,IT02,10,4,Frosinone,0,0,0,1,1,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/d/df/NarcisoDRIT2CastMug.jpg,-,29
+IT03-Q0551,Q0551,IT03,1,5,Milan,3,2,0,2,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/d/dd/LinaGaloreDRIT3CastMug.jpg,-,34
+IT03-Q0552,Q0552,IT03,2,4,Rome,2,6,0,0,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/a/ad/MelissaBianchiniDRIT3CastMug.jpg,-,36
+IT03-Q0553,Q0553,IT03,3,1,Rome,2,1,1,4,12,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/0/02/LaSheevaDRIT3CastMug.jpg,-,37
+IT03-Q0554,Q0554,IT03,3,13,Rome,2,4,1,2,12,Yes,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/b/b8/SilvanaDellaMaglianaDRIT3CastMug.jpg,-,44
+IT03-Q0555,Q0555,IT03,5,6,Naples,1,1,2,2,9,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/5/56/SyparioDRIT3CastMug.jpg,-,29
+IT03-Q0556,Q0556,IT03,6,11,Palermo,0,2,0,2,8,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/2/2e/LeilaYarnDRIT3CastMug.jpg,-,24
+IT03-Q0557,Q0557,IT03,7,3,Milan,0,0,1,2,7,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/6/6d/LaPradaDRIT3CastMug.jpg,-,25
+IT03-Q0558,Q0558,IT03,8,8,"London,UK",0,0,2,2,6,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/9/97/SissyLeaDRIT3CastMug.jpg,-,44
+IT03-Q0559,Q0559,IT03,9,12,Bologna,0,1,1,2,5,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/d/d2/MorganaCosmicaDRIT3CastMug.jpg,-,38
+IT03-Q0560,Q0560,IT03,10,9,Cagliari,0,1,0,1,4,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/a/a0/LightningAuroraDRIT3CastMug.jpg,-,24
+IT03-Q0561,Q0561,IT03,11,2,"Tirana,Albania",0,1,0,1,3,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/1/10/VezirjaDRIT3CastMug.jpg,-,32
+IT03-Q0562,Q0562,IT03,12,7,Milan,0,0,0,1,2,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/0/00/AmyKraniaDRIT3CastMug.jpg,-,31
+IT03-Q0563,Q0563,IT03,13,10,Padua,0,0,0,1,1,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/9/91/AdrianaPicassoDRIT3CastMug.jpg,-,29
 NL01-Q0564,Q0564,NL01,1,10,Amsterdam,4,0,0,0,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/1/13/EnvyPeruDRHL1CastMug.jpg/revision/latest/scale-to-width-down/110?cb=20210831144623,-,31
 NL01-Q0400,Q0400,NL01,2,3,Amsterdam,2,1,0,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/e/ed/JaneyJack%C3%A9DRHL1CastMug.jpg/revision/latest/scale-to-width-down/110?cb=20210831144711,-,28
 NL01-Q0565,Q0565,NL01,3,8,Rotterdam,1,0,3,3,8,Yes,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/c/ce/Ma%27MaQueenDRHL1CastMug.jpg/revision/latest/scale-to-width-down/110?cb=20210831144834,-,30
@@ -854,53 +854,53 @@ PH03-Q0645,Q0645,PH03,8,3,"San Francisco, USA",0,3,0,1,6,No,-,JohnFedellagaDRPH3
 PH03-Q0646,Q0646,PH03,9,7,"Caloocan City, Metro Manila",0,0,1,2,5,No,-,JQuinnDRPH3MiniPromo.jpg,0,25
 PH03-Q0647,Q0647,PH03,10,8,"Bacolod, Negros Occidental",0,2,0,0,4,No,-,YudipotaDRPH3MiniPromo.jpg,0,27
 PH03-Q0648,Q0648,PH03,11,2,"Manila, Metro Manila",0,0,1,1,3,Yes,-,VersexDRPH3MiniPromo.jpg,60000,25
-PHSR01-Q0619,Q0619,PHSR01,1,3,-,5,3,0,0,,No,-,images/queens/PHSR01-Q0619.webp,2260000,-
-PHSR01-Q0620,Q0620,PHSR01,2,5,-,3,2,1,2,,No,-,images/queens/PHSR01-Q0620.webp,200000,-
-PHSR01-Q0627,Q0627,PHSR01,3,1,-,3,3,0,2,,No,-,images/queens/PHSR01-Q0627.webp,120000,-
-PHSR01-Q0261,Q0261,PHSR01,3,11,-,2,2,0,2,10,Yes,-,images/queens/PHSR01-Q0261.webp,60000,-
-PHSR01-Q0639,Q0639,PHSR01,5,12,-,1,1,0,3,8,No,-,images/queens/PHSR01-Q0639.webp,160000,-
-PHSR01-Q0125,Q0125,PHSR01,6,2,-,1,1,1,1,7,No,Yuhua,images/queens/PHSR01-Q0125.webp,80000,-
-PHSR01-Q0649,Q0649,PHSR01,7,4,-,1,1,2,1,6,No,-,images/queens/PHSR01-Q0649.webp,20000,-
-PHSR01-Q0629,Q0629,PHSR01,8,7,-,0,0,0,2,5,No,-,images/queens/PHSR01-Q0629.webp,0,-
-PHSR01-Q0521,Q0521,PHSR01,9,8,-,1,1,0,1,4,No,-,images/queens/PHSR01-Q0521.webp,0,-
-PHSR01-Q0437,Q0437,PHSR01,10,6,-,0,0,0,2,3,No,-,images/queens/PHSR01-Q0437.webp,0,-
-PHSR01-Q0316,Q0316,PHSR01,11,9,-,0,0,0,2,2,No,-,images/queens/PHSR01-Q0316.webp,0,-
-PHSR01-Q0599,Q0599,PHSR01,12,10,-,0,0,0,1,1,No,-,images/queens/PHSR01-Q0599.webp,0,-
-TH01-Q0650,Q0650,TH01,1,2,Bangkok,3,2,0,0,,No,-,images/queens/TH01-Q0650.webp,-,37
-TH01-Q0651,Q0651,TH01,2,9,Bangkok,3,2,1,1,,No,-,images/queens/TH01-Q0651.webp,-,30
-TH01-Q0652,Q0652,TH01,2,1,NakhonPathom,2,0,0,2,,No,-,images/queens/TH01-Q0652.webp,-,30
-TH01-Q0653,Q0653,TH01,4,5,NakhonRatchasima,1,2,2,1,7,Yes,-,images/queens/TH01-Q0653.webp,-,30
-TH01-Q0654,Q0654,TH01,5,4,Bangkok,1,1,0,2,6,No,-,images/queens/TH01-Q0654.webp,-,24
-TH01-Q0655,Q0655,TH01,5,7,Philippines,1,1,0,2,6,No,-,images/queens/TH01-Q0655.webp,-,34
-TH01-Q0656,Q0656,TH01,7,6,Rayong,0,1,0,2,5,No,-,images/queens/TH01-Q0656.webp,-,30
-TH01-Q0657,Q0657,TH01,8,8,Bangkok,0,0,0,2,3,No,-,images/queens/TH01-Q0657.webp,-,18
-TH01-Q0658,Q0658,TH01,9,10,NakhonRatchasima,0,0,0,1,2,No,-,images/queens/TH01-Q0658.webp,-,25
-TH01-Q0659,Q0659,TH01,10,3,Phrae,1,0,0,1,1,No,-,images/queens/TH01-Q0659.webp,-,26
-TH02-Q0660,Q0660,TH02,1,11,NakhonRatchasima,6,1,0,2,,No,-,images/queens/TH02-Q0660.webp,-,24
-TH02-Q0661,Q0661,TH02,2,14,Nakhon Sawan,2,0,0,4,5,No,-,images/queens/TH02-Q0661.webp,-,29
-TH02-Q0662,Q0662,TH02,2,6,ChiangMai,3,1,0,1,4,No,-,images/queens/TH02-Q0662.webp,-,26
-TH02-Q0663,Q0663,TH02,4,4,Bangkok,1,4,2,1,11,No,-,images/queens/TH02-Q0663.webp,-,34
-TH02-Q0664,Q0664,TH02,4,13,Singapore,2,1,3,3,11,No,-,images/queens/TH02-Q0664.webp,-,29
-TH02-Q0665,Q0665,TH02,6,7,Udon Thani,1,1,2,4,10,No,-,images/queens/TH02-Q0665.webp,-,29
-TH02-Q0666,Q0666,TH02,7,12,Nakhon SiThammarat,0,2,4,2,8,No,-,images/queens/TH02-Q0666.webp,-,28
-TH02-Q0667,Q0667,TH02,8,10,United States,2,0,1,1,7,No,-,images/queens/TH02-Q0667.webp,-,30
-TH02-Q0668,Q0668,TH02,9,1,Chonburi,1,3,1,0,6,No,-,images/queens/TH02-Q0668.webp,-,24
-TH02-Q0669,Q0669,TH02,10,2,Hong Kong,1,0,1,2,6,No,-,images/queens/TH02-Q0669.webp,-,30
-TH02-Q0670,Q0670,TH02,11,5,Phuket,1,1,2,1,5,Yes,-,images/queens/TH02-Q0670.webp,-,33
-TH02-Q0671,Q0671,TH02,12,3,Bangkok,1,0,0,1,3,No,-,images/queens/TH02-Q0671.webp,-,24
-TH02-Q0672,Q0672,TH02,13,8,KhonKaen,0,0,0,2,2,No,-,images/queens/TH02-Q0672.webp,-,22
-TH02-Q0673,Q0673,TH02,14,9,Bangkok,0,0,0,1,1,No,-,images/queens/TH02-Q0673.webp,-,33
-TH03-Q0674,Q0674,TH03,1,3,Bangkok,3,2,0,0,,No,-,images/queens/TH03-Q0674.webp,812000,30
-TH03-Q0675,Q0675,TH03,2,2,Phrae,2,2,1,1,,No,-,images/queens/TH03-Q0675.webp,200000,29
-TH03-Q0407,Q0407,TH03,3,5,Chiang Mai,2,2,2,1,10,No,-,images/queens/TH03-Q0407.webp,74000,22
-TH03-Q0676,Q0676,TH03,3,10,Bangkok,1,1,0,5,10,No,-,images/queens/TH03-Q0676.webp,74000,30
-TH03-Q0677,Q0677,TH03,5,9,Chiang Mai,1,2,1,2,8,No,-,images/queens/TH03-Q0677.webp,86000,33
-TH03-Q0678,Q0678,TH03,6,11,Bangkok,0,1,0,3,7,No,-,images/queens/TH03-Q0678.webp,0,28
-TH03-Q0649,Q0649,TH03,7,8,"SanFrancisco,USA",0,2,2,1,6,No,-,images/queens/TH03-Q0649.webp,0,34
-TH03-Q0679,Q0679,TH03,8,6,Samut Prakan,0,2,0,2,5,Yes,-,images/queens/TH03-Q0679.webp,27000,42
-TH03-Q0680,Q0680,TH03,9,7,Chiang Mai,0,0,1,2,4,No,-,images/queens/TH03-Q0680.webp,0,22
-TH03-Q0681,Q0681,TH03,10,4,Ratchaburi,0,1,0,1,3,No,-,images/queens/TH03-Q0681.webp,0,27
-TH03-Q0682,Q0682,TH03,11,1,Bangkok,0,0,0,2,2,No,-,images/queens/TH03-Q0682.webp,0,27
+PHSR01-Q0619,Q0619,PHSR01,1,3,-,5,3,0,0,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/6/66/BrigidingDRPHSR1.jpg,2260000,-
+PHSR01-Q0620,Q0620,PHSR01,2,5,-,3,2,1,2,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/7/7f/Vi%C3%B1asDeluxeDRPHSR1.jpg,200000,-
+PHSR01-Q0627,Q0627,PHSR01,3,1,-,3,3,0,2,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/4/4f/ArizonaBrandyDRPHSR1.jpg,120000,-
+PHSR01-Q0261,Q0261,PHSR01,3,11,-,2,2,0,2,10,Yes,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/4/43/SukiDollDRPHSR1.jpg,60000,-
+PHSR01-Q0639,Q0639,PHSR01,5,12,-,1,1,0,3,8,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/2/2d/KhiannaDRPHSR1.jpg,160000,-
+PHSR01-Q0125,Q0125,PHSR01,6,2,-,1,1,1,1,7,No,Yuhua,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/7/73/YuhuaDRPHSR1.jpg,80000,-
+PHSR01-Q0649,Q0649,PHSR01,7,4,-,1,1,2,1,6,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/7/79/SiamPhusriDRPHSR1.jpg,20000,-
+PHSR01-Q0629,Q0629,PHSR01,8,7,-,0,0,0,2,5,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/8/8a/BernieDRPHSR1.jpg,0,-
+PHSR01-Q0521,Q0521,PHSR01,9,8,-,1,1,0,1,4,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/c/ca/KittySpaceDRPHSR1.jpg,0,-
+PHSR01-Q0437,Q0437,PHSR01,10,6,-,0,0,0,2,3,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/8/8d/IvoryGlazeDRPHSR1.jpg,0,-
+PHSR01-Q0316,Q0316,PHSR01,11,9,-,0,0,0,2,2,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/7/7a/SumTingWongDRPHSR1.jpg,0,-
+PHSR01-Q0599,Q0599,PHSR01,12,10,-,0,0,0,1,1,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/2/2a/MadameYokoDRPHSR1.jpg,0,-
+TH01-Q0650,Q0650,TH01,1,2,Bangkok,3,2,0,0,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/2/21/NataliaPliacamDRTH1CastMug.png,-,37
+TH01-Q0651,Q0651,TH01,2,9,Bangkok,3,2,1,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/9/97/Ann%C3%A9eMaywongDRTH1CastMug.png,-,30
+TH01-Q0652,Q0652,TH01,2,1,NakhonPathom,2,0,0,2,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/d/d4/DearisDollDRTH1CastMug.png,-,30
+TH01-Q0653,Q0653,TH01,4,5,NakhonRatchasima,1,2,2,1,7,Yes,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/e/ea/BEllaDRTH1CastMug.png,-,30
+TH01-Q0654,Q0654,TH01,5,4,Bangkok,1,1,0,2,6,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/4/47/AmadivaDRTH1CastMug.png,-,24
+TH01-Q0655,Q0655,TH01,5,7,Philippines,1,1,0,2,6,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/c/c3/JAJADRTH1CastMug.png,-,34
+TH01-Q0656,Q0656,TH01,7,6,Rayong,0,1,0,2,5,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/f/f8/PetchraDRTH1CastMug.png,-,30
+TH01-Q0657,Q0657,TH01,8,8,Bangkok,0,0,0,2,3,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/d/d5/MorriganDRTH1CastMug.png,-,18
+TH01-Q0658,Q0658,TH01,9,10,NakhonRatchasima,0,0,0,1,2,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/b/bb/BunnyBeFlyDRTH1CastMug.png,-,25
+TH01-Q0659,Q0659,TH01,10,3,Phrae,1,0,0,1,1,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/8/8d/MeannieMinajDRTH1CastMug.png,-,26
+TH02-Q0660,Q0660,TH02,1,11,NakhonRatchasima,6,1,0,2,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/5/5b/AngeleAnangDRTH2CastMug.png,-,24
+TH02-Q0661,Q0661,TH02,2,14,Nakhon Sawan,2,0,0,4,5,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/d/d2/KanaWarriorDRTH2CastMug.png,-,29
+TH02-Q0662,Q0662,TH02,2,6,ChiangMai,3,1,0,1,4,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/d/d6/KandyZyanideDRTH2CastMug.png,-,26
+TH02-Q0663,Q0663,TH02,4,4,Bangkok,1,4,2,1,11,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/c/c5/BanditDRTH2CastMug.png,-,34
+TH02-Q0664,Q0664,TH02,4,13,Singapore,2,1,3,3,11,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/f/f3/VandaMissJoaquimDRTH2CastMug.png,-,29
+TH02-Q0665,Q0665,TH02,6,7,Udon Thani,1,1,2,4,10,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/e/e1/SrimalaDRTH2CastMug.png,-,29
+TH02-Q0666,Q0666,TH02,7,12,Nakhon SiThammarat,0,2,4,2,8,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/6/65/TormaiDRTH2CastMug.png,-,28
+TH02-Q0667,Q0667,TH02,8,10,United States,2,0,1,1,7,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/0/0a/GenieDRTH2CastMug.png,-,30
+TH02-Q0668,Q0668,TH02,9,1,Chonburi,1,3,1,0,6,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/d/d3/MissGimhuayDRTH2CastMug.png,-,24
+TH02-Q0669,Q0669,TH02,10,2,Hong Kong,1,0,1,2,6,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/9/98/MochaDivaDRTH2CastMug.png,-,30
+TH02-Q0670,Q0670,TH02,11,5,Phuket,1,1,2,1,5,Yes,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/a/a3/MayaB%27HaroDRTH2CastMug.png,-,33
+TH02-Q0671,Q0671,TH02,12,3,Bangkok,1,0,0,1,3,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/a/a4/KatyKillerDRTH2CastMug.png,-,24
+TH02-Q0672,Q0672,TH02,13,8,KhonKaen,0,0,0,2,2,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/5/5d/SilverSonicDRTH2CastMug.png,-,22
+TH02-Q0673,Q0673,TH02,14,9,Bangkok,0,0,0,1,1,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/a/ac/MStrangerFoxDRTH2CastMug.png,-,33
+TH03-Q0674,Q0674,TH03,1,3,Bangkok,3,2,0,0,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/1/1a/FrankieWongaDRTH3CastMug.jpg,812000,30
+TH03-Q0675,Q0675,TH03,2,2,Phrae,2,2,1,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/a/a8/ZepeeDRTH3CastMug.jpg,200000,29
+TH03-Q0407,Q0407,TH03,3,5,Chiang Mai,2,2,2,1,10,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/8/82/GawdlandDRTH3CastMug.jpg,74000,22
+TH03-Q0676,Q0676,TH03,3,10,Bangkok,1,1,0,5,10,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/2/2b/SpicySunshineDRTH3CastMug.jpg,74000,30
+TH03-Q0677,Q0677,TH03,5,9,Chiang Mai,1,2,1,2,8,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/4/4a/NaneSpheraDRTH3CastMug.jpg,86000,33
+TH03-Q0678,Q0678,TH03,6,11,Bangkok,0,1,0,3,7,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/8/8b/GigiFerociousDRTH3CastMug.jpg,0,28
+TH03-Q0649,Q0649,TH03,7,8,"SanFrancisco,USA",0,2,2,1,6,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/d/dc/SiamPhusriDRTH3CastMug.jpg,0,34
+TH03-Q0679,Q0679,TH03,8,6,Samut Prakan,0,2,0,2,5,Yes,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/4/4e/BenzeDivaDRTH3CastMug.jpg,27000,42
+TH03-Q0680,Q0680,TH03,9,7,Chiang Mai,0,0,1,2,4,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/e/e7/ShortgunDRTH3CastMug.jpg,0,22
+TH03-Q0681,Q0681,TH03,10,4,Ratchaburi,0,1,0,1,3,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/0/00/KaraMightDRTH3CastMug.jpg,0,27
+TH03-Q0682,Q0682,TH03,11,1,Bangkok,0,0,0,2,2,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/2/2a/SrirashaHotsauceDRTH3CastMug.jpg,0,27
 BR01-Q0683,Q0683,BR01,1,-,"Rio de Janeiro, RJ",4,3,0,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/9/9d/OrganzzaDRBR1CastMug.jpg,155000,30
 BR01-Q0684,Q0684,BR01,2,-,"Rio de Janeiro, RJ",2,1,1,2,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/c/cd/BetinaPolaroidDRBR1CastMug.jpg,7500,46
 BR01-Q0685,Q0685,BR01,2,-,"Salvador, BA",2,4,2,1,,No,-,https://static.wikia.nocookie.net/logosrupaulsdragrace/images/6/6b/HellenaMaldittaDRBR1CastMug.jpg,2500,23
