@@ -1,83 +1,83 @@
-season_id,franchise,season_label,platform,host,premiere_date,episode_count,winner_id,miss_congeniality_id,power_up_system,cash_prize
-US01,US main,Season 1,Logo TV,RuPaul,2009-02-02,9,Q0001,Q0002,-,20000
-US02,US main,Season 2,Logo TV,RuPaul,2010-02-01,12,Q0010,Q0014,-,25000
-US03,US main,Season 3,Logo TV,RuPaul,2011-01-24,16,Q0022,Q0025,-,75000
-US04,US main,Season 4,Logo TV,RuPaul,2012-01-30,14,Q0034,Q0037,-,100000
-US05,US main,Season 5,Logo TV,RuPaul,2013-01-28,14,Q0047,Q0053,-,100000
-US06,US main,Season 6,Logo TV,RuPaul,2014-02-24,14,Q0061,Q0065,-,100000
-US07,US main,Season 7,Logo TV,RuPaul,2015-03-02,14,Q0075,Q0079,-,100000
-US08,US main,Season 8,Logo TV,RuPaul,2016-03-07,10,Q0089,Q0098,-,100000
-US09,US main,Season 9,Logo TV,RuPaul,2017-03-24,14,Q0101,Q0107,-,100000
-US10,US main,Season 10,Logo TV,RuPaul,2018-03-22,14,Q0115,Q0119,-,100000
-US11,US main,Season 11,Logo TV,RuPaul,2019-02-28,14,Q0128,Q0132,-,100000
-US12,US main,Season 12,Logo TV,RuPaul,2020-02-28,14,Q0144,Q0147,-,100000
-US13,US main,Season 13,Logo TV,RuPaul,2021-01-01,16,Q0155,Q0164,-,100000
-US14,US main,Season 14,Logo TV,RuPaul,2022-01-07,16,Q0168,Q0179,-,150000
-US15,US main,Season 15,MTV,RuPaul,2023-01-06,16,Q0182,Q0186,-,200000
-US16,US main,Season 16,MTV,RuPaul,2024-01-05,16,Q0198,Q0199,-,200000
-US17,US main,Season 17,MTV,RuPaul,2025-01-03,16,Q0212,Q0220,-,200000
-US18,US main,Season 18,MTV,RuPaul,2026-01-02,16,Q0226,Q0230,-,200000
-AS05,All Stars,All Stars 5,VH1,RuPaul,2020-06-05,8,Q0103,-,-,100000
-AS01,All Stars,All Stars 1,Logo TV,RuPaul,2012-10-22,6,Q0035,-,-,100000
-AS02,All Stars,All Stars 2,VH1,RuPaul,2016-08-25,9,Q0048,-,-,100000
-AS03,All Stars,All Stars 3,VH1,RuPaul,2018-01-25,8,Q0080,-,-,100000
-AS04,All Stars,All Stars 4,VH1,RuPaul,2018-12-14,10,Q0119,-,-,100000
-AS06,All Stars,All Stars 6,VH1,RuPaul,2021-06-24,12,Q0018,-,-,100000
-AS07,All Stars,All Stars 7,VH1,RuPaul,2022-05-20,12,Q0047,-,-,200000
-AS08,All Stars,All Stars 8,MTV,RuPaul,2023-05-12,12,Q0241,-,-,200000
-AS09,All Stars,All Stars 9,MTV,RuPaul,2024-05-17,12,Q0170,-,-,200000
-AS10,All Stars,All Stars 10,Paramount+,RuPaul,2025-05-09,12,Q0076,-,-,200000
-AS11,All Stars,All Stars 11,Paramount+,RuPaul,2026-05-08,12,-,-,-,200000
-CA01,Canada's Drag Race,Canada's Drag Race 1,Crave,Brooke Lynn Hytes,2020-07-02,10,Q0242,Q0249,-,100000
-CA02,Canada's Drag Race,Canada's Drag Race 2,Crave,Brooke Lynn Hytes,2021-10-14,10,Q0253,Q0261,-,100000
-CA03,Canada's Drag Race,Canada's Drag Race 3,Crave,Brooke Lynn Hytes,2022-07-14,9,Q0265,-,-,100000
-CA04,Canada's Drag Race,Canada's Drag Race 4,Crave,Brooke Lynn Hytes,2023-11-16,9,Q0277,Q0284,-,100000
-CA05,Canada's Drag Race,Canada's Drag Race 5,Crave,Brooke Lynn Hytes,2024-11-21,9,Q0288,Q0295,-,100000
-CA06,Canada's Drag Race,Canada's Drag Race 6,Crave,Brooke Lynn Hytes,2025-11-20,9,Q0299,Q0308,-,100000
-UK01,Drag Race UK,Drag Race UK 1,BBC Three,RuPaul,2019-10-03,9,Q0240,-,-,0
-UK02,Drag Race UK,Drag Race UK 2,BBC Three,RuPaul,2021-01-14,10,Q0320,-,-,0
-UK03,Drag Race UK,Drag Race UK 3,BBC Three,RuPaul,2021-09-23,10,Q0332,-,-,0
-UK04,Drag Race UK,Drag Race UK 4,BBC Three,RuPaul,2022-09-22,10,Q0343,-,-,0
-UK05,Drag Race UK,Drag Race UK 5,BBC Three,RuPaul,2023-09-28,10,Q0355,-,-,0
-UK06,Drag Race UK,Drag Race UK 6,BBC Three,RuPaul,2024-09-26,10,Q0365,Q0370,-,25000
-UK07,Drag Race UK,Drag Race UK 7,BBC Three,RuPaul,2025-09-25,10,Q0377,Q0385,-,25000
-CW01,Canada vs the World,Canada vs the World 1,Crave,RuPaul,2022-11-18,6,Q0135,Q0389,-,100000
-CW02,Canada vs the World,Canada vs the World 2,Crave,RuPaul,2024-07-19,6,Q0245,Q0111,-,100000
-GA01,Global All Stars,Global All Stars 1,WOW Presents Plus,RuPaul,2024-08-16,12,Q0052,Q0396,-,200000
-UW01,UK vs the World,UK vs the World 1,BBC Three,RuPaul,2022-02-01,6,Q0314,-,-,0
-UW02,UK vs the World,UK vs the World 2,BBC Three,RuPaul,2024-02-09,8,Q0326,Q0406,-,50000
-UW03,UK vs the World,UK vs the World 3,BBC Three,RuPaul,2026-01-27,8,Q0407,Q0411,-,50000
-DU01,Drag Race Down Under,Down Under Season 1,WOW Presents Plus,RuPaul,2021-05-01,8,Q0412,-,-,30000
-DU02,Drag Race Down Under,Down Under Season 2,WOW Presents Plus,RuPaul,2022-07-30,8,Q0421,-,-,30000
-DU03,Drag Race Down Under,Down Under Season 3,WOW Presents Plus,RuPaul,2023-07-28,8,Q0429,-,-,30000
-DU04,Drag Race Down Under,Down Under Season 4,WOW Presents Plus,Michelle Visage,2024-11-01,8,Q0439,-,-,50000
-ES01,Drag Race España,España Season 1,ATRESplayer / WOW Presents Plus,Supremme de Luxe,2021-05-30,10,Q0449,Q0452,-,30000
-ES02,Drag Race España,España Season 2,ATRESplayer / WOW Presents Plus,Supremme de Luxe,2022-03-27,12,Q0458,Q0467,-,-
-ES03,Drag Race España,España Season 3,ATRESplayer / WOW Presents Plus,Supremme de Luxe,2023-04-16,12,Q0470,Q0481,-,40000
-ES04,Drag Race España,España Season 4,ATRESplayer / WOW Presents Plus,Supremme de Luxe,2024-09-22,12,Q0482,Q0491,-,35000
-ES05,Drag Race España,España Season 5,ATRESplayer / WOW Presents Plus,Supremme de Luxe,2025-09-28,11,Q0494,Q0505,-,55000
-ESAS01,Drag Race España,España All Stars Season 1,ATRESplayer / WOW Presents Plus,Supremme de Luxe,2024-02-04,7,Q0463,Q0467,-,30000
-FR01,Drag Race France,France Season 1,France.tv Slash / WOW Presents Plus,Nicky Doll,2022-06-25,8,Q0506,Q0509,-,40000
-FR02,Drag Race France,France Season 2,France.tv Slash / WOW Presents Plus,Nicky Doll,2023-06-30,9,Q0513,Q0519,-,40000
-FR03,Drag Race France,France Season 3,France.tv Slash / WOW Presents Plus,Nicky Doll,2024-05-31,8,Q0524,Q0530,-,40000
-FRAS01,Drag Race France All Stars,France All Stars Season 1,France.tv Slash / WOW Presents Plus,Nicky Doll,2025-07-10,8,Q0515,Q0510,-,40000
-IT01,Drag Race Italia,Italia Season 1,Discovery+ / WOW Presents Plus,Priscilla,2021-11-19,6,Q0534,Q0537,-,-
-IT02,Drag Race Italia,Italia Season 2,Discovery+ / WOW Presents Plus,Priscilla,2022-10-20,8,Q0542,Q0392,-,-
-IT03,Drag Race Italia,Italia Season 3,Paramount+ / WOW Presents Plus,Priscilla,2023-10-13,12,Q0551,Q0554,-,20000
-NL01,Drag Race Holland,Holland Season 1,Videoland / WOW Presents Plus,Fred van Leer,2020-09-18,8,Q0564,Q0565,-,-
-NL02,Drag Race Holland,Holland Season 2,Videoland / WOW Presents Plus,Fred van Leer,2021-08-06,8,Q0573,Q0576,-,15000
-BE01,Drag Race Belgique,Belgique Season 1,WOW Presents Plus / Auvio,Rita Baga,2023-02-16,8,Q0582,Q0587,-,-
-BE02,Drag Race Belgique,Belgique Season 2,WOW Presents Plus / Auvio,Rita Baga,2024-02-01,8,Q0592,Q0597,-,-
-DE01,Drag Race Germany,Germany Season 1,WOW Presents Plus / Paramount+,Barbie Breakout,2023-09-05,12,Q0601,-,-,-
-SE01,Drag Race Sverige,Sverige Season 1,WOW Presents Plus / SVT Play,Robert Fux,2023-03-05,8,Q0610,-,-,-
-PH01,Drag Race Philippines,Philippines Season 1,WOW Presents Plus,Paolo Ballesteros,2022-08-17,10,Q0617,Q0621,-,-
-PH02,Drag Race Philippines,Philippines Season 2,WOW Presents Plus,Paolo Ballesteros,2023-08-02,10,Q0626,Q0630,-,-
-PH03,Drag Race Philippines,Philippines Season 3,WOW Presents Plus,Paolo Ballesteros,2024-08-07,10,Q0638,Q0648,-,-
-PHSR01,Drag Race Philippines: Slaysian Royale,Slaysian Royale Season 1,WOW Presents Plus,Paolo Ballesteros,2025-08-13,10,Q0619,Q0261,-,-
-TH01,Drag Race Thailand,Thailand Season 1,LINE TV,Art Arya,2018-02-15,8,Q0650,Q0653,-,-
-TH02,Drag Race Thailand,Thailand Season 2,LINE TV,Art Arya,2019-01-11,13,Q0660,Q0670,-,-
-TH03,Drag Race Thailand,Thailand Season 3,WOW Presents Plus,Pangina Heals,2024-10-16,10,Q0674,Q0679,-,-
-BR01,Drag Race Brasil,Brasil Season 1,WOW Presents Plus,Grag Queen,2023-08-30,12,Q0683,Q0690,-,-
-BR02,Drag Race Brasil,Brasil Season 2,WOW Presents Plus,Grag Queen,2025-07-10,10,Q0694,-,-,-
-MX01,Drag Race México,México Season 1,WOW Presents Plus,Lolita Banana & Valentina,2023-06-22,12,Q0704,Q0707,-,-
-MX02,Drag Race México,México Season 2,WOW Presents Plus,Lolita Banana & Taiga Brava,2024-06-20,12,Q0713,Q0719,-,-
+season_id,franchise,season_label,platform,host,premiere_date,episode_count,winner_id,miss_congeniality_id,power_up_system,cash_prize,region
+US01,US main,Season 1,Logo TV,RuPaul,2009-02-02,9,Q0001,Q0002,-,20000,Main Series
+US02,US main,Season 2,Logo TV,RuPaul,2010-02-01,12,Q0010,Q0014,-,25000,Main Series
+US03,US main,Season 3,Logo TV,RuPaul,2011-01-24,16,Q0022,Q0025,-,75000,Main Series
+US04,US main,Season 4,Logo TV,RuPaul,2012-01-30,14,Q0034,Q0037,-,100000,Main Series
+US05,US main,Season 5,Logo TV,RuPaul,2013-01-28,14,Q0047,Q0053,-,100000,Main Series
+US06,US main,Season 6,Logo TV,RuPaul,2014-02-24,14,Q0061,Q0065,-,100000,Main Series
+US07,US main,Season 7,Logo TV,RuPaul,2015-03-02,14,Q0075,Q0079,-,100000,Main Series
+US08,US main,Season 8,Logo TV,RuPaul,2016-03-07,10,Q0089,Q0098,-,100000,Main Series
+US09,US main,Season 9,Logo TV,RuPaul,2017-03-24,14,Q0101,Q0107,-,100000,Main Series
+US10,US main,Season 10,Logo TV,RuPaul,2018-03-22,14,Q0115,Q0119,-,100000,Main Series
+US11,US main,Season 11,Logo TV,RuPaul,2019-02-28,14,Q0128,Q0132,-,100000,Main Series
+US12,US main,Season 12,Logo TV,RuPaul,2020-02-28,14,Q0144,Q0147,-,100000,Main Series
+US13,US main,Season 13,Logo TV,RuPaul,2021-01-01,16,Q0155,Q0164,-,100000,Main Series
+US14,US main,Season 14,Logo TV,RuPaul,2022-01-07,16,Q0168,Q0179,-,150000,Main Series
+US15,US main,Season 15,MTV,RuPaul,2023-01-06,16,Q0182,Q0186,-,200000,Main Series
+US16,US main,Season 16,MTV,RuPaul,2024-01-05,16,Q0198,Q0199,-,200000,Main Series
+US17,US main,Season 17,MTV,RuPaul,2025-01-03,16,Q0212,Q0220,-,200000,Main Series
+US18,US main,Season 18,MTV,RuPaul,2026-01-02,16,Q0226,Q0230,-,200000,Main Series
+AS05,All Stars,All Stars 5,VH1,RuPaul,2020-06-05,8,Q0103,-,-,100000,Main Series
+AS01,All Stars,All Stars 1,Logo TV,RuPaul,2012-10-22,6,Q0035,-,-,100000,Main Series
+AS02,All Stars,All Stars 2,VH1,RuPaul,2016-08-25,9,Q0048,-,-,100000,Main Series
+AS03,All Stars,All Stars 3,VH1,RuPaul,2018-01-25,8,Q0080,-,-,100000,Main Series
+AS04,All Stars,All Stars 4,VH1,RuPaul,2018-12-14,10,Q0119,-,-,100000,Main Series
+AS06,All Stars,All Stars 6,VH1,RuPaul,2021-06-24,12,Q0018,-,-,100000,Main Series
+AS07,All Stars,All Stars 7,VH1,RuPaul,2022-05-20,12,Q0047,-,-,200000,Main Series
+AS08,All Stars,All Stars 8,MTV,RuPaul,2023-05-12,12,Q0241,-,-,200000,Main Series
+AS09,All Stars,All Stars 9,MTV,RuPaul,2024-05-17,12,Q0170,-,-,200000,Main Series
+AS10,All Stars,All Stars 10,Paramount+,RuPaul,2025-05-09,12,Q0076,-,-,200000,Main Series
+AS11,All Stars,All Stars 11,Paramount+,RuPaul,2026-05-08,12,-,-,-,200000,Main Series
+CA01,Canada's Drag Race,Canada's Drag Race 1,Crave,Brooke Lynn Hytes,2020-07-02,10,Q0242,Q0249,-,100000,Americas
+CA02,Canada's Drag Race,Canada's Drag Race 2,Crave,Brooke Lynn Hytes,2021-10-14,10,Q0253,Q0261,-,100000,Americas
+CA03,Canada's Drag Race,Canada's Drag Race 3,Crave,Brooke Lynn Hytes,2022-07-14,9,Q0265,-,-,100000,Americas
+CA04,Canada's Drag Race,Canada's Drag Race 4,Crave,Brooke Lynn Hytes,2023-11-16,9,Q0277,Q0284,-,100000,Americas
+CA05,Canada's Drag Race,Canada's Drag Race 5,Crave,Brooke Lynn Hytes,2024-11-21,9,Q0288,Q0295,-,100000,Americas
+CA06,Canada's Drag Race,Canada's Drag Race 6,Crave,Brooke Lynn Hytes,2025-11-20,9,Q0299,Q0308,-,100000,Americas
+UK01,Drag Race UK,Drag Race UK 1,BBC Three,RuPaul,2019-10-03,9,Q0240,-,-,0,Europe
+UK02,Drag Race UK,Drag Race UK 2,BBC Three,RuPaul,2021-01-14,10,Q0320,-,-,0,Europe
+UK03,Drag Race UK,Drag Race UK 3,BBC Three,RuPaul,2021-09-23,10,Q0332,-,-,0,Europe
+UK04,Drag Race UK,Drag Race UK 4,BBC Three,RuPaul,2022-09-22,10,Q0343,-,-,0,Europe
+UK05,Drag Race UK,Drag Race UK 5,BBC Three,RuPaul,2023-09-28,10,Q0355,-,-,0,Europe
+UK06,Drag Race UK,Drag Race UK 6,BBC Three,RuPaul,2024-09-26,10,Q0365,Q0370,-,25000,Europe
+UK07,Drag Race UK,Drag Race UK 7,BBC Three,RuPaul,2025-09-25,10,Q0377,Q0385,-,25000,Europe
+CW01,Canada vs the World,Canada vs the World 1,Crave,RuPaul,2022-11-18,6,Q0135,Q0389,-,100000,Global
+CW02,Canada vs the World,Canada vs the World 2,Crave,RuPaul,2024-07-19,6,Q0245,Q0111,-,100000,Global
+GA01,Global All Stars,Global All Stars 1,WOW Presents Plus,RuPaul,2024-08-16,12,Q0052,Q0396,-,200000,Global
+UW01,UK vs the World,UK vs the World 1,BBC Three,RuPaul,2022-02-01,6,Q0314,-,-,0,Global
+UW02,UK vs the World,UK vs the World 2,BBC Three,RuPaul,2024-02-09,8,Q0326,Q0406,-,50000,Global
+UW03,UK vs the World,UK vs the World 3,BBC Three,RuPaul,2026-01-27,8,Q0407,Q0411,-,50000,Global
+DU01,Drag Race Down Under,Down Under Season 1,WOW Presents Plus,RuPaul,2021-05-01,8,Q0412,-,-,30000,Asia-Pacific
+DU02,Drag Race Down Under,Down Under Season 2,WOW Presents Plus,RuPaul,2022-07-30,8,Q0421,-,-,30000,Asia-Pacific
+DU03,Drag Race Down Under,Down Under Season 3,WOW Presents Plus,RuPaul,2023-07-28,8,Q0429,-,-,30000,Asia-Pacific
+DU04,Drag Race Down Under,Down Under Season 4,WOW Presents Plus,Michelle Visage,2024-11-01,8,Q0439,-,-,50000,Asia-Pacific
+ES01,Drag Race España,España Season 1,ATRESplayer / WOW Presents Plus,Supremme de Luxe,2021-05-30,10,Q0449,Q0452,-,30000,Europe
+ES02,Drag Race España,España Season 2,ATRESplayer / WOW Presents Plus,Supremme de Luxe,2022-03-27,12,Q0458,Q0467,-,-,Europe
+ES03,Drag Race España,España Season 3,ATRESplayer / WOW Presents Plus,Supremme de Luxe,2023-04-16,12,Q0470,Q0481,-,40000,Europe
+ES04,Drag Race España,España Season 4,ATRESplayer / WOW Presents Plus,Supremme de Luxe,2024-09-22,12,Q0482,Q0491,-,35000,Europe
+ES05,Drag Race España,España Season 5,ATRESplayer / WOW Presents Plus,Supremme de Luxe,2025-09-28,11,Q0494,Q0505,-,55000,Europe
+ESAS01,Drag Race España,España All Stars Season 1,ATRESplayer / WOW Presents Plus,Supremme de Luxe,2024-02-04,7,Q0463,Q0467,-,30000,Europe
+FR01,Drag Race France,France Season 1,France.tv Slash / WOW Presents Plus,Nicky Doll,2022-06-25,8,Q0506,Q0509,-,40000,Europe
+FR02,Drag Race France,France Season 2,France.tv Slash / WOW Presents Plus,Nicky Doll,2023-06-30,9,Q0513,Q0519,-,40000,Europe
+FR03,Drag Race France,France Season 3,France.tv Slash / WOW Presents Plus,Nicky Doll,2024-05-31,8,Q0524,Q0530,-,40000,Europe
+FRAS01,Drag Race France All Stars,France All Stars Season 1,France.tv Slash / WOW Presents Plus,Nicky Doll,2025-07-10,8,Q0515,Q0510,-,40000,Europe
+IT01,Drag Race Italia,Italia Season 1,Discovery+ / WOW Presents Plus,Priscilla,2021-11-19,6,Q0534,Q0537,-,-,Europe
+IT02,Drag Race Italia,Italia Season 2,Discovery+ / WOW Presents Plus,Priscilla,2022-10-20,8,Q0542,Q0392,-,-,Europe
+IT03,Drag Race Italia,Italia Season 3,Paramount+ / WOW Presents Plus,Priscilla,2023-10-13,12,Q0551,Q0554,-,20000,Europe
+NL01,Drag Race Holland,Holland Season 1,Videoland / WOW Presents Plus,Fred van Leer,2020-09-18,8,Q0564,Q0565,-,-,Europe
+NL02,Drag Race Holland,Holland Season 2,Videoland / WOW Presents Plus,Fred van Leer,2021-08-06,8,Q0573,Q0576,-,15000,Europe
+BE01,Drag Race Belgique,Belgique Season 1,WOW Presents Plus / Auvio,Rita Baga,2023-02-16,8,Q0582,Q0587,-,-,Europe
+BE02,Drag Race Belgique,Belgique Season 2,WOW Presents Plus / Auvio,Rita Baga,2024-02-01,8,Q0592,Q0597,-,-,Europe
+DE01,Drag Race Germany,Germany Season 1,WOW Presents Plus / Paramount+,Barbie Breakout,2023-09-05,12,Q0601,-,-,-,Europe
+SE01,Drag Race Sverige,Sverige Season 1,WOW Presents Plus / SVT Play,Robert Fux,2023-03-05,8,Q0610,-,-,-,Europe
+PH01,Drag Race Philippines,Philippines Season 1,WOW Presents Plus,Paolo Ballesteros,2022-08-17,10,Q0617,Q0621,-,-,Asia-Pacific
+PH02,Drag Race Philippines,Philippines Season 2,WOW Presents Plus,Paolo Ballesteros,2023-08-02,10,Q0626,Q0630,-,-,Asia-Pacific
+PH03,Drag Race Philippines,Philippines Season 3,WOW Presents Plus,Paolo Ballesteros,2024-08-07,10,Q0638,Q0648,-,-,Asia-Pacific
+PHSR01,Drag Race Philippines: Slaysian Royale,Slaysian Royale Season 1,WOW Presents Plus,Paolo Ballesteros,2025-08-13,10,Q0619,Q0261,-,-,Asia-Pacific
+TH01,Drag Race Thailand,Thailand Season 1,LINE TV,Art Arya,2018-02-15,8,Q0650,Q0653,-,-,Asia-Pacific
+TH02,Drag Race Thailand,Thailand Season 2,LINE TV,Art Arya,2019-01-11,13,Q0660,Q0670,-,-,Asia-Pacific
+TH03,Drag Race Thailand,Thailand Season 3,WOW Presents Plus,Pangina Heals,2024-10-16,10,Q0674,Q0679,-,-,Asia-Pacific
+BR01,Drag Race Brasil,Brasil Season 1,WOW Presents Plus,Grag Queen,2023-08-30,12,Q0683,Q0690,-,-,Americas
+BR02,Drag Race Brasil,Brasil Season 2,WOW Presents Plus,Grag Queen,2025-07-10,10,Q0694,-,-,-,Americas
+MX01,Drag Race México,México Season 1,WOW Presents Plus,Lolita Banana & Valentina,2023-06-22,12,Q0704,Q0707,-,-,Americas
+MX02,Drag Race México,México Season 2,WOW Presents Plus,Lolita Banana & Taiga Brava,2024-06-20,12,Q0713,Q0719,-,-,Americas
