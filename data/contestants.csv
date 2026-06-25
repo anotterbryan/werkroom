@@ -923,3 +923,27 @@ BR02-Q0700,Q0700,BR02,7,10,"Irecê, BA",1,1,1,2,6,No,-,images/queens/BR02-Q0700.
 BR02-Q0701,Q0701,BR02,8,6,"Vinhedo, SP",0,2,0,1,5,No,-,images/queens/BR02-Q0701.webp,0,36
 BR02-Q0702,Q0702,BR02,9,1,"Vila Velha, ES",0,0,1,1,3,No,-,images/queens/BR02-Q0702.webp,0,35
 BR02-Q0703,Q0703,BR02,10,3,"Niterói, RJ",0,1,0,1,2,No,-,images/queens/BR02-Q0703.webp,0,21
+MX01-Q0704,Q0704,MX01,1,9,"Guadalajara, JA",5,3,1,0,,No,-,images/queens/MX01-Q0704.webp,568000,35
+MX01-Q0395,Q0395,MX01,2,10,"Morelia, MI",1,4,0,2,,No,-,images/queens/MX01-Q0395.webp,0,33
+MX01-Q0705,Q0705,MX01,2,11,"León, GT",3,2,1,1,,No,-,images/queens/MX01-Q0705.webp,61000,24
+MX01-Q0706,Q0706,MX01,2,5,"Mexico City, DF",1,4,0,1,,No,-,images/queens/MX01-Q0706.webp,36000,41
+MX01-Q0707,Q0707,MX01,5,7,"Ocotlán de Morelos, OA",0,3,1,2,9,Yes,-,images/queens/MX01-Q0707.webp,36000,33
+MX01-Q0708,Q0708,MX01,6,3,"Mexico City, DF",0,2,3,1,7,No,-,images/queens/MX01-Q0708.webp,36000,28
+MX01-Q0709,Q0709,MX01,7,8,"Ciudad Juárez, CH",1,1,0,3,6,No,-,images/queens/MX01-Q0709.webp,27000,26
+MX01-Q0411,Q0411,MX01,8,2,"Aguascalientes, AG",0,0,1,3,5,No,-,images/queens/MX01-Q0411.webp,0,34
+MX01-Q0710,Q0710,MX01,9,1,"Mexico City, DF",0,0,0,1,4,No,-,images/queens/MX01-Q0710.webp,0,32
+MX01-Q0711,Q0711,MX01,10,4,"Querétaro City, QT",0,0,1,2,3,No,-,images/queens/MX01-Q0711.webp,9000,24
+MX01-Q0712,Q0712,MX01,11,6,"Puerto Vallarta, JA",0,0,0,2,2,No,-,images/queens/MX01-Q0712.webp,0,25
+MX02-Q0713,Q0713,MX02,1,12,"Mexicali, BC",1,3,1,1,,No,-,images/queens/MX02-Q0713.webp,550000,22
+MX02-Q0714,Q0714,MX02,2,13,"Mexico City, DF",2,4,0,0,,No,-,images/queens/MX02-Q0714.webp,18000,35
+MX02-Q0715,Q0715,MX02,2,4,"Chihuahua, CH",2,3,1,2,,No,-,images/queens/MX02-Q0715.webp,0,20
+MX02-Q0716,Q0716,MX02,2,7,"Tepatitlán de Morelos, JA",3,0,1,2,,No,-,images/queens/MX02-Q0716.webp,0,27
+MX02-Q0717,Q0717,MX02,5,2,"Mexico City, DF",1,4,2,2,10,No,-,images/queens/MX02-Q0717.webp,36000,26
+MX02-Q0718,Q0718,MX02,6,9,"Aguascalientes, AG",1,1,0,4,9,No,-,images/queens/MX02-Q0718.webp,18000,27
+MX02-Q0719,Q0719,MX02,7,11,"Mexico City, DF",2,0,0,2,7,Yes,-,images/queens/MX02-Q0719.webp,9000,36
+MX02-Q0720,Q0720,MX02,8,5,"Mexico City, DF",0,0,2,1,6,No,-,images/queens/MX02-Q0720.webp,0,27
+MX02-Q0721,Q0721,MX02,9,1,"Ciudad Madero, TM",0,1,1,2,5,No,-,images/queens/MX02-Q0721.webp,0,29
+MX02-Q0722,Q0722,MX02,10,10,"Querétaro City, QT",0,1,0,1,4,No,-,images/queens/MX02-Q0722.webp,0,29
+MX02-Q0723,Q0723,MX02,11,6,"Monterrey, NL",0,0,0,1,3,No,-,images/queens/MX02-Q0723.webp,0,31
+MX02-Q0724,Q0724,MX02,12,3,"Mexico City, DF",0,0,0,1,2,Yes,-,images/queens/MX02-Q0724.webp,9000,33
+MX02-Q0725,Q0725,MX02,13,8,"Aguascalientes, AG",0,0,0,1,1,No,-,images/queens/MX02-Q0725.webp,0,23
