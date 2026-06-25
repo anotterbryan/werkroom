@@ -901,3 +901,25 @@ TH03-Q0679,Q0679,TH03,8,6,Samut Prakan,0,2,0,2,5,Yes,-,images/queens/TH03-Q0679.
 TH03-Q0680,Q0680,TH03,9,7,Chiang Mai,0,0,1,2,4,No,-,images/queens/TH03-Q0680.webp,0,22
 TH03-Q0681,Q0681,TH03,10,4,Ratchaburi,0,1,0,1,3,No,-,images/queens/TH03-Q0681.webp,0,27
 TH03-Q0682,Q0682,TH03,11,1,Bangkok,0,0,0,2,2,No,-,images/queens/TH03-Q0682.webp,0,27
+BR01-Q0683,Q0683,BR01,1,-,"Rio de Janeiro, RJ",4,3,0,1,,No,-,images/queens/BR01-Q0683.webp,155000,30
+BR01-Q0684,Q0684,BR01,2,-,"Rio de Janeiro, RJ",2,1,1,2,,No,-,images/queens/BR01-Q0684.webp,7500,46
+BR01-Q0685,Q0685,BR01,2,-,"Salvador, BA",2,4,2,1,,No,-,images/queens/BR01-Q0685.webp,2500,23
+BR01-Q0398,Q0398,BR01,2,-,"Rio de Janeiro, RJ",1,4,3,1,,No,-,images/queens/BR01-Q0398.webp,10000,33
+BR01-Q0686,Q0686,BR01,5,-,"Piraúba, MG",1,2,1,3,10,No,-,images/queens/BR01-Q0686.webp,10000,26
+BR01-Q0687,Q0687,BR01,6,-,"Monte Santo de Minas, MG",1,0,0,2,8,No,-,images/queens/BR01-Q0687.webp,0,22
+BR01-Q0688,Q0688,BR01,7,-,"Campinas, SP",0,3,1,3,7,No,-,images/queens/BR01-Q0688.webp,5000,26
+BR01-Q0689,Q0689,BR01,8,-,"Taguatinga, DF",0,3,1,1,6,No,-,images/queens/BR01-Q0689.webp,0,29
+BR01-Q0690,Q0690,BR01,9,-,"Belo Horizonte, MG",0,0,0,2,5,Yes,-,images/queens/BR01-Q0690.webp,0,26
+BR01-Q0691,Q0691,BR01,10,-,"São José do Rio Preto, SP",0,0,0,1,4,No,-,images/queens/BR01-Q0691.webp,0,26
+BR01-Q0692,Q0692,BR01,11,-,"Belém, PA",0,2,0,1,3,No,-,images/queens/BR01-Q0692.webp,0,34
+BR01-Q0693,Q0693,BR01,12,-,"Jaquirana, RS",0,0,0,2,2,No,-,images/queens/BR01-Q0693.webp,0,42
+BR02-Q0694,Q0694,BR02,1,4,"Carnaíba, PE",3,0,1,0,,No,-,images/queens/BR02-Q0694.webp,150000,31
+BR02-Q0695,Q0695,BR02,2,8,"Belo Horizonte, MG",1,1,2,3,,No,-,images/queens/BR02-Q0695.webp,6000,30
+BR02-Q0696,Q0696,BR02,3,9,"Sapé, PB",0,3,0,3,10,No,-,images/queens/BR02-Q0696.webp,5000,30
+BR02-Q0697,Q0697,BR02,3,2,"Recife, PE",1,2,2,3,10,No,-,images/queens/BR02-Q0697.webp,0,30
+BR02-Q0698,Q0698,BR02,5,7,"São Paulo, SP",1,4,1,1,9,No,-,images/queens/BR02-Q0698.webp,0,36
+BR02-Q0699,Q0699,BR02,6,5,"Cidade Ocidental, GO",2,1,1,2,7,No,-,images/queens/BR02-Q0699.webp,10000,26
+BR02-Q0700,Q0700,BR02,7,10,"Irecê, BA",1,1,1,2,6,No,-,images/queens/BR02-Q0700.webp,0,34
+BR02-Q0701,Q0701,BR02,8,6,"Vinhedo, SP",0,2,0,1,5,No,-,images/queens/BR02-Q0701.webp,0,36
+BR02-Q0702,Q0702,BR02,9,1,"Vila Velha, ES",0,0,1,1,3,No,-,images/queens/BR02-Q0702.webp,0,35
+BR02-Q0703,Q0703,BR02,10,3,"Niterói, RJ",0,1,0,1,2,No,-,images/queens/BR02-Q0703.webp,0,21

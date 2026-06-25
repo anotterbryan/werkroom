@@ -52,7 +52,7 @@ S0059,Stupid Girls,Pink,1,1Ab6RxeKl3e07zP7Get7CX,No,LIPSYNC,-
 S0060,Vibeology,Paula Abdul,1,6IXKljJrwMJlyRhzHRbEDW,No,LIPSYNC,-
 S0061,Think,Aretha Franklin,1,4yQw7FR9lcvL6RHtegbJBh,No,LIPSYNC,-
 S0062,Stronger (What Doesn't Kill You),Kelly Clarkson,2,6D60klaHqbCl9ySc8VcRss,No,LIPSYNC,-
-S0063,Sissy That Walk,RuPaul,4,4KvHJkVdQQrskjVfGoYedT,Yes,LIPSYNC,-
+S0063,Sissy That Walk,RuPaul,5,4KvHJkVdQQrskjVfGoYedT,Yes,LIPSYNC,-
 S0064,Geronimo,RuPaul ft. Lucian Piane,1,6e0OWCPIC1W9zhRRu1Me0E,Yes,LIPSYNC,-
 S0065,Twist of Fate,Olivia Newton-John,1,7k7i5YHJSLTbBSuwnWtSBn,No,LIPSYNC,-
 S0066,I Was Gonna Cancel,Kylie Minogue,1,4WiQmOTCwKGeq4IUKxQOZg,No,LIPSYNC,-
@@ -82,7 +82,7 @@ S0091,Baby I'm Burnin',Dolly Parton,1,2Asiem9O0YGuvvoAkz8aSq,No,LIPSYNC,-
 S0092,Greedy,Ariana Grande,1,2tpIAmAq9orm1Owh5pja1w,No,LIPSYNC,-
 S0093,Cool for the Summer,Demi Lovato,1,3uwnnTQcHM1rDqSfA4gQNz,No,LIPSYNC,-
 S0094,Macho Man,Village People,1,0xRDqhYsCW6F9LM4s7gY5z,No,LIPSYNC,-
-S0095,U Wear It Well,RuPaul,1,5ZPm6L12nA9nK3AAIxNa3Y,Yes,LIPSYNC,-
+S0095,U Wear It Well,RuPaul,2,5ZPm6L12nA9nK3AAIxNa3Y,Yes,LIPSYNC,-
 S0096,"It's Not Right, but It's Okay",Whitney Houston,1,7861kBrZ5aw7o4NfggcyYW,No,LIPSYNC,-
 S0097,Ain't No Other Man,Christina Aguilera,1,7huo2wvrCgRucUsjdSDLQV,No,LIPSYNC,-
 S0098,Best of My Love,The Emotions,1,2M2WJ7gBlcKNxdhyfPp9zY,No,LIPSYNC,-
@@ -179,7 +179,7 @@ S0203,Thats What I Want,Lil Nas X,1,0e8nrvls4Qqv5Rfa2UhqmO,No,LIPSYNC,-
 S0204,Running Up That Hill (A Deal with God),Kate Bush,1,1PtQJZVZIdWIYdARpZRDFO,No,LIPSYNC,-
 S0205,Oops!... I Did It Again,Britney Spears,1,6naxalmIoLFWR0siv8dnQQ,No,LIPSYNC,-
 S0206,Two to Make It Right,Seduction,1,0n6Eg4mD1tfhnLs5jswEM2,No,LIPSYNC,-
-S0207,The Beginning,RuPaul,2,2kCXEZLsTDf6vdgQHJkboU,Yes,LIPSYNC,-
+S0207,The Beginning,RuPaul,3,2kCXEZLsTDf6vdgQHJkboU,Yes,LIPSYNC,-
 S0208,Supermodel (You Better Work),RuPaul,1,36Rpz4MZQhGknLEmTmHr8v,Yes,LIPSYNC,-
 S0209,I Hear You Knocking,Wynonna Judd,1,1LFvcyg3bpq7AffqwuZ13K,No,LIPSYNC,-
 S0210,Jealous of My Boogie (Gomi and RasJek Edit),RuPaul,1,1QnYyVU3qF90dMdvlOAxbw,Yes,LIPSYNC,-
@@ -831,3 +831,23 @@ S0855,We Are Beautiful,Silvy,1,-,No,LIPSYNC,TH03
 S0856,Music Lover,Marsha,1,-,No,LIPSYNC,TH03
 S0857,ร (W8),Gene Kasidit,1,-,No,LIPSYNC,TH03
 S0858,ประวัติศาสตร์,Christina Aguilar,1,-,No,LIPSYNC,TH03
+S0859,Bandida,Pabllo Vittar feat. Pocah,1,-,No,LIPSYNC,BR01
+S0860,Cachorrinhas,Luísa Sonza,1,-,No,LIPSYNC,BR01
+S0861,Cheguei,Ludmilla,1,-,No,LIPSYNC,BR01
+S0862,Vermelho,Gloria Groove,1,-,No,LIPSYNC,BR01
+S0863,Shine It On,Wanessa Camargo,1,-,No,LIPSYNC,BR01
+S0864,Decadence Avec Elegance,Deborah Blando,1,-,No,LIPSYNC,BR01
+S0865,Dois Trabalhos,Donas,1,-,No,LIPSYNC,BR01
+S0866,Festa,Ivete Sangalo,1,-,No,LIPSYNC,BR01
+S0867,Gueto,Iza,1,-,No,LIPSYNC,BR01
+S0868,Envolver,Anitta,1,-,No,LIPSYNC,BR01
+S0869,Funk Rave,Anitta,1,-,No,LIPSYNC,BR02
+S0870,Ultra Som,Pabllo Vittar,1,-,No,LIPSYNC,BR02
+S0871,Brasil,Gal Costa,1,-,No,LIPSYNC,BR02
+S0872,Tombei,Karol Conká,1,-,No,LIPSYNC,BR02
+S0873,A Dona Aranha,Luísa Sonza,1,-,No,LIPSYNC,BR02
+S0874,Bixinho (Lux & Tróia Remix),Duda Beat and Lux & Tróia,1,-,No,LIPSYNC,BR02
+S0875,Jeito Sexy,Fat Family,1,-,No,LIPSYNC,BR02
+S0876,O Amor e o Poder,Rosana Fiengo,1,-,No,LIPSYNC,BR02
+S0877,"I'm a Winner, Baby",RuPaul,1,-,No,LIPSYNC,BR02
+S0878,A Little Bit Of Love,RuPaul,1,-,No,LIPSYNC,BR02
