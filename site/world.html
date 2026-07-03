@@ -567,11 +567,13 @@ function failGate(title, body){
 }
 
 /* ---------------- capability gate ---------------- */
+window.WR_CALM = false;
 if(matchMedia('(prefers-reduced-motion: reduce)').matches){
-  failGate('reduced motion is on — honoring it',
-    'Your system asks for reduced motion, and a first-person walk is the opposite of that. '+
-    'The classic site is the real product anyway — every view, every fact, zero camera moves.');
-  throw new Error('reduced-motion');
+  /* soften, don't block: note the preference, offer both doors */
+  window.WR_CALM = true;   /* consumed below: gentler turn speed, no camera sway, instant curtain fade */
+  gateStatus.textContent = 'reduced motion is on — calm mode ready';
+  gateBody.innerHTML = 'Your system asks for reduced motion, so the room will move gently: '+
+    'softer turns, no sway, quicker fades. Prefer zero camera movement? The classic site holds the entire archive.';
 }
 {
   const test = document.createElement('canvas');
@@ -906,8 +908,9 @@ document.addEventListener('pointerlockchange', ()=>{
 });
 document.addEventListener('mousemove', e=>{
   if(!document.pointerLockElement) return;
-  player.yaw -= e.movementX*0.0023;
-  player.pitch = Math.max(-1.45, Math.min(1.45, player.pitch - e.movementY*0.0023));
+  const LOOK = window.WR_CALM ? 0.0013 : 0.0023;   /* calm mode: gentler turns */
+  player.yaw -= e.movementX*LOOK;
+  player.pitch = Math.max(-1.45, Math.min(1.45, player.pitch - e.movementY*LOOK));
 });
 addEventListener('keydown', e=>{
   keys[e.code]=true;
@@ -1463,7 +1466,7 @@ function curtainTick(dt,t){
   }
   /* lighting crossfade across the 5m corridor (≈2s at walk speed) */
   const want=Math.max(0,Math.min(1,(player.z-15)/5));
-  crossT += (want-crossT)*Math.min(1,dt*2.2);
+  crossT += (want-crossT)*Math.min(1,dt*(window.WR_CALM?6:2.2));  /* calm: quicker, less lingering fade */
   const back=1-crossT;
   baseI.forEach((v,l)=>{
     const isRun=(l===hemiRun||l===spotMag||l===spotBlu||l===spotGld||l===pJuke);
