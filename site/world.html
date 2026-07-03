@@ -6,7 +6,9 @@
 <meta name="theme-color" content="#14101c"/>
 <title>THE WERKROOM — In Three Dimensions (experimental)</title>
 <!--
-  THE WERKROOM 3D · Phase 1 prototype
+  THE WERKROOM 3D · Phase 2 — the archive fills in
+  (string board · snatch desk · vault · reading room · runway lip-sync act ·
+   diegetic homes · spotlight collection in localStorage 'wr3d')
   Three.js pinned at r0.168.0 (jsDelivr, import map below). NEVER float this version.
   All data flows through the hidden same-origin iframe bridge to index.html —
   this file loads NO site_data.js and reimplements NO data logic.
@@ -176,12 +178,67 @@ a{color:var(--gold)}
 #libGo{background:var(--brass);color:#231600;border:none;border-radius:10px;padding:0 20px;
   font-weight:700;cursor:pointer;font-size:13px}
 
+/* ---------- Toast + pause progress ---------- */
+#toast{position:fixed;left:50%;bottom:64px;transform:translateX(-50%);z-index:185;
+  background:rgba(20,16,28,.95);border:1px solid var(--brass);color:var(--gold);border-radius:12px;
+  padding:11px 18px;font-size:12px;letter-spacing:.5px;max-width:92vw;text-align:center;box-shadow:var(--shadow)}
+#pauseProg{display:flex;align-items:center;gap:14px;margin:14px 0 4px;padding-top:12px;
+  border-top:1px solid rgba(201,162,39,.25)}
+#pauseProg svg{flex:none}
+#pauseProg .pp{font-size:11.5px;line-height:1.7;color:rgba(247,240,230,.8)}
+#pauseProg .pp b{color:var(--gold)}
+
+/* ---------- The Reading Room sitting ---------- */
+#read{position:fixed;inset:0;z-index:140;display:flex;align-items:center;justify-content:center;
+  background:rgba(8,5,12,.68)}
+#readCard{width:min(560px,94vw);max-height:min(700px,86vh);display:flex;flex-direction:column;
+  background:linear-gradient(160deg,rgba(61,35,82,.75),rgba(20,16,28,.97));
+  border:1px solid var(--brass);border-radius:16px;box-shadow:var(--shadow);overflow:hidden}
+#readHead{display:flex;align-items:flex-start;gap:10px;padding:14px 18px 10px}
+#readHead .rk{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--nrose);font-weight:700}
+#readHead .rt{font-family:var(--disp);font-weight:800;font-size:20px}
+#readHead .rt em{font-style:italic;color:var(--brass)}
+#readX{margin-left:auto;background:none;border:1px solid rgba(244,181,63,.5);color:var(--gold);
+  border-radius:8px;width:32px;height:32px;cursor:pointer;flex:none}
+#readBody{overflow-y:auto;padding:6px 18px 18px;font-size:13px;line-height:1.6}
+#readBody .qnum{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--brass);margin:6px 0 8px}
+#readBody .qq{font-family:var(--disp);font-size:19px;line-height:1.3;margin-bottom:14px}
+.ropt{display:block;width:100%;text-align:left;margin:7px 0;padding:13px 15px;min-height:48px;border-radius:11px;
+  background:rgba(61,35,82,.5);border:1px solid rgba(201,162,39,.35);color:var(--cream);
+  font-family:var(--mono);font-size:13.5px;cursor:pointer;line-height:1.4}
+.ropt:hover{background:rgba(230,0,126,.16)}
+.ropt.good{background:rgba(116,224,200,.16);border-color:var(--mint)}
+.ropt.bad{background:rgba(230,0,126,.2);border-color:var(--magenta)}
+.rsay{margin:12px 0;padding:11px 14px;border-radius:12px;font-style:italic;font-size:12.5px;line-height:1.55;
+  background:rgba(212,112,143,.12);border:1px solid rgba(212,112,143,.4)}
+.rfact{margin:10px 0;padding:11px 14px;border-radius:12px;font-size:12.5px;line-height:1.55;
+  background:rgba(201,162,39,.1);border:1px solid rgba(201,162,39,.45)}
+#readBody .gbtn{padding:12px 20px;font-size:13px}
+
+/* ---------- Connections board side panel (non-blocking) ---------- */
+#board{position:fixed;right:12px;top:64px;z-index:58;width:min(330px,calc(100vw - 24px));
+  max-height:min(480px,62vh);display:flex;flex-direction:column;
+  background:linear-gradient(165deg,rgba(36,26,51,.96),rgba(20,16,28,.97));
+  border:1px solid var(--brass);border-radius:14px;box-shadow:var(--shadow);overflow:hidden}
+#board .bh{display:flex;align-items:center;gap:8px;padding:11px 14px;border-bottom:1px solid rgba(201,162,39,.3)}
+#board .bh b{font-family:var(--disp);font-size:17px}
+#board .bh .n{font-size:10px;color:rgba(247,240,230,.5)}
+#boardX{margin-left:auto;background:none;border:1px solid rgba(244,181,63,.5);color:var(--gold);
+  border-radius:8px;width:28px;height:28px;cursor:pointer;flex:none}
+#boardList{overflow-y:auto;padding:6px 14px;flex:1}
+#boardList .lk{padding:7px 0;border-bottom:1px solid rgba(255,255,255,.05);font-size:12px;line-height:1.45}
+#boardList .lk .ty{font-size:9.5px;letter-spacing:1px;text-transform:uppercase;color:var(--nrose)}
+#board .bf{display:flex;gap:8px;padding:10px 14px;border-top:1px solid rgba(201,162,39,.3)}
+#board .bf button{flex:1;min-height:44px;border-radius:10px;font-size:11.5px;cursor:pointer;font-weight:700;font-family:var(--mono)}
+#boardGo{background:var(--brass);color:#231600;border:none}
+#boardQ{background:transparent;border:1px solid rgba(244,181,63,.55);color:var(--gold)}
+
 /* ---------- Mobile controls ---------- */
 #joy{position:fixed;z-index:55;width:110px;height:110px;border-radius:50%;border:1px solid rgba(201,162,39,.5);
   background:rgba(20,16,28,.35);pointer-events:none}
 #joyKnob{position:absolute;left:50%;top:50%;width:46px;height:46px;margin:-23px;border-radius:50%;
   background:rgba(201,162,39,.5);border:1px solid var(--brass)}
-@media (hover:hover) and (pointer:fine){ #askBtn{bottom:auto;top:56px;right:12px} }
+@media (hover:hover) and (pointer:fine){ #askBtn{bottom:auto;top:56px;right:12px} #board{top:120px} }
 </style>
 </head>
 <body>
@@ -226,8 +283,10 @@ classic two-dimensional site at index.html, which is fully accessible. Use the s
     <div class="keys">
       <b>W A S D</b> walk &nbsp;·&nbsp; <b>Shift</b> run &nbsp;·&nbsp; <b>mouse</b> look<br/>
       <b>E</b> interact &nbsp;·&nbsp; <b>T</b> talk to The Librarian &nbsp;·&nbsp; <b>← →</b> flip seasons at the photo wall or judges' table<br/>
-      <b>Esc</b> this menu / close panels
+      <b>Esc</b> this menu / close panels<br/>
+      <b>sit</b> in the Reading Room armchair to get read &nbsp;·&nbsp; <b>step</b> on a runway spotlight to call a lip sync
     </div>
+    <div id="pauseProg"></div>
     <div>
       <button class="gbtn" id="resumeBtn">Resume</button>
       <a class="gbtn ghost" href="index.html">Exit to classic site</a>
@@ -276,6 +335,27 @@ classic two-dimensional site at index.html, which is fully accessible. Use the s
     <button id="libGo">Ask</button>
   </div>
 </div>
+
+<!-- The Reading Room sitting (trivia built live from the archive) -->
+<div id="read" class="hidden">
+  <div id="readCard">
+    <div id="readHead">
+      <div><div class="rk">the reading room</div><div class="rt">READING IS <em>FUNDAMENTAL</em></div></div>
+      <button id="readX" aria-label="Stand up">✕</button>
+    </div>
+    <div id="readBody"></div>
+  </div>
+</div>
+
+<!-- Connections string-board side panel (non-blocking; movement stays live) -->
+<div id="board" class="hidden">
+  <div class="bh"><div><b id="boardName">—</b><br/><span class="n" id="boardN"></span></div>
+    <button id="boardX" aria-label="Close panel">✕</button></div>
+  <div id="boardList"></div>
+  <div class="bf"><button id="boardGo">Connections in the archive ↗</button><button id="boardQ">Her dossier ↗</button></div>
+</div>
+
+<div id="toast" class="hidden" role="status"></div>
 
 <div id="joy" class="hidden"><div id="joyKnob"></div></div>
 
@@ -375,8 +455,37 @@ var PROP_LINES = {
   photowall:'Hundreds of faces, one wall. Look one of them in the eye and press the key — her whole dossier answers.',
   judges:'Sit. The scoreboard does the talking; I merely painted it.',
   jukebox:'Every season keeps its songs in this cabinet. The playable ones glow green; the missing ones I refuse to fake.',
-  exitdoor:'The classic site, through there. Same archive, calmer shoes.'
+  exitdoor:'The classic site, through there. Same archive, calmer shoes.',
+  stringboard:'Every thread on that board is a receipt — a queen, a return, a date. Pull one and follow it.',
+  snatchdesk:'The Snatch Game desk. Impersonation with citations — the only kind I shelve.',
+  vault:'The vault. Every column, every run, no editorializing. My happy place.',
+  vaultcrt:'That terminal shows the archive with its wig off — what we have, what we’re honest about missing.',
+  reading:'The Reading Room. Sit, and I’ll read you — kindly, and with page numbers.',
+  mirror0:'The mirrors play favorites at random, darling. Ask one to shine on somebody.',
+  globe:'Spin it gently. The hometowns are load-bearing.',
+  calendar:'Every marked square on that wall is somebody’s birthday. The archive never forgets one.',
+  vibe:'My disreputable cousin, Madame Vibe. Her math is honest about being a party trick.',
+  lsstage:'Two spotlights, one song, and a verdict already in my files. Care to call it?',
+  departures:'The departures board. Every season leaves on time — eventually.',
+  workbench:'The workbench. Challenges filed by type; the pincushion is decorative.',
+  lectern:'The guest book. Everyone who ever judged, counted and cross-referenced.',
+  ledger:'The ledger tracks every documented dollar on that table. Tips not included.'
 };
+
+/* emcee announce lines for the lip-sync summon — flavor only, never the verdict */
+var LS_ANNOUNCE = [
+  'Two queens, one song, and a verdict already in my files. Ladies — the floor is yours.',
+  'The archive remembers this one, baby. Let’s see if you do.',
+  'House lights down. This battle really happened — call it if you dare.'
+];
+/* library-card ceremony lines (Reading Room, 5/5) */
+var CARD_LINES = [
+  'With the power vested in me by absolutely nobody, I confer upon you this library card. Five for five',
+  'A perfect sitting. The stacks are humming and the stamp is still warm',
+  'Flawless. I have embossed cards for less, but never with more pleasure'
+];
+/* spotlight-collection milestones (design §5.1) */
+var MET_TITLES = [[10,'a Regular'],[50,'Front Row'],[150,'Archivist’s Pet'],[400,'The Landlord of These Stacks']];
 
 /* ---------------- pure helpers ---------------- */
 
@@ -445,6 +554,225 @@ function placementMatrix(D, sid){
   return {queens:cs, eps:eps, status:function(qid,eid){ return st[qid+'|'+eid]||''; }};
 }
 
+function ordinal(n){
+  n = +n;
+  var s = ['th','st','nd','rd'], v = n % 100;
+  return n + (s[(v-20)%10] || s[v] || s[0]);
+}
+
+/* ---- Connections string-board layout (pure) ----
+   Groups DATA.derived.alumni_links (252) by queen: gold hub pins sized by
+   link count, rose spoke pins fanned around each hub, deterministic layout
+   in board space [0..W]×[0..H]. The 3D twin of buildAlumniSVG (audit §4). */
+function alumniBoard(D, W, H){
+  var links = (D.derived && D.derived.alumni_links) || [];
+  var qn = (D.derived && D.derived.qname) || {};
+  var byq = {};
+  links.forEach(function(l){
+    /* rows with no linked queen record group by credited person name instead
+       of collapsing into one '-' pin (honest: shown, not invented) */
+    var linked = l.queen_id && l.queen_id !== '-' && qn[l.queen_id] && qn[l.queen_id] !== '-';
+    var k = linked ? 'q:' + l.queen_id : 'p:' + l.person;
+    (byq[k] = byq[k] || []).push(l);
+  });
+  var hubs = Object.keys(byq).map(function(k){
+    var ls = byq[k].slice().sort(function(a,b){ return String(a.episode).localeCompare(String(b.episode)); });
+    var linked = k.charAt(0) === 'q';
+    return {qid:linked ? k.slice(2) : null,
+      name:linked ? (qn[k.slice(2)] || k.slice(2)) : k.slice(2),
+      links:ls};
+  }).sort(function(a,b){ return b.links.length - a.links.length || (a.name < b.name ? -1 : 1); });
+  var n = hubs.length || 1;
+  var cols = Math.max(1, Math.round(Math.sqrt(n * W / H)));
+  var cw = W / cols, ch = H / Math.ceil(n / cols);
+  hubs.forEach(function(h, i){
+    var c = i % cols, r = (i / cols) | 0;
+    h.x = (c + 0.5) * cw + ((r % 2) ? cw * 0.14 : -cw * 0.1);   /* organic but deterministic */
+    h.y = H - (r + 0.5) * ch;
+    h.r = Math.min(0.085, 0.026 + h.links.length * 0.006);
+    var fan = Math.min(cw, ch) * 0.36;
+    h.links.forEach(function(l, j){
+      var a = (j / h.links.length) * Math.PI * 2 + i * 0.7;
+      l.x = h.x + Math.cos(a) * fan;
+      l.y = h.y + Math.sin(a) * fan * 0.8;
+    });
+  });
+  hubs.forEach(function(h){
+    h.x = Math.max(.22, Math.min(W - .22, h.x)); h.y = Math.max(.18, Math.min(H - .18, h.y));
+    h.links.forEach(function(l){
+      l.x = Math.max(.07, Math.min(W - .07, l.x)); l.y = Math.max(.07, Math.min(H - .07, l.y));
+    });
+  });
+  return {hubs:hubs, W:W, H:H};
+}
+
+/* sagging-string samples between two board points (catenary-ish quadratic) */
+function stringPoints(x1, y1, x2, y2, segs){
+  segs = segs || 5;
+  var pts = [], dx = x2 - x1, dy = y2 - y1, len = Math.sqrt(dx*dx + dy*dy);
+  var sag = Math.min(.2, len * .16);
+  for(var i = 0; i <= segs; i++){
+    var t = i / segs;
+    pts.push([x1 + dx*t, y1 + dy*t - sag * 4 * t * (1 - t)]);
+  }
+  return pts;
+}
+
+/* ---- Snatch Game (pure) — roles from episode_roles SNATCH_CHARACTER ---- */
+function snatchRoles(D){
+  var cont = {}; D.contestants.forEach(function(c){ cont[c.contestant_id] = c; });
+  var qn = (D.derived && D.derived.qname) || {};
+  return D.episode_roles.filter(function(r){
+    return r.role_type === 'SNATCH_CHARACTER' && r.role_detail && r.role_detail !== '-' && cont[r.contestant_id];
+  }).map(function(r){
+    var c = cont[r.contestant_id];
+    return {celeb:r.role_detail, qid:c.queen_id,
+      queen:(c.drag_name_used && c.drag_name_used !== '-') ? c.drag_name_used : (qn[c.queen_id] || c.queen_id),
+      season_id:c.season_id, episode_id:r.episode_id};
+  });
+}
+/* most-impersonated tally — folds variant spellings like the 2D snatch view */
+function snatchTally(D){
+  function fold(s){ return String(s).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim(); }
+  var by = {};
+  snatchRoles(D).forEach(function(r){
+    var k = fold(r.celeb);
+    var e = (by[k] = by[k] || {names:{}, queens:{}, plays:0});
+    e.names[r.celeb] = (e.names[r.celeb] || 0) + 1;
+    e.queens[r.qid] = 1; e.plays++;
+  });
+  return Object.keys(by).map(function(k){
+    var e = by[k];
+    var disp = Object.keys(e.names).sort(function(a,b){ return e.names[b] - e.names[a]; })[0];
+    return {base:disp, queens:Object.keys(e.queens).length, plays:e.plays};
+  }).sort(function(a,b){ return b.queens - a.queens || b.plays - a.plays || (a.base < b.base ? -1 : 1); });
+}
+/* one Snatch episode's who-played-whom card set (idx wraps over snatch_index) */
+function snatchEpisodeCards(D, idx){
+  var eps = (D.derived && D.derived.snatch_index) || [];
+  if(!eps.length) return null;
+  var e = eps[((idx % eps.length) + eps.length) % eps.length];
+  var slabel = (D.derived && D.derived.slabel) || {};
+  var cards = snatchRoles(D).filter(function(r){ return r.episode_id === e.episode_id; });
+  return {episode_id:e.episode_id, season:e.season, label:slabel[e.season] || e.season, title:e.title, cards:cards};
+}
+
+/* ---- Lip-sync battle pick + honest outcome (pure) ---- */
+function lsPick(D, rnd){
+  rnd = rnd || Math.random;
+  var qn = (D.derived && D.derived.qname) || {};
+  var pool = D.lip_syncs.filter(function(l){
+    if(!(l.queen_a_id && l.queen_b_id && qn[l.queen_a_id] && qn[l.queen_b_id])) return false;
+    if(l.result_type === 'SHANTAY' || l.result_type === 'SASHAY') return true;   /* doubles */
+    return !!(l.winner_id && qn[l.winner_id]);
+  });
+  if(!pool.length) return null;
+  var l = pool[Math.floor(rnd() * pool.length)];
+  var ep = null, song = null, i;
+  for(i = 0; i < D.episodes.length; i++) if(D.episodes[i].episode_id === l.episode_id){ ep = D.episodes[i]; break; }
+  for(i = 0; i < D.songs.length; i++) if(D.songs[i].song_id === l.song_id){ song = D.songs[i]; break; }
+  var slabel = (D.derived && D.derived.slabel) || {};
+  var outcome = l.result_type === 'SHANTAY' ? 'both_stay'
+             : l.result_type === 'SASHAY'  ? 'both_go'
+             : (l.winner_id === l.queen_a_id ? 'a' : 'b');
+  return {ls:l, a:{qid:l.queen_a_id, name:qn[l.queen_a_id]}, b:{qid:l.queen_b_id, name:qn[l.queen_b_id]},
+    ep:ep, season:ep ? (slabel[ep.season_id] || ep.season_id) : '', song:song, outcome:outcome};
+}
+function lsOutcomeText(m){
+  var w = m.outcome === 'a' ? m.a : (m.outcome === 'b' ? m.b : null);
+  var l = m.outcome === 'a' ? m.b : (m.outcome === 'b' ? m.a : null);
+  var t = m.ls.result_type;
+  if(m.outcome === 'both_stay') return 'Double shantay — both queens stayed.';
+  if(m.outcome === 'both_go')   return 'Double sashay — both queens went home.';
+  if(t === 'CROWN') return w.name + ' won the lip sync for the crown.';
+  if(t === 'TOPS')  return w.name + ' won the lip sync for the win.';
+  if(m.ls.was_save === 'Yes') return w.name + ' won — and ' + l.name + ' was saved.';
+  return w.name + ' stayed; ' + l.name + ' sashayed away.';
+}
+
+/* ---- Reading Room trivia (pure) — 5 questions from REAL rows, distractors
+   from sibling rows; every question carries its proof route. Never invents. */
+function triviaBuild(D, n, rnd){
+  n = n || 5; rnd = rnd || Math.random;
+  var qn = (D.derived && D.derived.qname) || {};
+  var slabel = (D.derived && D.derived.slabel) || {};
+  function R(a){ return a.length ? a[Math.floor(rnd() * a.length)] : null; }
+  function shuffle(a){
+    a = a.slice();
+    for(var i = a.length - 1; i > 0; i--){ var j = Math.floor(rnd() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t; }
+    return a;
+  }
+  var castBy = {};
+  D.contestants.forEach(function(c){ (castBy[c.season_id] = castBy[c.season_id] || []).push(c); });
+  function cname(c){
+    return (c.drag_name_used && c.drag_name_used !== '-') ? c.drag_name_used : (qn[c.queen_id] || c.queen_id);
+  }
+  var snatch = null;
+  var gens = [
+    function winner(){
+      var s = R(D.seasons.filter(function(x){
+        return x.winner_id && x.winner_id !== '-' && qn[x.winner_id] && (castBy[x.season_id] || []).length >= 4;
+      }));
+      if(!s) return null;
+      var correct = qn[s.winner_id];
+      var d = shuffle(castBy[s.season_id].filter(function(c){ return c.queen_id !== s.winner_id; })).slice(0, 3).map(cname);
+      if(d.length < 3) return null;
+      return {q:'Who took the crown on ' + s.season_label + ' (' + s.franchise + ')?',
+        correct:correct, options:shuffle([correct].concat(d)),
+        fact:correct + ' won ' + s.season_label + ' (' + s.franchise + ').', route:'season:' + s.season_id};
+    },
+    function lipsync(){
+      var m = lsPick(D, rnd);
+      if(!m || m.outcome === 'both_stay' || m.outcome === 'both_go' || !m.ep) return null;
+      var correct = m.outcome === 'a' ? m.a.name : m.b.name;
+      var song = m.song ? '“' + m.song.title + '”' : 'the lip-sync song';
+      return {q:m.season + ' Episode ' + m.ep.episode_number + ' — ' + m.a.name + ' vs ' + m.b.name +
+          ', lip-syncing to ' + song + '. Who won?',
+        correct:correct, options:shuffle([m.a.name, m.b.name]),
+        fact:lsOutcomeText(m), route:'lipsyncs'};
+    },
+    function snatchQ(){
+      snatch = snatch || snatchRoles(D);
+      if(snatch.length < 8) return null;
+      var r = R(snatch);
+      var seen = {}, d = [];
+      shuffle(snatch).forEach(function(x){
+        if(d.length < 3 && x.celeb !== r.celeb && !seen[x.celeb]){ seen[x.celeb] = 1; d.push(x.celeb); }
+      });
+      if(d.length < 3) return null;
+      return {q:'Snatch Game on ' + (slabel[r.season_id] || r.season_id) + ': who did ' + r.queen + ' impersonate?',
+        correct:r.celeb, options:shuffle([r.celeb].concat(d)),
+        fact:r.queen + ' played ' + r.celeb + ' in Snatch Game (' + (slabel[r.season_id] || r.season_id) + ').',
+        route:'snatch'};
+    },
+    function placement(){
+      var c = R(D.contestants.filter(function(x){
+        return +x.placement >= 1 && qn[x.queen_id] && (castBy[x.season_id] || []).length >= 4;
+      }));
+      if(!c) return null;
+      var places = [];
+      (castBy[c.season_id] || []).forEach(function(x){
+        var p = +x.placement;
+        if(p >= 1 && p !== +c.placement && places.indexOf(p) < 0) places.push(p);
+      });
+      var d = shuffle(places).slice(0, 3).map(ordinal);
+      if(d.length < 3) return null;
+      var correct = ordinal(+c.placement);
+      return {q:'Where did ' + cname(c) + ' place on ' + (slabel[c.season_id] || c.season_id) + '?',
+        correct:correct, options:shuffle([correct].concat(d)),
+        fact:cname(c) + ' placed ' + correct + ' on ' + (slabel[c.season_id] || c.season_id) + '.',
+        route:'queen:' + c.queen_id};
+    }
+  ];
+  var out = [], gi = 0, guard = 0;
+  while(out.length < n && guard < 80){
+    guard++;
+    var q = gens[gi % gens.length](); gi++;
+    if(q && !out.some(function(o){ return o.q === q.q; })) out.push(q);
+  }
+  return out;
+}
+
 /* boot assertion: poll the iframe window for the blessed globals.
    getWin may throw (cross-origin / file://) → reject('bridge-blocked'). */
 function bridgeWait(getWin, opts){
@@ -508,7 +836,10 @@ var ROUTE_NAMES = {
   snatchhall:'Snatch Game', ages:'Age Explorer', earnings:'Earnings', nameology:'Name-ology',
   birthdays:'Birthdays', zodiac:'Birthdays', hometowns:'Hometowns', georoll:'Hometowns',
   atlas:'Season Atlas', timeline:'Timeline', missc:'Miss Congeniality', about:'About',
-  'sec:records':'Track Records', trivia:'Trivia', ask:'Ask the Library', predictor:'Madame Vibe'
+  'sec:records':'Track Records', trivia:'Trivia', ask:'Ask the Library', predictor:'Madame Vibe',
+  alumniweb:'Alumni Web', connect:'Connection Finder', crossfranchise:'Cross-Franchise',
+  secondact:'Second Acts', guestfreq:'Guests', challenges:'Challenges', episodes:'Episodes',
+  health:'Data Health'
 };
 function routeLabel(route, D){
   if(!route) return '';
@@ -533,9 +864,13 @@ return {
   AMBIENT_BACK:AMBIENT_BACK, AMBIENT_RUN:AMBIENT_RUN,
   FLAVOR_BACK:FLAVOR_BACK, FLAVOR_RUN:FLAVOR_RUN,
   READS:READS, PRAISES:PRAISES, PROP_LINES:PROP_LINES,
+  LS_ANNOUNCE:LS_ANNOUNCE, CARD_LINES:CARD_LINES, MET_TITLES:MET_TITLES,
   pick:pick, gridLayout:gridLayout, seasonTracks:seasonTracks, isPlayable:isPlayable,
   placementMatrix:placementMatrix, bridgeWait:bridgeWait, pipeline:pipeline,
-  routeLabel:routeLabel, ROUTE_NAMES:ROUTE_NAMES
+  routeLabel:routeLabel, ROUTE_NAMES:ROUTE_NAMES,
+  ordinal:ordinal, alumniBoard:alumniBoard, stringPoints:stringPoints,
+  snatchRoles:snatchRoles, snatchTally:snatchTally, snatchEpisodeCards:snatchEpisodeCards,
+  lsPick:lsPick, lsOutcomeText:lsOutcomeText, triviaBuild:triviaBuild
 };
 })();
 if (typeof module!=='undefined' && module.exports) module.exports = WR;
@@ -698,17 +1033,21 @@ box(1.6,3,.18, M.dark, 3.5,1.5,0.1, gBack);
 box(1.8,.14,.24, M.trim, 3.5,3.05,0.12, gBack);
 const doorLamp = box(.16,.16,.16, M.bulb, 3.5,3.3,0.3, gBack);
 
-/* backstage set dressing: vanity counter + 3 mirrors (S wall, decor) */
+/* backstage set dressing: vanity counter + 3 mirrors (S wall) —
+   Phase 2: each mirror is a random-queen spotlight (canvas glass, painted later) */
 box(6,.8,.8, M.dark, -6.5,0.4,0.65, gBack); W(-9.5,0,-3.5,1.05);
+const mirrorCnv=[], mirrorTex=[];
 for(let i=0;i<3;i++){
   const mx = -8.5+i*2;
   box(1.5,1.8,.08, M.plum, mx,2.1,0.14, gBack);
-  const g = new THREE.Mesh(new THREE.PlaneGeometry(1.2,1.5),
-    new THREE.MeshStandardMaterial({color:0x554a66, roughness:.15, metalness:.7}));
+  const cnv=document.createElement('canvas'); cnv.width=256; cnv.height=320;
+  const tex=new THREE.CanvasTexture(cnv); tex.colorSpace=THREE.SRGBColorSpace;
+  mirrorCnv.push(cnv); mirrorTex.push(tex);
+  const g = new THREE.Mesh(new THREE.PlaneGeometry(1.2,1.5), new THREE.MeshBasicMaterial({map:tex}));
   g.position.set(mx,2.1,0.19); gBack.add(g);
   for(let b=0;b<4;b++) box(.07,.07,.07, M.bulb, mx-0.6+b*0.4, 3.05, 0.2, gBack);
 }
-/* reading-room nook (SW): armchair + lamp (Phase 2 opens it; decor now) */
+/* reading-room nook (SW): armchair + lamp (the sitting itself lives in the Phase-2 block below) */
 box(1,.5,1, M.plum, -10.8,0.25,1.6, gBack);
 box(1,.9,.25, M.plum, -10.8,0.85,1.1, gBack); W(-11.3,0.9,-10.3,2.1);
 box(.08,1.7,.08, M.trim, -9.8,0.85,1.4, gBack);
@@ -783,20 +1122,23 @@ const exitSign = new THREE.Mesh(new THREE.PlaneGeometry(1.7,.55), new THREE.Mesh
 exitSign.rotation.y = Math.PI/2; exitSign.position.set(-13.75,3.2,21.5); gRun.add(exitSign);
 
 /* ---------------- lights ---------------- */
-scene.add(new THREE.AmbientLight(0x3a2f4a, .35));
-const hemiBack = new THREE.HemisphereLight(0xffd9a0, 0x181022, .85); gBack.add(hemiBack);
+scene.add(new THREE.AmbientLight(0x3a2f4a, .52));   /* live-inspection: room read too dark */
+const hemiBack = new THREE.HemisphereLight(0xffd9a0, 0x181022, 1.0); gBack.add(hemiBack);
 const pB1 = new THREE.PointLight(0xffc98a, 26, 12, 2); pB1.position.set(-6.5,3,1.6); gBack.add(pB1);
 const pB2 = new THREE.PointLight(0xffd9a0, 30, 13, 2); pB2.position.set(-9,3.2,7.5); gBack.add(pB2);
 const pB3 = new THREE.PointLight(0xffc98a, 24, 11, 2); pB3.position.set(-7,3.2,12.5); gBack.add(pB3);
-const hemiRun = new THREE.HemisphereLight(0x2a2340, 0x05030a, .28); gRun.add(hemiRun);
+const pB4 = new THREE.PointLight(0xffd9a0, 26, 13, 2); pB4.position.set(8.5,3.2,8); gBack.add(pB4); /* east side was a cave */
+const hemiRun = new THREE.HemisphereLight(0x2a2340, 0x05030a, .34); gRun.add(hemiRun);
 const spotMag = new THREE.SpotLight(0xe6007e, 220, 20, .5, .45, 2); spotMag.position.set(-2.4,5.6,27.6);
 const spotBlu = new THREE.SpotLight(0x7aa0ff, 200, 20, .5, .45, 2); spotBlu.position.set(2.4,5.6,27.6);
 const spotGld = new THREE.SpotLight(0xf4b53f, 180, 22, .6, .5, 2); spotGld.position.set(0,5.7,26.2);
 [spotMag,spotBlu,spotGld].forEach(s=>{ s.target.position.set(s.position.x,0,s.position.z+0.01); gRun.add(s); gRun.add(s.target); });
 const pJuke = new THREE.PointLight(0xffb066, 16, 8, 2); pJuke.position.set(-10.5,2.4,24.2); gRun.add(pJuke);
+const pWingE = new THREE.PointLight(0x74e0c8, 10, 8, 2); pWingE.position.set(11,3,30); gRun.add(pWingE);   /* globe wing */
+const pWingW = new THREE.PointLight(0xd4708f, 10, 8, 2); pWingW.position.set(-11,3,29.5); gRun.add(pWingW); /* calendar wing */
 const pCorr = new THREE.PointLight(0xd4708f, 12, 7, 2); pCorr.position.set(0,2.8,17.5); gAlways.add(pCorr);
-const baseI = new Map([[hemiBack,.85],[pB1,26],[pB2,30],[pB3,24],[hemiRun,.28],
-  [spotMag,220],[spotBlu,200],[spotGld,180],[pJuke,16]]);
+const baseI = new Map([[hemiBack,1.0],[pB1,26],[pB2,30],[pB3,24],[pB4,26],[hemiRun,.34],
+  [spotMag,220],[spotBlu,200],[spotGld,180],[pJuke,16],[pWingE,10],[pWingW,10]]);
 
 /* ---------------- THE LIBRARIAN (procedural, original, ~1.2k tris) ---------------- */
 const lib = new THREE.Group();
@@ -869,7 +1211,7 @@ let libGlasses, libGlassesNose, libGlassesUp, libArms=[];
   libGlassesUp   = {y:1.93, z:.1,  rx:-.9};
   libGlasses.position.set(0,libGlassesNose.y,libGlassesNose.z);
 }
-lib.position.set(1.2,0,4.2);
+lib.position.set(0.7,0,2.5);   /* dead ahead of spawn's sightline — she greets you first (live-inspection fix) */
 scene.add(lib);
 /* glitter pool for teleports */
 const glitter = [];
@@ -895,7 +1237,7 @@ let entered=false, paused=false, suppressPause=false;
 
 function overlayOpen(){
   return !$('#dress').classList.contains('veil') || !$('#booth').classList.contains('hidden')
-      || !$('#lib').classList.contains('hidden') || paused;
+      || !$('#lib').classList.contains('hidden') || !$('#read').classList.contains('hidden') || paused;
 }
 function releaseLook(){
   if(document.pointerLockElement){ suppressPause=true; document.exitPointerLock(); setTimeout(()=>suppressPause=false,400); }
@@ -919,6 +1261,8 @@ addEventListener('keydown', e=>{
     if(!$('#dress').classList.contains('veil')) closeDress();
     else if(!$('#booth').classList.contains('hidden')) closeBooth();
     else if(!$('#lib').classList.contains('hidden')) closeChat();
+    else if(!$('#read').classList.contains('hidden')) closeRead();
+    else if(!$('#board').classList.contains('hidden')) clearBoardFocus();
     else if(paused) closePause();
     else openPause();
     return;
@@ -939,7 +1283,7 @@ const look = {id:null, lx:0, ly:0};
 if(IS_TOUCH){
   addEventListener('pointerdown', e=>{
     if(!entered || overlayOpen()) return;
-    if(e.target.closest('#prompt,#askBtn,#exit2d')) return;
+    if(e.target.closest('#prompt,#askBtn,#exit2d,#board,#toast')) return;
     if(e.clientX < innerWidth*.45 && joy.id===null){
       joy.id=e.pointerId; joy.active=true; joy.bx=e.clientX; joy.by=e.clientY; joy.dx=joy.dy=0;
       const j=$('#joy'); show(j); j.style.left=(e.clientX-55)+'px'; j.style.top=(e.clientY-55)+'px';
@@ -964,7 +1308,7 @@ if(IS_TOUCH){
 }
 
 /* pause */
-function openPause(){ paused=true; show($('#pause')); releaseLook(); }
+function openPause(){ paused=true; renderPauseProg(); show($('#pause')); releaseLook(); }
 function closePause(){ paused=false; hide($('#pause')); tryLock(); }
 $('#resumeBtn').addEventListener('click', closePause);
 
@@ -1028,15 +1372,19 @@ function doInteract(){ if(promptTarget && !overlayOpen()) promptTarget.act(); }
 function updatePrompt(){
   const p = $('#prompt');
   if(overlayOpen() || !entered){ hide(p); return; }
-  /* facing-ish check via angle to target */
+  /* facing-ish check via angle to target. The Librarian gets NO bypass and a
+     distance penalty: she trails 2m behind the player, so without the facing
+     check she squats on the prompt forever (live-inspection bug). */
   let best=null, bestD=1e9;
   const fx=-Math.sin(player.yaw), fz=-Math.cos(player.yaw);
   for(const o of interactables){
+    if(o.active && !o.active()) continue;
     const dx=o.x-player.x, dz=o.z-player.z, d=Math.hypot(dx,dz);
     if(d>o.radius) continue;
     const dot=(dx*fx+dz*fz)/(d||1);
-    if(o.id!=='librarian' && dot<0.25 && d>1.2) continue;
-    if(d<bestD){ best=o; bestD=d; }
+    if(dot<0.25 && d>1.2) continue;
+    const score = d + (o.id==='librarian'?1.1:0);
+    if(score<bestD){ best=o; bestD=score; }
   }
   if(player.seated) best = interactables.find(o=>o.id==='judges');
   promptTarget=best;
@@ -1224,6 +1572,7 @@ function paintMarquee(){
 
 /* ---------------- panels ---------------- */
 function openDress(route, where){
+  if(route && route.indexOf('queen:')===0) markMet(route.slice(6));   /* spotlight collection (§5.1) */
   try{ B.win.go(route); }catch(e){ console.warn('bridge go failed', e); }
   $('#dressWhere').textContent = where || WR.routeLabel(route, B.D);
   $('#dress').classList.remove('veil'); $('#dress').setAttribute('aria-hidden','false');
@@ -1376,15 +1725,23 @@ function sendChat(){
 
 /* ---------------- Librarian behavior ---------------- */
 let act='backstage';
-let libTarget=new THREE.Vector3(1.2,0,4.2), libVel=new THREE.Vector3();
+let libTarget=new THREE.Vector3(0.7,0,2.5), libVel=new THREE.Vector3();
 let ambientTimer=18;
+let libHold=true, enterAt=0;   /* she waits by the spawn to greet, then falls in behind */
 function actOf(z){ return z<15?'backstage':(z>20?'runway':'corridor'); }
 
 function libTick(dt, t){
-  /* follow point: 2m behind-left of player */
-  const fx=-Math.sin(player.yaw), fz=-Math.cos(player.yaw);
-  const rx=Math.cos(player.yaw),  rz=-Math.sin(player.yaw);
-  libTarget.set(player.x - fx*2 - rx*1.2, 0, player.z - fz*2 - rz*1.2);
+  if(libHold && enterAt && (performance.now()-enterAt>9000 || Math.hypot(player.x-3.5, player.z-1.4)>2.2)) libHold=false;
+  if(readOpen){
+    libTarget.set(-9.4,0,2.2);                 /* her wingback in the Reading Room */
+  } else if(libHold){
+    libTarget.set(0.7,0,2.5);                  /* greeting mark, in the spawn sightline */
+  } else {
+    /* follow point: 2m behind-left of player */
+    const fx=-Math.sin(player.yaw), fz=-Math.cos(player.yaw);
+    const rx=Math.cos(player.yaw),  rz=-Math.sin(player.yaw);
+    libTarget.set(player.x - fx*2 - rx*1.2, 0, player.z - fz*2 - rz*1.2);
+  }
   /* keep her out of the corridor pinch walls */
   if(libTarget.z>14.6&&libTarget.z<20.4) libTarget.x=Math.max(-1.4,Math.min(1.4,libTarget.x));
   const dx=libTarget.x-lib.position.x, dz=libTarget.z-lib.position.z;
@@ -1469,7 +1826,7 @@ function curtainTick(dt,t){
   crossT += (want-crossT)*Math.min(1,dt*(window.WR_CALM?6:2.2));  /* calm: quicker, less lingering fade */
   const back=1-crossT;
   baseI.forEach((v,l)=>{
-    const isRun=(l===hemiRun||l===spotMag||l===spotBlu||l===spotGld||l===pJuke);
+    const isRun=(l===hemiRun||l===spotMag||l===spotBlu||l===spotGld||l===pJuke||l===pWingE||l===pWingW);
     l.intensity=v*(isRun?(0.15+0.85*crossT):(0.25+0.75*back));
   });
   scene.fog.color.copy(FOG_BACK).lerp(FOG_RUN, crossT);
@@ -1511,20 +1868,802 @@ function tick(){
       player.x=nx; player.z=nz;
     }
   }
-  /* eye height eases over the runway platform */
+  /* eye height eases over the runway platform (and down into the armchair) */
   const gy=groundY(player.x,player.z);
-  player.eyeY += ((gy+1.65)-player.eyeY)*Math.min(1,dt*6);
+  player.eyeY += ((gy+(sitEye!=null?sitEye:1.65))-player.eyeY)*Math.min(1,dt*6);
   camera.position.set(player.x, player.eyeY, player.z);
   camera.rotation.y=player.yaw; camera.rotation.x=player.pitch;
 
   curtainTick(dt,t);
   if(B.D) libTick(dt,t);
   glitterTick(dt);
-  lsDiscs.forEach((d,i)=>{ d.material.color.setHSL(0.9-(i*0.35), .5, .75+Math.sin(t*2+i*2)*.12); });
+  if(!battle) lsDiscs.forEach((d,i)=>{ d.material.color.setHSL(0.9-(i*0.35), .5, .75+Math.sin(t*2+i*2)*.12); });
+  phase2Tick(dt,t);
   updatePrompt();
   renderer.render(scene,camera);
 }
 renderer.setAnimationLoop(tick);
+
+/* ================================================================
+   PHASE 2 — the archive fills in.
+   Everything below reads live data over the bridge; nothing is invented.
+   ================================================================ */
+
+/* ---- persistence: single localStorage key 'wr3d' (design §5.5) ---- */
+function loadSave(){
+  try{
+    const s=JSON.parse(localStorage.getItem('wr3d')||'null');
+    if(s && s.v===1 && Array.isArray(s.met))
+      return Object.assign({cards:0, ls:{right:0,seen:0}}, s, {ls:Object.assign({right:0,seen:0}, s.ls||{})});
+  }catch(e){}
+  return {v:1, met:[], cards:0, ls:{right:0,seen:0}};
+}
+const SAVE = loadSave();
+const metSet = new Set(SAVE.met);
+let _saveT=null;
+function persist(){
+  clearTimeout(_saveT);
+  _saveT=setTimeout(()=>{ SAVE.met=[...metSet]; try{ localStorage.setItem('wr3d', JSON.stringify(SAVE)); }catch(e){} }, 400);
+}
+function toast(t){
+  const el=$('#toast'); el.textContent=t; show(el);
+  clearTimeout(toast._t); toast._t=setTimeout(()=>hide(el), 4800);
+}
+function markMet(qid){
+  if(!qid || metSet.has(qid)) return;
+  metSet.add(qid); persist();
+  const n=metSet.size;
+  for(const m of WR.MET_TITLES) if(n===m[0])
+    toast('Spotlight milestone — '+n+' queens met. The Librarian now calls you “'+m[1]+'”.');
+}
+function renderPauseProg(){
+  const host=$('#pauseProg'); if(!host) return;
+  if(!B.D){ host.innerHTML=''; return; }
+  const total=B.D.meta.queens, n=metSet.size;
+  const s=seasonAt(SEASON.idx);
+  const cast=B.D.contestants.filter(c=>c.season_id===s.season_id);
+  const seasonMet=cast.filter(c=>metSet.has(c.queen_id)).length;
+  const R=26, C=2*Math.PI*R, frac=Math.min(1,n/total);
+  host.innerHTML =
+    '<svg width="64" height="64" viewBox="0 0 64 64" aria-hidden="true">'+
+    '<circle cx="32" cy="32" r="'+R+'" fill="none" stroke="rgba(201,162,39,.18)" stroke-width="6"/>'+
+    '<circle cx="32" cy="32" r="'+R+'" fill="none" stroke="#c9a227" stroke-width="6" stroke-linecap="round" '+
+    'stroke-dasharray="'+(C*frac).toFixed(1)+' '+C.toFixed(1)+'" transform="rotate(-90 32 32)"/>'+
+    '<text x="32" y="37" text-anchor="middle" fill="#f4b53f" font-size="13" font-family="Space Mono, monospace">'+n+'</text></svg>'+
+    '<div class="pp"><b>'+n+'</b> of '+total+' queens met · the wall’s '+s.season_label+': <b>'+seasonMet+'</b> of '+cast.length+'<br/>'+
+    'library cards: <b>'+SAVE.cards+'</b> · lip-sync calls: <b>'+SAVE.ls.right+'</b> right of <b>'+SAVE.ls.seen+'</b></div>';
+}
+
+/* ---- repaint registry: fonts arrive late, data later still ---- */
+const REPAINTS=[];
+function repaintAll(){ REPAINTS.forEach(f=>{ try{ f(); }catch(e){} }); }
+
+/* ---- Phase-2 materials ---- */
+const M2 = {
+  cork: new THREE.MeshStandardMaterial({color:0x4a3524, roughness:.95}),
+  desk: new THREE.MeshStandardMaterial({color:0x321f47, roughness:.8}),
+};
+
+/* ---- station signage: unlit canvas planes — bright, colorful, discoverable
+   from spawn (live-inspection fix for “dark and sparse”) ---- */
+function mkSign(text, w, h, x, y, z, ry, grp, accent){
+  const cnv=document.createElement('canvas'); cnv.width=512; cnv.height=Math.max(64,Math.round(512*h/w));
+  const tex=new THREE.CanvasTexture(cnv); tex.colorSpace=THREE.SRGBColorSpace;
+  const paint=()=>{
+    const g=cnv.getContext('2d'), Wc=cnv.width, Hc=cnv.height;
+    g.fillStyle='#0e0a16'; g.fillRect(0,0,Wc,Hc);
+    g.strokeStyle=accent||PAL.brass; g.lineWidth=8; g.strokeRect(6,6,Wc-12,Hc-12);
+    g.fillStyle=accent||PAL.gold; g.textAlign='center';
+    g.font='700 '+Math.floor(Hc*.42)+'px "Bodoni Moda", serif';
+    g.fillText(text, Wc/2, Hc*.63, Wc-40);
+    g.textAlign='left'; tex.needsUpdate=true;
+  };
+  paint(); REPAINTS.push(paint);
+  const m=new THREE.Mesh(new THREE.PlaneGeometry(w,h), new THREE.MeshBasicMaterial({map:tex}));
+  m.position.set(x,y,z); m.rotation.y=ry; grp.add(m);
+  return m;
+}
+mkSign('THE PHOTO WALL', 2.6,.5, -11.8,3.95,7.5, Math.PI/2, gBack);
+mkSign('THE READING ROOM', 2.6,.5, -10.4,3.6,0.32, 0, gBack, PAL.rose);
+mkSign('SNATCH GAME', 2.4,.5, 8.5,3.9,14.9, Math.PI, gBack, PAL.magenta);
+mkSign('CONNECTIONS', 2.4,.5, 11.9,3.85,8.2, -Math.PI/2, gBack);
+mkSign('THE VAULT', 1.8,.45, 11.9,3.1,2.2, -Math.PI/2, gBack, '#74e0c8');
+mkSign('DEPARTURES', 2.2,.5, 7.5,3.6,0.12, 0, gBack, '#74e0c8');
+mkSign('THE ATLAS', 2,.5, 13.95,3.9,30.5, -Math.PI/2, gRun, '#74e0c8');
+mkSign('BIRTHDAYS', 2,.5, -13.95,4.9,29.5, Math.PI/2, gRun, PAL.rose);
+mkSign('MADAME VIBE', 2,.5, 13.95,3.4,22.5, -Math.PI/2, gRun, PAL.magenta);
+/* two rugs of color underfoot */
+{
+  const rug=new THREE.Mesh(new THREE.PlaneGeometry(7,5), new THREE.MeshStandardMaterial({color:0x4a2a55, roughness:.95}));
+  rug.rotation.x=-Math.PI/2; rug.position.set(-2,0.012,7.2); gBack.add(rug);
+  const runner=new THREE.Mesh(new THREE.PlaneGeometry(2.2,6), new THREE.MeshStandardMaterial({color:0x552438, roughness:.95}));
+  runner.rotation.x=-Math.PI/2; runner.position.set(3.2,0.012,4); gBack.add(runner);
+}
+
+/* ================= CONNECTIONS STRING BOARD (E wall) =================
+   Real 3D pins + sagging threads from DATA.derived.alumni_links (252).
+   E cycles focused queen pins; her threads light up; the side panel
+   lists her returns and deep-links into the archive. */
+const BOARD={ cy:2.05, cz:8.2, W:6.2, H:2.7, model:null, focus:-1 };
+{
+  const plane=new THREE.Mesh(new THREE.PlaneGeometry(6.6,3.1), M2.cork);
+  plane.rotation.y=-Math.PI/2; plane.position.set(11.93,BOARD.cy,BOARD.cz); gBack.add(plane);
+  box(.12,3.3,6.9, M.trim, 12.06,BOARD.cy,BOARD.cz, gBack);
+}
+function boardWorld(bx,by){ return [11.86, BOARD.cy-BOARD.H/2+by, BOARD.cz-BOARD.W/2+bx]; }
+let stringColors=null, hubRanges=null;
+function buildBoard(){
+  const model=WR.alumniBoard(B.D, BOARD.W, BOARD.H);
+  if(!model.hubs.length) return;
+  BOARD.model=model;
+  const hubs=model.hubs;
+  const nSpokes=hubs.reduce((a,h)=>a+h.links.length,0);
+  const pinHubs=new THREE.InstancedMesh(new THREE.SphereGeometry(1,8,6), M.trim, hubs.length);
+  const pinSpokes=new THREE.InstancedMesh(new THREE.SphereGeometry(1,7,5), M.rosey, nSpokes);
+  const mtx=new THREE.Matrix4();
+  let sp=0;
+  const pos=[], cols=[]; hubRanges=[];
+  const DIM=[0.42,0.24,0.30];
+  hubs.forEach((h,i)=>{
+    const [wx,wy,wz]=boardWorld(h.x,h.y);
+    mtx.makeScale(h.r,h.r,h.r).setPosition(wx,wy,wz);
+    pinHubs.setMatrixAt(i,mtx);
+    const start=pos.length/3;
+    h.links.forEach(l=>{
+      const [sx,sy,sz]=boardWorld(l.x,l.y);
+      mtx.makeScale(.02,.02,.02).setPosition(sx,sy,sz);
+      pinSpokes.setMatrixAt(sp++,mtx);
+      const pts=WR.stringPoints(h.x,h.y,l.x,l.y,5);
+      for(let k=0;k<pts.length-1;k++){
+        const a=boardWorld(pts[k][0],pts[k][1]), b2=boardWorld(pts[k+1][0],pts[k+1][1]);
+        pos.push(a[0]-.03,a[1],a[2], b2[0]-.03,b2[1],b2[2]);
+        cols.push(DIM[0],DIM[1],DIM[2], DIM[0],DIM[1],DIM[2]);
+      }
+    });
+    hubRanges.push({start, end:pos.length/3});
+  });
+  pinHubs.instanceMatrix.needsUpdate=true; pinSpokes.instanceMatrix.needsUpdate=true;
+  gBack.add(pinHubs, pinSpokes);
+  const geo=new THREE.BufferGeometry();
+  geo.setAttribute('position', new THREE.Float32BufferAttribute(pos,3));
+  stringColors=new THREE.Float32BufferAttribute(cols,3);
+  geo.setAttribute('color', stringColors);
+  gBack.add(new THREE.LineSegments(geo, new THREE.LineBasicMaterial({vertexColors:true, transparent:true, opacity:.92})));
+}
+function focusHub(i){
+  BOARD.focus=i;
+  const h=BOARD.model.hubs[i], arr=stringColors.array;
+  for(let v=0;v<arr.length;v+=3){ arr[v]=0.42*0.4; arr[v+1]=0.24*0.4; arr[v+2]=0.30*0.4; }
+  const r=hubRanges[i];
+  for(let v=r.start*3; v<r.end*3; v+=3){ arr[v]=0.95; arr[v+1]=0.75; arr[v+2]=0.25; }
+  stringColors.needsUpdate=true;
+  $('#boardName').textContent=h.name;
+  $('#boardN').textContent=h.links.length+(h.links.length===1?' return thread':' return threads')+' · pin '+(i+1)+' of '+BOARD.model.hubs.length;
+  $('#boardQ').style.display = h.qid ? '' : 'none';   /* unlinked alums have no dossier route */
+  const list=$('#boardList'); list.innerHTML='';
+  h.links.forEach(l=>{
+    const d=document.createElement('div'); d.className='lk';
+    const ty=document.createElement('span'); ty.className='ty';
+    ty.textContent=String(l.type||'').toLowerCase().replace(/_/g,' ');
+    d.appendChild(ty); d.appendChild(document.createElement('br'));
+    d.appendChild(document.createTextNode((l.person&&l.person!==h.name? l.person+' — ':'')+(l.episode||l.season||'')));
+    list.appendChild(d);
+  });
+  show($('#board'));
+}
+function clearBoardFocus(){
+  if(BOARD.focus<0){ hide($('#board')); return; }
+  BOARD.focus=-1; hide($('#board'));
+  if(stringColors){
+    const a=stringColors.array;
+    for(let v=0;v<a.length;v+=3){ a[v]=0.42; a[v+1]=0.24; a[v+2]=0.30; }
+    stringColors.needsUpdate=true;
+  }
+}
+$('#boardX').addEventListener('click', clearBoardFocus);
+$('#boardGo').addEventListener('click', ()=>{ hide($('#board')); openDress('alumniweb','Connections Board → Alumni Web'); });
+$('#boardQ').addEventListener('click', ()=>{
+  if(BOARD.focus<0) return;
+  const h=BOARD.model.hubs[BOARD.focus];
+  if(!h.qid) return;
+  hide($('#board')); openDress('queen:'+h.qid,'Connections Board → '+h.name);
+});
+addInteract({id:'stringboard', x:11.9, z:8.2, radius:4.2,
+  active(){ return !!BOARD.model; },
+  label(){
+    if(BOARD.focus<0) return '<b>E</b> — pull a thread on the Connections board';
+    return '<b>E</b> — next pin: '+BOARD.model.hubs[(BOARD.focus+1)%BOARD.model.hubs.length].name;
+  },
+  act(){ if(BOARD.model) focusHub((BOARD.focus+1)%BOARD.model.hubs.length); }});
+
+/* ================= SNATCH GAME DESK (NE) ================= */
+box(2.8,.1,.9, M.trim, 8.5,1.0,12.6, gBack);
+box(2.6,.95,.8, M2.desk, 8.5,0.48,12.6, gBack); W(7.1,12.15,9.9,13.05);
+const snatchCnv=document.createElement('canvas'); snatchCnv.width=1536; snatchCnv.height=768;
+const snatchTex=new THREE.CanvasTexture(snatchCnv); snatchTex.colorSpace=THREE.SRGBColorSpace;
+{
+  const wallP=new THREE.Mesh(new THREE.PlaneGeometry(4.6,2.3), new THREE.MeshBasicMaterial({map:snatchTex}));
+  wallP.rotation.y=Math.PI; wallP.position.set(8.5,2.45,14.95); gBack.add(wallP);
+}
+const easelCnv=document.createElement('canvas'); easelCnv.width=512; easelCnv.height=640;
+const easelTex=new THREE.CanvasTexture(easelCnv); easelTex.colorSpace=THREE.SRGBColorSpace;
+{
+  const p=new THREE.Mesh(new THREE.PlaneGeometry(.95,1.2), new THREE.MeshBasicMaterial({map:easelTex}));
+  p.position.set(6.3,1.35,13.4); p.rotation.y=Math.PI*.92; p.rotation.x=-.06; gBack.add(p);
+  box(.06,1.5,.06, M.dark, 6.0,0.75,13.55, gBack);
+  box(.06,1.5,.06, M.dark, 6.6,0.75,13.55, gBack);
+  W(5.9,13.25,6.7,13.7);
+}
+const SNATCH={idx:0, t:0};
+function paintSnatchWall(){
+  if(!B.D) return;
+  const rec=WR.snatchEpisodeCards(B.D, SNATCH.idx);
+  const g=snatchCnv.getContext('2d');
+  g.fillStyle=PAL.ink; g.fillRect(0,0,1536,768);
+  g.fillStyle=PAL.magenta; g.font='700 56px "Bodoni Moda", serif';
+  g.fillText('SNATCH GAME', 34, 66);
+  g.fillStyle='rgba(247,240,230,.6)'; g.font='24px "Space Mono", monospace';
+  if(rec && rec.cards.length){
+    g.fillText(rec.label+' · '+rec.episode_id+' — who played whom (the wall rotates)', 34, 108);
+    const lay=WR.gridLayout(rec.cards.length, 1536-60, 768-150, 1.6);
+    const cw=(1536-60)/lay.cols, ch=(768-150)/lay.rows;
+    rec.cards.forEach((c,i)=>{
+      const col=i%lay.cols, row=(i/lay.cols)|0;
+      const x=30+col*cw+8, y=132+row*ch+8, w=cw-16, h=ch-16;
+      g.fillStyle=PAL.plum; g.fillRect(x,y,w,h);
+      g.strokeStyle=PAL.brass; g.lineWidth=3; g.strokeRect(x,y,w,h);
+      g.textAlign='center';
+      g.fillStyle=PAL.gold; g.font='700 '+Math.min(30,Math.floor(h*.28))+'px "Bodoni Moda", serif';
+      g.fillText(c.celeb, x+w/2, y+h*.42, w-16);
+      g.fillStyle='rgba(247,240,230,.78)'; g.font=Math.min(19,Math.floor(h*.18))+'px "Space Mono", monospace';
+      g.fillText('as played by '+c.queen, x+w/2, y+h*.76, w-16);
+      g.textAlign='left';
+    });
+  } else {
+    g.fillText('no character roster on file for this episode — left blank rather than guessed', 34, 108);
+  }
+  snatchTex.needsUpdate=true;
+}
+function paintEasel(){
+  if(!B.D) return;
+  const tally=WR.snatchTally(B.D).slice(0,8);
+  const g=easelCnv.getContext('2d');
+  g.fillStyle='#efe6d6'; g.fillRect(0,0,512,640);
+  g.fillStyle=PAL.ink; g.textAlign='center'; g.font='700 40px "Bodoni Moda", serif';
+  g.fillText('MOST', 256, 58); g.fillText('IMPERSONATED', 256, 102);
+  g.textAlign='left'; g.font='21px "Space Mono", monospace';
+  tally.forEach((t2,i)=>{
+    g.fillStyle=i===0?PAL.magenta:PAL.ink;
+    g.fillText((i+1)+'. '+t2.base, 30, 168+i*52, 340);
+    g.fillStyle=PAL.plum; g.fillText(t2.queens+' queens', 382, 168+i*52, 110);
+  });
+  g.fillStyle='rgba(20,16,28,.55)'; g.textAlign='center'; g.font='16px "Space Mono", monospace';
+  g.fillText('distinct queens who played each icon', 256, 612);
+  g.textAlign='left'; easelTex.needsUpdate=true;
+}
+REPAINTS.push(paintSnatchWall, paintEasel);
+addInteract({id:'snatchdesk', x:8.5, z:12.4, radius:2.8,
+  label(){ return '<b>E</b> — Snatch Game · the full archive'; },
+  act(){ openDress('snatch','Snatch Game Desk → Snatch Game'); }});
+
+/* ================= THE VAULT (SE corner): cabinet + CRT ================= */
+box(.65,2.0,1.0, M2.desk, 11.65,1.0,1.2, gBack); W(11.3,0.65,12,1.75);
+[0,1,2,3].forEach(i=>{ box(.06,.03,.5, M.trim, 11.3,0.4+i*0.47,1.2, gBack); });
+box(.9,.75,.7, M.dark, 11.55,0.37,3.2, gBack); W(11.1,2.85,12,3.55);
+box(.5,.56,.6, M.plum, 11.6,1.05,3.2, gBack);
+const crtCnv=document.createElement('canvas'); crtCnv.width=512; crtCnv.height=384;
+const crtTex=new THREE.CanvasTexture(crtCnv); crtTex.colorSpace=THREE.SRGBColorSpace;
+{
+  const scr=new THREE.Mesh(new THREE.PlaneGeometry(.56,.42), new THREE.MeshBasicMaterial({map:crtTex}));
+  scr.rotation.y=-Math.PI/2; scr.position.set(11.28,1.06,3.2); gBack.add(scr);
+}
+function paintCRT(){
+  const g=crtCnv.getContext('2d');
+  g.fillStyle='#03140a'; g.fillRect(0,0,512,384);
+  g.fillStyle='#9df2c0'; g.font='700 30px "Space Mono", monospace';
+  g.fillText('WERKROOM MAINFRAME', 24, 56);
+  g.font='20px "Space Mono", monospace';
+  const lines=B.D?[
+    '> archive mounted',
+    '> '+B.D.meta.queens+' queens · '+B.D.meta.seasons+' seasons',
+    '> '+B.D.meta.episodes+' episodes on file',
+    '',
+    '> run DATA_HEALTH ?  [E]'
+  ]:['> waiting for the archive…'];
+  lines.forEach((l,i)=>g.fillText(l, 24, 104+i*40));
+  g.fillStyle='rgba(0,0,0,.18)';
+  for(let y=0;y<384;y+=4) g.fillRect(0,y,512,1);
+  crtTex.needsUpdate=true;
+}
+paintCRT(); REPAINTS.push(paintCRT);
+addInteract({id:'vault', x:11.4, z:1.2, radius:2.2,
+  label(){ return '<b>E</b> — open the Vault · the master table'; },
+  act(){ openDress('vault','The Vault → Master Table'); }});
+addInteract({id:'vaultcrt', x:11.3, z:3.2, radius:1.7,
+  label(){ return '<b>E</b> — run DATA_HEALTH on the terminal'; },
+  act(){ openDress('health','Vault Terminal → Data Health'); }});
+
+/* ================= THE READING ROOM (SW nook) =================
+   Sit → Get Read: 5 questions from real rows, praise/reads from the
+   shipped banks, proof route after every answer. 5/5 = a library card. */
+box(1,.9,.25, M.plum, -9.4,0.85,2.95, gBack);              /* her wingback */
+box(1,.5,1, M.plum, -9.4,0.25,2.5, gBack); W(-9.9,2.2,-8.9,3.1);
+box(.8,1.3,.5, M2.desk, -11.5,0.65,3.4, gBack); W(-11.9,3.15,-11.1,3.65);   /* card catalog */
+[0,1,2].forEach(i=>{ box(.6,.02,.05, M.trim, -11.5,0.35+i*0.4,3.14, gBack); });
+let readOpen=false, sitEye=null, preSit=null, quiz=null;
+const readState={}, praiseState={}, cardLineState={};
+function openRead(){ readOpen=true; show($('#read')); releaseLook(); readMenu(); }
+function closeRead(){
+  readOpen=false; hide($('#read')); quiz=null;
+  if(preSit){ player.x=preSit.x; player.z=preSit.z; preSit=null; }
+  sitEye=null;
+  tryLock();
+}
+$('#readX').addEventListener('click', closeRead);
+function sitInReadingRoom(){
+  preSit={x:player.x, z:player.z};
+  player.x=-10.7; player.z=1.75; sitEye=1.28;
+  const dx=-9.4-player.x, dz=2.85-player.z;
+  player.yaw=Math.atan2(-dx,-dz); player.pitch=0;
+  openRead();
+}
+function readMenu(){
+  const b=$('#readBody'); b.innerHTML='';
+  const p=document.createElement('p');
+  p.textContent='“House rules: I read you, I never grade you. Five questions, all from the archive, receipts included. Wrong answers cost nothing but composure.”';
+  p.style.cssText='font-style:italic;color:rgba(247,240,230,.85);margin:4px 0 14px';
+  b.appendChild(p);
+  const mk=(t,fn,ghost)=>{
+    const x=document.createElement('button'); x.className='gbtn'+(ghost?' ghost':'');
+    x.style.margin='4px 8px 4px 0'; x.textContent=t; x.addEventListener('click',fn); b.appendChild(x);
+  };
+  mk('Get Read — 5 questions', startQuiz);
+  mk('Ask the Library', ()=>{ closeRead(); openChat(); }, true);
+  mk('Stand up', closeRead, true);
+  const foot=document.createElement('div');
+  foot.style.cssText='margin-top:14px;font-size:10.5px;color:rgba(247,240,230,.5)';
+  foot.textContent='Library cards earned: '+SAVE.cards+'. A perfect sitting (5 of 5) earns one.';
+  b.appendChild(foot);
+}
+function startQuiz(){
+  quiz={qs:WR.triviaBuild(B.D,5), i:0, right:0};
+  if(!quiz.qs.length){ quiz=null; readMenu(); return; }
+  renderQuestion();
+}
+function renderQuestion(){
+  const b=$('#readBody'); b.innerHTML='';
+  const Q=quiz.qs[quiz.i];
+  const num=document.createElement('div'); num.className='qnum';
+  num.textContent='question '+(quiz.i+1)+' of '+quiz.qs.length+' · stamps: '+quiz.right;
+  b.appendChild(num);
+  const qq=document.createElement('div'); qq.className='qq'; qq.textContent=Q.q; b.appendChild(qq);
+  Q.options.forEach(opt=>{
+    const o=document.createElement('button'); o.className='ropt'; o.textContent=opt;
+    o.addEventListener('click', ()=>answerQuestion(o,opt), {once:true});
+    b.appendChild(o);
+  });
+}
+function answerQuestion(btn,opt){
+  const Q=quiz.qs[quiz.i], good=(opt===Q.correct);
+  [...$('#readBody').querySelectorAll('.ropt')].forEach(o=>{
+    o.disabled=true;
+    if(o.textContent===Q.correct) o.classList.add('good');
+  });
+  if(good) quiz.right++; else btn.classList.add('bad');
+  const b=$('#readBody');
+  const say=document.createElement('div'); say.className='rsay';
+  say.textContent=good? WR.pick(WR.PRAISES,praiseState) : WR.pick(WR.READS,readState);
+  b.appendChild(say);
+  const fact=document.createElement('div'); fact.className='rfact';
+  const tag=document.createElement('span'); tag.className='reg gold'; tag.textContent='FROM THE ARCHIVE';
+  fact.appendChild(tag); fact.appendChild(document.createElement('br'));
+  fact.appendChild(document.createTextNode(Q.fact));
+  const chips=document.createElement('div'); chips.className='rchips';
+  const c=document.createElement('button'); c.className='rchip';
+  c.textContent='explore → '+WR.routeLabel(Q.route,B.D);
+  c.addEventListener('click',()=>openDress(Q.route,'The Reading Room → '+WR.routeLabel(Q.route,B.D)));
+  chips.appendChild(c); fact.appendChild(chips);
+  b.appendChild(fact);
+  const nxt=document.createElement('button'); nxt.className='gbtn'; nxt.style.marginTop='10px';
+  nxt.textContent=(quiz.i+1<quiz.qs.length)?'Next question':'The verdict';
+  nxt.addEventListener('click', ()=>{ quiz.i++; if(quiz.i<quiz.qs.length) renderQuestion(); else finishQuiz(); });
+  b.appendChild(nxt);
+  b.scrollTop=1e9;
+}
+function finishQuiz(){
+  const b=$('#readBody'); b.innerHTML='';
+  const r=quiz.right, n=quiz.qs.length;
+  const t=document.createElement('div'); t.className='qq'; t.textContent=r+' of '+n+'.';
+  b.appendChild(t);
+  const say=document.createElement('div'); say.className='rsay';
+  if(r===n){
+    SAVE.cards++; persist();
+    say.textContent=WR.pick(WR.CARD_LINES,cardLineState)+' — Library card No. '+SAVE.cards+', issued and embossed.';
+    toast('Library card No. '+SAVE.cards+' — a perfect sitting.');
+  } else {
+    say.textContent='No card this sitting — the library is open, and so is the chair. '+
+      (r>=3?'Close, scholar. Painfully close.':'We’ll call that a first draft.');
+  }
+  b.appendChild(say);
+  const again=document.createElement('button'); again.className='gbtn';
+  again.style.margin='10px 8px 0 0'; again.textContent='Another sitting';
+  again.addEventListener('click', startQuiz); b.appendChild(again);
+  const up=document.createElement('button'); up.className='gbtn ghost';
+  up.style.marginTop='10px'; up.textContent='Stand up';
+  up.addEventListener('click', closeRead); b.appendChild(up);
+  quiz=null;
+}
+addInteract({id:'reading', x:-10.8, z:1.6, radius:2.2,
+  active(){ return !!B.D; },
+  label(){ return '<b>E</b> — sit · READING IS FUNDAMENTAL'; },
+  act(){ sitInReadingRoom(); }});
+
+/* ================= VANITY MIRRORS: random queen spotlight ================= */
+const mirrorPick=[null,null,null];
+function paintMirror(i, c){
+  const cnv=mirrorCnv[i], g=cnv.getContext('2d');
+  const gr=g.createLinearGradient(0,0,256,320);
+  gr.addColorStop(0,'#6e6280'); gr.addColorStop(.5,'#3f364e'); gr.addColorStop(1,'#57496b');
+  g.fillStyle=gr; g.fillRect(0,0,256,320);
+  g.strokeStyle='rgba(255,255,255,.22)'; g.lineWidth=2;
+  g.beginPath(); g.moveTo(30,290); g.lineTo(220,40); g.stroke();
+  g.textAlign='center';
+  if(!c){
+    g.fillStyle='rgba(247,240,230,.85)'; g.font='700 26px "Bodoni Moda", serif';
+    g.fillText('WHO’S IN', 128, 138); g.fillText('THE MIRROR?', 128, 172);
+    g.fillStyle='rgba(247,240,230,.5)'; g.font='14px "Space Mono", monospace';
+    g.fillText('a spotlight at random', 128, 210);
+  } else {
+    const qn=B.D.derived.qname||{};
+    const name=(c.drag_name_used&&c.drag_name_used!=='-')?c.drag_name_used:(qn[c.queen_id]||c.queen_id);
+    const sl=(B.D.derived.slabel||{})[c.season_id]||c.season_id;
+    g.fillStyle=PAL.gold; g.font='700 26px "Bodoni Moda", serif';
+    g.fillText(name, 128, 128, 236);
+    g.fillStyle='rgba(247,240,230,.85)'; g.font='16px "Space Mono", monospace';
+    g.fillText(sl, 128, 164, 236);
+    if(+c.placement>=1) g.fillText('placed '+WR.ordinal(+c.placement), 128, 192, 236);
+    g.fillStyle='rgba(247,240,230,.55)'; g.font='13px "Space Mono", monospace';
+    g.fillText('E — open her dossier', 128, 250);
+  }
+  g.textAlign='left'; mirrorTex[i].needsUpdate=true;
+}
+for(let i=0;i<3;i++) paintMirror(i,null);
+REPAINTS.push(()=>{ for(let i=0;i<3;i++) paintMirror(i, mirrorPick[i]); });
+[0,1,2].forEach(i=>{
+  const mx=-8.5+i*2;
+  addInteract({id:'mirror'+i, x:mx, z:0.9, radius:1.8,
+    active(){ return !!B.D; },
+    label(){
+      const c=mirrorPick[i];
+      if(!c) return '<b>E</b> — vanity mirror · spotlight a queen at random';
+      const qn=B.D.derived.qname||{};
+      const nm=(c.drag_name_used&&c.drag_name_used!=='-')?c.drag_name_used:(qn[c.queen_id]||c.queen_id);
+      return '<b>E</b> — open '+nm+'’s dossier';
+    },
+    act(){
+      const c=mirrorPick[i];
+      if(c){
+        const qn=B.D.derived.qname||{};
+        const nm=(c.drag_name_used&&c.drag_name_used!=='-')?c.drag_name_used:(qn[c.queen_id]||c.queen_id);
+        mirrorPick[i]=null; paintMirror(i,null);
+        openDress('queen:'+c.queen_id, 'Vanity Mirror → '+nm);
+      } else {
+        mirrorPick[i]=B.D.contestants[Math.floor(Math.random()*B.D.contestants.length)];
+        paintMirror(i, mirrorPick[i]);
+      }
+    }});
+});
+
+/* ================= small diegetic homes (backstage) ================= */
+box(.5,1.15,.45, M2.desk, -3.9,0.57,12.3, gBack); W(-4.2,12.05,-3.6,12.55);
+box(.6,.06,.5, M.plum, -3.9,1.2,12.3, gBack);
+addInteract({id:'lectern', x:-3.9, z:12.0, radius:1.8,
+  label(){ return '<b>E</b> — the guest book · judges & guests'; },
+  act(){ openDress('guestfreq','Guest Book → Guests'); }});
+box(.5,.08,.36, M.rosey, -5.2,1.12,12.15, gBack);           /* the earnings ledger */
+addInteract({id:'ledger', x:-5.2, z:11.9, radius:1.4,
+  label(){ return '<b>E</b> — the earnings ledger'; },
+  act(){ openDress('earnings',"Judges' Table → Earnings"); }});
+box(1.9,.85,.9, M2.desk, -4.5,0.42,3.5, gBack); W(-5.45,3.05,-3.55,3.95);   /* workbench */
+box(.24,.1,.24, M.rosey, -4.9,0.92,3.5, gBack);
+box(.3,.16,.3, M.trim, -4.1,0.95,3.5, gBack);               /* mini-crown paperweight */
+addInteract({id:'workbench', x:-4.5, z:3.5, radius:2.2,
+  label(){ return '<b>E</b> — the workbench · challenges'; },
+  act(){ openDress('challenges','Workbench → Challenges'); }});
+/* departures split-flap (S wall) */
+const depCnv=document.createElement('canvas'); depCnv.width=1024; depCnv.height=512;
+const depTex=new THREE.CanvasTexture(depCnv); depTex.colorSpace=THREE.SRGBColorSpace;
+{
+  const b2=new THREE.Mesh(new THREE.PlaneGeometry(3.4,1.7), new THREE.MeshBasicMaterial({map:depTex}));
+  b2.position.set(7.5,2.25,0.12); gBack.add(b2);
+}
+function paintDepartures(){
+  const g=depCnv.getContext('2d');
+  g.fillStyle='#0c0a12'; g.fillRect(0,0,1024,512);
+  g.fillStyle=PAL.gold; g.font='700 44px "Bodoni Moda", serif';
+  g.fillText('DEPARTURES — the seasons', 30, 58);
+  g.font='22px "Space Mono", monospace';
+  if(B.D){
+    B.D.seasons.slice(-10).reverse().forEach((s,i)=>{
+      const y=108+i*38;
+      g.fillStyle='#74e0c8'; g.fillText(String(s.season_label).slice(0,22), 30, y, 380);
+      g.fillStyle='rgba(247,240,230,.75)'; g.fillText(String(s.franchise).slice(0,16), 440, y, 260);
+      g.fillStyle='rgba(247,240,230,.5)'; g.fillText(String(s.premiere_date||'—'), 740, y, 250);
+    });
+  } else { g.fillStyle='#74e0c8'; g.fillText('boarding soon…', 30, 120); }
+  depTex.needsUpdate=true;
+}
+paintDepartures(); REPAINTS.push(paintDepartures);
+addInteract({id:'departures', x:7.5, z:0.9, radius:2.6,
+  label(){ return '<b>E</b> — departures · season timetables'; },
+  act(){ openDress('timeline','Departures Board → Timeline'); }});
+
+/* ================= runway wings: globe · calendar · Madame Vibe ================= */
+const globeGrp=new THREE.Group(); globeGrp.position.set(11,0,30.5); gRun.add(globeGrp);
+{
+  const stand=new THREE.Mesh(new THREE.CylinderGeometry(.14,.3,1.1,10), M2.desk); stand.position.y=.55; globeGrp.add(stand);
+  const ring=new THREE.Mesh(new THREE.TorusGeometry(.74,.03,8,26), M.brassWire); ring.position.y=1.7; ring.rotation.x=Math.PI/2.6; globeGrp.add(ring);
+  const sphere=new THREE.Mesh(new THREE.SphereGeometry(.62,14,10), new THREE.MeshBasicMaterial({color:0x2e8f78, wireframe:true}));
+  sphere.position.y=1.7; globeGrp.add(sphere); globeGrp.userData.sphere=sphere;
+  W(10.6,30.1,11.4,30.9);
+}
+addInteract({id:'globe', x:11, z:30.5, radius:2.6,
+  label(){ return '<b>E</b> — the Atlas · every franchise by region'; },
+  act(){ openDress('atlas','The Globe → Season Atlas'); }});
+
+const calCnv=document.createElement('canvas'); calCnv.width=1280; calCnv.height=768;
+const calTex=new THREE.CanvasTexture(calCnv); calTex.colorSpace=THREE.SRGBColorSpace;
+{
+  const p=new THREE.Mesh(new THREE.PlaneGeometry(4.8,2.9), new THREE.MeshBasicMaterial({map:calTex}));
+  p.rotation.y=Math.PI/2; p.position.set(-13.98,2.9,29.5); gRun.add(p);
+}
+function paintCalendar(){
+  const g=calCnv.getContext('2d');
+  g.fillStyle=PAL.ink; g.fillRect(0,0,1280,768);
+  const now=new Date();
+  const MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
+  g.fillStyle=PAL.rose; g.font='700 52px "Bodoni Moda", serif';
+  g.fillText(MONTHS[now.getMonth()]+' '+now.getFullYear()+' — queens’ birthdays', 34, 64);
+  const bdays={};
+  if(B.D){
+    B.D.queens.forEach(q=>{
+      if(!q.birthdate || q.birthdate==='-') return;
+      if(+q.birthdate.slice(5,7)===now.getMonth()+1)
+        (bdays[+q.birthdate.slice(8,10)]=bdays[+q.birthdate.slice(8,10)]||[]).push(q.drag_name);
+    });
+  }
+  const first=new Date(now.getFullYear(), now.getMonth(), 1).getDay();
+  const days=new Date(now.getFullYear(), now.getMonth()+1, 0).getDate();
+  const cw=(1280-60)/7, ch=(768-130)/6;
+  for(let d=1; d<=days; d++){
+    const idx=first+d-1, col=idx%7, row=(idx/7)|0;
+    const x=30+col*cw+4, y=110+row*ch+4, w=cw-8, h=ch-8;
+    const has=bdays[d];
+    g.fillStyle=has?'rgba(212,112,143,.22)':'rgba(255,255,255,.045)';
+    g.fillRect(x,y,w,h);
+    if(d===now.getDate()){ g.strokeStyle=PAL.gold; g.lineWidth=3; g.strokeRect(x,y,w,h); }
+    g.fillStyle=has?PAL.rose:'rgba(247,240,230,.6)'; g.font='700 24px "Space Mono", monospace';
+    g.fillText(d, x+10, y+30);
+    if(has){
+      g.fillStyle='rgba(247,240,230,.9)'; g.font='16px "Space Mono", monospace';
+      has.slice(0,3).forEach((nm,i)=>g.fillText(nm, x+10, y+56+i*22, w-18));
+      if(has.length>3) g.fillText('+'+(has.length-3)+' more', x+10, y+56+3*22, w-18);
+    }
+  }
+  calTex.needsUpdate=true;
+}
+paintCalendar(); REPAINTS.push(paintCalendar);
+addInteract({id:'calendar', x:-13.5, z:29.5, radius:3,
+  label(){ return '<b>E</b> — birthdays & the zodiac'; },
+  act(){ openDress('birthdays','Calendar Wall → Birthdays'); }});
+
+box(1.2,2.4,.9, M2.desk, 13.4,1.2,22.5, gRun); W(12.8,22.0,14,23.0);   /* Madame Vibe cabinet */
+box(1.3,.14,1, M.trim, 13.4,2.46,22.5, gRun);
+const vibeCnv=document.createElement('canvas'); vibeCnv.width=512; vibeCnv.height=768;
+const vibeTex=new THREE.CanvasTexture(vibeCnv); vibeTex.colorSpace=THREE.SRGBColorSpace;
+{
+  const p=new THREE.Mesh(new THREE.PlaneGeometry(.95,1.45), new THREE.MeshBasicMaterial({map:vibeTex}));
+  p.rotation.y=-Math.PI/2; p.position.set(12.78,1.5,22.5); gRun.add(p);
+}
+function paintVibe(){
+  const g=vibeCnv.getContext('2d');
+  const gr=g.createLinearGradient(0,0,0,768);
+  gr.addColorStop(0,'#2a0e3a'); gr.addColorStop(1,'#14101c');
+  g.fillStyle=gr; g.fillRect(0,0,512,768);
+  g.textAlign='center';
+  g.fillStyle=PAL.magenta; g.font='700 52px "Bodoni Moda", serif';
+  g.fillText('MADAME VIBE', 256, 88);
+  g.fillStyle='rgba(247,240,230,.8)'; g.font='19px "Space Mono", monospace';
+  g.fillText('WINNER-VIBE PREDICTOR', 256, 126);
+  g.strokeStyle=PAL.brass; g.lineWidth=10;
+  g.beginPath(); g.arc(256,340,120,Math.PI*.8,Math.PI*2.2); g.stroke();
+  g.strokeStyle=PAL.magenta; g.lineWidth=8;
+  g.beginPath(); g.moveTo(256,340); g.lineTo(256+88*Math.cos(-Math.PI*.7),340+88*Math.sin(-Math.PI*.7)); g.stroke();
+  g.fillStyle=PAL.gold; g.font='700 30px "Space Mono", monospace';
+  g.fillText('0 — 100', 256, 372);
+  g.fillStyle='rgba(247,240,230,.6)'; g.font='17px "Space Mono", monospace';
+  ['A transparent little party','trick — six vibes, zero','clairvoyance. The math is','honest about being for fun.'].forEach((l,i)=>g.fillText(l,256,540+i*30));
+  g.textAlign='left'; vibeTex.needsUpdate=true;
+}
+paintVibe(); REPAINTS.push(paintVibe);
+addInteract({id:'vibe', x:12.9, z:22.5, radius:2.4,
+  label(){ return '<b>E</b> — consult Madame Vibe'; },
+  act(){ openDress('predictor','Madame Vibe → Winner-Vibe Predictor'); }});
+
+/* ================= THE LIP SYNC — spotlight summons + honest verdicts =================
+   E at the stage summons a REAL matchup from D.lip_syncs (metadata projected on
+   the back wall); step into a spotlight and E to call the winner; the reveal is
+   the archived outcome — including double shantays/sashays. Tally in wr3d.ls. */
+const projCnv=document.createElement('canvas'); projCnv.width=1536; projCnv.height=560;
+const projTex=new THREE.CanvasTexture(projCnv); projTex.colorSpace=THREE.SRGBColorSpace;
+{
+  const p=new THREE.Mesh(new THREE.PlaneGeometry(9.6,3.5), new THREE.MeshBasicMaterial({map:projTex}));
+  p.rotation.y=Math.PI; p.position.set(0,3.9,32.9); gRun.add(p);
+}
+function silhouetteTexture(flip){
+  /* an original, deliberately generic drag silhouette — never a likeness */
+  const cnv=document.createElement('canvas'); cnv.width=256; cnv.height=384;
+  const g=cnv.getContext('2d');
+  if(flip){ g.translate(256,0); g.scale(-1,1); }
+  g.fillStyle='#0a0614'; g.strokeStyle='rgba(201,162,39,.85)'; g.lineWidth=3;
+  g.beginPath();
+  g.moveTo(128,26);
+  g.bezierCurveTo(168,26,176,62,160,84);
+  g.bezierCurveTo(172,96,168,118,150,124);
+  g.lineTo(196,88); g.lineTo(212,60);
+  g.lineTo(224,66); g.lineTo(204,104); g.lineTo(158,140);
+  g.bezierCurveTo(150,152,148,162,150,172);
+  g.bezierCurveTo(160,196,150,216,138,232);
+  g.bezierCurveTo(196,286,228,344,236,372);
+  g.lineTo(20,372);
+  g.bezierCurveTo(30,336,64,282,118,232);
+  g.bezierCurveTo(104,214,100,192,110,172);
+  g.bezierCurveTo(112,158,110,148,104,138);
+  g.bezierCurveTo(88,124,86,100,96,86);
+  g.bezierCurveTo(80,60,92,26,128,26);
+  g.closePath(); g.fill(); g.stroke();
+  const t=new THREE.CanvasTexture(cnv); t.colorSpace=THREE.SRGBColorSpace;
+  return t;
+}
+const sils=[-2.4,2.4].map((x,i)=>{
+  const m=new THREE.Mesh(new THREE.PlaneGeometry(1.5,2.25),
+    new THREE.MeshBasicMaterial({map:silhouetteTexture(i===1), transparent:true, opacity:0, depthWrite:false}));
+  m.rotation.y=Math.PI; m.position.set(x,1.78,27.6); m.visible=false; gRun.add(m);
+  const lc=document.createElement('canvas'); lc.width=512; lc.height=96;
+  const lt=new THREE.CanvasTexture(lc); lt.colorSpace=THREE.SRGBColorSpace;
+  const lbl=new THREE.Mesh(new THREE.PlaneGeometry(1.6,.3),
+    new THREE.MeshBasicMaterial({map:lt, transparent:true, opacity:0, depthWrite:false}));
+  lbl.rotation.y=Math.PI; lbl.position.set(x,3.15,27.6); lbl.visible=false; gRun.add(lbl);
+  return {mesh:m, lbl:lbl, lc:lc, lt:lt};
+});
+function paintSilLabel(i, name){
+  const g=sils[i].lc.getContext('2d');
+  g.clearRect(0,0,512,96);
+  g.fillStyle='rgba(12,8,18,.85)'; g.fillRect(0,0,512,96);
+  g.strokeStyle=PAL.brass; g.lineWidth=4; g.strokeRect(4,4,504,88);
+  g.fillStyle=PAL.cream; g.textAlign='center'; g.font='700 40px "Bodoni Moda", serif';
+  g.fillText(name, 256, 62, 480); g.textAlign='left';
+  sils[i].lt.needsUpdate=true;
+}
+let battle=null;   /* {m, phase:'guess'|'reveal', called, calledRight} */
+const lsAnnState={};
+function stakesLine(t){ return t==='CROWN'?'for the crown':(t==='TOPS'?'for the win':'to stay'); }
+function paintProjection(){
+  const g=projCnv.getContext('2d');
+  g.fillStyle='#07050c'; g.fillRect(0,0,1536,560);
+  g.strokeStyle='rgba(201,162,39,.4)'; g.lineWidth=6; g.strokeRect(10,10,1516,540);
+  g.textAlign='center';
+  if(!battle){
+    g.fillStyle=PAL.magenta; g.font='700 70px "Bodoni Moda", serif';
+    g.fillText('THE LIP SYNC', 768, 150);
+    g.fillStyle='rgba(247,240,230,.7)'; g.font='28px "Space Mono", monospace';
+    g.fillText('step to the stage and summon a real matchup from the archive', 768, 224);
+    g.fillStyle=PAL.gold; g.font='26px "Space Mono", monospace';
+    g.fillText('your record: '+SAVE.ls.right+' called right of '+SAVE.ls.seen, 768, 300);
+  } else {
+    const m=battle.m;
+    g.fillStyle='rgba(247,240,230,.6)'; g.font='26px "Space Mono", monospace';
+    g.fillText(m.season+(m.ep?' · Episode '+m.ep.episode_number:''), 768, 68);
+    g.fillStyle=PAL.cream; g.font='700 62px "Bodoni Moda", serif';
+    g.fillText(m.a.name+'  vs  '+m.b.name, 768, 158, 1460);
+    g.fillStyle=PAL.gold; g.font='italic 36px "Bodoni Moda", serif';
+    g.fillText(m.song?('“'+m.song.title+'”'+(m.song.artist&&m.song.artist!=='-'?' — '+m.song.artist:'')):'song not on file', 768, 228, 1460);
+    g.fillStyle=PAL.rose; g.font='26px "Space Mono", monospace';
+    g.fillText('lip-syncing '+stakesLine(m.ls.result_type), 768, 282);
+    if(battle.phase==='guess'){
+      g.fillStyle='rgba(247,240,230,.78)'; g.font='28px "Space Mono", monospace';
+      g.fillText('step into a spotlight — call the winner', 768, 384);
+    } else {
+      g.fillStyle='#74e0c8'; g.font='700 38px "Space Mono", monospace';
+      g.fillText(WR.lsOutcomeText(m), 768, 378, 1460);
+      g.fillStyle=battle.called==null?'rgba(247,240,230,.6)':(battle.calledRight?PAL.gold:PAL.magenta);
+      g.font='26px "Space Mono", monospace';
+      g.fillText(battle.called==null?'nobody could have called that one':(battle.calledRight?'you called it':'the archive disagrees'), 768, 438);
+      g.fillStyle='rgba(247,240,230,.55)';
+      g.fillText('your record: '+SAVE.ls.right+' of '+SAVE.ls.seen+' · E at the stage for another', 768, 498);
+    }
+  }
+  g.textAlign='left'; projTex.needsUpdate=true;
+}
+paintProjection(); REPAINTS.push(paintProjection);
+function startBattle(){
+  const m=WR.lsPick(B.D);
+  if(!m) return;
+  battle={m, phase:'guess', called:null, calledRight:false};
+  paintSilLabel(0, m.a.name); paintSilLabel(1, m.b.name);
+  sils.forEach(s=>{
+    s.mesh.visible=true; s.lbl.visible=true;
+    if(window.WR_CALM){ s.mesh.material.opacity=1; s.lbl.material.opacity=1; }  /* calm: no fade-in */
+  });
+  lsDiscs.forEach(d=>d.material.color.set(0xffe9f4));
+  paintProjection();
+  libSay(WR.pick(WR.LS_ANNOUNCE, lsAnnState));
+}
+function resolveBattle(side){
+  const m=battle.m;
+  battle.phase='reveal';
+  SAVE.ls.seen++;
+  const isDouble=(m.outcome==='both_stay'||m.outcome==='both_go');
+  if(isDouble){ battle.called=null; }
+  else { battle.called=side; battle.calledRight=(m.outcome===side); if(battle.calledRight) SAVE.ls.right++; }
+  persist();
+  const FLARE=0xfff3c0, CUT=0x2a2233;
+  if(m.outcome==='both_stay') lsDiscs.forEach(d=>d.material.color.set(FLARE));
+  else if(m.outcome==='both_go') lsDiscs.forEach(d=>d.material.color.set(CUT));
+  else {
+    lsDiscs[0].material.color.set(m.outcome==='a'?FLARE:CUT);
+    lsDiscs[1].material.color.set(m.outcome==='b'?FLARE:CUT);
+  }
+  paintProjection();
+  libSay('The wall has the verdict, baby — the archive never blinks.', true);
+}
+addInteract({id:'lsstage', x:0, z:27.2, radius:3.4,
+  active(){ return !!B.D; },
+  label(){
+    return battle ? (battle.phase==='reveal' ? '<b>E</b> — another lip sync' : '<b>E</b> — shuffle the matchup')
+                  : '<b>E</b> — summon a lip sync';
+  },
+  act(){ startBattle(); }});
+[['lsA','a',-2.4],['lsB','b',2.4]].forEach(([id,side,x])=>{
+  addInteract({id, x, z:27.6, radius:1.3,
+    active(){ return !!(battle && battle.phase==='guess'); },
+    label(){ const m=battle.m; return '<b>E</b> — call it: '+(side==='a'?m.a.name:m.b.name)+' won'; },
+    act(){ resolveBattle(side); }});
+});
+
+/* ---- per-frame Phase-2 work ---- */
+function phase2Tick(dt,t){
+  if(globeGrp.userData.sphere) globeGrp.userData.sphere.rotation.y += dt*(window.WR_CALM?0.06:0.45);
+  SNATCH.t+=dt;
+  if(SNATCH.t>12){
+    SNATCH.t=0;
+    if(B.D && gBack.visible){
+      let tries=0;
+      do{ SNATCH.idx++; tries++; }
+      while(tries<90 && !((WR.snatchEpisodeCards(B.D,SNATCH.idx)||{cards:[]}).cards.length));
+      paintSnatchWall();
+    }
+  }
+  for(const s of sils){
+    if(!s.mesh.visible) continue;
+    s.mesh.material.opacity += (1-s.mesh.material.opacity)*Math.min(1,dt*2.2);
+    s.lbl.material.opacity = s.mesh.material.opacity;
+  }
+  if(BOARD.focus>=0 && Math.hypot(11.9-player.x, 8.2-player.z)>4.8) clearBoardFocus();
+}
+
+/* ---- data-driven props, built once the bridge delivers DATA ---- */
+function buildDataProps(){
+  buildBoard();
+  /* start the snatch wall on an episode that has a roster */
+  let tries=0;
+  while(tries<90 && !((WR.snatchEpisodeCards(B.D,SNATCH.idx)||{cards:[]}).cards.length)){ SNATCH.idx++; tries++; }
+  repaintAll();
+}
+
+/* draw-call peek for perf checks: WR_STATS() in the console */
+window.WR_STATS = ()=>({calls:renderer.info.render.calls, triangles:renderer.info.render.triangles,
+  geometries:renderer.info.memory.geometries, textures:renderer.info.memory.textures});
 
 /* ---------------- boot ---------------- */
 bridgeReady.then(()=>{
@@ -1532,6 +2671,7 @@ bridgeReady.then(()=>{
   const us=B.D.seasons.map((s,i)=>s.franchise==='US main'?i:-1).filter(i=>i>=0);
   if(us.length) SEASON.idx=us[us.length-1];
   applySeason();
+  buildDataProps();          /* Phase 2: string board, snatch wall, calendar, projections… */
   enterBtn.disabled=false;
   gateStatus.textContent = IS_TOUCH ? 'ready — tap to enter' : 'ready — click to enter';
   /* repaint data textures once the display fonts have actually loaded */
@@ -1539,15 +2679,20 @@ bridgeReady.then(()=>{
     texLRU.forEach(r=>r.tex.dispose()); texLRU.clear();
     applySeason();
     if(player.seated) paintScoreboard(SEASON.idx); else paintScorePlaceholder();
+    repaintAll();
   });
 }).catch(()=>{ /* failGate already shown above */ });
 
 enterBtn.addEventListener('click', ()=>{
-  entered=true; hide(gate); show($('#xhair')); show($('#askBtn'));
+  entered=true; enterAt=performance.now(); hide(gate); show($('#xhair')); show($('#askBtn'));
   $('#hint').textContent = IS_TOUCH ? 'left thumb walk · right thumb look' : 'WASD walk · E interact · T librarian · Esc menu';
   show($('#hint')); setTimeout(()=>hide($('#hint')), 9000);
   tryLock();
-  setTimeout(()=>libSay('Welcome to the Werkroom, baby. The photo wall is ahead on your left — and I’m right behind you. Press T when you have questions; I keep receipts.'), 900);
+  const returning = metSet.size>0 || SAVE.cards>0 || SAVE.ls.seen>0;
+  setTimeout(()=>libSay(returning
+    ? 'Back again, scholar — the stacks kept your place. The photo wall’s ahead on your left; the runway hasn’t moved.'
+    : 'Welcome to the Werkroom, baby — I’m The Librarian, and I walk with you. The photo wall is ahead on your left; everything you touch has receipts.'), 700);
+  setTimeout(()=>toast('The Librarian is your guide — press T (or tap ◆) to ask her anything.'), 5200);
 });
 </script>
 </body>
