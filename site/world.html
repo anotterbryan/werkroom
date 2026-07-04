@@ -48,6 +48,7 @@ a{color:var(--gold)}
 /* ---------- HUD ---------- */
 #xhair{position:fixed;left:50%;top:50%;width:5px;height:5px;margin:-2.5px;border-radius:50%;
   background:rgba(247,240,230,.75);z-index:40;pointer-events:none;box-shadow:0 0 6px rgba(0,0,0,.8)}
+#xhair.on{width:9px;height:9px;margin:-4.5px;background:var(--gold);box-shadow:0 0 10px rgba(244,181,63,.85)}
 #prompt{position:fixed;left:50%;bottom:110px;transform:translateX(-50%);z-index:50;
   background:rgba(20,16,28,.88);border:1px solid rgba(201,162,39,.55);border-radius:999px;
   padding:11px 20px;font-size:13.5px;letter-spacing:.4px;color:var(--cream);white-space:nowrap;
@@ -271,8 +272,8 @@ classic two-dimensional site at index.html, which is fully accessible. Use the s
       <button class="gbtn" id="enterBtn" disabled>Enter the Werkroom</button>
       <a class="gbtn ghost" href="index.html">Open the classic site</a>
     </div>
-    <div class="gfoot" id="gateFoot">WASD / arrow keys to walk · mouse to look · E to interact · T to talk to The Librarian · Esc for the menu.<br/>
-    On a phone: left thumb to walk, right thumb to look, tap the prompts.</div>
+    <div class="gfoot" id="gateFoot">WASD / arrow keys to walk · mouse to look · click or E to interact · T to talk to The Librarian · Esc for the menu.<br/>
+    On a phone: left thumb to walk, right thumb to look, tap an object or the prompts.</div>
   </div>
 </div>
 
@@ -282,7 +283,7 @@ classic two-dimensional site at index.html, which is fully accessible. Use the s
     <h3>Paused — <em style="color:var(--brass)">the house lights are up</em></h3>
     <div class="keys">
       <b>W A S D</b> walk &nbsp;·&nbsp; <b>Shift</b> run &nbsp;·&nbsp; <b>mouse</b> look<br/>
-      <b>E</b> interact &nbsp;·&nbsp; <b>T</b> talk to The Librarian &nbsp;·&nbsp; <b>← →</b> flip seasons at the photo wall or judges' table<br/>
+      <b>E</b> or <b>click</b> what you're near or aiming at &nbsp;·&nbsp; <b>T</b> talk to The Librarian &nbsp;·&nbsp; <b>← →</b> flip seasons at the photo wall or judges' table<br/>
       <b>Esc</b> this menu / close panels<br/>
       <b>sit</b> in the Reading Room armchair to get read &nbsp;·&nbsp; <b>step</b> on a runway spotlight to call a lip sync
     </div>
@@ -378,6 +379,13 @@ var GREETING = 'Welcome to the Werkroom, baby. Gold means it’s in the archive 
 var GREETING_2 = 'Ask me anything in plain English. If it’s on my shelves, you get the receipt and a door straight to it.';
 var REFUSAL = 'That one’s not on my shelves yet, henny — and I don’t improvise citations. Here’s the vault if you want to dig.';
 var SUGGESTIONS = ['Who won Season 6?','How old was Jinkx Monsoon?','Who played Maggie Smith in Snatch Game?','What is Latrice Royale’s lip sync record?'];
+
+/* clicked something from across the room — Librarian-voiced, rotated */
+var TOO_FAR = [
+  'Walk closer, honey — the archive rewards proximity.',
+  'From way over there? No, baby. Come within arm’s reach and try again.',
+  'It can’t hear you from that distance, darling. Approach.'
+];
 
 /* riffs, never quotes (design §2 — short-phrase riffing on the spirit, not the trade dress) */
 var CROSS_TO_RUNWAY = [
@@ -495,6 +503,22 @@ function pick(bank, state){
   var j = Math.floor(Math.random()*state.left.length);
   var idx = state.left.splice(j,1)[0];
   return bank[idx];
+}
+
+/* clean-tap classifier for click/tap-to-interact: short press, near-zero travel —
+   joystick presses, drag-looks and holds are NOT taps */
+function isCleanTap(downX, downY, downT, upX, upY, upT, opts){
+  opts = opts || {};
+  var maxMs = opts.maxMs || 250, maxMove = opts.maxMove || 10;
+  if((upT - downT) >= maxMs) return false;
+  var dx = upX - downX, dy = upY - downY;
+  return (dx*dx + dy*dy) < maxMove*maxMove;
+}
+/* range gate: a click ray can hit across the room; interaction honors each
+   prop's existing radius, exactly like the E prompt */
+function inReach(px, pz, o){
+  var dx = o.x - px, dz = o.z - pz;
+  return Math.sqrt(dx*dx + dz*dz) <= o.radius;
 }
 
 /* grid layout for the photo-wall canvas: n cards into W×H px, portrait-ish cells */
@@ -863,9 +887,10 @@ return {
   CROSS_TO_RUNWAY:CROSS_TO_RUNWAY, CROSS_TO_BACKSTAGE:CROSS_TO_BACKSTAGE,
   AMBIENT_BACK:AMBIENT_BACK, AMBIENT_RUN:AMBIENT_RUN,
   FLAVOR_BACK:FLAVOR_BACK, FLAVOR_RUN:FLAVOR_RUN,
-  READS:READS, PRAISES:PRAISES, PROP_LINES:PROP_LINES,
+  READS:READS, PRAISES:PRAISES, PROP_LINES:PROP_LINES, TOO_FAR:TOO_FAR,
   LS_ANNOUNCE:LS_ANNOUNCE, CARD_LINES:CARD_LINES, MET_TITLES:MET_TITLES,
-  pick:pick, gridLayout:gridLayout, seasonTracks:seasonTracks, isPlayable:isPlayable,
+  pick:pick, isCleanTap:isCleanTap, inReach:inReach,
+  gridLayout:gridLayout, seasonTracks:seasonTracks, isPlayable:isPlayable,
   placementMatrix:placementMatrix, bridgeWait:bridgeWait, pipeline:pipeline,
   routeLabel:routeLabel, ROUTE_NAMES:ROUTE_NAMES,
   ordinal:ordinal, alumniBoard:alumniBoard, stringPoints:stringPoints,
@@ -890,7 +915,7 @@ $('#pauseDisc').textContent = WR.FAN_DISCLAIMER;
 
 const IS_TOUCH = matchMedia('(pointer:coarse)').matches || innerWidth <= 640;
 if(IS_TOUCH){
-  $('#gateFoot').innerHTML = 'Left thumb: walk · right thumb: look around · tap the bottom prompt to interact · ◆ opens The Librarian.';
+  $('#gateFoot').innerHTML = 'Left thumb: walk · right thumb: look around · tap an object (or the bottom prompt) to interact · ◆ opens The Librarian.';
 }
 
 function failGate(title, body){
@@ -994,6 +1019,17 @@ function box(w,h,d, mat, x,y,z, grp){
   const m = new THREE.Mesh(new THREE.BoxGeometry(w,h,d), mat);
   m.position.set(x,y,z); (grp||gAlways).add(m); return m;
 }
+
+/* ---- click/tap raycast registry: mesh (or group) → interactable id ----
+   Everything registered here becomes directly clickable; the click still
+   honors the interactable's radius, so distance rules match the E prompt. */
+const pickRoots=[], pickById={};
+function registerPick(obj, id){
+  obj.userData.wrPick = id;
+  pickRoots.push(obj);
+  (pickById[id] = pickById[id] || []).push(obj);
+  return obj;
+}
 /* floors + ceilings */
 {
   const f1 = new THREE.Mesh(new THREE.PlaneGeometry(24.8,15.8), M.floorBack);
@@ -1039,17 +1075,17 @@ box(6,.8,.8, M.dark, -6.5,0.4,0.65, gBack); W(-9.5,0,-3.5,1.05);
 const mirrorCnv=[], mirrorTex=[];
 for(let i=0;i<3;i++){
   const mx = -8.5+i*2;
-  box(1.5,1.8,.08, M.plum, mx,2.1,0.14, gBack);
+  registerPick(box(1.5,1.8,.08, M.plum, mx,2.1,0.14, gBack), 'mirror'+i);
   const cnv=document.createElement('canvas'); cnv.width=256; cnv.height=320;
   const tex=new THREE.CanvasTexture(cnv); tex.colorSpace=THREE.SRGBColorSpace;
   mirrorCnv.push(cnv); mirrorTex.push(tex);
   const g = new THREE.Mesh(new THREE.PlaneGeometry(1.2,1.5), new THREE.MeshBasicMaterial({map:tex}));
-  g.position.set(mx,2.1,0.19); gBack.add(g);
+  g.position.set(mx,2.1,0.19); gBack.add(g); registerPick(g,'mirror'+i);
   for(let b=0;b<4;b++) box(.07,.07,.07, M.bulb, mx-0.6+b*0.4, 3.05, 0.2, gBack);
 }
 /* reading-room nook (SW): armchair + lamp (the sitting itself lives in the Phase-2 block below) */
-box(1,.5,1, M.plum, -10.8,0.25,1.6, gBack);
-box(1,.9,.25, M.plum, -10.8,0.85,1.1, gBack); W(-11.3,0.9,-10.3,2.1);
+registerPick(box(1,.5,1, M.plum, -10.8,0.25,1.6, gBack), 'reading');
+registerPick(box(1,.9,.25, M.plum, -10.8,0.85,1.1, gBack), 'reading'); W(-11.3,0.9,-10.3,2.1);
 box(.08,1.7,.08, M.trim, -9.8,0.85,1.4, gBack);
 box(.3,.24,.3, M.bulb, -9.8,1.8,1.4, gBack);
 /* four queen podiums (decor Phase 1) */
@@ -1065,21 +1101,21 @@ box(.3,.24,.3, M.bulb, -9.8,1.8,1.4, gBack);
 const wallMat = new THREE.MeshBasicMaterial({color:0xffffff});
 const photoWall = new THREE.Mesh(new THREE.PlaneGeometry(11,3.6), wallMat);
 photoWall.rotation.y = Math.PI/2;                 /* faces east */
-photoWall.position.set(-11.95,2.1,7.5); gBack.add(photoWall);
+photoWall.position.set(-11.95,2.1,7.5); gBack.add(photoWall); registerPick(photoWall,'photowall');
 box(.1,3.9,11.3, M.trim, -12.02,2.1,7.5, gBack);  /* brass frame slab behind */
 /* season arrow hotspots at the wall's ends */
-const arrowPrev = box(.12,.7,.7, M.trim, -11.8,1.5,1.9, gBack);
-const arrowNext = box(.12,.7,.7, M.trim, -11.8,1.5,13.1, gBack);
+const arrowPrev = registerPick(box(.12,.7,.7, M.trim, -11.8,1.5,1.9, gBack), 'arrowPrev');
+const arrowNext = registerPick(box(.12,.7,.7, M.trim, -11.8,1.5,13.1, gBack), 'arrowNext');
 
 /* ---- JUDGES' TABLE + SCOREBOARD (backstage north) ---- */
-box(4.6,.12,1.1, M.plum, -7,0.95,12.2, gBack);
-box(4.4,.9,.9, M.dark, -7,0.45,12.2, gBack); W(-9.3,11.7,-4.7,12.7);
-box(4.7,.06,1.2, M.trim, -7,1.02,12.2, gBack);
-[[-8.4],[-7],[-5.6]].forEach(c=>{ box(.55,1.15,.55, M.plum, c[0],0.57,10.9, gBack); });
+registerPick(box(4.6,.12,1.1, M.plum, -7,0.95,12.2, gBack), 'judges');
+registerPick(box(4.4,.9,.9, M.dark, -7,0.45,12.2, gBack), 'judges'); W(-9.3,11.7,-4.7,12.7);
+registerPick(box(4.7,.06,1.2, M.trim, -7,1.02,12.2, gBack), 'judges');
+[[-8.4],[-7],[-5.6]].forEach(c=>{ registerPick(box(.55,1.15,.55, M.plum, c[0],0.57,10.9, gBack), 'judges'); });
 const scoreMat = new THREE.MeshBasicMaterial({color:0xffffff});
 const scoreWall = new THREE.Mesh(new THREE.PlaneGeometry(8.6,3), scoreMat);
 scoreWall.rotation.y = Math.PI;                   /* on north wall, faces south */
-scoreWall.position.set(-7,2.4,14.95); gBack.add(scoreWall);
+scoreWall.position.set(-7,2.4,14.95); gBack.add(scoreWall); registerPick(scoreWall,'judges');
 
 /* ---- corridor curtain (two proximity-parting velvet planes) ---- */
 const curtGeoL = new THREE.PlaneGeometry(2.15,3.1,10,8);
@@ -1097,15 +1133,17 @@ box(1,.4,.14, onAirMat, 0,2.9,19.9, gAlways);
 
 /* ---- RUNWAY HALL ---- */
 const platform = box(18,.6,3, M.stage, 0,0.3,26.9, gRun);   /* raised, walkable, no collider */
+registerPick(platform,'lsstage');
 box(18.2,.05,.1, M.trim, 0,0.62,25.35, gRun);
 box(18.2,.05,.1, M.trim, 0,0.62,28.45, gRun);
 /* lip-sync spotlight circles at the stage's north side */
-const lsDiscs = [-2.4,2.4].map(x=>{
+const lsDiscs = [-2.4,2.4].map((x,i)=>{
   const d = new THREE.Mesh(new THREE.CircleGeometry(.85,24), M.spotDisc.clone());
-  d.rotation.x = -Math.PI/2; d.position.set(x,0.615,27.6); gRun.add(d); return d;
+  d.rotation.x = -Math.PI/2; d.position.set(x,0.615,27.6); gRun.add(d);
+  registerPick(d, i?'lsB':'lsA'); return d;
 });
 /* jukebox (house left / west) */
-const juke = new THREE.Group(); juke.position.set(-10.5,0,23.5); gRun.add(juke);
+const juke = new THREE.Group(); juke.position.set(-10.5,0,23.5); gRun.add(juke); registerPick(juke,'jukebox');
 {
   const body = new THREE.Mesh(new THREE.BoxGeometry(1.3,1.5,.75), M.plum); body.position.y=.75; juke.add(body);
   const arch = new THREE.Mesh(new THREE.CylinderGeometry(.65,.65,.75,16,1,false,0,Math.PI), M.plum);
@@ -1117,9 +1155,9 @@ const juke = new THREE.Group(); juke.position.set(-10.5,0,23.5); gRun.add(juke);
   W(-11.25,23.05,-9.75,23.95);
 }
 /* stage-door exit (runway SW corner, lit CLASSIC SITE sign) */
-box(1.6,3,.2, M.dark, -13.9,1.5,21.5, gRun);
+registerPick(box(1.6,3,.2, M.dark, -13.9,1.5,21.5, gRun), 'exitdoor');
 const exitSign = new THREE.Mesh(new THREE.PlaneGeometry(1.7,.55), new THREE.MeshBasicMaterial({color:0xffffff}));
-exitSign.rotation.y = Math.PI/2; exitSign.position.set(-13.75,3.2,21.5); gRun.add(exitSign);
+exitSign.rotation.y = Math.PI/2; exitSign.position.set(-13.75,3.2,21.5); gRun.add(exitSign); registerPick(exitSign,'exitdoor');
 
 /* ---------------- lights ---------------- */
 scene.add(new THREE.AmbientLight(0x3a2f4a, .52));   /* live-inspection: room read too dark */
@@ -1212,7 +1250,7 @@ let libGlasses, libGlassesNose, libGlassesUp, libArms=[];
   libGlasses.position.set(0,libGlassesNose.y,libGlassesNose.z);
 }
 lib.position.set(0.7,0,2.5);   /* dead ahead of spawn's sightline — she greets you first (live-inspection fix) */
-scene.add(lib);
+scene.add(lib); registerPick(lib,'librarian');
 /* glitter pool for teleports */
 const glitter = [];
 {
@@ -1244,7 +1282,15 @@ function releaseLook(){
 }
 function tryLock(){ if(!IS_TOUCH && entered && !overlayOpen() && !document.pointerLockElement) canvas.requestPointerLock(); }
 
-canvas.addEventListener('click', tryLock);
+/* click resolves interaction first, pointer lock second (touch uses the tap
+   classifier further down — its click events are ignored here) */
+canvas.addEventListener('click', e=>{
+  if(IS_TOUCH) return;
+  if(!entered || overlayOpen()) return;
+  if(document.pointerLockElement){ clickInteract(0,0); return; }     /* crosshair click */
+  const r = clickInteract((e.clientX/innerWidth)*2-1, -(e.clientY/innerHeight)*2+1);
+  if(r!=='far') tryLock();   /* nothing hit → classic lock; interacted → lock too when no overlay opened (tryLock self-gates) */
+});
 document.addEventListener('pointerlockchange', ()=>{
   if(!document.pointerLockElement && entered && !overlayOpen() && !suppressPause) openPause();
 });
@@ -1334,8 +1380,8 @@ function collide(nx,nz){
 
 /* ---------------- interactables ---------------- */
 const ray = new THREE.Raycaster();
-const interactables = [];
-function addInteract(o){ interactables.push(o); }
+const interactables = [], interactById = {};
+function addInteract(o){ interactables.push(o); interactById[o.id]=o; }
 let promptTarget=null, pickedQueen=null;
 
 addInteract({id:'photowall', x:-11.9, z:7.5, radius:5.2,
@@ -1386,6 +1432,7 @@ function updatePrompt(){
     const score = d + (o.id==='librarian'?1.1:0);
     if(score<bestD){ best=o; bestD=score; }
   }
+  if(aim.o && (!aim.o.active || aim.o.active())) best = aim.o;   /* aimed/hovered target wins */
   if(player.seated) best = interactables.find(o=>o.id==='judges');
   promptTarget=best;
   pickedQueen=null;
@@ -1394,15 +1441,138 @@ function updatePrompt(){
 }
 
 /* raycast the photo wall for the queen under the crosshair */
-function pickWallQueen(){
-  ray.setFromCamera({x:0,y:0}, camera);
-  const hit = ray.intersectObject(photoWall, false)[0];
-  if(!hit || !hit.uv || !photoWall.userData.cells) return null;
-  const u=hit.uv.x, v=hit.uv.y;
+function cellAtUV(u,v){
+  if(!photoWall.userData.cells) return null;
   for(const c of photoWall.userData.cells){
     if(u>=c.u0&&u<=c.u1&&v>=c.v0&&v<=c.v1) return c;
   }
   return null;
+}
+function pickWallQueen(){
+  ray.setFromCamera({x:0,y:0}, camera);
+  const hit = ray.intersectObject(photoWall, false)[0];
+  if(!hit || !hit.uv) return null;
+  return cellAtUV(hit.uv.x, hit.uv.y);
+}
+
+/* ---------------- click / tap to interact (raycast the registered meshes) ---------------- */
+const tooFarState={};
+function chainVisible(o){ while(o){ if(o.visible===false) return false; o=o.parent; } return true; }
+function findPickId(o){ while(o){ if(o.userData && o.userData.wrPick) return o.userData.wrPick; o=o.parent; } return null; }
+function pickAt(nx,ny){
+  ray.setFromCamera({x:nx,y:ny}, camera);
+  for(const h of ray.intersectObjects(pickRoots, true)){
+    if(!chainVisible(h.object)) continue;
+    const id=findPickId(h.object);
+    if(id) return {id, hit:h};
+  }
+  return null;
+}
+/* one resolver for clicks and taps: 'acted' | 'far' | null */
+function handlePick(res){
+  const id = res.id==='stringpins' ? 'stringboard' : res.id;
+  const o = interactById[id];
+  if(!o || (o.active && !o.active())) return null;
+  if(!WR.inReach(player.x, player.z, o)){ libSay(WR.pick(WR.TOO_FAR, tooFarState), true); return 'far'; }
+  if(res.id==='stringpins' && res.hit.instanceId!=null){ pinAct(res.hit.instanceId); return 'acted'; }
+  if(id==='photowall' && res.hit.uv){                    /* the exact card under the click, not the crosshair */
+    const c=cellAtUV(res.hit.uv.x, res.hit.uv.y);
+    if(c){ openDress('queen:'+c.qid, 'Photo Wall → '+c.name); return 'acted'; }
+  }
+  o.act();
+  return 'acted';
+}
+function clickInteract(nx,ny){
+  const res=pickAt(nx,ny);
+  return res ? handlePick(res) : null;
+}
+/* a clicked pin focuses it; a second click on the focused pin opens her dossier
+   (E still cycles pins exactly as before) */
+function pinAct(i){
+  if(!BOARD.model) return;
+  const h=BOARD.model.hubs[i];
+  if(BOARD.focus===i){
+    hide($('#board'));
+    if(h.qid) openDress('queen:'+h.qid, 'Connections Board → '+h.name);
+    else openDress('alumniweb', 'Connections Board → Alumni Web');
+  } else focusHub(i);
+}
+
+/* mobile: clean short taps only — a joystick press or a drag-look never interacts */
+if(IS_TOUCH){
+  let tapCand=null;
+  addEventListener('pointerdown', e=>{
+    tapCand=null;
+    if(!entered || overlayOpen()) return;
+    if(e.target && e.target.closest && e.target.closest('#prompt,#askBtn,#exit2d,#board,#toast,#say')) return;
+    if(e.clientX < innerWidth*.45) return;               /* joystick half of the screen — walking, not tapping */
+    tapCand={id:e.pointerId, x:e.clientX, y:e.clientY, t:performance.now()};
+  });
+  addEventListener('pointerup', e=>{
+    if(!tapCand || e.pointerId!==tapCand.id) return;
+    const c=tapCand; tapCand=null;
+    if(!entered || overlayOpen()) return;
+    if(!WR.isCleanTap(c.x, c.y, c.t, e.clientX, e.clientY, performance.now())) return;
+    clickInteract((e.clientX/innerWidth)*2-1, -(e.clientY/innerHeight)*2+1);
+  });
+}
+
+/* ---------------- hover / aim feedback (desktop only; touch is tap-only) ----------------
+   Materials are shared across props, so highlight swaps in a per-mesh CLONE with a
+   lifted emissive/color and restores the original on clear. Calm mode: static lift. */
+const aim={o:null};
+const HL={id:null, entries:[]};
+function setHighlight(id){
+  if(HL.id===id) return;
+  for(const e of HL.entries){ e.mesh.material=e.orig; e.mat.dispose(); }
+  HL.entries.length=0; HL.id=id||null;
+  if(!id) return;
+  const roots=(pickById[id]||[]).concat(id==='stringboard' ? (pickById.stringpins||[]) : []);
+  for(const r of roots) r.traverse(ob=>{
+    if(!ob.isMesh || !ob.material || HL.entries.length>=24) return;
+    const orig=ob.material, mat=orig.clone();
+    let baseE=null, baseC=null;
+    if(mat.emissive){ mat.emissive.add(new THREE.Color(0x30260f)); baseE=mat.emissive.clone(); }
+    else if(mat.color){ mat.color.multiplyScalar(1.25); baseC=mat.color.clone(); }
+    ob.material=mat;
+    HL.entries.push({mesh:ob, orig, mat, baseE, baseC});
+  });
+}
+function highlightTick(t){
+  if(!HL.entries.length || window.WR_CALM) return;       /* calm mode: no pulse, just the lift */
+  const k=1+Math.sin(t*4.5)*0.35;
+  for(const e of HL.entries){
+    if(e.baseE) e.mat.emissive.copy(e.baseE).multiplyScalar(k);
+    else if(e.baseC) e.mat.color.copy(e.baseC).multiplyScalar(1+(k-1)*0.4);
+  }
+}
+const mouseNDC={x:0, y:0, has:false};
+if(!IS_TOUCH) addEventListener('pointermove', e=>{
+  if(document.pointerLockElement){ mouseNDC.has=false; return; }
+  mouseNDC.x=(e.clientX/innerWidth)*2-1; mouseNDC.y=-(e.clientY/innerHeight)*2+1; mouseNDC.has=true;
+});
+let aimFrame=0;
+function aimTick(){
+  if(IS_TOUCH) return;
+  if(!entered || overlayOpen()){ aimSet(null); return; }
+  if((aimFrame++)%3) return;                             /* raycast every 3rd frame */
+  if(document.pointerLockElement) aimUpdate(0,0);
+  else if(mouseNDC.has) aimUpdate(mouseNDC.x, mouseNDC.y);
+  else aimSet(null);
+}
+function aimUpdate(nx,ny){
+  const res=pickAt(nx,ny);
+  let o=null;
+  if(res){
+    const cand=interactById[res.id==='stringpins' ? 'stringboard' : res.id];
+    if(cand && (!cand.active || cand.active()) && WR.inReach(player.x, player.z, cand)) o=cand;
+  }
+  aimSet(o);
+}
+function aimSet(o){
+  if(aim.o!==o){ aim.o=o; setHighlight(o ? o.id : null); }
+  $('#xhair').classList.toggle('on', !!(o && document.pointerLockElement));
+  canvas.style.cursor = (o && !document.pointerLockElement) ? 'pointer' : '';
 }
 
 /* ---------------- season state + canvas textures ---------------- */
@@ -1879,6 +2049,7 @@ function tick(){
   glitterTick(dt);
   if(!battle) lsDiscs.forEach((d,i)=>{ d.material.color.setHSL(0.9-(i*0.35), .5, .75+Math.sin(t*2+i*2)*.12); });
   phase2Tick(dt,t);
+  aimTick(); highlightTick(t);
   updatePrompt();
   renderer.render(scene,camera);
 }
@@ -1987,7 +2158,7 @@ mkSign('MADAME VIBE', 2,.5, 13.95,3.4,22.5, -Math.PI/2, gRun, PAL.magenta);
 const BOARD={ cy:2.05, cz:8.2, W:6.2, H:2.7, model:null, focus:-1 };
 {
   const plane=new THREE.Mesh(new THREE.PlaneGeometry(6.6,3.1), M2.cork);
-  plane.rotation.y=-Math.PI/2; plane.position.set(11.93,BOARD.cy,BOARD.cz); gBack.add(plane);
+  plane.rotation.y=-Math.PI/2; plane.position.set(11.93,BOARD.cy,BOARD.cz); gBack.add(plane); registerPick(plane,'stringboard');
   box(.12,3.3,6.9, M.trim, 12.06,BOARD.cy,BOARD.cz, gBack);
 }
 function boardWorld(bx,by){ return [11.86, BOARD.cy-BOARD.H/2+by, BOARD.cz-BOARD.W/2+bx]; }
@@ -2024,6 +2195,7 @@ function buildBoard(){
   });
   pinHubs.instanceMatrix.needsUpdate=true; pinSpokes.instanceMatrix.needsUpdate=true;
   gBack.add(pinHubs, pinSpokes);
+  registerPick(pinHubs,'stringpins');   /* clickable per-pin via instanceId */
   const geo=new THREE.BufferGeometry();
   geo.setAttribute('position', new THREE.Float32BufferAttribute(pos,3));
   stringColors=new THREE.Float32BufferAttribute(cols,3);
@@ -2077,19 +2249,19 @@ addInteract({id:'stringboard', x:11.9, z:8.2, radius:4.2,
   act(){ if(BOARD.model) focusHub((BOARD.focus+1)%BOARD.model.hubs.length); }});
 
 /* ================= SNATCH GAME DESK (NE) ================= */
-box(2.8,.1,.9, M.trim, 8.5,1.0,12.6, gBack);
-box(2.6,.95,.8, M2.desk, 8.5,0.48,12.6, gBack); W(7.1,12.15,9.9,13.05);
+registerPick(box(2.8,.1,.9, M.trim, 8.5,1.0,12.6, gBack), 'snatchdesk');
+registerPick(box(2.6,.95,.8, M2.desk, 8.5,0.48,12.6, gBack), 'snatchdesk'); W(7.1,12.15,9.9,13.05);
 const snatchCnv=document.createElement('canvas'); snatchCnv.width=1536; snatchCnv.height=768;
 const snatchTex=new THREE.CanvasTexture(snatchCnv); snatchTex.colorSpace=THREE.SRGBColorSpace;
 {
   const wallP=new THREE.Mesh(new THREE.PlaneGeometry(4.6,2.3), new THREE.MeshBasicMaterial({map:snatchTex}));
-  wallP.rotation.y=Math.PI; wallP.position.set(8.5,2.45,14.95); gBack.add(wallP);
+  wallP.rotation.y=Math.PI; wallP.position.set(8.5,2.45,14.95); gBack.add(wallP); registerPick(wallP,'snatchdesk');
 }
 const easelCnv=document.createElement('canvas'); easelCnv.width=512; easelCnv.height=640;
 const easelTex=new THREE.CanvasTexture(easelCnv); easelTex.colorSpace=THREE.SRGBColorSpace;
 {
   const p=new THREE.Mesh(new THREE.PlaneGeometry(.95,1.2), new THREE.MeshBasicMaterial({map:easelTex}));
-  p.position.set(6.3,1.35,13.4); p.rotation.y=Math.PI*.92; p.rotation.x=-.06; gBack.add(p);
+  p.position.set(6.3,1.35,13.4); p.rotation.y=Math.PI*.92; p.rotation.x=-.06; gBack.add(p); registerPick(p,'snatchdesk');
   box(.06,1.5,.06, M.dark, 6.0,0.75,13.55, gBack);
   box(.06,1.5,.06, M.dark, 6.6,0.75,13.55, gBack);
   W(5.9,13.25,6.7,13.7);
@@ -2147,15 +2319,15 @@ addInteract({id:'snatchdesk', x:8.5, z:12.4, radius:2.8,
   act(){ openDress('snatch','Snatch Game Desk → Snatch Game'); }});
 
 /* ================= THE VAULT (SE corner): cabinet + CRT ================= */
-box(.65,2.0,1.0, M2.desk, 11.65,1.0,1.2, gBack); W(11.3,0.65,12,1.75);
+registerPick(box(.65,2.0,1.0, M2.desk, 11.65,1.0,1.2, gBack), 'vault'); W(11.3,0.65,12,1.75);
 [0,1,2,3].forEach(i=>{ box(.06,.03,.5, M.trim, 11.3,0.4+i*0.47,1.2, gBack); });
-box(.9,.75,.7, M.dark, 11.55,0.37,3.2, gBack); W(11.1,2.85,12,3.55);
-box(.5,.56,.6, M.plum, 11.6,1.05,3.2, gBack);
+registerPick(box(.9,.75,.7, M.dark, 11.55,0.37,3.2, gBack), 'vaultcrt'); W(11.1,2.85,12,3.55);
+registerPick(box(.5,.56,.6, M.plum, 11.6,1.05,3.2, gBack), 'vaultcrt');
 const crtCnv=document.createElement('canvas'); crtCnv.width=512; crtCnv.height=384;
 const crtTex=new THREE.CanvasTexture(crtCnv); crtTex.colorSpace=THREE.SRGBColorSpace;
 {
   const scr=new THREE.Mesh(new THREE.PlaneGeometry(.56,.42), new THREE.MeshBasicMaterial({map:crtTex}));
-  scr.rotation.y=-Math.PI/2; scr.position.set(11.28,1.06,3.2); gBack.add(scr);
+  scr.rotation.y=-Math.PI/2; scr.position.set(11.28,1.06,3.2); gBack.add(scr); registerPick(scr,'vaultcrt');
 }
 function paintCRT(){
   const g=crtCnv.getContext('2d');
@@ -2355,18 +2527,18 @@ REPAINTS.push(()=>{ for(let i=0;i<3;i++) paintMirror(i, mirrorPick[i]); });
 });
 
 /* ================= small diegetic homes (backstage) ================= */
-box(.5,1.15,.45, M2.desk, -3.9,0.57,12.3, gBack); W(-4.2,12.05,-3.6,12.55);
-box(.6,.06,.5, M.plum, -3.9,1.2,12.3, gBack);
+registerPick(box(.5,1.15,.45, M2.desk, -3.9,0.57,12.3, gBack), 'lectern'); W(-4.2,12.05,-3.6,12.55);
+registerPick(box(.6,.06,.5, M.plum, -3.9,1.2,12.3, gBack), 'lectern');
 addInteract({id:'lectern', x:-3.9, z:12.0, radius:1.8,
   label(){ return '<b>E</b> — the guest book · judges & guests'; },
   act(){ openDress('guestfreq','Guest Book → Guests'); }});
-box(.5,.08,.36, M.rosey, -5.2,1.12,12.15, gBack);           /* the earnings ledger */
+registerPick(box(.5,.08,.36, M.rosey, -5.2,1.12,12.15, gBack), 'ledger');   /* the earnings ledger */
 addInteract({id:'ledger', x:-5.2, z:11.9, radius:1.4,
   label(){ return '<b>E</b> — the earnings ledger'; },
   act(){ openDress('earnings',"Judges' Table → Earnings"); }});
-box(1.9,.85,.9, M2.desk, -4.5,0.42,3.5, gBack); W(-5.45,3.05,-3.55,3.95);   /* workbench */
-box(.24,.1,.24, M.rosey, -4.9,0.92,3.5, gBack);
-box(.3,.16,.3, M.trim, -4.1,0.95,3.5, gBack);               /* mini-crown paperweight */
+registerPick(box(1.9,.85,.9, M2.desk, -4.5,0.42,3.5, gBack), 'workbench'); W(-5.45,3.05,-3.55,3.95);   /* workbench */
+registerPick(box(.24,.1,.24, M.rosey, -4.9,0.92,3.5, gBack), 'workbench');
+registerPick(box(.3,.16,.3, M.trim, -4.1,0.95,3.5, gBack), 'workbench');   /* mini-crown paperweight */
 addInteract({id:'workbench', x:-4.5, z:3.5, radius:2.2,
   label(){ return '<b>E</b> — the workbench · challenges'; },
   act(){ openDress('challenges','Workbench → Challenges'); }});
@@ -2375,7 +2547,7 @@ const depCnv=document.createElement('canvas'); depCnv.width=1024; depCnv.height=
 const depTex=new THREE.CanvasTexture(depCnv); depTex.colorSpace=THREE.SRGBColorSpace;
 {
   const b2=new THREE.Mesh(new THREE.PlaneGeometry(3.4,1.7), new THREE.MeshBasicMaterial({map:depTex}));
-  b2.position.set(7.5,2.25,0.12); gBack.add(b2);
+  b2.position.set(7.5,2.25,0.12); gBack.add(b2); registerPick(b2,'departures');
 }
 function paintDepartures(){
   const g=depCnv.getContext('2d');
@@ -2399,7 +2571,7 @@ addInteract({id:'departures', x:7.5, z:0.9, radius:2.6,
   act(){ openDress('timeline','Departures Board → Timeline'); }});
 
 /* ================= runway wings: globe · calendar · Madame Vibe ================= */
-const globeGrp=new THREE.Group(); globeGrp.position.set(11,0,30.5); gRun.add(globeGrp);
+const globeGrp=new THREE.Group(); globeGrp.position.set(11,0,30.5); gRun.add(globeGrp); registerPick(globeGrp,'globe');
 {
   const stand=new THREE.Mesh(new THREE.CylinderGeometry(.14,.3,1.1,10), M2.desk); stand.position.y=.55; globeGrp.add(stand);
   const ring=new THREE.Mesh(new THREE.TorusGeometry(.74,.03,8,26), M.brassWire); ring.position.y=1.7; ring.rotation.x=Math.PI/2.6; globeGrp.add(ring);
@@ -2415,7 +2587,7 @@ const calCnv=document.createElement('canvas'); calCnv.width=1280; calCnv.height=
 const calTex=new THREE.CanvasTexture(calCnv); calTex.colorSpace=THREE.SRGBColorSpace;
 {
   const p=new THREE.Mesh(new THREE.PlaneGeometry(4.8,2.9), new THREE.MeshBasicMaterial({map:calTex}));
-  p.rotation.y=Math.PI/2; p.position.set(-13.98,2.9,29.5); gRun.add(p);
+  p.rotation.y=Math.PI/2; p.position.set(-13.98,2.9,29.5); gRun.add(p); registerPick(p,'calendar');
 }
 function paintCalendar(){
   const g=calCnv.getContext('2d');
@@ -2457,13 +2629,13 @@ addInteract({id:'calendar', x:-13.5, z:29.5, radius:3,
   label(){ return '<b>E</b> — birthdays & the zodiac'; },
   act(){ openDress('birthdays','Calendar Wall → Birthdays'); }});
 
-box(1.2,2.4,.9, M2.desk, 13.4,1.2,22.5, gRun); W(12.8,22.0,14,23.0);   /* Madame Vibe cabinet */
-box(1.3,.14,1, M.trim, 13.4,2.46,22.5, gRun);
+registerPick(box(1.2,2.4,.9, M2.desk, 13.4,1.2,22.5, gRun), 'vibe'); W(12.8,22.0,14,23.0);   /* Madame Vibe cabinet */
+registerPick(box(1.3,.14,1, M.trim, 13.4,2.46,22.5, gRun), 'vibe');
 const vibeCnv=document.createElement('canvas'); vibeCnv.width=512; vibeCnv.height=768;
 const vibeTex=new THREE.CanvasTexture(vibeCnv); vibeTex.colorSpace=THREE.SRGBColorSpace;
 {
   const p=new THREE.Mesh(new THREE.PlaneGeometry(.95,1.45), new THREE.MeshBasicMaterial({map:vibeTex}));
-  p.rotation.y=-Math.PI/2; p.position.set(12.78,1.5,22.5); gRun.add(p);
+  p.rotation.y=-Math.PI/2; p.position.set(12.78,1.5,22.5); gRun.add(p); registerPick(p,'vibe');
 }
 function paintVibe(){
   const g=vibeCnv.getContext('2d');
@@ -2498,7 +2670,7 @@ const projCnv=document.createElement('canvas'); projCnv.width=1536; projCnv.heig
 const projTex=new THREE.CanvasTexture(projCnv); projTex.colorSpace=THREE.SRGBColorSpace;
 {
   const p=new THREE.Mesh(new THREE.PlaneGeometry(9.6,3.5), new THREE.MeshBasicMaterial({map:projTex}));
-  p.rotation.y=Math.PI; p.position.set(0,3.9,32.9); gRun.add(p);
+  p.rotation.y=Math.PI; p.position.set(0,3.9,32.9); gRun.add(p); registerPick(p,'lsstage');
 }
 function silhouetteTexture(flip){
   /* an original, deliberately generic drag silhouette — never a likeness */
@@ -2685,7 +2857,7 @@ bridgeReady.then(()=>{
 
 enterBtn.addEventListener('click', ()=>{
   entered=true; enterAt=performance.now(); hide(gate); show($('#xhair')); show($('#askBtn'));
-  $('#hint').textContent = IS_TOUCH ? 'left thumb walk · right thumb look' : 'WASD walk · E interact · T librarian · Esc menu';
+  $('#hint').textContent = IS_TOUCH ? 'left thumb walk · right thumb look · tap objects' : 'WASD walk · click/E interact · T librarian · Esc menu';
   show($('#hint')); setTimeout(()=>hide($('#hint')), 9000);
   tryLock();
   const returning = metSet.size>0 || SAVE.cards>0 || SAVE.ls.seen>0;
