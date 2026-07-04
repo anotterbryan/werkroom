@@ -978,32 +978,68 @@ const canvas = $('#c');
 const renderer = new THREE.WebGLRenderer({canvas, antialias:true, powerPreference:'high-performance'});
 renderer.setPixelRatio(Math.min(devicePixelRatio||1, IS_TOUCH?1.5:2));
 renderer.setSize(innerWidth, innerHeight);
-addEventListener('resize', ()=>{ camera.aspect=innerWidth/innerHeight; camera.updateProjectionMatrix(); renderer.setSize(innerWidth,innerHeight); });
+/* lighting overhaul: filmic tone curve + a bright exposure — house lights ON */
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.22;
+let composerRef = null;
+addEventListener('resize', ()=>{ camera.aspect=innerWidth/innerHeight; camera.updateProjectionMatrix(); renderer.setSize(innerWidth,innerHeight); if(composerRef) composerRef.setSize(innerWidth,innerHeight); });
 
 const scene = new THREE.Scene();
-const FOG_BACK = new THREE.Color(0x241a2e), FOG_RUN = new THREE.Color(0x07050c);
-scene.fog = new THREE.Fog(FOG_BACK.clone(), 9, 40);
+/* fog pushed back + lifted so it frames the room instead of eating it */
+const FOG_BACK = new THREE.Color(0x40305a), FOG_RUN = new THREE.Color(0x150c28);
+scene.fog = new THREE.Fog(FOG_BACK.clone(), 13, 58);
 scene.background = scene.fog.color;
+
+/* cheap image-based fill (0 KB, generated once): brass, mirror facets and the
+   glossy runway floor all pick up a warm neutral room. Soft-fails to no env. */
+let renderFrame = ()=>renderer.render(scene,camera);
+import('three/addons/environments/RoomEnvironment.js').then(({RoomEnvironment})=>{
+  const pm = new THREE.PMREMGenerator(renderer);
+  scene.environment = pm.fromScene(new RoomEnvironment()).texture;
+  scene.environmentIntensity = .38;
+  pm.dispose();
+}).catch(()=>{});
+/* UnrealBloom, desktop only, half-res — pure sweetener; the scene is lit to
+   stand on its own if any addon fails to load */
+if(!IS_TOUCH){
+  Promise.all([
+    import('three/addons/postprocessing/EffectComposer.js'),
+    import('three/addons/postprocessing/RenderPass.js'),
+    import('three/addons/postprocessing/UnrealBloomPass.js'),
+    import('three/addons/postprocessing/OutputPass.js'),
+  ]).then(([ec,rp,ub,op])=>{
+    const composer = new ec.EffectComposer(renderer);
+    composer.addPass(new rp.RenderPass(scene,camera));
+    composer.addPass(new ub.UnrealBloomPass(new THREE.Vector2(innerWidth/2,innerHeight/2), .34, .55, .8));
+    composer.addPass(new op.OutputPass());
+    composer.setSize(innerWidth,innerHeight);
+    composerRef = composer;
+    renderFrame = ()=>composer.render();
+  }).catch(()=>{});
+}
 
 const camera = new THREE.PerspectiveCamera(70, innerWidth/innerHeight, 0.1, 80);
 camera.rotation.order = 'YXZ';
 
 /* ---------------- materials (pageant-noir) ---------------- */
+/* lighting overhaul: everything lifted from near-black to rich plum/rose/brass */
 const M = {
-  floorBack: new THREE.MeshStandardMaterial({color:0x2a2033, roughness:.92}),
-  floorRun:  new THREE.MeshStandardMaterial({color:0x0d0a14, roughness:.55, metalness:.15}),
-  wall:      new THREE.MeshStandardMaterial({color:0x241a33, roughness:.95}),
-  wallRun:   new THREE.MeshStandardMaterial({color:0x120d1d, roughness:.95}),
-  trim:      new THREE.MeshStandardMaterial({color:0xc9a227, roughness:.4, metalness:.6, emissive:0x2a2008, emissiveIntensity:.6}),
-  plum:      new THREE.MeshStandardMaterial({color:0x3d2352, roughness:.85}),
-  velvet:    new THREE.MeshStandardMaterial({color:0x3d2352, roughness:.98, side:THREE.DoubleSide}),
-  dark:      new THREE.MeshStandardMaterial({color:0x1a1424, roughness:.9}),
-  stage:     new THREE.MeshStandardMaterial({color:0x241a2e, roughness:.25, metalness:.35, emissive:0x0d0716, emissiveIntensity:.8}),
-  bulb:      new THREE.MeshBasicMaterial({color:0xffd9a0}),
-  rosey:     new THREE.MeshStandardMaterial({color:0xd4708f, roughness:.6}),
-  skin:      new THREE.MeshStandardMaterial({color:0x7a5f9e, roughness:.55}),
-  inkGown:   new THREE.MeshStandardMaterial({color:0x1a1226, roughness:.75, emissive:0x0c0714, emissiveIntensity:.7}),
-  brassWire: new THREE.MeshStandardMaterial({color:0xc9a227, roughness:.3, metalness:.8, emissive:0x574512, emissiveIntensity:.9}),
+  floorBack: new THREE.MeshStandardMaterial({color:0x4a3358, roughness:.88}),
+  floorRun:  new THREE.MeshStandardMaterial({color:0x1e1332, roughness:.35, metalness:.3}),
+  wall:      new THREE.MeshStandardMaterial({color:0x483061, roughness:.93}),
+  wallRun:   new THREE.MeshStandardMaterial({color:0x28193e, roughness:.93}),
+  trim:      new THREE.MeshStandardMaterial({color:0xc9a227, roughness:.4, metalness:.6, emissive:0x53400f, emissiveIntensity:1}),
+  plum:      new THREE.MeshStandardMaterial({color:0x5a3578, roughness:.85}),
+  velvet:    new THREE.MeshStandardMaterial({color:0x6e2250, roughness:.98, side:THREE.DoubleSide}),
+  dark:      new THREE.MeshStandardMaterial({color:0x2c2142, roughness:.9}),
+  ceilBack:  new THREE.MeshStandardMaterial({color:0x3c2b52, roughness:.95, emissive:0x1d1230, emissiveIntensity:1}),
+  ceilRun:   new THREE.MeshStandardMaterial({color:0x231536, roughness:.95, emissive:0x0f081e, emissiveIntensity:1}),
+  stage:     new THREE.MeshStandardMaterial({color:0x37254c, roughness:.22, metalness:.4, emissive:0x1a0e2c, emissiveIntensity:1}),
+  bulb:      new THREE.MeshBasicMaterial({color:0xffe2b0}),
+  rosey:     new THREE.MeshStandardMaterial({color:0xe087a6, roughness:.6}),
+  skin:      new THREE.MeshStandardMaterial({color:0x8a6fae, roughness:.55}),
+  inkGown:   new THREE.MeshStandardMaterial({color:0x241834, roughness:.75, emissive:0x120a20, emissiveIntensity:.7}),
+  brassWire: new THREE.MeshStandardMaterial({color:0xc9a227, roughness:.3, metalness:.8, emissive:0x6b5416, emissiveIntensity:1}),
   spotDisc:  new THREE.MeshBasicMaterial({color:0xffe9f4}),
 };
 
@@ -1038,9 +1074,9 @@ function registerPick(obj, id){
   fc.rotation.x = -Math.PI/2; fc.position.set(0,0,17.5); gAlways.add(fc);
   const f2 = new THREE.Mesh(new THREE.PlaneGeometry(28.8,13.8), M.floorRun);
   f2.rotation.x = -Math.PI/2; f2.position.set(0,0,26.5); gRun.add(f2);
-  const c1 = new THREE.Mesh(new THREE.PlaneGeometry(24.8,15.8), M.dark);
+  const c1 = new THREE.Mesh(new THREE.PlaneGeometry(24.8,15.8), M.ceilBack);
   c1.rotation.x = Math.PI/2; c1.position.set(0,4.2,7.5); gBack.add(c1);
-  const c2 = new THREE.Mesh(new THREE.PlaneGeometry(28.8,13.8), M.dark);
+  const c2 = new THREE.Mesh(new THREE.PlaneGeometry(28.8,13.8), M.ceilRun);
   c2.rotation.x = Math.PI/2; c2.position.set(0,6,26.5); gRun.add(c2);
   const cc = new THREE.Mesh(new THREE.PlaneGeometry(4.8,5.6), M.plum);
   cc.rotation.x = Math.PI/2; cc.position.set(0,3.2,17.5); gAlways.add(cc);
@@ -1081,7 +1117,19 @@ for(let i=0;i<3;i++){
   mirrorCnv.push(cnv); mirrorTex.push(tex);
   const g = new THREE.Mesh(new THREE.PlaneGeometry(1.2,1.5), new THREE.MeshBasicMaterial({map:tex}));
   g.position.set(mx,2.1,0.19); gBack.add(g); registerPick(g,'mirror'+i);
-  for(let b=0;b<4;b++) box(.07,.07,.07, M.bulb, mx-0.6+b*0.4, 3.05, 0.2, gBack);
+}
+/* marquee bulb rings around all three mirrors — one draw call, unmistakably lit */
+{
+  const ring = new THREE.InstancedMesh(new THREE.SphereGeometry(.05,8,6), M.bulb, 36);
+  const dum = new THREE.Object3D();
+  let k=0;
+  for(let i=0;i<3;i++){ const mx=-8.5+i*2;
+    for(let b=0;b<12;b++){ const a=b/12*Math.PI*2;
+      dum.position.set(mx+Math.cos(a)*.74, 2.1+Math.sin(a)*.94, 0.2);
+      dum.updateMatrix(); ring.setMatrixAt(k++, dum.matrix);
+    }
+  }
+  ring.instanceMatrix.needsUpdate=true; gBack.add(ring);
 }
 /* reading-room nook (SW): armchair + lamp (the sitting itself lives in the Phase-2 block below) */
 registerPick(box(1,.5,1, M.plum, -10.8,0.25,1.6, gBack), 'reading');
@@ -1159,24 +1207,164 @@ registerPick(box(1.6,3,.2, M.dark, -13.9,1.5,21.5, gRun), 'exitdoor');
 const exitSign = new THREE.Mesh(new THREE.PlaneGeometry(1.7,.55), new THREE.MeshBasicMaterial({color:0xffffff}));
 exitSign.rotation.y = Math.PI/2; exitSign.position.set(-13.75,3.2,21.5); gRun.add(exitSign); registerPick(exitSign,'exitdoor');
 
-/* ---------------- lights ---------------- */
-scene.add(new THREE.AmbientLight(0x3a2f4a, .52));   /* live-inspection: room read too dark */
-const hemiBack = new THREE.HemisphereLight(0xffd9a0, 0x181022, 1.0); gBack.add(hemiBack);
-const pB1 = new THREE.PointLight(0xffc98a, 26, 12, 2); pB1.position.set(-6.5,3,1.6); gBack.add(pB1);
-const pB2 = new THREE.PointLight(0xffd9a0, 30, 13, 2); pB2.position.set(-9,3.2,7.5); gBack.add(pB2);
-const pB3 = new THREE.PointLight(0xffc98a, 24, 11, 2); pB3.position.set(-7,3.2,12.5); gBack.add(pB3);
-const pB4 = new THREE.PointLight(0xffd9a0, 26, 13, 2); pB4.position.set(8.5,3.2,8); gBack.add(pB4); /* east side was a cave */
-const hemiRun = new THREE.HemisphereLight(0x2a2340, 0x05030a, .34); gRun.add(hemiRun);
-const spotMag = new THREE.SpotLight(0xe6007e, 220, 20, .5, .45, 2); spotMag.position.set(-2.4,5.6,27.6);
-const spotBlu = new THREE.SpotLight(0x7aa0ff, 200, 20, .5, .45, 2); spotBlu.position.set(2.4,5.6,27.6);
-const spotGld = new THREE.SpotLight(0xf4b53f, 180, 22, .6, .5, 2); spotGld.position.set(0,5.7,26.2);
-[spotMag,spotBlu,spotGld].forEach(s=>{ s.target.position.set(s.position.x,0,s.position.z+0.01); gRun.add(s); gRun.add(s.target); });
-const pJuke = new THREE.PointLight(0xffb066, 16, 8, 2); pJuke.position.set(-10.5,2.4,24.2); gRun.add(pJuke);
-const pWingE = new THREE.PointLight(0x74e0c8, 10, 8, 2); pWingE.position.set(11,3,30); gRun.add(pWingE);   /* globe wing */
-const pWingW = new THREE.PointLight(0xd4708f, 10, 8, 2); pWingW.position.set(-11,3,29.5); gRun.add(pWingW); /* calendar wing */
-const pCorr = new THREE.PointLight(0xd4708f, 12, 7, 2); pCorr.position.set(0,2.8,17.5); gAlways.add(pCorr);
-const baseI = new Map([[hemiBack,1.0],[pB1,26],[pB2,30],[pB3,24],[pB4,26],[hemiRun,.34],
-  [spotMag,220],[spotBlu,200],[spotGld,180],[pJuke,16],[pWingE,10],[pWingW,10]]);
+/* ---------------- lights — the "bright and gay" rig (Bryan's directive) ----------------
+   Few REAL lights (crossfaded per act via RIG), everything else is emissive
+   surfaces + additive glow pools. Room culling turns off whichever half is hidden. */
+const RIG=[];   /* {l, base, act:'back'|'run'} — 'always' lights stay out of the fade */
+function addL(l, act, grp){ RIG.push({l, base:l.intensity, act}); grp.add(l); return l; }
+scene.add(new THREE.AmbientLight(0x6a5880, .85));   /* warm-violet base: no more murk */
+addL(new THREE.HemisphereLight(0xffe3b8, 0x53355e, 1.5), 'back', gBack);
+const pB1=addL(new THREE.PointLight(0xffcf9a, 42, 12, 2), 'back', gBack); pB1.position.set(-6.5,2.9,1.3);  /* vanity row */
+const pB2=addL(new THREE.PointLight(0xffc964, 50, 14, 2), 'back', gBack); pB2.position.set(-9.5,3.1,7.5); /* photo wall gold */
+const pB3=addL(new THREE.PointLight(0xffd9a0, 44, 12, 2), 'back', gBack); pB3.position.set(-7,3.2,12.3);  /* judges */
+const pB4=addL(new THREE.PointLight(0xffe3c2, 46, 14, 2), 'back', gBack); pB4.position.set(8.5,3.2,8);    /* east stations */
+const pCorr = new THREE.PointLight(0xff9ec0, 20, 8, 2); pCorr.position.set(0,2.8,17.5); gAlways.add(pCorr);
+addL(new THREE.HemisphereLight(0x9a7fd0, 0x241238, 1.05), 'run', gRun);
+const spotKey=addL(new THREE.SpotLight(0xffe6f2, 650, 30, 1.0, .55, 2), 'run', gRun);  /* white-pink runway key */
+spotKey.position.set(0,5.85,26.9);
+const spotMag =addL(new THREE.SpotLight(0xff2f9e, 380, 20, .5, .5, 2), 'run', gRun); spotMag.position.set(-2.4,5.6,27.6);
+const spotTeal=addL(new THREE.SpotLight(0x35e0d0, 340, 20, .5, .5, 2), 'run', gRun); spotTeal.position.set(2.4,5.6,27.6);
+[spotKey,spotMag,spotTeal].forEach(s=>{ s.target.position.set(s.position.x,0,s.position.z+0.01); gRun.add(s.target); });
+const pJuke =addL(new THREE.PointLight(0xffb066, 26, 9, 2), 'run', gRun); pJuke.position.set(-10.5,2.4,24.2);
+const pWingE=addL(new THREE.PointLight(0x59d7ff, 22, 9, 2), 'run', gRun); pWingE.position.set(11,3,30);     /* atlas cyan */
+const pWingW=addL(new THREE.PointLight(0xbb95ff, 22, 9, 2), 'run', gRun); pWingW.position.set(-11,3,29.5);  /* calendar lilac */
+/* two disco sweep spots — desktop only (mobile light budget); none under WR_CALM */
+let sweepA=null, sweepB=null;
+if(!IS_TOUCH && !window.WR_CALM){
+  sweepA=addL(new THREE.SpotLight(0xff4fb0, 300, 26, .3, .6, 2), 'run', gRun);
+  sweepB=addL(new THREE.SpotLight(0x46e6c8, 280, 26, .3, .6, 2), 'run', gRun);
+  [sweepA,sweepB].forEach((s,i)=>{ s.position.set(0,4.9,26.5); s.target.position.set(i?5:-5,0,i?30:23); gRun.add(s.target); });
+}
+
+/* ---------------- glow pools: baked-feel colored light, zero light cost ----------------
+   One shared radial-gradient texture, tinted per station — a rainbow around the room. */
+const poolTex=(()=>{ const c=document.createElement('canvas'); c.width=c.height=256;
+  const g=c.getContext('2d'), r=g.createRadialGradient(128,128,8,128,128,128);
+  r.addColorStop(0,'rgba(255,255,255,.95)'); r.addColorStop(.55,'rgba(255,255,255,.34)'); r.addColorStop(1,'rgba(255,255,255,0)');
+  g.fillStyle=r; g.fillRect(0,0,256,256);
+  const t=new THREE.CanvasTexture(c); t.colorSpace=THREE.SRGBColorSpace; return t; })();
+function glowPool(x,z,r,hex,grp,op){
+  const m=new THREE.Mesh(new THREE.PlaneGeometry(r*2,r*2),
+    new THREE.MeshBasicMaterial({map:poolTex, color:hex, transparent:true, opacity:op||.42,
+      blending:THREE.AdditiveBlending, depthWrite:false}));
+  m.rotation.x=-Math.PI/2; m.position.set(x,0.022,z); grp.add(m); return m;
+}
+glowPool(-10.4,7.5,2.7,0xffc23f,gBack);      /* photo wall — warm gold */
+glowPool(-10.2,1.9,2.2,0xff9440,gBack);      /* reading room — amber */
+glowPool(-6.5,1.2,2.5,0xff7fb0,gBack,.34);   /* vanity row — rose */
+glowPool(-7,11.5,2.5,0xf4b53f,gBack,.36);    /* judges' table — gold */
+glowPool(8.5,12.5,2.3,0x2fd8c0,gBack);       /* snatch desk — teal */
+glowPool(10.8,8.2,2.4,0xff5cab,gBack);       /* string board — rose */
+glowPool(11.1,2.2,2.1,0x3dffa0,gBack);       /* vault — green CRT spill */
+glowPool(-4.5,3.5,1.7,0xffb066,gBack,.3);    /* workbench — warm */
+glowPool(7.5,1.2,1.9,0x74e0c8,gBack,.34);    /* departures — mint */
+glowPool(0,17.5,1.9,0xff9ec0,gAlways,.34);   /* corridor — rose */
+glowPool(-10.5,23.8,2.3,0xffb066,gRun);      /* jukebox — amber */
+glowPool(11,30.5,2.3,0x35d5ff,gRun);         /* atlas — cyan */
+glowPool(-12.4,29.5,2.5,0xb08cff,gRun);      /* calendar — lilac */
+glowPool(13,22.5,2.1,0x9a4dff,gRun);         /* Madame Vibe — violet */
+glowPool(-13.3,21.5,1.7,0xf4b53f,gRun,.34);  /* exit door — gold */
+
+/* ON AIR spill: red halo on the corridor side, opacity driven by crossT below */
+const onAirGlow=new THREE.Mesh(new THREE.PlaneGeometry(2.4,1.3),
+  new THREE.MeshBasicMaterial({map:poolTex, color:0xff3030, transparent:true, opacity:0,
+    blending:THREE.AdditiveBlending, depthWrite:false}));
+onAirGlow.rotation.y=Math.PI; onAirGlow.position.set(0,2.9,19.82); gAlways.add(onAirGlow);
+
+/* string bulbs across the backstage ceiling — a party, not a void (1 draw call) */
+{
+  const N=66, str=new THREE.InstancedMesh(new THREE.SphereGeometry(.045,8,6), M.bulb, N);
+  const dum=new THREE.Object3D(); let k=0;
+  for(let s2=0;s2<3;s2++) for(let b=0;b<22;b++){
+    const t2=b/21;
+    dum.position.set(-11+22*t2, 4.08-Math.sin(Math.PI*t2)*.5, 2.6+s2*4.9+Math.sin(t2*9+s2)*.25);
+    dum.updateMatrix(); str.setMatrixAt(k++,dum.matrix);
+  }
+  str.instanceMatrix.needsUpdate=true; gBack.add(str);
+}
+
+/* colored footlights along both platform edges — one instanced draw, emissive only */
+{
+  const foot=new THREE.InstancedMesh(new THREE.BoxGeometry(.16,.1,.1), new THREE.MeshBasicMaterial({color:0xffffff}), 20);
+  const cols=[new THREE.Color(0xff5cab), new THREE.Color(0x35e0d0), new THREE.Color(0xf4b53f)];
+  const dum=new THREE.Object3D();
+  for(let i=0;i<20;i++){
+    const side=i%2, k=(i/2)|0;
+    dum.position.set(-8.1+k*1.8, .66, side?25.3:28.5);
+    dum.updateMatrix(); foot.setMatrixAt(i,dum.matrix);
+    foot.setColorAt(i, cols[k%3]);
+  }
+  foot.instanceMatrix.needsUpdate=true; if(foot.instanceColor) foot.instanceColor.needsUpdate=true;
+  gRun.add(foot);
+}
+/* neon rails on the runway ceiling — zero light cost, maximum color */
+box(26,.07,.07, new THREE.MeshBasicMaterial({color:0xff4fb0}), 0,5.88,22.3, gRun);
+box(26,.07,.07, new THREE.MeshBasicMaterial({color:0x46e6c8}), 0,5.88,30.7, gRun);
+
+/* the two lip-sync spotlights get visible beams (additive gobo cones) */
+[[0xff2f9e,-2.4],[0x35e0d0,2.4]].forEach(([c,x])=>{
+  const cone=new THREE.Mesh(new THREE.ConeGeometry(1.05,4.95,20,1,true),
+    new THREE.MeshBasicMaterial({color:c, transparent:true, opacity:.12,
+      blending:THREE.AdditiveBlending, depthWrite:false, side:THREE.DoubleSide}));
+  cone.position.set(x,3.09,27.6); gRun.add(cone);
+});
+
+/* ---------------- disco ball (procedural InstancedMesh, ~0 KB) ---------------- */
+const disco=new THREE.Group(); disco.position.set(0,4.55,26.5); gRun.add(disco);
+{
+  const rod=new THREE.Mesh(new THREE.CylinderGeometry(.02,.02,.85,6), M.dark); rod.position.y=.95; disco.add(rod);
+  const core=new THREE.Mesh(new THREE.SphereGeometry(.5,16,12),
+    new THREE.MeshStandardMaterial({color:0x39304a, roughness:.5, metalness:.6}));
+  disco.add(core);
+  const facetMat=new THREE.MeshStandardMaterial({color:0xd4dcec, metalness:1, roughness:.15, emissive:0x2b3344, emissiveIntensity:.7});
+  const N=340, facets=new THREE.InstancedMesh(new THREE.BoxGeometry(.095,.095,.012), facetMat, N);
+  const dum=new THREE.Object3D();
+  for(let i=0;i<N;i++){
+    const y=1-2*(i+.5)/N, r=Math.sqrt(Math.max(0,1-y*y)), a=i*2.399963;
+    const d=new THREE.Vector3(Math.cos(a)*r, y, Math.sin(a)*r);
+    dum.position.copy(d).multiplyScalar(.53);
+    dum.lookAt(d.x*2,d.y*2,d.z*2);
+    dum.updateMatrix(); facets.setMatrixAt(i,dum.matrix);
+  }
+  facets.instanceMatrix.needsUpdate=true; disco.add(facets);
+}
+/* speckles: light-dots cast onto the hall's surfaces by intersecting a rotating
+   direction fan with the room box — one Points draw call, static under WR_CALM */
+const SPECK={n:140, dirs:[], geo:null};
+{
+  for(let i=0;i<SPECK.n;i++) SPECK.dirs.push(new THREE.Vector3().randomDirection());
+  SPECK.geo=new THREE.BufferGeometry();
+  SPECK.geo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(SPECK.n*3),3));
+  const pts=new THREE.Points(SPECK.geo, new THREE.PointsMaterial({color:0xffd7ef, size:.16, map:poolTex,
+    transparent:true, opacity:.85, blending:THREE.AdditiveBlending, depthWrite:false}));
+  gRun.add(pts);
+}
+function speckLayout(theta){
+  const o=disco.position, a=SPECK.geo.attributes.position.array;
+  const c=Math.cos(theta), s=Math.sin(theta);
+  for(let i=0;i<SPECK.n;i++){
+    const d=SPECK.dirs[i];
+    const dx=d.x*c-d.z*s, dy=d.y, dz=d.x*s+d.z*c;
+    let t=40;
+    if(dx>1e-4) t=Math.min(t,(14.2-o.x)/dx); else if(dx<-1e-4) t=Math.min(t,(-14.2-o.x)/dx);
+    if(dy>1e-4) t=Math.min(t,(5.98-o.y)/dy); else if(dy<-1e-4) t=Math.min(t,(0.05-o.y)/dy);
+    if(dz>1e-4) t=Math.min(t,(33.2-o.z)/dz); else if(dz<-1e-4) t=Math.min(t,(20.05-o.z)/dz);
+    t=Math.max(.6,t);
+    a[i*3]=o.x+dx*t; a[i*3+1]=o.y+dy*t; a[i*3+2]=o.z+dz*t;
+  }
+  SPECK.geo.attributes.position.needsUpdate=true;
+}
+speckLayout(0);
+let discoTheta=0;
+function discoTick(dt,t){
+  if(!gRun.visible || window.WR_CALM) return;   /* calm mode: static sparkle, no sweeps */
+  disco.rotation.y += dt*.4;
+  discoTheta -= dt*.25; speckLayout(discoTheta);
+  if(sweepA){
+    sweepA.target.position.set(Math.cos(t*.5)*9, 0, 26.5+Math.sin(t*.5)*5.5);
+    sweepB.target.position.set(Math.cos(-t*.42+2)*9, 0, 26.5+Math.sin(-t*.42+2)*5.5);
+  }
+}
 
 /* ---------------- THE LIBRARIAN (procedural, original, ~1.2k tris) ---------------- */
 const lib = new THREE.Group();
@@ -1532,8 +1720,8 @@ function setHighlight(id){
     if(!ob.isMesh || !ob.material || HL.entries.length>=24) return;
     const orig=ob.material, mat=orig.clone();
     let baseE=null, baseC=null;
-    if(mat.emissive){ mat.emissive.add(new THREE.Color(0x30260f)); baseE=mat.emissive.clone(); }
-    else if(mat.color){ mat.color.multiplyScalar(1.25); baseC=mat.color.clone(); }
+    if(mat.emissive){ mat.emissive.add(new THREE.Color(0x6b4f1d)); baseE=mat.emissive.clone(); }   /* retuned: brighter room needs a bigger lift */
+    else if(mat.color){ mat.color.multiplyScalar(1.5); baseC=mat.color.clone(); }
     ob.material=mat;
     HL.entries.push({mesh:ob, orig, mat, baseE, baseC});
   });
@@ -1995,12 +2183,10 @@ function curtainTick(dt,t){
   const want=Math.max(0,Math.min(1,(player.z-15)/5));
   crossT += (want-crossT)*Math.min(1,dt*(window.WR_CALM?6:2.2));  /* calm: quicker, less lingering fade */
   const back=1-crossT;
-  baseI.forEach((v,l)=>{
-    const isRun=(l===hemiRun||l===spotMag||l===spotBlu||l===spotGld||l===pJuke||l===pWingE||l===pWingW);
-    l.intensity=v*(isRun?(0.15+0.85*crossT):(0.25+0.75*back));
-  });
+  for(const r of RIG) r.l.intensity = r.base * (r.act==='run' ? (0.15+0.85*crossT) : (0.3+0.7*back));
   scene.fog.color.copy(FOG_BACK).lerp(FOG_RUN, crossT);
-  onAirMat.color.setHex(crossT>0.55?0xff2b2b:0x330000);
+  onAirMat.color.setHex(crossT>0.55?0xff4545:0x551111);
+  onAirGlow.material.opacity = Math.max(0, crossT-0.35)*.8;
   /* act flip + Librarian register */
   const a=actOf(player.z);
   if(a!=='corridor' && a!==act){
@@ -2048,10 +2234,11 @@ function tick(){
   if(B.D) libTick(dt,t);
   glitterTick(dt);
   if(!battle) lsDiscs.forEach((d,i)=>{ d.material.color.setHSL(0.9-(i*0.35), .5, .75+Math.sin(t*2+i*2)*.12); });
+  discoTick(dt,t);
   phase2Tick(dt,t);
   aimTick(); highlightTick(t);
   updatePrompt();
-  renderer.render(scene,camera);
+  renderFrame();
 }
 renderer.setAnimationLoop(tick);
 
@@ -2124,14 +2311,22 @@ function mkSign(text, w, h, x, y, z, ry, grp, accent){
     const g=cnv.getContext('2d'), Wc=cnv.width, Hc=cnv.height;
     g.fillStyle='#0e0a16'; g.fillRect(0,0,Wc,Hc);
     g.strokeStyle=accent||PAL.brass; g.lineWidth=8; g.strokeRect(6,6,Wc-12,Hc-12);
+    g.save(); g.shadowColor=accent||PAL.gold; g.shadowBlur=26;   /* neon core: glow + double strike */
     g.fillStyle=accent||PAL.gold; g.textAlign='center';
     g.font='700 '+Math.floor(Hc*.42)+'px "Bodoni Moda", serif';
     g.fillText(text, Wc/2, Hc*.63, Wc-40);
+    g.fillText(text, Wc/2, Hc*.63, Wc-40);
+    g.restore();
     g.textAlign='left'; tex.needsUpdate=true;
   };
   paint(); REPAINTS.push(paint);
-  const m=new THREE.Mesh(new THREE.PlaneGeometry(w,h), new THREE.MeshBasicMaterial({map:tex}));
+  const m=new THREE.Mesh(new THREE.PlaneGeometry(w,h), new THREE.MeshBasicMaterial({map:tex, side:THREE.DoubleSide}));
   m.position.set(x,y,z); m.rotation.y=ry; grp.add(m);
+  /* soft neon halo behind the sign — reads as light spilling onto the wall */
+  const halo=new THREE.Mesh(new THREE.PlaneGeometry(w*1.6,h*2.6),
+    new THREE.MeshBasicMaterial({map:poolTex, color:new THREE.Color(accent||'#f4b53f'), transparent:true,
+      opacity:.4, blending:THREE.AdditiveBlending, depthWrite:false, side:THREE.DoubleSide}));
+  halo.position.set(x-Math.sin(ry)*.03, y, z-Math.cos(ry)*.03); halo.rotation.y=ry; grp.add(halo);
   return m;
 }
 mkSign('THE PHOTO WALL', 2.6,.5, -11.8,3.95,7.5, Math.PI/2, gBack);
@@ -2143,6 +2338,9 @@ mkSign('DEPARTURES', 2.2,.5, 7.5,3.6,0.12, 0, gBack, '#74e0c8');
 mkSign('THE ATLAS', 2,.5, 13.95,3.9,30.5, -Math.PI/2, gRun, '#74e0c8');
 mkSign('BIRTHDAYS', 2,.5, -13.95,4.9,29.5, Math.PI/2, gRun, PAL.rose);
 mkSign('MADAME VIBE', 2,.5, 13.95,3.4,22.5, -Math.PI/2, gRun, PAL.magenta);
+/* THE WERKROOM — glowing house lettering in both acts */
+mkSign('THE WERKROOM', 4.6,.8, 0.2,3.7,0.14, 0, gBack, PAL.magenta);
+mkSign('THE WERKROOM', 7,1.1, 0,5.35,30.9, Math.PI, gRun, PAL.magenta);
 /* two rugs of color underfoot */
 {
   const rug=new THREE.Mesh(new THREE.PlaneGeometry(7,5), new THREE.MeshStandardMaterial({color:0x4a2a55, roughness:.95}));
