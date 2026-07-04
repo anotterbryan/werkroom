@@ -71,6 +71,14 @@ a{color:var(--gold)}
   line-height:1.45;color:rgba(247,240,230,.45);pointer-events:none}
 #hint{position:fixed;top:14px;left:14px;z-index:45;font-size:10.5px;letter-spacing:1px;
   color:rgba(247,240,230,.55);pointer-events:none;text-transform:uppercase}
+#lockHint{position:fixed;left:50%;top:12px;transform:translateX(-50%);z-index:46;
+  background:rgba(20,16,28,.72);border:1px solid rgba(201,162,39,.4);border-radius:999px;
+  padding:6px 14px;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;
+  color:rgba(247,240,230,.72);pointer-events:none}
+#viewBtn{position:fixed;right:14px;bottom:162px;z-index:60;border-radius:999px;
+  background:rgba(20,16,28,.85);border:1px solid rgba(244,181,63,.5);color:var(--gold);
+  padding:9px 14px;font-size:11px;font-weight:700;letter-spacing:1px;cursor:pointer;text-transform:uppercase}
+#viewBtn:hover{background:rgba(230,0,126,.2)}
 
 /* ---------- Boot / gate cards ---------- */
 #gate{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;
@@ -239,7 +247,7 @@ a{color:var(--gold)}
   background:rgba(20,16,28,.35);pointer-events:none}
 #joyKnob{position:absolute;left:50%;top:50%;width:46px;height:46px;margin:-23px;border-radius:50%;
   background:rgba(201,162,39,.5);border:1px solid var(--brass)}
-@media (hover:hover) and (pointer:fine){ #askBtn{bottom:auto;top:56px;right:12px} #board{top:120px} }
+@media (hover:hover) and (pointer:fine){ #askBtn{bottom:auto;top:56px;right:12px} #viewBtn{bottom:auto;top:62px;right:76px} #board{top:120px} }
 </style>
 </head>
 <body>
@@ -257,7 +265,9 @@ classic two-dimensional site at index.html, which is fully accessible. Use the s
 <div id="say" class="hidden" aria-hidden="true"><span class="who">The Librarian</span><span id="sayTxt"></span></div>
 <a id="exit2d" href="index.html">Classic site ⤴</a>
 <button id="askBtn" class="hidden" title="Talk to The Librarian (T)" aria-label="Talk to The Librarian">◆</button>
+<button id="viewBtn" class="hidden" title="Switch first/third person (V)" aria-label="Switch camera view">view · 3rd</button>
 <div id="hint" class="hidden"></div>
+<div id="lockHint" class="hidden" aria-hidden="true">Esc frees your mouse</div>
 <div id="disc"></div>
 
 <!-- Boot / failure gate -->
@@ -272,7 +282,7 @@ classic two-dimensional site at index.html, which is fully accessible. Use the s
       <button class="gbtn" id="enterBtn" disabled>Enter the Werkroom</button>
       <a class="gbtn ghost" href="index.html">Open the classic site</a>
     </div>
-    <div class="gfoot" id="gateFoot">WASD / arrow keys to walk · mouse to look · click or E to interact · T to talk to The Librarian · Esc for the menu.<br/>
+    <div class="gfoot" id="gateFoot">WASD / arrow keys to walk · mouse to look · click or E to interact · V flips first/third person · T talks to The Librarian · Esc frees the mouse.<br/>
     On a phone: left thumb to walk, right thumb to look, tap an object or the prompts.</div>
   </div>
 </div>
@@ -284,12 +294,13 @@ classic two-dimensional site at index.html, which is fully accessible. Use the s
     <div class="keys">
       <b>W A S D</b> walk &nbsp;·&nbsp; <b>Shift</b> run &nbsp;·&nbsp; <b>mouse</b> look<br/>
       <b>E</b> or <b>click</b> what you're near or aiming at &nbsp;·&nbsp; <b>T</b> talk to The Librarian &nbsp;·&nbsp; <b>← →</b> flip seasons at the photo wall or judges' table<br/>
-      <b>Esc</b> this menu / close panels<br/>
+      <b>V</b> switch first/third person &nbsp;·&nbsp; <b>Esc</b> frees the mouse / closes panels / this menu<br/>
       <b>sit</b> in the Reading Room armchair to get read &nbsp;·&nbsp; <b>step</b> on a runway spotlight to call a lip sync
     </div>
     <div id="pauseProg"></div>
     <div>
       <button class="gbtn" id="resumeBtn">Resume</button>
+      <button class="gbtn ghost" id="pauseView">Switch view</button>
       <a class="gbtn ghost" href="index.html">Exit to classic site</a>
     </div>
     <div class="gfoot" id="pauseDisc"></div>
@@ -519,6 +530,33 @@ function isCleanTap(downX, downY, downT, upX, upY, upT, opts){
 function inReach(px, pz, o){
   var dx = o.x - px, dz = o.z - pz;
   return Math.sqrt(dx*dx + dz*dz) <= o.radius;
+}
+
+/* third-person chase camera: clamp the camera boom against wall AABBs (pure).
+   Returns the allowed distance along (dx,dz) from (px,pz), never exceeding dist —
+   the camera pulls in instead of clipping through a wall. */
+function chaseClamp(px, pz, dx, dz, dist, boxes, pad){
+  pad = (pad==null) ? 0.3 : pad;
+  var len = Math.sqrt(dx*dx + dz*dz);
+  if(!len || dist<=0) return dist;
+  dx/=len; dz/=len;
+  var best = dist;
+  for(var i=0;i<(boxes||[]).length;i++){
+    var b=boxes[i], x1=b.x1-pad, x2=b.x2+pad, z1=b.z1-pad, z2=b.z2+pad;
+    var t0=-Infinity, t1=Infinity, ta, tb;
+    if(Math.abs(dx)<1e-9){ if(px<x1 || px>x2) continue; }
+    else { ta=(x1-px)/dx; tb=(x2-px)/dx; t0=Math.max(t0,Math.min(ta,tb)); t1=Math.min(t1,Math.max(ta,tb)); }
+    if(Math.abs(dz)<1e-9){ if(pz<z1 || pz>z2) continue; }
+    else { ta=(z1-pz)/dz; tb=(z2-pz)/dz; t0=Math.max(t0,Math.min(ta,tb)); t1=Math.min(t1,Math.max(ta,tb)); }
+    if(t1>=t0 && t1>=0 && t0<best) best=Math.max(0,t0);
+  }
+  return Math.min(dist, best);
+}
+
+/* room culling with a chase camera (pure): the AVATAR's room decides, but any
+   room the CAMERA is still crossing stays visible so the boom never shows a void. */
+function cullRooms(avatarZ, camZ){
+  return { back: avatarZ<21 || camZ<21, run: avatarZ>14 || camZ>14 };
 }
 
 /* grid layout for the photo-wall canvas: n cards into W×H px, portrait-ish cells */
@@ -890,6 +928,7 @@ return {
   READS:READS, PRAISES:PRAISES, PROP_LINES:PROP_LINES, TOO_FAR:TOO_FAR,
   LS_ANNOUNCE:LS_ANNOUNCE, CARD_LINES:CARD_LINES, MET_TITLES:MET_TITLES,
   pick:pick, isCleanTap:isCleanTap, inReach:inReach,
+  chaseClamp:chaseClamp, cullRooms:cullRooms,
   gridLayout:gridLayout, seasonTracks:seasonTracks, isPlayable:isPlayable,
   placementMatrix:placementMatrix, bridgeWait:bridgeWait, pipeline:pipeline,
   routeLabel:routeLabel, ROUTE_NAMES:ROUTE_NAMES,
@@ -1038,7 +1077,7 @@ const M = {
   bulb:      new THREE.MeshBasicMaterial({color:0xffe2b0}),
   rosey:     new THREE.MeshStandardMaterial({color:0xe087a6, roughness:.6}),
   skin:      new THREE.MeshStandardMaterial({color:0x8a6fae, roughness:.55}),
-  inkGown:   new THREE.MeshStandardMaterial({color:0x241834, roughness:.75, emissive:0x120a20, emissiveIntensity:.7}),
+  inkGown:   new THREE.MeshStandardMaterial({color:0x241834, roughness:.75, emissive:0x120a20, emissiveIntensity:.7, side:THREE.DoubleSide}),
   brassWire: new THREE.MeshStandardMaterial({color:0xc9a227, roughness:.3, metalness:.8, emissive:0x6b5416, emissiveIntensity:1}),
   spotDisc:  new THREE.MeshBasicMaterial({color:0xffe9f4}),
 };
@@ -1050,6 +1089,9 @@ const gBack = new THREE.Group(), gRun = new THREE.Group(), gAlways = new THREE.G
 scene.add(gBack, gRun, gAlways);
 const colliders = [];   /* {x1,z1,x2,z2} AABBs */
 const W = (x1,z1,x2,z2)=>colliders.push({x1,z1,x2,z2});
+/* walls only (not furniture): the third-person camera boom clamps against these */
+const camWalls = [];
+const WB = (x1,z1,x2,z2)=>{ W(x1,z1,x2,z2); camWalls.push({x1,z1,x2,z2}); };
 
 function box(w,h,d, mat, x,y,z, grp){
   const m = new THREE.Mesh(new THREE.BoxGeometry(w,h,d), mat);
@@ -1082,20 +1124,20 @@ function registerPick(obj, id){
   cc.rotation.x = Math.PI/2; cc.position.set(0,3.2,17.5); gAlways.add(cc);
 }
 /* backstage walls (h 4.2) */
-box(.5,4.2,15.8, M.wall, -12.25,2.1,7.5, gBack);  W(-12.5,-0.4,-12,15.4);
-box(.5,4.2,15.8, M.wall,  12.25,2.1,7.5, gBack);  W(12,-0.4,12.5,15.4);
-box(24.8,4.2,.5, M.wall, 0,2.1,-0.25, gBack);     W(-12.5,-0.5,12.5,0);
-box(10,4.2,.5, M.wall, -7,2.1,15.25, gBack);      W(-12.5,15,-2,15.5);
-box(10,4.2,.5, M.wall,  7,2.1,15.25, gBack);      W(2,15,12.5,15.5);
+box(.5,4.2,15.8, M.wall, -12.25,2.1,7.5, gBack);  WB(-12.5,-0.4,-12,15.4);
+box(.5,4.2,15.8, M.wall,  12.25,2.1,7.5, gBack);  WB(12,-0.4,12.5,15.4);
+box(24.8,4.2,.5, M.wall, 0,2.1,-0.25, gBack);     WB(-12.5,-0.5,12.5,0);
+box(10,4.2,.5, M.wall, -7,2.1,15.25, gBack);      WB(-12.5,15,-2,15.5);
+box(10,4.2,.5, M.wall,  7,2.1,15.25, gBack);      WB(2,15,12.5,15.5);
 /* corridor walls (h 3.2) */
-box(.4,3.2,5, M.plum, -2.2,1.6,17.5, gAlways);    W(-2.4,15,-2,20);
-box(.4,3.2,5, M.plum,  2.2,1.6,17.5, gAlways);    W(2,15,2.4,20);
+box(.4,3.2,5, M.plum, -2.2,1.6,17.5, gAlways);    WB(-2.4,15,-2,20);
+box(.4,3.2,5, M.plum,  2.2,1.6,17.5, gAlways);    WB(2,15,2.4,20);
 /* runway hall walls (h 6) */
-box(12,6,.5, M.wallRun, -8,3,19.75, gRun);        W(-14.5,19.5,-2,20);
-box(12,6,.5, M.wallRun,  8,3,19.75, gRun);        W(2,19.5,14.5,20);
-box(28.8,6,.5, M.wallRun, 0,3,33.25, gRun);       W(-14.5,33,14.5,33.5);
-box(.5,6,13.8, M.wallRun, -14.25,3,26.5, gRun);   W(-14.5,19.5,-14,33.5);
-box(.5,6,13.8, M.wallRun,  14.25,3,26.5, gRun);   W(14,19.5,14.5,33.5);
+box(12,6,.5, M.wallRun, -8,3,19.75, gRun);        WB(-14.5,19.5,-2,20);
+box(12,6,.5, M.wallRun,  8,3,19.75, gRun);        WB(2,19.5,14.5,20);
+box(28.8,6,.5, M.wallRun, 0,3,33.25, gRun);       WB(-14.5,33,14.5,33.5);
+box(.5,6,13.8, M.wallRun, -14.25,3,26.5, gRun);   WB(-14.5,19.5,-14,33.5);
+box(.5,6,13.8, M.wallRun,  14.25,3,26.5, gRun);   WB(14,19.5,14.5,33.5);
 /* brass trim lines */
 box(24.6,.06,.06, M.trim, 0,3.6,0.02, gBack);
 box(28.6,.06,.06, M.trim, 0,5.2,32.98, gRun);
@@ -1366,6 +1408,52 @@ function discoTick(dt,t){
   }
 }
 
+/* ---------------- painted faces (CanvasTexture) ----------------
+   Original stylized features — eyes with lashes, brows, lips, blush — no likeness.
+   The front of a default THREE sphere is u=0.25, so features center at x=128/512. */
+function mkFaceTex(o){
+  const c=document.createElement('canvas'); c.width=512; c.height=256;
+  const g=c.getContext('2d'), TAU=Math.PI*2, cx=128;
+  g.fillStyle=o.skin; g.fillRect(0,0,512,256);
+  for(const s of [-1,1]){                                     /* blush */
+    const r=g.createRadialGradient(cx+s*54,148,2, cx+s*54,148,24);
+    r.addColorStop(0,o.blush); r.addColorStop(1,'rgba(0,0,0,0)');
+    g.fillStyle=r; g.beginPath(); g.arc(cx+s*54,148,24,0,TAU); g.fill();
+  }
+  for(const s of [-1,1]){                                     /* eyes */
+    const ex=cx+s*34, ey=116;
+    g.fillStyle='#fdf8ef'; g.beginPath(); g.ellipse(ex,ey,15,10,0,0,TAU); g.fill();
+    g.fillStyle=o.iris; g.beginPath(); g.arc(ex,ey+1,6.6,0,TAU); g.fill();
+    g.fillStyle='#14101c'; g.beginPath(); g.arc(ex,ey+1,3.2,0,TAU); g.fill();
+    g.fillStyle='rgba(255,255,255,.95)'; g.beginPath(); g.arc(ex+2.4,ey-1.6,1.7,0,TAU); g.fill();
+    g.strokeStyle=o.lash; g.lineCap='round'; g.lineWidth=3.6;  /* lined upper lid */
+    g.beginPath(); g.ellipse(ex,ey-1,15.5,10,0,Math.PI*1.05,Math.PI*1.95); g.stroke();
+    g.lineWidth=2.4;                                           /* winged lashes, fanned outward */
+    for(let i=0;i<3;i++){
+      g.beginPath();
+      g.moveTo(ex+s*(10+i*2.4), ey-7+i*2);
+      g.lineTo(ex+s*(17+i*3.2), ey-12+i*1.6);
+      g.stroke();
+    }
+  }
+  g.strokeStyle=o.brow; g.lineWidth=4.6; g.lineCap='round';    /* brows */
+  for(const s of [-1,1]){
+    g.beginPath(); g.moveTo(cx+s*18,96); g.quadraticCurveTo(cx+s*36,85, cx+s*51,97); g.stroke();
+  }
+  g.fillStyle='rgba(20,16,28,.14)';                            /* the tiniest nose shadow */
+  g.beginPath(); g.ellipse(cx,140,4.4,2.8,0,0,TAU); g.fill();
+  g.fillStyle=o.lip;                                           /* lips, cupid's bow */
+  g.beginPath();
+  g.moveTo(cx-14,166);
+  g.quadraticCurveTo(cx-7,158, cx,165); g.quadraticCurveTo(cx+7,158, cx+14,166);
+  g.quadraticCurveTo(cx+7,179, cx,180); g.quadraticCurveTo(cx-7,179, cx-14,166);
+  g.closePath(); g.fill();
+  g.fillStyle='rgba(255,255,255,.3)'; g.beginPath(); g.ellipse(cx-4,168,3,1.6,0,0,TAU); g.fill();
+  if(o.mark){ g.fillStyle='#14101c'; g.beginPath(); g.arc(cx+42,158,2.6,0,TAU); g.fill(); }
+  const t=new THREE.CanvasTexture(c); t.colorSpace=THREE.SRGBColorSpace;
+  return t;
+}
+
 /* ---------------- THE LIBRARIAN (procedural, original, ~1.2k tris) ---------------- */
 const lib = new THREE.Group();
 let libGlasses, libGlassesNose, libGlassesUp, libArms=[];
@@ -1397,16 +1485,12 @@ let libGlasses, libGlassesNose, libGlassesUp, libArms=[];
     arm.position.set(.33*s,1.48,.02); arm.rotation.z = s*0.28; arm.rotation.x = -0.12;
     lib.add(arm); libArms.push(arm);
   });
-  /* head: abstract mask, plum-violet — deliberately no likeness */
-  const head = new THREE.Mesh(new THREE.SphereGeometry(.155,14,11), M.skin);
+  /* head: painted stylized face (original, no likeness) — she reads at 2-4m now */
+  const head = new THREE.Mesh(new THREE.SphereGeometry(.155,16,12),
+    new THREE.MeshStandardMaterial({roughness:.5,
+      map:mkFaceTex({skin:'#9a7fbe', iris:'#b8862e', lip:'#d4708f', brow:'#221533',
+        blush:'rgba(212,112,143,.5)', lash:'#160d22', mark:true})}));
   head.position.y = 1.72; lib.add(head);
-  [-1,1].forEach(s=>{
-    const lash = new THREE.Mesh(new THREE.TorusGeometry(.042,.006,5,10,Math.PI*.85), M.dark);
-    lash.position.set(.06*s,1.75,.135); lash.rotation.x = -.35; lash.rotation.z = Math.PI*.08*s + Math.PI;
-    lib.add(lash);
-  });
-  const mark = new THREE.Mesh(new THREE.SphereGeometry(.011,6,5), M.dark);
-  mark.position.set(.075,1.685,.132); lib.add(mark);
   /* beehive-adjacent updo + two pencils (she's staff, not cast) */
   const h1 = new THREE.Mesh(new THREE.SphereGeometry(.15,12,9), M.dark); h1.position.y=1.9;
   const h2 = new THREE.Mesh(new THREE.SphereGeometry(.115,10,8), M.dark); h2.position.y=2.07;
@@ -1425,7 +1509,7 @@ let libGlasses, libGlassesNose, libGlassesUp, libArms=[];
       const wing = new THREE.Mesh(new THREE.ConeGeometry(.018,.05,4), M.brassWire);
       wing.position.set(.125*s,.045,0); wing.rotation.z = -s*1.2; g.add(wing);
       const lens = new THREE.Mesh(new THREE.CircleGeometry(.05,12),
-        new THREE.MeshBasicMaterial({color:0x14101c, transparent:true, opacity:.55}));
+        new THREE.MeshBasicMaterial({color:0x14101c, transparent:true, opacity:.18}));  /* sheer: her painted eyes read through */
       lens.position.set(.068*s,0,.002); g.add(lens);
     });
     const bridgeBar = new THREE.Mesh(new THREE.CylinderGeometry(.006,.006,.04,5), M.brassWire);
@@ -1433,11 +1517,14 @@ let libGlasses, libGlassesNose, libGlassesUp, libArms=[];
     return g;
   }
   libGlasses = mkGlasses(); lib.add(libGlasses);
-  libGlassesNose = {y:1.72, z:.15, rx:0};
+  libGlassesNose = {y:1.735, z:.163, rx:0};   /* riding the painted eyes, not embedded in them */
   libGlassesUp   = {y:1.93, z:.1,  rx:-.9};
   libGlasses.position.set(0,libGlassesNose.y,libGlassesNose.z);
 }
-lib.position.set(0.7,0,2.5);   /* dead ahead of spawn's sightline — she greets you first (live-inspection fix) */
+/* her home: behind the Library Corner desk, dead in the spawn sightline — she greets from there */
+const LIB_HOME = {x:0.55, z:3.0};
+lib.position.set(LIB_HOME.x,0,LIB_HOME.z);
+lib.traverse(o=>{ o.frustumCulled=false; });   /* she must NEVER vanish at the frustum's edge */
 scene.add(lib); registerPick(lib,'librarian');
 /* glitter pool for teleports */
 const glitter = [];
@@ -1455,20 +1542,135 @@ function glitterBurst(p){
 }
 let glitterIdx = 0;
 
+/* ---------------- THE PLAYER AVATAR — a baby queen in a rehearsal look ----------------
+   Original and clearly distinct from The Librarian: short magenta A-line, mint gloves,
+   gold belt + gold heels with a shine, blonde high pony. Front = +z (like her face). */
+const avatar = new THREE.Group();
+{
+  const A = {
+    dress: new THREE.MeshStandardMaterial({color:0xe6007e, roughness:.6, emissive:0x40001f, emissiveIntensity:.6}),
+    tights:new THREE.MeshStandardMaterial({color:0x241834, roughness:.7}),
+    glove: new THREE.MeshStandardMaterial({color:0x74e0c8, roughness:.55}),
+    heel:  new THREE.MeshStandardMaterial({color:0xf4b53f, roughness:.15, metalness:.9, emissive:0x584207, emissiveIntensity:.8}),
+    hair:  new THREE.MeshStandardMaterial({color:0xd9a441, roughness:.65}),
+  };
+  [-1,1].forEach(s=>{                                   /* legs + gold heels */
+    const leg=new THREE.Mesh(new THREE.CylinderGeometry(.045,.05,.56,8), A.tights);
+    leg.position.set(.09*s,.34,0); avatar.add(leg);
+    const foot=new THREE.Mesh(new THREE.BoxGeometry(.09,.05,.2), A.heel);
+    foot.position.set(.09*s,.045,.045); avatar.add(foot);
+    const spike=new THREE.Mesh(new THREE.CylinderGeometry(.012,.02,.09,6), A.heel);
+    spike.position.set(.09*s,.045,-.05); avatar.add(spike);
+  });
+  const pts=[new THREE.Vector2(.01,0), new THREE.Vector2(.34,.01), new THREE.Vector2(.25,.22),
+             new THREE.Vector2(.17,.5), new THREE.Vector2(.2,.7), new THREE.Vector2(.16,.84)];
+  const dress=new THREE.Mesh(new THREE.LatheGeometry(pts,16),A.dress);
+  dress.position.y=.56; avatar.add(dress);
+  const belt=new THREE.Mesh(new THREE.TorusGeometry(.175,.014,6,18), M.brassWire);
+  belt.rotation.x=Math.PI/2; belt.position.y=1.06; avatar.add(belt);
+  const sh=new THREE.Mesh(new THREE.SphereGeometry(.21,12,9), A.dress);
+  sh.scale.set(1.15,.45,.7); sh.position.y=1.42; avatar.add(sh);
+  [-1,1].forEach(s=>{                                   /* mint gloves */
+    const arm=new THREE.Group();
+    const a=new THREE.Mesh(new THREE.CylinderGeometry(.04,.045,.5,8), A.glove);
+    a.position.y=-.25; arm.add(a);
+    const hand=new THREE.Mesh(new THREE.SphereGeometry(.055,8,6), A.glove);
+    hand.position.y=-.52; arm.add(hand);
+    arm.position.set(.26*s,1.43,.02); arm.rotation.z=s*.34; arm.rotation.x=-.1;
+    avatar.add(arm);
+  });
+  const head=new THREE.Mesh(new THREE.SphereGeometry(.14,16,12),
+    new THREE.MeshStandardMaterial({roughness:.5,
+      map:mkFaceTex({skin:'#d8a8c4', iris:'#1f9d86', lip:'#e6007e', brow:'#4a2c38',
+        blush:'rgba(255,92,171,.5)', lash:'#221426'})}));
+  head.position.y=1.66; avatar.add(head);
+  const cap=new THREE.Mesh(new THREE.SphereGeometry(.145,12,9), A.hair);
+  cap.scale.set(1,.82,1); cap.position.set(0,1.72,-.03); avatar.add(cap);
+  const bun=new THREE.Mesh(new THREE.SphereGeometry(.07,10,8), A.hair);
+  bun.position.set(0,1.87,-.05); avatar.add(bun);
+  const tail=new THREE.Mesh(new THREE.ConeGeometry(.055,.5,8), A.hair);
+  tail.position.set(0,1.6,-.17); tail.rotation.x=.35; avatar.add(tail);
+}
+avatar.position.set(3.5,0,1.4);
+avatar.visible=false;                                    /* shown only in third person */
+avatar.traverse(o=>{ o.frustumCulled=false; });
+scene.add(avatar);
+
+/* ---------------- camera rigs: first person + third-person chase ---------------- */
+const cam={x:0, y:2.4, z:-2, has:false};
+let avatarYaw=Math.atan2(-(-11.9-3.5), -(7.5-1.4));      /* matches the spawn yaw below */
+let avatarMove=0;
+function roomCeil(z){ return z<15?4.0 : (z<20?3.0 : 5.8); }
+function avatarTick(dt, gy, t){
+  const seated = sitEye!=null;
+  let bob=0;
+  if(!window.WR_CALM && !seated) bob = avatarMove>0.02 ? Math.abs(Math.sin(t*7))*0.04 : Math.sin(t*1.7)*0.015;
+  avatar.position.set(player.x, gy+(seated?-0.42:0)+bob, player.z);
+  let want=avatarYaw;
+  if(seated) want=Math.atan2(-9.4-player.x, 2.85-player.z);      /* face The Librarian's wingback */
+  else if(player.seated) want=player.yaw;                        /* judges' table: face the scoreboard */
+  else want=player.moveYaw;
+  let d=want-avatarYaw; d=Math.atan2(Math.sin(d),Math.cos(d));
+  avatarYaw+=d*Math.min(1,dt*10);
+  avatar.rotation.y=avatarYaw;
+  avatarMove=Math.max(0, avatarMove-dt*3);
+}
+function camTick(dt, gy, t){
+  const third = entered && VIEW.mode==='third';
+  avatar.visible = third;
+  if(!third){
+    camera.position.set(player.x, player.eyeY, player.z);
+    camera.rotation.y=player.yaw; camera.rotation.x=player.pitch; camera.rotation.z=0;
+    cam.has=false;
+    return;
+  }
+  avatarTick(dt, gy, t);
+  let dx, dy, dz, lx, ly, lz;
+  if(readOpen){
+    /* Reading Room sitting: swing to an over-shoulder framing of The Librarian */
+    dx=-11.55; dy=1.9; dz=0.8;  lx=-9.4; ly=1.45; lz=2.85;
+  } else {
+    const pivY=gy+1.5;
+    const elev=Math.max(-0.9, Math.min(1.25, 0.3-player.pitch));  /* mouse up = camera dips, looks up */
+    const bx=Math.sin(player.yaw), bz=Math.cos(player.yaw);       /* straight behind the avatar */
+    let d=3.5;
+    let horiz=Math.cos(elev)*d;
+    const allowed=WR.chaseClamp(player.x, player.z, bx, bz, horiz, camWalls, .34);
+    if(allowed<horiz){ d*=allowed/Math.max(1e-4,horiz); horiz=allowed; }   /* pull in at walls, never clip */
+    d=Math.max(0.9,d);
+    dx=player.x+bx*Math.cos(elev)*d; dz=player.z+bz*Math.cos(elev)*d;
+    dy=pivY+Math.sin(elev)*d;
+    dy=Math.max(groundY(dx,dz)+0.35, Math.min(roomCeil(dz)-0.2, dy));
+    lx=player.x; ly=pivY; lz=player.z;
+  }
+  const k = window.WR_CALM ? 1 : (1-Math.exp(-dt*9));   /* calm mode: no camera lag bounce */
+  if(!cam.has){ cam.x=dx; cam.y=dy; cam.z=dz; cam.has=true; }
+  cam.x+=(dx-cam.x)*k; cam.y+=(dy-cam.y)*k; cam.z+=(dz-cam.z)*k;
+  camera.position.set(cam.x, cam.y, cam.z);
+  camera.lookAt(lx, ly, lz);
+}
+
 /* ---------------- player state / controls ---------------- */
-const player = { x:3.5, z:1.4, yaw:0, pitch:0, eyeY:1.65, seated:false };
-{ const dx = -11.9-player.x, dz = 7.5-player.z; player.yaw = Math.atan2(-dx,-dz); } /* face the photo wall */
+const player = { x:3.5, z:1.4, yaw:0, pitch:0, eyeY:1.65, seated:false, moveYaw:0 };
+{ const dx = -11.9-player.x, dz = 7.5-player.z; player.yaw = Math.atan2(-dx,-dz); player.moveYaw = player.yaw; } /* face the photo wall */
 const keys = {};
-let entered=false, paused=false, suppressPause=false;
+let entered=false, paused=false;
 
 function overlayOpen(){
   return !$('#dress').classList.contains('veil') || !$('#booth').classList.contains('hidden')
       || !$('#lib').classList.contains('hidden') || !$('#read').classList.contains('hidden') || paused;
 }
-function releaseLook(){
-  if(document.pointerLockElement){ suppressPause=true; document.exitPointerLock(); setTimeout(()=>suppressPause=false,400); }
+/* pointer-lock etiquette (Bryan's fix #1): any overlay frees the mouse instantly,
+   one Esc always releases (and nothing re-grabs it), and we NEVER call
+   requestPointerLock inside the browser's post-Esc throttle window — that race
+   was the "hit Esc a couple times" bug. Re-acquire only on the next canvas click. */
+let lastUnlock=-1e9;
+function releaseLook(){ if(document.pointerLockElement) document.exitPointerLock(); }
+function tryLock(){
+  if(IS_TOUCH || !entered || overlayOpen() || document.pointerLockElement) return;
+  if(performance.now()-lastUnlock < 1250) return;   /* browsers throttle re-lock right after an unlock */
+  try{ const p=canvas.requestPointerLock(); if(p && p.catch) p.catch(()=>{}); }catch(e){}
 }
-function tryLock(){ if(!IS_TOUCH && entered && !overlayOpen() && !document.pointerLockElement) canvas.requestPointerLock(); }
 
 /* click resolves interaction first, pointer lock second (touch uses the tap
    classifier further down — its click events are ignored here) */
@@ -1480,7 +1682,8 @@ canvas.addEventListener('click', e=>{
   if(r!=='far') tryLock();   /* nothing hit → classic lock; interacted → lock too when no overlay opened (tryLock self-gates) */
 });
 document.addEventListener('pointerlockchange', ()=>{
-  if(!document.pointerLockElement && entered && !overlayOpen() && !suppressPause) openPause();
+  if(document.pointerLockElement){ show($('#lockHint')); }
+  else { hide($('#lockHint')); lastUnlock=performance.now(); }   /* Esc frees the mouse — no auto-pause, no re-grab */
 });
 document.addEventListener('mousemove', e=>{
   if(!document.pointerLockElement) return;
@@ -1504,6 +1707,7 @@ addEventListener('keydown', e=>{
   if(overlayOpen()) return;   /* chat input has its own Enter handler */
   if(e.code==='KeyE') doInteract();
   if(e.code==='KeyT') openChat();
+  if(e.code==='KeyV') toggleView();
   if(e.code==='ArrowLeft'||e.code==='ArrowRight'){
     const nearWall = Math.hypot(player.x+11.9, player.z-7.5) < 6.5;
     if(player.seated || nearWall){ shiftSeason(e.code==='ArrowRight'?1:-1); e.preventDefault(); }
@@ -1517,7 +1721,7 @@ const look = {id:null, lx:0, ly:0};
 if(IS_TOUCH){
   addEventListener('pointerdown', e=>{
     if(!entered || overlayOpen()) return;
-    if(e.target.closest('#prompt,#askBtn,#exit2d,#board,#toast')) return;
+    if(e.target.closest('#prompt,#askBtn,#viewBtn,#exit2d,#board,#toast')) return;
     if(e.clientX < innerWidth*.45 && joy.id===null){
       joy.id=e.pointerId; joy.active=true; joy.bx=e.clientX; joy.by=e.clientY; joy.dx=joy.dy=0;
       const j=$('#joy'); show(j); j.style.left=(e.clientX-55)+'px'; j.style.top=(e.clientY-55)+'px';
@@ -1543,7 +1747,7 @@ if(IS_TOUCH){
 
 /* pause */
 function openPause(){ paused=true; renderPauseProg(); show($('#pause')); releaseLook(); }
-function closePause(){ paused=false; hide($('#pause')); tryLock(); }
+function closePause(){ paused=false; hide($('#pause')); }   /* mouse stays free; click the canvas to look again */
 $('#resumeBtn').addEventListener('click', closePause);
 
 /* ---------------- movement + collision ---------------- */
@@ -1692,7 +1896,7 @@ if(IS_TOUCH){
   addEventListener('pointerdown', e=>{
     tapCand=null;
     if(!entered || overlayOpen()) return;
-    if(e.target && e.target.closest && e.target.closest('#prompt,#askBtn,#exit2d,#board,#toast,#say')) return;
+    if(e.target && e.target.closest && e.target.closest('#prompt,#askBtn,#viewBtn,#exit2d,#board,#toast,#say')) return;
     if(e.clientX < innerWidth*.45) return;               /* joystick half of the screen — walking, not tapping */
     tapCand={id:e.pointerId, x:e.clientX, y:e.clientY, t:performance.now()};
   });
@@ -1937,14 +2141,14 @@ function openDress(route, where){
   releaseLook();
 }
 function closeDress(){
-  $('#dress').classList.add('veil'); $('#dress').setAttribute('aria-hidden','true'); tryLock();
+  $('#dress').classList.add('veil'); $('#dress').setAttribute('aria-hidden','true');
 }
 $('#dressX').addEventListener('click', closeDress);
 
 /* ---- listening booth ---- */
 let boothIdx=0;
 function openBooth(){ boothIdx=SEASON.idx; renderBooth(); show($('#booth')); releaseLook(); }
-function closeBooth(){ hide($('#booth')); tryLock(); }
+function closeBooth(){ hide($('#booth')); }
 $('#boothX').addEventListener('click', closeBooth);
 $('#boothPrev').addEventListener('click', ()=>{ boothIdx=(boothIdx-1+B.D.seasons.length)%B.D.seasons.length; renderBooth(); });
 $('#boothNext').addEventListener('click', ()=>{ boothIdx=(boothIdx+1)%B.D.seasons.length; renderBooth(); });
@@ -2025,7 +2229,7 @@ function openChat(){
   }
   if(!IS_TOUCH) $('#libQ').focus();
 }
-function closeChat(){ hide($('#lib')); tryLock(); }
+function closeChat(){ hide($('#lib')); }
 $('#libX').addEventListener('click', closeChat);
 $('#askBtn').addEventListener('click', openChat);
 $('#libGo').addEventListener('click', sendChat);
@@ -2083,17 +2287,18 @@ function sendChat(){
 
 /* ---------------- Librarian behavior ---------------- */
 let act='backstage';
-let libTarget=new THREE.Vector3(0.7,0,2.5), libVel=new THREE.Vector3();
+let libTarget=new THREE.Vector3(LIB_HOME.x,0,LIB_HOME.z), libVel=new THREE.Vector3();
 let ambientTimer=18;
-let libHold=true, enterAt=0;   /* she waits by the spawn to greet, then falls in behind */
+let libHold=true, enterAt=0;   /* she greets from her Library Corner desk, then falls in behind */
 function actOf(z){ return z<15?'backstage':(z>20?'runway':'corridor'); }
 
 function libTick(dt, t){
-  if(libHold && enterAt && (performance.now()-enterAt>9000 || Math.hypot(player.x-3.5, player.z-1.4)>2.2)) libHold=false;
+  /* the glide-follow begins only once you actually leave the Library Corner */
+  if(libHold && Math.hypot(player.x-LIB_DESK.x, player.z-LIB_DESK.z)>5.5) libHold=false;
   if(readOpen){
     libTarget.set(-9.4,0,2.2);                 /* her wingback in the Reading Room */
   } else if(libHold){
-    libTarget.set(0.7,0,2.5);                  /* greeting mark, in the spawn sightline */
+    libTarget.set(LIB_HOME.x,0,LIB_HOME.z);    /* at her desk, in the spawn sightline */
   } else {
     /* follow point: 2m behind-left of player */
     const fx=-Math.sin(player.yaw), fz=-Math.cos(player.yaw);
@@ -2110,13 +2315,22 @@ function libTick(dt, t){
   } else if(dist>0.9){
     const sp=Math.min(dist*1.8, 5.2);
     lib.position.x += dx/dist*sp*dt; lib.position.z += dz/dist*sp*dt;
-    lib.rotation.y = Math.atan2(dx,dz)+Math.PI;      /* face travel direction */
+    lib.rotation.y = Math.atan2(dx,dz);              /* face travel direction (her face is local +z) */
   } else {
-    /* face the player when settled */
+    /* face the player when settled — this was flipped 180°, which is why she "had no face" */
     const px=player.x-lib.position.x, pz=player.z-lib.position.z;
-    const want=Math.atan2(px,pz)+Math.PI;
+    const want=Math.atan2(px,pz);
     let d=want-lib.rotation.y; d=Math.atan2(Math.sin(d),Math.cos(d));
     lib.rotation.y += d*Math.min(1,dt*4);
+  }
+  /* she never occupies your space: walk through her and she steps aside, gently */
+  {
+    const ax=lib.position.x-player.x, az=lib.position.z-player.z, ad=Math.hypot(ax,az);
+    if(ad<0.9){
+      const push=(0.9-ad)*Math.min(1,dt*7);
+      lib.position.x += (ad>1e-3?ax/ad:1)*push;
+      lib.position.z += (ad>1e-3?az/ad:0)*push;
+    }
   }
   /* idle: glide bob + gown sway */
   lib.position.y = Math.sin(t*1.6)*0.03;
@@ -2195,9 +2409,11 @@ function curtainTick(dt,t){
     if(act==='runway'&&from!=='runway') libSay(WR.pick(WR.CROSS_TO_RUNWAY, crossRunState));
     if(act==='backstage'&&from!=='backstage') libSay(WR.pick(WR.CROSS_TO_BACKSTAGE, crossBackState));
   }
-  /* room culling: both alive only in transit */
-  gBack.visible = player.z < 21;
-  gRun.visible  = player.z > 14;
+  /* room culling: the avatar's room decides; any room the chase camera is still
+     crossing stays visible so the boom never frames a void */
+  const cull = WR.cullRooms(player.z, camera.position.z);
+  gBack.visible = cull.back;
+  gRun.visible  = cull.run;
 }
 
 /* ---------------- main loop ---------------- */
@@ -2220,6 +2436,7 @@ function tick(){
       const rx=Math.cos(player.yaw),  rz=-Math.sin(player.yaw);
       let nx=player.x+(fx*mz+rx*mx)*run*dt;
       let nz=player.z+(fz*mz+rz*mx)*run*dt;
+      player.moveYaw=Math.atan2(fx*mz+rx*mx, fz*mz+rz*mx); avatarMove=1;   /* the avatar faces where she walks */
       [nx,nz]=collide(nx,nz);
       player.x=nx; player.z=nz;
     }
@@ -2227,8 +2444,7 @@ function tick(){
   /* eye height eases over the runway platform (and down into the armchair) */
   const gy=groundY(player.x,player.z);
   player.eyeY += ((gy+(sitEye!=null?sitEye:1.65))-player.eyeY)*Math.min(1,dt*6);
-  camera.position.set(player.x, player.eyeY, player.z);
-  camera.rotation.y=player.yaw; camera.rotation.x=player.pitch;
+  camTick(dt, gy, t);   /* first person, or the third-person chase rig */
 
   curtainTick(dt,t);
   if(B.D) libTick(dt,t);
@@ -2252,12 +2468,31 @@ function loadSave(){
   try{
     const s=JSON.parse(localStorage.getItem('wr3d')||'null');
     if(s && s.v===1 && Array.isArray(s.met))
-      return Object.assign({cards:0, ls:{right:0,seen:0}}, s, {ls:Object.assign({right:0,seen:0}, s.ls||{})});
+      return Object.assign({cards:0, ls:{right:0,seen:0}, view:'third'}, s,
+        {ls:Object.assign({right:0,seen:0}, s.ls||{}), view:(s.view==='first'?'first':'third')});
   }catch(e){}
-  return {v:1, met:[], cards:0, ls:{right:0,seen:0}};
+  return {v:1, met:[], cards:0, ls:{right:0,seen:0}, view:'third'};
 }
 const SAVE = loadSave();
 const metSet = new Set(SAVE.met);
+
+/* ---- camera view: third person by default, first person one V away (persisted) ---- */
+const VIEW={mode: SAVE.view==='first' ? 'first' : 'third'};
+function syncViewUI(){
+  const third=VIEW.mode==='third';
+  $('#viewBtn').textContent = third ? 'view · 3rd' : 'view · 1st';
+  $('#pauseView').textContent = third ? 'Switch to first person (V)' : 'Switch to third person (V)';
+}
+function toggleView(){
+  VIEW.mode = VIEW.mode==='third' ? 'first' : 'third';
+  SAVE.view=VIEW.mode; persist(); syncViewUI(); cam.has=false;
+  if(entered) toast(VIEW.mode==='third'
+    ? 'Third person — that’s you walking the room. V switches back.'
+    : 'First person — through your own lashes. V switches back.');
+}
+$('#viewBtn').addEventListener('click', toggleView);
+$('#pauseView').addEventListener('click', toggleView);
+syncViewUI();
 let _saveT=null;
 function persist(){
   clearTimeout(_saveT);
@@ -2347,6 +2582,64 @@ mkSign('THE WERKROOM', 7,1.1, 0,5.35,30.9, Math.PI, gRun, PAL.magenta);
   rug.rotation.x=-Math.PI/2; rug.position.set(-2,0.012,7.2); gBack.add(rug);
   const runner=new THREE.Mesh(new THREE.PlaneGeometry(2.2,6), new THREE.MeshStandardMaterial({color:0x552438, roughness:.95}));
   runner.rotation.x=-Math.PI/2; runner.position.set(3.2,0.012,4); gBack.add(runner);
+}
+
+/* ================= THE LIBRARY CORNER (spawn, S wall) =================
+   The Librarian's home: her desk (lamp, card catalog, book stack), two
+   bookshelves with palette-colored spines, and a rug — visible the moment
+   you spawn. She greets from the desk; the glide-follow starts only once
+   you leave the corner (libTick reads LIB_DESK). Everything here clicks
+   through to her chat. */
+const LIB_DESK={x:1.35, z:2.4};
+{
+  /* desk */
+  registerPick(box(1.5,.08,.7, M.trim, 1.35,.78,2.5, gBack), 'librarian');
+  registerPick(box(1.4,.7,.6, M2.desk, 1.35,.39,2.5, gBack), 'librarian');
+  W(0.6,2.15,2.1,2.85);
+  /* brass lamp with a warm bulb */
+  box(.05,.46,.05, M.trim, .85,1.05,2.4, gBack);
+  box(.2,.14,.2, M.bulb, .85,1.32,2.4, gBack);
+  /* book stack + open ledger on the desktop */
+  box(.3,.05,.22, new THREE.MeshStandardMaterial({color:0xe6007e, roughness:.8}), 1.72,.845,2.45, gBack);
+  box(.26,.05,.2, new THREE.MeshStandardMaterial({color:0x74e0c8, roughness:.8}), 1.73,.895,2.47, gBack);
+  box(.4,.03,.3, new THREE.MeshStandardMaterial({color:0xf7f0e6, roughness:.9}), 1.2,.835,2.52, gBack);
+  /* card catalog beside the desk, against the S wall */
+  registerPick(box(.55,1.06,.44, M2.desk, 2.62,.53,.52, gBack), 'librarian'); W(2.34,.3,2.9,.74);
+  [0,1,2].forEach(i=>{ box(.42,.02,.04, M.trim, 2.62,.24+i*.34,.75, gBack); });
+  /* two bookshelves, spines in the pageant palette */
+  const SPINE=[0xe6007e,0xf4b53f,0x74e0c8,0xd4708f,0x9a4dff,0x35d5ff,0xc9a227,0xff5cab];
+  [-0.35,1.45].forEach(sx=>{
+    box(1.7,2.3,.14, M2.desk, sx,1.15,.3, gBack);              /* backboard */
+    box(.08,2.3,.4, M2.desk, sx-.81,1.15,.42, gBack);          /* side panels */
+    box(.08,2.3,.4, M2.desk, sx+.81,1.15,.42, gBack);
+    [0,1,2].forEach(r=>{ box(1.54,.05,.38, M.trim, sx,.3+r*.65,.42, gBack); });
+    box(1.7,.07,.44, M.trim, sx,2.28,.42, gBack);              /* brass crown */
+    W(sx-.85,.1,sx+.85,.62);
+  });
+  {
+    const NB=78, books=new THREE.InstancedMesh(new THREE.BoxGeometry(.085,.44,.16),
+      new THREE.MeshStandardMaterial({color:0xffffff, roughness:.85}), NB);
+    const dum=new THREE.Object3D(); let k=0;
+    [-0.35,1.45].forEach(sx=>{
+      [0,1,2].forEach(r=>{
+        for(let b=0;b<13;b++){
+          dum.position.set(sx-.72+b*.12+(((r*13+b)%3)-1)*.008, .55+r*.65, .44);
+          dum.rotation.z=((r*7+b)%5===0)?.06:0;
+          dum.updateMatrix(); books.setMatrixAt(k,dum.matrix);
+          books.setColorAt(k, new THREE.Color(SPINE[(r*13+b+((sx>0)?3:0))%SPINE.length]));
+          k++;
+        }
+      });
+    });
+    books.instanceMatrix.needsUpdate=true; if(books.instanceColor) books.instanceColor.needsUpdate=true;
+    gBack.add(books); registerPick(books,'librarian');
+  }
+  /* rug + warm spill + shingle */
+  const rug=new THREE.Mesh(new THREE.CircleGeometry(1.6,22),
+    new THREE.MeshStandardMaterial({color:0x5c2f4e, roughness:.95}));
+  rug.rotation.x=-Math.PI/2; rug.position.set(1.35,0.014,2.5); gBack.add(rug);
+  glowPool(1.3,2.5,2.3,0xf4b53f,gBack,.34);
+  mkSign('THE LIBRARY', 2.0,.42, .55,2.72,.38, 0, gBack, PAL.gold);
 }
 
 /* ================= CONNECTIONS STRING BOARD (E wall) =================
@@ -2567,7 +2860,6 @@ function closeRead(){
   readOpen=false; hide($('#read')); quiz=null;
   if(preSit){ player.x=preSit.x; player.z=preSit.z; preSit=null; }
   sitEye=null;
-  tryLock();
 }
 $('#readX').addEventListener('click', closeRead);
 function sitInReadingRoom(){
@@ -3054,14 +3346,14 @@ bridgeReady.then(()=>{
 }).catch(()=>{ /* failGate already shown above */ });
 
 enterBtn.addEventListener('click', ()=>{
-  entered=true; enterAt=performance.now(); hide(gate); show($('#xhair')); show($('#askBtn'));
-  $('#hint').textContent = IS_TOUCH ? 'left thumb walk · right thumb look · tap objects' : 'WASD walk · click/E interact · T librarian · Esc menu';
+  entered=true; enterAt=performance.now(); hide(gate); show($('#xhair')); show($('#askBtn')); show($('#viewBtn'));
+  $('#hint').textContent = IS_TOUCH ? 'left thumb walk · right thumb look · tap objects' : 'WASD walk · click/E interact · V view · T librarian · Esc frees the mouse';
   show($('#hint')); setTimeout(()=>hide($('#hint')), 9000);
   tryLock();
   const returning = metSet.size>0 || SAVE.cards>0 || SAVE.ls.seen>0;
   setTimeout(()=>libSay(returning
-    ? 'Back again, scholar — the stacks kept your place. The photo wall’s ahead on your left; the runway hasn’t moved.'
-    : 'Welcome to the Werkroom, baby — I’m The Librarian, and I walk with you. The photo wall is ahead on your left; everything you touch has receipts.'), 700);
+    ? 'Back again, scholar — the stacks kept your place. I’m at my desk by the door; the photo wall’s ahead on your left.'
+    : 'Welcome to the Werkroom, baby — I’m The Librarian. This corner is my library; wander off and I’ll walk with you. Everything you touch has receipts.'), 700);
   setTimeout(()=>toast('The Librarian is your guide — press T (or tap ◆) to ask her anything.'), 5200);
 });
 </script>
