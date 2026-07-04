@@ -191,6 +191,21 @@ a{color:var(--gold)}
 #toast{position:fixed;left:50%;bottom:64px;transform:translateX(-50%);z-index:185;
   background:rgba(20,16,28,.95);border:1px solid var(--brass);color:var(--gold);border-radius:12px;
   padding:11px 18px;font-size:12px;letter-spacing:.5px;max-width:92vw;text-align:center;box-shadow:var(--shadow)}
+/* ---- season scope (gate presets + pause row; shared 'wr-scope' key) ---- */
+#gateScope{margin:0 0 14px;text-align:left}
+.gscap{font-size:12px;color:rgba(247,240,230,.78);font-style:italic;margin:0 0 8px;line-height:1.5}
+.gscap b{color:var(--gold);font-style:normal}
+.gscap a{color:var(--brass);text-decoration:underline;cursor:pointer}
+.scoperow{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 8px}
+.gbtn.schip{padding:9px 14px;font-size:11px}
+.schip.mini{background:rgba(0,0,0,.3);border:1px solid rgba(244,181,63,.35);color:rgba(247,240,230,.78);
+  border-radius:999px;cursor:pointer;font-family:var(--mono);font-size:10.5px;padding:5px 11px}
+.schip.mini.on{background:var(--magenta,#e6007e);border-color:var(--magenta,#e6007e);color:#fff}
+.scopefr{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 8px;max-height:190px;overflow-y:auto}
+#pauseScope{margin:10px 0 12px;padding-top:10px;border-top:1px solid rgba(201,162,39,.18);
+  font-size:12px;color:rgba(247,240,230,.85);line-height:1.6}
+#pauseScope b{color:var(--gold)}
+#pauseScope .gbtn{margin-left:10px;padding:6px 12px;font-size:10.5px;vertical-align:middle}
 #pauseProg{display:flex;align-items:center;gap:14px;margin:14px 0 4px;padding-top:12px;
   border-top:1px solid rgba(201,162,39,.25)}
 #pauseProg svg{flex:none}
@@ -278,6 +293,7 @@ classic two-dimensional site at index.html, which is fully accessible. Use the s
     <div class="gbody" id="gateBody">Backstage, a curtain, a runway — and every number in the archive
       still one question away. The classic site keeps running underneath; this is just a room built on top of it.</div>
     <div class="gstatus" id="gateStatus">warming the house lights…</div>
+    <div id="gateScope" class="hidden"></div>
     <div>
       <button class="gbtn" id="enterBtn" disabled>Enter the Werkroom</button>
       <a class="gbtn ghost" href="index.html">Open the classic site</a>
@@ -298,6 +314,7 @@ classic two-dimensional site at index.html, which is fully accessible. Use the s
       <b>sit</b> in the Reading Room armchair to get read &nbsp;·&nbsp; <b>step</b> on a runway spotlight to call a lip sync
     </div>
     <div id="pauseProg"></div>
+    <div id="pauseScope"></div>
     <div>
       <button class="gbtn" id="resumeBtn">Resume</button>
       <button class="gbtn ghost" id="pauseView">Switch view</button>
@@ -709,9 +726,18 @@ function snatchTally(D){
     return {base:disp, queens:Object.keys(e.queens).length, plays:e.plays};
   }).sort(function(a,b){ return b.queens - a.queens || b.plays - a.plays || (a.base < b.base ? -1 : 1); });
 }
-/* one Snatch episode's who-played-whom card set (idx wraps over snatch_index) */
-function snatchEpisodeCards(D, idx){
+/* one Snatch episode's who-played-whom card set (idx wraps over snatch_index).
+   Optional `allow` (Set or array of season_ids) narrows the rotation to the
+   user's scope — pure: the caller computes it, this never reads storage.
+   Falls back to the full index when the allow-list matches nothing. */
+function snatchEpisodeCards(D, idx, allow){
   var eps = (D.derived && D.derived.snatch_index) || [];
+  if(allow){
+    var ok = eps.filter(function(e){
+      return (typeof allow.has === 'function') ? allow.has(e.season) : allow.indexOf(e.season) >= 0;
+    });
+    if(ok.length) eps = ok;
+  }
   if(!eps.length) return null;
   var e = eps[((idx % eps.length) + eps.length) % eps.length];
   var slabel = (D.derived && D.derived.slabel) || {};
@@ -919,6 +945,56 @@ function routeLabel(route, D){
   return route.charAt(0).toUpperCase()+route.slice(1);
 }
 
+/* ---- season scope (shared 'wr-scope' key) — pure helpers, scope passed in.
+   Resolution mirrors the classic site's inScope(): mode 'all' (or no scope at
+   all) allows everything; an explicit seasons list wins; else franchise
+   membership. WR never reads localStorage — callers do. ---- */
+function scopeAllows(scope, season){
+  if(!scope || !scope.mode || scope.mode === 'all') return true;
+  if(scope.seasons && scope.seasons.length) return scope.seasons.indexOf(season.season_id) >= 0;
+  return !!(scope.franchises && scope.franchises.indexOf(season.franchise) >= 0);
+}
+/* the scoped rotation list — falls back to ALL seasons when the scope matches
+   nothing, so the photo wall / booth / marquee can never go empty */
+function scopedSeasonList(seasons, scope){
+  var out = (seasons || []).filter(function(s){ return scopeAllows(scope, s); });
+  return out.length ? out : (seasons || []).slice();
+}
+function scopeLabel(scope, seasons){
+  var all = (seasons || []).length;
+  var hits = (seasons || []).filter(function(s){ return scopeAllows(scope, s); });
+  if(!scope || !scope.mode || scope.mode === 'all' || !hits.length || hits.length === all)
+    return 'All ' + all + ' seasons';
+  var seas = hits.length + (hits.length === 1 ? ' season' : ' seasons');
+  if(scope.preset === 'us-as') return 'US + All Stars · ' + seas;
+  if(scope.preset === 'airing') return 'Currently airing · ' + seas;
+  var fr = {}; hits.forEach(function(s){ fr[s.franchise] = 1; });
+  var nf = Object.keys(fr).length;
+  return (nf === 1 ? Object.keys(fr)[0] : nf + ' franchises') + ' · ' + seas;
+}
+/* presets computed from the data: US+AS by franchise name; "currently airing" =
+   uncrowned seasons padded with premieres in the last ~9 months of `generated`
+   so the preset never lands empty */
+function scopePresets(seasons, generated){
+  seasons = seasons || [];
+  var usas = ['US main','All Stars'].filter(function(f){
+    return seasons.some(function(s){ return s.franchise === f; }); });
+  var usasCount = seasons.filter(function(s){ return usas.indexOf(s.franchise) >= 0; }).length;
+  var airing = seasons.filter(function(s){ return !s.winner_id || s.winner_id === '-'; })
+    .map(function(s){ return s.season_id; });
+  var gen = generated ? new Date(generated) : new Date();
+  var cutoff = gen.getTime() - 270 * 24 * 3600 * 1000;
+  seasons.forEach(function(s){
+    if(s.premiere_date && s.premiere_date !== '-'){
+      var t = new Date(s.premiere_date).getTime();
+      if(t >= cutoff && airing.indexOf(s.season_id) < 0) airing.push(s.season_id);
+    }});
+  var airFr = {};
+  seasons.forEach(function(s){ if(airing.indexOf(s.season_id) >= 0) airFr[s.franchise] = 1; });
+  return {usasFranchises:usas, usasCount:usasCount,
+    airingSeasons:airing, airingFranchises:Object.keys(airFr)};
+}
+
 return {
   FAN_DISCLAIMER:FAN_DISCLAIMER, BRIDGE_REQUIRED:BRIDGE_REQUIRED,
   GREETING:GREETING, GREETING_2:GREETING_2, REFUSAL:REFUSAL, SUGGESTIONS:SUGGESTIONS,
@@ -934,7 +1010,9 @@ return {
   routeLabel:routeLabel, ROUTE_NAMES:ROUTE_NAMES,
   ordinal:ordinal, alumniBoard:alumniBoard, stringPoints:stringPoints,
   snatchRoles:snatchRoles, snatchTally:snatchTally, snatchEpisodeCards:snatchEpisodeCards,
-  lsPick:lsPick, lsOutcomeText:lsOutcomeText, triviaBuild:triviaBuild
+  lsPick:lsPick, lsOutcomeText:lsOutcomeText, triviaBuild:triviaBuild,
+  scopeAllows:scopeAllows, scopedSeasonList:scopedSeasonList,
+  scopeLabel:scopeLabel, scopePresets:scopePresets
 };
 })();
 if (typeof module!=='undefined' && module.exports) module.exports = WR;
@@ -1746,7 +1824,7 @@ if(IS_TOUCH){
 }
 
 /* pause */
-function openPause(){ paused=true; renderPauseProg(); show($('#pause')); releaseLook(); }
+function openPause(){ paused=true; scopeSyncCheck(); renderPauseProg(); renderPauseScope(); show($('#pause')); releaseLook(); }
 function closePause(){ paused=false; hide($('#pause')); }   /* mouse stays free; click the canvas to look again */
 $('#resumeBtn').addEventListener('click', closePause);
 
@@ -1794,7 +1872,7 @@ addInteract({id:'judges', x:-7, z:11, radius:2.4,
       player.seated=true; player.x=-7; player.z=10.6;
       player.yaw = Math.atan2(-(-7-player.x), -(14.9-player.z)); /* face the scoreboard */
       paintScoreboard(SEASON.idx);
-      libSay('Eighty-two seasons of verdicts fit on one wall when you paint small enough. Flip through them.');
+      libSay(seasonRing().length+' seasons of verdicts fit on one wall when you paint small enough. Flip through them.');
     }
   }});
 addInteract({id:'jukebox', x:-10.5, z:23.8, radius:2.4,
@@ -1978,10 +2056,38 @@ const ST_COLORS = {  /* echo of .st-<STATUS> chips */
   LOW:['rgba(255,140,80,.6)','#2a1200'], BTM:['rgba(230,0,126,.65)','#fff'], BTM2:['rgba(230,0,126,.65)','#fff']
 };
 
-function seasonAt(i){ const S=B.D.seasons; return S[((i%S.length)+S.length)%S.length]; }
+/* ---- season scope: the rotations (photo wall, scoreboard, marquee, booth,
+   snatch desk) all run over SCOPED_SEASONS, rebuilt from the shared 'wr-scope'
+   key + B.D.seasons (falling back to every season when the scope is empty or
+   absent — a returning user with no key sees exactly today's behavior). ---- */
+const SCOPE_KEY='wr-scope';
+let SCOPED_SEASONS=null, SNATCH_ALLOW=null, _scopeJSON='';
+function readScopeRaw(){ try{ return localStorage.getItem(SCOPE_KEY)||''; }catch(e){ return ''; } }
+function readScope(){ try{ const s=JSON.parse(readScopeRaw()||'null'); if(s&&s.v===1)return s; }catch(e){} return null; }
+function writeScope(sc){ try{ localStorage.setItem(SCOPE_KEY, JSON.stringify(sc)); }catch(e){} }
+function scopeActive(){ const sc=readScope(); return !!(sc&&sc.mode&&sc.mode!=='all'); }
+function seasonRing(){ return SCOPED_SEASONS || (B.D?B.D.seasons:[]); }
+/* boot/default: the latest in-scope US-main season (livelier first wall),
+   else the last season in scope — identical to the old boot when unscoped */
+function defaultSeasonIdx(){
+  const S=seasonRing(); let last=-1;
+  S.forEach((s,i)=>{ if(s.franchise==='US main') last=i; });
+  return last>=0?last:Math.max(0,S.length-1);
+}
+function rebuildScope(keepCurrent){
+  if(!B.D) return;
+  const cur=(SCOPED_SEASONS&&SCOPED_SEASONS[SEASON.idx])?SCOPED_SEASONS[SEASON.idx].season_id:null;
+  const sc=readScope(); _scopeJSON=readScopeRaw();
+  SCOPED_SEASONS=WR.scopedSeasonList(B.D.seasons, sc);
+  SNATCH_ALLOW=(sc&&sc.mode&&sc.mode!=='all')?new Set(SCOPED_SEASONS.map(s=>s.season_id)):null;
+  const i=(keepCurrent&&cur)?SCOPED_SEASONS.findIndex(s=>s.season_id===cur):-1;
+  SEASON.idx=i>=0?i:defaultSeasonIdx();
+}
+function seasonAt(i){ const S=seasonRing(); return S[((i%S.length)+S.length)%S.length]; }
 function shiftSeason(d){
   if(!B.D) return;
-  SEASON.idx = ((SEASON.idx+d)%B.D.seasons.length + B.D.seasons.length)%B.D.seasons.length;
+  const n=seasonRing().length;
+  SEASON.idx = ((SEASON.idx+d)%n + n)%n;
   applySeason();
   libSay(seasonAt(SEASON.idx).season_label + ' — ' + seasonAt(SEASON.idx).franchise + '. The wall remembers them all.', true);
 }
@@ -2142,6 +2248,7 @@ function openDress(route, where){
 }
 function closeDress(){
   $('#dress').classList.add('veil'); $('#dress').setAttribute('aria-hidden','true');
+  scopeSyncCheck();   /* the classic site's crown chip may have changed the scope */
 }
 $('#dressX').addEventListener('click', closeDress);
 
@@ -2150,8 +2257,8 @@ let boothIdx=0;
 function openBooth(){ boothIdx=SEASON.idx; renderBooth(); show($('#booth')); releaseLook(); }
 function closeBooth(){ hide($('#booth')); }
 $('#boothX').addEventListener('click', closeBooth);
-$('#boothPrev').addEventListener('click', ()=>{ boothIdx=(boothIdx-1+B.D.seasons.length)%B.D.seasons.length; renderBooth(); });
-$('#boothNext').addEventListener('click', ()=>{ boothIdx=(boothIdx+1)%B.D.seasons.length; renderBooth(); });
+$('#boothPrev').addEventListener('click', ()=>{ const n=seasonRing().length; boothIdx=(boothIdx-1+n)%n; renderBooth(); });
+$('#boothNext').addEventListener('click', ()=>{ const n=seasonRing().length; boothIdx=(boothIdx+1)%n; renderBooth(); });
 let boothActiveRow=null;
 function cue(song,label,row){
   const f=$('#boothFrame');
@@ -2516,6 +2623,15 @@ function renderPauseProg(){
   const s=seasonAt(SEASON.idx);
   const cast=B.D.contestants.filter(c=>c.season_id===s.season_id);
   const seasonMet=cast.filter(c=>metSet.has(c.queen_id)).length;
+  /* collection progress is GLOBAL (never lost by narrowing scope) — but show
+     the finishable in-scope slice too, which is the whole point of the picker */
+  let scopeLine='';
+  if(SNATCH_ALLOW){
+    const qids=new Set();
+    B.D.contestants.forEach(c=>{ if(SNATCH_ALLOW.has(c.season_id)) qids.add(c.queen_id); });
+    let met=0; qids.forEach(q=>{ if(metSet.has(q)) met++; });
+    scopeLine='<br/>in your scope: <b>'+met+'</b> of '+qids.size+' queens met';
+  }
   const R=26, C=2*Math.PI*R, frac=Math.min(1,n/total);
   host.innerHTML =
     '<svg width="64" height="64" viewBox="0 0 64 64" aria-hidden="true">'+
@@ -2523,7 +2639,7 @@ function renderPauseProg(){
     '<circle cx="32" cy="32" r="'+R+'" fill="none" stroke="#c9a227" stroke-width="6" stroke-linecap="round" '+
     'stroke-dasharray="'+(C*frac).toFixed(1)+' '+C.toFixed(1)+'" transform="rotate(-90 32 32)"/>'+
     '<text x="32" y="37" text-anchor="middle" fill="#f4b53f" font-size="13" font-family="Space Mono, monospace">'+n+'</text></svg>'+
-    '<div class="pp"><b>'+n+'</b> of '+total+' queens met · the wall’s '+s.season_label+': <b>'+seasonMet+'</b> of '+cast.length+'<br/>'+
+    '<div class="pp"><b>'+n+'</b> of '+total+' queens met · the wall’s '+s.season_label+': <b>'+seasonMet+'</b> of '+cast.length+scopeLine+'<br/>'+
     'library cards: <b>'+SAVE.cards+'</b> · lip-sync calls: <b>'+SAVE.ls.right+'</b> right of <b>'+SAVE.ls.seen+'</b></div>';
 }
 
@@ -2760,7 +2876,7 @@ const easelTex=new THREE.CanvasTexture(easelCnv); easelTex.colorSpace=THREE.SRGB
 const SNATCH={idx:0, t:0};
 function paintSnatchWall(){
   if(!B.D) return;
-  const rec=WR.snatchEpisodeCards(B.D, SNATCH.idx);
+  const rec=WR.snatchEpisodeCards(B.D, SNATCH.idx, SNATCH_ALLOW);
   const g=snatchCnv.getContext('2d');
   g.fillStyle=PAL.ink; g.fillRect(0,0,1536,768);
   g.fillStyle=PAL.magenta; g.font='700 56px "Bodoni Moda", serif';
@@ -3302,7 +3418,7 @@ function phase2Tick(dt,t){
     if(B.D && gBack.visible){
       let tries=0;
       do{ SNATCH.idx++; tries++; }
-      while(tries<90 && !((WR.snatchEpisodeCards(B.D,SNATCH.idx)||{cards:[]}).cards.length));
+      while(tries<90 && !((WR.snatchEpisodeCards(B.D,SNATCH.idx,SNATCH_ALLOW)||{cards:[]}).cards.length));
       paintSnatchWall();
     }
   }
@@ -3319,8 +3435,106 @@ function buildDataProps(){
   buildBoard();
   /* start the snatch wall on an episode that has a roster */
   let tries=0;
-  while(tries<90 && !((WR.snatchEpisodeCards(B.D,SNATCH.idx)||{cards:[]}).cards.length)){ SNATCH.idx++; tries++; }
+  while(tries<90 && !((WR.snatchEpisodeCards(B.D,SNATCH.idx,SNATCH_ALLOW)||{cards:[]}).cards.length)){ SNATCH.idx++; tries++; }
   repaintAll();
+}
+
+/* ---- scope chooser UI (gate + pause), Librarian-voiced ----
+   Writes the shared 'wr-scope' key, rebuilds SCOPED_SEASONS, repaints the
+   props and tells the dressing iframe via the ADDITIVE bridge surface
+   window.applyScope (never touches the required bridge globals). */
+const LIB_SCOPE_CAP='“Which shelves shall I pull, scholar? I can dress the whole room for them.” — The Librarian';
+function scopeChanged(){
+  if(!B.D) return;
+  rebuildScope(true);
+  applySeason();
+  /* keep the snatch wall on an in-scope episode that has a roster */
+  let tries=0;
+  while(tries<90 && !((WR.snatchEpisodeCards(B.D,SNATCH.idx,SNATCH_ALLOW)||{cards:[]}).cards.length)){ SNATCH.idx++; tries++; }
+  paintSnatchWall();
+  if(!$('#booth').classList.contains('hidden')){ boothIdx=SEASON.idx; renderBooth(); }
+  renderPauseScope();
+  if(!entered) renderGateScope();
+  try{ if(B.win && typeof B.win.applyScope==='function') B.win.applyScope(); }catch(e){}
+}
+/* if the scope was changed elsewhere (the classic site in another tab, or the
+   dressing iframe's own crown chip), fold it in before showing stale UI */
+function scopeSyncCheck(){ if(B.D && readScopeRaw()!==_scopeJSON) scopeChanged(); }
+function buildScopeChooser(host, onDone){
+  const p=WR.scopePresets(B.D.seasons, B.D.meta && B.D.meta.generated);
+  const row=document.createElement('div'); row.className='scoperow';
+  const commit=sc=>{ writeScope(sc); scopeChanged(); if(onDone)onDone(sc); };
+  const mk=(label,fn)=>{ const b=document.createElement('button'); b.className='gbtn ghost schip';
+    b.textContent=label; b.addEventListener('click',fn); row.appendChild(b); return b; };
+  mk('Everything · '+B.D.seasons.length+' seasons',
+    ()=>commit({v:1,mode:'all',preset:null,franchises:[],seasons:null,ts:Date.now()}));
+  mk('US + All Stars · '+p.usasCount,
+    ()=>commit({v:1,mode:'preset',preset:'us-as',franchises:p.usasFranchises,seasons:null,ts:Date.now()}));
+  mk('Currently airing · '+p.airingSeasons.length,
+    ()=>commit({v:1,mode:'preset',preset:'airing',franchises:p.airingFranchises,seasons:p.airingSeasons,ts:Date.now()}));
+  const ex=document.createElement('div'); ex.style.display='none';
+  mk('Pick my seasons…',()=>{ const open=ex.style.display==='none'; ex.style.display=open?'':'none';
+    if(open && !ex.childNodes.length) buildFranchisePick(ex,commit); });
+  host.appendChild(row); host.appendChild(ex);
+}
+function buildFranchisePick(host,commit){
+  /* franchise-level chips (season-level refinement lives on the classic site) */
+  const frs=[]; const seen={};
+  B.D.seasons.forEach(s=>{ if(!seen[s.franchise]){ seen[s.franchise]=1; frs.push(s.franchise); } });
+  const cur=readScope();
+  const on=new Set((cur && cur.mode && cur.mode!=='all')
+    ? B.D.seasons.filter(s=>WR.scopeAllows(cur,s)).map(s=>s.franchise) : []);
+  const wrap=document.createElement('div'); wrap.className='scopefr';
+  frs.forEach(f=>{
+    const n=B.D.seasons.filter(s=>s.franchise===f).length;
+    const c=document.createElement('button'); c.className='schip mini'+(on.has(f)?' on':'');
+    c.textContent=f+' ('+n+')';
+    c.addEventListener('click',()=>{ if(on.has(f))on.delete(f);else on.add(f); c.classList.toggle('on',on.has(f)); });
+    wrap.appendChild(c);
+  });
+  const apply=document.createElement('button'); apply.className='gbtn schip'; apply.textContent='Pull these shelves';
+  apply.addEventListener('click',()=>{ if(!on.size)return;
+    commit({v:1,mode:'custom',preset:null,franchises:[...on],seasons:null,ts:Date.now()}); });
+  host.appendChild(wrap); host.appendChild(apply);
+}
+/* gate: first visit (no wr-scope) → the four presets above Enter; returning →
+   a one-line note with a "change" link. Enter itself never requires a choice. */
+function renderGateScope(){
+  const gs=$('#gateScope'); if(!gs || !B.D) return;
+  gs.innerHTML='';
+  const sc=readScope();
+  if(!sc){
+    const cap=document.createElement('div'); cap.className='gscap'; cap.textContent=LIB_SCOPE_CAP;
+    gs.appendChild(cap);
+    buildScopeChooser(gs, ()=>renderGateScope());
+  } else {
+    const note=document.createElement('div'); note.className='gscap';
+    note.innerHTML='Shelves pulled: <b>'+WR.scopeLabel(sc, B.D.seasons)+'</b> · ';
+    const a=document.createElement('a'); a.textContent='change';
+    a.addEventListener('click',e=>{ e.preventDefault();
+      gs.innerHTML='';
+      const cap=document.createElement('div'); cap.className='gscap'; cap.textContent=LIB_SCOPE_CAP;
+      gs.appendChild(cap);
+      buildScopeChooser(gs, ()=>renderGateScope()); });
+    note.appendChild(a); gs.appendChild(note);
+  }
+  show(gs);
+}
+/* pause: the in-world settings surface gains a scope row + change button */
+function renderPauseScope(){
+  const host=$('#pauseScope'); if(!host) return;
+  host.innerHTML='';
+  if(!B.D) return;
+  const line=document.createElement('div');
+  line.innerHTML='Shelves in the room: <b>'+WR.scopeLabel(readScope(), B.D.seasons)+'</b>';
+  const btn=document.createElement('button'); btn.className='gbtn ghost'; btn.textContent='Change scope';
+  btn.addEventListener('click',()=>{
+    host.innerHTML='';
+    const cap=document.createElement('div'); cap.className='gscap'; cap.textContent=LIB_SCOPE_CAP;
+    host.appendChild(cap);
+    buildScopeChooser(host, ()=>renderPauseScope());
+  });
+  line.appendChild(btn); host.appendChild(line);
 }
 
 /* draw-call peek for perf checks: WR_STATS() in the console */
@@ -3329,11 +3543,15 @@ window.WR_STATS = ()=>({calls:renderer.info.render.calls, triangles:renderer.inf
 
 /* ---------------- boot ---------------- */
 bridgeReady.then(()=>{
-  /* start on the most recent US main season for a livelier first wall */
-  const us=B.D.seasons.map((s,i)=>s.franchise==='US main'?i:-1).filter(i=>i>=0);
-  if(us.length) SEASON.idx=us[us.length-1];
+  /* season scope first: SCOPED_SEASONS drives the photo wall, scoreboard,
+     marquee, booth and snatch rotation. rebuildScope() lands on the latest
+     in-scope (US-main-first) season — identical to the old boot when no
+     wr-scope key exists. */
+  rebuildScope(false);
   applySeason();
   buildDataProps();          /* Phase 2: string board, snatch wall, calendar, projections… */
+  renderGateScope();         /* Librarian-voiced presets (first visit) / scope note */
+  renderPauseScope();
   enterBtn.disabled=false;
   gateStatus.textContent = IS_TOUCH ? 'ready — tap to enter' : 'ready — click to enter';
   /* repaint data textures once the display fonts have actually loaded */

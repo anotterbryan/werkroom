@@ -209,6 +209,30 @@ button.opt:hover:not(:disabled){border-color:var(--magenta);transform:translateX
 button.opt.correct{background:rgba(116,224,200,.22);border-color:var(--mint);color:var(--mint);font-weight:700}
 button.opt.wrong{background:rgba(255,92,171,.16);border-color:var(--rose);color:var(--rose)}
 button.opt:disabled{cursor:default}
+/* ---------- season scope (picker + persistent chip) ---------- */
+.scopebar{display:flex;justify-content:flex-end;margin:0 0 12px}
+@media(max-width:860px){.scopebar{display:none}}
+.scopechip{display:inline-flex;align-items:center;gap:7px;padding:7px 14px;border-radius:999px;cursor:pointer;
+  font-family:var(--mono);font-size:11.5px;font-weight:700;letter-spacing:.4px;color:var(--gold);
+  background:rgba(42,14,58,.65);border:1px solid rgba(244,181,63,.35);transition:border-color .15s,color .15s;max-width:100%}
+.scopechip:hover{border-color:var(--magenta);color:var(--cream)}
+.scopechip .ic{width:14px;height:14px;flex:none}
+.topbar .scopechip{margin-left:auto;font-size:10px;padding:6px 10px;max-width:58vw;overflow:hidden;
+  text-overflow:ellipsis;white-space:nowrap}
+.scope-overlay{position:fixed;inset:0;background:rgba(12,1,20,.72);z-index:200;display:flex;
+  align-items:flex-start;justify-content:center;padding:40px 16px;overflow-y:auto;backdrop-filter:blur(3px)}
+.scope-overlay-card{position:relative;width:min(760px,100%);max-height:calc(100vh - 80px);overflow-y:auto}
+.sea-list{flex-basis:100%;display:flex;flex-wrap:wrap;gap:6px;margin:2px 0 6px;padding-left:12px}
+.sea-chip{font-family:var(--mono);font-size:10.5px;padding:4px 10px;border-radius:14px;cursor:pointer;
+  background:rgba(0,0,0,.3);border:1px solid rgba(244,181,63,.25);color:rgba(247,240,230,.7);
+  transition:background .15s,border-color .15s;user-select:none}
+.sea-chip:hover{border-color:var(--magenta)}
+.sea-chip.on{background:var(--magenta);border-color:var(--magenta);color:#fff}
+/* ---------- embed mode: content-only inside the 3D world's dressing panel ---------- */
+body.embed aside,body.embed .topbar,body.embed .foot{display:none!important}
+body.embed .app{display:block}
+body.embed main{max-width:none;padding:18px}
+@media(max-width:860px){body.embed main{padding:18px}}
 @media print{
   body{background:#fff!important;color:#000!important;font-size:11pt}
   body::after{display:none}
@@ -360,23 +384,40 @@ function fanDisclaimerBlock(){
   return el('div',{style:'margin-top:16px;padding-top:12px;border-top:1px solid rgba(244,181,63,.18);'
     +'font-size:10.5px;line-height:1.6;color:rgba(247,240,230,.5)'},FAN_DISCLAIMER);
 }
-/* Builds the welcome banner card for the home view (dismissible, remembered). */
+/* Builds the welcome banner card for the home view (dismissible, remembered).
+   v2: when no wr-scope key exists yet, the card doubles as the skippable
+   season picker ("Where do you watch?") — shown independent of the welcome
+   dismissal, per the onboarding design. Dismissing without choosing counts
+   as "Everything" so the picker never re-ambushes; the crown chip stays as
+   the persistent way back in. */
 function welcomeCard(){
+  const needScope=!hasScopeKey();
+  const fullWelcome=!welcomeDismissed();
   const card=el('div',{class:'card fade welcome-card',
     style:'position:relative;margin-bottom:20px;border-color:rgba(244,181,63,.4);'
       +'background:linear-gradient(150deg,rgba(230,0,126,.18),rgba(42,14,58,.62) 55%,rgba(22,3,32,.7))'});
   const close=el('button',{class:'welcome-x',type:'button','aria-label':'Dismiss welcome',
     style:'position:absolute;top:10px;right:12px;background:none;border:none;color:var(--gold);'
       +'font-size:20px;line-height:1;cursor:pointer;opacity:.75;padding:4px 6px'},'×');
-  close.addEventListener('click',()=>{dismissWelcome();card.remove();});
+  close.addEventListener('click',()=>{dismissWelcome();
+    if(!hasScopeKey())saveScope({v:1,mode:'all',preset:null,franchises:[],seasons:null,ts:Date.now()});
+    try{updateTopbarChip();}catch(e){}
+    card.remove();});
   card.append(close);
-  welcomeHeading(card,true);
-  welcomeBody(card);
-  const fb=el('div',{style:'display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:14px'});
-  fb.append(el('span',{style:'font-size:13.5px;color:rgba(247,240,230,.85)'},'Notice something off? I’d love to fix it —'));
-  fb.append(feedbackButton('Report an inaccuracy'));
-  card.append(fb);
-  card.append(fanDisclaimerBlock());
+  if(fullWelcome){
+    welcomeHeading(card,true);
+    welcomeBody(card);
+  }else{
+    card.append(el('div',{class:'vkicker',style:'margin:0 0 6px;padding-right:26px'},'One quick question'));
+  }
+  if(needScope)card.append(scopePickerBlock({bare:!fullWelcome}));
+  if(fullWelcome){
+    const fb=el('div',{style:'display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:14px'});
+    fb.append(el('span',{style:'font-size:13.5px;color:rgba(247,240,230,.85)'},'Notice something off? I’d love to fix it —'));
+    fb.append(feedbackButton('Report an inaccuracy'));
+    card.append(fb);
+    card.append(fanDisclaimerBlock());
+  }
   return card;
 }
 /* Build the Google Form embed URL from FEEDBACK_URL by adding embedded=true,
@@ -443,7 +484,99 @@ function cname(c){return (c&&c.drag_name_used&&c.drag_name_used!=='-')?c.drag_na
 /* franchise filter (global) */
 let FRANCHISE='All';
 const FRANCHISES=[...new Set(D.seasons.map(s=>s.franchise))];
-function seasonAllowed(sid){if(FRANCHISE==='All')return true;const s=D.seasons.find(x=>x.season_id===sid);return s&&s.franchise===FRANCHISE;}
+const _SEAS_BY_ID={};D.seasons.forEach(s=>{_SEAS_BY_ID[s.season_id]=s;});
+
+/* ============ SCOPE — the season picker's shared model ============
+   One localStorage key ('wr-scope') shared with the 3D world (same origin).
+   mode 'all' = today's behavior, untouched — returning visitors with old
+   localStorage see ZERO change until they use the picker.
+   Resolution rule: mode 'all' ⇒ everything; else an explicit `seasons` list
+   wins; else franchise membership (franchise selection implies all of that
+   franchise's seasons, INCLUDING future ones). All storage access is
+   try/catch-wrapped like the existing helpers. */
+const SCOPE_KEY='wr-scope';
+let _SCOPE=null;            // parsed cache (invalidated by applyScope())
+let _SCOPE_CONFIRM='';      // one-shot confirmation line for the home view
+function _defaultScope(){return {v:1,mode:'all',preset:null,franchises:[],seasons:null,ts:0};}
+function hasScopeKey(){try{return localStorage.getItem(SCOPE_KEY)!=null;}catch(e){return false;}}
+function loadScope(){
+  if(_SCOPE)return _SCOPE;
+  try{const s=JSON.parse(localStorage.getItem(SCOPE_KEY)||'null');
+    if(s&&s.v===1&&(s.mode==='all'||s.mode==='preset'||s.mode==='custom'))_SCOPE=s;}catch(e){}
+  if(!_SCOPE)_SCOPE=_defaultScope();
+  return _SCOPE;
+}
+function saveScope(s){_SCOPE=s;try{localStorage.setItem(SCOPE_KEY,JSON.stringify(s));}catch(e){}}
+function scopeActive(){return loadScope().mode!=='all';}
+function inScope(sid){
+  const sc=loadScope();
+  if(sc.mode==='all')return true;
+  if(sc.seasons&&sc.seasons.length)return sc.seasons.includes(sid);
+  const s=_SEAS_BY_ID[sid];
+  return !!(s&&sc.franchises&&sc.franchises.includes(s.franchise));
+}
+function scopedSeasons(){return D.seasons.filter(s=>inScope(s.season_id));}
+function scopedFranchises(){
+  if(!scopeActive())return FRANCHISES.slice();
+  const set=new Set(scopedSeasons().map(s=>s.franchise));
+  const out=FRANCHISES.filter(f=>set.has(f));
+  return out.length?out:FRANCHISES.slice();
+}
+function scopeLabel(){
+  const sc=loadScope();
+  if(!scopeActive())return 'All '+D.seasons.length+' seasons';
+  const n=scopedSeasons().length;
+  const seas=n+' season'+(n===1?'':'s');
+  if(sc.preset==='us-as')return 'US + All Stars · '+seas;
+  if(sc.preset==='airing')return 'Currently airing · '+seas;
+  const fr=scopedFranchises();
+  return (fr.length===1?fr[0]:fr.length+' franchises')+' · '+seas;
+}
+/* presets, computed live from the data — nothing hardcoded but the flagship names */
+function scopePresets(){
+  const usas=['US main','All Stars'].filter(f=>FRANCHISES.includes(f));
+  const usasCount=D.seasons.filter(s=>usas.includes(s.franchise)).length;
+  /* airing = uncrowned seasons, padded with premieres in the last ~9 months so it never lands empty */
+  const airing=D.seasons.filter(s=>!s.winner_id||s.winner_id==='-').map(s=>s.season_id);
+  const gen=(D.meta&&D.meta.generated)?new Date(D.meta.generated):new Date();
+  const cutoff=gen.getTime()-270*24*3600*1000;
+  D.seasons.forEach(s=>{if(s.premiere_date&&s.premiere_date!=='-'){
+    const t=new Date(s.premiere_date).getTime();
+    if(t>=cutoff&&!airing.includes(s.season_id))airing.push(s.season_id);}});
+  const airingFranchises=[...new Set(D.seasons.filter(s=>airing.includes(s.season_id)).map(s=>s.franchise))];
+  return {usasFranchises:usas,usasCount,airingSeasons:airing,airingFranchises};
+}
+/* grow the scope from a badged out-of-scope tile (atlas / region landings) */
+function addSeasonToScope(sid){
+  const sc=loadScope();
+  if(!scopeActive())return;
+  const s=_SEAS_BY_ID[sid];if(!s)return;
+  if(sc.seasons&&sc.seasons.length){if(!sc.seasons.includes(sid))sc.seasons.push(sid);}
+  else if(!sc.franchises.includes(s.franchise))sc.franchises.push(s.franchise);
+  sc.mode='custom';sc.preset=null;sc.ts=Date.now();
+  saveScope(sc);applyScope();
+}
+/* additive bridge surface: the 3D world calls window.applyScope() after an
+   in-world scope change so the dressing iframe re-renders pre-scoped views.
+   Never rename DATA/libAnswer/libSearch/go/masterRows (BRIDGE_REQUIRED). */
+function applyScope(sc){
+  if(sc)saveScope(sc);else _SCOPE=null;   // no-arg call = re-read the shared key
+  loadScope();
+  if(FRANCHISE!=='All'&&!scopedFranchises().includes(FRANCHISE))FRANCHISE='All';
+  try{updateTopbarChip();}catch(e){}
+  try{if(typeof _LAST_ROUTE==='string'&&_LAST_ROUTE)go(_LAST_ROUTE);}catch(e){}
+}
+window.SCOPE={key:SCOPE_KEY,load:loadScope,save:saveScope,inScope:inScope,
+  seasons:scopedSeasons,franchises:scopedFranchises,label:scopeLabel,active:scopeActive};
+window.applyScope=applyScope;
+/* ================================================================== */
+
+/* franchise-tab check only (the pre-scope seasonAllowed semantics) — kept
+   separate so browse-everything surfaces (atlas, region landings) can show
+   out-of-scope seasons dimmed instead of hidden. */
+function franchiseAllowed(sid){if(FRANCHISE==='All')return true;const s=_SEAS_BY_ID[sid];return !!(s&&s.franchise===FRANCHISE);}
+/* the one predicate every scoped view funnels through: scope ∧ franchise tab */
+function seasonAllowed(sid){return inScope(sid)&&franchiseAllowed(sid);}
 /* Atlas region filter: 'All' or one of REGION_ORDER. Separate from FRANCHISE so the
    Atlas can filter by region without disturbing the franchise-scoped views. */
 let ATLAS_REGION='All';
@@ -467,6 +600,135 @@ function franchisesByRegion(){
   const out={};regionsPresent().forEach(r=>out[r]=[]);
   FRANCHISES.forEach(f=>{const r=franchiseRegion(f);(out[r]=out[r]||[]).push(f);});
   return out;}
+
+/* ============ SCOPE PICKER UI (welcome card + overlay, shared) ============ */
+/* Region → franchise → season chip picker ("Pick my seasons"). Reuses the
+   .frgroup/.frtog visual language of franchiseToggles; per-franchise carets
+   reveal season chips for season-level refinement. */
+function buildCustomScopePicker(host,done){
+  host.innerHTML='';
+  const byFr={};D.seasons.forEach(s=>{(byFr[s.franchise]=byFr[s.franchise]||[]).push(s.season_id);});
+  const sel=new Set(scopeActive()?scopedSeasons().map(s=>s.season_id):[]);
+  const wrap=el('div',{class:'frfilter byregion',style:'margin:8px 0 6px'});
+  const REGION_DOT={'Main Series':'var(--magenta)','Americas':'#f0915e',
+    'Europe':'#5aa7e0','Asia-Pacific':'#7ad1b5','Global':'#b78aed'};
+  const refreshers=[];
+  let applyBtnState=()=>{};
+  const refresh=()=>{refreshers.forEach(f=>f());applyBtnState();};
+  const byRegion=franchisesByRegion();
+  regionsPresent().forEach(region=>{
+    const frs=byRegion[region]||[];if(!frs.length)return;
+    const g=el('div',{class:'frgroup'+(region==='Main Series'?' flagship':'')});
+    const state=el('span',{class:'rstate'});
+    const headEl=el('div',{class:'frgroup-head',title:'Toggle every '+region+' franchise'},
+      el('span',{class:'frgroup-name'},
+        el('span',{class:'rdot',style:'background:'+(REGION_DOT[region]||'var(--gold)')}),region),state);
+    const chipsWrap=el('div',{class:'frgroup-chips'});
+    const allSids=frs.flatMap(f=>byFr[f]||[]);
+    headEl.addEventListener('click',()=>{
+      const allOn=allSids.every(x=>sel.has(x));
+      allSids.forEach(x=>{if(allOn)sel.delete(x);else sel.add(x);});refresh();});
+    frs.forEach(f=>{
+      const sids=byFr[f]||[];
+      const chip=el('div',{class:'frtog',title:f+' — '+sids.length+' season'+(sids.length===1?'':'s')});
+      const caret=el('span',{style:'margin-left:7px;opacity:.8;cursor:pointer',title:'Choose individual seasons'},'▸');
+      chip.append(document.createTextNode(f+' '),
+        el('span',{style:'opacity:.65;font-size:10px'},'('+sids.length+')'),caret);
+      const seaList=el('div',{class:'sea-list',style:'display:none'});
+      sids.forEach(sid=>{
+        const sc2=el('span',{class:'sea-chip'},seasonName(sid));
+        sc2.addEventListener('click',()=>{if(sel.has(sid))sel.delete(sid);else sel.add(sid);refresh();});
+        seaList.append(sc2);
+        refreshers.push(()=>sc2.classList.toggle('on',sel.has(sid)));});
+      caret.addEventListener('click',ev=>{ev.stopPropagation();
+        const open=seaList.style.display==='none';
+        seaList.style.display=open?'':'none';caret.textContent=open?'▾':'▸';});
+      chip.addEventListener('click',()=>{
+        const allOn=sids.every(x=>sel.has(x));
+        sids.forEach(x=>{if(allOn)sel.delete(x);else sel.add(x);});refresh();});
+      chipsWrap.append(chip,seaList);
+      refreshers.push(()=>{const on=sids.filter(x=>sel.has(x)).length;
+        chip.classList.toggle('on',on===sids.length);
+        chip.style.borderStyle=(on>0&&on<sids.length)?'dashed':'';});
+    });
+    refreshers.push(()=>{const on=allSids.filter(x=>sel.has(x)).length;
+      state.textContent=on===allSids.length?'all':(on===0?'none':on+'/'+allSids.length);});
+    g.append(headEl,chipsWrap);wrap.append(g);
+  });
+  host.append(wrap);
+  const foot=el('div',{style:'display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:4px'});
+  const applyB=el('button',{class:'tab on'},'Apply');
+  const note=el('span',{style:'font-size:11px;color:rgba(247,240,230,.6)'});
+  applyBtnState=()=>{const n=sel.size;applyB.disabled=!n;applyB.style.opacity=n?'1':'.5';
+    note.textContent=n?n+' season'+(n===1?'':'s')+' selected':'pick at least one season';};
+  applyB.addEventListener('click',()=>{
+    if(!sel.size)return;
+    const franchisesFull=FRANCHISES.filter(f=>(byFr[f]||[]).every(x=>sel.has(x)));
+    const partial=[...sel].some(sid=>{const s=_SEAS_BY_ID[sid];return !s||!franchisesFull.includes(s.franchise);});
+    done({v:1,mode:'custom',preset:null,franchises:franchisesFull,
+      seasons:partial?SEASON_ORDER.filter(x=>sel.has(x)):null,ts:Date.now()});});
+  foot.append(applyB,note);host.append(foot);
+  refresh();
+}
+/* "Where do you watch?" — the four presets + expandable custom picker.
+   Any choice writes wr-scope and re-renders the current view. */
+function scopePickerBlock(opts){
+  opts=opts||{};
+  const box=el('div',{class:'scope-picker',style:opts.bare?'':'margin-top:14px;padding-top:12px;border-top:1px solid rgba(244,181,63,.18)'});
+  box.append(el('div',{class:'vkicker',style:'margin:0 0 6px'},'Where do you watch?'));
+  box.append(el('div',{style:'font-size:12.5px;line-height:1.6;color:rgba(247,240,230,.8);margin-bottom:4px;max-width:680px'},
+    'Pick your corner of the Drag Race universe and every view follows — search and discover inside it. '
+    +'Everything stays one tap away, and you can change this any time from the crown chip.'));
+  const p=scopePresets();
+  const done=sc=>{saveScope(sc);_SCOPE_CONFIRM=scopeLabel();if(opts.onDone)opts.onDone(sc);applyScope();};
+  const row=el('div',{class:'chip-row',style:'gap:8px;margin:10px 0 4px'});
+  const mk=(label,fn)=>{const b=el('button',{class:'tab',style:'font-size:12.5px;padding:9px 16px'},label);
+    b.addEventListener('click',fn);row.append(b);return b;};
+  mk('Everything · '+D.seasons.length+' seasons',
+    ()=>done({v:1,mode:'all',preset:null,franchises:[],seasons:null,ts:Date.now()}));
+  mk('Just US + All Stars · '+p.usasCount+' seasons',
+    ()=>done({v:1,mode:'preset',preset:'us-as',franchises:p.usasFranchises,seasons:null,ts:Date.now()}));
+  mk('Currently airing · '+p.airingSeasons.length+' season'+(p.airingSeasons.length===1?'':'s'),
+    ()=>done({v:1,mode:'preset',preset:'airing',franchises:p.airingFranchises,seasons:p.airingSeasons,ts:Date.now()}));
+  const ex=el('div',{style:'display:none'});
+  const pick=mk('Pick my seasons…',()=>{
+    const open=ex.style.display==='none';
+    ex.style.display=open?'':'none';pick.classList.toggle('on',open);
+    if(open&&!ex.childNodes.length)buildCustomScopePicker(ex,done);});
+  box.append(row,ex);
+  return box;
+}
+/* lightweight overlay version — opened by the persistent scope chip */
+let _scopeOverlay=null;
+function closeScopePicker(){if(_scopeOverlay){_scopeOverlay.remove();_scopeOverlay=null;}}
+function openScopePicker(){
+  closeScopePicker();
+  const ov=el('div',{class:'scope-overlay',onclick:e=>{if(e.target===ov)closeScopePicker();}});
+  const card=el('div',{class:'card scope-overlay-card'});
+  const x=el('button',{type:'button','aria-label':'Close scope picker',
+    style:'position:absolute;top:10px;right:12px;background:none;border:none;color:var(--gold);font-size:20px;line-height:1;cursor:pointer;opacity:.75;padding:4px 6px'},'×');
+  x.addEventListener('click',closeScopePicker);
+  card.append(x,
+    el('div',{style:'font-size:11px;color:rgba(247,240,230,.6);margin-bottom:2px'},'Current scope: '+scopeLabel()),
+    scopePickerBlock({bare:true,onDone:closeScopePicker}));
+  ov.append(card);document.body.append(ov);_scopeOverlay=ov;
+}
+window.openScopePicker=openScopePicker;
+/* the persistent chip (top of every view + mobile topbar) */
+function scopeChipEl(){
+  const b=el('button',{class:'scopechip',type:'button',
+    title:'Which seasons are in view — click to change','aria-label':'Change season scope',
+    onclick:openScopePicker});
+  b.innerHTML=icon('crown')+' '+scopeLabel();
+  return b;
+}
+function updateTopbarChip(){
+  const tb=document.querySelector('.topbar');if(!tb)return;
+  let c=tb.querySelector('.scopechip');
+  if(!c){c=scopeChipEl();tb.append(c);}
+  else c.innerHTML=icon('crown')+' '+scopeLabel();
+}
+/* ========================================================================== */
 function epChip(eid){return el('span',{style:'cursor:pointer;color:var(--gold);text-decoration:underline',
   onclick:ev=>{const e=_EP[eid];if(e){ev.stopPropagation();go('season:'+e.season_id);}}},epLabel(eid));}
 /* colored section header for detail views */
@@ -547,9 +809,14 @@ function dataTable(host,o){ // o:{cols:[{k,label,num,html(r),filter}],rows,page=
   more.addEventListener('click',()=>{state.page=1e9;draw();});
   draw();return {redraw:draw};
 }
-/* shared franchise tab bar for explorer views */
-function fTabs(m,viewId){const ctrl=el('div',{class:'tabs fade'});m.append(ctrl);
-  ['All',...FRANCHISES].forEach(f=>{const b=el('button',{class:'tab'+(FRANCHISE===f?' on':'')},f);
+/* shared franchise tab bar for explorer views — renders only the franchises
+   in the user's scope ("All" = everything in scope); hides entirely when the
+   scope holds a single franchise (nothing to switch between). */
+function fTabs(m,viewId){
+  const scoped=scopedFranchises();
+  if(scoped.length<2)return;
+  const ctrl=el('div',{class:'tabs fade'});m.append(ctrl);
+  ['All',...scoped].forEach(f=>{const b=el('button',{class:'tab'+(FRANCHISE===f?' on':'')},f);
     b.addEventListener('click',()=>{FRANCHISE=f;go(viewId);});ctrl.append(b);});}
 /* animated, dynamic franchise side-filters. Multi-select toggle chips read the franchise
    list straight from the data (FRANCHISES) so new franchises need no code change. Rows must
@@ -558,7 +825,10 @@ function fTabs(m,viewId){const ctrl=el('div',{class:'tabs fade'});m.append(ctrl)
 function franchiseToggles(host,o){o=o||{};
   const present=[...new Set(FRANCHISES)].filter(f=>$$('.frrow['+'data-fr*="'+f+'"]',host).length||$$('.frrow',host).some(r=>(r.dataset.fr||'').split(',').includes(f)));
   const list=present.length?present:[...FRANCHISES];
-  const active=new Set(list);            // start with all visible
+  /* start from the user's scope (fall back to all when nothing matches) */
+  const scopedF=scopedFranchises();
+  const active=new Set(list.filter(f=>scopedF.includes(f)));
+  if(!active.size)list.forEach(f=>active.add(f));
   const bar=el('div',{class:'frfilter byregion fade'});
   const COLORS={};list.forEach((f,i)=>COLORS[f]=PAL[i%PAL.length]);
   const apply=()=>{
@@ -681,14 +951,20 @@ function subTabs(m,vid,tabs){
 const GROUP_ICONS={Home:'crown',Queens:'star',Seasons:'map','Track Records':'chart','Music & Lip Syncs':'disc',
   Challenges:'sparkle','Panel & Guests':'mask',Connections:'web',Play:'book',Data:'grid',About:'book'};
 V({id:'home',title:'The <em>Werkroom</em>',kicker:'Home',icon:'crown',group:'Home',ord:1,
- desc:'An original, copyright-safe exploration of RuPaul’s Drag Race — every queen, episode, lip sync, guest judge and panel shift across the U.S. main series and All Stars, woven through one connected database.',
+ desc:'An original, copyright-safe exploration of RuPaul’s Drag Race — every queen, episode, lip sync, guest judge and panel shift across the whole Drag Race universe, woven through one connected database.',
  render(m){
   const meta=D.meta;
   const cards=[['Seasons',meta.seasons,'atlas'],['Queens',meta.queens,'queens'],['Contestant runs',meta.contestants,'tallies'],
     ['Episodes',meta.episodes,'episodes'],['Guest appearances',meta.appearances,'guestfreq'],['Lip-sync songs',meta.songs,'songreuse']];
   m.innerHTML=head(this);
-  /* welcome banner — prominent at the top of home, dismissible (remembered) */
-  if(!welcomeDismissed())m.append(welcomeCard());
+  /* welcome banner — prominent at the top of home, dismissible (remembered).
+     Also the season picker's home while no wr-scope key exists; right after a
+     choice it collapses into a one-line confirmation. */
+  if(_SCOPE_CONFIRM){
+    m.append(el('div',{class:'card fade',style:'margin-bottom:20px;border-color:rgba(116,224,200,.45)',
+      html:'Scoped to <b style="color:var(--gold)">'+_SCOPE_CONFIRM+'</b> — change any time from the crown chip up top.'}));
+    _SCOPE_CONFIRM='';
+  }else if(!welcomeDismissed()||!hasScopeKey())m.append(welcomeCard());
   m.append(el('div',{class:'grid',style:'grid-template-columns:repeat(auto-fit,minmax(150px,1fr))',
     html:cards.map(c=>`<div class="card" style="cursor:pointer" onclick="go('${c[2]}')"><div class="stat">${c[1]}</div><div class="statlbl">${c[0]}</div></div>`).join('')}));
   /* quick start */
@@ -746,7 +1022,10 @@ function seasonCard(s){
   const win=qname[s.winner_id]||'—', mc=qname[s.miss_congeniality_id]||'—';
   const cs=contestantsBySeason(s.season_id).sort((a,b)=>(+a.placement||99)-(+b.placement||99));
   const runners=cs.filter(c=>+c.placement>1&&+c.placement<=3).map(c=>cname(c));
-  return el('div',{class:'card',style:'cursor:pointer',onclick:()=>go('season:'+s.season_id)},
+  /* atlas/region landings browse the whole universe: out-of-scope seasons are
+     BADGED (dimmed, "+ add to scope"), never hidden — discovery grows the scope */
+  const out=scopeActive()&&!inScope(s.season_id);
+  const card=el('div',{class:'card',style:'cursor:pointer'+(out?';opacity:.55':''),onclick:()=>go('season:'+s.season_id)},
     el('div',{style:'display:flex;justify-content:space-between;align-items:center'},
       el('div',{class:'vkicker',style:'margin:0'},s.platform+' · '+ (s.premiere_date||'')),
       el('span',{class:'pill'+(s.franchise==='All Stars'?' mint':' gold'),style:'font-size:9px'},s.franchise)),
@@ -754,6 +1033,14 @@ function seasonCard(s){
     el('div',{style:'margin:10px 0 4px',html:`<span class="pill gold">${icon('crown')} ${win}</span>`}),
     el('div',{style:'font-size:12.5px;color:rgba(247,240,230,.85);line-height:1.7;margin-top:6px'},
       `Runners-up: ${runners.join(', ')||'—'}`,el('br'),`Miss C: ${mc}`,el('br'),`${s.episode_count} episodes`));
+  if(out){
+    const sc=loadScope();
+    const add=el('button',{class:'tab',type:'button',style:'margin-top:10px;font-size:10.5px;padding:4px 10px',
+      title:'Add '+((sc.seasons&&sc.seasons.length)?seasonName(s.season_id):('all of '+s.franchise))+' to your scope'},'+ add to scope');
+    add.addEventListener('click',ev=>{ev.stopPropagation();addSeasonToScope(s.season_id);});
+    card.append(add);
+  }
+  return card;
 }
 /* Region → Franchise → seasons atlas. Regions render in REGION_ORDER (Main Series
    first, flagship-styled); each region holds its franchises (read from the data),
@@ -766,11 +1053,13 @@ const _isMobile=()=>(typeof innerWidth!=='undefined'&&innerWidth<=640);
 function regionSection(region,opts){
   opts=opts||{};
   const byRegion=franchisesByRegion();
-  const frs=(byRegion[region]||[]).filter(f=>D.seasons.some(s=>s.franchise===f&&seasonAllowed(s.season_id)));
+  /* browse surface: honor the franchise tab if one is set, but NOT the scope —
+     out-of-scope seasons render badged via seasonCard() instead of vanishing */
+  const frs=(byRegion[region]||[]).filter(f=>D.seasons.some(s=>s.franchise===f&&franchiseAllowed(s.season_id)));
   if(!frs.length)return null;
   const flagship=region==='Main Series';
   const sec=el('div',{class:'region-sec'+(flagship?' flagship':'')});
-  const seasonCount=D.seasons.filter(s=>s.region===region&&seasonAllowed(s.season_id)).length;
+  const seasonCount=D.seasons.filter(s=>s.region===region&&franchiseAllowed(s.season_id)).length;
   /* Main Series always open; other regions collapse on small screens (unless a
      landing view forces them open, since the region IS the page there). */
   const startCollapsed=!opts.startOpen&&!flagship&&_isMobile();
@@ -788,7 +1077,7 @@ function regionSection(region,opts){
     ? [...frs].sort((a,b)=>{const w=f=>f==='RuPaul’s Drag Race'||/main|drag race$/i.test(f)?0:(f==='All Stars'?1:2);return w(a)-w(b);})
     : frs;
   orderedFrs.forEach(f=>{
-    const ses=D.seasons.filter(s=>s.franchise===f&&seasonAllowed(s.season_id));
+    const ses=D.seasons.filter(s=>s.franchise===f&&franchiseAllowed(s.season_id));
     const blk=el('div',{class:'fr-block'});
     blk.append(el('div',{class:'fr-block-head'},
       el('span',{class:'fr-block-name'},f),
@@ -1303,7 +1592,9 @@ V({id:'placementgrid',title:'Placement <em>Grid</em>',kicker:'Track Records',ico
  render(m){
   m.innerHTML=head(this);
   const ctrl=el('div',{class:'controls'});
-  const sel=el('select');SEASON_ORDER.forEach(s=>sel.append(el('option',{value:s},seasonName(s))));
+  const seasonsIn=SEASON_ORDER.filter(seasonAllowed);
+  const seasonOpts=seasonsIn.length?seasonsIn:SEASON_ORDER;
+  const sel=el('select');seasonOpts.forEach(s=>sel.append(el('option',{value:s},seasonName(s))));
   ctrl.append(el('span',{style:'font-size:12.5px;color:var(--gold)'},'Season:'),sel);m.append(ctrl);
   const statsHost=el('div');m.append(statsHost);
   const host=el('div',{class:'card fade',style:'overflow-x:auto'});m.append(host);
@@ -1317,7 +1608,7 @@ V({id:'placementgrid',title:'Placement <em>Grid</em>',kicker:'Track Records',ico
     cs.forEach(c=>{html+=`<tr><td style="white-space:nowrap;cursor:pointer" onclick="go('queen:${c.queen_id}')">${cname(c)}</td>`+
       eps.map(e=>{const st=prog[c.queen_id+'|'+e.episode_id]||'';return `<td style="text-align:center;padding:3px">${st?`<span class="st st-${st}" style="min-width:0;width:100%">${st}</span>`:''}</td>`;}).join('')+'</tr>';});
     html+='</table>';host.innerHTML=html;};
-  sel.addEventListener('change',e=>draw(e.target.value));draw(SEASON_ORDER[0]);
+  sel.addEventListener('change',e=>draw(e.target.value));draw(seasonOpts[0]);
  }});
 
 /* ---------- 6. WIN/HIGH/LOW/BTM TALLIES ---------- */
@@ -1418,10 +1709,8 @@ V({id:'lipsyncs',title:'Lip-Sync <em>Battles</em>',kicker:'Music & Lip Syncs',ic
  desc:'Every head-to-head lip sync, filterable by franchise, season, and stakes — Lip Sync for Your Life, for the Win, or for the Crown.',
  render(m){
   m.innerHTML=head(this);
-  // franchise tab bar (global FRANCHISE) — re-renders the view, like the Music view
-  const ctrl=el('div',{class:'tabs fade'});m.append(ctrl);
-  ['All',...FRANCHISES].forEach(f=>{const b=el('button',{class:'tab'+(FRANCHISE===f?' on':'')},f);
-    b.addEventListener('click',()=>{FRANCHISE=f;go('lipsyncs');});ctrl.append(b);});
+  // franchise tab bar (global FRANCHISE, scoped) — re-renders the view, like the Music view
+  fTabs(m,'lipsyncs');
   // local state for season + type (reset when franchise changes via go())
   let season='All',type='All';
   const bar=el('div',{class:'card fade',style:'display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:14px'});
@@ -2028,7 +2317,9 @@ V({id:'missc',title:'Miss <em>Congeniality</em>',kicker:'Queens',icon:'heart',gr
 /* ---------- 19. EXITS & FAREWELLS (Elimination Order + Farewell Wall) ---------- */
 function renderElimOrderTab(m){
   const ctrl=el('div',{class:'controls'});const sel=el('select');
-  SEASON_ORDER.forEach(s=>sel.append(el('option',{value:s},seasonName(s))));
+  const seasonsIn=SEASON_ORDER.filter(seasonAllowed);
+  const seasonOpts=seasonsIn.length?seasonsIn:SEASON_ORDER;
+  seasonOpts.forEach(s=>sel.append(el('option',{value:s},seasonName(s))));
   ctrl.append(el('span',{style:'font-size:12.5px;color:var(--gold)'},'Season:'),sel);m.append(ctrl);
   const host=el('div',{class:'card fade'});m.append(host);
   const draw=sid=>{host.innerHTML='<div class="vkicker">Exit sequence</div>';
@@ -2041,7 +2332,7 @@ function renderElimOrderTab(m){
         by:(e.decided_by_queen_id&&e.decided_by_queen_id!=='-')?(qname[e.decided_by_queen_id]||'?'):''})),
       csv:'elim-order-'+sid,onRow:r=>go('queen:'+r.queen_id)});
   };
-  sel.addEventListener('change',e=>draw(e.target.value));draw(SEASON_ORDER[0]);
+  sel.addEventListener('change',e=>draw(e.target.value));draw(seasonOpts[0]);
 }
 V({id:'elimorder',title:'Exits &amp; <em>Farewells</em>',kicker:'Track Records',icon:'timer',group:'Track Records',ord:12,
  desc:'Who went home when — the weekly cull in sequence, and every mirror message left behind.',
@@ -2053,10 +2344,11 @@ V({id:'elimorder',title:'Exits &amp; <em>Farewells</em>',kicker:'Track Records',
 /* ---------- 20. GUEST JUDGE DIRECTORY (tab of Guest Judges) ---------- */
 function renderGuestDirTab(m){
   const bios=X.guest_bios||{};
+  const unscoped=FRANCHISE==='All'&&!scopeActive();   /* fast path only when nothing filters */
   const rows=X.guest_freq.map(g=>{
-    const scoped=(g.episodes||[]).filter(eid=>{const e=_EP[eid];return e&&seasonAllowed(e.season_id);});
-    return {name:g.name,appearances:FRANCHISE==='All'?g.appearances:scoped.length,
-      known_for:bios[g.name]||'',_eps:FRANCHISE==='All'?(g.episodes||[]):scoped};})
+    const scoped=unscoped?(g.episodes||[]):(g.episodes||[]).filter(eid=>{const e=_EP[eid];return e&&seasonAllowed(e.season_id);});
+    return {name:g.name,appearances:unscoped?g.appearances:scoped.length,
+      known_for:bios[g.name]||'',_eps:scoped};})
     .filter(r=>r.appearances>0).sort((a,b)=>b.appearances-a.appearances||a.name.localeCompare(b.name));
   statCards(m,[[rows.length,'guest judges'],[rows[0]?rows[0].name:'—','most frequent']]);
   const card=el('div',{class:'card fade'});m.append(card);
@@ -2078,9 +2370,11 @@ V({id:'apptypes',title:'Appearance <em>Types</em>',kicker:'Panel & Guests',icon:
   const TLABEL={GUEST_JUDGE:'judges’ panel',MAINSTAGE_GUEST:'mainstage',WERKROOM_GUEST:'werkroom'};
   const col={GUEST_JUDGE:'var(--magenta)',MAINSTAGE_GUEST:'var(--gold)',WERKROOM_GUEST:'var(--mint)'};
   const host=el('div',{class:'card fade',style:'overflow-x:auto'});
-  const counts={};SEASON_ORDER.forEach(s=>{counts[s]={};types.forEach(t=>counts[s][t]=0);});
+  /* season rows honor the user's scope (mode 'all' = every season, as before) */
+  const seasonRows=SEASON_ORDER.filter(inScope);
+  const counts={};seasonRows.forEach(s=>{counts[s]={};types.forEach(t=>counts[s][t]=0);});
   D.appearances.forEach(a=>{if(counts[a.season_id]&&counts[a.season_id][a.appearance_type]!=null)counts[a.season_id][a.appearance_type]++;});
-  const max=Math.max(...SEASON_ORDER.map(s=>types.reduce((n,t)=>n+counts[s][t],0)),1);
+  const max=Math.max(...seasonRows.map(s=>types.reduce((n,t)=>n+counts[s][t],0)),1);
   // drill-down: the named people for one season, grouped by appearance type
   const buildDetail=s=>{
     const det=el('div',{style:'display:none;padding:4px 0 12px 84px'});
@@ -2108,7 +2402,7 @@ V({id:'apptypes',title:'Appearance <em>Types</em>',kicker:'Panel & Guests',icon:
     if(!any)det.append(el('div',{style:'font-size:11.5px;color:rgba(247,240,230,.62)'},'No named guests recorded for this season yet.'));
     return det;
   };
-  SEASON_ORDER.forEach(s=>{
+  seasonRows.forEach(s=>{
     const tot=types.reduce((n,t)=>n+counts[s][t],0);
     const caret=el('span',{style:'color:var(--magenta);font-size:10px;width:10px;flex:none'},'▸');
     const row=el('div',{style:'display:flex;align-items:center;gap:10px;padding:5px 0;cursor:pointer'});
@@ -2165,7 +2459,7 @@ V({id:'entrance',title:'Entrance Order <em>&amp; Fate</em>',kicker:'Track Record
     data:eks.map(k=>+(agg[k].reduce((a,b)=>a+b,0)/agg[k].length).toFixed(2)),backgroundColor:PAL[0]}]},
     options:{plugins:{legend:{display:false}}}},240))m.append(cc);
   const host=el('div',{class:'card fade'});host.innerHTML='<div class="vkicker">By season \u00b7 click to expand</div>';
-  SEASON_ORDER.forEach(sid=>{
+  SEASON_ORDER.filter(inScope).forEach(sid=>{
     const cs=contestantsBySeason(sid).slice().sort((a,b)=>{
       const ea=+a.entrance_order||99,eb=+b.entrance_order||99;return ea!==eb?ea-eb:(+a.placement||99)-(+b.placement||99);});
     const hasEnt=cs.some(c=>c.entrance_order&&c.entrance_order!=='-');
@@ -2260,10 +2554,13 @@ V({id:'music',title:'The <em>Music</em>',kicker:'Music & Lip Syncs',icon:'disc',
  desc:'A jukebox for the whole archive — pick a franchise and season for its playlist (lip syncs, cast &amp; challenge songs, Ru-mixes), or browse Ru’s catalogue and the original challenge songs. Tap any track to load it in the shared Spotify player.',
  render(m){
   m.innerHTML=head(this);
-  // ---- franchise tabs (global FRANCHISE) ----
-  const ctrl=el('div',{class:'tabs fade'});m.append(ctrl);
-  ['All',...FRANCHISES].forEach(f=>{const b=el('button',{class:'tab'+(FRANCHISE===f?' on':'')},f);
-    b.addEventListener('click',()=>{FRANCHISE=f;MUSIC_SEASON='';go('music');});ctrl.append(b);});
+  // ---- franchise tabs (global FRANCHISE, scoped like fTabs; clears the season pick) ----
+  const scopedFr=scopedFranchises();
+  if(scopedFr.length>1){
+    const ctrl=el('div',{class:'tabs fade'});m.append(ctrl);
+    ['All',...scopedFr].forEach(f=>{const b=el('button',{class:'tab'+(FRANCHISE===f?' on':'')},f);
+      b.addEventListener('click',()=>{FRANCHISE=f;MUSIC_SEASON='';go('music');});ctrl.append(b);});
+  }
   // header note
   m.append(el('div',{class:'fade',style:'font-size:12px;color:rgba(247,240,230,.62);margin:2px 0 14px;line-height:1.5'},
     'Most tracks play in-page via Spotify; a handful of multi-track Rusicals have no single Spotify track yet and show a muted note.'));
@@ -2375,7 +2672,7 @@ V({id:'music',title:'The <em>Music</em>',kicker:'Music & Lip Syncs',icon:'disc',
   function renderRumix(){
     body.innerHTML='';
     let songs=D.songs.filter(s=>s.is_rumix==='Yes');
-    if(FRANCHISE!=='All')songs=songs.filter(s=>{const ss=songSeasons(s.song_id);return [...ss].some(seasonAllowed)||(s.season_id!=='-'&&seasonAllowed(s.season_id));});
+    if(FRANCHISE!=='All'||scopeActive())songs=songs.filter(s=>{const ss=songSeasons(s.song_id);return [...ss].some(seasonAllowed)||(s.season_id!=='-'&&seasonAllowed(s.season_id));});
     songs.sort((a,b)=>(+b.times_used||0)-(+a.times_used||0)||(a.title||'').localeCompare(b.title||''));
     const np=songs.filter(isPlay).length;
     statCards(body,[[songs.length,'Ru-mixes'],[np,'playable'],[songs.length-np,'no track yet']]);
@@ -2391,13 +2688,13 @@ V({id:'music',title:'The <em>Music</em>',kicker:'Music & Lip Syncs',icon:'disc',
   function renderCast(){
     body.innerHTML='';
     let songs=D.songs.filter(s=>s.catalog!=='LIPSYNC');
-    if(FRANCHISE!=='All')songs=songs.filter(s=>s.season_id==='-'||seasonAllowed(s.season_id));
+    if(FRANCHISE!=='All'||scopeActive())songs=songs.filter(s=>s.season_id==='-'||seasonAllowed(s.season_id));
     const np=songs.filter(isPlay).length;
     statCards(body,[[songs.length,'cast &amp; rusical songs'],[np,'playable'],[songs.length-np,'no track yet']]);
     body.append(el('div',{class:'vkicker fade'},'Original challenge songs — Rusicals, girl-group verses, songwriting &amp; cast singles, grouped by season'));
     const player=makePlayer();body.append(player.node);
     // group by season_id in SEASON_ORDER, then Unattributed
-    const order=[...allowedSeasons];if(FRANCHISE==='All')order.push('-');else if(songs.some(s=>s.season_id==='-'))order.push('-');
+    const order=[...allowedSeasons];if(FRANCHISE==='All'&&!scopeActive())order.push('-');else if(songs.some(s=>s.season_id==='-'))order.push('-');
     order.forEach(seas=>{
       const grp=songs.filter(s=>s.season_id===seas).sort((a,b)=>(a.title||'').localeCompare(b.title||''));
       if(!grp.length)return;
@@ -3481,7 +3778,7 @@ V({id:'hostpack',title:'Host <em>Pack</em>',kicker:'Play',icon:'book',group:'Pla
     const title=el('div',{class:'card',style:'margin-bottom:14px'});
     title.append(el('div',{style:'font-family:var(--disp);font-weight:800;font-size:30px'},'The Werkroom — Trivia Night'),
       el('div',{style:'font-size:13px;margin-top:8px;line-height:1.7'},
-        `Pack code ${state.code} · ${new Date().toISOString().slice(0,10)} · scope: ${FRANCHISE==='All'?'all franchises':FRANCHISE} · ${qs.length} questions · ${state.diff.toLowerCase()} difficulty`));
+        `Pack code ${state.code} · ${new Date().toISOString().slice(0,10)} · scope: ${FRANCHISE==='All'?(scopeActive()?scopeLabel():'all franchises'):FRANCHISE} · ${qs.length} questions · ${state.diff.toLowerCase()} difficulty`));
     out.append(title);
     for(let r=0;r*10<qs.length;r++){
       const card=el('div',{class:'card',style:'margin-bottom:14px'});
@@ -3521,15 +3818,47 @@ function libInit(){
   LIB.celebs=D.episode_roles.filter(r=>r.role_type==='SNATCH_CHARACTER').map(r=>({n:norm(r.role_detail.split('(')[0]),r}));
   LIB.cont={};D.contestants.forEach(c=>{(LIB.cont[c.queen_id]=LIB.cont[c.queen_id]||[]).push(c);});
 }
-function libFind(list,nq){for(const e of list){if(e.n&&e.n.length>3&&nq.includes(e.n))return e;}return null;}
+/* optional pref(e): keep scanning for a preferred (in-scope) hit, falling back
+   to the first hit — so scope softly disambiguates without ever refusing. */
+function libFind(list,nq,pref){
+  let first=null;
+  for(const e of list){
+    if(!(e.n&&e.n.length>3&&nq.includes(e.n)))continue;
+    if(!pref)return e;
+    if(pref(e))return e;
+    if(!first)first=e;
+  }
+  return first;
+}
 function libSeason(nq){
   const m=nq.match(/season (\d{1,2})/);
-  if(m){const lbl='season '+m[1];const hit=LIB.seasons.find(e=>e.n===lbl||e.n.endsWith(' '+lbl));if(hit)return hit.s;}
-  const e=libFind(LIB.seasons,nq);return e&&e.s;
+  if(m){const lbl='season '+m[1];
+    const hits=LIB.seasons.filter(e=>e.n===lbl||e.n.endsWith(' '+lbl));
+    if(hits.length){const pref=hits.find(e=>inScope(e.s.season_id));return (pref||hits[0]).s;}}
+  const e=libFind(LIB.seasons,nq,x=>inScope(x.s.season_id));return e&&e.s;
 }
-function libAnswer(raw){
+/* soft scope tag: if everything the answer points at sits outside the user's
+   shelves, say so — but always answer (the librarian fetches anything). */
+function libScopeTag(a){
+  try{
+    if(!a||!scopeActive())return a;
+    let anyRef=false,anyIn=false;
+    (a.links||[]).forEach(l=>{
+      const i=String(l).indexOf(':');if(i<1)return;
+      const id=String(l).slice(0,i),arg=String(l).slice(i+1);
+      if(id==='season'&&arg){anyRef=true;if(inScope(arg))anyIn=true;}
+      if(id==='queen'&&arg){const runs=(LIB.cont&&LIB.cont[arg])||[];
+        if(runs.length){anyRef=true;if(runs.some(c=>inScope(c.season_id)))anyIn=true;}}
+    });
+    if(anyRef&&!anyIn)a.t+=' (That one’s outside your shelves, scholar — the crown chip up top widens the room.)';
+  }catch(e){}
+  return a;
+}
+function libAnswer(raw){return libScopeTag(libAnswerCore(raw));}
+function libAnswerCore(raw){
   libInit();const nq=LIB.norm(raw);const L=[];
-  const Q=libFind(LIB.queens,nq)?.q, S=libSeason(nq), SO=libFind(LIB.songs,nq)?.s, C=libFind(LIB.celebs,nq)?.r;
+  const Q=libFind(LIB.queens,nq,e=>{const r=(e.q&&LIB.cont[e.q.queen_id])||[];return r.some(c=>inScope(c.season_id));})?.q,
+    S=libSeason(nq), SO=libFind(LIB.songs,nq)?.s, C=libFind(LIB.celebs,nq)?.r;
   const name=q=>q.drag_name, runsOf=q=>LIB.cont[q.queen_id]||[];
   const seasonOfQ=()=>{const r=runsOf(Q);return S?r.find(c=>c.season_id===S.season_id):r[0];};
   // who won <season>
@@ -4125,16 +4454,28 @@ function go(route){
     const bar=el('div',{class:'backbar fade'},back);
     main.insertBefore(bar,main.firstChild);
   }
+  /* persistent scope chip — the single always-visible affordance for the season
+     scope on every view (desktop: top of main; mobile: mirrored in the topbar).
+     Prepended after the backbar so it always sits first; never in NAV_STACK. */
+  main.insertBefore(el('div',{class:'scopebar fade'},scopeChipEl()),main.firstChild);
+  updateTopbarChip();
   if(history&&history.replaceState)history.replaceState(null,'','#'+route);
   document.querySelector('aside').classList.remove('open');
   // footer
   const foot=el('div',{class:'foot'});
-  foot.append(el('div',{html:'THE WERKROOM · an original, copyright-safe data observatory of the U.S. main series · built from a hand-verified relational database · no official logos, trade dress, or photographs used'}));
+  foot.append(el('div',{html:'THE WERKROOM · an original, copyright-safe data observatory of the Drag Race universe · built from a hand-verified relational database · no official logos, trade dress, or photographs used'}));
   foot.append(el('div',{style:'margin-top:8px'},'Spot a mistake? ',feedbackFootLink(),'.'));
   foot.append(el('div',{style:'margin-top:8px;opacity:.8'},FAN_DISCLAIMER));
   main.append(foot);
 }
 window.addEventListener('mousemove',e=>{if(tt.style.opacity==='1')moveTip(e);});
+/* embed mode: inside the 3D world's dressing panel (or any iframe / ?embed=1)
+   hide the sidebar/topbar/footer chrome and show content-only. self!==top is
+   the trigger, so the world's bridgeFrame.src stays untouched. */
+try{
+  if(window.self!==window.top||new URLSearchParams(location.search).has('embed'))
+    document.body.classList.add('embed');
+}catch(e){document.body.classList.add('embed');}   /* cross-origin top ⇒ definitely framed */
 buildNav();
 go((location.hash||'#home').slice(1));
 /* External hash changes (browser/phone back-forward, deep-link edits, manual
