@@ -202,10 +202,10 @@ a{color:var(--gold)}
   border-radius:999px;cursor:pointer;font-family:var(--mono);font-size:10.5px;padding:5px 11px}
 .schip.mini.on{background:var(--magenta,#e6007e);border-color:var(--magenta,#e6007e);color:#fff}
 .scopefr{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 8px;max-height:190px;overflow-y:auto}
-#pauseScope{margin:10px 0 12px;padding-top:10px;border-top:1px solid rgba(201,162,39,.18);
+#pauseScope,#pauseMotion{margin:10px 0 12px;padding-top:10px;border-top:1px solid rgba(201,162,39,.18);
   font-size:12px;color:rgba(247,240,230,.85);line-height:1.6}
-#pauseScope b{color:var(--gold)}
-#pauseScope .gbtn{margin-left:10px;padding:6px 12px;font-size:10.5px;vertical-align:middle}
+#pauseScope b,#pauseMotion b{color:var(--gold)}
+#pauseScope .gbtn,#pauseMotion .gbtn{margin-left:10px;padding:6px 12px;font-size:10.5px;vertical-align:middle}
 #pauseProg{display:flex;align-items:center;gap:14px;margin:14px 0 4px;padding-top:12px;
   border-top:1px solid rgba(201,162,39,.25)}
 #pauseProg svg{flex:none}
@@ -298,7 +298,7 @@ classic two-dimensional site at index.html, which is fully accessible. Use the s
       <button class="gbtn" id="enterBtn" disabled>Enter the Werkroom</button>
       <a class="gbtn ghost" href="index.html">Open the classic site</a>
     </div>
-    <div class="gfoot" id="gateFoot">WASD / arrow keys to walk · mouse to look · click or E to interact · V flips first/third person · T talks to The Librarian · Esc frees the mouse.<br/>
+    <div class="gfoot" id="gateFoot">WASD / arrow keys to walk · mouse to look · click or E to interact · [ ] flip the photo-wall season · V flips first/third person · T talks to The Librarian · Esc frees the mouse.<br/>
     On a phone: left thumb to walk, right thumb to look, tap an object or the prompts.</div>
   </div>
 </div>
@@ -308,13 +308,14 @@ classic two-dimensional site at index.html, which is fully accessible. Use the s
   <div class="gcard">
     <h3>Paused — <em style="color:var(--brass)">the house lights are up</em></h3>
     <div class="keys">
-      <b>W A S D</b> walk &nbsp;·&nbsp; <b>Shift</b> run &nbsp;·&nbsp; <b>mouse</b> look<br/>
-      <b>E</b> or <b>click</b> what you're near or aiming at &nbsp;·&nbsp; <b>T</b> talk to The Librarian &nbsp;·&nbsp; <b>← →</b> flip seasons at the photo wall or judges' table<br/>
+      <b>W A S D</b> or <b>arrow keys</b> walk &nbsp;·&nbsp; <b>Shift</b> run &nbsp;·&nbsp; <b>mouse</b> look<br/>
+      <b>E</b> or <b>click</b> what you're near or aiming at &nbsp;·&nbsp; <b>T</b> talk to The Librarian &nbsp;·&nbsp; <b>[ ]</b> flip the season (or the brass arrows on the photo wall; <b>← →</b> while seated at the judges' table)<br/>
       <b>V</b> switch first/third person &nbsp;·&nbsp; <b>Esc</b> frees the mouse / closes panels / this menu<br/>
       <b>sit</b> in the Reading Room armchair to get read &nbsp;·&nbsp; <b>step</b> on a runway spotlight to call a lip sync
     </div>
     <div id="pauseProg"></div>
     <div id="pauseScope"></div>
+    <div id="pauseMotion"></div>
     <div>
       <button class="gbtn" id="resumeBtn">Resume</button>
       <button class="gbtn ghost" id="pauseView">Switch view</button>
@@ -995,6 +996,14 @@ function scopePresets(seasons, generated){
     airingSeasons:airing, airingFranchises:Object.keys(airFr)};
 }
 
+/* ---- motion setting (wr3d.motion) — pure. 'auto' follows the system's
+   reduced-motion preference; 'full'/'calm' override; junk behaves as 'auto'. */
+function resolveMotion(setting, systemReduced){
+  if(setting==='full') return 'full';
+  if(setting==='calm') return 'calm';
+  return systemReduced ? 'calm' : 'full';
+}
+
 return {
   FAN_DISCLAIMER:FAN_DISCLAIMER, BRIDGE_REQUIRED:BRIDGE_REQUIRED,
   GREETING:GREETING, GREETING_2:GREETING_2, REFUSAL:REFUSAL, SUGGESTIONS:SUGGESTIONS,
@@ -1012,7 +1021,7 @@ return {
   snatchRoles:snatchRoles, snatchTally:snatchTally, snatchEpisodeCards:snatchEpisodeCards,
   lsPick:lsPick, lsOutcomeText:lsOutcomeText, triviaBuild:triviaBuild,
   scopeAllows:scopeAllows, scopedSeasonList:scopedSeasonList,
-  scopeLabel:scopeLabel, scopePresets:scopePresets
+  scopeLabel:scopeLabel, scopePresets:scopePresets, resolveMotion:resolveMotion
 };
 })();
 if (typeof module!=='undefined' && module.exports) module.exports = WR;
@@ -1043,14 +1052,23 @@ function failGate(title, body){
   $('.gtitle').innerHTML = 'THE <em>WERKROOM</em><br/>needs a different stage';
 }
 
-/* ---------------- capability gate ---------------- */
-window.WR_CALM = false;
-if(matchMedia('(prefers-reduced-motion: reduce)').matches){
-  /* soften, don't block: note the preference, offer both doors */
-  window.WR_CALM = true;   /* consumed below: gentler turn speed, no camera sway, instant curtain fade */
-  gateStatus.textContent = 'reduced motion is on — calm mode ready';
-  gateBody.innerHTML = 'Your system asks for reduced motion, so the room will move gently: '+
-    'softer turns, no sway, quicker fades. Prefer zero camera movement? The classic site holds the entire archive.';
+/* ---------------- capability gate + motion setting ----------------
+   wr3d.motion: 'auto' (follow the system) | 'full' | 'calm'. WR_CALM is a LIVE
+   getter — every tick that consults it picks up a runtime switch at once. */
+const SYS_REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
+let MOTION = 'auto';
+try{ const s=JSON.parse(localStorage.getItem('wr3d')||'null');
+  if(s && (s.motion==='full'||s.motion==='calm')) MOTION=s.motion; }catch(e){}
+Object.defineProperty(window, 'WR_CALM', {configurable:true,
+  get(){ return WR.resolveMotion(MOTION, SYS_REDUCED)==='calm'; }});
+if(window.WR_CALM){
+  gateStatus.textContent = 'reduced motion detected — calm mode ready';
+  gateBody.innerHTML = 'Reduced motion detected — the room is in calm mode: softer turns, no sway, '+
+    'a still disco ball. Want the full show? ';
+  const b=document.createElement('button'); b.className='gbtn ghost'; b.textContent='Give me the full show';
+  b.addEventListener('click', ()=>{ setMotion('full');
+    gateStatus.textContent='full motion on — the ball spins'; b.remove(); });
+  gateBody.appendChild(b);
 }
 {
   const test = document.createElement('canvas');
@@ -1348,13 +1366,15 @@ const spotTeal=addL(new THREE.SpotLight(0x35e0d0, 340, 20, .5, .5, 2), 'run', gR
 const pJuke =addL(new THREE.PointLight(0xffb066, 26, 9, 2), 'run', gRun); pJuke.position.set(-10.5,2.4,24.2);
 const pWingE=addL(new THREE.PointLight(0x59d7ff, 22, 9, 2), 'run', gRun); pWingE.position.set(11,3,30);     /* atlas cyan */
 const pWingW=addL(new THREE.PointLight(0xbb95ff, 22, 9, 2), 'run', gRun); pWingW.position.set(-11,3,29.5);  /* calendar lilac */
-/* two disco sweep spots — desktop only (mobile light budget); none under WR_CALM */
+/* two disco sweep spots — desktop only; lazy, so a calm boot can add them later */
 let sweepA=null, sweepB=null;
-if(!IS_TOUCH && !window.WR_CALM){
+function ensureSweeps(){
+  if(IS_TOUCH || sweepA) return;
   sweepA=addL(new THREE.SpotLight(0xff4fb0, 300, 26, .3, .6, 2), 'run', gRun);
   sweepB=addL(new THREE.SpotLight(0x46e6c8, 280, 26, .3, .6, 2), 'run', gRun);
   [sweepA,sweepB].forEach((s,i)=>{ s.position.set(0,4.9,26.5); s.target.position.set(i?5:-5,0,i?30:23); gRun.add(s.target); });
 }
+if(!window.WR_CALM) ensureSweeps();
 
 /* ---------------- glow pools: baked-feel colored light, zero light cost ----------------
    One shared radial-gradient texture, tinted per station — a rainbow around the room. */
@@ -1475,11 +1495,12 @@ function speckLayout(theta){
   SPECK.geo.attributes.position.needsUpdate=true;
 }
 speckLayout(0);
-let discoTheta=0;
 function discoTick(dt,t){
   if(!gRun.visible || window.WR_CALM) return;   /* calm mode: static sparkle, no sweeps */
   disco.rotation.y += dt*.4;
-  discoTheta -= dt*.25; speckLayout(discoTheta);
+  /* the dots are the ball's reflections: lock the fan to the ball's own spin
+     (speckLayout rotates by -theta in three's Y convention, hence the sign) */
+  speckLayout(-disco.rotation.y);
   if(sweepA){
     sweepA.target.position.set(Math.cos(t*.5)*9, 0, 26.5+Math.sin(t*.5)*5.5);
     sweepB.target.position.set(Math.cos(-t*.42+2)*9, 0, 26.5+Math.sin(-t*.42+2)*5.5);
@@ -1691,13 +1712,19 @@ function avatarTick(dt, gy, t){
   let d=want-avatarYaw; d=Math.atan2(Math.sin(d),Math.cos(d));
   avatarYaw+=d*Math.min(1,dt*10);
   avatar.rotation.y=avatarYaw;
+  if(slipT>0){                                    /* banana physics: quick tumble + recover */
+    const p=1-slipT/0.9;
+    avatar.rotation.x=-Math.sin(Math.min(1,p*1.5)*Math.PI)*1.15;
+    avatar.position.y-=Math.sin(p*Math.PI)*0.3;
+  } else if(avatar.rotation.x) avatar.rotation.x=0;
   avatarMove=Math.max(0, avatarMove-dt*3);
 }
 function camTick(dt, gy, t){
   const third = entered && VIEW.mode==='third';
   avatar.visible = third;
+  const slipBounce = slipT>0 ? Math.sin((1-slipT/0.9)*Math.PI*3)*0.09 : 0;   /* WR_CALM never sets slipT */
   if(!third){
-    camera.position.set(player.x, player.eyeY, player.z);
+    camera.position.set(player.x, player.eyeY+slipBounce, player.z);
     camera.rotation.y=player.yaw; camera.rotation.x=player.pitch; camera.rotation.z=0;
     cam.has=false;
     return;
@@ -1718,7 +1745,7 @@ function camTick(dt, gy, t){
     d=Math.max(0.9,d);
     dx=player.x+bx*Math.cos(elev)*d; dz=player.z+bz*Math.cos(elev)*d;
     dy=pivY+Math.sin(elev)*d;
-    dy=Math.max(groundY(dx,dz)+0.35, Math.min(roomCeil(dz)-0.2, dy));
+    dy=Math.max(groundY(dx,dz)+0.35, Math.min(roomCeil(dz)-0.2, dy))+slipBounce;
     lx=player.x; ly=pivY; lz=player.z;
   }
   const k = window.WR_CALM ? 1 : (1-Math.exp(-dt*9));   /* calm mode: no camera lag bounce */
@@ -1786,10 +1813,11 @@ addEventListener('keydown', e=>{
   if(e.code==='KeyE') doInteract();
   if(e.code==='KeyT') openChat();
   if(e.code==='KeyV') toggleView();
-  if(e.code==='ArrowLeft'||e.code==='ArrowRight'){
-    const nearWall = Math.hypot(player.x+11.9, player.z-7.5) < 6.5;
-    if(player.seated || nearWall){ shiftSeason(e.code==='ArrowRight'?1:-1); e.preventDefault(); }
-  }
+  if(e.code.indexOf('Arrow')===0) e.preventDefault();       /* arrows walk now — never scroll */
+  if((e.code==='ArrowLeft'||e.code==='ArrowRight') && player.seated)
+    shiftSeason(e.code==='ArrowRight'?1:-1);                /* seated at the scoreboard: keep flipping */
+  if(e.code==='BracketLeft') shiftSeason(-1);               /* [ ] flip the season from anywhere */
+  if(e.code==='BracketRight') shiftSeason(1);
 });
 addEventListener('keyup', e=>{ keys[e.code]=false; });
 
@@ -1824,7 +1852,7 @@ if(IS_TOUCH){
 }
 
 /* pause */
-function openPause(){ paused=true; scopeSyncCheck(); renderPauseProg(); renderPauseScope(); show($('#pause')); releaseLook(); }
+function openPause(){ paused=true; scopeSyncCheck(); renderPauseProg(); renderPauseScope(); renderPauseMotion(); show($('#pause')); releaseLook(); }
 function closePause(){ paused=false; hide($('#pause')); }   /* mouse stays free; click the canvas to look again */
 $('#resumeBtn').addEventListener('click', closePause);
 
@@ -1856,7 +1884,7 @@ let promptTarget=null, pickedQueen=null;
 
 addInteract({id:'photowall', x:-11.9, z:7.5, radius:5.2,
   label(){ return pickedQueen ? `<b>E</b> — open ${pickedQueen.name}'s dossier` :
-    `<b>E</b> — Photo Wall · look at a queen · <b>←→</b> season`; },
+    `<b>E</b> — Photo Wall · look at a queen · <b>[ ]</b> season`; },
   act(){ if(pickedQueen) openDress('queen:'+pickedQueen.qid, 'Photo Wall → '+pickedQueen.name);
          else openDress('gallery','Photo Wall → Gallery'); }});
 addInteract({id:'arrowPrev', x:-11.8, z:1.9, radius:1.7,
@@ -2533,8 +2561,10 @@ function tick(){
     /* input */
     let mx=0,mz=0;
     if(keys.KeyW||keys.ArrowUp)mz+=1; if(keys.KeyS||keys.ArrowDown)mz-=1;
-    if(keys.KeyA)mx-=1; if(keys.KeyD)mx+=1;
+    if(keys.KeyA||(keys.ArrowLeft&&!player.seated))mx-=1;   /* seated ←/→ flip seasons instead */
+    if(keys.KeyD||(keys.ArrowRight&&!player.seated))mx+=1;
     if(IS_TOUCH){ mx+=joy.dx; mz-=joy.dy; }
+    if(slipT>0){ mx=0; mz=0; }                              /* mid-slip: the floor is in charge */
     if((mx||mz) && player.seated){ player.seated=false; paintScorePlaceholder(); }
     if((mx||mz) && !player.seated){
       const m=Math.hypot(mx,mz); mx/=m; mz/=m;
@@ -2559,6 +2589,7 @@ function tick(){
   if(!battle) lsDiscs.forEach((d,i)=>{ d.material.color.setHSL(0.9-(i*0.35), .5, .75+Math.sin(t*2+i*2)*.12); });
   discoTick(dt,t);
   phase2Tick(dt,t);
+  eggTick(dt,t);
   aimTick(); highlightTick(t);
   updatePrompt();
   renderFrame();
@@ -2575,10 +2606,11 @@ function loadSave(){
   try{
     const s=JSON.parse(localStorage.getItem('wr3d')||'null');
     if(s && s.v===1 && Array.isArray(s.met))
-      return Object.assign({cards:0, ls:{right:0,seen:0}, view:'third'}, s,
-        {ls:Object.assign({right:0,seen:0}, s.ls||{}), view:(s.view==='first'?'first':'third')});
+      return Object.assign({cards:0, ls:{right:0,seen:0}, view:'third', eggs:[], motion:'auto'}, s,
+        {ls:Object.assign({right:0,seen:0}, s.ls||{}), view:(s.view==='first'?'first':'third'),
+         eggs:Array.isArray(s.eggs)?s.eggs:[], motion:(s.motion==='full'||s.motion==='calm')?s.motion:'auto'});
   }catch(e){}
-  return {v:1, met:[], cards:0, ls:{right:0,seen:0}, view:'third'};
+  return {v:1, met:[], cards:0, ls:{right:0,seen:0}, view:'third', eggs:[], motion:'auto'};
 }
 const SAVE = loadSave();
 const metSet = new Set(SAVE.met);
@@ -2600,6 +2632,27 @@ function toggleView(){
 $('#viewBtn').addEventListener('click', toggleView);
 $('#pauseView').addEventListener('click', toggleView);
 syncViewUI();
+
+/* ---- motion setting: pause row + runtime switch. Every mover reads the
+   WR_CALM getter per frame; the sweep spots are the one build-time skip. ---- */
+function setMotion(mode){
+  MOTION = (mode==='full'||mode==='calm') ? mode : 'auto';
+  SAVE.motion=MOTION; persist();
+  if(!window.WR_CALM) ensureSweeps();
+  if(sweepA){ sweepA.visible=sweepB.visible=!window.WR_CALM; }
+  if(entered) toast(window.WR_CALM ? 'Calm mode — the room holds its pose.' : 'Full motion — the disco ball spins.');
+}
+function renderPauseMotion(){
+  const host=$('#pauseMotion'); if(!host) return;
+  host.innerHTML='Motion: <b>'+(window.WR_CALM?'calm':'full show')+'</b>'+
+    (MOTION==='auto'?' · following your system setting':'');
+  [['auto','Auto'],['full','Full show'],['calm','Calm']].forEach(([m,l])=>{
+    const b=document.createElement('button'); b.className='gbtn ghost'; b.textContent=l;
+    if(MOTION===m){ b.style.background='rgba(244,181,63,.22)'; b.style.borderColor='var(--gold)'; }
+    b.addEventListener('click', ()=>{ setMotion(m); renderPauseMotion(); });
+    host.appendChild(b);
+  });
+}
 let _saveT=null;
 function persist(){
   clearTimeout(_saveT);
@@ -2640,7 +2693,8 @@ function renderPauseProg(){
     'stroke-dasharray="'+(C*frac).toFixed(1)+' '+C.toFixed(1)+'" transform="rotate(-90 32 32)"/>'+
     '<text x="32" y="37" text-anchor="middle" fill="#f4b53f" font-size="13" font-family="Space Mono, monospace">'+n+'</text></svg>'+
     '<div class="pp"><b>'+n+'</b> of '+total+' queens met · the wall’s '+s.season_label+': <b>'+seasonMet+'</b> of '+cast.length+scopeLine+'<br/>'+
-    'library cards: <b>'+SAVE.cards+'</b> · lip-sync calls: <b>'+SAVE.ls.right+'</b> right of <b>'+SAVE.ls.seen+'</b></div>';
+    'library cards: <b>'+SAVE.cards+'</b> · lip-sync calls: <b>'+SAVE.ls.right+'</b> right of <b>'+SAVE.ls.seen+'</b><br/>'+
+    'curiosities found: <b>'+SAVE.eggs.length+'</b> of '+EGG_TOTAL+'</div>';
 }
 
 /* ---- repaint registry: fonts arrive late, data later still ---- */
@@ -3409,6 +3463,132 @@ addInteract({id:'lsstage', x:0, z:27.2, radius:3.4,
     act(){ resolveBattle(side); }});
 });
 
+/* ============ CURIOSITIES (wr3d.eggs) — hidden gags, flavor only ============ */
+const EGG_TOTAL=7;
+function foundEgg(id){ if(SAVE.eggs.indexOf(id)<0){ SAVE.eggs.push(id); persist(); } }
+
+/* ---- the banana peel on the spawn walk-line: slip once, click to re-set ---- */
+const peel=new THREE.Group(); peel.position.set(2.55,0,1.8); gBack.add(peel);
+{
+  const y=new THREE.MeshStandardMaterial({color:0xf2d24b, roughness:.65, emissive:0x4a3c08, emissiveIntensity:.5});
+  [0,2.1,4.2].forEach(a=>{
+    const arm=box(.08,.02,.22, y, Math.sin(a)*.1, .015, Math.cos(a)*.1, peel);
+    arm.rotation.y=a;
+  });
+  box(.1,.035,.1, y, 0,.02,0, peel);
+}
+registerPick(peel,'banana');
+let peelArmed=true, slipT=0;
+addInteract({id:'banana', x:2.55, z:1.8, radius:1.6,
+  active(){ return !peelArmed; },
+  label(){ return '<b>E</b> — re-set the banana peel'; },
+  act(){ peelArmed=true; libSay('Re-set. Comedy is a science, darling.', true); }});
+function slipCheck(){
+  if(!peelArmed || !entered || player.seated || slipT>0 || readOpen) return;
+  if(Math.hypot(player.x-2.55, player.z-1.8)>=0.5) return;
+  peelArmed=false; foundEgg('banana');
+  if(!window.WR_CALM) slipT=0.9;    /* calm: no tumble, no camera bounce — just the quip */
+  libSay('An icon’s entrance, darling. The floor keeps receipts too.');
+}
+
+/* ---- "Queens walking!" — an occasional off-stage PA in the corridor ---- */
+const PA={last:-1e9, zone:'backstage'};
+function paCheck(){
+  const z=actOf(player.z);
+  if(z!==PA.zone){
+    if(z==='corridor' && performance.now()-PA.last>75000 && Math.random()<0.35){
+      PA.last=performance.now(); foundEgg('pa');
+      toast('“Queens walking! Queens walking!” — a voice, off-stage, somewhere');
+    }
+    PA.zone=z;
+  }
+}
+
+/* ---- oddball props with opinions (click or tap them) ---- */
+function oddball(id, x, z, quip, label, radius){
+  addInteract({id, x, z, radius:radius||1.7,
+    label(){ return '<b>E</b> — '+label; },
+    act(){ libSay(quip, true); foundEgg(id); }});
+}
+{ /* a mop by the stage door */
+  const g=new THREE.Group(); g.position.set(4.6,0,0.5); g.rotation.z=-.16; gBack.add(g);
+  const h=new THREE.Mesh(new THREE.CylinderGeometry(.02,.02,1.5,6), M2.desk); h.position.y=.8; g.add(h);
+  const m=new THREE.Mesh(new THREE.SphereGeometry(.11,8,6), new THREE.MeshStandardMaterial({color:0xcfc5ae, roughness:1}));
+  m.scale.set(1,.55,1); m.position.y=.07; g.add(m);
+  registerPick(g,'mop');
+}
+oddball('mop', 4.6, 0.5, 'Gay clutter. Very important. Do not file.', 'a mop, minding its business');
+{ /* a traffic cone on the runway, unexplained */
+  const g=new THREE.Group(); g.position.set(5.6,0.6,26.2); gRun.add(g);
+  const c=new THREE.Mesh(new THREE.ConeGeometry(.16,.42,10),
+    new THREE.MeshStandardMaterial({color:0xe8722a, roughness:.7, emissive:0x3a1500, emissiveIntensity:.6}));
+  c.position.y=.26; g.add(c);
+  box(.3,.03,.3, M.dark, 0,.015,0, g);
+  registerPick(g,'cone');
+}
+oddball('cone', 5.6, 26.2, 'No parking on the runway. She stays anyway. Nobody remembers ordering her.', 'a traffic cone with no business here');
+{ /* the sewing machine on the workbench */
+  const g=new THREE.Group(); g.position.set(-4.55,0.85,3.35); gBack.add(g);
+  box(.4,.06,.16, M.dark, 0,.03,0, g);
+  box(.09,.3,.14, M.dark, .13,.2,0, g);
+  box(.34,.08,.13, M.dark, -.02,.36,0, g);
+  box(.03,.12,.03, M.trim, -.16,.26,0, g);
+  registerPick(g,'sewmach');
+}
+oddball('sewmach', -4.55, 3.35, '(the sewing machine whirs once, with intention, and stops. It knows what it made.)', 'the sewing machine', 1.1);
+{ /* a wig head on the vanity that is definitely not watching you */
+  const g=new THREE.Group(); g.position.set(-5.45,0.8,0.65); gBack.add(g);
+  const n=new THREE.Mesh(new THREE.CylinderGeometry(.05,.07,.12,8), M.plum); n.position.y=.06; g.add(n);
+  const hd=new THREE.Mesh(new THREE.SphereGeometry(.09,10,8),
+    new THREE.MeshStandardMaterial({color:0xd8cfe0, roughness:.85}));
+  hd.position.y=.2; hd.scale.set(.85,1.1,.9); g.add(hd);
+  const wig=new THREE.Mesh(new THREE.SphereGeometry(.095,10,8),
+    new THREE.MeshStandardMaterial({color:0x5ce0b8, roughness:.6}));
+  wig.position.set(0,.25,-.02); g.add(wig);
+  registerPick(g,'wighead');
+}
+oddball('wighead', -5.45, 0.65, '(the wig head winks. You saw it. No one will believe you.)', 'a wig head that seems… aware', 1.3);
+
+/* ---- type “shantay” anywhere (not in an input): gold rain. You stay. ---- */
+let typed='';
+addEventListener('keydown', e=>{
+  const tg=e.target;
+  if(tg && tg.tagName && (tg.tagName==='INPUT'||tg.tagName==='TEXTAREA')) return;
+  if(e.key && e.key.length===1 && /[a-z]/i.test(e.key)){
+    typed=(typed+e.key.toLowerCase()).slice(-7);
+    if(typed==='shantay'){ typed=''; confettiBurst(); foundEgg('shantay'); libSay('You stay.'); }
+  } else if(e.key===' ') typed='';
+});
+/* gold confetti pool — the glitter pattern, scaled up, falling like rain */
+const confetti=[];
+{
+  const cols=[0xf4b53f,0xc9a227,0xffe2b0,0xe6007e];
+  for(let i=0;i<42;i++){
+    const s=new THREE.Sprite(new THREE.SpriteMaterial({color:cols[i%4], transparent:true, opacity:0}));
+    s.scale.set(.09,.09,1); s.visible=false; scene.add(s); confetti.push({s, life:0, vx:0, vy:0, vz:0});
+  }
+}
+function confettiBurst(){
+  const n=window.WR_CALM?16:42;
+  for(let i=0;i<n;i++){
+    const c=confetti[i];
+    c.s.visible=true; c.s.material.opacity=1; c.life=1.1+Math.random()*.5;
+    c.s.position.set(player.x+(Math.random()-.5)*2.6, 2.3+Math.random()*1.3, player.z+(Math.random()-.5)*2.6);
+    c.vx=(Math.random()-.5)*.8; c.vy=-(.7+Math.random()*.9); c.vz=(Math.random()-.5)*.8;
+  }
+}
+function eggTick(dt,t){
+  if(slipT>0) slipT=Math.max(0,slipT-dt);
+  if(entered && !paused){ slipCheck(); paCheck(); }
+  for(const c of confetti){
+    if(!c.s.visible) continue;
+    c.life-=dt;
+    if(c.life<=0){ c.s.visible=false; continue; }
+    c.s.position.x+=c.vx*dt; c.s.position.y+=c.vy*dt; c.s.position.z+=c.vz*dt;
+    c.s.material.opacity=Math.min(1,c.life);
+  }
+}
+
 /* ---- per-frame Phase-2 work ---- */
 function phase2Tick(dt,t){
   if(globeGrp.userData.sphere) globeGrp.userData.sphere.rotation.y += dt*(window.WR_CALM?0.06:0.45);
@@ -3565,7 +3745,7 @@ bridgeReady.then(()=>{
 
 enterBtn.addEventListener('click', ()=>{
   entered=true; enterAt=performance.now(); hide(gate); show($('#xhair')); show($('#askBtn')); show($('#viewBtn'));
-  $('#hint').textContent = IS_TOUCH ? 'left thumb walk · right thumb look · tap objects' : 'WASD walk · click/E interact · V view · T librarian · Esc frees the mouse';
+  $('#hint').textContent = IS_TOUCH ? 'left thumb walk · right thumb look · tap objects' : 'WASD/arrows walk · click/E interact · [ ] season · V view · T librarian · Esc frees the mouse';
   show($('#hint')); setTimeout(()=>hide($('#hint')), 9000);
   tryLock();
   const returning = metSet.size>0 || SAVE.cards>0 || SAVE.ls.seen>0;
