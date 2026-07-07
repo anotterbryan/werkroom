@@ -6,9 +6,10 @@
 <meta name="theme-color" content="#14101c"/>
 <title>THE WERKROOM — In Three Dimensions (experimental)</title>
 <!--
-  THE WERKROOM 3D · Phase 2 — the archive fills in
-  (string board · snatch desk · vault · reading room · runway lip-sync act ·
-   diegetic homes · spotlight collection in localStorage 'wr3d')
+  THE WERKROOM 3D · Phase 3 — the set rebuilt to the real show's flow
+  (ALLEYWAY spawn → WERK ROOM → THE WALK + Untucked Lounge → MAIN STAGE;
+   string board · snatch desk · vault · reading room · lip-sync act · golden doors ·
+   lipstick mirror · golf cart · spotlight collection in localStorage 'wr3d')
   Three.js pinned at r0.168.0 (jsDelivr, import map below). NEVER float this version.
   All data flows through the hidden same-origin iframe bridge to index.html —
   this file loads NO site_data.js and reimplements NO data logic.
@@ -257,6 +258,22 @@ a{color:var(--gold)}
 #boardGo{background:var(--brass);color:#231600;border:none}
 #boardQ{background:transparent;border:1px solid rgba(244,181,63,.55);color:var(--gold)}
 
+/* ---------- Lipstick farewells on THE mirror (non-blocking) ---------- */
+#lipp{position:fixed;right:12px;top:64px;z-index:58;width:min(340px,calc(100vw - 24px));
+  display:flex;flex-direction:column;background:linear-gradient(165deg,rgba(46,20,44,.97),rgba(20,16,28,.97));
+  border:1px solid var(--nrose);border-radius:14px;box-shadow:var(--shadow);overflow:hidden}
+#lipp .bh{display:flex;align-items:center;gap:8px;padding:11px 14px;border-bottom:1px solid rgba(212,112,143,.35)}
+#lipp .bh b{font-family:var(--disp);font-size:16px}
+#lipp .bh .lk{font-size:9.5px;letter-spacing:2px;text-transform:uppercase;color:var(--nrose)}
+#lippX{margin-left:auto;background:none;border:1px solid rgba(212,112,143,.5);color:var(--nrose);
+  border-radius:8px;width:28px;height:28px;cursor:pointer;flex:none}
+#lippMsg{padding:16px 16px 6px;font-family:var(--disp);font-style:italic;font-size:19px;line-height:1.45;color:#ff9ec8}
+#lippWho{padding:0 16px 12px;font-size:10.5px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(247,240,230,.6)}
+#lipp .bf{display:flex;gap:8px;padding:10px 14px;border-top:1px solid rgba(212,112,143,.3)}
+#lipp .bf button{flex:1;min-height:40px;border-radius:10px;font-size:10.5px;cursor:pointer;font-weight:700;font-family:var(--mono);
+  background:transparent;border:1px solid rgba(212,112,143,.55);color:var(--nrose)}
+#lipp .bf button.gold{background:var(--brass);border:none;color:#231600}
+
 /* ---------- Mobile controls ---------- */
 #joy{position:fixed;z-index:55;width:110px;height:110px;border-radius:50%;border:1px solid rgba(201,162,39,.5);
   background:rgba(20,16,28,.35);pointer-events:none}
@@ -290,8 +307,8 @@ classic two-dimensional site at index.html, which is fully accessible. Use the s
   <div class="gcard">
     <div class="gkick">an experiment · the archive, walkable</div>
     <div class="gtitle">THE <em>WERKROOM</em><br/>in three dimensions</div>
-    <div class="gbody" id="gateBody">Backstage, a curtain, a runway — and every number in the archive
-      still one question away. The classic site keeps running underneath; this is just a room built on top of it.</div>
+    <div class="gbody" id="gateBody">An alley, a werk room, the long walk, a main stage — and every number
+      in the archive still one question away. The classic site keeps running underneath; this is just a set built on top of it.</div>
     <div class="gstatus" id="gateStatus">warming the house lights…</div>
     <div id="gateScope" class="hidden"></div>
     <div>
@@ -383,6 +400,15 @@ classic two-dimensional site at index.html, which is fully accessible. Use the s
     <button id="boardX" aria-label="Close panel">✕</button></div>
   <div id="boardList"></div>
   <div class="bf"><button id="boardGo">Connections in the archive ↗</button><button id="boardQ">Her dossier ↗</button></div>
+</div>
+
+<!-- Lipstick farewells: THE mirror's side panel (non-blocking; movement stays live) -->
+<div id="lipp" class="hidden">
+  <div class="bh"><div><b>The Mirror</b><br/><span class="lk">lipstick farewells</span></div>
+    <button id="lippX" aria-label="Close the mirror">✕</button></div>
+  <div id="lippMsg">—</div>
+  <div id="lippWho">—</div>
+  <div class="bf"><button class="gold" id="lippNext">Another message</button><button id="lippQ">Her dossier ↗</button><button id="lippAll">Farewells ↗</button></div>
 </div>
 
 <div id="toast" class="hidden" role="status"></div>
@@ -506,8 +532,56 @@ var PROP_LINES = {
   departures:'The departures board. Every season leaves on time — eventually.',
   workbench:'The workbench. Challenges filed by type; the pincushion is decorative.',
   lectern:'The guest book. Everyone who ever judged, counted and cross-referenced.',
-  ledger:'The ledger tracks every documented dollar on that table. Tips not included.'
+  ledger:'The ledger tracks every documented dollar on that table. Tips not included.',
+  rudoors:'The golden doors, darling. When they crack, a challenge walks in wearing a wig.',
+  lipstick:'The big mirror keeps every goodbye. Lipstick outlasts the wig, baby.',
+  closet:'Each cubby is somebody’s whole world on six hangers. Handle with reverence.',
+  cart:'The cart is real, honey. Stage is a block and a half from here — I measured.',
+  backmirror:'The last mirror before the lights. Say something kind to yourself in it.',
+  tswitch:'The stage manager’s switch. The T lights up — or doesn’t. Designer’s note.',
+  shadebtn:'The shade button. Ornamental. Historically, aggressively ornamental.',
+  loungetv:'The lounge screen plays the episode log. Bring a beverage and an opinion.'
 };
+
+/* golden-doors riffs — spirit, never verbatim quotes (design §2) */
+var RU_DOOR_LINES = [
+  'The doors crack, the light spills… she has taste, that one. A new challenge is warming up behind there.',
+  'Gold hinges, darling. Somewhere past that light a challenge is being typed up in all caps.',
+  'You feel that warm light? That’s tomorrow’s assignment deciding what to wear.',
+  'Not yet, baby. When those doors open for real, you’ll hear the heels first.'
+];
+/* the shade button refuses — rotating, never presses */
+var SHADE_LINES = [
+  'The button has considered your request. The button declines.',
+  'It doesn’t press. It has never pressed. Ask the producers.',
+  'No, henny. That button is load-bearing for the drama of the room.',
+  'She’s decorative, darling — like a feud kept warm for the reunion.'
+];
+/* backstage mirror affirmations (The Walk, stage end) */
+var AFFIRM_LINES = [
+  'You got this. The runway is just a hallway with opinions.',
+  'Shoulders back, receipts ready. You got this, baby.',
+  'Breathe. Blink. Walk like the archive is watching — it is, lovingly.',
+  'One more look. Perfect. Now go give them footnotes.'
+];
+
+/* ---- lipstick farewells (pure): real elimination_events rows with a farewell ---- */
+function farewellList(D){
+  var qn=(D.derived&&D.derived.qname)||{}, sl=(D.derived&&D.derived.slabel)||{};
+  return (D.elimination_events||[]).filter(function(e){ return e.farewell && e.farewell!=='-'; })
+    .map(function(e){ return {qid:e.queen_id, name:qn[e.queen_id]||e.queen_id,
+      season:sl[e.season_id]||e.season_id, episode:e.episode_id, text:e.farewell}; });
+}
+/* ---- Untucked teaser (pure): one random episode with untucked notes, or null ---- */
+function untuckedTeaser(D, rnd){
+  rnd=rnd||Math.random;
+  var sl=(D.derived&&D.derived.slabel)||{};
+  var pool=(D.episodes||[]).filter(function(e){ return e.untucked_notes && e.untucked_notes!=='-'; });
+  if(!pool.length) return null;
+  var e=pool[Math.floor(rnd()*pool.length)];
+  return {episode_id:e.episode_id, label:(sl[e.season_id]||e.season_id)+' · E'+e.episode_number,
+    title:e.title, notes:String(e.untucked_notes)};
+}
 
 /* emcee announce lines for the lip-sync summon — flavor only, never the verdict */
 var LS_ANNOUNCE = [
@@ -571,10 +645,42 @@ function chaseClamp(px, pz, dx, dz, dist, boxes, pad){
   return Math.min(dist, best);
 }
 
-/* room culling with a chase camera (pure): the AVATAR's room decides, but any
-   room the CAMERA is still crossing stays visible so the boom never shows a void. */
-function cullRooms(avatarZ, camZ){
-  return { back: avatarZ<21 || camZ<21, run: avatarZ>14 || camZ>14 };
+/* ---- the zone chain (set rebuild): ALLEYWAY → WERK ROOM → THE WALK
+   (Untucked Lounge off its east side) → MAIN STAGE. All pure. ---- */
+var ZONE_BOX = {
+  alley:   {x1:1.3,  z1:-8.4, x2:5.7,  z2:0},
+  werk:    {x1:-12.5,z1:0,    x2:12.5, z2:15},
+  walk:    {x1:-2.4, z1:15,   x2:2.4,  z2:30},
+  untucked:{x1:2.4,  z1:20.8, x2:11.4, z2:27.2},
+  stage:   {x1:-14.5,z1:30,   x2:14.5, z2:48}
+};
+var ZONE_ADJ = { alley:['werk'], werk:['alley','walk'],
+  walk:['werk','stage','untucked'], untucked:['walk'], stage:['walk'] };
+function zoneOf(x,z){
+  if(z<0) return 'alley';
+  if(z<15) return 'werk';
+  if(z<30) return (x>2.2 && z>20.8 && z<27.2) ? 'untucked' : 'walk';
+  return 'stage';
+}
+function zoneDist(x,z,b){
+  var dx=Math.max(b.x1-x, 0, x-b.x2), dz=Math.max(b.z1-z, 0, z-b.z2);
+  return Math.sqrt(dx*dx+dz*dz);
+}
+/* per-zone lighting weights: 1 inside a zone, fading to 0 over `fade` metres —
+   the act crossfade generalized to the whole chain */
+function zoneWeights(x,z,fade){
+  fade=fade||3.5; var w={};
+  Object.keys(ZONE_BOX).forEach(function(k){ w[k]=Math.max(0, 1-zoneDist(x,z,ZONE_BOX[k])/fade); });
+  return w;
+}
+/* room culling (pure): the AVATAR's zone + its neighbours stay alive (only
+   adjacent — mobile-aggressive); the CAMERA's zone always stays visible. */
+function cullRooms(px,pz,cx,cz){
+  var p=zoneOf(px,pz), c=zoneOf(cx,cz), vis={};
+  Object.keys(ZONE_BOX).forEach(function(k){ vis[k]=false; });
+  vis[p]=true; vis[c]=true;
+  ZONE_ADJ[p].forEach(function(k){ vis[k]=true; });
+  return vis;
 }
 
 /* grid layout for the photo-wall canvas: n cards into W×H px, portrait-ish cells */
@@ -1012,6 +1118,9 @@ return {
   FLAVOR_BACK:FLAVOR_BACK, FLAVOR_RUN:FLAVOR_RUN,
   READS:READS, PRAISES:PRAISES, PROP_LINES:PROP_LINES, TOO_FAR:TOO_FAR,
   LS_ANNOUNCE:LS_ANNOUNCE, CARD_LINES:CARD_LINES, MET_TITLES:MET_TITLES,
+  RU_DOOR_LINES:RU_DOOR_LINES, SHADE_LINES:SHADE_LINES, AFFIRM_LINES:AFFIRM_LINES,
+  farewellList:farewellList, untuckedTeaser:untuckedTeaser,
+  ZONE_BOX:ZONE_BOX, ZONE_ADJ:ZONE_ADJ, zoneOf:zoneOf, zoneWeights:zoneWeights,
   pick:pick, isCleanTap:isCleanTap, inReach:inReach,
   chaseClamp:chaseClamp, cullRooms:cullRooms,
   gridLayout:gridLayout, seasonTracks:seasonTracks, isPlayable:isPlayable,
@@ -1120,9 +1229,16 @@ let composerRef = null;
 addEventListener('resize', ()=>{ camera.aspect=innerWidth/innerHeight; camera.updateProjectionMatrix(); renderer.setSize(innerWidth,innerHeight); if(composerRef) composerRef.setSize(innerWidth,innerHeight); });
 
 const scene = new THREE.Scene();
-/* fog pushed back + lifted so it frames the room instead of eating it */
-const FOG_BACK = new THREE.Color(0x40305a), FOG_RUN = new THREE.Color(0x150c28);
-scene.fog = new THREE.Fog(FOG_BACK.clone(), 13, 58);
+/* fog pushed back + lifted so it frames the room instead of eating it —
+   per-zone fog colours, blended by the zone weights each frame */
+const FOG_ZONE = {
+  alley:   new THREE.Color(0x171019),   /* night air */
+  werk:    new THREE.Color(0x40305a),
+  walk:    new THREE.Color(0x241a33),
+  untucked:new THREE.Color(0x2b1338),
+  stage:   new THREE.Color(0x150c28)
+};
+scene.fog = new THREE.Fog(FOG_ZONE.werk.clone(), 13, 58);
 scene.background = scene.fog.color;
 
 /* cheap image-based fill (0 KB, generated once): brass, mirror facets and the
@@ -1179,10 +1295,13 @@ const M = {
 };
 
 /* ---------------- world geometry ---------------- */
-/* coords: x east(+)/west(−), z north(+)/south(−). Backstage z 0..15 (24×15),
-   corridor z 15..20 (x −2..2), runway hall z 20..33 (28×13). 1 unit = 1 m. */
-const gBack = new THREE.Group(), gRun = new THREE.Group(), gAlways = new THREE.Group();
-scene.add(gBack, gRun, gAlways);
+/* coords: x east(+)/west(−), z north(+)/south(−). 1 unit = 1 m. The chain:
+   THE ALLEYWAY z −8..0 (x 1.3..5.7, spawn) → THE WERK ROOM z 0..15 (24×15) →
+   THE WALK z 15..30 (x −2..2; UNTUCKED LOUNGE off its east side, z 20.8..27.2)
+   → THE MAIN STAGE z 30..48 (28×18). One group per zone for room culling. */
+const gAlley = new THREE.Group(), gBack = new THREE.Group(), gWalk = new THREE.Group(),
+      gRun = new THREE.Group(), gLounge = new THREE.Group(), gAlways = new THREE.Group();
+scene.add(gAlley, gBack, gWalk, gRun, gLounge, gAlways);
 const colliders = [];   /* {x1,z1,x2,z2} AABBs */
 const W = (x1,z1,x2,z2)=>colliders.push({x1,z1,x2,z2});
 /* walls only (not furniture): the third-person camera boom clamps against these */
@@ -1208,40 +1327,99 @@ function registerPick(obj, id){
 {
   const f1 = new THREE.Mesh(new THREE.PlaneGeometry(24.8,15.8), M.floorBack);
   f1.rotation.x = -Math.PI/2; f1.position.set(0,0,7.5); gBack.add(f1);
-  const fc = new THREE.Mesh(new THREE.PlaneGeometry(4.8,5.6), M.floorBack);
-  fc.rotation.x = -Math.PI/2; fc.position.set(0,0,17.5); gAlways.add(fc);
-  const f2 = new THREE.Mesh(new THREE.PlaneGeometry(28.8,13.8), M.floorRun);
-  f2.rotation.x = -Math.PI/2; f2.position.set(0,0,26.5); gRun.add(f2);
+  const fc = new THREE.Mesh(new THREE.PlaneGeometry(4.8,15.6), M.floorBack);
+  fc.rotation.x = -Math.PI/2; fc.position.set(0,0,22.5); gWalk.add(fc);
+  const f2 = new THREE.Mesh(new THREE.PlaneGeometry(28.8,18.6), M.floorRun);
+  f2.rotation.x = -Math.PI/2; f2.position.set(0,0,39); gRun.add(f2);
+  const fa = new THREE.Mesh(new THREE.PlaneGeometry(4.6,8.8),
+    new THREE.MeshStandardMaterial({color:0x2a2430, roughness:.97}));       /* alley asphalt */
+  fa.rotation.x = -Math.PI/2; fa.position.set(3.5,0,-4.2); gAlley.add(fa);
+  const fl = new THREE.Mesh(new THREE.PlaneGeometry(9.2,6.6),
+    new THREE.MeshStandardMaterial({color:0x3a2547, roughness:.94}));       /* lounge carpet */
+  fl.rotation.x = -Math.PI/2; fl.position.set(6.9,0,24); gLounge.add(fl);
   const c1 = new THREE.Mesh(new THREE.PlaneGeometry(24.8,15.8), M.ceilBack);
   c1.rotation.x = Math.PI/2; c1.position.set(0,4.2,7.5); gBack.add(c1);
-  const c2 = new THREE.Mesh(new THREE.PlaneGeometry(28.8,13.8), M.ceilRun);
-  c2.rotation.x = Math.PI/2; c2.position.set(0,6,26.5); gRun.add(c2);
-  const cc = new THREE.Mesh(new THREE.PlaneGeometry(4.8,5.6), M.plum);
-  cc.rotation.x = Math.PI/2; cc.position.set(0,3.2,17.5); gAlways.add(cc);
+  const c2 = new THREE.Mesh(new THREE.PlaneGeometry(28.8,18.6), M.ceilRun);
+  c2.rotation.x = Math.PI/2; c2.position.set(0,6,39); gRun.add(c2);
+  const cc = new THREE.Mesh(new THREE.PlaneGeometry(4.8,15.6), M.plum);
+  cc.rotation.x = Math.PI/2; cc.position.set(0,3.2,22.5); gWalk.add(cc);
+  const cl = new THREE.Mesh(new THREE.PlaneGeometry(9.2,6.6), M.dark);
+  cl.rotation.x = Math.PI/2; cl.position.set(6.9,3.4,24); gLounge.add(cl);
+  /* the alley has no ceiling — night air; the fog colour is the sky */
 }
-/* backstage walls (h 4.2) */
+/* THE ALLEYWAY — brick walls, exterior feel */
+const M_BRICK = new THREE.MeshStandardMaterial({color:0x5a3a33, roughness:.96});
+box(.4,4.8,8.8, M_BRICK, 1.3,2.4,-4.2, gAlley);   WB(1.1,-8.6,1.5,0);
+box(.4,4.8,8.8, M_BRICK, 5.7,2.4,-4.2, gAlley);   WB(5.5,-8.6,5.9,0);
+box(4.8,4.8,.4, M_BRICK, 3.5,2.4,-8.4, gAlley);   WB(1.1,-8.7,5.9,-8.2);
+/* brick coursing hint: thin mortar lines (instanced, one draw) */
+{
+  const N=22, rows=new THREE.InstancedMesh(new THREE.BoxGeometry(.02,.03,8.6),
+    new THREE.MeshStandardMaterial({color:0x3c2822, roughness:1}), N);
+  const dum=new THREE.Object3D(); let k=0;
+  for(const sx of [1.51,5.49]) for(let r=0;r<11;r++){
+    dum.position.set(sx, .45+r*.42, -4.2); dum.updateMatrix(); rows.setMatrixAt(k++,dum.matrix);
+  }
+  rows.instanceMatrix.needsUpdate=true; gAlley.add(rows);
+}
+/* a dumpster minding its business */
+box(1.5,.9,.8, new THREE.MeshStandardMaterial({color:0x2c4a3c, roughness:.85}), 2.2,0.45,-6.6, gAlley);
+box(1.55,.08,.85, M.dark, 2.2,0.94,-6.6, gAlley); W(1.4,-7.05,3.0,-6.15);
+/* string of bulbs down the alley (one draw) */
+{
+  const N=14, str=new THREE.InstancedMesh(new THREE.SphereGeometry(.05,8,6), M.bulb, N);
+  const dum=new THREE.Object3D();
+  for(let b=0;b<N;b++){ const t2=b/(N-1);
+    dum.position.set(1.9+3.2*t2, 3.6-Math.sin(Math.PI*t2)*.4, -7.6+7*t2);
+    dum.updateMatrix(); str.setMatrixAt(b,dum.matrix);
+  }
+  str.instanceMatrix.needsUpdate=true; gAlley.add(str);
+}
+
+/* THE WERK ROOM walls (h 4.2) — brick + pink panel (Sims reference) */
 box(.5,4.2,15.8, M.wall, -12.25,2.1,7.5, gBack);  WB(-12.5,-0.4,-12,15.4);
 box(.5,4.2,15.8, M.wall,  12.25,2.1,7.5, gBack);  WB(12,-0.4,12.5,15.4);
-box(24.8,4.2,.5, M.wall, 0,2.1,-0.25, gBack);     WB(-12.5,-0.5,12.5,0);
+/* south wall split around the alley door (gap x 2.7..4.3) */
+box(15.2,4.2,.5, M.wall, -4.9,2.1,-0.25, gBack);  WB(-12.5,-0.5,2.7,0);
+box(8.2,4.2,.5, M.wall,  8.4,2.1,-0.25, gBack);   WB(4.3,-0.5,12.5,0);
 box(10,4.2,.5, M.wall, -7,2.1,15.25, gBack);      WB(-12.5,15,-2,15.5);
 box(10,4.2,.5, M.wall,  7,2.1,15.25, gBack);      WB(2,15,12.5,15.5);
-/* corridor walls (h 3.2) */
-box(.4,3.2,5, M.plum, -2.2,1.6,17.5, gAlways);    WB(-2.4,15,-2,20);
-box(.4,3.2,5, M.plum,  2.2,1.6,17.5, gAlways);    WB(2,15,2.4,20);
-/* runway hall walls (h 6) */
-box(12,6,.5, M.wallRun, -8,3,19.75, gRun);        WB(-14.5,19.5,-2,20);
-box(12,6,.5, M.wallRun,  8,3,19.75, gRun);        WB(2,19.5,14.5,20);
-box(28.8,6,.5, M.wallRun, 0,3,33.25, gRun);       WB(-14.5,33,14.5,33.5);
-box(.5,6,13.8, M.wallRun, -14.25,3,26.5, gRun);   WB(-14.5,19.5,-14,33.5);
-box(.5,6,13.8, M.wallRun,  14.25,3,26.5, gRun);   WB(14,19.5,14.5,33.5);
+/* pink panel wainscot along the werk-room walls (Sims reference) */
+const M_PINKPANEL = new THREE.MeshStandardMaterial({color:0xb0447e, roughness:.8, emissive:0x2c0a1e, emissiveIntensity:.5});
+box(15.1,1.5,.1, M_PINKPANEL, -4.9,0.78,0.06, gBack);
+box(8.1,1.5,.1, M_PINKPANEL,  8.4,0.78,0.06, gBack);
+box(9.9,1.5,.1, M_PINKPANEL, -7,0.78,14.94, gBack);
+box(9.9,1.5,.1, M_PINKPANEL,  7,0.78,14.94, gBack);
+
+/* THE WALK walls (h 3.2) — long corridor, doorway to the lounge on the east */
+box(.4,3.2,15, M.plum, -2.2,1.6,22.5, gWalk);     WB(-2.4,15,-2,30);
+box(.4,3.2,7.8, M.plum, 2.2,1.6,18.9, gWalk);     WB(2,15,2.4,22.8);
+box(.4,3.2,4.8, M.plum, 2.2,1.6,27.6, gWalk);     WB(2,25.2,2.4,30);
+box(.4,.7,2.4, M.plum, 2.2,2.85,24, gWalk);       /* lounge doorway header */
+
+/* UNTUCKED LOUNGE walls (h 3.4) — moody magenta/violet */
+const M_LOUNGE = new THREE.MeshStandardMaterial({color:0x4a2258, roughness:.92});
+box(9,3.4,.4, M_LOUNGE, 6.9,1.7,20.8, gLounge);   WB(2.4,20.6,11.4,21.0);
+box(9,3.4,.4, M_LOUNGE, 6.9,1.7,27.2, gLounge);   WB(2.4,27.0,11.4,27.4);
+box(.4,3.4,6.8, M_LOUNGE, 11.4,1.7,24, gLounge);  WB(11.2,20.6,11.6,27.4);
+
+/* MAIN STAGE hall walls (h 6) */
+box(12,6,.5, M.wallRun, -8,3,29.75, gRun);        WB(-14.5,29.5,-2,30);
+box(12,6,.5, M.wallRun,  8,3,29.75, gRun);        WB(2,29.5,14.5,30);
+box(28.8,6,.5, M.wallRun, 0,3,48.25, gRun);       WB(-14.5,48,14.5,48.5);
+box(.5,6,18.8, M.wallRun, -14.25,3,39, gRun);     WB(-14.5,29.5,-14,48.5);
+box(.5,6,18.8, M.wallRun,  14.25,3,39, gRun);     WB(14,29.5,14.5,48.5);
+/* pink paneled back wall (Sims reference) */
+box(28.6,3.6,.12, M_PINKPANEL, 0,1.9,47.92, gRun);
 /* brass trim lines */
 box(24.6,.06,.06, M.trim, 0,3.6,0.02, gBack);
-box(28.6,.06,.06, M.trim, 0,5.2,32.98, gRun);
+box(28.6,.06,.06, M.trim, 0,5.2,47.94, gRun);
 
-/* spawn stage-door alcove (south backstage) */
-box(1.6,3,.18, M.dark, 3.5,1.5,0.1, gBack);
-box(1.8,.14,.24, M.trim, 3.5,3.05,0.12, gBack);
-const doorLamp = box(.16,.16,.16, M.bulb, 3.5,3.3,0.3, gBack);
+/* the alley door (werk-room threshold): frame, lintel, lamp — the gap walks through */
+box(.18,3,.3, M.dark, 2.75,1.5,-0.1, gAlley);
+box(.18,3,.3, M.dark, 4.25,1.5,-0.1, gAlley);
+box(1.9,.16,.34, M.trim, 3.5,3.06,-0.1, gAlley);
+const doorLamp = box(.16,.16,.16, M.bulb, 3.5,3.3,-0.35, gAlley);
 
 /* backstage set dressing: vanity counter + 3 mirrors (S wall) —
    Phase 2: each mirror is a random-queen spotlight (canvas glass, painted later) */
@@ -1256,12 +1434,29 @@ for(let i=0;i<3;i++){
   const g = new THREE.Mesh(new THREE.PlaneGeometry(1.2,1.5), new THREE.MeshBasicMaterial({map:tex}));
   g.position.set(mx,2.1,0.19); gBack.add(g); registerPick(g,'mirror'+i);
 }
-/* marquee bulb rings around all three mirrors — one draw call, unmistakably lit */
+/* two decor vanity mirrors extend the row (Sims reference) — glass gradient, no interaction */
 {
-  const ring = new THREE.InstancedMesh(new THREE.SphereGeometry(.05,8,6), M.bulb, 36);
+  const gm=document.createElement('canvas'); gm.width=128; gm.height=160;
+  const g=gm.getContext('2d');
+  const gr=g.createLinearGradient(0,0,128,160);
+  gr.addColorStop(0,'#6e6280'); gr.addColorStop(.5,'#3f364e'); gr.addColorStop(1,'#57496b');
+  g.fillStyle=gr; g.fillRect(0,0,128,160);
+  g.strokeStyle='rgba(255,255,255,.2)'; g.lineWidth=2;
+  g.beginPath(); g.moveTo(16,144); g.lineTo(110,20); g.stroke();
+  const dt=new THREE.CanvasTexture(gm); dt.colorSpace=THREE.SRGBColorSpace;
+  for(const mx of [-10.5,-2.6]){
+    box(1.5,1.8,.08, M.plum, mx,2.1,0.14, gBack);
+    const p=new THREE.Mesh(new THREE.PlaneGeometry(1.2,1.5), new THREE.MeshBasicMaterial({map:dt}));
+    p.position.set(mx,2.1,0.19); gBack.add(p);
+  }
+}
+/* marquee bulb rings around all five mirrors — one draw call, unmistakably lit */
+{
+  const XS=[-10.5,-8.5,-6.5,-4.5,-2.6];
+  const ring = new THREE.InstancedMesh(new THREE.SphereGeometry(.05,8,6), M.bulb, 12*XS.length);
   const dum = new THREE.Object3D();
   let k=0;
-  for(let i=0;i<3;i++){ const mx=-8.5+i*2;
+  for(const mx of XS){
     for(let b=0;b<12;b++){ const a=b/12*Math.PI*2;
       dum.position.set(mx+Math.cos(a)*.74, 2.1+Math.sin(a)*.94, 0.2);
       dum.updateMatrix(); ring.setMatrixAt(k++, dum.matrix);
@@ -1293,43 +1488,222 @@ box(.1,3.9,11.3, M.trim, -12.02,2.1,7.5, gBack);  /* brass frame slab behind */
 const arrowPrev = registerPick(box(.12,.7,.7, M.trim, -11.8,1.5,1.9, gBack), 'arrowPrev');
 const arrowNext = registerPick(box(.12,.7,.7, M.trim, -11.8,1.5,13.1, gBack), 'arrowNext');
 
-/* ---- JUDGES' TABLE + SCOREBOARD (backstage north) ---- */
-registerPick(box(4.6,.12,1.1, M.plum, -7,0.95,12.2, gBack), 'judges');
-registerPick(box(4.4,.9,.9, M.dark, -7,0.45,12.2, gBack), 'judges'); W(-9.3,11.7,-4.7,12.7);
-registerPick(box(4.7,.06,1.2, M.trim, -7,1.02,12.2, gBack), 'judges');
-[[-8.4],[-7],[-5.6]].forEach(c=>{ registerPick(box(.55,1.15,.55, M.plum, c[0],0.57,10.9, gBack), 'judges'); });
-const scoreMat = new THREE.MeshBasicMaterial({color:0xffffff});
-const scoreWall = new THREE.Mesh(new THREE.PlaneGeometry(8.6,3), scoreMat);
-scoreWall.rotation.y = Math.PI;                   /* on north wall, faces south */
-scoreWall.position.set(-7,2.4,14.95); gBack.add(scoreWall); registerPick(scoreWall,'judges');
+/* ---- THE GOLDEN DOORS (werk-room north wall, where the challenges enter) ---- */
+const ruMat = new THREE.MeshStandardMaterial({color:0xd9b13b, roughness:.28, metalness:.7, emissive:0x6b5416, emissiveIntensity:.55});
+const ruDoors = new THREE.Group(); ruDoors.position.set(-5,0,14.7); gBack.add(ruDoors);
+const ruL = new THREE.Mesh(new THREE.BoxGeometry(1.05,2.9,.12), ruMat); ruL.position.set(-0.55,1.87,0);
+const ruR = ruL.clone(); ruR.position.x = 0.55;
+ruDoors.add(ruL, ruR);
+[-0.55,0.55].forEach(x=>{ const knob=new THREE.Mesh(new THREE.SphereGeometry(.05,8,6), M.brassWire);
+  knob.position.set(x+(x<0?.38:-.38),1.8,.1); ruDoors.add(knob); });
+box(2.5,.16,.3, M.trim, -5,3.4,14.7, gBack);       /* lintel */
+/* small stair up to the doors */
+box(2.6,.2,.7, M.plum, -5,.1,14.15, gBack);
+box(2.3,.2,.5, M.plum, -5,.3,14.4, gBack);
+box(2.62,.04,.72, M.trim, -5,.21,14.15, gBack);
+W(-6.35,13.75,-3.65,15);                           /* steps + doors keep their distance */
+/* warm light behind the crack (opacity driven when the doors are asked) */
+const ruGlow = new THREE.Mesh(new THREE.PlaneGeometry(1.6,3),
+  new THREE.MeshBasicMaterial({color:0xffd9a0, transparent:true, opacity:0,
+    blending:THREE.AdditiveBlending, depthWrite:false}));
+ruGlow.rotation.y = Math.PI; ruGlow.position.set(-5,1.9,14.62); gBack.add(ruGlow);
+registerPick(ruDoors,'rudoors');
 
-/* ---- corridor curtain (two proximity-parting velvet planes) ---- */
+/* ---- THE MIRROR (large; lipstick farewells) — werk-room north wall, west ---- */
+const lipCnv = document.createElement('canvas'); lipCnv.width=512; lipCnv.height=640;
+const lipTex = new THREE.CanvasTexture(lipCnv); lipTex.colorSpace=THREE.SRGBColorSpace;
+{
+  box(2.4,3.1,.1, M.trim, -9.5,2.0,14.98, gBack);  /* gold frame slab */
+  const glass = new THREE.Mesh(new THREE.PlaneGeometry(2.05,2.7), new THREE.MeshBasicMaterial({map:lipTex}));
+  glass.rotation.y = Math.PI; glass.position.set(-9.5,2.0,14.9); gBack.add(glass);
+  registerPick(glass,'lipstick');
+  const ring = new THREE.InstancedMesh(new THREE.SphereGeometry(.05,8,6), M.bulb, 14);
+  const dum = new THREE.Object3D();
+  for(let b=0;b<14;b++){ const a=b/14*Math.PI*2;
+    dum.position.set(-9.5+Math.cos(a)*1.16, 2.0+Math.sin(a)*1.5, 14.86);
+    dum.updateMatrix(); ring.setMatrixAt(b,dum.matrix);
+  }
+  ring.instanceMatrix.needsUpdate=true; gBack.add(ring);
+}
+
+/* ---- each-queen closet cubbies (werk-room north wall, east) ---- */
+{
+  const cub = new THREE.Group(); gBack.add(cub);
+  box(3.7,2.3,.14, M.dark, 4.3,1.15,14.68, cub);
+  registerPick(cub,'closet');
+  for(let i=0;i<=5;i++) box(.06,2.3,.5, M.dark, 2.5+i*.72,1.15,14.42, cub);
+  box(3.7,.06,.5, M.trim, 4.3,1.92,14.42, cub);    /* brass hanger rail */
+  box(3.7,.08,.5, M.plum, 4.3,.06,14.42, cub);
+  /* hanging looks: one instanced draw of little gowns in the palette */
+  const LOOKS=[0xe6007e,0xf4b53f,0x74e0c8,0x9a4dff,0xff5cab,0x35d5ff,0xd4708f,0xc9a227];
+  const N=15, gowns=new THREE.InstancedMesh(new THREE.BoxGeometry(.16,.8,.3),
+    new THREE.MeshStandardMaterial({color:0xffffff, roughness:.8}), N);
+  const dum=new THREE.Object3D();
+  for(let i=0;i<N;i++){
+    dum.position.set(2.68+ (i%15)*.225, 1.45, 14.46);
+    dum.rotation.y=((i%3)-1)*.08; dum.updateMatrix(); gowns.setMatrixAt(i,dum.matrix);
+    gowns.setColorAt(i, new THREE.Color(LOOKS[i%LOOKS.length]));
+  }
+  gowns.instanceMatrix.needsUpdate=true; if(gowns.instanceColor) gowns.instanceColor.needsUpdate=true;
+  cub.add(gowns);
+  W(2.4,14.2,6.2,15);
+}
+
+/* ---- worktables (Sims reference): pink-magenta tops, gold edge, paint-well stools ---- */
+const M_TABLE = new THREE.MeshStandardMaterial({color:0xd6337f, roughness:.55, emissive:0x38091f, emissiveIntensity:.6});
+function mkWorktable(x,z,ry){
+  const g=new THREE.Group(); g.position.set(x,0,z); g.rotation.y=ry||0; gBack.add(g);
+  box(2.2,.1,1.1, M_TABLE, 0,.86,0, g);
+  box(2.3,.05,1.2, M.trim, 0,.93,0, g);            /* gold edge trim */
+  [[-.95,-.4],[.95,-.4],[-.95,.4],[.95,.4]].forEach(p=>box(.12,.82,.12, M.dark, p[0],.41,p[1], g));
+  /* paint-well stool */
+  const st=new THREE.Mesh(new THREE.CylinderGeometry(.22,.26,.52,10), M.plum);
+  st.position.set(0,.26,1.0); g.add(st);
+  const sr=new THREE.Mesh(new THREE.CylinderGeometry(.23,.23,.04,10), M.trim);
+  sr.position.set(0,.54,1.0); g.add(sr);
+  /* a little clutter in the palette */
+  box(.3,.06,.22, M.rosey, -.6,.96,.1, g);
+  box(.2,.14,.2, M.bulb, .55,1.0,-.2, g);
+  const cs=Math.cos(ry||0), sn=Math.sin(ry||0);
+  W(x-1.2*Math.abs(cs)-0.6*Math.abs(sn), z-0.6*Math.abs(cs)-1.2*Math.abs(sn),
+    x+1.2*Math.abs(cs)+0.6*Math.abs(sn), z+0.6*Math.abs(cs)+1.2*Math.abs(sn));
+  return g;
+}
+mkWorktable(-5.2,12.1,0);          /* holds the earnings ledger */
+mkWorktable(-2.2,5.6,.35);
+mkWorktable(-2.4,9.6,-.3);
+mkWorktable(-6.8,7.6,.15);
+mkWorktable(6.4,7.9,-.5);
+
+/* ---- corridor curtain (two proximity-parting velvet planes, stage end of THE WALK) ---- */
+const CURT_Z = 28.8;
 const curtGeoL = new THREE.PlaneGeometry(2.15,3.1,10,8);
 const curtGeoR = new THREE.PlaneGeometry(2.15,3.1,10,8);
 const curtL = new THREE.Mesh(curtGeoL, M.velvet), curtR = new THREE.Mesh(curtGeoR, M.velvet);
-curtL.position.set(-1.05,1.58,17.5); curtR.position.set(1.05,1.58,17.5);
-gAlways.add(curtL, curtR);
-box(4.4,.16,.3, M.trim, 0,3.05,17.5, gAlways);    /* brass rail */
+curtL.position.set(-1.05,1.58,CURT_Z); curtR.position.set(1.05,1.58,CURT_Z);
+gWalk.add(curtL, curtR);
+box(4.4,.16,.3, M.trim, 0,3.05,CURT_Z, gWalk);    /* brass rail */
 const tieL = new THREE.Mesh(new THREE.TorusGeometry(.16,.035,8,14), M.brassWire);
-const tieR = tieL.clone(); tieL.position.set(-1.9,1.4,17.5); tieR.position.set(1.9,1.4,17.5);
-gAlways.add(tieL,tieR);
-/* ON AIR lamp over the runway mouth */
+const tieR = tieL.clone(); tieL.position.set(-1.9,1.4,CURT_Z); tieR.position.set(1.9,1.4,CURT_Z);
+gWalk.add(tieL,tieR);
+/* ON AIR lamp over the stage mouth */
 const onAirMat = new THREE.MeshBasicMaterial({color:0x330000});
-box(1,.4,.14, onAirMat, 0,2.9,19.9, gAlways);
+box(1,.4,.14, onAirMat, 0,2.9,29.85, gWalk);
 
-/* ---- RUNWAY HALL ---- */
-const platform = box(18,.6,3, M.stage, 0,0.3,26.9, gRun);   /* raised, walkable, no collider */
-registerPick(platform,'lsstage');
-box(18.2,.05,.1, M.trim, 0,0.62,25.35, gRun);
-box(18.2,.05,.1, M.trim, 0,0.62,28.45, gRun);
-/* lip-sync spotlight circles at the stage's north side */
+/* ---- THE MAIN STAGE (rebuilt per the Sims reference) ----
+   T-shaped runway: stem z 31.3..42.1 (x −1.5..1.5) into a 16m crossbar
+   z 41.9..45.3, raised .6, checkerboard top that LIGHTS UP, gold bulb trim. */
+const stemP  = box(3,.6,10.8, M.stage, 0,0.3,36.7, gRun);
+const crossP = box(16,.6,3.4, M.stage, 0,0.3,43.6, gRun);
+registerPick(stemP,'lsstage'); registerPick(crossP,'lsstage');
+/* entrance step at the T's base, magenta towers flanking */
+box(3,.3,.9, M.stage, 0,0.15,30.85, gRun);
+box(3.1,.04,.95, M.trim, 0,0.32,30.85, gRun);
+const M_TOWER = new THREE.MeshStandardMaterial({color:0xc22a76, roughness:.6, emissive:0x3a0a22, emissiveIntensity:.7});
+[-2.7,2.7].forEach(x=>{
+  box(.9,4.6,.9, M_TOWER, x,2.3,30.9, gRun);
+  box(1.05,.14,1.05, M.trim, x,4.68,30.9, gRun);
+  W(x-.5,30.4,x+.5,31.4);
+});
+/* checkerboard tiles over the whole T — two instanced draws; the pink set is
+   emissive and toggles from the stage-manager switch */
+const tileLitMat  = new THREE.MeshStandardMaterial({color:0xff77b3, roughness:.35, emissive:0xff2f8e, emissiveIntensity:.95});
+const tileDarkMat = new THREE.MeshStandardMaterial({color:0x171020, roughness:.35, metalness:.3});
+{
+  const cells=[];
+  for(let ix=0; ix<4; ix++) for(let iz=0; iz<14; iz++){          /* stem 4×14 */
+    const z=31.65+iz*.75; if(z>41.85) continue;
+    cells.push([-1.125+ix*.75, z, (ix+iz)%2]);
+  }
+  for(let ix=0; ix<21; ix++) for(let iz=0; iz<4; iz++){          /* crossbar 21×4 */
+    cells.push([-7.5+ix*.75, 42.3+iz*.75, (ix+iz+1)%2]);
+  }
+  const lit=cells.filter(c=>c[2]), drk=cells.filter(c=>!c[2]);
+  const mk=(list,mat)=>{
+    const im=new THREE.InstancedMesh(new THREE.BoxGeometry(.72,.025,.72), mat, list.length);
+    const dum=new THREE.Object3D();
+    list.forEach((c,i)=>{ dum.position.set(c[0],0.614,c[1]); dum.updateMatrix(); im.setMatrixAt(i,dum.matrix); });
+    im.instanceMatrix.needsUpdate=true; gRun.add(im); return im;
+  };
+  mk(lit,tileLitMat); mk(drk,tileDarkMat);
+}
+let TLIT=true;
+function applyTLights(){
+  tileLitMat.emissiveIntensity = TLIT ? .95 : .06;
+  tileLitMat.color.setHex(TLIT ? 0xff77b3 : 0x5a2a44);
+}
+/* gold bulb trim edging the T + the stage lip (one instanced draw) */
+{
+  const pts=[];
+  for(let z=31.4; z<=41.9; z+=.7){ pts.push([-1.62,z],[1.62,z]); }           /* stem sides */
+  for(let x=-7.9; x<=7.9; x+=.7){ pts.push([x,45.42],[x,41.82]); }           /* crossbar lip + back */
+  for(let z=42.1; z<=45.2; z+=.7){ pts.push([-8.12,z],[8.12,z]); }           /* crossbar ends */
+  const trimB=new THREE.InstancedMesh(new THREE.SphereGeometry(.045,8,6), M.bulb, pts.length);
+  const dum=new THREE.Object3D();
+  pts.forEach((p,i)=>{ dum.position.set(p[0],.64,p[1]); dum.updateMatrix(); trimB.setMatrixAt(i,dum.matrix); });
+  trimB.instanceMatrix.needsUpdate=true; gRun.add(trimB);
+}
+/* lip-sync spotlight circles ON the T's crossbar */
 const lsDiscs = [-2.4,2.4].map((x,i)=>{
   const d = new THREE.Mesh(new THREE.CircleGeometry(.85,24), M.spotDisc.clone());
-  d.rotation.x = -Math.PI/2; d.position.set(x,0.615,27.6); gRun.add(d);
+  d.rotation.x = -Math.PI/2; d.position.set(x,0.635,43.7); gRun.add(d);
   registerPick(d, i?'lsB':'lsA'); return d;
 });
-/* jukebox (house left / west) */
-const juke = new THREE.Group(); juke.position.set(-10.5,0,23.5); gRun.add(juke); registerPick(juke,'jukebox');
+
+/* ---- JUDGES' PANEL — house left, FACING the runway across the floor ---- */
+registerPick(box(1.1,.12,4.6, M.plum, -8.6,0.95,38, gRun), 'judges');
+registerPick(box(.9,.9,4.4, M.dark, -8.6,0.45,38, gRun), 'judges'); W(-9.15,35.7,-8.05,40.3);
+registerPick(box(1.2,.06,4.7, M.trim, -8.6,1.02,38, gRun), 'judges');
+[36.6,38,39.4].forEach(cz=>{ registerPick(box(.55,1.15,.55, M.plum, -9.8,0.57,cz, gRun), 'judges'); });
+const scoreMat = new THREE.MeshBasicMaterial({color:0xffffff});
+const scoreWall = new THREE.Mesh(new THREE.PlaneGeometry(8.6,3), scoreMat);
+scoreWall.rotation.y = -Math.PI/2;                /* east wall — the seat looks across the runway at it */
+scoreWall.position.set(13.9,3.2,38); gRun.add(scoreWall); registerPick(scoreWall,'judges');
+
+/* ---- gold grid screen on the pink back wall (Sims reference) ---- */
+{
+  const gc=document.createElement('canvas'); gc.width=1024; gc.height=288;
+  const g=gc.getContext('2d');
+  g.fillStyle='#8e2860'; g.fillRect(0,0,1024,288);
+  g.strokeStyle='rgba(244,181,63,.85)'; g.lineWidth=4;
+  for(let x=0;x<=1024;x+=64){ g.beginPath(); g.moveTo(x,0); g.lineTo(x,288); g.stroke(); }
+  for(let y=0;y<=288;y+=48){ g.beginPath(); g.moveTo(0,y); g.lineTo(1024,y); g.stroke(); }
+  const t=new THREE.CanvasTexture(gc); t.colorSpace=THREE.SRGBColorSpace;
+  const p=new THREE.Mesh(new THREE.PlaneGeometry(20,5.4), new THREE.MeshBasicMaterial({map:t}));
+  p.rotation.y=Math.PI; p.position.set(0,3.1,47.99); gRun.add(p);
+}
+/* ---- Art Deco crown proscenium: stepped gold arcs over the crossbar ---- */
+[[14.5,4.55],[11.5,4.95],[8.5,5.35],[5.5,5.72]].forEach(([w,y])=>box(w,.14,.14, M.trim, 0,y,41.6, gRun));
+[-3.4,0,3.4].forEach(x=>{
+  const c=new THREE.Mesh(new THREE.ConeGeometry(.17,.45,8), M.trim);
+  c.position.set(x,5.72,41.6); gRun.add(c);
+});
+/* ---- moving-head spot rigs overhead (decor; the real sweeps live in the RIG) ---- */
+{
+  box(21,.12,.12, M.dark, 0,5.7,34.8, gRun);
+  box(21,.12,.12, M.dark, 0,5.7,45.6, gRun);
+  const HEADS=[[-7,34.8,.5],[-2.3,34.8,-.3],[2.3,34.8,.3],[7,34.8,-.5],[-5,45.6,.4],[5,45.6,-.4]];
+  for(const [hx,hz,tilt] of HEADS){
+    const h=new THREE.Group(); h.position.set(hx,5.55,hz); h.rotation.x=Math.PI-tilt; gRun.add(h);
+    const body=new THREE.Mesh(new THREE.CylinderGeometry(.09,.13,.34,8), M.dark); h.add(body);
+    const lens=new THREE.Mesh(new THREE.CircleGeometry(.09,10),
+      new THREE.MeshBasicMaterial({color:[0xff4fb0,0x46e6c8,0xf4b53f][Math.abs(hx|0)%3]}));
+    lens.rotation.x=Math.PI/2; lens.position.y=-.18; h.add(lens);
+  }
+}
+/* ---- stage-manager switch (toggles the T lighting; designer's note) ---- */
+{
+  const ped=new THREE.Group(); ped.position.set(-3.6,0,31.1); gRun.add(ped);
+  box(.4,1.05,.4, M.dark, 0,.52,0, ped);
+  box(.3,.08,.3, M.trim, 0,1.1,0, ped);
+  const lever=new THREE.Mesh(new THREE.BoxGeometry(.08,.26,.08), M.rosey);
+  lever.position.set(0,1.24,0); lever.rotation.z=.4; ped.add(lever);
+  registerPick(ped,'tswitch'); W(-3.85,30.85,-3.35,31.35);
+}
+
+/* ---- jukebox / DJ booth corner (stage NW) ---- */
+const juke = new THREE.Group(); juke.position.set(-11.6,0,45.4); juke.rotation.y=Math.PI*.72;
+gRun.add(juke); registerPick(juke,'jukebox');
 {
   const body = new THREE.Mesh(new THREE.BoxGeometry(1.3,1.5,.75), M.plum); body.position.y=.75; juke.add(body);
   const arch = new THREE.Mesh(new THREE.CylinderGeometry(.65,.65,.75,16,1,false,0,Math.PI), M.plum);
@@ -1338,41 +1712,90 @@ const juke = new THREE.Group(); juke.position.set(-10.5,0,23.5); gRun.add(juke);
   glowL.position.set(0,1.5,.38); juke.add(glowL);
   const marq = new THREE.Mesh(new THREE.PlaneGeometry(1.05,.4), new THREE.MeshBasicMaterial({color:0xffffff}));
   marq.position.set(0,1.12,.39); juke.add(marq); juke.userData.marquee = marq;
-  W(-11.25,23.05,-9.75,23.95);
+  W(-12.35,44.65,-10.85,46.15);
+  /* DJ desk beside it */
+  box(1.8,.9,.7, M.dark, -10.1,0.45,46.6, gRun);
+  box(1.9,.06,.8, M.trim, -10.1,0.93,46.6, gRun);
+  W(-11.05,46.25,-9.15,46.95);
 }
-/* stage-door exit (runway SW corner, lit CLASSIC SITE sign) */
-registerPick(box(1.6,3,.2, M.dark, -13.9,1.5,21.5, gRun), 'exitdoor');
+/* stage-door exit (stage SW corner, lit CLASSIC SITE sign) */
+registerPick(box(1.6,3,.2, M.dark, -13.9,1.5,31.6, gRun), 'exitdoor');
 const exitSign = new THREE.Mesh(new THREE.PlaneGeometry(1.7,.55), new THREE.MeshBasicMaterial({color:0xffffff}));
-exitSign.rotation.y = Math.PI/2; exitSign.position.set(-13.75,3.2,21.5); gRun.add(exitSign); registerPick(exitSign,'exitdoor');
+exitSign.rotation.y = Math.PI/2; exitSign.position.set(-13.75,3.2,31.6); gRun.add(exitSign); registerPick(exitSign,'exitdoor');
+
+/* ---- THE WALK props: golf cart (fast travel) + backstage mirror ---- */
+const cart = new THREE.Group(); cart.position.set(-1.15,0,17.8); gWalk.add(cart);
+{
+  const M_CART=new THREE.MeshStandardMaterial({color:0xf7f0e6, roughness:.45});
+  box(1.05,.42,2.0, M_CART, 0,.5,0, cart);
+  box(1.0,.35,.7, M.plum, 0,.9,-.2, cart);                       /* bench seat */
+  box(1.0,.7,.06, M_CART, 0,1.05,.95, cart);                     /* dash + windshield post */
+  [[-.5,.85],[.5,.85],[-.5,-.85],[.5,-.85]].forEach(p=>{
+    const w=new THREE.Mesh(new THREE.CylinderGeometry(.16,.16,.1,10), M.dark);
+    w.rotation.z=Math.PI/2; w.position.set(p[0],.16,p[1]); cart.add(w);
+  });
+  box(1.15,.06,2.1, M_CART, 0,1.62,0, cart);                     /* roof */
+  [[-.5,.95],[.5,.95],[-.5,-.95],[.5,-.95]].forEach(p=>box(.05,.9,.05, M.dark, p[0],1.15,p[1], cart));
+  box(.5,.1,.1, M.trim, 0,.72,1.02, cart);                       /* gold bumper wink */
+}
+registerPick(cart,'cart');
+const cartCol={x1:-1.85,z1:16.7,x2:-0.45,z2:18.9};               /* mutated when the cart moves */
+colliders.push(cartCol);
+/* backstage mirror near the stage end of THE WALK */
+{
+  const mc=document.createElement('canvas'); mc.width=128; mc.height=192;
+  const g=mc.getContext('2d');
+  const gr=g.createLinearGradient(0,0,128,192);
+  gr.addColorStop(0,'#6e6280'); gr.addColorStop(1,'#4a3d5e');
+  g.fillStyle=gr; g.fillRect(0,0,128,192);
+  g.strokeStyle='rgba(255,255,255,.22)'; g.lineWidth=2;
+  g.beginPath(); g.moveTo(14,170); g.lineTo(112,26); g.stroke();
+  const t=new THREE.CanvasTexture(mc); t.colorSpace=THREE.SRGBColorSpace;
+  box(1.0,1.6,.06, M.trim, -2.14,1.7,27.2, gWalk);
+  const p=new THREE.Mesh(new THREE.PlaneGeometry(.85,1.45), new THREE.MeshBasicMaterial({map:t}));
+  p.rotation.y=Math.PI/2; p.position.set(-2.1,1.7,27.2); gWalk.add(p);
+  registerPick(p,'backmirror');
+}
 
 /* ---------------- lights — the "bright and gay" rig (Bryan's directive) ----------------
    Few REAL lights (crossfaded per act via RIG), everything else is emissive
    surfaces + additive glow pools. Room culling turns off whichever half is hidden. */
-const RIG=[];   /* {l, base, act:'back'|'run'} — 'always' lights stay out of the fade */
-function addL(l, act, grp){ RIG.push({l, base:l.intensity, act}); grp.add(l); return l; }
+const RIG=[];   /* {l, base, zone} — the act crossfade generalized to per-zone profiles */
+function addL(l, zone, grp){ RIG.push({l, base:l.intensity, zone}); grp.add(l); return l; }
 scene.add(new THREE.AmbientLight(0x6a5880, .85));   /* warm-violet base: no more murk */
-addL(new THREE.HemisphereLight(0xffe3b8, 0x53355e, 1.5), 'back', gBack);
-const pB1=addL(new THREE.PointLight(0xffcf9a, 42, 12, 2), 'back', gBack); pB1.position.set(-6.5,2.9,1.3);  /* vanity row */
-const pB2=addL(new THREE.PointLight(0xffc964, 50, 14, 2), 'back', gBack); pB2.position.set(-9.5,3.1,7.5); /* photo wall gold */
-const pB3=addL(new THREE.PointLight(0xffd9a0, 44, 12, 2), 'back', gBack); pB3.position.set(-7,3.2,12.3);  /* judges */
-const pB4=addL(new THREE.PointLight(0xffe3c2, 46, 14, 2), 'back', gBack); pB4.position.set(8.5,3.2,8);    /* east stations */
-const pCorr = new THREE.PointLight(0xff9ec0, 20, 8, 2); pCorr.position.set(0,2.8,17.5); gAlways.add(pCorr);
-addL(new THREE.HemisphereLight(0x9a7fd0, 0x241238, 1.05), 'run', gRun);
-const spotKey=addL(new THREE.SpotLight(0xffe6f2, 650, 30, 1.0, .55, 2), 'run', gRun);  /* white-pink runway key */
-spotKey.position.set(0,5.85,26.9);
-const spotMag =addL(new THREE.SpotLight(0xff2f9e, 380, 20, .5, .5, 2), 'run', gRun); spotMag.position.set(-2.4,5.6,27.6);
-const spotTeal=addL(new THREE.SpotLight(0x35e0d0, 340, 20, .5, .5, 2), 'run', gRun); spotTeal.position.set(2.4,5.6,27.6);
+/* alley: one warm door lamp + a cool night hemi — dim, exterior */
+addL(new THREE.HemisphereLight(0x5a6a9a, 0x141018, .55), 'alley', gAlley);
+const pAlley=addL(new THREE.PointLight(0xffb066, 15, 8, 2), 'alley', gAlley); pAlley.position.set(3.5,3.3,-0.8);
+/* werk room */
+addL(new THREE.HemisphereLight(0xffe3b8, 0x53355e, 1.5), 'werk', gBack);
+const pB1=addL(new THREE.PointLight(0xffcf9a, 42, 12, 2), 'werk', gBack); pB1.position.set(-6.5,2.9,1.3);  /* vanity row */
+const pB2=addL(new THREE.PointLight(0xffc964, 50, 14, 2), 'werk', gBack); pB2.position.set(-9.5,3.1,7.5); /* photo wall gold */
+const pB3=addL(new THREE.PointLight(0xffd9a0, 44, 12, 2), 'werk', gBack); pB3.position.set(-6,3.2,12.8);  /* golden doors / mirror wall */
+const pB4=addL(new THREE.PointLight(0xffe3c2, 46, 14, 2), 'werk', gBack); pB4.position.set(8.5,3.2,8);    /* east stations */
+/* the walk: rose pools down the corridor */
+const pCorr =addL(new THREE.PointLight(0xff9ec0, 20, 8, 2), 'walk', gWalk); pCorr.position.set(0,2.8,17.5);
+const pCorr2=addL(new THREE.PointLight(0xff9ec0, 20, 8, 2), 'walk', gWalk); pCorr2.position.set(0,2.8,24.5);
+const pCorr3=addL(new THREE.PointLight(0xffc2d6, 16, 7, 2), 'walk', gWalk); pCorr3.position.set(0,2.8,28.6);
+/* untucked lounge: moody magenta/violet */
+const pLng =addL(new THREE.PointLight(0xd05cff, 26, 10, 2), 'untucked', gLounge); pLng.position.set(6.9,2.9,24);
+const pLng2=addL(new THREE.PointLight(0xff5cab, 14, 7, 2), 'untucked', gLounge); pLng2.position.set(9.8,2.2,26.2);
+/* main stage */
+addL(new THREE.HemisphereLight(0x9a7fd0, 0x241238, 1.05), 'stage', gRun);
+const spotKey=addL(new THREE.SpotLight(0xffe6f2, 650, 30, 1.0, .55, 2), 'stage', gRun);  /* white-pink runway key */
+spotKey.position.set(0,5.85,40);
+const spotMag =addL(new THREE.SpotLight(0xff2f9e, 380, 20, .5, .5, 2), 'stage', gRun); spotMag.position.set(-2.4,5.6,43.7);
+const spotTeal=addL(new THREE.SpotLight(0x35e0d0, 340, 20, .5, .5, 2), 'stage', gRun); spotTeal.position.set(2.4,5.6,43.7);
 [spotKey,spotMag,spotTeal].forEach(s=>{ s.target.position.set(s.position.x,0,s.position.z+0.01); gRun.add(s.target); });
-const pJuke =addL(new THREE.PointLight(0xffb066, 26, 9, 2), 'run', gRun); pJuke.position.set(-10.5,2.4,24.2);
-const pWingE=addL(new THREE.PointLight(0x59d7ff, 22, 9, 2), 'run', gRun); pWingE.position.set(11,3,30);     /* atlas cyan */
-const pWingW=addL(new THREE.PointLight(0xbb95ff, 22, 9, 2), 'run', gRun); pWingW.position.set(-11,3,29.5);  /* calendar lilac */
+const pJuke =addL(new THREE.PointLight(0xffb066, 26, 9, 2), 'stage', gRun); pJuke.position.set(-11.2,2.4,45.2);
+const pWingE=addL(new THREE.PointLight(0x59d7ff, 22, 9, 2), 'stage', gRun); pWingE.position.set(11,3,41);     /* atlas cyan */
+const pWingW=addL(new THREE.PointLight(0xbb95ff, 22, 9, 2), 'stage', gRun); pWingW.position.set(-12.5,3,36);  /* calendar lilac */
 /* two disco sweep spots — desktop only; lazy, so a calm boot can add them later */
 let sweepA=null, sweepB=null;
 function ensureSweeps(){
   if(IS_TOUCH || sweepA) return;
-  sweepA=addL(new THREE.SpotLight(0xff4fb0, 300, 26, .3, .6, 2), 'run', gRun);
-  sweepB=addL(new THREE.SpotLight(0x46e6c8, 280, 26, .3, .6, 2), 'run', gRun);
-  [sweepA,sweepB].forEach((s,i)=>{ s.position.set(0,4.9,26.5); s.target.position.set(i?5:-5,0,i?30:23); gRun.add(s.target); });
+  sweepA=addL(new THREE.SpotLight(0xff4fb0, 300, 26, .3, .6, 2), 'stage', gRun);
+  sweepB=addL(new THREE.SpotLight(0x46e6c8, 280, 26, .3, .6, 2), 'stage', gRun);
+  [sweepA,sweepB].forEach((s,i)=>{ s.position.set(0,4.9,43); s.target.position.set(i?5:-5,0,i?46:38); gRun.add(s.target); });
 }
 if(!window.WR_CALM) ensureSweeps();
 
@@ -1389,27 +1812,33 @@ function glowPool(x,z,r,hex,grp,op){
       blending:THREE.AdditiveBlending, depthWrite:false}));
   m.rotation.x=-Math.PI/2; m.position.set(x,0.022,z); grp.add(m); return m;
 }
+glowPool(3.5,-0.8,1.8,0xffb066,gAlley,.4);   /* alley door — warm spill */
 glowPool(-10.4,7.5,2.7,0xffc23f,gBack);      /* photo wall — warm gold */
 glowPool(-10.2,1.9,2.2,0xff9440,gBack);      /* reading room — amber */
 glowPool(-6.5,1.2,2.5,0xff7fb0,gBack,.34);   /* vanity row — rose */
-glowPool(-7,11.5,2.5,0xf4b53f,gBack,.36);    /* judges' table — gold */
+glowPool(-5,13.6,2.3,0xffd27a,gBack,.4);     /* golden doors — warm gold */
+glowPool(-9.5,13.8,1.9,0xff7fb0,gBack,.32);  /* THE mirror — rose */
 glowPool(8.5,12.5,2.3,0x2fd8c0,gBack);       /* snatch desk — teal */
 glowPool(10.8,8.2,2.4,0xff5cab,gBack);       /* string board — rose */
 glowPool(11.1,2.2,2.1,0x3dffa0,gBack);       /* vault — green CRT spill */
 glowPool(-4.5,3.5,1.7,0xffb066,gBack,.3);    /* workbench — warm */
 glowPool(7.5,1.2,1.9,0x74e0c8,gBack,.34);    /* departures — mint */
-glowPool(0,17.5,1.9,0xff9ec0,gAlways,.34);   /* corridor — rose */
-glowPool(-10.5,23.8,2.3,0xffb066,gRun);      /* jukebox — amber */
-glowPool(11,30.5,2.3,0x35d5ff,gRun);         /* atlas — cyan */
-glowPool(-12.4,29.5,2.5,0xb08cff,gRun);      /* calendar — lilac */
-glowPool(13,22.5,2.1,0x9a4dff,gRun);         /* Madame Vibe — violet */
-glowPool(-13.3,21.5,1.7,0xf4b53f,gRun,.34);  /* exit door — gold */
+glowPool(0,17.5,1.9,0xff9ec0,gWalk,.34);     /* the walk — rose */
+glowPool(0,24.5,1.9,0xff9ec0,gWalk,.3);
+glowPool(-1.15,17.8,2.1,0xf4d27a,gWalk,.3);  /* golf cart — warm */
+glowPool(6.9,24,3,0xb44dff,gLounge,.36);     /* untucked lounge — violet */
+glowPool(-11.4,45.3,2.3,0xffb066,gRun);      /* DJ booth — amber */
+glowPool(11,41,2.3,0x35d5ff,gRun);           /* atlas — cyan */
+glowPool(-12.6,36,2.5,0xb08cff,gRun);        /* calendar — lilac */
+glowPool(13,33.5,2.1,0x9a4dff,gRun);         /* Madame Vibe — violet */
+glowPool(-13.3,31.6,1.7,0xf4b53f,gRun,.34);  /* exit door — gold */
+glowPool(-8.6,38,2.6,0xf4b53f,gRun,.32);     /* judges' panel — gold */
 
 /* ON AIR spill: red halo on the corridor side, opacity driven by crossT below */
 const onAirGlow=new THREE.Mesh(new THREE.PlaneGeometry(2.4,1.3),
   new THREE.MeshBasicMaterial({map:poolTex, color:0xff3030, transparent:true, opacity:0,
     blending:THREE.AdditiveBlending, depthWrite:false}));
-onAirGlow.rotation.y=Math.PI; onAirGlow.position.set(0,2.9,19.82); gAlways.add(onAirGlow);
+onAirGlow.rotation.y=Math.PI; onAirGlow.position.set(0,2.9,29.77); gWalk.add(onAirGlow);
 
 /* string bulbs across the backstage ceiling — a party, not a void (1 draw call) */
 {
@@ -1423,34 +1852,20 @@ onAirGlow.rotation.y=Math.PI; onAirGlow.position.set(0,2.9,19.82); gAlways.add(o
   str.instanceMatrix.needsUpdate=true; gBack.add(str);
 }
 
-/* colored footlights along both platform edges — one instanced draw, emissive only */
-{
-  const foot=new THREE.InstancedMesh(new THREE.BoxGeometry(.16,.1,.1), new THREE.MeshBasicMaterial({color:0xffffff}), 20);
-  const cols=[new THREE.Color(0xff5cab), new THREE.Color(0x35e0d0), new THREE.Color(0xf4b53f)];
-  const dum=new THREE.Object3D();
-  for(let i=0;i<20;i++){
-    const side=i%2, k=(i/2)|0;
-    dum.position.set(-8.1+k*1.8, .66, side?25.3:28.5);
-    dum.updateMatrix(); foot.setMatrixAt(i,dum.matrix);
-    foot.setColorAt(i, cols[k%3]);
-  }
-  foot.instanceMatrix.needsUpdate=true; if(foot.instanceColor) foot.instanceColor.needsUpdate=true;
-  gRun.add(foot);
-}
-/* neon rails on the runway ceiling — zero light cost, maximum color */
-box(26,.07,.07, new THREE.MeshBasicMaterial({color:0xff4fb0}), 0,5.88,22.3, gRun);
-box(26,.07,.07, new THREE.MeshBasicMaterial({color:0x46e6c8}), 0,5.88,30.7, gRun);
+/* neon rails on the stage ceiling — zero light cost, maximum color */
+box(26,.07,.07, new THREE.MeshBasicMaterial({color:0xff4fb0}), 0,5.88,32.2, gRun);
+box(26,.07,.07, new THREE.MeshBasicMaterial({color:0x46e6c8}), 0,5.88,46.9, gRun);
 
 /* the two lip-sync spotlights get visible beams (additive gobo cones) */
 [[0xff2f9e,-2.4],[0x35e0d0,2.4]].forEach(([c,x])=>{
   const cone=new THREE.Mesh(new THREE.ConeGeometry(1.05,4.95,20,1,true),
     new THREE.MeshBasicMaterial({color:c, transparent:true, opacity:.12,
       blending:THREE.AdditiveBlending, depthWrite:false, side:THREE.DoubleSide}));
-  cone.position.set(x,3.09,27.6); gRun.add(cone);
+  cone.position.set(x,3.11,43.7); gRun.add(cone);
 });
 
-/* ---------------- disco ball (procedural InstancedMesh, ~0 KB) ---------------- */
-const disco=new THREE.Group(); disco.position.set(0,4.55,26.5); gRun.add(disco);
+/* ---------------- disco ball (procedural InstancedMesh, ~0 KB) — centre-stage ---------------- */
+const disco=new THREE.Group(); disco.position.set(0,4.7,43.6); gRun.add(disco);
 {
   const rod=new THREE.Mesh(new THREE.CylinderGeometry(.02,.02,.85,6), M.dark); rod.position.y=.95; disco.add(rod);
   const core=new THREE.Mesh(new THREE.SphereGeometry(.5,16,12),
@@ -1488,7 +1903,7 @@ function speckLayout(theta){
     let t=40;
     if(dx>1e-4) t=Math.min(t,(14.2-o.x)/dx); else if(dx<-1e-4) t=Math.min(t,(-14.2-o.x)/dx);
     if(dy>1e-4) t=Math.min(t,(5.98-o.y)/dy); else if(dy<-1e-4) t=Math.min(t,(0.05-o.y)/dy);
-    if(dz>1e-4) t=Math.min(t,(33.2-o.z)/dz); else if(dz<-1e-4) t=Math.min(t,(20.05-o.z)/dz);
+    if(dz>1e-4) t=Math.min(t,(48.2-o.z)/dz); else if(dz<-1e-4) t=Math.min(t,(30.05-o.z)/dz);
     t=Math.max(.6,t);
     a[i*3]=o.x+dx*t; a[i*3+1]=o.y+dy*t; a[i*3+2]=o.z+dz*t;
   }
@@ -1690,16 +2105,19 @@ const avatar = new THREE.Group();
   const tail=new THREE.Mesh(new THREE.ConeGeometry(.055,.5,8), A.hair);
   tail.position.set(0,1.6,-.17); tail.rotation.x=.35; avatar.add(tail);
 }
-avatar.position.set(3.5,0,1.4);
+avatar.position.set(3.5,0,-6.5);
 avatar.visible=false;                                    /* shown only in third person */
 avatar.traverse(o=>{ o.frustumCulled=false; });
 scene.add(avatar);
 
 /* ---------------- camera rigs: first person + third-person chase ---------------- */
 const cam={x:0, y:2.4, z:-2, has:false};
-let avatarYaw=Math.atan2(-(-11.9-3.5), -(7.5-1.4));      /* matches the spawn yaw below */
+let avatarYaw=Math.PI;                                   /* matches the spawn yaw below: facing the door */
 let avatarMove=0;
-function roomCeil(z){ return z<15?4.0 : (z<20?3.0 : 5.8); }
+function roomCeil(x,z){
+  const zn=WR.zoneOf(x,z);
+  return zn==='alley'?5.2 : zn==='werk'?4.0 : zn==='untucked'?3.2 : zn==='walk'?3.0 : 5.8;
+}
 function avatarTick(dt, gy, t){
   const seated = sitEye!=null;
   let bob=0;
@@ -1745,7 +2163,7 @@ function camTick(dt, gy, t){
     d=Math.max(0.9,d);
     dx=player.x+bx*Math.cos(elev)*d; dz=player.z+bz*Math.cos(elev)*d;
     dy=pivY+Math.sin(elev)*d;
-    dy=Math.max(groundY(dx,dz)+0.35, Math.min(roomCeil(dz)-0.2, dy))+slipBounce;
+    dy=Math.max(groundY(dx,dz)+0.35, Math.min(roomCeil(dx,dz)-0.2, dy))+slipBounce;
     lx=player.x; ly=pivY; lz=player.z;
   }
   const k = window.WR_CALM ? 1 : (1-Math.exp(-dt*9));   /* calm mode: no camera lag bounce */
@@ -1756,8 +2174,8 @@ function camTick(dt, gy, t){
 }
 
 /* ---------------- player state / controls ---------------- */
-const player = { x:3.5, z:1.4, yaw:0, pitch:0, eyeY:1.65, seated:false, moveYaw:0 };
-{ const dx = -11.9-player.x, dz = 7.5-player.z; player.yaw = Math.atan2(-dx,-dz); player.moveYaw = player.yaw; } /* face the photo wall */
+/* spawn: THE ALLEYWAY, facing the lit door (where the queens line up) */
+const player = { x:3.5, z:-6.5, yaw:Math.PI, pitch:0, eyeY:1.65, seated:false, moveYaw:Math.PI };
 const keys = {};
 let entered=false, paused=false;
 
@@ -1805,6 +2223,7 @@ addEventListener('keydown', e=>{
     else if(!$('#lib').classList.contains('hidden')) closeChat();
     else if(!$('#read').classList.contains('hidden')) closeRead();
     else if(!$('#board').classList.contains('hidden')) clearBoardFocus();
+    else if(!$('#lipp').classList.contains('hidden')) hide($('#lipp'));
     else if(paused) closePause();
     else openPause();
     return;
@@ -1827,7 +2246,7 @@ const look = {id:null, lx:0, ly:0};
 if(IS_TOUCH){
   addEventListener('pointerdown', e=>{
     if(!entered || overlayOpen()) return;
-    if(e.target.closest('#prompt,#askBtn,#viewBtn,#exit2d,#board,#toast')) return;
+    if(e.target.closest('#prompt,#askBtn,#viewBtn,#exit2d,#board,#lipp,#toast')) return;
     if(e.clientX < innerWidth*.45 && joy.id===null){
       joy.id=e.pointerId; joy.active=true; joy.bx=e.clientX; joy.by=e.clientY; joy.dx=joy.dy=0;
       const j=$('#joy'); show(j); j.style.left=(e.clientX-55)+'px'; j.style.top=(e.clientY-55)+'px';
@@ -1857,7 +2276,13 @@ function closePause(){ paused=false; hide($('#pause')); }   /* mouse stays free;
 $('#resumeBtn').addEventListener('click', closePause);
 
 /* ---------------- movement + collision ---------------- */
-function groundY(x,z){ return (x>-9&&x<9&&z>25.4&&z<28.4) ? 0.6 : 0; }
+/* the T-shaped runway is raised .6 (stem + crossbar) with a half step at its base */
+function groundY(x,z){
+  if(x>-8.2 && x<8.2 && z>41.7 && z<45.5) return 0.6;    /* crossbar */
+  if(x>-1.7 && x<1.7 && z>31.25 && z<=41.7) return 0.6;  /* stem */
+  if(x>-1.7 && x<1.7 && z>30.35 && z<=31.25) return 0.3; /* entrance step */
+  return 0;
+}
 function collide(nx,nz){
   const r=.35;
   for(const b of colliders){
@@ -1891,21 +2316,21 @@ addInteract({id:'arrowPrev', x:-11.8, z:1.9, radius:1.7,
   label(){ return '<b>E</b> — earlier season'; }, act(){ shiftSeason(-1); }});
 addInteract({id:'arrowNext', x:-11.8, z:13.1, radius:1.7,
   label(){ return '<b>E</b> — later season'; }, act(){ shiftSeason(1); }});
-addInteract({id:'judges', x:-7, z:11, radius:2.4,
+addInteract({id:'judges', x:-9.0, z:38, radius:2.6,
   label(){ return player.seated ? `<b>E</b> — open Track Records · <b>←→</b> season · walk to stand`
-                                : `<b>E</b> — sit at the Judges' Table`; },
+                                : `<b>E</b> — sit at the Judges' Panel`; },
   act(){
-    if(player.seated){ openDress('sec:records', "Judges' Table → Track Records"); }
+    if(player.seated){ openDress('sec:records', "Judges' Panel → Track Records"); }
     else {
-      player.seated=true; player.x=-7; player.z=10.6;
-      player.yaw = Math.atan2(-(-7-player.x), -(14.9-player.z)); /* face the scoreboard */
+      player.seated=true; player.x=-9.55; player.z=38;
+      player.yaw = Math.atan2(-(13.9-player.x), -(38-player.z)); /* look across the runway at the scoreboard */
       paintScoreboard(SEASON.idx);
       libSay(seasonRing().length+' seasons of verdicts fit on one wall when you paint small enough. Flip through them.');
     }
   }});
-addInteract({id:'jukebox', x:-10.5, z:23.8, radius:2.4,
-  label(){ return '<b>E</b> — the Listening Booth'; }, act(){ openBooth(); }});
-addInteract({id:'exitdoor', x:-13.7, z:21.5, radius:2.2,
+addInteract({id:'jukebox', x:-11.4, z:45.4, radius:2.6,
+  label(){ return '<b>E</b> — the Listening Booth (DJ booth)'; }, act(){ openBooth(); }});
+addInteract({id:'exitdoor', x:-13.7, z:31.6, radius:2.2,
   label(){ return '<b>E</b> — exit to the classic site'; }, act(){ location.href='index.html'; }});
 addInteract({id:'librarian', get x(){return lib.position.x;}, get z(){return lib.position.z;}, radius:2.6,
   label(){ return '<b>T</b> / <b>E</b> — talk to The Librarian'; }, act(){ openChat(); }});
@@ -2002,7 +2427,7 @@ if(IS_TOUCH){
   addEventListener('pointerdown', e=>{
     tapCand=null;
     if(!entered || overlayOpen()) return;
-    if(e.target && e.target.closest && e.target.closest('#prompt,#askBtn,#viewBtn,#exit2d,#board,#toast,#say')) return;
+    if(e.target && e.target.closest && e.target.closest('#prompt,#askBtn,#viewBtn,#exit2d,#board,#lipp,#toast,#say')) return;
     if(e.clientX < innerWidth*.45) return;               /* joystick half of the screen — walking, not tapping */
     tapCand={id:e.pointerId, x:e.clientX, y:e.clientY, t:performance.now()};
   });
@@ -2425,11 +2850,16 @@ let act='backstage';
 let libTarget=new THREE.Vector3(LIB_HOME.x,0,LIB_HOME.z), libVel=new THREE.Vector3();
 let ambientTimer=18;
 let libHold=true, enterAt=0;   /* she greets from her Library Corner desk, then falls in behind */
-function actOf(z){ return z<15?'backstage':(z>20?'runway':'corridor'); }
+/* zone → register: the emcee on the main stage, the archivist everywhere homely */
+function actOf(x,z){
+  const zn=WR.zoneOf(x,z);
+  return zn==='stage' ? 'runway' : (zn==='werk'||zn==='alley') ? 'backstage' : 'corridor';
+}
 
 function libTick(dt, t){
-  /* the glide-follow begins only once you actually leave the Library Corner */
-  if(libHold && Math.hypot(player.x-LIB_DESK.x, player.z-LIB_DESK.z)>5.5) libHold=false;
+  /* the glide-follow begins only once you've come INSIDE and left the Library
+     Corner — she greets from her desk while you're still in the alley */
+  if(libHold && player.z>0.5 && Math.hypot(player.x-LIB_DESK.x, player.z-LIB_DESK.z)>5.5) libHold=false;
   if(readOpen){
     libTarget.set(-9.4,0,2.2);                 /* her wingback in the Reading Room */
   } else if(libHold){
@@ -2440,11 +2870,18 @@ function libTick(dt, t){
     const rx=Math.cos(player.yaw),  rz=-Math.sin(player.yaw);
     libTarget.set(player.x - fx*2 - rx*1.2, 0, player.z - fz*2 - rz*1.2);
   }
-  /* keep her out of the corridor pinch walls */
-  if(libTarget.z>14.6&&libTarget.z<20.4) libTarget.x=Math.max(-1.4,Math.min(1.4,libTarget.x));
+  /* corridor-aware pathing: pinch her into THE WALK unless the party is in
+     the Untucked Lounge; funnel her through the alley door */
+  if(libTarget.z>14.6 && libTarget.z<30.4){
+    if(WR.zoneOf(player.x,player.z)==='untucked'){
+      libTarget.x=Math.max(3.2,Math.min(10.6,libTarget.x));
+      libTarget.z=Math.max(21.6,Math.min(26.4,libTarget.z));
+    } else libTarget.x=Math.max(-1.4,Math.min(1.4,libTarget.x));
+  }
+  if(libTarget.z<1.2) libTarget.x=Math.max(2.9,Math.min(4.1,libTarget.x));   /* the alley door's width */
   const dx=libTarget.x-lib.position.x, dz=libTarget.z-lib.position.z;
   const dist=Math.hypot(dx,dz);
-  const pAct=actOf(player.z), lAct=actOf(lib.position.z);
+  const pAct=actOf(player.x,player.z), lAct=actOf(lib.position.x,lib.position.z);
   if(dist>12 || (pAct!=='corridor'&&lAct!=='corridor'&&pAct!==lAct&&dist>6)){
     glitterBurst(lib.position); lib.position.copy(libTarget); glitterBurst(lib.position);
   } else if(dist>0.9){
@@ -2511,9 +2948,10 @@ function glitterTick(dt){
 /* ---------------- curtain + act crossfade ---------------- */
 const curtBaseL=curtGeoL.attributes.position.array.slice();
 const curtBaseR=curtGeoR.attributes.position.array.slice();
-let crossT=0;   /* 0 backstage look, 1 runway look */
+let crossT=0;   /* 0 far from the stage mouth, 1 at it (ON AIR lamp driver) */
+const fogScratch=new THREE.Color();
 function curtainTick(dt,t){
-  const d=Math.hypot(player.x-0, player.z-17.5);
+  const d=Math.hypot(player.x-0, player.z-CURT_Z);
   const open=Math.max(0, 1-d/4.2);           /* proximity parts it — no button, ever */
   const targetOff=open*1.75;
   curtL.position.x += ((-1.05-targetOff)-curtL.position.x)*Math.min(1,dt*3.5);
@@ -2528,27 +2966,37 @@ function curtainTick(dt,t){
     }
     geo.attributes.position.needsUpdate=true;
   }
-  /* lighting crossfade across the 5m corridor (≈2s at walk speed) */
-  const want=Math.max(0,Math.min(1,(player.z-15)/5));
+  /* per-zone lighting: every RIG light follows its zone's weight, continuous */
+  const wz=WR.zoneWeights(player.x, player.z);
+  for(const r of RIG) r.l.intensity = r.base * (0.12 + 0.88*(wz[r.zone]||0));
+  /* fog: weighted blend of the zone colours */
+  {
+    let sum=0; fogScratch.setRGB(0,0,0);
+    for(const k in FOG_ZONE){ const w=wz[k]||0; if(w>0){ sum+=w;
+      fogScratch.r+=FOG_ZONE[k].r*w; fogScratch.g+=FOG_ZONE[k].g*w; fogScratch.b+=FOG_ZONE[k].b*w; } }
+    if(sum>0){ fogScratch.multiplyScalar(1/sum); scene.fog.color.lerp(fogScratch, Math.min(1,dt*3)); }
+  }
+  /* ON AIR lamp over the stage mouth */
+  const want=Math.max(0,Math.min(1,(player.z-25)/5));
   crossT += (want-crossT)*Math.min(1,dt*(window.WR_CALM?6:2.2));  /* calm: quicker, less lingering fade */
-  const back=1-crossT;
-  for(const r of RIG) r.l.intensity = r.base * (r.act==='run' ? (0.15+0.85*crossT) : (0.3+0.7*back));
-  scene.fog.color.copy(FOG_BACK).lerp(FOG_RUN, crossT);
   onAirMat.color.setHex(crossT>0.55?0xff4545:0x551111);
   onAirGlow.material.opacity = Math.max(0, crossT-0.35)*.8;
   /* act flip + Librarian register */
-  const a=actOf(player.z);
+  const a=actOf(player.x,player.z);
   if(a!=='corridor' && a!==act){
     const from=act; act=a;
     $('#libMode').textContent = act==='runway' ? 'main stage · the emcee' : 'backstage · the archivist';
     if(act==='runway'&&from!=='runway') libSay(WR.pick(WR.CROSS_TO_RUNWAY, crossRunState));
     if(act==='backstage'&&from!=='backstage') libSay(WR.pick(WR.CROSS_TO_BACKSTAGE, crossBackState));
   }
-  /* room culling: the avatar's room decides; any room the chase camera is still
-     crossing stays visible so the boom never frames a void */
-  const cull = WR.cullRooms(player.z, camera.position.z);
-  gBack.visible = cull.back;
-  gRun.visible  = cull.run;
+  /* room culling by zone: avatar's zone + neighbours only (mobile-aggressive);
+     any zone the chase camera is crossing stays visible — no void behind the boom */
+  const cull = WR.cullRooms(player.x, player.z, camera.position.x, camera.position.z);
+  gAlley.visible  = cull.alley;
+  gBack.visible   = cull.werk;
+  gWalk.visible   = cull.walk;
+  gLounge.visible = cull.untucked;
+  gRun.visible    = cull.stage;
 }
 
 /* ---------------- main loop ---------------- */
@@ -2740,12 +3188,14 @@ mkSign('SNATCH GAME', 2.4,.5, 8.5,3.9,14.9, Math.PI, gBack, PAL.magenta);
 mkSign('CONNECTIONS', 2.4,.5, 11.9,3.85,8.2, -Math.PI/2, gBack);
 mkSign('THE VAULT', 1.8,.45, 11.9,3.1,2.2, -Math.PI/2, gBack, '#74e0c8');
 mkSign('DEPARTURES', 2.2,.5, 7.5,3.6,0.12, 0, gBack, '#74e0c8');
-mkSign('THE ATLAS', 2,.5, 13.95,3.9,30.5, -Math.PI/2, gRun, '#74e0c8');
-mkSign('BIRTHDAYS', 2,.5, -13.95,4.9,29.5, Math.PI/2, gRun, PAL.rose);
-mkSign('MADAME VIBE', 2,.5, 13.95,3.4,22.5, -Math.PI/2, gRun, PAL.magenta);
-/* THE WERKROOM — glowing house lettering in both acts */
+mkSign('THE ATLAS', 2,.5, 13.95,3.9,41, -Math.PI/2, gRun, '#74e0c8');
+mkSign('BIRTHDAYS', 2,.5, -13.95,4.9,36, Math.PI/2, gRun, PAL.rose);
+mkSign('MADAME VIBE', 2,.5, 13.95,3.4,33.5, -Math.PI/2, gRun, PAL.magenta);
+/* THE WERKROOM — glowing house lettering; the alley door wears the marquee */
+mkSign('THE WERK ROOM', 2.4,.55, 3.5,3.6,-0.42, Math.PI, gAlley, PAL.magenta);
 mkSign('THE WERKROOM', 4.6,.8, 0.2,3.7,0.14, 0, gBack, PAL.magenta);
-mkSign('THE WERKROOM', 7,1.1, 0,5.35,30.9, Math.PI, gRun, PAL.magenta);
+mkSign('THE MAIN STAGE', 7,1.1, 0,5.3,30.3, 0, gRun, PAL.magenta);
+mkSign('UNTUCKED', 2.6,.6, 6.9,2.8,26.95, Math.PI, gLounge, PAL.magenta);
 /* two rugs of color underfoot */
 {
   const rug=new THREE.Mesh(new THREE.PlaneGeometry(7,5), new THREE.MeshStandardMaterial({color:0x4a2a55, roughness:.95}));
@@ -3186,13 +3636,273 @@ REPAINTS.push(()=>{ for(let i=0;i<3;i++) paintMirror(i, mirrorPick[i]); });
     }});
 });
 
+/* ================= PHASE 3 — the set rebuilt: new stations ================= */
+
+/* ---- the golden doors: click → crack, warm light, a Librarian riff ---- */
+let ruT=0;
+const ruState={};
+addInteract({id:'rudoors', x:-5, z:13.9, radius:2.8,
+  label(){ return '<b>E</b> — the golden doors'; },
+  act(){ ruT=4.2; libSay(WR.pick(WR.RU_DOOR_LINES, ruState)); }});
+
+/* ---- closet cubbies: one clickable — a random queen's life's work ---- */
+addInteract({id:'closet', x:4.3, z:14.2, radius:2.4,
+  active(){ return !!B.D; },
+  label(){ return '<b>E</b> — somebody’s closet cubby'; },
+  act(){
+    const qn=B.D.derived.qname||{};
+    const c=B.D.contestants[Math.floor(Math.random()*B.D.contestants.length)];
+    const nm=(c.drag_name_used&&c.drag_name_used!=='-')?c.drag_name_used:(qn[c.queen_id]||c.queen_id);
+    libSay('Careful with that cubby, baby — tonight it’s '+nm+'’s. Everything on those hangers is somebody’s life’s work.');
+  }});
+
+/* ---- RuPaul-esque portrait frames: abstract gold crown silhouettes (copyright-safe) ---- */
+function mkCrownPortrait(x,y,z,ry,grp){
+  const cnv=document.createElement('canvas'); cnv.width=192; cnv.height=240;
+  const g=cnv.getContext('2d');
+  const gr=g.createLinearGradient(0,0,0,240);
+  gr.addColorStop(0,'#3d2352'); gr.addColorStop(1,'#1c1030');
+  g.fillStyle=gr; g.fillRect(0,0,192,240);
+  g.strokeStyle=PAL.brass; g.lineWidth=10; g.strokeRect(8,8,176,224);
+  g.fillStyle=PAL.gold;                                    /* stylized crown, nobody's likeness */
+  g.beginPath();
+  g.moveTo(46,150); g.lineTo(52,96); g.lineTo(76,124); g.lineTo(96,82);
+  g.lineTo(116,124); g.lineTo(140,96); g.lineTo(146,150); g.closePath(); g.fill();
+  g.fillRect(46,156,100,14);
+  [52,96,140].forEach(cx=>{ g.beginPath(); g.arc(cx,88,6,0,Math.PI*2); g.fill(); });
+  g.fillStyle='rgba(247,240,230,.55)'; g.font='italic 15px "Bodoni Moda", serif'; g.textAlign='center';
+  g.fillText('her majesty, abstracted', 96, 206);
+  const t=new THREE.CanvasTexture(cnv); t.colorSpace=THREE.SRGBColorSpace;
+  const m=new THREE.Mesh(new THREE.PlaneGeometry(.95,1.2), new THREE.MeshBasicMaterial({map:t}));
+  m.position.set(x,y,z); m.rotation.y=ry; grp.add(m);
+}
+mkCrownPortrait(-11.2,2.6,14.9,Math.PI,gBack);
+mkCrownPortrait(4.3,3.25,14.9,Math.PI,gBack);
+mkCrownPortrait(11.9,2.5,13.3,-Math.PI/2,gBack);
+
+/* ---- THE MIRROR: lipstick farewells from elimination_events (via the bridge) ---- */
+let FAREWELLS=null, fwIdx=0, lipLoreTold=false;
+function paintLipstick(fw){
+  const g=lipCnv.getContext('2d');
+  const gr=g.createLinearGradient(0,0,512,640);
+  gr.addColorStop(0,'#6e6280'); gr.addColorStop(.5,'#453b57'); gr.addColorStop(1,'#57496b');
+  g.fillStyle=gr; g.fillRect(0,0,512,640);
+  g.strokeStyle='rgba(255,255,255,.18)'; g.lineWidth=3;
+  g.beginPath(); g.moveTo(50,600); g.lineTo(470,60); g.stroke();
+  g.textAlign='center';
+  if(!fw){
+    g.fillStyle='#ff9ec8'; g.font='italic 700 40px "Bodoni Moda", serif';
+    g.fillText('THE MIRROR', 256, 280);
+    g.fillStyle='rgba(247,240,230,.75)'; g.font='18px "Space Mono", monospace';
+    g.fillText('every goodbye, in lipstick', 256, 330);
+    g.fillText('E — read one', 256, 380);
+  } else {
+    g.fillStyle='#ff9ec8'; g.font='italic 700 30px "Bodoni Moda", serif';
+    const words=String(fw.text).split(/\s+/); const lines=[]; let cur='';
+    for(const w of words){
+      if((cur+' '+w).trim().length>24){ lines.push(cur.trim()); cur=w; } else cur+=' '+w;
+      if(lines.length>9) break;
+    }
+    if(cur.trim() && lines.length<=9) lines.push(cur.trim());
+    lines.forEach((l,i)=>g.fillText(l, 256, 150+i*44, 460));
+    g.fillStyle='rgba(247,240,230,.8)'; g.font='17px "Space Mono", monospace';
+    g.fillText('— '+fw.name+' · '+fw.season, 256, 590, 470);
+  }
+  g.textAlign='left'; lipTex.needsUpdate=true;
+}
+paintLipstick(null); REPAINTS.push(()=>paintLipstick(FAREWELLS?FAREWELLS[fwIdx%FAREWELLS.length]:null));
+function showFarewell(){
+  if(!FAREWELLS || !FAREWELLS.length){
+    toast('No farewell messages on file — left blank rather than guessed.'); return;
+  }
+  const fw=FAREWELLS[fwIdx%FAREWELLS.length];
+  paintLipstick(fw);
+  $('#lippMsg').textContent='“'+fw.text+'”';
+  $('#lippWho').textContent=fw.name+' · '+fw.season+' · '+fw.episode;
+  $('#lippQ').style.display = fw.qid && fw.qid!=='-' ? '' : 'none';
+  show($('#lipp'));
+}
+addInteract({id:'lipstick', x:-9.5, z:14.3, radius:2.6,
+  active(){ return !!B.D; },
+  label(){ return '<b>E</b> — THE mirror · lipstick farewells'; },
+  act(){
+    if(!lipLoreTold){ lipLoreTold=true;
+      libSay('Off the record, scholar: some mirrors look back. The producers’ favorite lens lived behind glass just like this.'); }
+    showFarewell(); fwIdx++;
+  }});
+$('#lippX').addEventListener('click', ()=>hide($('#lipp')));
+$('#lippNext').addEventListener('click', ()=>{ showFarewell(); fwIdx++; });
+$('#lippAll').addEventListener('click', ()=>{ hide($('#lipp')); openDress('farewells','The Mirror → Farewells'); });
+$('#lippQ').addEventListener('click', ()=>{
+  const fw=FAREWELLS && FAREWELLS[(fwIdx-1+FAREWELLS.length)%FAREWELLS.length];
+  if(fw && fw.qid && fw.qid!=='-'){ hide($('#lipp')); openDress('queen:'+fw.qid,'The Mirror → '+fw.name); }
+});
+
+/* ---- golf cart fast travel (THE WALK is a block and a half) ----
+   Click/tap or E shuttles you to the far end; cartCol mutates in place. */
+let cartEnd='werk';   /* which end the cart is parked at */
+function cartPark(end){
+  cartEnd=end;
+  const z=end==='werk'?17.8:26.6;
+  cart.position.set(-1.15,0,z);
+  cartCol.z1=z-1.1; cartCol.z2=z+1.1;
+}
+addInteract({id:'cart', get x(){ return cart.position.x; }, get z(){ return cart.position.z; }, radius:2.6,
+  label(){ return '<b>E</b> — golf cart · ride to the '+(cartEnd==='werk'?'main stage':'werk room'); },
+  act(){
+    const toStage=cartEnd==='werk';
+    glitterBurst(player);
+    if(toStage){ player.x=0.9; player.z=28.4; player.yaw=Math.PI; player.moveYaw=Math.PI; cartPark('stage'); }
+    else { player.x=0.9; player.z=16.2; player.yaw=0; player.moveYaw=0; cartPark('werk'); }
+    glitterBurst(player);
+    cam.has=false;
+    toast('The cart hums the whole block and a half. Union rules.');
+  }});
+
+/* ---- backstage mirror at the stage end of THE WALK: an affirmation ---- */
+const affState={};
+addInteract({id:'backmirror', x:-1.9, z:27.2, radius:1.9,
+  label(){ return '<b>E</b> — one last look'; },
+  act(){ toast(WR.pick(WR.AFFIRM_LINES, affState)); }});
+
+/* ---- stage-manager switch: the T lighting, per the designer's note ---- */
+addInteract({id:'tswitch', x:-3.6, z:31.1, radius:2.2,
+  label(){ return '<b>E</b> — runway T lights: '+(TLIT?'ON':'off'); },
+  act(){
+    TLIT=!TLIT; applyTLights();
+    toast(TLIT ? 'T lights up — full pageant.' : 'T lights down — the designer’s note wins tonight.');
+  }});
+
+/* ================= UNTUCKED LOUNGE (off THE WALK, east) ================= */
+const M_COUCH=new THREE.MeshStandardMaterial({color:0x8b8b93, roughness:.9});
+const M_COUCH2=new THREE.MeshStandardMaterial({color:0x6f6f78, roughness:.9});
+{
+  /* gray L-couches around a low table */
+  box(3.2,.45,1.1, M_COUCH, 5.8,0.23,22.1, gLounge);
+  box(3.2,.8,.3, M_COUCH2, 5.8,0.5,21.55, gLounge);  W(4.2,21.35,7.4,22.65);
+  box(1.1,.45,2.4, M_COUCH, 3.7,0.23,23.6, gLounge);
+  box(.3,.8,2.4, M_COUCH2, 3.25,0.5,23.6, gLounge);  W(3.05,22.4,4.25,24.8);
+  box(3.2,.45,1.1, M_COUCH, 7.6,0.23,26.0, gLounge);
+  box(3.2,.8,.3, M_COUCH2, 7.6,0.5,26.55, gLounge);  W(6.0,25.45,9.2,26.75);
+  /* low table + gold tray */
+  box(1.6,.4,1.0, M2.desk, 6.6,0.2,24.1, gLounge);   W(5.8,23.6,7.4,24.6);
+  box(.7,.04,.4, M.trim, 6.9,0.43,24.3, gLounge);
+  /* clutter shelves: props from "previous episodes" (reused meshes, easter-egg decor) */
+  const shelf=new THREE.Group(); gLounge.add(shelf); registerPick(shelf,'relics');
+  box(.14,2.2,4.2, M2.desk, 11.15,1.1,24, shelf);
+  [0,1,2].forEach(i=>box(.5,.05,4.2, M.trim, 10.95,0.6+i*.7,24, shelf));
+  W(10.6,21.7,11.4,26.3);
+  /* the relics: a wig head, a cone, a mop head, book stacks, a mini crown */
+  const wig2=new THREE.Mesh(new THREE.SphereGeometry(.09,10,8),
+    new THREE.MeshStandardMaterial({color:0xd8cfe0, roughness:.85}));
+  wig2.position.set(10.9,0.75,22.6); wig2.scale.set(.85,1.1,.9); shelf.add(wig2);
+  const cone2=new THREE.Mesh(new THREE.ConeGeometry(.11,.3,10),
+    new THREE.MeshStandardMaterial({color:0xe8722a, roughness:.7}));
+  cone2.position.set(10.9,1.46,25.2); shelf.add(cone2);
+  const mop2=new THREE.Mesh(new THREE.SphereGeometry(.09,8,6),
+    new THREE.MeshStandardMaterial({color:0xcfc5ae, roughness:1}));
+  mop2.scale.set(1,.5,1); mop2.position.set(10.9,1.38,23.1); shelf.add(mop2);
+  box(.22,.05,.16, new THREE.MeshStandardMaterial({color:0xe6007e, roughness:.8}), 10.9,2.02,24.4, shelf);
+  box(.2,.05,.15, new THREE.MeshStandardMaterial({color:0x74e0c8, roughness:.8}), 10.9,2.07,24.42, shelf);
+  const crown2=new THREE.Mesh(new THREE.CylinderGeometry(.09,.11,.1,8), M.trim);
+  crown2.position.set(10.9,2.06,25.5); shelf.add(crown2);
+  /* the unpressable shade button */
+  const ped=new THREE.Group(); ped.position.set(9.7,0,21.7); gLounge.add(ped);
+  box(.35,1.0,.35, M.dark, 0,.5,0, ped);
+  box(.42,.05,.42, M.trim, 0,1.02,0, ped);
+  const dome=new THREE.Mesh(new THREE.SphereGeometry(.11,10,8,0,Math.PI*2,0,Math.PI/2),
+    new THREE.MeshStandardMaterial({color:0xd42a2a, roughness:.4, emissive:0x550808, emissiveIntensity:.8}));
+  dome.position.set(0,1.04,0); ped.add(dome);
+  registerPick(ped,'shadebtn'); W(9.45,21.45,9.95,21.95);
+  /* headphones corner: someone's practicing the lip sync */
+  const hp=new THREE.Group(); hp.position.set(10.5,0,26.5); gLounge.add(hp);
+  box(.06,1.2,.06, M.dark, 0,.6,0, hp);
+  const band=new THREE.Mesh(new THREE.TorusGeometry(.13,.03,8,14,Math.PI), M.plum);
+  band.position.set(0,1.28,0); hp.add(band);
+  [-0.13,0.13].forEach(x=>{ const cup=new THREE.Mesh(new THREE.SphereGeometry(.05,8,6), M.plum);
+    cup.position.set(x,1.24,0); hp.add(cup); });
+  registerPick(hp,'phones'); W(10.3,26.3,10.7,26.7);
+  /* the lounge screen: opens the dressing screen on the episodes route */
+  const tvC=document.createElement('canvas'); tvC.width=512; tvC.height=320;
+  const tvT=new THREE.CanvasTexture(tvC); tvT.colorSpace=THREE.SRGBColorSpace;
+  const tvPaint=()=>{
+    const g=tvC.getContext('2d');
+    g.fillStyle='#0c0714'; g.fillRect(0,0,512,320);
+    g.strokeStyle=PAL.magenta; g.lineWidth=8; g.strokeRect(6,6,500,308);
+    g.textAlign='center';
+    g.save(); g.shadowColor=PAL.magenta; g.shadowBlur=22;
+    g.fillStyle=PAL.magenta; g.font='700 64px "Bodoni Moda", serif';
+    g.fillText('UNTUCKED', 256, 140); g.fillText('UNTUCKED', 256, 140);
+    g.restore();
+    g.fillStyle='rgba(247,240,230,.7)'; g.font='22px "Space Mono", monospace';
+    g.fillText('the episode log — E to browse', 256, 220);
+    g.textAlign='left'; tvT.needsUpdate=true;
+  };
+  tvPaint(); REPAINTS.push(tvPaint);
+  const tv=new THREE.Mesh(new THREE.PlaneGeometry(1.7,1.05), new THREE.MeshBasicMaterial({map:tvT}));
+  tv.rotation.y=Math.PI; tv.position.set(9.4,1.95,26.94); gLounge.add(tv);
+  registerPick(tv,'loungetv');
+}
+const shadeState={};
+addInteract({id:'shadebtn', x:9.7, z:21.7, radius:1.9,
+  label(){ return '<b>E</b> — press the shade button'; },
+  act(){ libSay(WR.pick(WR.SHADE_LINES, shadeState), true); foundEgg('shade'); }});
+addInteract({id:'phones', x:10.5, z:26.5, radius:1.7,
+  label(){ return '<b>E</b> — a headphones stand, occupied in spirit'; },
+  act(){ libSay('(through the headphones, faintly: five, six, seven, eight—) Someone’s practicing the lip sync, darling. We do not interrupt craft.', true); foundEgg('phones'); }});
+addInteract({id:'relics', x:11, z:24, radius:2.4,
+  label(){ return '<b>E</b> — props from previous episodes'; },
+  act(){ libSay('Relics of previous episodes, baby. Every one of them signed something before it got shelved.', true); foundEgg('relics'); }});
+addInteract({id:'loungetv', x:9.4, z:26.4, radius:2.4,
+  label(){ return '<b>E</b> — the lounge screen · the episode log'; },
+  act(){ openDress('episodes','Untucked Lounge → Episodes'); }});
+/* couch-side Untucked teaser card (painted from episodes.untucked_notes over the bridge) */
+const ucardCnv=document.createElement('canvas'); ucardCnv.width=512; ucardCnv.height=320;
+const ucardTex=new THREE.CanvasTexture(ucardCnv); ucardTex.colorSpace=THREE.SRGBColorSpace;
+let UCARD=null;
+function paintUcard(){
+  const g=ucardCnv.getContext('2d');
+  g.fillStyle='#2a1030'; g.fillRect(0,0,512,320);
+  g.strokeStyle=PAL.rose; g.lineWidth=6; g.strokeRect(5,5,502,310);
+  g.fillStyle=PAL.rose; g.font='700 30px "Bodoni Moda", serif';
+  if(UCARD){
+    g.fillText('UNTUCKED · '+UCARD.label, 24, 46, 464);
+    g.fillStyle='rgba(247,240,230,.9)'; g.font='19px "Space Mono", monospace';
+    const words=String(UCARD.notes).split(/\s+/); let line='', y=92;
+    for(const w of words){
+      if((line+' '+w).trim().length>40){ g.fillText(line.trim(), 24, y, 464); y+=28; line=w; }
+      else line+=' '+w;
+      if(y>250) { line=line.trim()+'…'; break; }
+    }
+    if(line.trim()) g.fillText(line.trim(), 24, y, 464);
+    g.fillStyle='rgba(247,240,230,.55)'; g.font='15px "Space Mono", monospace';
+    g.fillText('E — the episode log', 24, 296);
+  } else {
+    g.fillText('UNTUCKED', 24, 46);
+    g.fillStyle='rgba(247,240,230,.7)'; g.font='18px "Space Mono", monospace';
+    g.fillText('no notes on file for tonight —', 24, 110);
+    g.fillText('left blank rather than guessed.', 24, 140);
+  }
+  ucardTex.needsUpdate=true;
+}
+paintUcard(); REPAINTS.push(paintUcard);
+{
+  const card=new THREE.Mesh(new THREE.PlaneGeometry(.85,.53), new THREE.MeshBasicMaterial({map:ucardTex}));
+  card.rotation.x=-Math.PI/2; card.rotation.z=.3; card.position.set(6.4,0.415,24.15); gLounge.add(card);
+  registerPick(card,'ucard');
+}
+addInteract({id:'ucard', x:6.4, z:24.15, radius:2.0,
+  active(){ return !!B.D; },
+  label(){ return UCARD ? '<b>E</b> — tonight’s Untucked note · '+UCARD.label : '<b>E</b> — the Untucked card'; },
+  act(){ openDress('episodes', UCARD ? 'Untucked → '+UCARD.label : 'Untucked → Episodes'); }});
+
 /* ================= small diegetic homes (backstage) ================= */
 registerPick(box(.5,1.15,.45, M2.desk, -3.9,0.57,12.3, gBack), 'lectern'); W(-4.2,12.05,-3.6,12.55);
 registerPick(box(.6,.06,.5, M.plum, -3.9,1.2,12.3, gBack), 'lectern');
 addInteract({id:'lectern', x:-3.9, z:12.0, radius:1.8,
   label(){ return '<b>E</b> — the guest book · judges & guests'; },
   act(){ openDress('guestfreq','Guest Book → Guests'); }});
-registerPick(box(.5,.08,.36, M.rosey, -5.2,1.12,12.15, gBack), 'ledger');   /* the earnings ledger */
+registerPick(box(.5,.08,.36, M.rosey, -5.2,0.99,12.15, gBack), 'ledger');   /* the earnings ledger, on its worktable */
 addInteract({id:'ledger', x:-5.2, z:11.9, radius:1.4,
   label(){ return '<b>E</b> — the earnings ledger'; },
   act(){ openDress('earnings',"Judges' Table → Earnings"); }});
@@ -3231,15 +3941,15 @@ addInteract({id:'departures', x:7.5, z:0.9, radius:2.6,
   act(){ openDress('timeline','Departures Board → Timeline'); }});
 
 /* ================= runway wings: globe · calendar · Madame Vibe ================= */
-const globeGrp=new THREE.Group(); globeGrp.position.set(11,0,30.5); gRun.add(globeGrp); registerPick(globeGrp,'globe');
+const globeGrp=new THREE.Group(); globeGrp.position.set(11,0,41); gRun.add(globeGrp); registerPick(globeGrp,'globe');
 {
   const stand=new THREE.Mesh(new THREE.CylinderGeometry(.14,.3,1.1,10), M2.desk); stand.position.y=.55; globeGrp.add(stand);
   const ring=new THREE.Mesh(new THREE.TorusGeometry(.74,.03,8,26), M.brassWire); ring.position.y=1.7; ring.rotation.x=Math.PI/2.6; globeGrp.add(ring);
   const sphere=new THREE.Mesh(new THREE.SphereGeometry(.62,14,10), new THREE.MeshBasicMaterial({color:0x2e8f78, wireframe:true}));
   sphere.position.y=1.7; globeGrp.add(sphere); globeGrp.userData.sphere=sphere;
-  W(10.6,30.1,11.4,30.9);
+  W(10.6,40.6,11.4,41.4);
 }
-addInteract({id:'globe', x:11, z:30.5, radius:2.6,
+addInteract({id:'globe', x:11, z:41, radius:2.6,
   label(){ return '<b>E</b> — the Atlas · every franchise by region'; },
   act(){ openDress('atlas','The Globe → Season Atlas'); }});
 
@@ -3247,7 +3957,7 @@ const calCnv=document.createElement('canvas'); calCnv.width=1280; calCnv.height=
 const calTex=new THREE.CanvasTexture(calCnv); calTex.colorSpace=THREE.SRGBColorSpace;
 {
   const p=new THREE.Mesh(new THREE.PlaneGeometry(4.8,2.9), new THREE.MeshBasicMaterial({map:calTex}));
-  p.rotation.y=Math.PI/2; p.position.set(-13.98,2.9,29.5); gRun.add(p); registerPick(p,'calendar');
+  p.rotation.y=Math.PI/2; p.position.set(-13.98,2.9,36); gRun.add(p); registerPick(p,'calendar');
 }
 function paintCalendar(){
   const g=calCnv.getContext('2d');
@@ -3285,17 +3995,17 @@ function paintCalendar(){
   calTex.needsUpdate=true;
 }
 paintCalendar(); REPAINTS.push(paintCalendar);
-addInteract({id:'calendar', x:-13.5, z:29.5, radius:3,
+addInteract({id:'calendar', x:-13.5, z:36, radius:3,
   label(){ return '<b>E</b> — birthdays & the zodiac'; },
   act(){ openDress('birthdays','Calendar Wall → Birthdays'); }});
 
-registerPick(box(1.2,2.4,.9, M2.desk, 13.4,1.2,22.5, gRun), 'vibe'); W(12.8,22.0,14,23.0);   /* Madame Vibe cabinet */
-registerPick(box(1.3,.14,1, M.trim, 13.4,2.46,22.5, gRun), 'vibe');
+registerPick(box(1.2,2.4,.9, M2.desk, 13.4,1.2,33.5, gRun), 'vibe'); W(12.8,33.0,14,34.0);   /* Madame Vibe cabinet */
+registerPick(box(1.3,.14,1, M.trim, 13.4,2.46,33.5, gRun), 'vibe');
 const vibeCnv=document.createElement('canvas'); vibeCnv.width=512; vibeCnv.height=768;
 const vibeTex=new THREE.CanvasTexture(vibeCnv); vibeTex.colorSpace=THREE.SRGBColorSpace;
 {
   const p=new THREE.Mesh(new THREE.PlaneGeometry(.95,1.45), new THREE.MeshBasicMaterial({map:vibeTex}));
-  p.rotation.y=-Math.PI/2; p.position.set(12.78,1.5,22.5); gRun.add(p); registerPick(p,'vibe');
+  p.rotation.y=-Math.PI/2; p.position.set(12.78,1.5,33.5); gRun.add(p); registerPick(p,'vibe');
 }
 function paintVibe(){
   const g=vibeCnv.getContext('2d');
@@ -3318,7 +4028,7 @@ function paintVibe(){
   g.textAlign='left'; vibeTex.needsUpdate=true;
 }
 paintVibe(); REPAINTS.push(paintVibe);
-addInteract({id:'vibe', x:12.9, z:22.5, radius:2.4,
+addInteract({id:'vibe', x:12.9, z:33.5, radius:2.4,
   label(){ return '<b>E</b> — consult Madame Vibe'; },
   act(){ openDress('predictor','Madame Vibe → Winner-Vibe Predictor'); }});
 
@@ -3330,7 +4040,7 @@ const projCnv=document.createElement('canvas'); projCnv.width=1536; projCnv.heig
 const projTex=new THREE.CanvasTexture(projCnv); projTex.colorSpace=THREE.SRGBColorSpace;
 {
   const p=new THREE.Mesh(new THREE.PlaneGeometry(9.6,3.5), new THREE.MeshBasicMaterial({map:projTex}));
-  p.rotation.y=Math.PI; p.position.set(0,3.9,32.9); gRun.add(p); registerPick(p,'lsstage');
+  p.rotation.y=Math.PI; p.position.set(0,3.6,47.85); gRun.add(p); registerPick(p,'lsstage');
 }
 function silhouetteTexture(flip){
   /* an original, deliberately generic drag silhouette — never a likeness */
@@ -3360,12 +4070,12 @@ function silhouetteTexture(flip){
 const sils=[-2.4,2.4].map((x,i)=>{
   const m=new THREE.Mesh(new THREE.PlaneGeometry(1.5,2.25),
     new THREE.MeshBasicMaterial({map:silhouetteTexture(i===1), transparent:true, opacity:0, depthWrite:false}));
-  m.rotation.y=Math.PI; m.position.set(x,1.78,27.6); m.visible=false; gRun.add(m);
+  m.rotation.y=Math.PI; m.position.set(x,1.8,43.7); m.visible=false; gRun.add(m);
   const lc=document.createElement('canvas'); lc.width=512; lc.height=96;
   const lt=new THREE.CanvasTexture(lc); lt.colorSpace=THREE.SRGBColorSpace;
   const lbl=new THREE.Mesh(new THREE.PlaneGeometry(1.6,.3),
     new THREE.MeshBasicMaterial({map:lt, transparent:true, opacity:0, depthWrite:false}));
-  lbl.rotation.y=Math.PI; lbl.position.set(x,3.15,27.6); lbl.visible=false; gRun.add(lbl);
+  lbl.rotation.y=Math.PI; lbl.position.set(x,3.2,43.7); lbl.visible=false; gRun.add(lbl);
   return {mesh:m, lbl:lbl, lc:lc, lt:lt};
 });
 function paintSilLabel(i, name){
@@ -3449,7 +4159,7 @@ function resolveBattle(side){
   paintProjection();
   libSay('The wall has the verdict, baby — the archive never blinks.', true);
 }
-addInteract({id:'lsstage', x:0, z:27.2, radius:3.4,
+addInteract({id:'lsstage', x:0, z:43.4, radius:3.6,
   active(){ return !!B.D; },
   label(){
     return battle ? (battle.phase==='reveal' ? '<b>E</b> — another lip sync' : '<b>E</b> — shuffle the matchup')
@@ -3457,18 +4167,19 @@ addInteract({id:'lsstage', x:0, z:27.2, radius:3.4,
   },
   act(){ startBattle(); }});
 [['lsA','a',-2.4],['lsB','b',2.4]].forEach(([id,side,x])=>{
-  addInteract({id, x, z:27.6, radius:1.3,
+  addInteract({id, x, z:43.7, radius:1.3,
     active(){ return !!(battle && battle.phase==='guess'); },
     label(){ const m=battle.m; return '<b>E</b> — call it: '+(side==='a'?m.a.name:m.b.name)+' won'; },
     act(){ resolveBattle(side); }});
 });
 
 /* ============ CURIOSITIES (wr3d.eggs) — hidden gags, flavor only ============ */
-const EGG_TOTAL=7;
+const EGG_TOTAL=10;   /* banana · pa · mop · cone · sewmach · wighead · shantay · shade · phones · relics */
 function foundEgg(id){ if(SAVE.eggs.indexOf(id)<0){ SAVE.eggs.push(id); persist(); } }
 
-/* ---- the banana peel on the spawn walk-line: slip once, click to re-set ---- */
-const peel=new THREE.Group(); peel.position.set(2.55,0,1.8); gBack.add(peel);
+/* ---- the banana peel in THE ALLEYWAY, right before the door (an icon's entrance):
+   slip once, click to re-set ---- */
+const peel=new THREE.Group(); peel.position.set(3.5,0,-1.0); gAlley.add(peel);
 {
   const y=new THREE.MeshStandardMaterial({color:0xf2d24b, roughness:.65, emissive:0x4a3c08, emissiveIntensity:.5});
   [0,2.1,4.2].forEach(a=>{
@@ -3479,13 +4190,13 @@ const peel=new THREE.Group(); peel.position.set(2.55,0,1.8); gBack.add(peel);
 }
 registerPick(peel,'banana');
 let peelArmed=true, slipT=0;
-addInteract({id:'banana', x:2.55, z:1.8, radius:1.6,
+addInteract({id:'banana', x:3.5, z:-1.0, radius:1.6,
   active(){ return !peelArmed; },
   label(){ return '<b>E</b> — re-set the banana peel'; },
   act(){ peelArmed=true; libSay('Re-set. Comedy is a science, darling.', true); }});
 function slipCheck(){
   if(!peelArmed || !entered || player.seated || slipT>0 || readOpen) return;
-  if(Math.hypot(player.x-2.55, player.z-1.8)>=0.5) return;
+  if(Math.hypot(player.x-3.5, player.z+1.0)>=0.5) return;
   peelArmed=false; foundEgg('banana');
   if(!window.WR_CALM) slipT=0.9;    /* calm: no tumble, no camera bounce — just the quip */
   libSay('An icon’s entrance, darling. The floor keeps receipts too.');
@@ -3494,7 +4205,7 @@ function slipCheck(){
 /* ---- "Queens walking!" — an occasional off-stage PA in the corridor ---- */
 const PA={last:-1e9, zone:'backstage'};
 function paCheck(){
-  const z=actOf(player.z);
+  const z=actOf(player.x,player.z);
   if(z!==PA.zone){
     if(z==='corridor' && performance.now()-PA.last>75000 && Math.random()<0.35){
       PA.last=performance.now(); foundEgg('pa');
@@ -3519,14 +4230,14 @@ function oddball(id, x, z, quip, label, radius){
 }
 oddball('mop', 4.6, 0.5, 'Gay clutter. Very important. Do not file.', 'a mop, minding its business');
 { /* a traffic cone on the runway, unexplained */
-  const g=new THREE.Group(); g.position.set(5.6,0.6,26.2); gRun.add(g);
+  const g=new THREE.Group(); g.position.set(5.5,0.6,43.9); gRun.add(g);
   const c=new THREE.Mesh(new THREE.ConeGeometry(.16,.42,10),
     new THREE.MeshStandardMaterial({color:0xe8722a, roughness:.7, emissive:0x3a1500, emissiveIntensity:.6}));
   c.position.y=.26; g.add(c);
   box(.3,.03,.3, M.dark, 0,.015,0, g);
   registerPick(g,'cone');
 }
-oddball('cone', 5.6, 26.2, 'No parking on the runway. She stays anyway. Nobody remembers ordering her.', 'a traffic cone with no business here');
+oddball('cone', 5.5, 43.9, 'No parking on the runway. She stays anyway. Nobody remembers ordering her.', 'a traffic cone with no business here');
 { /* the sewing machine on the workbench */
   const g=new THREE.Group(); g.position.set(-4.55,0.85,3.35); gBack.add(g);
   box(.4,.06,.16, M.dark, 0,.03,0, g);
@@ -3592,6 +4303,16 @@ function eggTick(dt,t){
 /* ---- per-frame Phase-2 work ---- */
 function phase2Tick(dt,t){
   if(globeGrp.userData.sphere) globeGrp.userData.sphere.rotation.y += dt*(window.WR_CALM?0.06:0.45);
+  /* the golden doors: crack open while asked, warm light spilling, then settle */
+  if(ruT>0 || ruL.rotation.y!==0){
+    ruT=Math.max(0,ruT-dt);
+    const wantA = ruT>0 ? .3 : 0;
+    const k=Math.min(1,dt*(window.WR_CALM?12:4));
+    ruL.rotation.y += (wantA-ruL.rotation.y)*k;
+    ruR.rotation.y += ((-wantA)-ruR.rotation.y)*k;
+    ruGlow.material.opacity += ((ruT>0?.85:0)-ruGlow.material.opacity)*k;
+    if(ruT<=0 && Math.abs(ruL.rotation.y)<.004){ ruL.rotation.y=0; ruR.rotation.y=0; ruGlow.material.opacity=0; }
+  }
   SNATCH.t+=dt;
   if(SNATCH.t>12){
     SNATCH.t=0;
@@ -3613,6 +4334,11 @@ function phase2Tick(dt,t){
 /* ---- data-driven props, built once the bridge delivers DATA ---- */
 function buildDataProps(){
   buildBoard();
+  /* lipstick farewells: real rows, shuffled start so every visit reads differently */
+  FAREWELLS=WR.farewellList(B.D);
+  if(FAREWELLS.length) fwIdx=Math.floor(Math.random()*FAREWELLS.length);
+  /* the couch-side Untucked teaser (untucked_notes is sparse — '-' handled) */
+  UCARD=WR.untuckedTeaser(B.D);
   /* start the snatch wall on an episode that has a roster */
   let tries=0;
   while(tries<90 && !((WR.snatchEpisodeCards(B.D,SNATCH.idx,SNATCH_ALLOW)||{cards:[]}).cards.length)){ SNATCH.idx++; tries++; }
@@ -3750,8 +4476,8 @@ enterBtn.addEventListener('click', ()=>{
   tryLock();
   const returning = metSet.size>0 || SAVE.cards>0 || SAVE.ls.seen>0;
   setTimeout(()=>libSay(returning
-    ? 'Back again, scholar — the stacks kept your place. I’m at my desk by the door; the photo wall’s ahead on your left.'
-    : 'Welcome to the Werkroom, baby — I’m The Librarian. This corner is my library; wander off and I’ll walk with you. Everything you touch has receipts.'), 700);
+    ? 'Back again, scholar — the stacks kept your place. Through the lit door, mind the peel; I’m at my desk just inside.'
+    : 'Psst — through the lit door, baby, that’s where the queens line up. Mind the peel. I’m The Librarian, waiting just inside — everything you touch has receipts.'), 700);
   setTimeout(()=>toast('The Librarian is your guide — press T (or tap ◆) to ask her anything.'), 5200);
 });
 </script>
