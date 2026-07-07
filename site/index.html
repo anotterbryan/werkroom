@@ -3987,13 +3987,39 @@ function libInit(){
   LIB.songs=D.songs.filter(s=>s.title&&s.title!=='-').map(s=>({n:norm(s.title),s})).sort((a,b)=>b.n.length-a.n.length);
   LIB.celebs=D.episode_roles.filter(r=>r.role_type==='SNATCH_CHARACTER').map(r=>({n:norm(r.role_detail.split('(')[0]),r}));
   LIB.cont={};D.contestants.forEach(c=>{(LIB.cont[c.queen_id]=LIB.cont[c.queen_id]||[]).push(c);});
+  LIB.qbyid={};D.queens.forEach(q=>LIB.qbyid[q.queen_id]=q);
+  /* --- Librarian 2.0: nickname/alias table, built programmatically from the data.
+     Alias entries carry .b (space-padded form) so they only match on word
+     boundaries — full-name entries keep the original substring behavior. */
+  const byName={};D.queens.forEach(q=>byName[norm(q.drag_name)]=q);
+  const BLOCK=new Set(['miss','lady','queen','king','drag','race','love','baby','honey','star','mister','sister','china']);
+  const t1={},t2={};
+  D.queens.forEach(q=>{const ts=norm(q.drag_name).split(' ');
+    if(ts.length>1)t1[ts[0]]=(t1[ts[0]]||0)+1;
+    if(ts.length>2){const k=ts[0]+' '+ts[1];t2[k]=(t2[k]||0)+1;}});
+  const alias=(n,q)=>{if(n&&n.length>3&&q&&!byName[n])LIB.queens.push({n,q});};
+  D.queens.forEach(q=>{const ts=norm(q.drag_name).split(' ');
+    if(ts.length>1&&t1[ts[0]]===1&&!BLOCK.has(ts[0]))alias(ts[0],q);
+    if(ts.length>2&&t2[ts[0]+' '+ts[1]]===1)alias(ts[0]+' '+ts[1],q);});
+  [['jinx','jinkx monsoon'],['jinx monsoon','jinkx monsoon'],['vanjie','vanessa vanjie mateo'],
+   ['miss vanjie','vanessa vanjie mateo'],['juju','jujubee']].forEach(([a,c])=>alias(a,byName[c]));
+  LIB.queens.sort((a,b)=>b.n.length-a.n.length);
+  /* season shorthand: franchise prefix + number ("as2", "uk 3") -> season_id */
+  LIB.sid={};D.seasons.forEach(s=>LIB.sid[s.season_id.toLowerCase()]=s);
+  const pre=[...new Set(D.seasons.map(s=>s.season_id.replace(/\d+$/,'').toLowerCase()))].sort((a,b)=>b.length-a.length);
+  const spaced=pre.filter(p=>!['as','it','be','us','in','on','at','to','se','de'].includes(p));
+  LIB.sre=new RegExp('\\b('+pre.join('|')+')(\\d{1,2})\\b');
+  LIB.sre2=spaced.length?new RegExp('\\b('+spaced.join('|')+') (\\d{1,2})\\b'):null;
 }
 /* optional pref(e): keep scanning for a preferred (in-scope) hit, falling back
    to the first hit — so scope softly disambiguates without ever refusing. */
+/* short names must match on word boundaries (queen "Star" ≠ "all stars");
+   longer names keep substring behavior so possessives/plurals still hit */
+function libHit(e,nq,pad){return e.n.length<8?pad.includes(' '+e.n+' '):nq.includes(e.n);}
 function libFind(list,nq,pref){
-  let first=null;
+  let first=null;const pad=' '+nq+' ';
   for(const e of list){
-    if(!(e.n&&e.n.length>3&&nq.includes(e.n)))continue;
+    if(!(e.n&&e.n.length>3&&libHit(e,nq,pad)))continue;
     if(!pref)return e;
     if(pref(e))return e;
     if(!first)first=e;
@@ -4005,6 +4031,8 @@ function libSeason(nq){
   if(m){const lbl='season '+m[1];
     const hits=LIB.seasons.filter(e=>e.n===lbl||e.n.endsWith(' '+lbl));
     if(hits.length){const pref=hits.find(e=>inScope(e.s.season_id));return (pref||hits[0]).s;}}
+  const sh=nq.match(LIB.sre)||(LIB.sre2?nq.match(LIB.sre2):null);
+  if(sh){const s=LIB.sid[sh[1]+String(+sh[2]).padStart(2,'0')];if(s)return s;}
   const e=libFind(LIB.seasons,nq,x=>inScope(x.s.season_id));return e&&e.s;
 }
 /* soft scope tag: if everything the answer points at sits outside the user's
@@ -4024,17 +4052,151 @@ function libScopeTag(a){
   }catch(e){}
   return a;
 }
-function libAnswer(raw){return libScopeTag(libAnswerCore(raw));}
+/* ================= Librarian 2.0 — conversational layer =================
+   Bridge contract UNCHANGED: libAnswer(raw) -> {t,links}|null (sync),
+   libSearch(raw) -> Promise<{t,links}|null>. New fields on the return object
+   (flavor, chips, compare) are ADDITIVE — world.html reads only t/links.
+   Two-register discipline: t = verbatim facts (gold); flavor = persona line
+   with zero stats in it (rose). */
+const _CTX={q:null,s:null};                       /* 2-slot conversation memory */
+function libResetContext(){_CTX.q=null;_CTX.s=null;}
+window.libResetContext=libResetContext;
+/* banded edit distance with early exit above max */
+function _ed(a,b,max){
+  if(a===b)return 0;
+  const la=a.length,lb=b.length;
+  if(Math.abs(la-lb)>max)return max+1;
+  let prev=[],cur=[];
+  for(let j=0;j<=lb;j++)prev[j]=j;
+  for(let i=1;i<=la;i++){
+    cur[0]=i;let best=cur[0];
+    for(let j=1;j<=lb;j++){
+      cur[j]=Math.min(prev[j]+1,cur[j-1]+1,prev[j-1]+(a[i-1]===b[j-1]?0:1));
+      if(cur[j]<best)best=cur[j];
+    }
+    if(best>max)return max+1;
+    const t=prev;prev=cur;cur=t;
+  }
+  return prev[lb];
+}
+/* query words that must never fuzzy-match a queen's name */
+const _FSTOP=new Set(('season seasons snatch winner winners winning episode episodes untucked compare versus against record records placement placements moment moments twist twists random surprise should would could where which there their theirs about money prize earnings earning hometown birthday oldest youngest queens congeniality farewell mirror message messages represent finish finished track tracks played playing happened happen start starting watch watching first crown crowned stars syncs synced lipsync lipsyncs quote quotes catchphrase catchphrases many much challenge challenges everyone anything something people between during after before').split(' '));
+/* typo tolerance: edit distance ≤2 on tokens ≥5 chars, best-scored queen */
+function libFuzzyQueen(nq){
+  const qt=nq.split(' ').filter(w=>w.length>=5&&!_FSTOP.has(w));
+  if(!qt.length)return null;
+  let best=null,bs=0;
+  for(const e of LIB.queens){
+    let s=0;
+    for(const t of e.n.split(' ')){
+      if(t.length<5)continue;
+      for(const w of qt){const d=_ed(w,t,2);if(d<=2){s+=t.length-d;break;}}
+    }
+    if(s>bs){bs=s;best=e;}
+  }
+  return bs>=5?best:null;
+}
+const _WORDNUM={one:1,two:2,three:3,four:4,five:5,six:6,seven:7,eight:8,nine:9,ten:10,eleven:11,twelve:12,thirteen:13,fourteen:14,fifteen:15,sixteen:16,seventeen:17,eighteen:18,nineteen:19,twenty:20};
+/* pre-substitutions: "s9" -> "season 9", "season nine" -> "season 9",
+   "seaosn 9" (typo) -> "season 9", "allstars" -> "all stars" */
+function libPresub(nq){
+  nq=nq.replace(/\ball ?stars?\b/g,'all stars');
+  nq=nq.replace(/\b([a-z]{5,7}) (\d{1,2})\b/g,(m,w,d)=>(w!=='season'&&_ed(w,'season',2)<=2)?'season '+d:m);
+  nq=nq.replace(/\bseason ([a-z]+)\b/g,(m,w)=>_WORDNUM[w]?'season '+_WORDNUM[w]:m);
+  nq=nq.replace(/\bs(\d{1,2})\b/g,'season $1');
+  return nq;
+}
+/* persona flavor — rotating, no-repeat, NEVER contains stats */
+const _FLAVOR=[
+ 'Off the record? I do love it when the archive shows off.',
+ 'Straight from the shelves, hunty — no guesswork, ever.',
+ 'Reading is fundamental, and this ledger reads itself.',
+ 'Category is: verified-facts eleganza. She never misses.',
+ 'The library is open, and the receipts are laminated.',
+ 'Filed, stamped, and served with a curtsy.',
+ 'That page was already dog-eared — a personal favorite.',
+ 'Ask me another, dove — the shelves go on for days.'];
+let _FLI=-1;
+function libFlavor(){_FLI=(_FLI+1)%_FLAVOR.length;return _FLAVOR[_FLI];}
+/* follow-up suggestion chips from the 2-slot memory */
+function libChips(){
+  const c=[],q=_CTX.q,s=_CTX.s;
+  if(q){const n=q.drag_name;
+    c.push({l:'Her lip syncs',send:n+' lip sync record'},
+      {l:'Her track record',send:'How did '+n+' place?'},
+      {l:'Compare her with…',fill:'Compare '+n+' and '});}
+  if(s)c.push({l:seasonName(s.season_id)+' twists',send:'What twists happened in '+seasonName(s.season_id)+'?'},
+    {l:'Who won '+seasonName(s.season_id)+'?',send:'Who won '+seasonName(s.season_id)+'?'});
+  if(!c.length)c.push({l:'Surprise me',send:'surprise me'},{l:'Where do I start?',send:'Where should I start?'});
+  return c.slice(0,4);
+}
+const _STATES={alabama:'al',arizona:'az',arkansas:'ar',california:'ca',colorado:'co',connecticut:'ct',delaware:'de',florida:'fl',georgia:'ga',hawaii:'hi',idaho:'id',illinois:'il',indiana:'in',iowa:'ia',kansas:'ks',kentucky:'ky',louisiana:'la',maine:'me',maryland:'md',massachusetts:'ma',michigan:'mi',minnesota:'mn',mississippi:'ms',missouri:'mo',montana:'mt',nebraska:'ne',nevada:'nv','new hampshire':'nh','new jersey':'nj','new mexico':'nm','new york':'ny','north carolina':'nc','north dakota':'nd',ohio:'oh',oklahoma:'ok',oregon:'or',pennsylvania:'pa','rhode island':'ri','south carolina':'sc','south dakota':'sd',tennessee:'tn',texas:'tx',utah:'ut',vermont:'vt',virginia:'va',washington:'wa','west virginia':'wv',wisconsin:'wi',wyoming:'wy'};
+function libAnswer(raw){
+  const a=libScopeTag(libAnswerCore(raw));
+  if(a){a.flavor=libFlavor();a.chips=libChips();}
+  return a;
+}
 function libAnswerCore(raw){
-  libInit();const nq=LIB.norm(raw);const L=[];
-  const Q=libFind(LIB.queens,nq,e=>{const r=(e.q&&LIB.cont[e.q.queen_id])||[];return r.some(c=>inScope(c.season_id));})?.q,
+  libInit();const nq=libPresub(LIB.norm(raw));
+  let Q=libFind(LIB.queens,nq,e=>{const r=(e.q&&LIB.cont[e.q.queen_id])||[];return r.some(c=>inScope(c.season_id));})?.q,
     S=libSeason(nq), SO=libFind(LIB.songs,nq)?.s, C=libFind(LIB.celebs,nq)?.r;
+  if(!Q&&!C&&!SO){const f=libFuzzyQueen(nq);if(f)Q=f.q;}   /* typo tolerance, only when nothing exact matched */
+  /* anaphora — pronouns and "what about…" pull from the 2-slot memory */
+  if(!Q&&_CTX.q&&/\b(she|her|hers|herself|they|them|their)\b/.test(nq))Q=_CTX.q;
+  if(!S&&_CTX.s&&/\b(that|this|the same) season\b/.test(nq))S=_CTX.s;
+  if(!Q&&!S&&!SO&&!C&&_CTX.q&&/^(and|what about|how about|also|what else|ok and)\b/.test(nq))Q=_CTX.q;
+  const a=libIntents(nq,Q,S,SO,C);
+  if(a){/* remember what we're talking about (engine-discovered entities too) */
+    const dq=a.q,ds=a.s;delete a.q;delete a.s;
+    _CTX.q=Q||dq||_CTX.q;_CTX.s=S||ds||_CTX.s;
+  }
+  return a;
+}
+function libIntents(nq,Q,S,SO,C){
+  const L=[];
   const name=q=>q.drag_name, runsOf=q=>LIB.cont[q.queen_id]||[];
   const seasonOfQ=()=>{const r=runsOf(Q);return S?r.find(c=>c.season_id===S.season_id):r[0];};
   // who won <season>
   if(S&&/\bwho (won|is the winner|took the crown)\b/.test(nq)&&!/lip ?sync/.test(nq)&&S.winner_id&&S.winner_id!=='-'){
     L.push('season:'+S.season_id,'queen:'+S.winner_id);
-    return {t:`${qname[S.winner_id]} won ${S.season_label}.`,links:L};}
+    return {t:`${qname[S.winner_id]} won ${S.season_label}.`,links:L,q:LIB.qbyid[S.winner_id]};}
+  // compare X and Y — side-by-side
+  if(/\b(compare|versus|vs)\b/.test(nq)){
+    const pair=[];const pad=' '+nq+' ';
+    for(const e of LIB.queens){
+      if(e.n.length>3&&libHit(e,nq,pad)&&!pair.some(x=>x.queen_id===e.q.queen_id)){
+        pair.push(e.q);if(pair.length===2)break;}}
+    if(pair.length===2){
+      const side=q=>{const r=runsOf(q);const ab=X.assassin_board.find(b=>b.queen_id===q.queen_id)||{ls_wins:0};
+        return {name:name(q),id:q.queen_id,
+          seasons:r.map(c=>seasonName(c.season_id)+(c.placement?' #'+c.placement:'')).join(', '),
+          wins:r.reduce((s,c)=>s+(+c.wins||0),0),ls:ab.ls_wins||0};};
+      const A=side(pair[0]),B=side(pair[1]);
+      return {t:`${A.name} — ${A.seasons}; ${A.wins} challenge wins; ${A.ls} lip syncs won. ${B.name} — ${B.seasons}; ${B.wins} challenge wins; ${B.ls} lip syncs won.`,
+        links:['queen:'+A.id,'queen:'+B.id],compare:[A,B],q:pair[0]};}}
+  // superlatives (checked before song matching so "the most…" can't hit a title)
+  if(/\b(youngest|oldest|most|biggest)\b/.test(nq)){
+    const M=masterRows();
+    if(/youngest|oldest/.test(nq)){
+      const win=/\bwin|winner|won|crown/.test(nq);
+      const pool=M.filter(r=>+r.age&&(!win||+r.placement===1));
+      if(pool.length){const yng=/youngest/.test(nq);
+        const r=pool.reduce((m,x)=>yng?(+x.age<+m.age?x:m):(+x.age>+m.age?x:m));
+        return {t:`${r.queen} — ${r.age} when filming ${seasonName(r.season)}${win?`, the ${yng?'youngest':'oldest'} winner on record`:''}${+r.placement===1?' (she took the crown)':` (placed #${r.placement})`}.`,
+          links:['queen:'+r.queen_id,'ages'],q:LIB.qbyid[r.queen_id]};}}
+    if(/lip ?sync/.test(nq)){
+      const key=/assassin|sent home|kill/.test(nq)?'assassinations':'ls_wins';
+      const top=X.assassin_board.slice().sort((a,b)=>(b[key]||0)-(a[key]||0))[0];
+      if(top)return {t:`${top.drag_name} — ${top[key]} lip sync${top[key]===1?'':'s'} ${key==='assassinations'?'that sent someone home':'won'}, the most in the archive.`,
+        links:['queen:'+top.queen_id,'assassin'],q:LIB.qbyid[top.queen_id]};}
+    if(/\bwins?\b|challenge/.test(nq)){
+      const r=M.slice().sort((a,b)=>(+b.wins||0)-(+a.wins||0))[0];
+      if(r)return {t:`${r.queen} — ${r.wins} challenge wins on ${seasonName(r.season)}, the most recorded in a single season.`,
+        links:['queen:'+r.queen_id],q:LIB.qbyid[r.queen_id]};}
+    if(/season|appear|runs/.test(nq)){
+      let bq=null,bn=0;Object.keys(LIB.cont).forEach(k=>{if(LIB.cont[k].length>bn&&qname[k]){bn=LIB.cont[k].length;bq=k;}});
+      if(bq)return {t:`${qname[bq]} — ${bn} recorded runs: ${LIB.cont[bq].map(c=>seasonName(c.season_id)).join(', ')}.`,
+        links:['queen:'+bq,'secondact'],q:LIB.qbyid[bq]};}}
   // who won the lip sync to <song>
   if(SO&&/lip ?sync/.test(nq)){
     const rows=D.lip_syncs.filter(l=>l.song_id===SO.song_id);
@@ -4048,6 +4210,47 @@ function libAnswerCore(raw){
     return {t:`No Snatch Game character recorded for ${name(Q)} yet — the Fandom ingest is still widening.`,links:['snatchhall']};}
   if(/snatch|play(ed)?/.test(nq)&&C){const c=D.contestants.find(x=>x.contestant_id===C.contestant_id);
     return {t:`${C.role_detail} was played by ${c?qname[c.queen_id]:'?'} in Snatch Game (${epLabel(C.episode_id)}).`,links:c?['queen:'+c.queen_id,'snatchhall']:['snatchhall']};}
+  // counts — "how many queens from texas", "how many seasons"…
+  if(/how many/.test(nq)){
+    const M=masterRows();
+    const from=nq.match(/how many queens? (?:are |come |came )?from ([a-z0-9 ]+)/);
+    if(from){const place=from[1].trim(),abbr=_STATES[place];
+      const qs=[...new Set(M.filter(r=>{const hay=LIB.norm(r.hometown+' '+r.home_city);
+        return hay.includes(place)||(abbr&&(' '+hay+' ').includes(' '+abbr+' '));}).map(r=>r.queen_id))];
+      return {t:qs.length?`${qs.length} queen${qs.length===1?'':'s'} from ${place} in the archive: ${qs.slice(0,8).map(id=>qname[id]).join(', ')}${qs.length>8?'…':''}.`:`No queens from ${place} on the shelves yet.`,links:['hometowns','georoll']};}
+    if(/season/.test(nq)){const as=/all stars/.test(nq);
+      const n=as?D.seasons.filter(s=>/all stars/i.test(s.franchise)).length:D.seasons.length;
+      return {t:`${n} ${as?'All Stars ':''}season${n===1?'':'s'} in the archive${as?'':`, across ${new Set(D.seasons.map(s=>s.franchise)).size} franchises`}.`,links:['atlas','timeline']};}
+    if(/queen/.test(nq))return {t:`${D.queens.length} queens across ${D.contestants.length} contestant runs.`,links:['queens','vault']};
+    if(/episode/.test(nq))return {t:`${D.episodes.length} episodes catalogued.`,links:['episodes']};
+    if(/lip ?sync/.test(nq))return {t:`${D.lip_syncs.length} lip syncs on file.`,links:['lipsyncs']};}
+  // untucked — "what happened in untucked after X"
+  if(/untucked/.test(nq)){
+    const noted=D.episodes.filter(e=>e.untucked_notes&&e.untucked_notes!=='-');
+    const snip=e=>{let t=e.untucked_notes;if(t.length>220)t=t.slice(0,217)+'…';return `${epLabel(e.episode_id)} — ${t}`;};
+    if(Q){const nn=LIB.norm(name(Q)),fn=nn.split(' ')[0];
+      const hits=noted.filter(e=>{const h=' '+LIB.norm(e.untucked_notes)+' ';return h.includes(' '+nn+' ')||(fn.length>3&&h.includes(' '+fn+' '));});
+      if(hits.length)return {t:hits.slice(0,2).map(snip).join('  '),links:['queen:'+Q.queen_id,'episodes']};
+      return {t:`No Untucked notes mentioning ${name(Q)} on the shelves yet — that ingest is still widening.`,links:['episodes']};}
+    if(S){const hits=noted.filter(e=>e.season_id===S.season_id);
+      if(hits.length)return {t:`${hits.length} Untucked note${hits.length===1?'':'s'} for ${S.season_label}. ${snip(hits[0])}`,links:['season:'+S.season_id,'episodes']};
+      return {t:`No Untucked notes for ${S.season_label} yet.`,links:['season:'+S.season_id]};}
+    return {t:`${noted.length} episodes carry Untucked notes — name a queen or a season and I'll pull the lounge gossip.`,links:['episodes']};}
+  // moments & twists
+  if((S||Q)&&/\b(twists?|moments?|shocking|memorable|happened)\b/.test(nq)){
+    const mm=D.episode_moments||[];let hits=[];
+    if(S)hits=mm.filter(m=>(_EP[m.episode_id]||{}).season_id===S.season_id);
+    else{const nn=LIB.norm(name(Q)),fn=nn.split(' ')[0];
+      hits=mm.filter(m=>{const h=' '+LIB.norm(m.description)+' ';return h.includes(' '+nn+' ')||(fn.length>3&&h.includes(' '+fn+' '));});}
+    if(hits.length)return {t:hits.slice(0,3).map(m=>`${epLabel(m.episode_id)}: ${m.description}`).join('  '),
+      links:S?['season:'+S.season_id]:['queen:'+Q.queen_id]};}
+  // quotes (feature-detected — quotes.csv is on the acquisitions list)
+  if(/\b(quotes?|catchphrases?)\b/.test(nq)){
+    if(D.quotes&&D.quotes.length){
+      const pool=Q?D.quotes.filter(x=>x.queen_id===Q.queen_id):D.quotes;
+      if(pool.length){const x=pool[Math.floor(Math.random()*pool.length)];
+        return {t:`“${x.quote_text}” — ${qname[x.queen_id]||x.speaker_name||'?'}${x.episode_id&&x.episode_id!=='-'?' ('+epLabel(x.episode_id)+')':''}`,links:x.queen_id?['queen:'+x.queen_id]:['vault']};}}
+    return {t:'No quote bank on my shelves yet — it’s on the acquisitions list. The episode moments ledger is the closest aisle.',links:['episodes']};}
   // where is <queen> from
   if(Q&&/\b(where|from|hometown|city|represent)\b/.test(nq)){const c=seasonOfQ();const bits=[];
     if(Q.hometown&&Q.hometown!=='-')bits.push(`${name(Q)} is from ${Q.hometown}`);
@@ -4059,9 +4262,15 @@ function libAnswerCore(raw){
   // earnings
   if(Q&&/\b(earn|money|prize|cash|won how much|how much)\b/.test(nq)){const r=runsOf(Q).filter(c=>c.earnings&&c.earnings!=='-');
     if(r.length)return {t:`${name(Q)} documented ${r.map(c=>'$'+(+c.earnings).toLocaleString()+' ('+seasonName(c.season_id)+')').join(' + ')}.`,links:['queen:'+Q.queen_id,'earnings']};}
+  // "and in All Stars?" — a queen's runs filtered to All Stars franchises
+  if(Q&&!S&&/\ball stars\b/.test(nq)){
+    const r=runsOf(Q).filter(c=>{const s=_SEAS_BY_ID[c.season_id];return s&&/all stars/i.test(s.franchise);});
+    if(r.length)return {t:`${name(Q)} on All Stars — ${r.map(c=>`${seasonName(c.season_id)}: #${c.placement||'?'} (${c.wins||0}W/${c.highs||0}H/${c.lows||0}L/${c.bottoms||0}B)`).join('  ·  ')}.`,links:['queen:'+Q.queen_id]};
+    return {t:`${name(Q)} hasn't taken an All Stars run in the archive yet.`,links:['queen:'+Q.queen_id,'secondact']};}
   // placement / track record
   if(Q&&/\b(place|placed|placement|finish|rank|track record|do on|how did)\b/.test(nq)){
-    const r=runsOf(Q);if(r.length)return {t:r.map(c=>`${seasonName(c.season_id)}: #${c.placement||'?'} (${c.wins||0}W/${c.highs||0}H/${c.lows||0}L/${c.bottoms||0}B)`).join('  ·  '),links:['queen:'+Q.queen_id]};}
+    let r=runsOf(Q);if(S){const f=r.filter(c=>c.season_id===S.season_id);if(f.length)r=f;}
+    if(r.length)return {t:r.map(c=>`${seasonName(c.season_id)}: #${c.placement||'?'} (${c.wins||0}W/${c.highs||0}H/${c.lows||0}L/${c.bottoms||0}B)`).join('  ·  '),links:['queen:'+Q.queen_id]};}
   // miss congeniality
   if(/congenialit|miss c\b/.test(nq)&&S&&S.miss_congeniality_id&&S.miss_congeniality_id!=='-')
     return {t:`${qname[S.miss_congeniality_id]} was Miss Congeniality of ${S.season_label}.`,links:['season:'+S.season_id,'missc']};
@@ -4074,6 +4283,21 @@ function libAnswerCore(raw){
   // lip-sync record
   if(Q&&/lip ?sync/.test(nq)){const a=X.assassin_board.find(b=>b.queen_id===Q.queen_id);
     if(a)return {t:`${name(Q)}: ${a.ls_wins} lip syncs won, ${a.assassinations} sent home, ${a.shantays} double shantays.`,links:['queen:'+Q.queen_id,'assassin']};}
+  // random / surprise me
+  if(/\b(surprise me|random|dazzle me)\b/.test(nq)){
+    const M=masterRows();const pool=M.filter(r=>inScope(r.season));const P=pool.length?pool:M;
+    const r=P[Math.floor(Math.random()*P.length)];
+    return {t:`${r.queen} — ${seasonName(r.season)}, placed #${r.placement||'?'} with ${r.wins||0} challenge win${+r.wins===1?'':'s'}${r.hometown?', from '+r.hometown:''}.`,
+      links:['queen:'+r.queen_id],q:LIB.qbyid[r.queen_id]};}
+  // newbie path — factual: the most-documented seasons in this very archive
+  if(/\b(where (do|should) i (start|begin)|start watching|which season (should i watch )?first|new to (drag race|the show)|good (starter|first) season)\b/.test(nq)){
+    const cnt={};(D.episode_moments||[]).forEach(m=>{const e=_EP[m.episode_id];if(e&&e.season_id.startsWith('US'))cnt[e.season_id]=(cnt[e.season_id]||0)+1;});
+    const top=Object.entries(cnt).sort((a,b)=>b[1]-a[1]).slice(0,2);
+    if(top.length){
+      const rec=top.map(([sid,n])=>{const s=_SEAS_BY_ID[sid];
+        return `${seasonName(sid)} — ${n} recorded moments${s&&s.winner_id&&s.winner_id!=='-'?', crowned '+qname[s.winner_id]:''}`;});
+      return {t:`By this archive's own density, the most-documented US seasons are: ${rec.join('; ')}. The Timeline maps every era, and Trivia Night is the fun way in.`,
+        links:top.map(x=>'season:'+x[0]).concat(['timeline','trivia'])};}}
   // queen generic
   if(Q){const r=runsOf(Q);return {t:`${name(Q)}: ${r.map(c=>seasonName(c.season_id)+(c.placement?' #'+c.placement:'')).join('; ')}.${Q.hometown&&Q.hometown!=='-'?' From '+Q.hometown+'.':''}`,links:['queen:'+Q.queen_id]};}
   if(S){const w=S.winner_id&&S.winner_id!=='-'?` Winner: ${qname[S.winner_id]}.`:'';
@@ -4094,28 +4318,66 @@ async function libSearch(raw){
   if(!scored.length)return null;
   return {t:'Here’s what the library holds: '+scored.map(x=>x.f.t).join('  ◆  '),links:[...new Set(scored.map(x=>x.f.l))].slice(0,3)};
 }
+/* the conversation thread survives view switches within a visit */
+const _ASK={log:null,ph:0,miss:-1};
+const _ASK_PH=['Who won Season 9?','Compare Trixie and Katya','Who has the most lip sync wins?','What happened in Untucked on Season 2?','Youngest winner ever?','How many queens are from Texas?','surprise me','Where should I start?'];
+const _ASK_MISS=[
+ 'Not on my shelves yet, hunty — the archive grows weekly. Try a queen, a season, a song, or a Snatch Game character.',
+ 'I flipped every page and came up empty, dove. Give me a name I can look up — or browse The Vault.',
+ 'That tea hasn’t been catalogued yet. A queen, a season, or a simple "surprise me" all work a look.',
+ 'Nothing under that call number, henny. The Vault holds every row I own.'];
 V({id:'ask',title:'Ask the <em>Library</em>',kicker:'Play',icon:'book',group:'Play',ord:3,
- desc:'The Werkroom Librarian — ask in plain English; she answers straight from the database, every time, no AI guesswork. Runs entirely in your browser.',
- render(m){m.innerHTML=head(this);
+ desc:'The Werkroom Librarian — now conversational. Ask in plain English, then follow up: "and her lip syncs?", "compare her with Katya", "youngest winner ever?". Every gold answer is a live database lookup — no AI guesswork; the rose lines are just her personality.',
+ render(m){m.innerHTML=head(this);libInit();
   const card=el('div',{class:'card fade'});m.append(card);
-  const log=el('div',{style:'display:flex;flex-direction:column;gap:10px;min-height:120px;margin-bottom:12px'});
-  const add=(role,text,links)=>{const b=el('div',{style:`max-width:85%;padding:10px 14px;border-radius:14px;font-size:13.5px;line-height:1.6;${role==='user'?'align-self:flex-end;background:rgba(230,0,126,.18);border:1px solid rgba(230,0,126,.35)':'align-self:flex-start;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12)'}`},text);
+  const log=el('div',{style:'display:flex;flex-direction:column;gap:10px;min-height:120px;max-height:56vh;overflow:auto;margin-bottom:12px'});
+  if(!_ASK.log)_ASK.log=[{role:'bot',text:'Hi! I answer from the database itself — and I can hold a conversation now. Try "Who won Season 9?", then "where is she from?" — or "Compare Trixie and Katya", "who has the most lip sync wins?", "surprise me".'}];
+  const bub=(role,text,links)=>{const b=el('div',{style:`max-width:85%;padding:10px 14px;border-radius:14px;font-size:13.5px;line-height:1.6;${role==='user'?'align-self:flex-end;background:rgba(230,0,126,.18);border:1px solid rgba(230,0,126,.35)':role==='rose'?'align-self:flex-start;background:rgba(239,121,138,.07);border:1px dashed rgba(239,121,138,.4);color:var(--rose);font-style:italic;font-size:12px;padding:6px 12px':'align-self:flex-start;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12)'}`},
+      role==='rose'?'off the record — '+text:text);
     if(links&&links.length){const lr=el('div',{style:'margin-top:6px;display:flex;gap:10px;flex-wrap:wrap'});
       links.forEach(l=>lr.append(el('span',{style:'cursor:pointer;color:var(--gold);text-decoration:underline;font-size:12px',onclick:()=>go(l)},'explore →')));b.append(lr);}
     log.append(b);return b;};
-  add('bot','Hi! I answer from the database itself — try "Who won Season 9?", "Who did Gottmik play in Snatch Game?", "Where is Jinkx Monsoon from?", "Who won the lip sync to Toxic?", or "How old was Symone?"');
+  const cmpCard=cmp=>{const w=el('div',{style:'align-self:flex-start;display:grid;grid-template-columns:1fr 1fr;gap:8px;max-width:85%;width:100%'});
+    cmp.forEach(x=>{const c=el('div',{style:'background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:10px 12px;font-size:12px;line-height:1.7'});
+      c.append(el('div',{style:'font-family:var(--disp);font-weight:800;font-size:15px;color:var(--gold)'},x.name),
+        el('div',{},x.seasons),el('div',{},x.wins+' challenge wins'),el('div',{},x.ls+' lip syncs won'),
+        el('span',{style:'cursor:pointer;color:var(--gold);text-decoration:underline;font-size:11.5px',onclick:()=>go('queen:'+x.id)},'explore →'));
+      w.append(c);});
+    log.append(w);};
+  const push=(role,text,links)=>{_ASK.log.push({role,text,links});return bub(role,text,links);};
+  _ASK.log.forEach(x=>x.role==='cmp'?cmpCard(x.cmp):bub(x.role,x.text,x.links));
+  const chipbar=el('div',{style:'display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-bottom:10px;min-height:20px'});
   const row=el('div',{style:'display:flex;gap:8px'});
   const inp=el('input',{type:'text',maxlength:'300',placeholder:'Ask the Librarian…',
     style:'flex:1;background:rgba(255,255,255,.06);color:var(--cream);border:1px solid rgba(255,255,255,.14);border-radius:10px;padding:10px 12px;font:inherit;font-size:13px'});
+  const drawMeta=chips=>{chipbar.innerHTML='';
+    const q=_CTX.q,s=_CTX.s;
+    if(q||s){chipbar.append(el('span',{style:'font-size:10.5px;color:rgba(247,240,230,.5)'},'talking about:'));
+      if(q)chipbar.append(el('span',{class:'pill gold',style:'cursor:pointer;font-size:10.5px',onclick:()=>go('queen:'+q.queen_id)},q.drag_name));
+      if(s)chipbar.append(el('span',{class:'pill',style:'cursor:pointer;font-size:10.5px',onclick:()=>go('season:'+s.season_id)},seasonName(s.season_id)));
+      chipbar.append(el('button',{class:'tab',style:'font-size:10px;padding:2px 9px',title:'Forget the current topic',
+        onclick:()=>{libResetContext();drawMeta(chips&&chips.filter(c=>!c.fill));}},'×'));}
+    (chips||[]).forEach(c=>{const b=el('button',{class:'tab',style:'font-size:11px'},c.l);
+      b.addEventListener('click',()=>{if(c.fill){inp.value=c.fill;inp.focus();}else{inp.value=c.send;fire();}});
+      chipbar.append(b);});};
   const send=el('button',{class:'tab'},'Ask');
-  const fire=async()=>{const q=inp.value.trim();if(!q)return;inp.value='';add('user',q);
+  const fire=async()=>{const q=inp.value.trim();if(!q)return;inp.value='';push('user',q);log.scrollTop=1e9;
     let a=null;try{a=libAnswer(q);}catch(e){}
-    if(!a){const wait=add('bot','…flipping through the archives');try{a=await libSearch(q);}catch(e){}wait.remove();}
-    if(a)add('bot',a.t,a.links);
-    else add('bot','That one’s not on my shelves yet, henny. Try a queen, a season, a song, or a Snatch Game character — or browse The Vault.',['vault']);};
+    if(!a){const wait=bub('bot','…flipping through the archives');try{a=await libSearch(q);}catch(e){}wait.remove();}
+    if(a){push('bot',a.t,a.links);
+      if(a.compare){_ASK.log.push({role:'cmp',cmp:a.compare});cmpCard(a.compare);}
+      if(a.flavor)push('rose',a.flavor);
+      drawMeta(a.chips);
+    }else{_ASK.miss=(_ASK.miss+1)%_ASK_MISS.length;
+      push('bot',_ASK_MISS[_ASK.miss],['vault']);
+      drawMeta([{l:'Surprise me',send:'surprise me'},{l:'Where do I start?',send:'Where should I start?'}]);}
+    _ASK.ph=(_ASK.ph+1)%_ASK_PH.length;inp.placeholder='Try: '+_ASK_PH[_ASK.ph];
+    log.scrollTop=1e9;};
   send.addEventListener('click',fire);inp.addEventListener('keydown',e=>{if(e.key==='Enter')fire();});
-  row.append(inp,send);card.append(log,row);
-  card.append(el('div',{style:'margin-top:10px;font-size:10.5px;color:rgba(247,240,230,.45)'},'100% in-browser · no servers, no AI APIs · every answer is a live database lookup'));
+  row.append(inp,send);drawMeta(_ASK.log.length>1?libChips():null);
+  card.append(log,chipbar,row);
+  card.append(el('div',{style:'margin-top:10px;font-size:10.5px;color:rgba(247,240,230,.45)'},'100% in-browser · no servers, no AI APIs · every gold answer is a live database lookup'));
+  log.scrollTop=1e9;
  }});
 
 /* ---------- 33. WINNER VIBE PREDICTOR (for fun) ---------- */
