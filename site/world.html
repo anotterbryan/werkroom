@@ -3027,7 +3027,7 @@ function tick(){
       player.moveYaw=Math.atan2(wx, wz); avatarMove=1;   /* the avatar faces where she walks */
       if(VIEW.mode==='stable'){                          /* stabilized follow: heading eases toward walk dir, camera trails it smoothly */
         let dY=Math.atan2(-wx,-wz)-player.yaw; dY=Math.atan2(Math.sin(dY),Math.cos(dY));
-        player.yaw+=dY*Math.min(1,dt*4);
+        player.yaw+=dY*Math.min(1,dt*1.6);   /* gentle trail — lower = lazier swing behind you */
       }
       [nx,nz]=collide(nx,nz);
       player.x=nx; player.z=nz;
