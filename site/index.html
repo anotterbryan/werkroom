@@ -4258,7 +4258,23 @@ function libIntents(nq,Q,S,SO,C){
     if(bits.length)return {t:bits.join('; ')+'.',links:['queen:'+Q.queen_id,'georoll']};}
   // how old
   if(Q&&/\b(how old|age)\b/.test(nq)){const r=runsOf(Q).filter(c=>c.age_at_filming&&c.age_at_filming!=='-');
-    if(r.length)return {t:`${name(Q)} was ${r.map(c=>c.age_at_filming+' on '+seasonName(c.season_id)).join(', ')}.${Q.birthdate&&Q.birthdate!=='-'?' Born '+Q.birthdate+'.':''}`,links:['queen:'+Q.queen_id,'ages']};}
+    if(r.length){
+      let t=`${name(Q)} was ${r.map(c=>c.age_at_filming+' on '+seasonName(c.season_id)).join(', ')}.`;
+      const bd=Q.birthdate;
+      if(bd&&bd!=='-'){const b=new Date(bd+'T00:00:00');
+        if(!isNaN(b)){const n=new Date();let a=n.getFullYear()-b.getFullYear();const m=n.getMonth()-b.getMonth();
+          if(m<0||(m===0&&n.getDate()<b.getDate()))a--;
+          t+=` Born ${bd} — that would make her ${a} today!`;}}
+      const runs=runsOf(Q),crowns=runs.filter(c=>String(c.placement)==='1');let dyk='';
+      if(crowns.length>1)dyk=`she's one of the rare double-crowned winners — taking ${crowns.map(c=>seasonName(c.season_id)).join(' and ')}`;
+      else if(crowns.length)dyk=`she snatched the crown on ${seasonName(crowns[0].season_id)}`;
+      else{const mc=runs.find(c=>String(c.miss_congeniality).toLowerCase()==='yes');
+        if(mc)dyk=`she was crowned Miss Congeniality on ${seasonName(mc.season_id)}`;
+        else{const tw=runs.reduce((s,c)=>s+(+c.wins||0),0);
+          if(tw>0)dyk=`she's racked up ${tw} maxi-challenge win${tw>1?'s':''} across ${runs.length} season${runs.length>1?'s':''}`;
+          else if(runs.length>1)dyk=`she's sashayed into the Werk Room ${runs.length} times`;}}
+      if(dyk)t+=` Did you know ${dyk}?! Let's do a deep dive.`;
+      return {t,links:['queen:'+Q.queen_id,'ages']};}}
   // earnings
   if(Q&&/\b(earn|money|prize|cash|won how much|how much)\b/.test(nq)){const r=runsOf(Q).filter(c=>c.earnings&&c.earnings!=='-');
     if(r.length)return {t:`${name(Q)} documented ${r.map(c=>'$'+(+c.earnings).toLocaleString()+' ('+seasonName(c.season_id)+')').join(' + ')}.`,links:['queen:'+Q.queen_id,'earnings']};}
