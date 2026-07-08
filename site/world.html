@@ -80,6 +80,21 @@ a{color:var(--gold)}
   background:rgba(20,16,28,.85);border:1px solid rgba(244,181,63,.5);color:var(--gold);
   padding:9px 14px;font-size:11px;font-weight:700;letter-spacing:1px;cursor:pointer;text-transform:uppercase}
 #viewBtn:hover{background:rgba(230,0,126,.2)}
+/* ---------- Minimap / travel ---------- */
+#minimap{position:fixed;left:12px;top:44px;z-index:58;width:152px;
+  background:rgba(20,16,28,.85);border:1px solid rgba(244,181,63,.5);border-radius:12px;
+  padding:8px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:5px}
+#minimap .mmttl{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);
+  text-align:center;opacity:.85}
+#minimap .mmrow{display:flex;gap:5px}
+#minimap .mmz{flex:1;background:rgba(61,35,82,.55);border:1px solid rgba(244,181,63,.28);
+  color:rgba(247,240,230,.85);font:700 10px/1.1 inherit;letter-spacing:.4px;
+  padding:7px 4px;border-radius:8px;cursor:pointer;text-transform:uppercase;text-align:center}
+#minimap .mmz:hover{background:rgba(230,0,126,.25)}
+#minimap .mmz.here{background:rgba(230,0,126,.4);border-color:var(--gold);color:#fff;
+  box-shadow:0 0 8px rgba(230,0,126,.5)}
+#minimap .mmun{flex:.9;font-size:9px}
+@media (max-width:640px){#minimap{width:120px;top:40px}#minimap .mmz{font-size:9px;padding:6px 3px}}
 
 /* ---------- Boot / gate cards ---------- */
 #gate{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;
@@ -298,6 +313,16 @@ classic two-dimensional site at index.html, which is fully accessible. Use the s
 <a id="exit2d" href="index.html">Classic site ⤴</a>
 <button id="askBtn" class="hidden" title="Talk to The Librarian (T)" aria-label="Talk to The Librarian">◆</button>
 <button id="viewBtn" class="hidden" title="Cycle camera: 3rd · stabilized · 1st (V)" aria-label="Cycle camera view">view · 3rd</button>
+<div id="minimap" class="hidden" aria-label="Zone map — tap to travel">
+  <div class="mmttl">travel</div>
+  <button class="mmz" data-z="stage">Main Stage</button>
+  <div class="mmrow">
+    <button class="mmz mmwalk" data-z="walk">The Walk</button>
+    <button class="mmz mmun" data-z="untucked">Untucked</button>
+  </div>
+  <button class="mmz" data-z="werk">Werk Room</button>
+  <button class="mmz" data-z="alley">Alleyway</button>
+</div>
 <div id="hint" class="hidden"></div>
 <div id="lockHint" class="hidden" aria-hidden="true">Esc frees your mouse</div>
 <div id="disc"></div>
@@ -315,7 +340,7 @@ classic two-dimensional site at index.html, which is fully accessible. Use the s
       <button class="gbtn" id="enterBtn" disabled>Enter the Werkroom</button>
       <a class="gbtn ghost" href="index.html">Open the classic site</a>
     </div>
-    <div class="gfoot" id="gateFoot">WASD / arrow keys to walk · mouse to look · click or E to interact · [ ] flip the photo-wall season · V cycles camera (3rd · stabilized · 1st) · T talks to The Librarian · Esc frees the mouse.<br/>
+    <div class="gfoot" id="gateFoot">WASD / arrow keys to walk · mouse to look · click or E to interact · [ ] flip the photo-wall season · V cycles camera (3rd · stabilized · 1st) · tap the map (top-left) to travel · T talks to The Librarian · Esc frees the mouse.<br/>
     On a phone: left thumb to walk, right thumb to look, tap an object or the prompts.</div>
   </div>
 </div>
@@ -2248,7 +2273,7 @@ const look = {id:null, lx:0, ly:0};
 if(IS_TOUCH){
   addEventListener('pointerdown', e=>{
     if(!entered || overlayOpen()) return;
-    if(e.target.closest('#prompt,#askBtn,#viewBtn,#exit2d,#board,#lipp,#toast')) return;
+    if(e.target.closest('#prompt,#askBtn,#viewBtn,#minimap,#exit2d,#board,#lipp,#toast')) return;
     if(e.clientX < innerWidth*.45 && joy.id===null){
       joy.id=e.pointerId; joy.active=true; joy.bx=e.clientX; joy.by=e.clientY; joy.dx=joy.dy=0;
       const j=$('#joy'); show(j); j.style.left=(e.clientX-55)+'px'; j.style.top=(e.clientY-55)+'px';
@@ -2429,7 +2454,7 @@ if(IS_TOUCH){
   addEventListener('pointerdown', e=>{
     tapCand=null;
     if(!entered || overlayOpen()) return;
-    if(e.target && e.target.closest && e.target.closest('#prompt,#askBtn,#viewBtn,#exit2d,#board,#lipp,#toast,#say')) return;
+    if(e.target && e.target.closest && e.target.closest('#prompt,#askBtn,#viewBtn,#minimap,#exit2d,#board,#lipp,#toast,#say')) return;
     if(e.clientX < innerWidth*.45) return;               /* joystick half of the screen — walking, not tapping */
     tapCand={id:e.pointerId, x:e.clientX, y:e.clientY, t:performance.now()};
   });
@@ -3047,6 +3072,7 @@ function tick(){
   eggTick(dt,t);
   aimTick(); highlightTick(t);
   updatePrompt();
+  updateMinimap();
   renderFrame();
 }
 renderer.setAnimationLoop(tick);
@@ -3091,6 +3117,26 @@ function toggleView(){
 $('#viewBtn').addEventListener('click', toggleView);
 $('#pauseView').addEventListener('click', toggleView);
 syncViewUI();
+
+/* ---- minimap / instant travel between zones ---- */
+const ZONE_LABEL={alley:'the Alleyway',werk:'the Werk Room',walk:'The Walk',untucked:'the Untucked Lounge',stage:'the Main Stage'};
+const ZONE_SPAWN={alley:[3.5,-4], werk:[0,8], walk:[0,22], untucked:[6,24], stage:[0,40]};   /* open floor centres */
+function teleport(z){
+  const s=ZONE_SPAWN[z]; if(!s || !entered) return;
+  if(player.seated){ player.seated=false; try{ paintScorePlaceholder(); }catch(e){} }
+  player.x=s[0]; player.z=s[1]; avatarMove=0; cam.has=false;   /* snap the camera to the new spot */
+  if(typeof toast==='function') toast('Sashayed to '+ZONE_LABEL[z]+'.');
+  updateMinimap();
+}
+let _mmZone=null;
+function updateMinimap(){
+  if(!entered) return;
+  const z=WR.zoneOf(player.x,player.z);
+  if(z===_mmZone) return; _mmZone=z;
+  document.querySelectorAll('#minimap .mmz').forEach(b=>b.classList.toggle('here', b.dataset.z===z));
+}
+document.querySelectorAll('#minimap .mmz').forEach(b=>
+  b.addEventListener('click', e=>{ e.stopPropagation(); teleport(b.dataset.z); }));
 
 /* ---- motion setting: pause row + runtime switch. Every mover reads the
    WR_CALM getter per frame; the sweep spots are the one build-time skip. ---- */
@@ -4481,7 +4527,7 @@ bridgeReady.then(()=>{
 }).catch(()=>{ /* failGate already shown above */ });
 
 enterBtn.addEventListener('click', ()=>{
-  entered=true; enterAt=performance.now(); hide(gate); show($('#xhair')); show($('#askBtn')); show($('#viewBtn'));
+  entered=true; enterAt=performance.now(); hide(gate); show($('#xhair')); show($('#askBtn')); show($('#viewBtn')); show($('#minimap')); _mmZone=null; updateMinimap();
   $('#hint').textContent = IS_TOUCH ? 'left thumb walk · right thumb look · tap objects' : 'WASD/arrows walk · click/E interact · [ ] season · V view · T librarian · Esc frees the mouse';
   show($('#hint')); setTimeout(()=>hide($('#hint')), 9000);
   tryLock();
