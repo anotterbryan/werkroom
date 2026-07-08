@@ -297,7 +297,7 @@ classic two-dimensional site at index.html, which is fully accessible. Use the s
 <div id="say" class="hidden" aria-hidden="true"><span class="who">The Librarian</span><span id="sayTxt"></span></div>
 <a id="exit2d" href="index.html">Classic site ⤴</a>
 <button id="askBtn" class="hidden" title="Talk to The Librarian (T)" aria-label="Talk to The Librarian">◆</button>
-<button id="viewBtn" class="hidden" title="Switch first/third person (V)" aria-label="Switch camera view">view · 3rd</button>
+<button id="viewBtn" class="hidden" title="Cycle camera: 3rd · stabilized · 1st (V)" aria-label="Cycle camera view">view · 3rd</button>
 <div id="hint" class="hidden"></div>
 <div id="lockHint" class="hidden" aria-hidden="true">Esc frees your mouse</div>
 <div id="disc"></div>
@@ -315,7 +315,7 @@ classic two-dimensional site at index.html, which is fully accessible. Use the s
       <button class="gbtn" id="enterBtn" disabled>Enter the Werkroom</button>
       <a class="gbtn ghost" href="index.html">Open the classic site</a>
     </div>
-    <div class="gfoot" id="gateFoot">WASD / arrow keys to walk · mouse to look · click or E to interact · [ ] flip the photo-wall season · V flips first/third person · T talks to The Librarian · Esc frees the mouse.<br/>
+    <div class="gfoot" id="gateFoot">WASD / arrow keys to walk · mouse to look · click or E to interact · [ ] flip the photo-wall season · V cycles camera (3rd · stabilized · 1st) · T talks to The Librarian · Esc frees the mouse.<br/>
     On a phone: left thumb to walk, right thumb to look, tap an object or the prompts.</div>
   </div>
 </div>
@@ -2138,10 +2138,11 @@ function avatarTick(dt, gy, t){
   avatarMove=Math.max(0, avatarMove-dt*3);
 }
 function camTick(dt, gy, t){
-  const third = entered && VIEW.mode==='third';
-  avatar.visible = third;
+  const stable = VIEW.mode==='stable';
+  const chase = entered && (VIEW.mode==='third' || stable);
+  avatar.visible = chase;
   const slipBounce = slipT>0 ? Math.sin((1-slipT/0.9)*Math.PI*3)*0.09 : 0;   /* WR_CALM never sets slipT */
-  if(!third){
+  if(!chase){
     camera.position.set(player.x, player.eyeY+slipBounce, player.z);
     camera.rotation.y=player.yaw; camera.rotation.x=player.pitch; camera.rotation.z=0;
     cam.has=false;
@@ -2154,9 +2155,10 @@ function camTick(dt, gy, t){
     dx=-11.55; dy=1.9; dz=0.8;  lx=-9.4; ly=1.45; lz=2.85;
   } else {
     const pivY=gy+1.5;
-    const elev=Math.max(-0.9, Math.min(1.25, 0.3-player.pitch));  /* mouse up = camera dips, looks up */
-    const bx=Math.sin(player.yaw), bz=Math.cos(player.yaw);       /* straight behind the avatar */
-    let d=3.5;
+    const elev=Math.max(-0.9, Math.min(1.25, 0.3-(stable?0:player.pitch)));  /* mouse up = camera dips, looks up */
+    const camYaw=stable?STABLE_YAW:player.yaw;                    /* stable: fixed heading, world never spins */
+    const bx=Math.sin(camYaw), bz=Math.cos(camYaw);              /* straight behind the avatar */
+    let d=stable?4.6:3.5;
     let horiz=Math.cos(elev)*d;
     const allowed=WR.chaseClamp(player.x, player.z, bx, bz, horiz, camWalls, .34);
     if(allowed<horiz){ d*=allowed/Math.max(1e-4,horiz); horiz=allowed; }   /* pull in at walls, never clip */
@@ -2210,6 +2212,7 @@ document.addEventListener('pointerlockchange', ()=>{
 });
 document.addEventListener('mousemove', e=>{
   if(!document.pointerLockElement) return;
+  if(VIEW.mode==='stable') return;   /* stabilized cam: mouse doesn't turn the world */
   const LOOK = window.WR_CALM ? 0.0013 : 0.0023;   /* calm mode: gentler turns */
   player.yaw -= e.movementX*LOOK;
   player.pitch = Math.max(-1.45, Math.min(1.45, player.pitch - e.movementY*LOOK));
@@ -2257,7 +2260,7 @@ if(IS_TOUCH){
       const dx=e.clientX-joy.bx, dy=e.clientY-joy.by, m=Math.hypot(dx,dy)||1, c=Math.min(m,42);
       joy.dx=dx/m*c/42; joy.dy=dy/m*c/42;
       $('#joyKnob').style.transform=`translate(${joy.dx*32}px,${joy.dy*32}px)`;
-    } else if(e.pointerId===look.id){
+    } else if(e.pointerId===look.id && VIEW.mode!=='stable'){
       player.yaw -= (e.clientX-look.lx)*0.006;
       player.pitch = Math.max(-1.45, Math.min(1.45, player.pitch-(e.clientY-look.ly)*0.006));
       look.lx=e.clientX; look.ly=e.clientY;
@@ -3017,11 +3020,18 @@ function tick(){
     if((mx||mz) && !player.seated){
       const m=Math.hypot(mx,mz); mx/=m; mz/=m;
       const run=(keys.ShiftLeft||keys.ShiftRight)?7:4;
-      const fx=-Math.sin(player.yaw), fz=-Math.cos(player.yaw);
-      const rx=Math.cos(player.yaw),  rz=-Math.sin(player.yaw);
-      let nx=player.x+(fx*mz+rx*mx)*run*dt;
-      let nz=player.z+(fz*mz+rz*mx)*run*dt;
-      player.moveYaw=Math.atan2(fx*mz+rx*mx, fz*mz+rz*mx); avatarMove=1;   /* the avatar faces where she walks */
+      let wx, wz;
+      if(VIEW.mode==='stable'){        /* fixed cam faces +Z: screen-up = away(+Z), screen-right = -X — never re-orient */
+        wx=-mx; wz=mz;
+      }else{
+        const fx=-Math.sin(player.yaw), fz=-Math.cos(player.yaw);
+        const rx=Math.cos(player.yaw),  rz=-Math.sin(player.yaw);
+        wx=fx*mz+rx*mx; wz=fz*mz+rz*mx;
+      }
+      let nx=player.x+wx*run*dt;
+      let nz=player.z+wz*run*dt;
+      player.moveYaw=Math.atan2(wx, wz); avatarMove=1;   /* the avatar faces where she walks */
+      if(VIEW.mode==='stable') player.yaw=player.moveYaw+Math.PI;   /* keep interaction-facing aligned to walk */
       [nx,nz]=collide(nx,nz);
       player.x=nx; player.z=nz;
     }
@@ -3055,7 +3065,7 @@ function loadSave(){
     const s=JSON.parse(localStorage.getItem('wr3d')||'null');
     if(s && s.v===1 && Array.isArray(s.met))
       return Object.assign({cards:0, ls:{right:0,seen:0}, view:'third', eggs:[], motion:'auto'}, s,
-        {ls:Object.assign({right:0,seen:0}, s.ls||{}), view:(s.view==='first'?'first':'third'),
+        {ls:Object.assign({right:0,seen:0}, s.ls||{}), view:(['first','stable'].includes(s.view)?s.view:'third'),
          eggs:Array.isArray(s.eggs)?s.eggs:[], motion:(s.motion==='full'||s.motion==='calm')?s.motion:'auto'});
   }catch(e){}
   return {v:1, met:[], cards:0, ls:{right:0,seen:0}, view:'third', eggs:[], motion:'auto'};
@@ -3064,18 +3074,22 @@ const SAVE = loadSave();
 const metSet = new Set(SAVE.met);
 
 /* ---- camera view: third person by default, first person one V away (persisted) ---- */
-const VIEW={mode: SAVE.view==='first' ? 'first' : 'third'};
+const VIEW={mode: (SAVE.view==='first'||SAVE.view==='stable') ? SAVE.view : 'third'};
+const STABLE_YAW=Math.PI;   /* stabilized heading: always faces down the alley→stage axis (+Z) */
+const VIEW_LABEL={third:'view · 3rd', stable:'view · fix', first:'view · 1st'};
+const VIEW_TOAST={
+  third:'Third person — that’s you walking the room. V cycles the camera.',
+  stable:'Stabilized — the camera holds its heading so you never re-orient. Just walk; up is always forward. V cycles.',
+  first:'First person — through your own lashes. V cycles the camera.'};
 function syncViewUI(){
-  const third=VIEW.mode==='third';
-  $('#viewBtn').textContent = third ? 'view · 3rd' : 'view · 1st';
-  $('#pauseView').textContent = third ? 'Switch to first person (V)' : 'Switch to third person (V)';
+  $('#viewBtn').textContent = VIEW_LABEL[VIEW.mode] || 'view · 3rd';
+  const nice={third:'third person', stable:'stabilized', first:'first person'}[VIEW.mode]||'third person';
+  $('#pauseView').textContent = 'Camera: '+nice+' — tap to cycle (V)';
 }
 function toggleView(){
-  VIEW.mode = VIEW.mode==='third' ? 'first' : 'third';
+  VIEW.mode = VIEW.mode==='third' ? 'stable' : VIEW.mode==='stable' ? 'first' : 'third';
   SAVE.view=VIEW.mode; persist(); syncViewUI(); cam.has=false;
-  if(entered) toast(VIEW.mode==='third'
-    ? 'Third person — that’s you walking the room. V switches back.'
-    : 'First person — through your own lashes. V switches back.');
+  if(entered) toast(VIEW_TOAST[VIEW.mode]);
 }
 $('#viewBtn').addEventListener('click', toggleView);
 $('#pauseView').addEventListener('click', toggleView);
