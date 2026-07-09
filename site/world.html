@@ -2275,6 +2275,7 @@ addEventListener('keydown', e=>{
   keys[e.code]=true;
   if(!entered) return;
   if(e.code==='Escape'){                       /* fires when pointer is NOT locked */
+    if(runway){ endRunway(false); return; }
     if(!$('#portal').classList.contains('hidden')) closePortal();
     else if(!$('#dress').classList.contains('veil')) closeDress();
     else if(!$('#booth').classList.contains('hidden')) closeBooth();
@@ -2394,6 +2395,8 @@ addInteract({id:'librarian', get x(){return lib.position.x;}, get z(){return lib
   label(){ return '<b>T</b> / <b>E</b> — talk to The Librarian'; }, act(){ openChat(); }});
 addInteract({id:'rudoors', x:-5, z:14.6, radius:2.7,
   label(){ return '<b>E</b> — the golden doors · step into any season'; }, act(){ openPortal(); }});
+addInteract({id:'runway', x:0, z:31.5, radius:3.2, active(){ return !runway; },
+  label(){ return '<b>E</b> — werk the runway (first-person strut)'; }, act(){ startRunway(); }});
 
 $('#prompt').addEventListener('click', ()=>{ if(IS_TOUCH) doInteract(); });
 function doInteract(){ if(promptTarget && !overlayOpen()) promptTarget.act(); }
@@ -3066,6 +3069,7 @@ function tick(){
   const dt=Math.min(0.05,(now-lastT)/1000); lastT=now;
   const t=now/1000;
   if(entered && !overlayOpen()){
+    if(runway){ runwayStep(dt); }
     /* input */
     let mx=0,mz=0;
     if(keys.KeyW||keys.ArrowUp)mz+=1; if(keys.KeyS||keys.ArrowDown)mz-=1;
@@ -3074,7 +3078,7 @@ function tick(){
     if(IS_TOUCH){ mx+=joy.dx; mz-=joy.dy; }
     if(slipT>0){ mx=0; mz=0; }                              /* mid-slip: the floor is in charge */
     if((mx||mz) && player.seated){ player.seated=false; paintScorePlaceholder(); }
-    if((mx||mz) && !player.seated){
+    if((mx||mz) && !player.seated && !runway){
       const m=Math.hypot(mx,mz); mx/=m; mz/=m;
       const run=(keys.ShiftLeft||keys.ShiftRight)?7:4;
       const fx=-Math.sin(player.yaw), fz=-Math.cos(player.yaw);
@@ -3143,6 +3147,7 @@ function syncViewUI(){
   $('#pauseView').textContent = 'Camera: '+nice+' — tap to cycle (V)';
 }
 function toggleView(){
+  if(runway) return;
   VIEW.mode = VIEW.mode==='third' ? 'stable' : VIEW.mode==='stable' ? 'first' : 'third';
   SAVE.view=VIEW.mode; persist(); syncViewUI(); cam.has=false;
   if(entered) toast(VIEW_TOAST[VIEW.mode]);
@@ -3155,7 +3160,7 @@ syncViewUI();
 const ZONE_LABEL={alley:'the Alleyway',werk:'the Werk Room',walk:'The Walk',untucked:'the Untucked Lounge',stage:'the Main Stage'};
 const ZONE_SPAWN={alley:[3.5,-4], werk:[0,8], walk:[0,22], untucked:[6,24], stage:[0,40]};   /* open floor centres */
 function teleport(z){
-  const s=ZONE_SPAWN[z]; if(!s || !entered) return;
+  const s=ZONE_SPAWN[z]; if(!s || !entered || runway) return;
   if(player.seated){ player.seated=false; try{ paintScorePlaceholder(); }catch(e){} }
   player.x=s[0]; player.z=s[1]; avatarMove=0; cam.has=false;   /* snap the camera to the new spot */
   if(typeof toast==='function') toast('Sashayed to '+ZONE_LABEL[z]+'.');
@@ -3208,6 +3213,36 @@ function openPortal(){ if(!entered) return; buildPortal(); show($('#portal')); r
 function closePortal(){ hide($('#portal')); }
 $('#ptlX').addEventListener('click', closePortal);
 $('#portal').addEventListener('click', e=>{ if(e.target.id==='portal') closePortal(); });
+
+/* ---- "Werk the Runway": scripted first-person strut down the Main Stage T ---- */
+let runway=null;
+const RW={ x:0, z0:31, z1:46, dur:6.5 };
+function startRunway(){
+  if(!entered || runway) return;
+  runway={ t:0, prevView:VIEW.mode };
+  VIEW.mode='first'; syncViewUI();
+  player.seated=false; player.x=RW.x; player.z=RW.z0; player.yaw=Math.PI; player.pitch=0;
+  cam.has=false; avatarMove=1;
+  if(typeof toast==='function') toast('Category is… Runway Realness. Now werk!');
+}
+function endRunway(cheer){
+  if(!runway) return;
+  const pv=runway.prevView; runway=null;
+  VIEW.mode=pv||'third'; syncViewUI(); cam.has=false;
+  if(cheer && typeof libSay==='function')
+    libSay('Now THAT is how you walk a runway. The judges are gagged, henny.', true);
+}
+function runwayStep(dt){
+  runway.t+=dt;
+  const p=Math.min(1, runway.t/RW.dur);
+  const e=p<.5 ? 2*p*p : 1-Math.pow(-2*p+2,2)/2;      /* easeInOutQuad glide */
+  player.z = RW.z0 + (RW.z1-RW.z0)*e;
+  const strut = Math.sin(runway.t*3.4);
+  player.x = RW.x + strut*0.14;                        /* hip-sway */
+  player.yaw = Math.PI + strut*0.05;                   /* subtle shoulder turn */
+  player.moveYaw = Math.PI; avatarMove=1;
+  if(p>=1) endRunway(true);
+}
 
 /* ---- motion setting: pause row + runtime switch. Every mover reads the
    WR_CALM getter per frame; the sweep spots are the one build-time skip. ---- */
