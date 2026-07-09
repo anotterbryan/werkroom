@@ -95,6 +95,25 @@ a{color:var(--gold)}
   box-shadow:0 0 8px rgba(230,0,126,.5)}
 #minimap .mmun{flex:.9;font-size:9px}
 @media (max-width:640px){#minimap{width:120px;top:40px}#minimap .mmz{font-size:9px;padding:6px 3px}}
+/* ---------- Season portal (golden doors) ---------- */
+#portal{position:fixed;inset:0;z-index:120;display:flex;align-items:center;justify-content:center;
+  background:rgba(8,5,12,.72);backdrop-filter:blur(3px)}
+#portal .ptl-card{width:min(560px,92vw);max-height:82vh;display:flex;flex-direction:column;
+  background:rgba(24,16,34,.97);border:1px solid rgba(244,181,63,.5);border-radius:16px;
+  box-shadow:var(--shadow);padding:16px}
+#portal .ptl-head{display:flex;justify-content:space-between;align-items:center}
+#portal .ptl-ttl{font-size:15px;font-weight:800;letter-spacing:1px;color:var(--gold);text-transform:uppercase}
+#portal .ptl-x{background:none;border:1px solid rgba(244,181,63,.4);color:var(--gold);border-radius:8px;
+  width:30px;height:30px;cursor:pointer;font-size:14px}
+#portal .ptl-sub{font-size:11px;color:rgba(247,240,230,.6);margin:4px 0 10px}
+#portal .ptl-list{overflow-y:auto;display:flex;flex-direction:column;gap:6px;padding-right:4px}
+#portal .ptl-grp{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--magenta);
+  margin:8px 0 2px;position:sticky;top:0;background:rgba(24,16,34,.97);padding:2px 0}
+#portal .ptl-row{display:flex;flex-wrap:wrap;gap:6px}
+#portal .ptl-s{background:rgba(61,35,82,.55);border:1px solid rgba(244,181,63,.25);
+  color:rgba(247,240,230,.9);font:600 11px/1 inherit;padding:8px 10px;border-radius:8px;cursor:pointer}
+#portal .ptl-s:hover{background:rgba(230,0,126,.3);border-color:var(--gold)}
+#portal .ptl-s.cur{background:rgba(230,0,126,.45);border-color:var(--gold);color:#fff}
 
 /* ---------- Boot / gate cards ---------- */
 #gate{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;
@@ -322,6 +341,16 @@ classic two-dimensional site at index.html, which is fully accessible. Use the s
   </div>
   <button class="mmz" data-z="werk">Werk Room</button>
   <button class="mmz" data-z="alley">Alleyway</button>
+</div>
+<div id="portal" class="hidden" role="dialog" aria-label="Choose a season">
+  <div class="ptl-card">
+    <div class="ptl-head">
+      <div class="ptl-ttl">The Golden Doors</div>
+      <button class="ptl-x" id="ptlX" aria-label="Close">✕</button>
+    </div>
+    <div class="ptl-sub">Step through to any season — the doors take on its colour.</div>
+    <div class="ptl-list" id="ptlList"></div>
+  </div>
 </div>
 <div id="hint" class="hidden"></div>
 <div id="lockHint" class="hidden" aria-hidden="true">Esc frees your mouse</div>
@@ -2207,7 +2236,8 @@ let entered=false, paused=false;
 
 function overlayOpen(){
   return !$('#dress').classList.contains('veil') || !$('#booth').classList.contains('hidden')
-      || !$('#lib').classList.contains('hidden') || !$('#read').classList.contains('hidden') || paused;
+      || !$('#lib').classList.contains('hidden') || !$('#read').classList.contains('hidden')
+      || !$('#portal').classList.contains('hidden') || paused;
 }
 /* pointer-lock etiquette (Bryan's fix #1): any overlay frees the mouse instantly,
    one Esc always releases (and nothing re-grabs it), and we NEVER call
@@ -2245,7 +2275,8 @@ addEventListener('keydown', e=>{
   keys[e.code]=true;
   if(!entered) return;
   if(e.code==='Escape'){                       /* fires when pointer is NOT locked */
-    if(!$('#dress').classList.contains('veil')) closeDress();
+    if(!$('#portal').classList.contains('hidden')) closePortal();
+    else if(!$('#dress').classList.contains('veil')) closeDress();
     else if(!$('#booth').classList.contains('hidden')) closeBooth();
     else if(!$('#lib').classList.contains('hidden')) closeChat();
     else if(!$('#read').classList.contains('hidden')) closeRead();
@@ -2361,6 +2392,8 @@ addInteract({id:'exitdoor', x:-13.7, z:31.6, radius:2.2,
   label(){ return '<b>E</b> — exit to the classic site'; }, act(){ location.href='index.html'; }});
 addInteract({id:'librarian', get x(){return lib.position.x;}, get z(){return lib.position.z;}, radius:2.6,
   label(){ return '<b>T</b> / <b>E</b> — talk to The Librarian'; }, act(){ openChat(); }});
+addInteract({id:'rudoors', x:-5, z:14.6, radius:2.7,
+  label(){ return '<b>E</b> — the golden doors · step into any season'; }, act(){ openPortal(); }});
 
 $('#prompt').addEventListener('click', ()=>{ if(IS_TOUCH) doInteract(); });
 function doInteract(){ if(promptTarget && !overlayOpen()) promptTarget.act(); }
@@ -3137,6 +3170,44 @@ function updateMinimap(){
 }
 document.querySelectorAll('#minimap .mmz').forEach(b=>
   b.addEventListener('click', e=>{ e.stopPropagation(); teleport(b.dataset.z); }));
+
+/* ---- golden-doors season portal: jump to any season + re-tint the doors by region ---- */
+const REGION_COLOR={'Main Series':0xe6007e,'Americas':0x74e0c8,'Europe':0xf4b53f,'Asia-Pacific':0x9a4dff,'Global':0x35d5ff};
+function themeToRegion(region){
+  const c=REGION_COLOR[region];
+  if(c!=null && typeof ruGlow!=='undefined' && ruGlow.material && ruGlow.material.color) ruGlow.material.color.setHex(c);
+}
+function gotoSeason(idx){
+  const n=seasonRing().length; if(!n) return;
+  SEASON.idx=((idx%n)+n)%n;
+  applySeason();
+  const s=seasonAt(SEASON.idx);
+  themeToRegion(s.region);
+  if(typeof toast==='function') toast('The doors open on '+s.season_label+' — '+s.franchise+'.');
+}
+function buildPortal(){
+  const list=$('#ptlList'); if(!list || !B.D) return; list.innerHTML='';
+  const S=seasonRing();
+  const order=['Main Series','Americas','Europe','Asia-Pacific','Global'];
+  const byReg={};
+  S.forEach((s,i)=>{ const r=s.region||'Other'; (byReg[r]=byReg[r]||[]).push({s,i}); });
+  const regions=order.filter(r=>byReg[r]).concat(Object.keys(byReg).filter(r=>order.indexOf(r)<0));
+  regions.forEach(r=>{
+    const g=document.createElement('div'); g.className='ptl-grp'; g.textContent=r; list.appendChild(g);
+    const row=document.createElement('div'); row.className='ptl-row';
+    byReg[r].forEach(({s,i})=>{
+      const b=document.createElement('button');
+      b.className='ptl-s'+(i===SEASON.idx?' cur':''); b.textContent=s.season_label; b.title=s.franchise;
+      b.addEventListener('click', ()=>{ gotoSeason(i); closePortal(); });
+      row.appendChild(b);
+    });
+    list.appendChild(row);
+  });
+}
+function openPortal(){ if(!entered) return; buildPortal(); show($('#portal')); releaseLook(); }
+function closePortal(){ hide($('#portal')); }
+$('#ptlX').addEventListener('click', closePortal);
+$('#portal').addEventListener('click', e=>{ if(e.target.id==='portal') closePortal(); });
 
 /* ---- motion setting: pause row + runtime switch. Every mover reads the
    WR_CALM getter per frame; the sweep spots are the one build-time skip. ---- */
