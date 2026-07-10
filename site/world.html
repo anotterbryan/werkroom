@@ -152,6 +152,13 @@ a{color:var(--gold)}
 #finding.fstyle-polaroid .fnd{background:#fdfdf8;border:10px solid #fff;border-bottom-width:46px;border-radius:4px;color:#242018;box-shadow:0 12px 34px rgba(0,0,0,.5)}
 #finding.fstyle-polaroid .fk{color:#e6007e}
 #finding.fstyle-polaroid .fx{color:#999}
+/* ---------- Backrooms jukebox ---------- */
+#juke{position:fixed;inset:0;z-index:127;display:flex;align-items:center;justify-content:center;background:rgba(8,6,2,.85)}
+#juke .jk{width:min(420px,92vw);background:rgba(24,18,10,.98);border:1px solid var(--gold);border-radius:14px;padding:18px;text-align:center}
+#juke .jkttl{color:var(--gold);font-weight:800;letter-spacing:1px;text-transform:uppercase;font-size:14px}
+#juke .jksub{color:rgba(247,240,230,.6);font-size:11px;margin:4px 0 12px}
+#juke #jukeFrame{width:100%;height:152px;border:0;border-radius:12px}
+#juke .jkx{margin-top:12px;background:rgba(61,35,82,.6);border:1px solid rgba(244,181,63,.3);color:var(--gold);padding:8px 16px;border-radius:8px;cursor:pointer;text-transform:uppercase;font:700 11px/1 inherit}
 
 /* ---------- Boot / gate cards ---------- */
 #gate{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;
@@ -406,6 +413,14 @@ classic two-dimensional site at index.html, which is fully accessible. Use the s
       <button class="lkbtn" id="lockGo">Enter</button>
       <button class="lkbtn sec" id="lockSeasons">Browse seasons</button>
     </div>
+  </div>
+</div>
+<div id="juke" class="hidden" role="dialog" aria-label="Jukebox">
+  <div class="jk">
+    <div class="jkttl">The Backrooms Jukebox</div>
+    <div class="jksub">It only knows one song. It has always only known one song.</div>
+    <iframe id="jukeFrame" allow="encrypted-media; autoplay" loading="lazy" title="Spotify player"></iframe>
+    <button class="jkx" id="jukeX">close</button>
   </div>
 </div>
 <div id="hint" class="hidden"></div>
@@ -2294,7 +2309,7 @@ function overlayOpen(){
   return !$('#dress').classList.contains('veil') || !$('#booth').classList.contains('hidden')
       || !$('#lib').classList.contains('hidden') || !$('#read').classList.contains('hidden')
       || !$('#portal').classList.contains('hidden') || !$('#finding').classList.contains('hidden')
-      || !$('#lock').classList.contains('hidden') || paused;
+      || !$('#lock').classList.contains('hidden') || !$('#juke').classList.contains('hidden') || paused;
 }
 /* pointer-lock etiquette (Bryan's fix #1): any overlay frees the mouse instantly,
    one Esc always releases (and nothing re-grabs it), and we NEVER call
@@ -2333,6 +2348,7 @@ addEventListener('keydown', e=>{
   if(!entered) return;
   if(e.code==='Escape'){                       /* fires when pointer is NOT locked */
     if(!$('#lock').classList.contains('hidden')){ closeLock(); return; }
+    if(!$('#juke').classList.contains('hidden')){ closeJuke(); return; }
     if(runway){ endRunway(false); return; }
     if(!$('#finding').classList.contains('hidden')){ closeFinding(); return; }
     if(inBackrooms){ exitBackrooms(); return; }
@@ -3121,6 +3137,7 @@ function curtainTick(dt,t){
     gAlley.visible=gBack.visible=gWalk.visible=gLounge.visible=gRun.visible=false;
     if(gVoid) gVoid.visible=(brLevel===0);
     if(gPool) gPool.visible=(brLevel===1);
+    if(gVault) gVault.visible=(brLevel===2);
   } else {
     const cull = WR.cullRooms(player.x, player.z, camera.position.x, camera.position.z);
     gAlley.visible  = cull.alley;
@@ -3130,6 +3147,7 @@ function curtainTick(dt,t){
     gRun.visible    = cull.stage;
     if(gVoid) gVoid.visible=false;
     if(gPool) gPool.visible=false;
+    if(gVault) gVault.visible=false;
   }
 }
 
@@ -3370,9 +3388,10 @@ function assignNPCs(){
 
 /* ===== THE BACKROOMS — hidden liminal level behind the golden doors (password: jiggly) ===== */
 let inBackrooms=false, gVoid=null, _brBuilt=false, _brReturn=null, _brPrevView=null;
-let brLevel=0, gPool=null, _poolBuilt=false;
+let brLevel=0, gPool=null, _poolBuilt=false, gVault=null, _vaultBuilt=false;
 const BR=[400,400], BR_FOG=0xb9a94a;          /* far off the normal map; damp-yellow fog */
 const POOL=[400,600], POOL_FOG=0x1e5a5a;      /* Level 1: the Poolrooms */
+const VAULT=[400,800], VAULT_FOG=0x2a0606;    /* Level 2: the Vault */
 function brLit(c,e,ei){ return new THREE.MeshStandardMaterial({color:c,emissive:e||0,emissiveIntensity:ei||0,roughness:.7}); }
 const brGhosts=[];
 function makeGhost(){
@@ -3418,11 +3437,26 @@ function buildBackrooms(){
     new THREE.MeshStandardMaterial({color:0x1a1508,emissive:0xff5cab,emissiveIntensity:.6}));
   exit.position.set(cx,1.1,cz-SZ+.3); gVoid.add(exit);
   addInteract({id:'brexit', x:cx, z:cz-SZ+1.4, radius:2.3,
-    label(){ return '<b>E</b> — noclip back to the Werk Room'; }, act(){ exitBackrooms(); }});
+    label(){ return '<b>E</b> — the PINK door · the only way home'; }, act(){ exitBackrooms(); }});
   { const h=new THREE.Mesh(new THREE.CylinderGeometry(.8,.8,.3,12),
       new THREE.MeshStandardMaterial({color:0x0a1a1a,emissive:0x1e6a6a,emissiveIntensity:.8})); h.position.set(cx+18,.16,cz-4); gVoid.add(h); }
   addInteract({id:'brdescend', x:cx+18, z:cz-4, radius:2.2,
     label(){ return '<b>E</b> — descend · a hatch in the floor, glowing teal'; }, act(){ goLevel(1); }});
+  /* jukebox — it only knows one song (the deadliest lip-sync of all) */
+  { const g=new THREE.Group();
+    g.add(new THREE.Mesh(new THREE.BoxGeometry(1,1.5,.6),lit(0x2a1a3a,0xe6007e,.4)));
+    const arc=new THREE.Mesh(new THREE.TorusGeometry(.4,.08,8,16),lit(0xf4b53f,0x584207,.6)); arc.position.y=.95; arc.rotation.x=Math.PI/2; g.add(arc);
+    g.position.set(cx-2,.75,cz-11); gVoid.add(g);
+    registerPick(g,'brjuke');
+    addInteract({id:'brjuke', x:cx-2, z:cz-11, radius:2.2,
+      label(){ return '<b>E</b> — the jukebox · it only knows one song'; }, act(){ openJuke(); }}); }
+  /* decoy EXIT doors (the WARNING was right — only the pink one is real) */
+  [[-16,-15],[16,-15]].forEach((p,i)=>{
+    const d=new THREE.Mesh(new THREE.BoxGeometry(1.1,2.1,.16),lit(0x2a2a2a,0x141414,.2)); d.position.set(cx+p[0],1.05,cz+p[1]); gVoid.add(d);
+    registerPick(d,'brdecoy'+i);
+    addInteract({id:'brdecoy'+i, x:cx+p[0], z:cz+p[1], radius:2,
+      label(){ return '<b>E</b> — a grey door marked EXIT'; },
+      act:(()=>()=>showFinding('The door lies','It opens onto another identical room. And another. And another. Only the PINK door — back the way you came in — leads home.','redacted'))()}); });
 
   /* interactable helper: place a prop mesh + a readable blurb */
   let _pi=0;
@@ -3565,6 +3599,9 @@ function buildPool(){
   const up=new THREE.Mesh(new THREE.CylinderGeometry(.8,.8,.3,12),brLit(0x0a1414,0xb9a94a,.6)); up.position.set(cx+7,.16,cz+7); gPool.add(up);
   addInteract({id:'poolup', x:cx+7, z:cz+7, radius:2.2,
     label(){ return '<b>E</b> — a ladder back up to Level 0'; }, act(){ goLevel(0); }});
+  const dn=new THREE.Mesh(new THREE.CylinderGeometry(.8,.8,.3,12),brLit(0x140606,0xff2a2a,.7)); dn.position.set(cx-7,.16,cz+7); gPool.add(dn);
+  addInteract({id:'pooldown', x:cx-7, z:cz+7, radius:2.2,
+    label(){ return '<b>E</b> — a darker hatch, glowing red · go deeper'; }, act(){ goLevel(2); }});
   const PF=[
     [-6,-6,'note','The Drowned Looks','Every mermaid and every underwater runway ever served — they are all still down here, dripping, waiting to be scored.'],
     [6,-6,'terminal','The Reflecting Pool','Stare too long into the water and it shows you which queen would have sent YOU home. Most people look away. You did not.'],
@@ -3584,11 +3621,51 @@ function buildPool(){
     if(g.userData.mat){ g.userData.mat.color.setHex(0x9fd0d0); g.userData.mat.emissive.setHex(0x1a4a4a); } gPool.add(g); });
   _poolBuilt=true;
 }
+function buildVault(){
+  if(_vaultBuilt) return;
+  gVault=new THREE.Group(); gVault.visible=false; scene.add(gVault);
+  const cx=VAULT[0], cz=VAULT[1], S=11;
+  const floor=new THREE.Mesh(new THREE.PlaneGeometry(2*S,2*S),new THREE.MeshStandardMaterial({color:0x0a0608,roughness:.92}));
+  floor.rotation.x=-Math.PI/2; floor.position.set(cx,0,cz); gVault.add(floor);
+  const ceil=new THREE.Mesh(new THREE.PlaneGeometry(2*S,2*S),brLit(0x120608,0x2a0808,.4));
+  ceil.rotation.x=Math.PI/2; ceil.position.set(cx,2.6,cz); gVault.add(ceil);
+  function vWall(px,pz,w,d){ const m=new THREE.Mesh(new THREE.BoxGeometry(w,2.6,d),brLit(0x1a0a0c,0x2a0606,.35));
+    m.position.set(px,1.3,pz); gVault.add(m); W(px-w/2,pz-d/2,px+w/2,pz+d/2); }
+  vWall(cx,cz-S,2*S,.4); vWall(cx,cz+S,2*S,.4); vWall(cx-S,cz,.4,2*S); vWall(cx+S,cz,.4,2*S);
+  vWall(cx-3,cz,.4,12); vWall(cx+3,cz,.4,12);
+  const L=new THREE.PointLight(0xff2a2a,18,38,2); L.position.set(cx,2.3,cz); gVault.add(L); gVault.userData.light=L;
+  addInteract({id:'vaultexit', x:cx, z:cz-S+1.4, radius:2.3,
+    label(){ return '<b>E</b> — claw your way back to the Werk Room'; }, act(){ exitBackrooms(); }});
+  const up=new THREE.Mesh(new THREE.CylinderGeometry(.8,.8,.3,12),brLit(0x140606,0xb9a94a,.6)); up.position.set(cx+6,.16,cz+6); gVault.add(up);
+  addInteract({id:'vaultup', x:cx+6, z:cz+6, radius:2.2,
+    label(){ return '<b>E</b> — a ladder all the way up to Level 0'; }, act(){ goLevel(0); }});
+  const VF=[
+    [-6,-6,'redacted','The Endurance Record','Jujubee has stood in the bottom or the danger zone SIXTEEN times — and kept walking. Alexis Mateo, fourteen. Survival is the darkest talent of them all.'],
+    [6,-6,'terminal','The Villains’ Wing','Every side-eye, every reunion screaming match, every "not my fault" ever filmed. It is warm in here. The red light suits them.'],
+    [-6,6,'note','The Ones Who Came Back','This vault keeps the returned — the queens the show could never stay away from. They are never really eliminated. Not really.'],
+    [6,6,'redacted','DO NOT OPEN','▮▮▮ ▮▮▮▮ ▮▮ ▮▮▮ ▮▮▮▮ ▮▮ ▮▮▮ ▮▮▮▮▮ ▮▮▮▮▮▮ — but you already read this far, didn’t you.']
+  ];
+  VF.forEach((f,i)=>{
+    const [dx,dz,st,ti,bo]=f, g=new THREE.Group();
+    const post=new THREE.Mesh(new THREE.CylinderGeometry(.05,.06,1,6),brLit(0x140606,0,0)); post.position.y=.5; g.add(post);
+    const scr=new THREE.Mesh(new THREE.BoxGeometry(.7,.5,.08),brLit(0x1a0202,0xff3a3a,.75)); scr.position.y=1.15; g.add(scr);
+    g.position.set(cx+dx,0,cz+dz); gVault.add(g);
+    registerPick(g,'vaultf'+i);
+    addInteract({id:'vaultf'+i, x:cx+dx, z:cz+dz, radius:2,
+      label(){ return '<b>E</b> — read the finding'; }, act:((k,b,s)=>()=>showFinding(k,b,s))(ti,bo,st)});
+  });
+  [[-2,0],[2,2],[0,-3]].forEach(p=>{ const g=makeGhost(); g.position.set(cx+p[0],0,cz+p[1]);
+    if(g.userData.mat){ g.userData.mat.color.setHex(0xd08a8a); g.userData.mat.emissive.setHex(0x5a1414); } gVault.add(g); });
+  _vaultBuilt=true;
+}
 function goLevel(n){
   brLevel=n; player.seated=false; player.pitch=0; cam.has=false;
   if(n===1){ buildPool(); player.x=POOL[0]; player.z=POOL[1]-8; player.yaw=Math.PI;
     scene.fog.color.setHex(POOL_FOG); scene.fog.near=3; scene.fog.far=20;
     if(typeof toast==='function') toast('Down the hatch, into the water. Level 1 — the Poolrooms.'); }
+  else if(n===2){ buildVault(); player.x=VAULT[0]; player.z=VAULT[1]-8; player.yaw=Math.PI;
+    scene.fog.color.setHex(VAULT_FOG); scene.fog.near=2; scene.fog.far=15;
+    if(typeof toast==='function') toast('Deeper still. Red light, no music. Level 2 — the Vault.'); }
   else { player.x=BR[0]; player.z=BR[1]-(BR_SZ-3); player.yaw=Math.PI;
     scene.fog.color.setHex(BR_FOG); scene.fog.near=3; scene.fog.far=22;
     if(typeof toast==='function') toast('Back up to Level 0. The carpet is still damp.'); }
@@ -3613,7 +3690,7 @@ function exitBackrooms(){
   if(typeof toast==='function') toast('Reality clicks back. The Werk Room was here all along.');
 }
 function backroomsTick(dt,t){
-  scene.fog.color.setHex(brLevel===1?POOL_FOG:BR_FOG);
+  scene.fog.color.setHex(brLevel===1?POOL_FOG:brLevel===2?VAULT_FOG:BR_FOG);
   if(brLevel!==0) return;
   const L=gVoid&&gVoid.userData.light;
   if(L) L.intensity = 24 + Math.sin(t*13)*5 + (Math.random()<.02? -14:0);
@@ -3652,6 +3729,14 @@ $('#lockGo').addEventListener('click', tryLockPass);
 $('#lockIn').addEventListener('keydown', e=>{ e.stopPropagation(); if(e.key==='Enter') tryLockPass(); });
 $('#lockSeasons').addEventListener('click', ()=>{ closeLock(); openPortal(); });
 $('#lock').addEventListener('click', e=>{ if(e.target.id==='lock') closeLock(); });
+
+/* ---- backrooms jukebox: one eternal lip-sync (Spotify embed) ---- */
+function openJuke(){ if(!entered) return;
+  $('#jukeFrame').src='https://open.spotify.com/embed/track/6RqeSykmswmQedR15bu0iv?utm_source=werkroom';
+  show($('#juke')); releaseLook(); }
+function closeJuke(){ $('#jukeFrame').src=''; hide($('#juke')); }
+$('#jukeX').addEventListener('click', closeJuke);
+$('#juke').addEventListener('click', e=>{ if(e.target.id==='juke') closeJuke(); });
 
 /* ---- motion setting: pause row + runtime switch. Every mover reads the
    WR_CALM getter per frame; the sweep spots are the one build-time skip. ---- */
