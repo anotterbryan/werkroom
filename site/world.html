@@ -3444,15 +3444,15 @@ function buildBackrooms(){
     label(){ return '<b>E</b> — descend · a hatch in the floor, glowing teal'; }, act(){ goLevel(1); }});
   /* jukebox — it only knows one song (the deadliest lip-sync of all) */
   { const g=new THREE.Group();
-    g.add(new THREE.Mesh(new THREE.BoxGeometry(1,1.5,.6),lit(0x2a1a3a,0xe6007e,.4)));
-    const arc=new THREE.Mesh(new THREE.TorusGeometry(.4,.08,8,16),lit(0xf4b53f,0x584207,.6)); arc.position.y=.95; arc.rotation.x=Math.PI/2; g.add(arc);
+    g.add(new THREE.Mesh(new THREE.BoxGeometry(1,1.5,.6),brLit(0x2a1a3a,0xe6007e,.4)));
+    const arc=new THREE.Mesh(new THREE.TorusGeometry(.4,.08,8,16),brLit(0xf4b53f,0x584207,.6)); arc.position.y=.95; arc.rotation.x=Math.PI/2; g.add(arc);
     g.position.set(cx-2,.75,cz-11); gVoid.add(g);
     registerPick(g,'brjuke');
     addInteract({id:'brjuke', x:cx-2, z:cz-11, radius:2.2,
       label(){ return '<b>E</b> — the jukebox · it only knows one song'; }, act(){ openJuke(); }}); }
   /* decoy EXIT doors (the WARNING was right — only the pink one is real) */
   [[-16,-15],[16,-15]].forEach((p,i)=>{
-    const d=new THREE.Mesh(new THREE.BoxGeometry(1.1,2.1,.16),lit(0x2a2a2a,0x141414,.2)); d.position.set(cx+p[0],1.05,cz+p[1]); gVoid.add(d);
+    const d=new THREE.Mesh(new THREE.BoxGeometry(1.1,2.1,.16),brLit(0x2a2a2a,0x141414,.2)); d.position.set(cx+p[0],1.05,cz+p[1]); gVoid.add(d);
     registerPick(d,'brdecoy'+i);
     addInteract({id:'brdecoy'+i, x:cx+p[0], z:cz+p[1], radius:2,
       label(){ return '<b>E</b> — a grey door marked EXIT'; },
