@@ -4,6 +4,16 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>THE WERKROOM — A Drag Race Data Observatory</title>
+<meta name="description" content="Every queen, season, lip sync, song and guest judge across the whole RuPaul's Drag Race universe — one connected, hand-verified, copyright-safe database. A fan-made data observatory.">
+<meta property="og:title" content="The Werkroom — A Drag Race Data Observatory">
+<meta property="og:description" content="82 seasons, 724 queens, every lip sync and judge across the whole Drag Race universe — one connected, hand-verified database.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="The Werkroom">
+<meta property="og:url" content="https://anotterbryan.github.io/werkroom/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="The Werkroom — A Drag Race Data Observatory">
+<meta name="twitter:description" content="Every queen, season, lip sync and judge across the whole Drag Race universe — one connected database.">
+<meta name="theme-color" content="#2a0e3a">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><rect width='16' height='16' rx='3' fill='%232a0e3a'/><path d='M2.5 6.5l2.5 2.5 3-5.5 3 5.5 2.5-2.5-1 7h-11z' fill='none' stroke='%23f4b53f' stroke-width='1.4' stroke-linejoin='round'/></svg>"/>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -4916,6 +4926,7 @@ function go(route){
   // footer
   const foot=el('div',{class:'foot'});
   foot.append(el('div',{html:'THE WERKROOM · an original, copyright-safe data observatory of the Drag Race universe · built from a hand-verified relational database · no official logos, trade dress, or photographs used'}));
+  foot.append(el('div',{style:'margin-top:6px;opacity:.72',html:'Data last updated <b>'+((D.meta&&D.meta.generated)||'—')+'</b> · every record passes 38 automated integrity checks · this is a growing work-in-progress, so gaps remain — spot something off? Use “Report an error” above.'}));
   foot.append(el('div',{style:'margin-top:8px'},'Spot a mistake? ',feedbackFootLink(),'.'));
   foot.append(el('div',{style:'margin-top:8px;opacity:.8'},FAN_DISCLAIMER));
   main.append(foot);
