@@ -141,6 +141,17 @@ a{color:var(--gold)}
 #lock .lkbtn{flex:1;background:var(--magenta);border:0;color:#fff;font:700 12px/1 inherit;padding:12px;
   border-radius:10px;cursor:pointer;text-transform:uppercase;letter-spacing:1px}
 #lock .lkbtn.sec{background:rgba(61,35,82,.6);border:1px solid rgba(244,181,63,.3);color:var(--gold)}
+/* finding style variants (different 'software' looks) */
+#finding.fstyle-terminal .fnd{background:#04120a;border-color:#35ff9a;color:#7dffbe;box-shadow:0 0 40px rgba(53,255,154,.25)}
+#finding.fstyle-terminal .fk{color:#35ff9a}
+#finding.fstyle-redacted .fnd{background:#161616;border-color:#ff4a4a;color:#e8d8d8}
+#finding.fstyle-redacted .fk{color:#ff4a4a}
+#finding.fstyle-note .fnd{background:#efe7cf;border-color:#c9b48a;color:#3a2f18;font-family:Georgia,"Bodoni Moda",serif;box-shadow:0 10px 32px rgba(0,0,0,.45)}
+#finding.fstyle-note .fk{color:#8a6a3a}
+#finding.fstyle-note .fx{color:rgba(58,47,24,.5)}
+#finding.fstyle-polaroid .fnd{background:#fdfdf8;border:10px solid #fff;border-bottom-width:46px;border-radius:4px;color:#242018;box-shadow:0 12px 34px rgba(0,0,0,.5)}
+#finding.fstyle-polaroid .fk{color:#e6007e}
+#finding.fstyle-polaroid .fx{color:#999}
 
 /* ---------- Boot / gate cards ---------- */
 #gate{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;
@@ -3406,12 +3417,12 @@ function buildBackrooms(){
 
   /* interactable helper: place a prop mesh + a readable blurb */
   let _pi=0;
-  function prop(mesh,x,z,ry,key,body,lbl){
+  function prop(mesh,x,z,ry,key,body,lbl,style){
     mesh.position.set(x,mesh.position.y||0,z); if(ry) mesh.rotation.y=ry; gVoid.add(mesh);
     registerPick(mesh,'brp'+_pi);
     addInteract({id:'brp'+(_pi++), x, z, radius:2,
       label:(l=>()=>'<b>E</b> — '+l)(lbl||'inspect'),
-      act:((k,b)=>()=>showFinding(k,b))(key,body)});
+      act:((k,b,s)=>()=>showFinding(k,b,s))(key,body,style)});
     return mesh;
   }
   const lit=(c,e,ei)=>new THREE.MeshStandardMaterial({color:c,emissive:e||0,emissiveIntensity:ei||0,roughness:.6});
@@ -3465,6 +3476,37 @@ function buildBackrooms(){
       act:((k,b)=>()=>showFinding(k,b))(j[0],j[1])});
   });
 
+  /* ---- 20 exhibits: data-driven findings in varied 'software' styles ---- */
+  const styleCol={terminal:0x35ff9a,redacted:0xff4a4a,note:0xf0e6b0,polaroid:0x74e0c8,finding:0xf4b53f};
+  const EX=[
+    [-18,-12,'terminal','Lip Sync Assassins','Ginger Minj and Silky Nutmeg Ganache — nine lip-sync kills apiece. Jinkx Monsoon and Roxxxy Andrews — seven. When the track drops, pray you are not standing across from them.'],
+    [-11,-12,'terminal','The Winningest','Most maxi-challenge wins, career: Trinity Taylor (11), Silky Nutmeg Ganache (10), Ginger Minj (9), Shea Couleé (8), Manila Luzon (7).'],
+    [-3,-13,'redacted','The Bottom-Dwellers','Most trips to the bottom: Jujubee — FOURTEEN. Alexis Mateo (8). Latrice Royale (8). Shangela (7). Surviving the bottom is its own dark art.'],
+    [11,-12,'note','The Uncrowned','One hundred and one queens have placed second and never worn the crown. Nina Flowers. Raven. Manila Luzon. Their reflections gather here to compare notes.'],
+    [18,-12,'polaroid','Youngest Ever Crowned','Krystal Versace — nineteen years old, Drag Race UK Series 3. The wig was older than she was.'],
+    [6,-13,'polaroid','Oldest Ever Crowned','Sharonne — forty-five, Drag Race España 2. The crown, it turns out, has no expiry date.'],
+    [-18,-4,'terminal','The Deadliest Songs','"Don\'t Leave Me This Way" and "Born This Way" have each ended four careers on this runway. The floor still remembers every count of the choreography.'],
+    [-11,-2,'note','The Congeniality Ward','Forty-six sashes. Forty-six queens the others swore they actually liked. Statistically improbable. We keep the paperwork down here, just in case.'],
+    [11,-2,'redacted','The Snatch Game Graveyard','Over five hundred impersonations logged. Some legendary. Some ▮▮▮▮▮▮. The worst are kept in this wing, where no one can hear them.'],
+    [18,-4,'polaroid','Patient Zero','BeBe Zahara Benet — Season 1. Before the machine, before the franchises. The first face to walk in, and the first to walk out crowned.'],
+    [-18,4,'terminal','The Ghost Seasons','Some seasons were announced and never fully aired. Their episodes sit blank in the ledger. All Stars 11 is filling itself in — live — even now. Do not stare at the blanks.'],
+    [-11,6,'finding','The Global Count','82 seasons. 724 queens. 863 episodes. 22 franchises scattered across the earth. One family. The number never stops climbing.'],
+    [11,6,'redacted','RuPaul\'s Ledger','RUPAUL — 45 seasons hosted, 57 panels. The name at the top of every page. The brow in every mirror. The final ▮▮▮▮.'],
+    [18,4,'note','The Endless Aisle','You have walked this corridor before. You are certain of it. The carpet is damp in exactly the same places. Keep moving. Do not count the doors.'],
+    [-18,11,'polaroid','The Returning Man','Jamal Sims — choreographer, eleven visits, more than any other guest. He has watched more death drops than the disco ball, and he is not tired yet.'],
+    [-11,13,'note','The Tally of Tears','Every "sashay away" ever spoken, stacked in this corner. It reaches the ceiling. It is, at this very moment, still growing.'],
+    [-3,13,'redacted','THE WARNING','IF YOU MEET A QUEEN WITH NO REFLECTION, DO NOT LIP SYNC AGAINST HER. DO NOT DRINK HER ALMOND WATER. ▮▮▮▮▮▮ ▮▮ ▮▮▮ ▮▮▮▮▮▮▮.'],
+    [3,13,'note','The Way Out That Isn\'t','A door marked EXIT. It opens onto another identical room. And another. Only the PINK door leads home. You did notice the pink door — didn\'t you?'],
+    [11,13,'terminal','Twin-Flame Birthdays','Pandora Boxx and Sonique share May 2. BeBe Zahara Benet and Chad Michaels share March 20. Somewhere, two cakes are always confused.'],
+    [18,11,'finding','The First to Fall','Fifty-six queens walked in and walked right back out — eliminated first. This is where they wait, still fixing their mugs, still sure it was the edit.']
+  ];
+  EX.forEach(e=>{
+    const [dx,dz,st,title,body]=e, g=new THREE.Group();
+    const post=new THREE.Mesh(new THREE.CylinderGeometry(.05,.06,1.1,6),lit(0x1a150a,0,0)); post.position.y=.55; g.add(post);
+    const scr=new THREE.Mesh(new THREE.BoxGeometry(.72,.5,.08),lit(0x0a0a06,styleCol[st]||0xf4b53f,.75)); scr.position.y=1.28; g.add(scr);
+    prop(g,cx+dx,cz+dz,0,title,body,'read',st);
+  });
+
   /* ---- ghost failures — first-outs + the named ones ---- */
   const qn=B.D.derived.qname, want=['Q0056','Q0057','Q0073'], ids=[...want];
   for(const c of B.D.contestants){ if(ids.length>=7) break; if(c.eliminated_episode==='1' && ids.indexOf(c.queen_id)<0) ids.push(c.queen_id); }
@@ -3512,7 +3554,12 @@ function backroomsTick(dt,t){
     if(r.mesh.userData.mat) r.mesh.userData.mat.opacity=.3+Math.sin(t*2+r.ph)*.12;
   });
 }
-function showFinding(k,body){ $('#fndBody').innerHTML='<b>'+k+'</b><br><br>'+body; show($('#finding')); releaseLook(); }
+function showFinding(k,body,style){
+  const f=$('#finding');
+  f.classList.remove('fstyle-terminal','fstyle-note','fstyle-redacted','fstyle-polaroid');
+  if(style && style!=='finding') f.classList.add('fstyle-'+style);
+  $('#fndBody').innerHTML='<b>'+k+'</b><br><br>'+body; show(f); releaseLook();
+}
 function closeFinding(){ hide($('#finding')); }
 $('#finding').addEventListener('click', closeFinding);
 $('#ptlPass').addEventListener('keydown', e=>{ e.stopPropagation();
