@@ -1136,6 +1136,7 @@ V({id:'home',title:'The <em>Werkroom</em>',kicker:'Home',icon:'crown',group:'Hom
   [['Cast Gallery','gallery'],['Trivia Night','trivia'],['The Music','music'],['Ask the Library','ask']].forEach(([t,id])=>{
     const b=el('button',{class:'tab on quickstart',style:'font-size:12.5px;padding:9px 16px'},t);
     b.addEventListener('click',()=>go(id));qs.append(b);});
+  m.append(el('div',{class:'fade',style:'margin:20px 0 -6px;font-family:var(--disp);font-weight:800;font-size:14px;color:var(--gold);letter-spacing:.5px'},'✦ New here? Start with —'));
   m.append(qs);
   /* bubble grid — one card per section of the left rail */
   const playable=D.songs.filter(s=>s.spotify_track_id&&s.spotify_track_id!=='-').length;
@@ -1156,7 +1157,7 @@ V({id:'home',title:'The <em>Werkroom</em>',kicker:'Home',icon:'crown',group:'Hom
   BUBBLES.forEach(([g,pitch,teaser])=>{
     const views=VIEWS.filter(v=>v.group===g&&!v.hidden).sort((a,b)=>(a.ord||0)-(b.ord||0));
     if(!views.length)return;
-    bg.append(el('div',{class:'card bubble spot-card',onclick:()=>go('sec:'+(GROUP_SLUG[g]||'home'))},
+    bg.append(el('div',{class:'card bubble spot-card',title:'Views: '+views.map(v=>v.title.replace(/<[^>]+>/g,'')).join(' · '),onclick:()=>go('sec:'+(GROUP_SLUG[g]||'home'))},
       el('div',{style:'color:var(--gold)',html:icon(GROUP_ICONS[g]||'star')}),
       el('div',{style:'font-family:var(--disp);font-weight:800;font-size:18px;margin:6px 0 4px'},g),
       el('div',{style:'font-size:12px;color:rgba(247,240,230,.8);line-height:1.5'},pitch),
@@ -1623,12 +1624,17 @@ V({id:'season',title:'Season <em>Detail</em>',kicker:'The Competition',icon:'gri
 
 /* ---------- 3. QUEEN INDEX ---------- */
 V({id:'queens',title:'The <em>Queens</em>',kicker:'Queens',icon:'star',group:'Queens',ord:1,
- desc:'All competing queens across eighteen seasons. Search, then click any name for her full record.',
+ desc:'All competing queens across all 82 seasons of the Drag Race universe. Search or sort, then click any name for her full record.',
  render(m){
   m.innerHTML=head(this);
   const ctrl=el('div',{class:'controls'});
   const search=el('input',{type:'text',placeholder:'Search queens…',style:'flex:1;min-width:200px'});
   ctrl.append(search);m.append(ctrl);
+  let sortKey='';
+  const sortSel=el('select',{'aria-label':'Sort queens',style:'background:rgba(0,0,0,.35);color:var(--cream);border:1px solid rgba(244,181,63,.3);border-radius:8px;padding:6px 8px;font:inherit;font-size:12.5px'});
+  [['','Default order'],['name','A–Z'],['wins','Most wins'],['place','Best placement'],['season','By season']].forEach(p=>sortSel.append(el('option',{value:p[0]},p[1])));
+  sortSel.addEventListener('change',e=>{sortKey=e.target.value;draw(search.value);});
+  ctrl.append(sortSel);
   statCards(m,[[new Set(D.contestants.map(c=>c.queen_id)).size,'queens'],[D.contestants.length,'contestant runs'],
     [new Set(D.contestants.map(c=>c.season_id)).size,'seasons']]);
   /* smallest cast photo per queen (lowest scale-to-width variant across her rows) */
@@ -1638,7 +1644,12 @@ V({id:'queens',title:'The <em>Queens</em>',kicker:'Queens',icon:'star',group:'Qu
   const list=el('div',{class:'grid fade',style:'grid-template-columns:repeat(auto-fill,minmax(190px,1fr));align-items:start'});
   m.append(list);
   const draw=(q='')=>{list.innerHTML='';
-    D.contestants.forEach(c=>{
+    let arr=D.contestants.slice();
+    if(sortKey==='name')arr.sort((a,b)=>cname(a).localeCompare(cname(b)));
+    else if(sortKey==='wins')arr.sort((a,b)=>(+b.wins||0)-(+a.wins||0));
+    else if(sortKey==='place')arr.sort((a,b)=>(+a.placement||99)-(+b.placement||99));
+    else if(sortKey==='season')arr.sort((a,b)=>String(a.season_id).localeCompare(String(b.season_id)));
+    arr.forEach(c=>{
       const nm=cname(c); if(q&&!((nm+' '+(qname[c.queen_id]||'')).toLowerCase().includes(q.toLowerCase())))return;
       const img=_QIMG[c.queen_id];
       const card=el('div',{class:'card',style:'cursor:pointer;padding:14px'},
