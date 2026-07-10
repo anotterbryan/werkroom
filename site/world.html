@@ -125,6 +125,22 @@ a{color:var(--gold)}
   font:15px/1.65 "Space Mono",monospace;text-align:center;box-shadow:0 0 44px rgba(201,184,78,.25)}
 #finding .fk{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#c9b84e;margin-bottom:10px}
 #finding .fx{margin-top:16px;font-size:10px;letter-spacing:1px;color:rgba(239,230,176,.45)}
+/* ---------- The Golden Doors: password lock ---------- */
+#lock{position:fixed;inset:0;z-index:126;display:flex;align-items:center;justify-content:center;
+  background:rgba(8,5,12,.82);backdrop-filter:blur(3px)}
+#lock .lk{width:min(440px,92vw);background:rgba(24,16,34,.98);border:2px solid var(--gold);
+  border-radius:16px;padding:26px;text-align:center;box-shadow:0 0 50px rgba(244,181,63,.3)}
+#lock .lkico{font-size:34px}
+#lock .lkttl{font-size:16px;font-weight:800;letter-spacing:1px;color:var(--gold);text-transform:uppercase;margin:8px 0 4px}
+#lock .lksub{font-size:12px;color:rgba(247,240,230,.7);margin-bottom:16px}
+#lock .lkin{width:100%;background:rgba(0,0,0,.4);border:1px solid rgba(244,181,63,.5);color:#fff;
+  font:16px "Space Mono",monospace;padding:12px 14px;border-radius:10px;outline:none;text-align:center;letter-spacing:4px}
+#lock .lkin:focus{border-color:var(--magenta)}
+#lock .lkmsg{font-size:11px;color:var(--magenta);margin-top:10px;min-height:14px;letter-spacing:1px}
+#lock .lkrow{display:flex;gap:8px;margin-top:12px}
+#lock .lkbtn{flex:1;background:var(--magenta);border:0;color:#fff;font:700 12px/1 inherit;padding:12px;
+  border-radius:10px;cursor:pointer;text-transform:uppercase;letter-spacing:1px}
+#lock .lkbtn.sec{background:rgba(61,35,82,.6);border:1px solid rgba(244,181,63,.3);color:var(--gold)}
 
 /* ---------- Boot / gate cards ---------- */
 #gate{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;
@@ -367,6 +383,19 @@ classic two-dimensional site at index.html, which is fully accessible. Use the s
 <div id="finding" class="hidden" role="dialog" aria-label="A finding">
   <div class="fnd"><div class="fk">a finding</div><div id="fndBody"></div>
     <div class="fx">click · E · Esc to step back</div></div>
+</div>
+<div id="lock" class="hidden" role="dialog" aria-label="The golden doors are locked">
+  <div class="lk">
+    <div class="lkico">🔒</div>
+    <div class="lkttl">The Golden Doors are locked</div>
+    <div class="lksub">Whisper the password to pass through…</div>
+    <input id="lockIn" class="lkin" type="text" placeholder="password" autocomplete="off" spellcheck="false">
+    <div class="lkmsg" id="lockMsg"></div>
+    <div class="lkrow">
+      <button class="lkbtn" id="lockGo">Enter</button>
+      <button class="lkbtn sec" id="lockSeasons">Browse seasons</button>
+    </div>
+  </div>
 </div>
 <div id="hint" class="hidden"></div>
 <div id="lockHint" class="hidden" aria-hidden="true">Esc frees your mouse</div>
@@ -2253,7 +2282,8 @@ let entered=false, paused=false;
 function overlayOpen(){
   return !$('#dress').classList.contains('veil') || !$('#booth').classList.contains('hidden')
       || !$('#lib').classList.contains('hidden') || !$('#read').classList.contains('hidden')
-      || !$('#portal').classList.contains('hidden') || !$('#finding').classList.contains('hidden') || paused;
+      || !$('#portal').classList.contains('hidden') || !$('#finding').classList.contains('hidden')
+      || !$('#lock').classList.contains('hidden') || paused;
 }
 /* pointer-lock etiquette (Bryan's fix #1): any overlay frees the mouse instantly,
    one Esc always releases (and nothing re-grabs it), and we NEVER call
@@ -2291,6 +2321,7 @@ addEventListener('keydown', e=>{
   keys[e.code]=true;
   if(!entered) return;
   if(e.code==='Escape'){                       /* fires when pointer is NOT locked */
+    if(!$('#lock').classList.contains('hidden')){ closeLock(); return; }
     if(runway){ endRunway(false); return; }
     if(!$('#finding').classList.contains('hidden')){ closeFinding(); return; }
     if(inBackrooms){ exitBackrooms(); return; }
@@ -2306,6 +2337,8 @@ addEventListener('keydown', e=>{
     return;
   }
   if(overlayOpen()) return;   /* chat input has its own Enter handler */
+  if(e.key && e.key.length===1){ window._kbuf=((window._kbuf||'')+e.key.toLowerCase()).slice(-6);
+    if(window._kbuf==='jiggly' && !inBackrooms){ window._kbuf=''; enterBackrooms(); return; } }   /* secret: type the word anywhere */
   if(e.code==='KeyE') doInteract();
   if(e.code==='KeyT') openChat();
   if(e.code==='KeyV') toggleView();
@@ -2411,8 +2444,8 @@ addInteract({id:'exitdoor', x:-13.7, z:31.6, radius:2.2,
   label(){ return '<b>E</b> — exit to the classic site'; }, act(){ location.href='index.html'; }});
 addInteract({id:'librarian', get x(){return lib.position.x;}, get z(){return lib.position.z;}, radius:2.6,
   label(){ return '<b>T</b> / <b>E</b> — talk to The Librarian'; }, act(){ openChat(); }});
-addInteract({id:'rudoors', x:-5, z:14.6, radius:2.7,
-  label(){ return '<b>E</b> — the golden doors · step into any season'; }, act(){ openPortal(); }});
+addInteract({id:'rudoors', x:-5, z:14.6, radius:3.6,
+  label(){ return '<b>E</b> — the golden doors'; }, act(){ openLock(); }});
 addInteract({id:'runway', x:0, z:31.5, radius:3.2, active(){ return !runway; },
   label(){ return '<b>E</b> — werk the runway (first-person strut)'; }, act(){ startRunway(); }});
 
@@ -3485,6 +3518,20 @@ $('#finding').addEventListener('click', closeFinding);
 $('#ptlPass').addEventListener('keydown', e=>{ e.stopPropagation();
   if(e.key==='Enter'){ const v=$('#ptlPass').value.trim().toLowerCase(); $('#ptlPass').value='';
     if(v==='jiggly'){ closePortal(); enterBackrooms(); } else { $('#ptlPass').placeholder='the doors stay shut.'; } } });
+
+/* ---- the golden doors' password lock (clear, dedicated prompt) ---- */
+function openLock(){ if(!entered) return; $('#lockIn').value=''; $('#lockMsg').textContent=''; show($('#lock')); releaseLook();
+  setTimeout(()=>{ try{ $('#lockIn').focus(); }catch(e){} }, 40); }
+function closeLock(){ hide($('#lock')); }
+function tryLockPass(){
+  const v=($('#lockIn').value||'').trim().toLowerCase();
+  if(v==='jiggly'){ closeLock(); enterBackrooms(); }
+  else { $('#lockMsg').textContent='The doors stay shut.'; $('#lockIn').value=''; }
+}
+$('#lockGo').addEventListener('click', tryLockPass);
+$('#lockIn').addEventListener('keydown', e=>{ e.stopPropagation(); if(e.key==='Enter') tryLockPass(); });
+$('#lockSeasons').addEventListener('click', ()=>{ closeLock(); openPortal(); });
+$('#lock').addEventListener('click', e=>{ if(e.target.id==='lock') closeLock(); });
 
 /* ---- motion setting: pause row + runtime switch. Every mover reads the
    WR_CALM getter per frame; the sweep spots are the one build-time skip. ---- */
