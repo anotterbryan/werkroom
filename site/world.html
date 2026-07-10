@@ -3119,7 +3119,8 @@ function curtainTick(dt,t){
      any zone the chase camera is crossing stays visible — no void behind the boom */
   if(inBackrooms){
     gAlley.visible=gBack.visible=gWalk.visible=gLounge.visible=gRun.visible=false;
-    if(gVoid) gVoid.visible=true;
+    if(gVoid) gVoid.visible=(brLevel===0);
+    if(gPool) gPool.visible=(brLevel===1);
   } else {
     const cull = WR.cullRooms(player.x, player.z, camera.position.x, camera.position.z);
     gAlley.visible  = cull.alley;
@@ -3128,6 +3129,7 @@ function curtainTick(dt,t){
     gLounge.visible = cull.untucked;
     gRun.visible    = cull.stage;
     if(gVoid) gVoid.visible=false;
+    if(gPool) gPool.visible=false;
   }
 }
 
@@ -3368,7 +3370,10 @@ function assignNPCs(){
 
 /* ===== THE BACKROOMS — hidden liminal level behind the golden doors (password: jiggly) ===== */
 let inBackrooms=false, gVoid=null, _brBuilt=false, _brReturn=null, _brPrevView=null;
+let brLevel=0, gPool=null, _poolBuilt=false;
 const BR=[400,400], BR_FOG=0xb9a94a;          /* far off the normal map; damp-yellow fog */
+const POOL=[400,600], POOL_FOG=0x1e5a5a;      /* Level 1: the Poolrooms */
+function brLit(c,e,ei){ return new THREE.MeshStandardMaterial({color:c,emissive:e||0,emissiveIntensity:ei||0,roughness:.7}); }
 const brGhosts=[];
 function makeGhost(){
   const m=new THREE.MeshStandardMaterial({color:0xd7cfe0,transparent:true,opacity:.4,
@@ -3414,6 +3419,10 @@ function buildBackrooms(){
   exit.position.set(cx,1.1,cz-SZ+.3); gVoid.add(exit);
   addInteract({id:'brexit', x:cx, z:cz-SZ+1.4, radius:2.3,
     label(){ return '<b>E</b> — noclip back to the Werk Room'; }, act(){ exitBackrooms(); }});
+  { const h=new THREE.Mesh(new THREE.CylinderGeometry(.8,.8,.3,12),
+      new THREE.MeshStandardMaterial({color:0x0a1a1a,emissive:0x1e6a6a,emissiveIntensity:.8})); h.position.set(cx+18,.16,cz-4); gVoid.add(h); }
+  addInteract({id:'brdescend', x:cx+18, z:cz-4, radius:2.2,
+    label(){ return '<b>E</b> — descend · a hatch in the floor, glowing teal'; }, act(){ goLevel(1); }});
 
   /* interactable helper: place a prop mesh + a readable blurb */
   let _pi=0;
@@ -3435,10 +3444,24 @@ function buildBackrooms(){
     g.add(new THREE.Mesh(new THREE.BoxGeometry(.32,.14,.9),lit(0xf4b53f,0x584207,.7)));
     const spk=new THREE.Mesh(new THREE.CylinderGeometry(.03,.06,.5,6),lit(0xf4b53f,0x584207,.7)); spk.position.set(0,-.28,-.32); g.add(spk);
     g.position.y=.5; prop(g,cx+15,cz-15,.6,'The Lone Heel','One size-13 stiletto, no partner in sight. It still holds the shape of a runway walk it never finished.','the lone heel'); }
-  { const g=new THREE.Group();
-    const pole=new THREE.Mesh(new THREE.CylinderGeometry(.03,.03,1.3,6),lit(0x777,0,0)); pole.position.y=.65; g.add(pole);
-    const w=new THREE.Mesh(new THREE.SphereGeometry(.34,12,10),lit(0xd9a441,0x2a1e08,.3)); w.scale.set(1,1.3,1); w.position.y=1.5; g.add(w);
-    prop(g,cx-4,cz+15,0,'The Wig on a Stand','A platinum wig teased to heaven, humming faintly. It turns to face you the instant you look away. (You imagined that. Probably.)','the wig'); }
+  /* ---- The Wig Wall: recognizable signature wigs on mannequin stands ---- */
+  const WIGS=[
+    [0xb5341f,false,'Jinkx Monsoon’s Flame Waves','The vintage flame-red finger-waves of Jinkx Monsoon — Seattle’s narcoleptic songbird and the only two-time American winner. Vintage to the very root.'],
+    [0xf0e6c8,true,'Trixie Mattel’s Platinum Bombshell','The oversized platinum blonde of Trixie Mattel — the biggest hair in any room, on purpose, always. Barbie by way of a truck stop.'],
+    [0xe0b84a,false,'Katya’s Soviet Glamour','Katya’s blonde flip — Russian glamour with a hint of beautiful chaos coiled underneath.'],
+    [0x14101a,false,'Bianca Del Rio’s Razor Bob','Bianca Del Rio’s sleek dark bob — not a hair, nor an insult, ever out of place.'],
+    [0xece4d4,true,'Alaska’s Waist-Length Platinum','Alaska’s waist-skimming platinum sheet. Hieeee. Anus. Iconic.'],
+    [0xe6007e,true,'Kim Chi’s Candy Sculpture','Kim Chi’s avant-garde candy tower — a wig that is also a sculpture, also, faintly, a threat.']
+  ];
+  WIGS.forEach((wg,i)=>{
+    const [hair,tall,title,body]=wg, g=new THREE.Group();
+    const st=new THREE.Mesh(new THREE.CylinderGeometry(.04,.06,1.2,6),lit(0x2a2418,0,0)); st.position.y=.6; g.add(st);
+    const head=new THREE.Mesh(new THREE.SphereGeometry(.12,10,8),lit(0xd8c0c8,0,0)); head.position.y=1.28; g.add(head);
+    const h=new THREE.Mesh(new THREE.SphereGeometry(.2,12,10),
+      new THREE.MeshStandardMaterial({color:hair,roughness:.6,emissive:hair,emissiveIntensity:.12}));
+    h.scale.set(1.15, tall?1.95:1.35, 1.15); h.position.y=1.4+(tall?.2:0); g.add(h);
+    prop(g, cx-21, cz-9+i*3.6, 0, title, body, 'a legendary wig', 'polaroid');
+  });
   { const m=new THREE.Mesh(new THREE.BoxGeometry(1.4,2.2,.12),lit(0x101018,0xb0c0ff,.3)); m.position.y=1.2;
     prop(m,cx+16,cz+13,0,'The Cracked Mirror','A farewell mirror, shattered. Faint lipstick letters keep re-forming in the cracks: "DON\'T F*** IT UP." You did not write that.','the mirror'); }
   { const j=new THREE.Mesh(new THREE.CylinderGeometry(.28,.3,.7,14),
@@ -3521,10 +3544,59 @@ function buildBackrooms(){
   });
   _brBuilt=true;
 }
+function buildPool(){
+  if(_poolBuilt) return;
+  gPool=new THREE.Group(); gPool.visible=false; scene.add(gPool);
+  const cx=POOL[0], cz=POOL[1], S=10;
+  const floor=new THREE.Mesh(new THREE.PlaneGeometry(2*S,2*S),
+    new THREE.MeshStandardMaterial({color:0x0e3a3a,emissive:0x083030,emissiveIntensity:.35,roughness:.25,metalness:.4}));
+  floor.rotation.x=-Math.PI/2; floor.position.set(cx,0,cz); gPool.add(floor);
+  const ceil=new THREE.Mesh(new THREE.PlaneGeometry(2*S,2*S),brLit(0x123c3c,0x061c1c,.5));
+  ceil.rotation.x=Math.PI/2; ceil.position.set(cx,2.5,cz); gPool.add(ceil);
+  function pWall(px,pz,w,d){ const m=new THREE.Mesh(new THREE.BoxGeometry(w,2.5,d),brLit(0x1a5252,0x061c1c,.4));
+    m.position.set(px,1.25,pz); gPool.add(m); W(px-w/2,pz-d/2,px+w/2,pz+d/2); }
+  pWall(cx,cz-S,2*S,.4); pWall(cx,cz+S,2*S,.4); pWall(cx-S,cz,.4,2*S); pWall(cx+S,cz,.4,2*S);
+  pWall(cx-3,cz+2,.4,10); pWall(cx+3,cz-2,.4,10);
+  const bar=new THREE.MeshBasicMaterial({color:0xbfffff});
+  for(let i=-1;i<=1;i++){ const b=new THREE.Mesh(new THREE.BoxGeometry(3,.05,.35),bar); b.position.set(cx+i*5,2.45,cz); gPool.add(b); }
+  const L=new THREE.PointLight(0x9fe8e8,20,40,2); L.position.set(cx,2.3,cz); gPool.add(L);
+  addInteract({id:'poolexit', x:cx, z:cz-S+1.4, radius:2.3,
+    label(){ return '<b>E</b> — climb out to the Werk Room'; }, act(){ exitBackrooms(); }});
+  const up=new THREE.Mesh(new THREE.CylinderGeometry(.8,.8,.3,12),brLit(0x0a1414,0xb9a94a,.6)); up.position.set(cx+7,.16,cz+7); gPool.add(up);
+  addInteract({id:'poolup', x:cx+7, z:cz+7, radius:2.2,
+    label(){ return '<b>E</b> — a ladder back up to Level 0'; }, act(){ goLevel(0); }});
+  const PF=[
+    [-6,-6,'note','The Drowned Looks','Every mermaid and every underwater runway ever served — they are all still down here, dripping, waiting to be scored.'],
+    [6,-6,'terminal','The Reflecting Pool','Stare too long into the water and it shows you which queen would have sent YOU home. Most people look away. You did not.'],
+    [-6,6,'redacted','The Deep End','Where every double-shantay and double-sashay cancel into a silence with no winner and no loser. ▮▮▮▮ ▮▮▮▮▮.'],
+    [6,6,'note','Poolrooms','The fandom built these next — endless tiled water beneath a buzzing light. No queen recalls walking in. Fewer recall a way out.']
+  ];
+  PF.forEach((f,i)=>{
+    const [dx,dz,st,ti,bo]=f, g=new THREE.Group();
+    const post=new THREE.Mesh(new THREE.CylinderGeometry(.05,.06,1,6),brLit(0x0a1414,0,0)); post.position.y=.5; g.add(post);
+    const scr=new THREE.Mesh(new THREE.BoxGeometry(.7,.5,.08),brLit(0x02100f,0x35ffd0,.7)); scr.position.y=1.15; g.add(scr);
+    g.position.set(cx+dx,0,cz+dz); gPool.add(g);
+    registerPick(g,'poolf'+i);
+    addInteract({id:'poolf'+i, x:cx+dx, z:cz+dz, radius:2,
+      label(){ return '<b>E</b> — read the finding'; }, act:((k,b,s)=>()=>showFinding(k,b,s))(ti,bo,st)});
+  });
+  [[-3,0],[3,3]].forEach(p=>{ const g=makeGhost(); g.position.set(cx+p[0],0,cz+p[1]);
+    if(g.userData.mat){ g.userData.mat.color.setHex(0x9fd0d0); g.userData.mat.emissive.setHex(0x1a4a4a); } gPool.add(g); });
+  _poolBuilt=true;
+}
+function goLevel(n){
+  brLevel=n; player.seated=false; player.pitch=0; cam.has=false;
+  if(n===1){ buildPool(); player.x=POOL[0]; player.z=POOL[1]-8; player.yaw=Math.PI;
+    scene.fog.color.setHex(POOL_FOG); scene.fog.near=3; scene.fog.far=20;
+    if(typeof toast==='function') toast('Down the hatch, into the water. Level 1 — the Poolrooms.'); }
+  else { player.x=BR[0]; player.z=BR[1]-(BR_SZ-3); player.yaw=Math.PI;
+    scene.fog.color.setHex(BR_FOG); scene.fog.near=3; scene.fog.far=22;
+    if(typeof toast==='function') toast('Back up to Level 0. The carpet is still damp.'); }
+}
 function enterBackrooms(){
   if(!entered) return;
   buildBackrooms();
-  inBackrooms=true; _brReturn={x:player.x,z:player.z,yaw:player.yaw};
+  inBackrooms=true; brLevel=0; _brReturn={x:player.x,z:player.z,yaw:player.yaw};
   _brPrevView=VIEW.mode; VIEW.mode='first'; syncViewUI();
   player.seated=false; player.x=BR[0]; player.z=BR[1]-(BR_SZ-3); player.yaw=Math.PI; player.pitch=0; cam.has=false;
   scene.fog.color.setHex(BR_FOG); scene.fog.near=3; scene.fog.far=22;
@@ -3533,7 +3605,7 @@ function enterBackrooms(){
 }
 function exitBackrooms(){
   if(!inBackrooms) return;
-  inBackrooms=false;
+  inBackrooms=false; brLevel=0;
   if(_brReturn){ player.x=_brReturn.x; player.z=_brReturn.z; player.yaw=_brReturn.yaw; }
   VIEW.mode=_brPrevView||'third'; syncViewUI(); cam.has=false;
   scene.fog.near=13; scene.fog.far=58;
@@ -3541,7 +3613,8 @@ function exitBackrooms(){
   if(typeof toast==='function') toast('Reality clicks back. The Werk Room was here all along.');
 }
 function backroomsTick(dt,t){
-  scene.fog.color.setHex(BR_FOG);
+  scene.fog.color.setHex(brLevel===1?POOL_FOG:BR_FOG);
+  if(brLevel!==0) return;
   const L=gVoid&&gVoid.userData.light;
   if(L) L.intensity = 24 + Math.sin(t*13)*5 + (Math.random()<.02? -14:0);
   const cx=BR[0], cz=BR[1], SX=BR_SX-3, SZ=BR_SZ-3;
