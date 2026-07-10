@@ -3138,6 +3138,7 @@ function curtainTick(dt,t){
     if(gVoid) gVoid.visible=(brLevel===0);
     if(gPool) gPool.visible=(brLevel===1);
     if(gVault) gVault.visible=(brLevel===2);
+    if(gWhite) gWhite.visible=(brLevel===3);
   } else {
     const cull = WR.cullRooms(player.x, player.z, camera.position.x, camera.position.z);
     gAlley.visible  = cull.alley;
@@ -3148,6 +3149,7 @@ function curtainTick(dt,t){
     if(gVoid) gVoid.visible=false;
     if(gPool) gPool.visible=false;
     if(gVault) gVault.visible=false;
+    if(gWhite) gWhite.visible=false;
   }
 }
 
@@ -3388,10 +3390,11 @@ function assignNPCs(){
 
 /* ===== THE BACKROOMS — hidden liminal level behind the golden doors (password: jiggly) ===== */
 let inBackrooms=false, gVoid=null, _brBuilt=false, _brReturn=null, _brPrevView=null;
-let brLevel=0, gPool=null, _poolBuilt=false, gVault=null, _vaultBuilt=false;
+let brLevel=0, gPool=null, _poolBuilt=false, gVault=null, _vaultBuilt=false, gWhite=null, _whiteBuilt=false;
 const BR=[400,400], BR_FOG=0xb9a94a;          /* far off the normal map; damp-yellow fog */
 const POOL=[400,600], POOL_FOG=0x1e5a5a;      /* Level 1: the Poolrooms */
 const VAULT=[400,800], VAULT_FOG=0x2a0606;    /* Level 2: the Vault */
+const WHITE=[400,1000], WHITE_FOG=0xdad6e2;   /* Level 3: the White Room */
 function brLit(c,e,ei){ return new THREE.MeshStandardMaterial({color:c,emissive:e||0,emissiveIntensity:ei||0,roughness:.7}); }
 const brGhosts=[];
 function makeGhost(){
@@ -3639,6 +3642,9 @@ function buildVault(){
   const up=new THREE.Mesh(new THREE.CylinderGeometry(.8,.8,.3,12),brLit(0x140606,0xb9a94a,.6)); up.position.set(cx+6,.16,cz+6); gVault.add(up);
   addInteract({id:'vaultup', x:cx+6, z:cz+6, radius:2.2,
     label(){ return '<b>E</b> — a ladder all the way up to Level 0'; }, act(){ goLevel(0); }});
+  const vdn=new THREE.Mesh(new THREE.CylinderGeometry(.8,.8,.3,12),brLit(0x140606,0xf4f0ff,.7)); vdn.position.set(cx-6,.16,cz+6); gVault.add(vdn);
+  addInteract({id:'vaultdown', x:cx-6, z:cz+6, radius:2.2,
+    label(){ return '<b>E</b> — a pale hatch, glowing white · the deepest way down'; }, act(){ goLevel(3); }});
   const VF=[
     [-6,-6,'redacted','The Endurance Record','Jujubee has stood in the bottom or the danger zone SIXTEEN times — and kept walking. Alexis Mateo, fourteen. Survival is the darkest talent of them all.'],
     [6,-6,'terminal','The Villains’ Wing','Every side-eye, every reunion screaming match, every "not my fault" ever filmed. It is warm in here. The red light suits them.'],
@@ -3658,6 +3664,43 @@ function buildVault(){
     if(g.userData.mat){ g.userData.mat.color.setHex(0xd08a8a); g.userData.mat.emissive.setHex(0x5a1414); } gVault.add(g); });
   _vaultBuilt=true;
 }
+function buildWhite(){
+  if(_whiteBuilt) return;
+  gWhite=new THREE.Group(); gWhite.visible=false; scene.add(gWhite);
+  const cx=WHITE[0], cz=WHITE[1], S=12;
+  const floor=new THREE.Mesh(new THREE.PlaneGeometry(2*S,2*S),new THREE.MeshStandardMaterial({color:0xece8f0,roughness:.6}));
+  floor.rotation.x=-Math.PI/2; floor.position.set(cx,0,cz); gWhite.add(floor);
+  const ceil=new THREE.Mesh(new THREE.PlaneGeometry(2*S,2*S),brLit(0xf2eff8,0xd8d4e6,.8));
+  ceil.rotation.x=Math.PI/2; ceil.position.set(cx,3.2,cz); gWhite.add(ceil);
+  function wWall(px,pz,w,d){ const m=new THREE.Mesh(new THREE.BoxGeometry(w,3.2,d),brLit(0xe6e2ee,0xcfcbe0,.4));
+    m.position.set(px,1.6,pz); gWhite.add(m); W(px-w/2,pz-d/2,px+w/2,pz+d/2); }
+  wWall(cx,cz-S,2*S,.4); wWall(cx,cz+S,2*S,.4); wWall(cx-S,cz,.4,2*S); wWall(cx+S,cz,.4,2*S);
+  const L=new THREE.PointLight(0xffffff,26,44,2); L.position.set(cx,3,cz); gWhite.add(L);
+  gWhite.add(new THREE.AmbientLight(0xe8e4f0,.45));
+  addInteract({id:'whiteexit', x:cx, z:cz-S+1.4, radius:2.3,
+    label(){ return '<b>E</b> — step back toward the Werk Room'; }, act(){ exitBackrooms(); }});
+  const up=new THREE.Mesh(new THREE.CylinderGeometry(.8,.8,.3,12),brLit(0xf0ecf6,0xf4b53f,.5)); up.position.set(cx,.16,cz+S-2); gWhite.add(up);
+  addInteract({id:'whiteup', x:cx, z:cz+S-2, radius:2.2,
+    label(){ return '<b>E</b> — the long ladder, all the way up to Level 0'; }, act(){ goLevel(0); }});
+  const WF=[
+    [-6,-5,'polaroid','Every Crown','Eighty-one queens have made it all the way to a crown. This is the only room in the whole Backrooms with the lights fully on.'],
+    [6,-5,'polaroid','The Only Double','Jinkx Monsoon is the single queen to win a regular season AND an All Stars outright — Season 5 and All Stars 7. The rarest air there is.'],
+    [-6,5,'note','The Shared Throne','All Stars 4 ended in a tie: Trinity the Tuck and Monét X Change — two crowns in one night. This room is still arguing about it.'],
+    [6,5,'note','The Quiet','No song plays here. No one is eliminated. You may stay as long as you like. Most people find, in the end, that they cannot.']
+  ];
+  WF.forEach((f,i)=>{
+    const [dx,dz,st,ti,bo]=f, g=new THREE.Group();
+    const post=new THREE.Mesh(new THREE.CylinderGeometry(.05,.06,1,6),brLit(0xd8d4e2,0,0)); post.position.y=.5; g.add(post);
+    const scr=new THREE.Mesh(new THREE.BoxGeometry(.7,.5,.08),brLit(0xffffff,0xf4b53f,.5)); scr.position.y=1.15; g.add(scr);
+    g.position.set(cx+dx,0,cz+dz); gWhite.add(g);
+    registerPick(g,'whitef'+i);
+    addInteract({id:'whitef'+i, x:cx+dx, z:cz+dz, radius:2,
+      label(){ return '<b>E</b> — read the finding'; }, act:((k,b,s)=>()=>showFinding(k,b,s))(ti,bo,st)});
+  });
+  [[-3,0],[3,2],[0,-3]].forEach(p=>{ const g=makeGhost(); g.position.set(cx+p[0],0,cz+p[1]);
+    if(g.userData.mat){ g.userData.mat.color.setHex(0xffffff); g.userData.mat.emissive.setHex(0xd0d0e8); g.userData.mat.opacity=.6; } gWhite.add(g); });
+  _whiteBuilt=true;
+}
 function goLevel(n){
   brLevel=n; player.seated=false; player.pitch=0; cam.has=false;
   if(n===1){ buildPool(); player.x=POOL[0]; player.z=POOL[1]-8; player.yaw=Math.PI;
@@ -3666,6 +3709,9 @@ function goLevel(n){
   else if(n===2){ buildVault(); player.x=VAULT[0]; player.z=VAULT[1]-8; player.yaw=Math.PI;
     scene.fog.color.setHex(VAULT_FOG); scene.fog.near=2; scene.fog.far=15;
     if(typeof toast==='function') toast('Deeper still. Red light, no music. Level 2 — the Vault.'); }
+  else if(n===3){ buildWhite(); player.x=WHITE[0]; player.z=WHITE[1]-9; player.yaw=Math.PI;
+    scene.fog.color.setHex(WHITE_FOG); scene.fog.near=5; scene.fog.far=32;
+    if(typeof toast==='function') toast('The lights come all the way up. Level 3 — the White Room. The winners are quiet here.'); }
   else { player.x=BR[0]; player.z=BR[1]-(BR_SZ-3); player.yaw=Math.PI;
     scene.fog.color.setHex(BR_FOG); scene.fog.near=3; scene.fog.far=22;
     if(typeof toast==='function') toast('Back up to Level 0. The carpet is still damp.'); }
@@ -3690,7 +3736,7 @@ function exitBackrooms(){
   if(typeof toast==='function') toast('Reality clicks back. The Werk Room was here all along.');
 }
 function backroomsTick(dt,t){
-  scene.fog.color.setHex(brLevel===1?POOL_FOG:brLevel===2?VAULT_FOG:BR_FOG);
+  scene.fog.color.setHex(brLevel===1?POOL_FOG:brLevel===2?VAULT_FOG:brLevel===3?WHITE_FOG:BR_FOG);
   if(brLevel!==0) return;
   const L=gVoid&&gVoid.userData.light;
   if(L) L.intensity = 24 + Math.sin(t*13)*5 + (Math.random()<.02? -14:0);
