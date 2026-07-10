@@ -155,6 +155,15 @@ def main():
             tu_bad.append(f"{s['song_id']} times_used want {want} got {got}")
     check("songs.times_used == distinct episodes", tu_bad)
 
+    # sanity: plausible ages (catch typos like 505) ------------------------
+    age_bad = []
+    for r in t["contestants"]:
+        a = r.get("age_at_filming", "")
+        if a and a not in BLANKS and str(a).lstrip("-").isdigit():
+            if not (16 <= int(a) <= 80):
+                age_bad.append(f"{r['contestant_id']} age={a}")
+    check("sanity: age_at_filming within 16..80", age_bad)
+
     # ---- report -----------------------------------------------------------
     passed = sum(1 for _, ok, _ in results if ok)
     for name, ok, detail in results:
