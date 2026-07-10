@@ -1492,7 +1492,7 @@ function renderSeasonDetail(m,sid){
   // contestants
   const ct=el('div',{class:'card'});
   ct.innerHTML='<div class="vkicker">Cast & placement</div>';
-  const tbl=el('table');tbl.innerHTML='<tr><th>#</th><th>Queen</th><th title="Age at filming">Age</th><th title="Entrance order">Ent</th><th>W</th><th>H</th><th>L</th><th>B</th></tr>';
+  const tbl=el('table');tbl.innerHTML='<tr><th>#</th><th>Queen</th><th title="Age at filming">Age</th><th title="Entrance order">Ent</th><th title="Maxi-challenge wins">W</th><th title="High / top placements">H</th><th title="Low placements">L</th><th title="Bottom (lip-synced for your life)">B</th></tr>';
   cs.forEach(c=>{const tr=el('tr',{style:'cursor:pointer',onclick:()=>go('queen:'+c.queen_id)});
     const isWin=(+c.placement===1)||(s.winner_id&&s.winner_id!=='-'&&s.winner_id===c.queen_id);
     const isRU=(+c.placement===2);
@@ -1596,12 +1596,16 @@ function renderSeasonDetail(m,sid){
   const prog={};D.progression.filter(p=>p.season_id===sid).forEach(p=>{prog[p.queen_id+'|'+p.episode_id]=p.status;});
   const esc=t=>String(t).replace(/"/g,'&quot;');
   const mx=el('div',{class:'card fade',style:'overflow-x:auto;margin-top:18px'});
-  let mh='<div class="vkicker">Progression — episode by episode</div>';
+  const STFULL={WIN:'Challenge winner',HIGH:'High / top',SAFE:'Safe',LOW:'Low',BTM:'Bottom two (lip-synced)',ELIM:'Eliminated',WINNER:'Season winner','RUNNER-UP':'Runner-up',RUNNERUP:'Runner-up',GUEST:'Guest',RTRN:'Returned'};
+  const legend='<div class="legend" style="margin:4px 0 12px" aria-label="Placement key">'+
+    ['WIN|challenge winner','HIGH|high','SAFE|safe','LOW|low','BTM|bottom two','ELIM|eliminated']
+      .map(x=>{const p=x.split('|');return `<span><span class="st st-${p[0]}">${p[0]}</span> ${p[1]}</span>`;}).join('')+'</div>';
+  let mh='<div class="vkicker">Progression — episode by episode</div>'+legend;
   mh+='<table style="font-size:11.5px"><tr><th style="white-space:nowrap">Queen</th>'+
     eps.map(e=>`<th title="${(e.title&&e.title!=='-')?esc(e.title):('Episode '+e.episode_number)}">${e.episode_number}</th>`).join('')+'</tr>';
   cs.forEach(c=>{mh+=`<tr><td style="white-space:nowrap;cursor:pointer" onclick="go('queen:${c.queen_id}')">${cname(c)}</td>`+
     eps.map(e=>{const st=prog[c.queen_id+'|'+e.episode_id]||'';
-      return `<td style="text-align:center;padding:3px">${st?`<span class="st st-${st}" style="min-width:0;width:100%" title="Ep ${e.episode_number}: ${st}">${st}</span>`:''}</td>`;}).join('')+'</tr>';});
+      return `<td style="text-align:center;padding:3px">${st?`<span class="st st-${st}" style="min-width:0;width:100%" title="Ep ${e.episode_number}: ${STFULL[st]||st}">${st}</span>`:''}</td>`;}).join('')+'</tr>';});
   mh+='</table>';mx.innerHTML=mh;m.append(mx);
 }
 V({id:'season',title:'Season <em>Detail</em>',kicker:'The Competition',icon:'grid',group:null,hidden:true,
@@ -1679,7 +1683,7 @@ function renderQueen(m,qid){
     sign?`<span class="pill">${sign}${q.birthdate&&q.birthdate!=='-'?' · b. '+q.birthdate:''}</span>`:''
   ].filter(Boolean).join(' ');
   m.innerHTML=`<div class="vhead fade" style="display:flex;gap:20px;align-items:flex-start;flex-wrap:wrap">
-    ${img?`<img src="${img}" alt="${q.drag_name.replace(/"/g,'&quot;')}" referrerpolicy="no-referrer" loading="eager" onerror="imgFallback(this,'${q.drag_name.replace(/\\/g,'\\\\').replace(/'/g,"\\'").replace(/"/g,'&quot;')}')" style="width:110px;height:110px;border-radius:18px;object-fit:cover;border:2px solid rgba(244,181,63,.5);box-shadow:var(--shadow);flex:none">`:''}
+    ${img?`<img src="${img}" alt="${q.drag_name.replace(/"/g,'&quot;')}" referrerpolicy="no-referrer" loading="eager" onerror="imgFallback(this,'${q.drag_name.replace(/\\/g,'\\\\').replace(/'/g,"\\'").replace(/"/g,'&quot;')}')" style="width:110px;height:110px;border-radius:18px;object-fit:cover;border:2px solid rgba(244,181,63,.5);box-shadow:var(--shadow);flex:none">`:`<div class="imgph" style="width:110px;height:110px;border-radius:18px;border:2px solid rgba(244,181,63,.5);box-shadow:var(--shadow);flex:none;font-size:36px" title="No photo on file yet" aria-label="${q.drag_name.replace(/"/g,'&quot;')} — no photo yet">${_initials(q.drag_name)}</div>`}
     <div style="flex:1;min-width:240px"><div class="vkicker">Queens</div>
     <h1 class="vtitle">${q.drag_name}</h1>
     <div class="vdesc">${[q.legal_name,q.hometown].filter(x=>x&&x!=='-').join(' · ')||'A competitor in the herstory.'}</div>
