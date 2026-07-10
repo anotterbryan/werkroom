@@ -95,6 +95,19 @@ a{color:var(--gold)}
   box-shadow:0 0 8px rgba(230,0,126,.5)}
 #minimap .mmun{flex:.9;font-size:9px}
 @media (max-width:640px){#minimap{width:120px;top:40px}#minimap .mmz{font-size:9px;padding:6px 3px}}
+/* ---------- Backrooms level navigator (passcode-gated) ---------- */
+#brnav{position:fixed;left:12px;top:44px;z-index:58;width:154px;background:rgba(20,16,28,.9);
+  border:1px solid rgba(244,181,63,.5);border-radius:12px;padding:8px;box-shadow:var(--shadow);
+  display:flex;flex-direction:column;gap:6px}
+#brnav .bnttl{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);text-align:center;opacity:.85}
+#brnav .bnhint{font-size:8.5px;color:rgba(247,240,230,.5);text-align:center;text-transform:uppercase;letter-spacing:1px}
+#brnav #bnPass{width:100%;box-sizing:border-box;background:rgba(0,0,0,.32);border:1px solid rgba(244,181,63,.25);
+  color:#d8c9a0;font:10px "Space Mono",monospace;padding:6px 8px;border-radius:7px;outline:none;letter-spacing:2px}
+#brnav #bnLevels{display:flex;flex-direction:column;gap:5px}
+#brnav .bnlv{background:rgba(61,35,82,.55);border:1px solid rgba(244,181,63,.28);color:rgba(247,240,230,.85);
+  font:700 10px/1.1 inherit;letter-spacing:.3px;padding:7px 8px;border-radius:8px;cursor:pointer;text-transform:uppercase;text-align:left}
+#brnav .bnlv:hover{background:rgba(230,0,126,.25)}
+#brnav .bnlv.here{background:rgba(230,0,126,.42);border-color:var(--gold);color:#fff}
 /* ---------- Season portal (golden doors) ---------- */
 #portal{position:fixed;inset:0;z-index:120;display:flex;align-items:center;justify-content:center;
   background:rgba(8,5,12,.72);backdrop-filter:blur(3px)}
@@ -386,6 +399,19 @@ classic two-dimensional site at index.html, which is fully accessible. Use the s
   </div>
   <button class="mmz" data-z="werk">Werk Room</button>
   <button class="mmz" data-z="alley">Alleyway</button>
+</div>
+<div id="brnav" class="hidden" aria-label="Backrooms level navigator">
+  <div class="bnttl">The Descent</div>
+  <div id="bnLocked">
+    <div class="bnhint">level-jump is locked</div>
+    <input id="bnPass" type="text" placeholder="passcode" autocomplete="off" spellcheck="false">
+  </div>
+  <div id="bnLevels" class="hidden">
+    <button class="bnlv" data-lv="0">0 · Warehouse</button>
+    <button class="bnlv" data-lv="1">1 · Poolrooms</button>
+    <button class="bnlv" data-lv="2">2 · Vault</button>
+    <button class="bnlv" data-lv="3">3 · White Room</button>
+  </div>
 </div>
 <div id="portal" class="hidden" role="dialog" aria-label="Choose a season">
   <div class="ptl-card">
@@ -2383,7 +2409,7 @@ const look = {id:null, lx:0, ly:0};
 if(IS_TOUCH){
   addEventListener('pointerdown', e=>{
     if(!entered || overlayOpen()) return;
-    if(e.target.closest('#prompt,#askBtn,#viewBtn,#minimap,#exit2d,#board,#lipp,#toast')) return;
+    if(e.target.closest('#prompt,#askBtn,#viewBtn,#minimap,#brnav,#exit2d,#board,#lipp,#toast')) return;
     if(e.clientX < innerWidth*.45 && joy.id===null){
       joy.id=e.pointerId; joy.active=true; joy.bx=e.clientX; joy.by=e.clientY; joy.dx=joy.dy=0;
       const j=$('#joy'); show(j); j.style.left=(e.clientX-55)+'px'; j.style.top=(e.clientY-55)+'px';
@@ -2568,7 +2594,7 @@ if(IS_TOUCH){
   addEventListener('pointerdown', e=>{
     tapCand=null;
     if(!entered || overlayOpen()) return;
-    if(e.target && e.target.closest && e.target.closest('#prompt,#askBtn,#viewBtn,#minimap,#exit2d,#board,#lipp,#toast,#say')) return;
+    if(e.target && e.target.closest && e.target.closest('#prompt,#askBtn,#viewBtn,#minimap,#brnav,#exit2d,#board,#lipp,#toast,#say')) return;
     if(e.clientX < innerWidth*.45) return;               /* joystick half of the screen — walking, not tapping */
     tapCand={id:e.pointerId, x:e.clientX, y:e.clientY, t:performance.now()};
   });
@@ -3703,6 +3729,7 @@ function buildWhite(){
 }
 function goLevel(n){
   brLevel=n; player.seated=false; player.pitch=0; cam.has=false;
+  if(typeof renderBrNav==='function') renderBrNav();
   if(n===1){ buildPool(); player.x=POOL[0]; player.z=POOL[1]-8; player.yaw=Math.PI;
     scene.fog.color.setHex(POOL_FOG); scene.fog.near=3; scene.fog.far=20;
     if(typeof toast==='function') toast('Down the hatch, into the water. Level 1 — the Poolrooms.'); }
@@ -3723,7 +3750,7 @@ function enterBackrooms(){
   _brPrevView=VIEW.mode; VIEW.mode='first'; syncViewUI();
   player.seated=false; player.x=BR[0]; player.z=BR[1]-(BR_SZ-3); player.yaw=Math.PI; player.pitch=0; cam.has=false;
   scene.fog.color.setHex(BR_FOG); scene.fog.near=3; scene.fog.far=22;
-  hide($('#minimap'));
+  hide($('#minimap')); show($('#brnav')); renderBrNav();
   if(typeof toast==='function') toast('You noclip through the doors. The hum swallows the music. Level 0.');
 }
 function exitBackrooms(){
@@ -3732,7 +3759,7 @@ function exitBackrooms(){
   if(_brReturn){ player.x=_brReturn.x; player.z=_brReturn.z; player.yaw=_brReturn.yaw; }
   VIEW.mode=_brPrevView||'third'; syncViewUI(); cam.has=false;
   scene.fog.near=13; scene.fog.far=58;
-  show($('#minimap')); _mmZone=null; updateMinimap();
+  show($('#minimap')); _mmZone=null; updateMinimap(); hide($('#brnav'));
   if(typeof toast==='function') toast('Reality clicks back. The Werk Room was here all along.');
 }
 function backroomsTick(dt,t){
@@ -3783,6 +3810,23 @@ function openJuke(){ if(!entered) return;
 function closeJuke(){ $('#jukeFrame').src=''; hide($('#juke')); }
 $('#jukeX').addEventListener('click', closeJuke);
 $('#juke').addEventListener('click', e=>{ if(e.target.id==='juke') closeJuke(); });
+
+/* ---- The Descent: passcode-gated level navigator in the side panel ---- */
+const BRNAV_CODE='shantay';
+let brNavUnlocked=false; try{ brNavUnlocked = localStorage.getItem('wr-brnav')==='1'; }catch(e){}
+function renderBrNav(){
+  const nav=$('#brnav'); if(!nav) return;
+  $('#bnLocked').classList.toggle('hidden', brNavUnlocked);
+  $('#bnLevels').classList.toggle('hidden', !brNavUnlocked);
+  document.querySelectorAll('#brnav .bnlv').forEach(b=>b.classList.toggle('here', (+b.dataset.lv)===brLevel));
+}
+$('#bnPass').addEventListener('keydown', e=>{ e.stopPropagation();
+  if(e.key==='Enter'){ const v=($('#bnPass').value||'').trim().toLowerCase(); $('#bnPass').value='';
+    if(v===BRNAV_CODE){ brNavUnlocked=true; try{ localStorage.setItem('wr-brnav','1'); }catch(e){} renderBrNav();
+      if(typeof toast==='function') toast('The Descent is unlocked. Jump between levels at will.'); }
+    else { $('#bnPass').placeholder='wrong word.'; } } });
+document.querySelectorAll('#brnav .bnlv').forEach(b=>b.addEventListener('click', e=>{
+  e.stopPropagation(); if(!brNavUnlocked || !inBackrooms) return; goLevel(+b.dataset.lv); }));
 
 /* ---- motion setting: pause row + runtime switch. Every mover reads the
    WR_CALM getter per frame; the sweep spots are the one build-time skip. ---- */
